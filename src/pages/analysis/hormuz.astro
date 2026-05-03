@@ -1,0 +1,314 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="Hormuz and the <em>limits of the index.</em>"
+ description="The Baltic Dirty Tanker Index has risen 156% since the disruption began. These numbers confirm that the market has priced in severe disruption. They cannot tell you which specific bilateral supply chains carry the exposure, at what percentage of total supply, or what each alternative pathway costs for each vessel class."
+ eyebrow="Scenario analysis · Strait of Hormuz · May 2026"
+ publishDate="May 2026"
+ readTime="14 min read"
+ author="Narrows Research"
+>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+ <div class="stat-bar-inner">
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">BDTI vs 2024 baseline</div>
+   <div class="stat-bar-value" style="color:var(--red);">+156%</div>
+   <div class="stat-bar-unit">Tanker freight, live market (LSEG / UNCTAD)</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Cape reroute VLCC, current rates</div>
+   <div class="stat-bar-value">$3.5M</div>
+   <div class="stat-bar-unit">Per voyage vs. Hormuz transit at current VLSFO</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Qatar Hormuz dependency</div>
+   <div class="stat-bar-value" style="color:var(--red);">100%</div>
+   <div class="stat-bar-unit">No alternative maritime exit exists</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Toll breakeven VLCC</div>
+   <div class="stat-bar-value">~$3.5M</div>
+   <div class="stat-bar-unit">Above this, Cape diversion becomes rational</div>
+  </div>
+ </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section-eyebrow">The analytical gap</div>
+<h2 class="article-section-title">What market indices can tell you, and what they cannot.</h2>
+
+<p class="prose">The UNCTAD Strait of Hormuz Dashboard launched 28 April 2026 aggregates the market signal clearly. The Baltic Dirty Tanker Index stands at 2,795, against a 2024 average of 1,091. VLSFO bunker in Singapore has risen from a 2024 average of $571 per tonne to $1,076. Brent crude has traded above $120 on intraday peaks. These are the right numbers to watch. They confirm severity. They do not distribute it.</p>
+
+<p class="prose">An accumulation underwriter pricing a P&I book, a crude desk managing a supply position, or a lender stress-testing a Capesize fleet facility needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. Run it through The Narrows and you get the answer.</p>
+
+<div class="compare-grid">
+ <div class="compare-card featured">
+  <div class="compare-card-label">Hormuz sensitivity score 1.00</div>
+  <div class="compare-card-title">No alternative. Full exposure at stated severity.</div>
+  <div class="compare-card-body">No navigable route exists for laden VLCCs or LNG carriers transiting out of the Persian Gulf. Qatar's entire LNG export capacity, plus Saudi, UAE, Kuwaiti, and Iraqi crude, exits via a single 33-kilometre navigable channel. A closure does not create a rerouting problem. It creates a supply halt. Capacity sensitivity: 1.00. Every percentage point of stated disruption translates directly to commercial impact with no bypass absorption.</div>
+ </div>
+ <div class="compare-card">
+  <div class="compare-card-label">Malacca sensitivity score 0.85</div>
+  <div class="compare-card-title">Alternatives exist. They are expensive, not impossible.</div>
+  <div class="compare-card-body">Lombok and Sunda Straits provide partial bypass capacity. A Malacca closure or toll is a rerouting problem at 85 cents on the dollar of stated disruption. The remaining 15 cents is absorbed through alternatives, at a cost. Hormuz offers no equivalent release valve. The two chokepoints require fundamentally different analytical frameworks for pricing exposure.</div>
+ </div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 2 -->
+<div class="section-eyebrow">The bilateral dependency matrix</div>
+<h2 class="article-section-title">Who is exposed, for what commodity, and at what percentage of supply.</h2>
+
+<p class="prose">The Narrows model produces bilateral dependency figures at the (importer, chokepoint, commodity) level. The table below shows Hormuz dependency for the commodity classes that account for the majority of the Strait's commercial traffic volume. These are not estimates of aggregate throughput. They are specific bilateral percentages: the share of each importer's total seaborne supply of each commodity that transits Hormuz, drawn from 2023 UN Comtrade bilateral data.</p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">Bilateral Hormuz dependency matrix selected importers and commodities, 2023</div>
+ <table class="n-table">
+  <thead>
+   <tr>
+    <th>Importer</th>
+    <th>Commodity</th>
+    <th class="num">Hormuz dep.</th>
+    <th class="num">Annual exposure</th>
+    <th class="num">30-day VaR</th>
+    <th>Reroute viable?</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr><td class="subhead" colspan="6">LNG liquefied natural gas (HS 271111)</td></tr>
+   <tr><td class="bold">Japan</td><td>LNG (LNG carrier)</td><td class="num dep-high">22%</td><td class="num bold">$20.2B</td><td class="num bold">$1.7B</td><td><span class="verdict-no">No no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">South Korea</td><td>LNG (LNG carrier)</td><td class="num dep-high">26%</td><td class="num bold">$10.9B</td><td class="num bold">$897M</td><td><span class="verdict-no">No no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">India</td><td>LNG (LNG carrier)</td><td class="num dep-high">48%</td><td class="num bold">$8.6B</td><td class="num bold">$707M</td><td><span class="verdict-no">No no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">China</td><td>LNG (LNG carrier)</td><td class="num dep-mid">15%</td><td class="num bold">$9.1B</td><td class="num bold">$748M</td><td><span class="verdict-no">No no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">United Kingdom</td><td>LNG (LNG carrier)</td><td class="num dep-mid">35%</td><td class="num bold">$4.6B</td><td class="num bold">$378M</td><td><span class="verdict-no">No no Cape option for LNG</span></td></tr>
+   <tr><td class="subhead" colspan="6">Crude petroleum (HS 2709)</td></tr>
+   <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">84%</td><td class="num bold">$74.2B</td><td class="num bold">$6.1B</td><td><span class="verdict-caution">Cape: $3.5M/voyage at current rates</span></td></tr>
+   <tr><td class="bold">India</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">58%</td><td class="num bold">$57.6B</td><td class="num bold">$4.7B</td><td><span class="verdict-caution">Cape: $3.5M/voyage at current rates</span></td></tr>
+   <tr><td class="bold">China</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">38%</td><td class="num bold">$76.1B</td><td class="num bold">$6.3B</td><td><span class="verdict-caution">Cape: $3.5M/voyage at current rates</span></td></tr>
+   <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">72%</td><td class="num bold">$43.1B</td><td class="num bold">$3.5B</td><td><span class="verdict-caution">Cape: $3.5M/voyage at current rates</span></td></tr>
+  </tbody>
+ </table>
+</div>
+
+<div class="callout">
+ <div class="callout-label">The LNG asymmetry</div>
+ <div class="callout-body">Crude petroleum has a Cape of Good Hope alternative, however expensive. LNG has none. LNG carriers cannot economically complete a Cape rerouting for reasons of boil-off gas loss, voyage duration, and long-term supply contract structure. <strong>Every LNG cargo originating in the Persian Gulf is a binary outcome: it transits Hormuz, or it does not move.</strong> The reroute column for LNG is not a cost figure. It is a categorical absence of options.</div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 3 -->
+<div class="section-eyebrow">The forward scenarios</div>
+<h2 class="article-section-title">What continuation costs at current market rates, for specific importers.</h2>
+
+<p class="prose">Market indices give a real-time aggregate read on disruption severity. The Narrows model translates that severity into bilateral cost for specific counterparties across four time horizons and two toll-level scenarios. The figures below use Japan as the primary example because Japan carries the highest absolute Hormuz exposure of any single importer across both LNG and crude petroleum. The model runs the same analysis for any importer and any commodity combination.</p>
+
+<p class="prose">All rerouting costs are recalculated at current market rates: VLSFO at $1,076 per tonne and tanker charter rates consistent with the BDTI at 2,795. These are approximately 1.9x and 2.5x their respective 2024 baselines. <strong>The cost of disruption at current market conditions is materially higher than any pre-crisis model assumption.</strong></p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">Scenario matrix Japan combined Hormuz exposure (LNG + crude petroleum), 2023 bilateral data</div>
+ <table class="n-table">
+  <thead>
+   <tr>
+    <th>Scenario</th>
+    <th>Duration / toll level</th>
+    <th class="num">Japan value at risk</th>
+    <th class="num">Cape reroute cost (crude only)</th>
+    <th>Constraint</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr class="row-mild"><td class="bold">14-day disruption</td><td>2 weeks</td><td class="num bold">$3.6B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Storage buffers hold; LNG terminal inventories stressed</td></tr>
+   <tr class="row-moderate"><td class="bold">30-day disruption</td><td>1 month</td><td class="num bold">$7.7B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">LNG inventory exhaustion begins; crude spot demand spikes</td></tr>
+   <tr class="row-severe"><td class="bold">60-day disruption</td><td>2 months</td><td class="num bold">$15.5B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Supply substitution required; no LNG substitute available at scale</td></tr>
+   <tr class="row-critical"><td class="bold">90-day disruption</td><td>3 months</td><td class="num bold">$23.2B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Structural supply gap; no market mechanism closes the LNG shortfall</td></tr>
+   <tr><td class="subhead" colspan="5">Toll scenarios ongoing annual cost burden (Japan, all Hormuz-transiting vessel classes)</td></tr>
+   <tr><td class="bold">$500k toll per vessel</td><td>Ongoing</td><td class="num bold">$400M/yr</td><td class="num" style="color:var(--green);font-weight:600;">Cape costs 7x more</td><td style="font-size:11px;color:var(--text-secondary);">Compliance rational; operators pay rather than reroute</td></tr>
+   <tr><td class="bold">$1M toll per vessel</td><td>Ongoing</td><td class="num bold">$800M/yr</td><td class="num" style="color:var(--green);font-weight:600;">Cape costs 3.5x more</td><td style="font-size:11px;color:var(--text-secondary);">Compliance rational at current VLSFO; a structural freight cost addition</td></tr>
+   <tr><td class="bold">$2M toll per vessel</td><td>Ongoing</td><td class="num bold">$1.6B/yr</td><td class="num" style="color:var(--gold-dark);font-weight:600;">Cape costs 1.75x more</td><td style="font-size:11px;color:var(--text-secondary);">Still below Cape breakeven; diversion not yet commercially rational</td></tr>
+   <tr><td class="bold">$3.5M toll per vessel</td><td>Ongoing</td><td class="num bold">$2.8B/yr</td><td class="num" style="color:var(--red);font-weight:600;">At Cape breakeven</td><td style="font-size:11px;color:var(--text-secondary);">Above this level, Cape diversion becomes economically rational for crude</td></tr>
+  </tbody>
+ </table>
+</div>
+
+<div class="callout-verdict">
+ <div class="callout-verdict-label">The breakeven insight</div>
+ <div class="callout-verdict-body">At pre-crisis bunker and charter rates, a $1 million toll per vessel was approaching the Cape rerouting breakeven for crude tankers. At current market rates VLSFO at $1,076 per tonne, BDTI at 2,795 the Cape reroute costs approximately $3.5 million per VLCC voyage. <strong>The toll threshold for rational diversion has shifted upward by roughly 75% since the disruption began.</strong> An operator facing a $1 million toll today pays it without hesitation. The disruption would need to produce a toll of approximately $3.5 million before Cape diversion becomes the commercially rational choice for crude. For LNG, no toll level changes the calculation, because the Cape is not an available option.</div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 4 -->
+<div class="section-eyebrow">The alternative pathways</div>
+<h2 class="article-section-title">What each option costs, vessel class by vessel class, at current market rates.</h2>
+
+<p class="prose">The Narrows model calculates alternative pathway costs by vessel class, using charter rate, bunker consumption, and detour days as inputs. The figures below are recalculated at current market conditions: VLSFO at $1,076 per tonne and charter rates consistent with the live BDTI reading. These represent the actual commercial decision facing operators and charterers today, not a pre-crisis baseline.</p>
+
+<div class="vessel-grid">
+ <div class="vessel-card">
+  <div class="vessel-card-class">Tanker</div>
+  <div class="vessel-card-name">VLCC (crude)</div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Alternative</span><span class="vessel-card-row-val">Cape of Good Hope</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra days (Gulf–Japan)</span><span class="vessel-card-row-val">+18 days</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra bunker (current)</span><span class="vessel-card-row-val red">$1.74M</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra charter (current)</span><span class="vessel-card-row-val red">$1.76M</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Total extra cost</span><span class="vessel-card-row-val gold">$3.5M</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Toll breakeven</span><span class="vessel-card-row-val">~$3.5M</span></div>
+  <div class="vessel-card-verdict card-verdict-caution">Cape viable above $3.5M toll</div>
+ </div>
+ <div class="vessel-card no-route">
+  <div class="vessel-card-class">LNG carrier</div>
+  <div class="vessel-card-name">Q-Flex / Q-Max</div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Alternative route</span><span class="vessel-card-row-val red">None available</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Cape boil-off loss</span><span class="vessel-card-row-val red">Commercially prohibitive</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Contract structure</span><span class="vessel-card-row-val red">Long-term, fixed destination</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Spot substitute</span><span class="vessel-card-row-val red">Not available at scale</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Toll breakeven</span><span class="vessel-card-row-val red">No calculation applies</span></div>
+  <div class="vessel-card-verdict card-verdict-impossible">No reroute at any toll level</div>
+ </div>
+ <div class="vessel-card">
+  <div class="vessel-card-class">Bulk carrier</div>
+  <div class="vessel-card-name">Capesize (fertiliser)</div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Alternative</span><span class="vessel-card-row-val">Cape of Good Hope</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra days</span><span class="vessel-card-row-val">+14 days</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra bunker (current)</span><span class="vessel-card-row-val red">$960k</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Extra charter (current)</span><span class="vessel-card-row-val red">$700k</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Total extra cost</span><span class="vessel-card-row-val gold">$1.66M</span></div>
+  <div class="vessel-card-row"><span class="vessel-card-row-label">Toll breakeven</span><span class="vessel-card-row-val">~$1.7M</span></div>
+  <div class="vessel-card-verdict card-verdict-caution">Cape viable above $1.7M toll</div>
+ </div>
+</div>
+
+<p class="prose">The asymmetry between crude and LNG is the defining structural feature of Hormuz risk. Crude tanker operators face a painful but calculable decision at each toll increment. LNG cargo has no equivalent calculation to run. The absence of a rerouting option for LNG means that any Hormuz disruption affecting Gulf LNG exports produces a supply gap that the market cannot fill through routing alternatives, regardless of price.</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 5 -->
+<div class="section-eyebrow">The transition fuel dimension</div>
+<h2 class="article-section-title">LNG is the IMO bridge fuel. The bridge runs through Hormuz.</h2>
+
+<p class="prose">IMO's revised GHG Strategy targets net-zero emissions from international shipping by 2050. Carbon Intensity Indicator regulations, effective from 2023, have pushed operators toward LNG as the primary compliant fuel available at scale for deep-sea voyages. LNG-fuelled vessels now represent over 40% of new deep-sea tonnage ordered. This energy transition creates a second-order Hormuz dependency that is not visible in the standard chokepoint exposure model.</p>
+
+<p class="prose">As the global fleet converts to LNG propulsion, the nature of Hormuz exposure changes. It is no longer only a cargo risk for energy-importing nations. It becomes a propulsion risk for the fleet itself. A sustained Hormuz disruption simultaneously reduces LNG cargo supply and restricts the fuel supply for vessels designed to run on LNG. These two effects compound: the ships most affected by cargo disruption are increasingly the same ships that require LNG to operate.</p>
+
+<div class="callout-red">
+ <div class="callout-label">The compound risk</div>
+ <div class="callout-body">The standard assumption in energy transition analysis is that decarbonisation reduces fossil fuel concentration risk. For LNG and Hormuz, the opposite is true. Each vessel that converts from heavy fuel oil to LNG propulsion reduces carbon intensity and simultaneously increases its structural exposure to a single 33-kilometre channel. <strong>A slower, more decarbonised fleet is a more Hormuz-dependent fleet.</strong></div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 6 -->
+<div class="section-eyebrow">The forward-look capability</div>
+<h2 class="article-section-title">What the Narrows model adds that market data cannot provide.</h2>
+
+<p class="prose">The UNCTAD Hormuz Dashboard provides an excellent real-time read on market-level disruption. The Narrows Chokepoint Dependency Model operates at a different analytical layer: bilateral, commodity-specific, and scenario-driven. The two tools are complementary, not competitive. The dashboard tells you the aggregate signal. The model tells you which counterparty carries the exposure.</p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">What each analytical layer provides</div>
+ <table class="n-table">
+  <thead><tr><th>Analytical question</th><th>Market index / dashboard</th><th>Narrows model</th></tr></thead>
+  <tbody>
+   <tr><td>Is there a disruption?</td><td style="color:var(--green);font-weight:600;">Yes BDTI, bunker prices, Brent</td><td style="color:var(--text-tertiary);">Not the primary instrument</td></tr>
+   <tr><td>How severe is the aggregate impact?</td><td style="color:var(--green);font-weight:600;">Yes index levels vs. baselines</td><td style="color:var(--text-tertiary);">Not the primary instrument</td></tr>
+   <tr><td>Which importer carries the highest exposure?</td><td style="color:var(--red);font-weight:600;">Cannot answer</td><td style="color:var(--green);font-weight:600;">Bilateral dependency by country and commodity</td></tr>
+   <tr><td>What % of this importer's supply is at risk?</td><td style="color:var(--red);font-weight:600;">Cannot answer</td><td style="color:var(--green);font-weight:600;">Dependency % at (importer, chokepoint, commodity) level</td></tr>
+   <tr><td>What does 30 days of disruption cost this counterparty?</td><td style="color:var(--red);font-weight:600;">Cannot answer</td><td style="color:var(--green);font-weight:600;">Value at risk by duration and vessel class</td></tr>
+   <tr><td>At what toll level does rerouting become rational?</td><td style="color:var(--red);font-weight:600;">Cannot answer</td><td style="color:var(--green);font-weight:600;">Toll threshold per vessel class at live market rates</td></tr>
+   <tr><td>Does LNG have the same rerouting option as crude?</td><td style="color:var(--red);font-weight:600;">Cannot answer</td><td style="color:var(--green);font-weight:600;">Commodity-specific pathway analysis</td></tr>
+   <tr><td>What are costs if disruption drags 60 or 90 days?</td><td style="color:var(--red);font-weight:600;">Cannot answer forward scenarios</td><td style="color:var(--green);font-weight:600;">Duration scenario matrix at any input assumption</td></tr>
+  </tbody>
+ </table>
+</div>
+
+<p class="prose">The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. A counterparty running their own scenario can replace the model's default vessel-class rates with their own book rates and rerun the exposure calculation in real time. This is the capability that aggregate market data, however current, cannot replicate.</p>
+
+<div class="method-note">
+ <div class="method-note-label">Methodology and data sources</div>
+ <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Simulation Model. Primary data source: UN Comtrade 2023 bilateral import data via Comtrade v3 public API, covering LNG (HS 271111), crude petroleum (HS 2709), and refined petroleum (HS 2710). Data quality: Tier 1 bilateral data for 10 of 11 EU reporters and all major non-EU importers. France remains at Tier 3 world aggregate pending 2023 Comtrade submission. Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative for laden VLCCs or LNG carriers exiting the Persian Gulf. LNG rerouting assessment is categorical: Cape of Good Hope is not commercially viable for laden LNG carriers at any realistic voyage duration due to boil-off gas loss rates and long-term contract constraints. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, April 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period. 22 chokepoints modelled. All model assumptions are substitutable.</div>
+</div>
+
+<!-- CTA -->
+<div slot="cta" class="cta-strip">
+ <div class="cta-strip-inner">
+  <div>
+   <div class="cta-strip-title">Run your Hormuz exposure through The Narrows.</div>
+   <div class="cta-strip-sub">Duration, toll level, vessel rates, and commodity mix are all substitutable. We will run your specific bilateral exposure in front of you.</div>
+  </div>
+  <a href="mailto:fysh@narrows.io?subject=Hormuz scenario request&body=I would like to run a Hormuz exposure scenario.%0A%0AOrganisation:%0ARole:%0AKey commodity / importer of interest:%0AScenario duration or toll level:" class="cta-btn">Request demo</a>
+ </div>
+</div>
+
+</ArticleLayout>
+
+<style>
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.compare-card { background: var(--surface); border: var(--rule-light); border-radius: 6px; padding: 20px; }
+.compare-card.featured { background: var(--navy); border-color: var(--navy); }
+.compare-card-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+.compare-card:not(.featured) .compare-card-label { color: var(--text-tertiary); }
+.compare-card.featured .compare-card-label { color: var(--gold); }
+.compare-card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
+.compare-card:not(.featured) .compare-card-title { color: var(--navy); }
+.compare-card.featured .compare-card-title { color: var(--white); }
+.compare-card-body { font-size: 13px; line-height: 1.6; font-weight: 300; }
+.compare-card:not(.featured) .compare-card-body { color: var(--text-secondary); }
+.compare-card.featured .compare-card-body { color: rgba(255,255,255,0.6); }
+
+.n-table-wrap { background: var(--white); border: var(--rule-light); border-radius: 6px; overflow: hidden; margin: 24px 0; overflow-x: auto; }
+.n-table-title { background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px; border-bottom: 2px solid var(--gold); }
+table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
+.n-table thead th.num { text-align: right; }
+.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+.n-table tbody td.num { text-align: right; font-weight: 500; }
+.n-table tbody td.bold { font-weight: 600; color: var(--navy); }
+.n-table tbody td.subhead { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); background: var(--surface); padding: 6px 14px; }
+.n-table tbody tr:last-child td { border-bottom: none; }
+.n-table tbody tr:hover td { background: var(--blue-pale); }
+.n-table tbody tr:hover td.subhead { background: var(--surface); }
+.dep-high { color: #C0392B; font-weight: 700; }
+.dep-mid { color: #B87333; font-weight: 600; }
+
+.verdict-no   { font-size: 11px; font-weight: 600; color: var(--red); }
+.verdict-caution { font-size: 11px; font-weight: 600; color: var(--gold-dark); }
+
+.vessel-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0; }
+.vessel-card { border: var(--rule-light); border-radius: 8px; padding: 20px; border-top: 3px solid var(--gold); }
+.vessel-card.no-route { border-top-color: var(--red); }
+.vessel-card-class { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+.vessel-card-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.vessel-card-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.vessel-card-row:last-child { border-bottom: none; }
+.vessel-card-row-label { font-size: 11px; color: var(--text-tertiary); }
+.vessel-card-row-val { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.vessel-card-row-val.gold { color: var(--gold-dark); }
+.vessel-card-row-val.red { color: var(--red); }
+.vessel-card-verdict { margin-top: 14px; padding: 8px 12px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+.card-verdict-caution { background: var(--gold-pale); color: var(--gold-dark); }
+.card-verdict-impossible { background: var(--navy); color: var(--white); }
+
+.callout-verdict { background: var(--navy); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.callout-verdict-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 300; }
+.callout-verdict-body strong { color: var(--gold); font-weight: 600; }
+
+.callout-red { background: var(--red-pale); border-left: 3px solid var(--red); border-radius: 0 6px 6px 0; padding: 20px 24px; margin: 28px 0; }
+.callout-red .callout-label { color: var(--red); }
+.callout-red .callout-body { color: var(--text-primary); }
+
+.row-mild td   { background: #fffdf5; }
+.row-moderate td { background: #fff9ec; }
+.row-severe td  { background: #fff3e0; }
+.row-critical td { background: #fdf0ee; }
+
+@media (max-width: 680px) {
+ .compare-grid { grid-template-columns: 1fr; }
+ .vessel-grid { grid-template-columns: 1fr; }
+}
+</style>
