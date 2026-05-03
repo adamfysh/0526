@@ -80,4 +80,4 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 | `--text-tertiary` | #8FA5BB | Meta labels, muted text |
 | `--s1`–`--s6` | 8–80px | Spacing scale |
 | `--max-w` | 1120px | Marketing page max width |
-| `--max-w-article` | 900px | Article page max width |
+| `--max-w-article` | 900px | Article page max width | 
