@@ -1,0 +1,267 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+  title="The Kra Land Bridge is a <em>$31 billion question</em> with a $1.4 million answer."
+  description="Thailand is fast-tracking a land bridge across the Kra Isthmus to create an alternative to the Strait of Malacca. The project is real. The geopolitical logic is real. The commercial case for bulk cargo is not."
+  eyebrow="Scenario analysis · Malacca Strait · May 2026"
+  publishDate="May 2026"
+  readTime="12 min read"
+  author="Narrows Research"
+>
+
+<!-- STAT BAR slot -->
+<div slot="stat-bar" class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Land bridge cost — Capesize</div>
+      <div class="stat-bar-value">$1.4M</div>
+      <div class="stat-bar-unit">per voyage, double-handling penalty</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Lombok detour cost — same vessel</div>
+      <div class="stat-bar-value">$800k</div>
+      <div class="stat-bar-unit">4 extra days via alternative strait</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Japan iron ore — annual Kra cost</div>
+      <div class="stat-bar-value">$800M</div>
+      <div class="stat-bar-unit">additional per year if land bridge used</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">VLCC crude — land bridge viable?</div>
+      <div class="stat-bar-value">No</div>
+      <div class="stat-bar-unit">transshipment of crude at scale is not feasible</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section-eyebrow">The project</div>
+<h2 class="article-section-title">Thailand's $31 billion land bridge and what it is trying to solve.</h2>
+
+<p class="prose">The Kra Isthmus is the narrow neck of the Thai peninsula where it is approximately 100 kilometres from the Gulf of Thailand to the Andaman Sea. Thailand has periodically proposed cutting a canal or building a land bridge across it since the 19th century. The current proposal is a $31 billion dual-port land bridge connecting Chumphon on the Gulf side to Ranong on the Andaman side, with a high-capacity rail link between them. This is the most serious version of this proposal yet.</p>
+<p class="prose">The project is positioned as Thailand's answer to Singapore's dominance of the Malacca transit hub. The logic: vessels currently sailing from the Indian Ocean to East Asia must go south through the Malacca Strait, transiting Singapore. A Kra land bridge would allow cargo to unload at the Gulf of Thailand terminal, cross by rail, and reload at the Andaman Sea terminal, bypassing roughly 1,200 kilometres of sailing and the entire Malacca corridor.</p>
+<p class="prose">The Hormuz closure of February 2026 gave the proposal geopolitical momentum it had previously lacked. If any single corridor can be closed, the argument goes, every alternative becomes more valuable. <strong>That argument is correct in principle and mostly wrong in practice for the commodity classes that actually drive Malacca traffic volume.</strong></p>
+
+<div class="callout">
+  <div class="callout-label">What the project is actually about</div>
+  <div class="callout-body">The Kra land bridge is a credible solution for containerised general cargo and some refined petroleum, and a geopolitical hedge that has real value regardless of commercial utilisation. It is not a credible solution for the two commodity classes that dominate Malacca's bulk tonnage: iron ore on Capesize vessels and crude petroleum on VLCCs. The numbers explain why.</div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 2 -->
+<div class="section-eyebrow">The core constraint</div>
+<h2 class="article-section-title">Double-handling is not a fee. It is a physical operation. For bulk cargo, it is ruinously expensive.</h2>
+
+<p class="prose">A canal would allow a vessel to sail through without unloading. A land bridge does not. Every tonne of cargo must be lifted off one vessel, moved across the isthmus by rail or road, and loaded onto a second vessel. For containerised cargo, this is expensive but operationally straightforward. Containers are designed to be handled. For bulk cargo such as iron ore, coal, grain, and crude oil, double-handling is a different kind of problem.</p>
+<p class="prose">Iron ore bulk handling typically costs $8–12 per tonne at a modern terminal, covering discharge, storage, and reloading. A Capesize bulk carrier typically carries 170,000–180,000 tonnes of iron ore. At $10/tonne average handling cost, a single Kra land bridge transit costs <strong>$1.7 million in handling charges alone,</strong> before rail freight, port dues, or the time cost of the additional port call.</p>
+<p class="prose">The alternative, diverting via Lombok Strait, costs $800,000 in additional bunker and charter cost for a 4-day detour. The land bridge costs more than double that, delivers the cargo more slowly due to the two port calls, and introduces new cargo damage risk during the discharge and reload cycle.</p>
+<p class="prose">For crude petroleum, the arithmetic is even more decisive. A VLCC carries 2 million barrels, roughly 270,000 tonnes of crude. Pumping crude from a VLCC, storing it in shore tanks, and reloading onto a second VLCC requires specialised terminal infrastructure that does not currently exist at Chumphon or Ranong, costs $15–20 per tonne in handling, and introduces contamination and evaporation losses that are commercially unacceptable. <strong>Transshipping crude via a land bridge at VLCC scale is not a cost problem; it is an operational impossibility at any realistic price point.</strong></p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 3 -->
+<div class="section-eyebrow">The rerouting economics</div>
+<h2 class="article-section-title">Land bridge versus Lombok diversion.</h2>
+
+<p class="prose">The Narrows model calculates rerouting cost by vessel class, using charter rate, bunker consumption, and detour days as inputs. The land bridge cost is calculated as double-handling cost per tonne multiplied by cargo mass, plus additional port call time (estimated at 1.5 days per end) at representative port cost. Both costs are compared for the same origin–destination pair: a laden vessel departing a Western Australian or Brazilian port bound for Japan or South Korea.</p>
+
+<div class="vessel-grid">
+  <div class="vessel-card">
+    <div class="vessel-card-class">Bulk carrier</div>
+    <div class="vessel-card-name">Capesize</div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Cargo</span><span class="vessel-card-row-val">Iron ore, ~170kt</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Lombok detour</span><span class="vessel-card-row-val">$800k (+4 days)</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Kra handling</span><span class="vessel-card-row-val red">$1.7M (+3 days)</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Kra premium vs. Lombok</span><span class="vessel-card-row-val red">+$900k</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Damage/loss risk</span><span class="vessel-card-row-val red">High (rehandling)</span></div>
+    <div class="vessel-card-verdict card-verdict-no">Land bridge: not viable</div>
+  </div>
+  <div class="vessel-card">
+    <div class="vessel-card-class">Tanker</div>
+    <div class="vessel-card-name">VLCC (laden crude)</div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Cargo</span><span class="vessel-card-row-val">Crude, ~270kt</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Lombok detour</span><span class="vessel-card-row-val">$1.0M (+5 days)</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Kra transshipment</span><span class="vessel-card-row-val red">Not feasible</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Infrastructure exists?</span><span class="vessel-card-row-val red">No</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Draft at Kra terminals</span><span class="vessel-card-row-val red">Insufficient for VLCC</span></div>
+    <div class="vessel-card-verdict card-verdict-impossible">Land bridge: impossible</div>
+  </div>
+  <div class="vessel-card">
+    <div class="vessel-card-class">Container ship</div>
+    <div class="vessel-card-name">Ultra-large (UL)</div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Cargo</span><span class="vessel-card-row-val">~18,000 TEU</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Sunda detour</span><span class="vessel-card-row-val">$495k (+3 days)</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Kra handling (est.)</span><span class="vessel-card-row-val">$180/TEU = $3.2M</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Schedule disruption</span><span class="vessel-card-row-val red">High (liner ops)</span></div>
+    <div class="vessel-card-row"><span class="vessel-card-row-label">Feeder vessels only?</span><span class="vessel-card-row-val gold">Marginal case</span></div>
+    <div class="vessel-card-verdict card-verdict-marginal">Land bridge: feeder only</div>
+  </div>
+</div>
+
+<p class="prose">The container case is the only one where the land bridge has any commercial logic, and only for smaller feeder vessels carrying time-sensitive cargo where avoiding a 3-day Sunda detour has material schedule value. For the ultra-large container ships that account for the majority of Asia-Europe TEU volume, double-handling costs exceed detour costs by a factor of six.</p>
+
+<div class="callout-verdict">
+  <div class="callout-verdict-label">The core finding</div>
+  <div class="callout-verdict-body">For the two commodity classes that drive Malacca's bulk tonnage, iron ore on Capesizes and crude on VLCCs, <strong>the Kra land bridge costs more than the alternative it is designed to replace</strong>, delivers cargo more slowly, and introduces operational risks that no charterer will accept when a viable sea route exists. The land bridge cannot be commercially competitive for bulk cargo unless iron ore handling costs fall to approximately $3/tonne, roughly one-third of current rates at any comparable terminal.</div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 4 -->
+<div class="section-eyebrow">The dependency matrix</div>
+<h2 class="article-section-title">Japan and South Korea's iron ore exposure is the specific number the land bridge was meant to address.</h2>
+
+<p class="prose">The commercial case for the Kra land bridge rests on the Malacca dependency of East Asian importers, specifically Japan and South Korea, whose steel industries depend on seaborne iron ore from Australia and Brazil. The Narrows model quantifies that dependency precisely, and at scale the numbers are large enough to make the question worth asking seriously.</p>
+
+<div class="matrix-wrap">
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th>Importer</th>
+        <th>Commodity</th>
+        <th class="num">Malacca dep.</th>
+        <th class="num">Exposed value (14d)</th>
+        <th>Land bridge viable?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="bold">Japan</td><td>Iron ore (Capesize)</td><td class="num dep-high">82%</td><td class="num bold">$1.8B</td><td><span class="verdict-cell verdict-no">No — double-handling too costly</span></td></tr>
+      <tr><td class="bold">South Korea</td><td>Iron ore (Capesize)</td><td class="num dep-high">78%</td><td class="num bold">$1.1B</td><td><span class="verdict-cell verdict-no">No — double-handling too costly</span></td></tr>
+      <tr><td class="bold">China</td><td>Iron ore (Capesize)</td><td class="num dep-high">74%</td><td class="num bold">$6.2B</td><td><span class="verdict-cell verdict-no">No — Lombok viable alternative</span></td></tr>
+      <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">76%</td><td class="num bold">$1.2B</td><td><span class="verdict-cell verdict-no">No — VLCC transshipment infeasible</span></td></tr>
+      <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">71%</td><td class="num bold">$950M</td><td><span class="verdict-cell verdict-no">No — VLCC transshipment infeasible</span></td></tr>
+      <tr><td class="bold">Japan</td><td>Electronics (Container)</td><td class="num dep-mid">68%</td><td class="num bold">$420M</td><td><span class="verdict-cell verdict-marginal">Marginal — feeder only</span></td></tr>
+      <tr><td class="bold">South Korea</td><td>Vehicles — imports (RoRo)</td><td class="num dep-mid">52%</td><td class="num bold">$280M</td><td><span class="verdict-cell verdict-no">No — RoRo double-handling impractical</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="prose">Japan alone imports approximately 120 million tonnes of iron ore annually, of which roughly 98 million tonnes transit Malacca. If the land bridge were used instead of Lombok diversion for that volume, the additional annual cost would be approximately <strong>$800 million per year,</strong> at current handling rates, paid in perpetuity, on top of the $31 billion construction cost. No steel mill procurement desk will accept that calculus.</p>
+
+<div class="callout">
+  <div class="callout-label">The self-defeating dependency</div>
+  <div class="callout-body">Japan's steel industry, which routes 82% of its iron ore through Malacca, has the most to gain from a credible Malacca alternative. It also has the most to lose from a land bridge that adds $800 million per year in handling costs to that supply chain. <strong>The importer with the highest exposure is also the importer for whom the proposed solution is most expensive.</strong></div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 5 -->
+<div class="section-eyebrow">The structural argument</div>
+<h2 class="article-section-title">The land bridge is a geopolitical hedge, not a commercial alternative. Both things can be true.</h2>
+
+<p class="prose">Dismissing the Kra land bridge as economically irrational misses the point that Thailand, Japan, and South Korea's governments are actually making. A project does not need to be commercially competitive to justify its construction. It needs to be commercially viable in the tail scenario, the Malacca closure, that it is designed to address.</p>
+<p class="prose">Under a full Malacca closure, the scenario where Lombok, Sunda, and the primary strait are all disrupted simultaneously, a land bridge that costs $1.7 million per Capesize transit is cheaper than the alternative, which is rerouting south of Australia via the Cape of Good Hope. That detour adds 18–22 days to a Japan–Brazil voyage, costing approximately $3.5–4.5 million per Capesize. In that scenario, the land bridge makes sense.</p>
+<p class="prose">The question is not whether that scenario is possible. It is how frequently a policymaker believes it will occur over a 50-year project life, and what probability-weighted value they assign to having the option. That is a sovereign risk calculation, not a commercial one, and it explains why the project is being driven by governments rather than shipping companies.</p>
+<p class="prose"><strong>The risk management implication for underwriters and commodity desks is different.</strong> The land bridge will not change Malacca dependency or Lombok utilisation in steady-state operations for a decade at minimum, and will not change Capesize or VLCC routing economics even after completion. The dependency numbers in the Narrows matrix are durable on any timeframe relevant to a current cargo policy, P&amp;I accumulation model, or trade finance facility.</p>
+
+<div class="section-eyebrow" style="margin-top:32px;">Cost comparison at scale</div>
+<h2 class="article-section-title">What each routing option costs for Japan's annual iron ore import volume.</h2>
+
+<div class="scale-wrap">
+  <div class="scale-item">
+    <div class="scale-label">Malacca (current)<span>Direct transit, no disruption</span></div>
+    <div class="scale-bar-wrap"><div class="scale-bar" style="width:8%;background:var(--green);"><span class="scale-bar-label">Baseline</span></div></div>
+    <div class="scale-cost" style="color:var(--green);">$0 premium</div>
+  </div>
+  <div class="scale-item">
+    <div class="scale-label">Lombok diversion<span>4-day detour, Capesize</span></div>
+    <div class="scale-bar-wrap"><div class="scale-bar" style="width:22%;background:var(--gold);"><span class="scale-bar-label">+$470M/yr</span></div></div>
+    <div class="scale-cost">+$470M/yr</div>
+  </div>
+  <div class="scale-item">
+    <div class="scale-label">Kra land bridge<span>Double-handling, $10/tonne</span></div>
+    <div class="scale-bar-wrap"><div class="scale-bar" style="width:55%;background:var(--gold-dark);"><span class="scale-bar-label">+$800M/yr extra cost</span></div></div>
+    <div class="scale-cost" style="color:var(--red);">+$800M/yr</div>
+  </div>
+  <div class="scale-item">
+    <div class="scale-label">Cape of Good Hope<span>Full Malacca closure — 18–22 day detour</span></div>
+    <div class="scale-bar-wrap"><div class="scale-bar" style="width:100%;background:var(--red);"><span class="scale-bar-label">+$2.1–2.8B/yr — land bridge viable only vs. this</span></div></div>
+    <div class="scale-cost">+$2.1–2.8B/yr</div>
+  </div>
+</div>
+
+<p class="prose" style="margin-top:24px;">The Lombok diversion costs Japan's steel supply chain roughly $470 million per year in additional voyage expense, painful but manageable. The Kra land bridge costs $800 million per year more than Lombok on the same volume. The land bridge only makes economic sense when the comparison is not Lombok but the full Cape rerouting scenario, a $2+ billion annual cost that the land bridge halves. In that framing, a $31 billion infrastructure investment with a 15–20 year payback under an extreme scenario is not unreasonable sovereign risk management. It is simply not a commercial shipping decision.</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 6 -->
+<div class="section-eyebrow">What this means for risk models</div>
+<h2 class="article-section-title">The land bridge does not change the dependency numbers. It changes the tail scenario economics.</h2>
+
+<p class="prose">An accumulation underwriter at a P&amp;I club, a crude desk at a commodity trading house, and a project finance lender considering a Capesize fleet facility all face the same structural question: how much of a specific counterparty's exposure runs through Malacca, and what does disruption cost at a given severity and duration?</p>
+<p class="prose">The Kra land bridge, even if built on schedule (which is unlikely), does not change those numbers for the commodity classes that matter most to those counterparties. Iron ore Capesizes will not use the land bridge. VLCC crude transits will not use it at all. The Malacca dependency percentages in the Narrows matrix will remain materially unchanged for the duration of any cargo policy, credit facility, or accumulation model currently being written.</p>
+<p class="prose">What changes is the tail scenario: a full and simultaneous Malacca and Lombok closure now has a land bridge option that costs $1.7M per Capesize transit rather than a Cape rerouting that costs $4M. That is a narrowing of the worst-case, not a reduction of the base-case exposure. For underwriters pricing accumulation risk, that distinction matters.</p>
+
+<div class="method-note">
+  <div class="method-note-label">Methodology</div>
+  <div class="method-note-body">All dependency figures derived from the Narrows Chokepoint Dependency Simulation Model. Data source: UN Comtrade 2023 bilateral import data, 7 HS commodity classes, 25 importing countries, 22 chokepoints. Model coverage: $804B of $897B matchable seaborne trade value (89.6%). Bilateral flows are classified by data quality tier: Tier 1 flows are direct bilateral reporter pairs; Tier 3 flows are aggregate or partner-imputed. Double-handling costs based on published terminal handling rates at comparable bulk facilities ($8–12/tonne for dry bulk; $15–20/tonne for liquid bulk). Capesize assumptions: 170,000 DWT cargo, bunker $32k/day, charter $18k/day. VLCC assumptions: 270,000 DWT cargo, bunker $55k/day, charter $45k/day. Lombok detour +4 days; Sunda detour +3 days; Cape of Good Hope full rerouting +18–22 days on Japan–Brazil routing. All model assumptions are substitutable; contact fysh@narrows.io to run a scenario with your own inputs.</div>
+</div>
+
+<!-- CTA slot -->
+<div slot="cta" class="cta-strip">
+  <div class="cta-strip-inner">
+    <div>
+      <div class="cta-strip-title">Model your Malacca exposure with and without the Kra tail scenario.</div>
+      <div class="cta-strip-sub">Adjust double-handling rates, detour days, and vessel assumptions to your own inputs. Request a demo and we will run your specific commodity and corridor exposure in front of you.</div>
+    </div>
+    <a href="mailto:fysh@narrows.io?subject=Kra land bridge scenario request&body=I would like to run a Malacca / Kra scenario.%0A%0AOrganisation:%0ARole:%0AKey commodity / route of interest:" class="cta-btn">Request demo</a>
+  </div>
+</div>
+
+</ArticleLayout>
+
+<style>
+/* Article-specific component styles for this page */
+.vessel-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0; }
+.vessel-card { border: var(--rule-light); border-radius: 8px; padding: 20px; border-top: 3px solid var(--gold); }
+.vessel-card-class { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
+.vessel-card-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.vessel-card-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.vessel-card-row:last-of-type { border-bottom: none; }
+.vessel-card-row-label { font-size: 11px; color: var(--text-tertiary); }
+.vessel-card-row-val { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.vessel-card-row-val.gold { color: var(--gold-dark); }
+.vessel-card-row-val.red  { color: var(--red); }
+.vessel-card-verdict { margin-top: 14px; padding: 8px 12px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+.card-verdict-no         { background: var(--red-pale);  color: var(--red); }
+.card-verdict-impossible { background: var(--navy);      color: var(--white); }
+.card-verdict-marginal   { background: var(--gold-pale); color: var(--gold-dark); }
+
+.callout-verdict { background: var(--navy); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.callout-verdict-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 300; }
+.callout-verdict-body strong { color: var(--gold); font-weight: 600; }
+
+.matrix-wrap { overflow-x: auto; margin: 28px 0; }
+.matrix-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.matrix-table thead tr { background: var(--navy); }
+.matrix-table thead th { padding: 12px 16px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.matrix-table thead th.num { text-align: right; }
+.matrix-table tbody tr { border-bottom: var(--rule-light); }
+.matrix-table tbody tr:last-child { border-bottom: none; }
+.matrix-table tbody tr:hover { background: var(--surface); }
+.matrix-table td { padding: 13px 16px; color: var(--text-secondary); vertical-align: middle; }
+.matrix-table td.bold { font-weight: 600; color: var(--text-primary); }
+.matrix-table td.num  { font-variant-numeric: tabular-nums; text-align: right; font-weight: 500; }
+.dep-high { color: #C0392B; font-weight: 700; }
+.dep-mid  { color: #B87333; font-weight: 600; }
+.verdict-cell { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; display: inline-block; }
+.verdict-no       { background: var(--red-pale);  color: var(--red); }
+.verdict-marginal { background: var(--gold-pale); color: var(--gold-dark); }
+
+.scale-wrap { margin: 32px 0; }
+.scale-item { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: var(--rule-light); }
+.scale-item:last-child { border-bottom: none; }
+.scale-label { width: 200px; flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.scale-label span { display: block; font-size: 10px; font-weight: 400; color: var(--text-tertiary); margin-top: 2px; }
+.scale-bar-wrap { flex: 1; position: relative; height: 28px; background: var(--surface); border-radius: 4px; overflow: hidden; }
+.scale-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 12px; }
+.scale-bar-label { font-size: 11px; font-weight: 700; color: var(--white); white-space: nowrap; }
+.scale-cost { width: 110px; flex-shrink: 0; text-align: right; font-size: 14px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 680px) { .vessel-grid { grid-template-columns: 1fr; } }
+</style>

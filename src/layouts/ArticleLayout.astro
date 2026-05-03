@@ -1,0 +1,315 @@
+---
+/**
+ * ArticleLayout.astro
+ * Use this for all analysis / research pieces.
+ * Provides the dark hero header, stat bar slot, and article body container.
+ *
+ * Props:
+ *   title       — article headline (supports <em> via set:html if needed)
+ *   description — meta description + hero subhead
+ *   eyebrow     — e.g. "Malacca Strait Analysis"
+ *   publishDate — e.g. "May 2026"
+ *   readTime    — e.g. "12 min read"
+ *   author      — e.g. "Narrows Research"
+ *   ogImage     — optional OG image path
+ */
+import BaseHead from '../components/BaseHead.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  publishDate?: string;
+  readTime?: string;
+  author?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '',
+  eyebrow = 'Analysis',
+  publishDate = '',
+  readTime = '',
+  author = 'Narrows Research',
+  ogImage,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <BaseHead title={`Narrows — ${title}`} description={description} ogImage={ogImage} />
+  <style>
+    /* Article-specific overrides */
+    body { font-size: 15px; }
+
+    /* Dark article header */
+    .article-hero {
+      background: var(--navy);
+      padding: 80px 28px 48px;
+      border-bottom: var(--rule-gold);
+    }
+    .article-hero-inner { max-width: var(--max-w-article); margin: 0 auto; }
+    .article-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .article-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .article-title :global(em) {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+    }
+    .article-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .article-meta-item { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
+    .article-meta-item strong { color: rgba(255,255,255,0.65); font-weight: 500; }
+    .article-meta-sep { color: rgba(255,255,255,0.2); }
+
+    /* Stat bar — optional slot between hero and body */
+    .stat-bar {
+      background: var(--surface);
+      border-bottom: var(--rule-light);
+    }
+    .stat-bar-inner {
+      max-width: var(--max-w-article);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-bar-item {
+      padding: 20px 24px;
+      border-right: var(--rule-light);
+    }
+    .stat-bar-item:last-child { border-right: none; }
+    .stat-bar-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .stat-bar-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .stat-bar-unit {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-weight: 300;
+    }
+
+    /* Article body */
+    .article-body {
+      max-width: var(--max-w-article);
+      margin: 0 auto;
+      padding: 52px 28px 80px;
+    }
+
+    /* Prose typography */
+    .prose {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    .prose strong { color: var(--text-primary); font-weight: 600; }
+    .prose a { color: var(--blue); }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .article-section-title {
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-rule {
+      border: none;
+      border-top: var(--rule-light);
+      margin: 48px 0;
+    }
+
+    /* Callout / methodology boxes */
+    .callout {
+      background: var(--blue-pale);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+    .callout-body strong { color: var(--text-primary); font-weight: 600; }
+
+    .method-note {
+      background: var(--surface);
+      border: var(--rule-light);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 32px;
+    }
+    .method-note-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+    .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.7; }
+
+    /* CTA strip at bottom of articles */
+    .cta-strip {
+      background: var(--navy);
+      border-top: var(--rule-gold);
+      padding: 48px 28px;
+    }
+    .cta-strip-inner {
+      max-width: var(--max-w-article);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-strip-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .cta-strip-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+    .cta-btn {
+      flex-shrink: 0;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.12s;
+      white-space: nowrap;
+    }
+    .cta-btn:hover { background: var(--gold-dark); transform: translateY(-1px); }
+
+    @media (max-width: 700px) {
+      .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .cta-strip-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <Nav />
+
+  <!-- Article hero -->
+  <div class="article-hero">
+    <div class="article-hero-inner">
+      <div class="article-eyebrow">{eyebrow}</div>
+      <h1 class="article-title" set:html={title} />
+      {description && <p class="article-sub">{description}</p>}
+      <div class="article-meta">
+        {author    && <span class="article-meta-item"><strong>{author}</strong></span>}
+        {publishDate && <><span class="article-meta-sep">·</span><span class="article-meta-item">{publishDate}</span></>}
+        {readTime  && <><span class="article-meta-sep">·</span><span class="article-meta-item">{readTime}</span></>}
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional stat bar (pass via named slot) -->
+  <slot name="stat-bar" />
+
+  <!-- Article body -->
+  <div class="article-body">
+    <slot />
+  </div>
+
+  <!-- Optional CTA strip -->
+  <slot name="cta" />
+
+  <Footer />
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

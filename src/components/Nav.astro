@@ -1,0 +1,99 @@
+---
+const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>`;
+---
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <Fragment set:html={NAV_LOGO_SVG} />
+      <span class="nav-logo-word">NARROWS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/model">The model</a></li>
+      <li><a href="/analysis">Analysis</a></li>
+      <li><a href="/methodology">Methodology</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="#" class="nav-login">Client login</a></li>
+      <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows" class="nav-cta">Request demo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--rule-light);
+  padding: 0 var(--s4);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo :global(.nav-logo-mark) {
+  width: 56px;
+  height: auto;
+  display: block;
+}
+.nav-logo :global(.nav-logo-mark path) { fill: var(--navy); }
+.nav-logo-word {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--white) !important;
+  background: var(--blue);
+  padding: 9px 20px;
+  border-radius: 4px;
+  transition: background 0.15s !important;
+  letter-spacing: 0 !important;
+}
+.nav-cta:hover { background: var(--navy) !important; }
+.nav-login {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  border: var(--rule-light);
+  padding: 8px 18px;
+  border-radius: 4px;
+  transition: border-color 0.15s, color 0.15s !important;
+  letter-spacing: 0 !important;
+}
+.nav-login:hover { border-color: var(--navy) !important; color: var(--navy) !important; }
+
+@media (max-width: 900px) { nav { padding: 0 var(--s2); } }
+@media (max-width: 600px) { .nav-links { display: none; } }
+</style>
