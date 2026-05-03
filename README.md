@@ -81,3 +81,6 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 | `--s1`–`--s6` | 8–80px | Spacing scale |
 | `--max-w` | 1120px | Marketing page max width |
 | `--max-w-article` | 900px | Article page max width | 
+
+
+
