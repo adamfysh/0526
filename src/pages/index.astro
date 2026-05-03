@@ -450,168 +450,412 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     MAP
-══════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════
+     NARROWS — MAP SECTION
+     Drop-in replacement for the SVG map block in index.astro
+     
+     SETUP: Replace YOUR_MAPTILER_KEY with your actual key.
+     Find and replace is fine — it appears once.
+     
+     Place this entire block where the <section class="map-section">
+     currently sits in index.astro.
+══════════════════════════════════════════════════════ -->
+ 
 <section class="map-section">
   <div class="map-section-inner">
-    <div class="map-header">
-      <h2 class="map-title">22 risk corridors. <em>Every one quantified.</em></h2>
-      <div class="map-legend">
-        <div class="map-legend-item"><div class="map-legend-dot-primary"></div>Primary — live scenario context</div>
-        <div class="map-legend-item"><div class="map-legend-dot-secondary"></div>Active — modelled, available in simulator</div>
+ 
+    <!-- Left: map -->
+    <div class="map-left">
+      <div id="narrows-map"></div>
+    </div>
+ 
+    <!-- Right: stats -->
+    <div class="map-right">
+      <div class="eyebrow" style="color:rgba(255,255,255,0.5);">
+        <span style="background:var(--gold);"></span>
+        22 risk corridors modelled
       </div>
+      <h2 class="map-title">
+        Every corridor.<br>
+        <em>Quantified.</em>
+      </h2>
+      <p class="map-sub">
+        The model covers 22 maritime risk corridors across 4 categories — geometric straits, nodal hubs, corridor zones, and infrastructure chokepoints. Select a corridor in the simulator to run your scenario.
+      </p>
+ 
+      <div class="map-stat-list">
+        <div class="map-stat-item primary">
+          <div class="map-stat-dot gold"></div>
+          <div>
+            <div class="map-stat-name">Strait of Hormuz</div>
+            <div class="map-stat-val">$13.8B at risk · 30d closure</div>
+          </div>
+        </div>
+        <div class="map-stat-item primary">
+          <div class="map-stat-dot gold"></div>
+          <div>
+            <div class="map-stat-name">Strait of Malacca</div>
+            <div class="map-stat-val">$62.4B at risk · 14d closure</div>
+          </div>
+        </div>
+        <div class="map-stat-item primary">
+          <div class="map-stat-dot gold"></div>
+          <div>
+            <div class="map-stat-name">Suez Canal</div>
+            <div class="map-stat-val">+14 days via Cape · VLCC</div>
+          </div>
+        </div>
+        <div class="map-stat-item primary">
+          <div class="map-stat-dot gold"></div>
+          <div>
+            <div class="map-stat-name">Panama Canal</div>
+            <div class="map-stat-val">+8 days Atlantic reroute</div>
+          </div>
+        </div>
+        <div class="map-stat-divider"></div>
+        <div class="map-stat-item secondary">
+          <div class="map-stat-dot grey"></div>
+          <div class="map-stat-name-secondary">Bab el-Mandeb · Lombok · Gibraltar · Tsushima · Torres Strait · Cape of Good Hope · Danish Straits · Strait of Sicily · Cape Horn · Sunda Strait · Hormuz alternatives · Dover Strait · +10 more</div>
+        </div>
+      </div>
+ 
+      <p class="map-source">
+        UN Comtrade 2023 bilateral data · Values are model outputs at stated severity and duration · All assumptions substitutable in the simulator
+      </p>
     </div>
-    <div class="map-wrap">
-      <svg viewBox="0 0 1120 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
-        <defs>
-          <filter id="glow-gold">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="glow-soft">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- Ocean background -->
-        <rect width="1120" height="560" fill="#060f1a"/>
-
-        <!-- Very simplified continent silhouettes — impressionistic, not precise -->
-        <!-- Europe -->
-        <path d="M480,60 L520,55 L560,70 L550,110 L530,120 L510,115 L490,105 L475,90 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- Scandinavia -->
-        <path d="M510,30 L530,25 L540,50 L520,55 L505,45 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- UK -->
-        <path d="M470,65 L480,60 L478,80 L466,78 Z" fill="#0d2035" opacity="0.85"/>
-        <!-- Africa -->
-        <path d="M480,130 L560,120 L590,150 L600,220 L570,310 L540,360 L510,340 L490,290 L470,220 L465,170 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- Middle East / Arabian Peninsula -->
-        <path d="M570,130 L630,120 L660,150 L650,190 L620,200 L590,185 L565,160 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- India -->
-        <path d="M650,150 L690,145 L700,200 L670,240 L645,200 L640,170 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- SE Asia / Malay Peninsula -->
-        <path d="M730,190 L760,185 L755,240 L740,250 L725,230 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- China / East Asia -->
-        <path d="M730,80 L840,70 L870,110 L860,160 L820,175 L770,165 L740,140 L720,110 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- Japan -->
-        <path d="M870,95 L885,85 L895,110 L880,120 L868,108 Z" fill="#0d2035" opacity="0.85"/>
-        <!-- Korea -->
-        <path d="M845,110 L860,105 L858,130 L843,128 Z" fill="#0d2035" opacity="0.85"/>
-        <!-- Americas -->
-        <path d="M140,50 L220,45 L240,90 L230,180 L200,260 L170,290 L150,250 L130,180 L120,110 Z" fill="#0d2035" opacity="0.9"/>
-        <path d="M150,290 L180,295 L190,360 L170,420 L145,410 L135,350 Z" fill="#0d2035" opacity="0.9"/>
-        <!-- Australia -->
-        <path d="M760,310 L870,300 L890,370 L860,420 L790,425 L755,380 Z" fill="#0d2035" opacity="0.9"/>
-
-        <!-- Trade route lines — subtle, curved -->
-        <!-- Europe ↔ Asia via Suez/Red Sea/Hormuz -->
-        <path d="M505,95 Q560,170 615,175 Q650,178 680,200 Q720,230 750,210 Q790,185 830,145" stroke="rgba(21,101,168,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
-        <!-- Europe ↔ Asia via Cape (alternative) -->
-        <path d="M505,105 Q490,200 510,310 Q530,390 570,430 Q650,480 730,440 Q790,410 840,360 Q870,300 855,200 Q845,160 830,145" stroke="rgba(21,101,168,0.1)" stroke-width="1" fill="none" stroke-dasharray="3,6"/>
-        <!-- Asia ↔ Americas via Panama -->
-        <path d="M830,145 Q840,170 830,210 Q810,260 760,280 Q700,300 640,300 Q560,300 490,280 Q430,260 380,240 Q310,210 255,200" stroke="rgba(21,101,168,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
-        <!-- ME ↔ East Asia via Malacca -->
-        <path d="M635,175 Q670,200 700,215 Q720,225 745,220" stroke="rgba(21,101,168,0.25)" stroke-width="1.5" fill="none" stroke-dasharray="4,4"/>
-        <!-- Australia ↔ East Asia -->
-        <path d="M820,320 Q840,270 855,200" stroke="rgba(21,101,168,0.15)" stroke-width="1" fill="none" stroke-dasharray="3,5"/>
-
-        <!-- ── SECONDARY CHOKEPOINTS (smaller, faded) ── -->
-        <!-- Bab el-Mandeb -->
-        <g opacity="0.45" filter="url(#glow-soft)">
-          <circle cx="597" cy="195" r="4" fill="#8FA5BB"/>
-          <text x="607" y="193" font-size="9" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="500" letter-spacing="0.04em">Bab el-Mandeb</text>
-        </g>
-        <!-- Strait of Gibraltar -->
-        <g opacity="0.4" filter="url(#glow-soft)">
-          <circle cx="468" cy="118" r="4" fill="#8FA5BB"/>
-          <text x="453" y="113" font-size="9" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="500" letter-spacing="0.04em" text-anchor="middle">Gibraltar</text>
-        </g>
-        <!-- Lombok -->
-        <g opacity="0.4" filter="url(#glow-soft)">
-          <circle cx="773" cy="275" r="4" fill="#8FA5BB"/>
-          <text x="783" y="273" font-size="9" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="500">Lombok</text>
-        </g>
-        <!-- Tsushima -->
-        <g opacity="0.35" filter="url(#glow-soft)">
-          <circle cx="858" cy="128" r="3" fill="#8FA5BB"/>
-          <text x="862" y="126" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Tsushima</text>
-        </g>
-        <!-- Torres Strait -->
-        <g opacity="0.35" filter="url(#glow-soft)">
-          <circle cx="853" cy="310" r="3" fill="#8FA5BB"/>
-          <text x="858" y="308" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Torres Strait</text>
-        </g>
-        <!-- Cape of Good Hope -->
-        <g opacity="0.35" filter="url(#glow-soft)">
-          <circle cx="519" cy="405" r="3" fill="#8FA5BB"/>
-          <text x="525" y="403" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Cape of Good Hope</text>
-        </g>
-        <!-- Danish Straits -->
-        <g opacity="0.35" filter="url(#glow-soft)">
-          <circle cx="517" cy="52" r="3" fill="#8FA5BB"/>
-          <text x="523" y="50" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Danish Straits</text>
-        </g>
-        <!-- Strait of Sicily -->
-        <g opacity="0.35" filter="url(#glow-soft)">
-          <circle cx="525" cy="125" r="3" fill="#8FA5BB"/>
-          <text x="531" y="123" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Sicily</text>
-        </g>
-        <!-- Cape Horn -->
-        <g opacity="0.3" filter="url(#glow-soft)">
-          <circle cx="185" cy="430" r="3" fill="#8FA5BB"/>
-          <text x="191" y="428" font-size="8" fill="#8FA5BB" font-family="'Plus Jakarta Sans',sans-serif" font-weight="400">Cape Horn</text>
-        </g>
-
-        <!-- ── PRIMARY CHOKEPOINTS ── -->
-        <!-- HORMUZ -->
-        <g filter="url(#glow-gold)">
-          <circle cx="645" cy="168" r="10" fill="rgba(240,180,41,0.15)" stroke="rgba(240,180,41,0.4)" stroke-width="1"/>
-          <circle cx="645" cy="168" r="5" fill="#F0B429"/>
-        </g>
-        <!-- Hormuz label -->
-        <rect x="652" y="153" width="108" height="28" rx="3" fill="rgba(10,37,64,0.85)" stroke="rgba(240,180,41,0.3)" stroke-width="1"/>
-        <text x="658" y="163" font-size="8" fill="rgba(255,255,255,0.5)" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" letter-spacing="0.1em" text-transform="uppercase">HORMUZ</text>
-        <text x="658" y="175" font-size="9" fill="#F0B429" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700">$13.8B / 30d</text>
-
-        <!-- MALACCA -->
-        <g filter="url(#glow-gold)">
-          <circle cx="747" cy="238" r="10" fill="rgba(240,180,41,0.15)" stroke="rgba(240,180,41,0.4)" stroke-width="1"/>
-          <circle cx="747" cy="238" r="5" fill="#F0B429"/>
-        </g>
-        <!-- Malacca label -->
-        <rect x="754" y="223" width="112" height="28" rx="3" fill="rgba(10,37,64,0.85)" stroke="rgba(240,180,41,0.3)" stroke-width="1"/>
-        <text x="760" y="233" font-size="8" fill="rgba(255,255,255,0.5)" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" letter-spacing="0.1em">MALACCA</text>
-        <text x="760" y="245" font-size="9" fill="#F0B429" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700">$62.4B / 14d</text>
-
-        <!-- SUEZ -->
-        <g filter="url(#glow-gold)">
-          <circle cx="578" cy="148" r="10" fill="rgba(240,180,41,0.15)" stroke="rgba(240,180,41,0.4)" stroke-width="1"/>
-          <circle cx="578" cy="148" r="5" fill="#F0B429"/>
-        </g>
-        <!-- Suez label -->
-        <rect x="585" y="133" width="90" height="28" rx="3" fill="rgba(10,37,64,0.85)" stroke="rgba(240,180,41,0.3)" stroke-width="1"/>
-        <text x="591" y="143" font-size="8" fill="rgba(255,255,255,0.5)" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" letter-spacing="0.1em">SUEZ</text>
-        <text x="591" y="155" font-size="9" fill="#F0B429" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700">+14d via Cape</text>
-
-        <!-- PANAMA -->
-        <g filter="url(#glow-gold)">
-          <circle cx="242" cy="230" r="10" fill="rgba(240,180,41,0.15)" stroke="rgba(240,180,41,0.4)" stroke-width="1"/>
-          <circle cx="242" cy="230" r="5" fill="#F0B429"/>
-        </g>
-        <!-- Panama label -->
-        <rect x="249" y="215" width="96" height="28" rx="3" fill="rgba(10,37,64,0.85)" stroke="rgba(240,180,41,0.3)" stroke-width="1"/>
-        <text x="255" y="225" font-size="8" fill="rgba(255,255,255,0.5)" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" letter-spacing="0.1em">PANAMA</text>
-        <text x="255" y="237" font-size="9" fill="#F0B429" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700">+8d Atlantic</text>
-
-        <!-- Narrows watermark -->
-        <text x="1100" y="548" font-size="9" fill="rgba(255,255,255,0.1)" font-family="'Plus Jakarta Sans',sans-serif" font-weight="700" letter-spacing="0.1em" text-anchor="end">NARROWS · 22 CORRIDORS · 2023 DATA</text>
-      </svg>
-    </div>
-    <p class="map-source">Corridor coverage based on UN Comtrade 2023 bilateral trade data. Values shown are model outputs at stated severity and duration. All assumptions substitutable.</p>
+ 
   </div>
 </section>
+ 
+<!-- MapLibre GL JS — loaded via CDN, nothing to install -->
+<link href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+ 
+<script>
+// ── CHOKEPOINT DATA ──────────────────────────────────────
+const CHOKEPOINTS = [
+  // PRIMARY — gold, large
+  {
+    name: "Strait of Hormuz",
+    lat: 26.6, lng: 56.3,
+    stat: "$13.8B at risk · 30d closure",
+    primary: true
+  },
+  {
+    name: "Strait of Malacca",
+    lat: 2.5, lng: 102.0,
+    stat: "$62.4B at risk · 14d closure",
+    primary: true
+  },
+  {
+    name: "Suez Canal",
+    lat: 30.5, lng: 32.3,
+    stat: "+14 days via Cape · VLCC",
+    primary: true
+  },
+  {
+    name: "Panama Canal",
+    lat: 9.1, lng: -79.7,
+    stat: "+8 days Atlantic reroute",
+    primary: true
+  },
+  // SECONDARY — faded, smaller
+  { name: "Bab el-Mandeb",       lat: 12.6,  lng: 43.4,   primary: false },
+  { name: "Strait of Gibraltar", lat: 35.9,  lng: -5.5,   primary: false },
+  { name: "Lombok Strait",       lat: -8.7,  lng: 115.7,  primary: false },
+  { name: "Tsushima Strait",     lat: 34.2,  lng: 129.4,  primary: false },
+  { name: "Torres Strait",       lat: -10.5, lng: 141.8,  primary: false },
+  { name: "Cape of Good Hope",   lat: -34.4, lng: 18.5,   primary: false },
+  { name: "Danish Straits",      lat: 56.0,  lng: 10.5,   primary: false },
+  { name: "Strait of Sicily",    lat: 37.1,  lng: 11.3,   primary: false },
+  { name: "Cape Horn",           lat: -55.9, lng: -67.3,  primary: false },
+  { name: "Sunda Strait",        lat: -6.0,  lng: 105.8,  primary: false },
+  { name: "Dover Strait",        lat: 51.1,  lng: 1.4,    primary: false },
+  { name: "Øresund",             lat: 55.9,  lng: 12.7,   primary: false },
+];
+ 
+// ── INIT MAP ─────────────────────────────────────────────
+// Replace YOUR_MAPTILER_KEY with your actual MapTiler API key
+const MAPTILER_KEY = 'WhGN4xYSsxgSvljOv6UB';
+const STYLE_URL = `https://api.maptiler.com/maps/019daf09-19a6-7ff8-acee-a15542062b80/style.json?key=${MAPTILER_KEY}`;
+ 
+let popup = null;
+ 
+window.addEventListener('load', () => {
+  const map = new maplibregl.Map({
+    container: 'narrows-map',
+    style: STYLE_URL,
+    center: [40, 15],
+    zoom: 1.8,
+    minZoom: 1,
+    maxZoom: 8,
+    attributionControl: false,
+    scrollZoom: false, // prevent scroll hijack on page
+  });
+ 
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+ 
+  map.on('load', () => {
+ 
+    // ── Add chokepoint source ──
+    map.addSource('chokepoints', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: CHOKEPOINTS.map(cp => ({
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [cp.lng, cp.lat] },
+          properties: {
+            name: cp.name,
+            stat: cp.stat || '',
+            primary: cp.primary,
+          }
+        }))
+      }
+    });
+ 
+    // ── Primary glow ring ──
+    map.addLayer({
+      id: 'cp-primary-ring',
+      type: 'circle',
+      source: 'chokepoints',
+      filter: ['==', ['get', 'primary'], true],
+      paint: {
+        'circle-radius': 14,
+        'circle-color': 'rgba(240, 180, 41, 0.12)',
+        'circle-stroke-width': 1,
+        'circle-stroke-color': 'rgba(240, 180, 41, 0.35)',
+      }
+    });
+ 
+    // ── Primary dot ──
+    map.addLayer({
+      id: 'cp-primary-dot',
+      type: 'circle',
+      source: 'chokepoints',
+      filter: ['==', ['get', 'primary'], true],
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#F0B429',
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': 'rgba(255,255,255,0.3)',
+      }
+    });
+ 
+    // ── Secondary dot ──
+    map.addLayer({
+      id: 'cp-secondary-dot',
+      type: 'circle',
+      source: 'chokepoints',
+      filter: ['==', ['get', 'primary'], false],
+      paint: {
+        'circle-radius': 4,
+        'circle-color': 'rgba(143, 165, 187, 0.5)',
+        'circle-stroke-width': 1,
+        'circle-stroke-color': 'rgba(143, 165, 187, 0.2)',
+      }
+    });
+ 
+    // ── Primary labels ──
+    map.addLayer({
+      id: 'cp-primary-label',
+      type: 'symbol',
+      source: 'chokepoints',
+      filter: ['==', ['get', 'primary'], true],
+      layout: {
+        'text-field': ['get', 'name'],
+        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        'text-size': 10,
+        'text-offset': [0, 1.6],
+        'text-anchor': 'top',
+        'text-allow-overlap': false,
+      },
+      paint: {
+        'text-color': '#F0B429',
+        'text-halo-color': 'rgba(6, 15, 26, 0.85)',
+        'text-halo-width': 2,
+      }
+    });
+ 
+    // ── Hover popup on primary points ──
+    map.on('mouseenter', 'cp-primary-dot', (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const props = e.features[0].properties;
+      const coords = e.features[0].geometry.coordinates.slice();
+ 
+      if (popup) popup.remove();
+      popup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        className: 'narrows-popup',
+        offset: 12,
+      })
+        .setLngLat(coords)
+        .setHTML(`
+          <div class="np-name">${props.name}</div>
+          <div class="np-stat">${props.stat}</div>
+        `)
+        .addTo(map);
+    });
+ 
+    map.on('mouseleave', 'cp-primary-dot', () => {
+      map.getCanvas().style.cursor = '';
+      if (popup) { popup.remove(); popup = null; }
+    });
+ 
+    // ── Hover on secondary too ──
+    map.on('mouseenter', 'cp-secondary-dot', (e) => {
+      map.getCanvas().style.cursor = 'default';
+      const props = e.features[0].properties;
+      const coords = e.features[0].geometry.coordinates.slice();
+      if (popup) popup.remove();
+      popup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        className: 'narrows-popup narrows-popup-secondary',
+        offset: 10,
+      })
+        .setLngLat(coords)
+        .setHTML(`<div class="np-name-secondary">${props.name}</div>`)
+        .addTo(map);
+    });
+ 
+    map.on('mouseleave', 'cp-secondary-dot', () => {
+      map.getCanvas().style.cursor = '';
+      if (popup) { popup.remove(); popup = null; }
+    });
+ 
+  }); // end map.on('load')
+}); // end window.on('load')
+</script>
+ 
+<style>
+/* ── MAP SECTION LAYOUT ── */
+.map-section {
+  background: var(--navy);
+  border-top: var(--rule-light);
+  border-bottom: 3px solid var(--gold);
+  padding: var(--s6) var(--s4);
+}
+.map-section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: start;
+}
+ 
+/* ── MAP CONTAINER ── */
+.map-left { position: relative; }
+#narrows-map {
+  width: 100%;
+  height: 480px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+ 
+/* ── RIGHT PANEL ── */
+.map-right { padding-top: var(--s2); }
+.map-title {
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+  margin-top: var(--s2);
+}
+.map-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.map-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: var(--s4);
+}
+ 
+/* ── STAT LIST ── */
+.map-stat-list { display: flex; flex-direction: column; gap: 0; margin-bottom: var(--s4); }
+.map-stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.map-stat-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.map-stat-item.secondary { padding: 12px 0; border-bottom: none; }
+.map-stat-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 4px;
+}
+.map-stat-dot.gold { background: var(--gold); }
+.map-stat-dot.grey { background: rgba(143,165,187,0.5); }
+.map-stat-name {
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2px;
+}
+.map-stat-val {
+  font-size: 11px; font-weight: 400;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.map-stat-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: var(--s2) 0;
+}
+.map-stat-name-secondary {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.map-source {
+  font-size: 10px;
+  color: rgba(255,255,255,0.18);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+ 
+/* ── POPUP ── */
+:global(.narrows-popup .maplibregl-popup-content) {
+  background: var(--navy) !important;
+  border: 1px solid rgba(240,180,41,0.4) !important;
+  border-radius: 4px !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+:global(.narrows-popup .maplibregl-popup-tip) {
+  border-top-color: rgba(240,180,41,0.4) !important;
+}
+:global(.np-name) {
+  font-size: 12px; font-weight: 700;
+  color: var(--white); margin-bottom: 3px;
+  letter-spacing: 0.02em;
+}
+:global(.np-stat) {
+  font-size: 11px; font-weight: 400;
+  color: var(--gold);
+}
+:global(.narrows-popup-secondary .maplibregl-popup-content) {
+  border-color: rgba(143,165,187,0.2) !important;
+}
+:global(.np-name-secondary) {
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.5);
+}
+ 
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .map-section-inner { grid-template-columns: 1fr; }
+  #narrows-map { height: 340px; }
+}
+</style>
 
 <!-- ══════════════════════════════
      THE MODEL SECTION
