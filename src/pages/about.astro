@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Narrows — About"
+  description="Narrows is an independent trade risk research practice. We build quantitative models of supply chain exposure for the global risk community."
+>
+
+<style>
+.about-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s6);
+  border-bottom: 3px solid var(--gold);
+}
+.about-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  max-width: 760px;
+}
+.about-hero-title {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s4);
+}
+.about-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.about-hero-body {
+  font-size: 18px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.75;
+  font-weight: 300;
+  margin-bottom: var(--s3);
+}
+.about-hero-body strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+/* Body sections */
+.about-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--s6) var(--s4);
+}
+.about-section {
+  margin-bottom: var(--s5);
+  padding-bottom: var(--s5);
+  border-bottom: var(--rule-light);
+}
+.about-section:last-child { border-bottom: none; }
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.about-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.about-section-title {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.about-body {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.about-body p { margin-bottom: var(--s2); }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body strong { color: var(--text-primary); font-weight: 500; }
+
+/* Principle list */
+.principle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: var(--s3);
+}
+.principle-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--s2);
+  padding: var(--s2) 0;
+  border-bottom: var(--rule-light);
+  align-items: baseline;
+}
+.principle-item:first-child { border-top: var(--rule-light); }
+.principle-mark {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 1px;
+  margin-top: 9px;
+}
+.principle-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.principle-text strong { color: var(--text-primary); font-weight: 600; }
+
+/* Contact block */
+.contact-block {
+  background: var(--surface);
+  border: var(--rule-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: var(--s3) var(--s4);
+  margin-top: var(--s4);
+}
+.contact-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.contact-email {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+  transition: color 0.15s;
+}
+.contact-email:hover { color: var(--blue); }
+.contact-sub {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+/* CTA strip */
+.about-cta {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+}
+.about-cta-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+}
+.about-cta-text {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.about-cta-text em { font-style: italic; font-weight: 400; color: var(--gold); }
+</style>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="eyebrow" style="color:rgba(255,255,255,0.4);">
+      <span style="background:var(--gold);width:16px;height:2px;display:inline-block;margin-right:8px;vertical-align:middle;"></span>
+      About Narrows
+    </div>
+    <h1 class="about-hero-title">
+      Independent trade risk research.<br>
+      <em>Quantitative, defensible, actionable.</em>
+    </h1>
+    <p class="about-hero-body">
+      Narrows is an independent trade risk research practice. We build quantitative models of supply chain exposure and publish applied scenario analysis for the global risk community. <strong>Our current focus is seaborne trade dependency</strong> — mapping which economies rely on which corridors, and quantifying the financial cost when those corridors fail.
+    </p>
+    <p class="about-hero-body">
+      The Chokepoint Dependency Model is the first in a planned suite of tools. The underlying methodology — bilateral flow analysis, corridor assignment, scenario simulation — is designed to generalise beyond maritime risk as the practice grows.
+    </p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="about-wrap">
+
+  <!-- What we do -->
+  <div class="about-section">
+    <div class="about-eyebrow">What we do</div>
+    <h2 class="about-section-title">We put a number on the story.</h2>
+    <div class="about-body">
+      <p>When a strait closes, a canal floods, or a port is sanctioned, the news tells you what happened. Narrows tells you what it costs — in dollars, by country, by commodity, under a scenario you define.</p>
+      <p>The analysis papers we publish are not commentary. They are scenario outputs from the model, applied to live events, with every assumption stated. If you disagree with an input, that is a one-parameter change in a demo session.</p>
+      <p>The simulator is the product. The papers are the proof of it.</p>
+    </div>
+  </div>
+
+  <!-- How we work -->
+  <div class="about-section">
+    <div class="about-eyebrow">How we work</div>
+    <h2 class="about-section-title">A research practice, not a software company.</h2>
+    <div class="about-body">
+      <p>Every demo is a live session. Every output comes with its assumptions stated. Every parameter in the model can be replaced with your own view. This is not a dashboard you subscribe to and interpret yourself — it is an analytical tool we run with you.</p>
+      <p>Full model documentation, including corridor definitions, the complete dependency matrix, and the simulation architecture, is available under NDA for qualified counterparties. The methodology published on this site is sufficient to evaluate the model's credibility and scope.</p>
+    </div>
+    <div class="principle-list">
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text"><strong>Assumptions are stated, not buried.</strong> Every output identifies the parameters behind it. If our defaults differ from your view, that is a conversation, not a problem.</div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text"><strong>Limitations are documented, not hidden.</strong> The model scope page states clearly what the model does and does not do. A professional who understands the limits is better placed to use the outputs.</div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text"><strong>The analysis drives the demo, not the other way around.</strong> We publish applied scenario analysis before anyone asks for it. The papers are not marketing materials — they are the work.</div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text"><strong>No sales funnel.</strong> A person replies to every demo request. We do not have a CRM sequence, a free trial tier, or a self-serve onboarding flow. Access is a conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="about-section">
+    <div class="about-eyebrow">Contact</div>
+    <h2 class="about-section-title">One point of contact. A person will reply.</h2>
+    <div class="about-body">
+      <p>All enquiries — demo requests, press, research collaboration, data questions — go to the same address. Response time is typically within one business day.</p>
+    </div>
+    <div class="contact-block">
+      <div class="contact-label">Direct contact</div>
+      <a href="mailto:fysh@narrows.io" class="contact-email">fysh@narrows.io</a>
+      <div class="contact-sub">Narrows · Trade Risk Intelligence · narrows.io</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="about-cta">
+  <div class="about-cta-inner">
+    <div class="about-cta-text">
+      The news tells you what happened.<br>
+      <em>Narrows tells you what it costs.</em>
+    </div>
+    <a href="mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>
+  </div>
+</div>
+
+</BaseLayout>
