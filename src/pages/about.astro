@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Narrows — About"
-  description="The Narrows is an independent trade risk research practice. We build quantitative models of supply chain exposure for the global risk community."
+  description="The Narrows is a trade risk intelligence resource. The due diligence step before a deal closes, a policy locks in, or a facility is underwritten."
 >
 
 <style>
@@ -14,12 +14,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   border-bottom: 3px solid var(--gold);
 }
 .about-hero-inner {
-  max-width: var(--max-w);
+  max-width: 800px;
   margin: 0 auto;
-  max-width: 760px;
 }
 .about-hero-title {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(32px, 4vw, 50px);
   font-weight: 700;
   color: var(--white);
   line-height: 1.1;
@@ -28,26 +27,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .about-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
 .about-hero-body {
-  font-size: 18px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.75;
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
   font-weight: 300;
-  margin-bottom: var(--s3);
+  max-width: 620px;
 }
 .about-hero-body strong { color: rgba(255,255,255,0.85); font-weight: 500; }
 
-/* Body sections */
 .about-wrap {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
   padding: var(--s6) var(--s4);
 }
 .about-section {
-  margin-bottom: var(--s5);
   padding-bottom: var(--s5);
+  margin-bottom: var(--s5);
   border-bottom: var(--rule-light);
 }
-.about-section:last-child { border-bottom: none; }
+.about-section:last-of-type { border-bottom: none; }
+
 .about-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -77,10 +76,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .about-body {
   font-size: 16px;
   color: var(--text-secondary);
-  line-height: 1.8;
+  line-height: 1.85;
   font-weight: 300;
 }
-.about-body p { margin-bottom: var(--s2); }
+.about-body p { margin-bottom: var(--s3); }
 .about-body p:last-child { margin-bottom: 0; }
 .about-body strong { color: var(--text-primary); font-weight: 500; }
 
@@ -88,16 +87,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .principle-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
   margin-top: var(--s3);
 }
 .principle-item {
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 24px 1fr;
   gap: var(--s2);
   padding: var(--s2) 0;
   border-bottom: var(--rule-light);
-  align-items: baseline;
 }
 .principle-item:first-child { border-top: var(--rule-light); }
 .principle-mark {
@@ -106,16 +103,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   background: var(--gold);
   border-radius: 1px;
   margin-top: 9px;
+  flex-shrink: 0;
 }
 .principle-text {
   font-size: 15px;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.75;
   font-weight: 300;
 }
 .principle-text strong { color: var(--text-primary); font-weight: 600; }
 
-/* Contact block */
+/* Contact */
 .contact-block {
   background: var(--surface);
   border: var(--rule-light);
@@ -148,14 +146,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   font-weight: 300;
 }
 
-/* CTA strip */
+/* CTA */
 .about-cta {
   background: var(--navy);
   border-top: 3px solid var(--gold);
   padding: var(--s5) var(--s4);
 }
 .about-cta-inner {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -171,24 +169,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   letter-spacing: -0.01em;
 }
 .about-cta-text em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+@media (max-width: 700px) {
+  .about-cta-inner { flex-direction: column; align-items: flex-start; }
+}
 </style>
 
 <!-- HERO -->
 <div class="about-hero">
   <div class="about-hero-inner">
-    <div class="eyebrow" style="color:rgba(255,255,255,0.4);">
-      <span style="background:var(--gold);width:16px;height:2px;display:inline-block;margin-right:8px;vertical-align:middle;"></span>
-      About Narrows
+    <div class="eyebrow" style="color:rgba(255,255,255,0.35);">
+      <span style="background:var(--gold);width:16px;height:2px;display:inline-block;margin-right:8px;vertical-align:middle;flex-shrink:0;"></span>
+      About The Narrows
     </div>
     <h1 class="about-hero-title">
-      Independent trade risk research.<br>
-      <em>Quantitative, defensible, actionable.</em>
+      The due diligence step<br>
+      that most risk models<br>
+      <em>do not include.</em>
     </h1>
     <p class="about-hero-body">
-      Narrows is an independent trade risk research practice. We build models and tools to understand of supply chain exposure and publish applied scenario analysis for the global risk community. <strong>Our current focus is seaborne trade dependency</strong>, mapping which economies rely on which corridors, and quantifying the financial cost when those corridors fail.
-    </p>
-    <p class="about-hero-body">
-      The Chokepoint Dependency Model is the first in a planned suite of tools. The bilateral flow analysis, corridor assignment, scenario simulation method is designed to generalise beyond maritime risk as the practice grows.
+      The Narrows is a trade risk intelligence resource. <strong>It exists to be run before a deal closes, a policy locks in, or a facility is underwritten.</strong> Not as a monitoring tool. Not as a dashboard. As the step that answers the structural question behind the transaction.
     </p>
   </div>
 </div>
@@ -196,55 +196,71 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- BODY -->
 <div class="about-wrap">
 
-  <!-- What we do -->
   <div class="about-section">
-    <div class="about-eyebrow">What we do</div>
-    <h2 class="about-section-title">We put a number on the story.</h2>
+    <div class="about-eyebrow">The premise</div>
+    <h2 class="about-section-title">Most risk pricing does not reflect the underlying structure of supply chain constraints.</h2>
     <div class="about-body">
-      <p>When a strait closes, a canal floods, or a port is sanctioned, the news tells you what happened. The Narrows tells you what it costs in dollars, by country, by commodity, under a scenario users define.</p>
-      <p>The analysis papers we publish are not commentary. They are  outputs from the model, applied to live events, with every assumption stated. If you disagree with an input, that is a one-parameter change in a demo session.</p>
+      <p>AIS tracks vessels. PortWatch tracks throughput. Index providers track freight rates. These are monitoring tools. They tell you what is happening to traffic. They do not tell you which bilateral supply chains depend on which corridors, at what percentage of total supply, or what a credible alternative looks like and what it costs.</p>
+      <p>The Narrows operates at a different layer. It models the structural exposure of importing countries to specific trade corridors, denominated in dollars, at the (importer, corridor, commodity) level. The output is not a signal. It is a number that belongs in a risk model, a credit facility, or an underwriting decision.</p>
+      <p>The world is generating new constraint points. Chokepoints, ports, borders, shipping lanes that once functioned as frictionless infrastructure are becoming risk variables. As the globalised order fragments and national interests assert themselves, the geography of trade is becoming a risk factor in ways that most models have not yet priced. <strong>The Narrows is built to measure that.</strong></p>
     </div>
   </div>
 
-  <!-- How we work -->
   <div class="about-section">
-    <div class="about-eyebrow">How we work</div>
-    <h2 class="about-section-title">A research practice, not a software company.</h2>
+    <div class="about-eyebrow">The name</div>
+    <h2 class="about-section-title">The points where the world narrows.</h2>
     <div class="about-body">
-      <p>Every demo is a live session. Every output comes with its assumptions stated. Every parameter in the model can be replaced with your own view. This is not a dashboard you subscribe to and interpret yourself — it is an analytical tool we run with you.</p>
-      <p>Full model documentation, including corridor definitions, the complete dependency matrix, and the simulation architecture, is available under NDA for qualified counterparties. The methodology published on this site is sufficient to evaluate the model's credibility and scope.</p>
+      <p>The name refers to the points where constraints are hard, data has meaning, and decisions cannot be deferred. A strait through which 30% of global seaborne trade passes is a narrow. A port that handles the majority of a country's grain imports is a narrow. A corridor that has no viable alternative is a narrow.</p>
+      <p>At these points, the structure of the world becomes legible. The dependencies are real. The exposure is quantifiable. The decisions that flow from understanding them are consequential. That is where The Narrows works.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">What The Narrows is building</div>
+    <h2 class="about-section-title">The Chokepoint Dependency Model is the first tool in a broader suite.</h2>
+    <div class="about-body">
+      <p>The current model covers 22 maritime risk corridors, $1.8 trillion in matched trade value, 85 importing countries, and 7 commodity classes. It produces three outputs: value at risk, rerouting penalty, and fleet at risk. Every assumption is substitutable.</p>
+      <p>The practice is building toward a broader suite of tools covering port risk, event monitoring, and exposure analysis across trade corridors and supply chain infrastructure. The analytical framework is not limited to maritime trade. The same approach applies wherever hard constraints concentrate risk and data has real-world implications.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">How it works</div>
+    <h2 class="about-section-title">Every demo is a live session. Every assumption is yours to change.</h2>
+    <div class="about-body">
+      <p>The Narrows is not a self-serve product. Access is through a demo session in which the model is run against the specific counterparties, corridors, and commodities relevant to the decision at hand. Every parameter the model uses can be replaced with the client's own assumptions.</p>
+      <p>Full model documentation, including corridor definitions, the complete dependency matrix, and the simulation architecture, is available under NDA for qualified counterparties.</p>
     </div>
     <div class="principle-list">
       <div class="principle-item">
         <div class="principle-mark"></div>
-        <div class="principle-text"><strong>Assumptions are stated, not buried.</strong> Every output identifies the parameters behind it. If our defaults differ from your view, that is a conversation, not a problem.</div>
+        <div class="principle-text"><strong>Assumptions are stated, not buried.</strong> Every output identifies the parameters behind it. If the defaults differ from the client's view, that is a one-parameter change in the session.</div>
       </div>
       <div class="principle-item">
         <div class="principle-mark"></div>
-        <div class="principle-text"><strong>Limitations are documented, not hidden.</strong> The model scope page states clearly what the model does and does not do. A professional who understands the limits is better placed to use the outputs.</div>
+        <div class="principle-text"><strong>Limitations are documented.</strong> The methodology page states clearly what the model does and does not do. A professional who understands the limits is better placed to use the outputs.</div>
       </div>
       <div class="principle-item">
         <div class="principle-mark"></div>
-        <div class="principle-text"><strong>The analysis drives the demo, not the other way around.</strong> We publish applied scenario analysis before anyone asks for it. The papers are not marketing materials — they are the work.</div>
+        <div class="principle-text"><strong>The analysis precedes the conversation.</strong> The papers published on this site are not marketing materials. They are model outputs applied to live events, with every assumption stated. They exist so that a prospective client can evaluate the work before requesting access.</div>
       </div>
       <div class="principle-item">
         <div class="principle-mark"></div>
-        <div class="principle-text"><strong>No sales funnel.</strong> A person replies to every demo request. We do not have a CRM sequence, a free trial tier, or a self-serve onboarding flow. Access is a conversation.</div>
+        <div class="principle-text"><strong>No sales funnel.</strong> A person responds to every enquiry. There is no CRM sequence, no free trial tier, and no self-serve onboarding. Access is a conversation.</div>
       </div>
     </div>
   </div>
 
-  <!-- Contact -->
   <div class="about-section">
     <div class="about-eyebrow">Contact</div>
-    <h2 class="about-section-title">One point of contact. A person will reply.</h2>
+    <h2 class="about-section-title">One address. A person replies.</h2>
     <div class="about-body">
-      <p>All enquiries — demo requests, press, research collaboration, data questions — go to the same address. Response time is typically within one business day.</p>
+      <p>All enquiries — demo requests, press, research collaboration, methodology questions — go to the same address. Response time is typically within one business day.</p>
     </div>
     <div class="contact-block">
       <div class="contact-label">Direct contact</div>
       <a href="mailto:fysh@narrows.io" class="contact-email">fysh@narrows.io</a>
-      <div class="contact-sub">Narrows · Trade Risk Intelligence · narrows.io</div>
+      <div class="contact-sub">The Narrows · Trade Risk Intelligence · narrows.io</div>
     </div>
   </div>
 
@@ -255,9 +271,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="about-cta-inner">
     <div class="about-cta-text">
       The news tells you what happened.<br>
-      <em>Narrows tells you what it costs.</em>
+      <em>The Narrows tells you what it costs.</em>
     </div>
-    <a href="mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>
+    <a href="mailto:fysh@narrows.io?subject=Demo request — The Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>
   </div>
 </div>
 
