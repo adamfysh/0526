@@ -9,12 +9,11 @@ const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="h
       <span class="nav-logo-word">NARROWS</span>
     </a>
     <ul class="nav-links">
-      <li><a href="/model">The model</a></li>
-      <li><a href="/analysis">Analysis</a></li>
-      <li><a href="/methodology">Methodology</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="https://app.narrows.io" class="nav-login">Client login</a></li>
-      <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows" class="nav-cta">Request demo</a></li>
+      <li class="nav-hide-mid"><a href="/about">About</a></li>
+      <li class="nav-hide-mid"><a href="/methodology">Methodology</a></li>
+      <li class="nav-hide-small"><a href="/analysis">Analysis</a></li>
+      <li><a href="https://app.narrows.io" class="nav-cdm">Chokepoint Dependency Model</a></li>
+      <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="nav-cta">Request demo</a></li>
     </ul>
   </div>
 </nav>
@@ -36,64 +35,96 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--s3);
 }
+
+/* Logo — never shrinks */
 .nav-logo {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .nav-logo :global(.nav-logo-mark) {
-  width: 56px;
+  width: 44px;
   height: auto;
   display: block;
 }
 .nav-logo :global(.nav-logo-mark path) { fill: var(--navy); }
 .nav-logo-word {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--navy);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
+
+/* Nav links — shrink gracefully */
 .nav-links {
   display: flex;
   align-items: center;
-  gap: var(--s4);
+  gap: var(--s3);
   list-style: none;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 .nav-links a {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--text-secondary);
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   transition: color 0.15s;
+  white-space: nowrap;
 }
 .nav-links a:hover { color: var(--navy); }
+
+/* CDM link — subtle border treatment */
+.nav-cdm {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--navy) !important;
+  border: 1px solid var(--border) !important;
+  padding: 7px 14px !important;
+  border-radius: 4px !important;
+  letter-spacing: 0.02em !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+.nav-cdm:hover {
+  border-color: var(--navy) !important;
+  background: var(--surface) !important;
+}
+
+/* CTA button */
 .nav-cta {
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 600 !important;
   color: var(--white) !important;
   background: var(--blue);
-  padding: 9px 20px;
+  padding: 9px 18px !important;
   border-radius: 4px;
   transition: background 0.15s !important;
   letter-spacing: 0 !important;
+  white-space: nowrap;
 }
 .nav-cta:hover { background: var(--navy) !important; }
-.nav-login {
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: var(--text-secondary) !important;
-  border: var(--rule-light);
-  padding: 8px 18px;
-  border-radius: 4px;
-  transition: border-color 0.15s, color 0.15s !important;
-  letter-spacing: 0 !important;
-}
-.nav-login:hover { border-color: var(--navy) !important; color: var(--navy) !important; }
 
-@media (max-width: 900px) { nav { padding: 0 var(--s2); } }
-@media (max-width: 600px) { .nav-links { display: none; } }
+/* Responsive — hide text links at progressively smaller sizes */
+@media (max-width: 1080px) {
+  nav { padding: 0 var(--s3); }
+  .nav-links { gap: var(--s2); }
+}
+
+/* At 860px hide About and Methodology, keep Analysis and CDM */
+@media (max-width: 860px) {
+  .nav-hide-mid { display: none; }
+}
+
+/* At 640px hide Analysis too, keep CDM and CTA only */
+@media (max-width: 640px) {
+  .nav-hide-small { display: none; }
+  .nav-links { gap: var(--s2); }
+}
 </style>
