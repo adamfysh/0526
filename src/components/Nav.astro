@@ -2,18 +2,38 @@
 const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>`;
 ---
 
-<nav>
+<nav id="narrows-nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
       <Fragment set:html={NAV_LOGO_SVG} />
       <span class="nav-logo-word">NARROWS</span>
     </a>
+
+    <!-- Full nav links — hidden on mobile -->
     <ul class="nav-links">
-      <li class="nav-hide-mid"><a href="/about">About</a></li>
-      <li class="nav-hide-mid"><a href="/methodology">Methodology</a></li>
-      <li class="nav-hide-small"><a href="/analysis">Analysis</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/methodology">Methodology</a></li>
+      <li><a href="/analysis">Analysis</a></li>
       <li><a href="https://app.narrows.io" class="nav-cdm">Chokepoint Dependency Model</a></li>
       <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="nav-cta">Request demo</a></li>
+    </ul>
+
+    <!-- Hamburger button — visible on mobile only -->
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="nav-drawer">
+    <ul class="nav-drawer-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/methodology">Methodology</a></li>
+      <li><a href="/analysis">Analysis</a></li>
+      <li><a href="https://app.narrows.io" class="drawer-cdm">Chokepoint Dependency Model</a></li>
+      <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="drawer-cta">Request demo</a></li>
     </ul>
   </div>
 </nav>
@@ -23,10 +43,9 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.97);
   backdrop-filter: blur(12px);
   border-bottom: var(--rule-light);
-  padding: 0 var(--s4);
 }
 .nav-inner {
   max-width: var(--max-w);
@@ -35,10 +54,11 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 var(--s4);
   gap: var(--s3);
 }
 
-/* Logo — never shrinks */
+/* Logo */
 .nav-logo {
   display: inline-flex;
   align-items: center;
@@ -46,11 +66,7 @@ nav {
   text-decoration: none;
   flex-shrink: 0;
 }
-.nav-logo :global(.nav-logo-mark) {
-  width: 44px;
-  height: auto;
-  display: block;
-}
+.nav-logo :global(.nav-logo-mark) { width: 44px; height: auto; display: block; }
 .nav-logo :global(.nav-logo-mark path) { fill: var(--navy); }
 .nav-logo-word {
   font-size: 16px;
@@ -61,14 +77,13 @@ nav {
   white-space: nowrap;
 }
 
-/* Nav links — shrink gracefully */
+/* Desktop nav links */
 .nav-links {
   display: flex;
   align-items: center;
   gap: var(--s3);
   list-style: none;
   flex-wrap: nowrap;
-  min-width: 0;
 }
 .nav-links a {
   font-size: 12px;
@@ -76,12 +91,11 @@ nav {
   color: var(--text-secondary);
   text-decoration: none;
   letter-spacing: 0.03em;
-  transition: color 0.15s;
   white-space: nowrap;
+  transition: color 0.15s;
 }
 .nav-links a:hover { color: var(--navy); }
 
-/* CDM link — subtle border treatment */
 .nav-cdm {
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -92,12 +106,8 @@ nav {
   letter-spacing: 0.02em !important;
   transition: border-color 0.15s, background 0.15s !important;
 }
-.nav-cdm:hover {
-  border-color: var(--navy) !important;
-  background: var(--surface) !important;
-}
+.nav-cdm:hover { border-color: var(--navy) !important; background: var(--surface) !important; }
 
-/* CTA button */
 .nav-cta {
   font-size: 12px !important;
   font-weight: 600 !important;
@@ -105,26 +115,110 @@ nav {
   background: var(--blue);
   padding: 9px 18px !important;
   border-radius: 4px;
+  white-space: nowrap;
   transition: background 0.15s !important;
   letter-spacing: 0 !important;
-  white-space: nowrap;
 }
 .nav-cta:hover { background: var(--navy) !important; }
 
-/* Responsive — hide text links at progressively smaller sizes */
-@media (max-width: 1080px) {
-  nav { padding: 0 var(--s3); }
-  .nav-links { gap: var(--s2); }
+/* Hamburger button */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-burger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--navy);
+  transition: transform 0.2s, opacity 0.2s;
+  transform-origin: center;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none;
+  background: var(--white);
+  border-top: var(--rule-light);
+  padding: var(--s2) var(--s4) var(--s3);
+}
+.nav-drawer.open { display: block; }
+.nav-drawer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.nav-drawer-links li {
+  border-bottom: var(--rule-light);
+}
+.nav-drawer-links li:last-child { border-bottom: none; }
+.nav-drawer-links a {
+  display: block;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-drawer-links a:hover { color: var(--navy); }
+
+.drawer-cdm {
+  font-weight: 500 !important;
+  color: var(--navy) !important;
+}
+.drawer-cta {
+  font-weight: 600 !important;
+  color: var(--blue) !important;
 }
 
-/* At 860px hide About and Methodology, keep Analysis and CDM */
-@media (max-width: 860px) {
-  .nav-hide-mid { display: none; }
-}
-
-/* At 640px hide Analysis too, keep CDM and CTA only */
-@media (max-width: 640px) {
-  .nav-hide-small { display: none; }
-  .nav-links { gap: var(--s2); }
+/* Breakpoint: swap to hamburger */
+@media (max-width: 900px) {
+  .nav-inner { padding: 0 var(--s3); }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
 }
 </style>
+
+<script>
+const burger = document.getElementById('nav-burger');
+const drawer = document.getElementById('nav-drawer');
+
+burger?.addEventListener('click', () => {
+  const isOpen = drawer?.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  burger.setAttribute('aria-expanded', String(isOpen));
+});
+
+// Close drawer when a link is clicked
+drawer?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    burger?.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Close drawer on outside click
+document.addEventListener('click', (e) => {
+  const nav = document.getElementById('narrows-nav');
+  if (nav && !nav.contains(e.target as Node)) {
+    drawer?.classList.remove('open');
+    burger?.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
