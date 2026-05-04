@@ -462,10 +462,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="hero-cov-label">Commodity classes</span>
         <span class="hero-cov-value">7<span>classes</span></span>
       </div>
-      <div class="hero-cov-item">
-        <span class="hero-cov-label">Model version</span>
-        <span class="hero-cov-value">0.1<span>May 2026</span></span>
-      </div>
+    
     </div>
   </div>
 </div>
@@ -478,11 +475,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">What the model is</div>
     <h2 class="section-heading">A bilateral trade exposure model. Not a monitoring tool.</h2>
     <div class="text-body">
-      <p>The Narrows model quantifies the financial exposure of importing countries to disruptions in specific trade corridors. It answers a different question from AIS-based monitoring tools, which measure what is happening to throughput. Narrows measures what a disruption costs — in dollars, by country, by commodity, under a scenario you define.</p>
+      <p>The Narrows Chokepoint Dependency Model quantifies the financial exposure of importing countries to disruptions in specific trade corridors. It answers a different question from AIS-based monitoring tools, which measure what is happening to throughput. The Narrows measures what a disruption costs in dollars, by country, by commodity, under a scenario users can define.</p>
       <p>The model is built on validated bilateral trade flow data matched to corridor-specific dependency scores. It produces three structured outputs: value at risk, rerouting penalty, and fleet at risk. Every parameter the model uses is substitutable with your own assumptions.</p>
     </div>
     <div class="pullquote">
-      The model produces dependency scores and exposure estimates. It is an input to your analysis — not a replacement for it.
+      The model produces dependency scores and exposure estimates. It is a fundamental input to your analysis.
     </div>
   </section>
 
@@ -512,7 +509,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="pipeline-step">
         <div class="pipeline-num">04</div>
         <div class="pipeline-title">Scenario simulation</div>
-        <div class="pipeline-desc">A user-defined disruption — corridor, severity, and duration — is applied to the dependency matrix. Exposed trade value is calculated against the relevant time window.</div>
+        <div class="pipeline-desc">A user-defined disruption (corridor, severity, and duration) is applied to the dependency matrix. Exposed trade value is calculated against the relevant time window.</div>
       </div>
       <div class="pipeline-step">
         <div class="pipeline-num">05</div>
@@ -527,7 +524,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">What it produces</div>
     <h2 class="section-heading">Three outputs. Each answers a specific professional question.</h2>
     <div class="text-body">
-      <p>Every output connects to a downstream use case. The model is designed to produce numbers that slot into existing analytical workflows — accumulation models, trading desk pricing, credit stress tests — not numbers that require translation before they can be used.</p>
+      <p>Every output connects to a downstream use case. The model is designed to produce numbers that slot into existing analytical workflows like accumulation models, trading desk pricing, credit stress tests. No magic numbers that require translation before they can be used.</p>
     </div>
     <div class="outputs-grid">
       <div class="output-card fade-up">
@@ -542,7 +539,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="output-card fade-up">
         <div class="output-num">Output 02</div>
         <div class="output-title">Rerouting penalty</div>
-        <p class="output-desc">Per-voyage cost overrun by vessel class: detour days, bunker uplift, charter rate differential, and inventory carrying cost. Tagged by audience — underwriter, lender, cargo owner. All rate assumptions substitutable.</p>
+        <p class="output-desc">Per-voyage cost overrun by vessel class: detour days, bunker uplift, charter rate differential, and inventory carrying cost. Tagged by audience: underwriter, lender, cargo owner. All rate assumptions substitutable.</p>
         <div class="output-eg">
           <strong>Suez closure — VLCC via Cape</strong>
           +14 days · $1.4M voyage overrun · $230k carrying cost per vessel
@@ -572,7 +569,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="sample-param"><div class="sample-param-label">Severity</div><div class="sample-param-value">100%</div></div>
       <div class="sample-param"><div class="sample-param-label">Duration</div><div class="sample-param-value">14 days</div></div>
       <div class="sample-param"><div class="sample-param-label">Capacity sensitivity</div><div class="sample-param-value">0.85</div></div>
-      <div class="sample-param"><div class="sample-param-label">Base data</div><div class="sample-param-value">2023</div></div>
     </div>
     <div class="results-grid fade-up">
       <div class="result-card">
@@ -639,7 +635,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Validation</div>
     <h2 class="section-heading">Route inference outputs are validated against independent aggregated datasets.</h2>
     <div class="text-body">
-      <p>The model's corridor assignment logic is validated by checking whether predicted chokepoint shares are directionally consistent with observed vessel traffic distributions from independent sources. Validation is described as directional rather than exact — trade data and vessel traffic data do not map to the same time period or granularity.</p>
+      <p>The model's corridor assignment logic is validated by checking whether predicted chokepoint shares are directionally consistent with observed vessel traffic distributions from independent sources. Validation is described as directional rather than exact. Trade data and vessel traffic data do not map to the same time period or granularity.</p>
     </div>
     <div class="outputs-grid" style="margin-top:var(--s3);">
       <div class="output-card">
@@ -665,7 +661,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Scope and limitations</div>
     <h2 class="section-heading">What the model is, and is not.</h2>
     <div class="text-body">
-      <p>These limitations are stated because the model is intended to support serious risk analysis. A professional who understands where the model is uncertain is better positioned to use it appropriately — and to substitute their own assumptions where they disagree with ours.</p>
+      <p>These limitations are stated because the model is intended to support serious risk analysis. A professional who understands where the model is uncertain is better positioned to use it appropriately and to substitute their own assumptions where they disagree with the default settings.</p>
     </div>
     <div class="limitation-list">
       <div class="limitation-item">
@@ -682,15 +678,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <div class="limitation-item">
         <div class="limitation-bullet"></div>
-        <div class="limitation-text"><strong>Country-level, not vessel-level.</strong> The model does not track individual vessels, flag states, or policy-specific cargo. Portfolio accumulation analysis requires mapping individual policies to corridor assignments — a data integration step that sits outside the model.</div>
+        <div class="limitation-text"><strong>Country-level, not vessel-level.</strong> The model does not track individual vessels, flag states, or policy-specific cargo. Portfolio accumulation analysis requires mapping individual policies to corridor assignments; a data integration step that sits outside this model.</div>
       </div>
       <div class="limitation-item">
         <div class="limitation-bullet"></div>
-        <div class="limitation-text"><strong>Capacity sensitivity scores are calibrated parameters.</strong> The 0–1 sensitivity scores applied per corridor are informed judgements calibrated against historical disruption events. They are defensible and adjustable — not statistical estimates with confidence intervals. Commercial clients may substitute their own scores.</div>
+        <div class="limitation-text"><strong>Capacity sensitivity scores are calibrated parameters.</strong> The 0–1 sensitivity scores applied per corridor are informed judgements calibrated against historical disruption events. They are defensible and adjustable, not statistical estimates with confidence intervals. Commercial clients may substitute their own scores.</div>
       </div>
       <div class="limitation-item">
         <div class="limitation-bullet"></div>
-        <div class="limitation-text"><strong>Coverage gaps at thin bilateral flows.</strong> Some commodity-corridor pairs with limited bilateral data coverage are excluded from the dependency matrix. The 89.6% coverage rate reflects value-weighted coverage — smaller flows by value are disproportionately underrepresented.</div>
+        <div class="limitation-text"><strong>Coverage gaps at thin bilateral flows.</strong> Some commodity-corridor pairs with limited bilateral data coverage are excluded from the dependency matrix. The 89.6% coverage rate reflects value-weighted coverage. Smaller flows by value are disproportionately underrepresented.</div>
       </div>
       <div class="limitation-item">
         <div class="limitation-bullet"></div>
