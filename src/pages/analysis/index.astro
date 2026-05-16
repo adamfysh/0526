@@ -1,0 +1,570 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Paper registry — add new papers here as they are published
+// Tags drive the filter system. Use lowercase, hyphenated.
+const papers = [
+  {
+    slug: '/analysis/hormuz-who-pays',
+    title: 'Iran Can Hold Out. Here Is Who Pays.',
+    eyebrow: 'Strait of Hormuz · May 2026',
+    body: 'A CIA assessment gives Iran 3 to 4 months of runway. That is long enough to exhaust strategic petroleum reserves in most exposed importers. The model identifies which importers carry the highest bilateral crude and LPG exposure, at what percentage of total seaborne supply, and what supply substitution actually costs.',
+    stat: 'Greece 54.6% dep · China adj. VaR $128B · 5 SE Asia LPG nations uncovered',
+    tags: ['hormuz', 'crude', 'lpg', 'tanker', 'greece', 'china', 'indonesia', 'rerouting'],
+    date: 'May 2026',
+    featured: true,
+  },
+  {
+    slug: '/analysis/hormuz-rebalancing',
+    title: 'The Rebalancing Is Real. It Does Not Reach Everyone.',
+    eyebrow: 'Strait of Hormuz · May 2026',
+    body: 'Three pillars, Chinese demand reduction, pipeline rerouting, and Atlantic Basin supply growth, explain why aggregate oil markets have not collapsed. They do not explain who remains exposed. The bilateral data does.',
+    stat: 'Pipeline bypass: ~4mbd · Atlantic surge: +5mbd · LPG importers: 0 of 3 pillars',
+    tags: ['hormuz', 'crude', 'lpg', 'tanker', 'china', 'indonesia', 'rerouting', 'pipeline'],
+    date: 'May 2026',
+    featured: false,
+  },
+  {
+    slug: '/analysis/hormuz',
+    title: 'Hormuz and the Limits of the Index',
+    eyebrow: 'Strait of Hormuz · May 2026',
+    body: 'Why the BDTI tells you tanker rates are up 156% but not which importers face binary exposure. The toll breakeven, the LNG no-route problem, and the forward scenario matrix by importer.',
+    stat: 'Japan 30d VaR: $7.7B · Qatar LNG: no Cape option · BDTI +156%',
+    tags: ['hormuz', 'crude', 'lng', 'tanker', 'japan', 'qatar', 'china', 'rerouting'],
+    date: 'May 2026',
+    featured: false,
+  },
+  {
+    slug: '/analysis/malacca',
+    title: 'The Malacca Toll Question Has a Number. Here It Is.',
+    eyebrow: 'Strait of Malacca · May 2026',
+    body: 'Indonesia floated a Malacca transit fee. The question did not go away when they walked it back. The model calculates the diversion threshold by vessel class, the bilateral dependency matrix, and what the CII slow-steaming adjustment does to the Lombok detour cost.',
+    stat: 'Capesize diversion threshold: $800k · Global 14d VaR: $30B · CII cost: +$21M/yr',
+    tags: ['malacca', 'iron-ore', 'bulk', 'capesize', 'japan', 'south-korea', 'china', 'cii', 'rerouting'],
+    date: 'May 2026',
+    featured: false,
+  },
+  {
+    slug: '/analysis/kra-land-bridge',
+    title: 'The Kra Land Bridge Is a $31B Question With a $1.4M Answer.',
+    eyebrow: 'Kra Isthmus · May 2026',
+    body: 'Thailand is fast-tracking a land bridge across the Kra Isthmus as a Malacca alternative. The commercial case for bulk cargo does not hold. The model shows why, and what the land bridge does and does not change for underwriters and commodity desks.',
+    stat: 'Capesize Kra cost: $1.7M vs. $800k Lombok detour · Japan annual premium: $800M',
+    tags: ['malacca', 'kra', 'iron-ore', 'bulk', 'capesize', 'japan', 'south-korea', 'infrastructure', 'rerouting'],
+    date: 'May 2026',
+    featured: false,
+  },
+  {
+    slug: '/analysis/model-validation-2024',
+    title: 'We Built the Model on 2023 Data. Then 2024 Happened.',
+    eyebrow: 'Model Validation · May 2026',
+    body: 'The Chokepoint Dependency Model was locked before the Houthi Red Sea campaign and Panama Canal drought began. Two disruptions then unfolded in the precise corridors the model covers. Here is a systematic account of what the model predicted and what the disruptions confirmed.',
+    stat: '5 of 6 predictions validated · $1.4M rerouting cost confirmed · Greece ranked #1 European exposure: confirmed',
+    tags: ['validation', 'bab-el-mandeb', 'panama', 'crude', 'lng', 'rerouting', 'greece', 'japan'],
+    date: 'May 2026',
+    featured: false,
+  },
+];
+
+// All tags for filter bar — collected from all papers
+const allTags = [...new Set(papers.flatMap(p => p.tags))].sort();
+
+// Tag display labels — add readable versions here
+const tagLabels: Record<string, string> = {
+  'hormuz':         'Hormuz',
+  'malacca':        'Malacca',
+  'kra':            'Kra',
+  'crude':          'Crude oil',
+  'lng':            'LNG',
+  'lpg':            'LPG',
+  'iron-ore':       'Iron ore',
+  'bulk':           'Bulk',
+  'tanker':         'Tanker',
+  'capesize':       'Capesize',
+  'japan':          'Japan',
+  'china':          'China',
+  'south-korea':    'South Korea',
+  'indonesia':      'Indonesia',
+  'greece':         'Greece',
+  'qatar':          'Qatar',
+  'rerouting':      'Rerouting',
+  'pipeline':       'Pipeline',
+  'cii':            'CII / IMO',
+  'infrastructure': 'Infrastructure',
+  'validation':     'Validation',
+  'bab-el-mandeb':  'Bab-el-Mandeb',
+};
+---
+
+<BaseLayout
+  title="Narrows — Analysis"
+  description="Applied scenario analysis from Narrows. Every figure is a model output. Every assumption is stated."
+>
+
+<style>
+.analysis-hero {
+  padding: 128px var(--s4) var(--s5);
+  border-bottom: var(--rule-light);
+}
+.analysis-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 80px;
+  align-items: end;
+}
+.analysis-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s3);
+}
+.analysis-hero-title em { font-style: italic; font-weight: 400; color: var(--blue-light); }
+.analysis-hero-body {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 520px;
+}
+
+/* Publishing note */
+.publish-note {
+  background: var(--surface);
+  border: var(--rule-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: var(--s3);
+}
+.publish-note-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.publish-note-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+}
+.publish-note-body strong { color: var(--text-primary); font-weight: 500; }
+
+/* Filter bar */
+.filter-bar {
+  background: var(--surface);
+  border-bottom: var(--rule-light);
+  padding: var(--s2) var(--s4);
+}
+.filter-bar-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.filter-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-right: var(--s1);
+}
+.filter-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--white);
+  border: var(--rule-light);
+  border-radius: 20px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  user-select: none;
+  line-height: 1;
+}
+.filter-tag:hover { border-color: var(--navy); color: var(--navy); }
+.filter-tag.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.filter-clear {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  margin-left: var(--s1);
+  display: none;
+  transition: color 0.12s;
+}
+.filter-clear:hover { color: var(--navy); }
+.filter-clear.visible { display: inline; }
+
+/* Papers list */
+.papers-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--s4) var(--s4) var(--s6);
+}
+.papers-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--s3);
+  letter-spacing: 0.02em;
+}
+.papers-count strong { color: var(--text-secondary); font-weight: 500; }
+
+/* Featured paper */
+.paper-featured {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s4);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--s3);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.paper-featured:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(10,37,64,0.08);
+}
+.paper-featured-inner {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--s4);
+  align-items: start;
+}
+.paper-featured-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.paper-featured-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: var(--s1);
+}
+.paper-featured-title {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.paper-featured-body {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: var(--s3);
+}
+.paper-featured-stat {
+  font-size: 12px;
+  color: var(--blue);
+  background: var(--blue-pale);
+  padding: 8px 14px;
+  border-radius: 4px;
+  line-height: 1.5;
+  margin-bottom: var(--s3);
+}
+.paper-featured-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.paper-featured-link::after { content: '→'; }
+
+/* Right side of featured */
+.paper-featured-tags {
+  background: var(--surface);
+  border: var(--rule-light);
+  border-radius: 6px;
+  padding: var(--s3);
+}
+.paper-featured-tags-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--s2);
+}
+.paper-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.paper-tag {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-pale);
+  border-radius: 20px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.paper-tag:hover { background: var(--navy); color: var(--white); }
+
+/* Standard paper card */
+.paper-card {
+  background: var(--white);
+  border: var(--rule-light);
+  border-radius: 6px;
+  padding: var(--s3) var(--s4);
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s4);
+  align-items: start;
+  margin-bottom: var(--s2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.paper-card:hover {
+  border-color: rgba(240,180,41,0.4);
+  box-shadow: 0 4px 20px rgba(10,37,64,0.07);
+}
+.paper-card-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.paper-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.paper-card-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+.paper-card-stat {
+  font-size: 11px;
+  color: var(--blue);
+  background: var(--blue-pale);
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.paper-card-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.paper-card-link::after { content: '→'; }
+.paper-card-arrow {
+  font-size: 20px;
+  color: var(--text-tertiary);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* No results */
+.no-results {
+  padding: var(--s5) 0;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .analysis-hero-inner { grid-template-columns: 1fr; }
+  .paper-featured-inner { grid-template-columns: 1fr; }
+  .paper-card { grid-template-columns: 1fr; }
+  .paper-card-arrow { display: none; }
+}
+</style>
+
+<!-- HERO -->
+<div class="analysis-hero">
+  <div class="analysis-hero-inner">
+    <div>
+      <div class="eyebrow">Analysis</div>
+      <h1 class="analysis-hero-title">
+        The model applied to<br>
+        <em>live events.</em>
+      </h1>
+      <p class="analysis-hero-body">Every figure is a model output. Every assumption is stated. Every number can be run with your own inputs in a demo session. Analysis is published as events warrant.</p>
+    </div>
+    <div class="publish-note">
+      <div class="publish-note-label">Publishing approach</div>
+      <p class="publish-note-body">Analysis is published when a live event warrants it: a corridor disruption, a policy shift, a market dislocation. <strong>Papers are not time-sensitive commentary.</strong> They are applied scenario analysis that remains useful as long as the structural dependency it models is unchanged.</p>
+      <p class="publish-note-body" style="margin-top:10px;">Tags allow you to find all papers relevant to a corridor, commodity, vessel class, or topic regardless of when they were published.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <span class="filter-label">Filter</span>
+    {allTags.map(tag => (
+      <button class="filter-tag" data-tag={tag}>
+        {tagLabels[tag] || tag}
+      </button>
+    ))}
+    <span class="filter-clear" id="filter-clear">Clear</span>
+  </div>
+</div>
+
+<!-- PAPERS -->
+<div class="papers-wrap">
+  <div class="papers-count" id="papers-count">
+    Showing <strong>{papers.length}</strong> {papers.length === 1 ? 'paper' : 'papers'}
+  </div>
+
+  <div id="papers-list">
+    {papers.map((paper, i) => (
+      paper.featured ? (
+        <a href={paper.slug} class="paper-featured" data-tags={paper.tags.join(',')}>
+          <div class="paper-featured-inner">
+            <div>
+              <div class="paper-featured-tag">
+                {paper.eyebrow}
+                <span class="paper-featured-badge">Latest</span>
+              </div>
+              <div class="paper-featured-title">{paper.title}</div>
+              <p class="paper-featured-body">{paper.body}</p>
+              <div class="paper-featured-stat">{paper.stat}</div>
+              <span class="paper-featured-link">Read the analysis</span>
+            </div>
+            <div class="paper-featured-tags">
+              <div class="paper-featured-tags-label">Topics covered</div>
+              <div class="paper-tag-list">
+                {paper.tags.map(tag => (
+                  <span class="paper-tag" data-filter-tag={tag}>
+                    {tagLabels[tag] || tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      ) : (
+        <a href={paper.slug} class="paper-card" data-tags={paper.tags.join(',')}>
+          <div>
+            <div class="paper-card-tag">{paper.eyebrow}</div>
+            <div class="paper-card-title">{paper.title}</div>
+            <p class="paper-card-body">{paper.body}</p>
+            <div class="paper-card-stat">{paper.stat}</div>
+            <span class="paper-card-link">Read the analysis</span>
+          </div>
+          <div class="paper-card-arrow">→</div>
+        </a>
+      )
+    ))}
+  </div>
+
+  <div class="no-results" id="no-results">
+    No papers found for this filter combination. <a href="/analysis" style="color:var(--blue);">Clear filters</a>
+  </div>
+</div>
+
+<script>
+// ── TAG FILTER ────────────────────────────────────────────
+const filterTags = document.querySelectorAll('.filter-tag');
+const paperItems = document.querySelectorAll('[data-tags]');
+const clearBtn   = document.getElementById('filter-clear');
+const countEl    = document.getElementById('papers-count');
+const noResults  = document.getElementById('no-results');
+
+let activeTags: Set<string> = new Set();
+
+function updateDisplay() {
+  let visible = 0;
+  paperItems.forEach(item => {
+    const tags = (item.getAttribute('data-tags') || '').split(',');
+    const show = activeTags.size === 0 || [...activeTags].every(t => tags.includes(t));
+    (item as HTMLElement).style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  if (countEl) {
+    countEl.innerHTML = `Showing <strong>${visible}</strong> ${visible === 1 ? 'paper' : 'papers'}${activeTags.size > 0 ? ' matching filter' : ''}`;
+  }
+
+  if (noResults) {
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  if (clearBtn) {
+    clearBtn.classList.toggle('visible', activeTags.size > 0);
+  }
+}
+
+filterTags.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tag = btn.getAttribute('data-tag') || '';
+    if (activeTags.has(tag)) {
+      activeTags.delete(tag);
+      btn.classList.remove('active');
+    } else {
+      activeTags.add(tag);
+      btn.classList.add('active');
+    }
+    updateDisplay();
+  });
+});
+
+// Tags on the featured paper card
+document.querySelectorAll('.paper-tag[data-filter-tag]').forEach(tag => {
+  tag.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const t = tag.getAttribute('data-filter-tag') || '';
+    activeTags.add(t);
+    filterTags.forEach(btn => {
+      if (btn.getAttribute('data-tag') === t) btn.classList.add('active');
+    });
+    updateDisplay();
+    document.querySelector('.filter-bar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+clearBtn?.addEventListener('click', () => {
+  activeTags.clear();
+  filterTags.forEach(btn => btn.classList.remove('active'));
+  updateDisplay();
+});
+</script>
+
+</BaseLayout>
