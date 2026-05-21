@@ -1042,7 +1042,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   /* ── EMAIL GATE ── */
   (function initGate() {
     const GATE_KEY = 'narrows_pri_access';
-    const FORMSPREE_ID = 'YOUR_FORM_ID'; // ← replace with your Formspree form ID
+    const FORMSPREE_ID = 'https://formspree.io/f/mwvzovon'; // ← replace with your Formspree form ID
     const EXPIRY_MS = 90 * 24 * 60 * 60 * 1000; // 90 days
 
     const gate = document.getElementById('pri-gate');
