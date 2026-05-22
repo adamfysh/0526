@@ -1,0 +1,760 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="PRI Methodology — Narrows"
+  description="Full technical documentation for the Narrows Port Risk Index: data sources, indicator definitions, normalisation procedures, and composite scoring."
+>
+
+<style>
+.meth-hero {
+  padding: 120px var(--s4) var(--s5);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.meth-hero-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s2);
+}
+.meth-hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.meth-hero h1 {
+  font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: var(--navy);
+  line-height: 1.1; letter-spacing: -0.03em; margin-bottom: var(--s2);
+}
+.meth-hero-lead {
+  font-size: 17px; color: var(--text-secondary); line-height: 1.7;
+  font-weight: 300; max-width: 620px; margin-bottom: var(--s3);
+}
+.meth-meta {
+  display: flex; gap: var(--s3); flex-wrap: wrap;
+  font-size: 12px; color: var(--text-tertiary);
+}
+.meth-meta-item::before { content: '·'; margin-right: 6px; }
+.meth-meta-item:first-child::before { content: ''; margin-right: 0; }
+
+/* Two-column layout: sticky TOC + content */
+.meth-body {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.meth-toc {
+  position: sticky; top: 88px;
+}
+.meth-toc-title {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s2); padding-bottom: var(--s1);
+  border-bottom: var(--rule-light);
+}
+.meth-toc ol { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.meth-toc a {
+  font-size: 13px; color: var(--text-secondary); text-decoration: none;
+  line-height: 1.5; display: block; padding: 4px 0; transition: color 0.15s;
+}
+.meth-toc a:hover { color: var(--navy); }
+
+/* Sections */
+.meth-section {
+  border-top: var(--rule-light); padding-top: var(--s4); margin-bottom: var(--s5);
+}
+.meth-section:first-of-type { border-top: none; padding-top: 0; }
+.meth-section-num {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s1);
+}
+.meth-section h2 {
+  font-size: clamp(20px, 2vw, 26px); font-weight: 700; color: var(--navy);
+  letter-spacing: -0.02em; margin-bottom: var(--s3); line-height: 1.15;
+}
+.meth-section h3 {
+  font-size: 16px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.01em; margin: var(--s3) 0 var(--s2);
+  display: flex; align-items: center; gap: 10px;
+}
+.dim-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.meth-p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.75;
+  font-weight: 300; margin-bottom: var(--s2);
+}
+.meth-p strong { color: var(--text-primary); font-weight: 600; }
+.meth-p code {
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px;
+  background: var(--surface); padding: 1px 6px; border-radius: 3px; color: var(--navy);
+}
+
+/* Formula block */
+.meth-formula {
+  background: var(--navy); border-radius: 8px;
+  padding: var(--s3) var(--s4); margin: var(--s3) 0;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 14px; color: var(--gold); letter-spacing: 0.02em; line-height: 1.8;
+}
+.meth-formula .formula-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); display: block; margin-bottom: 6px;
+  font-family: var(--font);
+}
+
+/* Indicator tables */
+.meth-table-wrap {
+  overflow-x: auto; margin: var(--s3) 0;
+  border: var(--rule-light); border-radius: 8px;
+}
+.meth-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.meth-table thead { background: var(--surface); }
+.meth-table th {
+  padding: 10px 14px; text-align: left;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-tertiary); white-space: nowrap; border-bottom: var(--rule-light);
+}
+.meth-table td {
+  padding: 11px 14px; border-bottom: var(--rule-light);
+  color: var(--text-secondary); line-height: 1.55; vertical-align: top;
+}
+.meth-table tr:last-child td { border-bottom: none; }
+.meth-table td:first-child { font-weight: 600; color: var(--navy); white-space: nowrap; }
+.meth-table td code {
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px;
+  background: var(--surface); padding: 1px 5px; border-radius: 3px; color: var(--navy);
+}
+
+/* Score bands */
+.meth-bands {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden;
+  margin: var(--s3) 0;
+}
+.meth-band {
+  padding: 16px 14px; background: var(--white);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.meth-band-score { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+.meth-band-label { font-size: 12px; font-weight: 600; }
+.meth-band-desc { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; margin-top: 2px; }
+
+/* Limitations */
+.meth-limits { display: flex; flex-direction: column; gap: var(--s2); margin: var(--s2) 0; }
+.meth-limit {
+  display: flex; gap: 14px; padding: var(--s2) var(--s3);
+  background: var(--surface); border-radius: 6px; border-left: 3px solid var(--border);
+}
+.meth-limit-icon { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+.meth-limit-body { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+.meth-limit-body strong { color: var(--text-primary); font-weight: 600; }
+
+.meth-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text-secondary); text-decoration: none;
+  margin-bottom: var(--s4); transition: color 0.15s;
+}
+.meth-back:hover { color: var(--navy); }
+
+@media (max-width: 900px) {
+  .meth-body { grid-template-columns: 1fr; }
+  .meth-toc { display: none; }
+  .meth-bands { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .meth-bands { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- Hero -->
+<div class="meth-hero fade-up">
+  <div class="meth-hero-kicker">Technical documentation</div>
+  <h1>Port Risk Index<br>Methodology</h1>
+  <p class="meth-hero-lead">
+    Full specification of the Narrows PRI: data universe, indicator definitions,
+    normalisation procedures, composite scoring, and known limitations.
+  </p>
+  <div class="meth-meta">
+    <span class="meth-meta-item">Version 1.1</span>
+    <span class="meth-meta-item">May 2026</span>
+    <span class="meth-meta-item">3804 ports · 28 fields</span>
+    <span class="meth-meta-item">Data vintage 2023/24</span>
+  </div>
+</div>
+
+<div class="meth-body">
+
+  <!-- TOC -->
+  <nav class="meth-toc">
+    <div class="meth-toc-title">Contents</div>
+    <ol>
+      <li><a href="#overview">1. Overview</a></li>
+      <li><a href="#universe">2. Data Universe</a></li>
+      <li><a href="#composite">3. Composite Scoring</a></li>
+      <li><a href="#d1">4. D1: Accessibility</a></li>
+      <li><a href="#d2">5. D2: Reliability</a></li>
+      <li><a href="#d3">6. D3: Concentration</a></li>
+      <li><a href="#d4">7. D4: Stability</a></li>
+      <li><a href="#interpretation">8. Score Interpretation</a></li>
+      <li><a href="#tiers">9. Data Tiers</a></li>
+      <li><a href="#limitations">10. Limitations</a></li>
+      <li><a href="#vintage">11. Data Vintage</a></li>
+    </ol>
+  </nav>
+
+  <!-- Content -->
+  <div>
+    <a href="/pri" class="meth-back">← Back to Port Risk Index</a>
+
+    <!-- 1 -->
+    <div class="meth-section" id="overview">
+      <div class="meth-section-num">Section 1</div>
+      <h2>Overview</h2>
+      <p class="meth-p">
+        The Narrows Port Risk Index (PRI) is a composite risk score assigned to every port in the
+        World Port Index universe. It is designed to support comparative risk assessment across a
+        global port population: quantifying, in a single number, the relative risk a given port
+        poses to a maritime supply chain.
+      </p>
+      <p class="meth-p">
+        The index is structured around <strong>four dimensions</strong>, each capturing a distinct
+        class of port risk: physical accessibility, operational reliability, trade concentration, and
+        geopolitical and institutional stability. Within each dimension, source indicators are
+        normalised to a 0–10 scale and combined into a dimension score. The four dimension scores
+        are then composited into a single PRI via <strong>geometric mean</strong>.
+      </p>
+      <p class="meth-p">
+        The geometric mean is standard practice in multi-dimensional risk compositing because it
+        penalises dimensional extremes. A port that scores very well on physical access cannot offset
+        a severe stability deficit: both the dimension weakness and the composite will reflect the
+        exposure. This property is essential in a risk instrument — compensatory arithmetic means
+        systematically understate concentrated risk.
+      </p>
+      <p class="meth-p">
+        <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3804-port
+        universe is approximately 0.75 to 3.71. Score distributions are right-skewed: the median
+        port falls below 1.8, and the large majority of ports fall below 2.0.
+      </p>
+    </div>
+
+    <!-- 2 -->
+    <div class="meth-section" id="universe">
+      <div class="meth-section-num">Section 2</div>
+      <h2>Data Universe</h2>
+      <p class="meth-p">
+        The PRI covers all ports in the <strong>National Geospatial-Intelligence Agency World Port
+        Index (WPI), Publication 150</strong> — the standard global port registry used by the
+        maritime industry. The WPI lists 3804 ports across 195 countries, from major transshipment
+        hubs to small coastal facilities.
+      </p>
+      <p class="meth-p">
+        The WPI provides port-level attributes including controlling depth, terminal count, and
+        vessel class acceptances. These attributes anchor D1 (Accessibility) scoring. Country-level
+        indicators from external sources are matched to each port via ISO-2 country code and
+        geographic coordinates.
+      </p>
+      <p class="meth-p">
+        Not all ports have complete data across all dimensions. Where source data is unavailable
+        for a given indicator, the scoring procedure applies a conservative imputation — typically
+        the global mean or a data-tier-adjusted estimate. Coverage quality is captured in the
+        <code>data_tier</code> and <code>n_dims</code> fields (see Section 9).
+      </p>
+    </div>
+
+    <!-- 3 -->
+    <div class="meth-section" id="composite">
+      <div class="meth-section-num">Section 3</div>
+      <h2>Composite Scoring</h2>
+      <p class="meth-p">
+        Each dimension produces a score on a 0–10 scale. The composite PRI is the geometric mean
+        of the four dimension scores, with a floor of 0.1 applied to each dimension before
+        compositing to prevent zero values from collapsing the result.
+      </p>
+      <div class="meth-formula">
+        <span class="formula-label">Composite formula</span>
+        PRI = (D1 × D2 × D3 × D4) ^ (1/4)<br><br>
+        where each Dₙ = max(raw_dimension_score, 0.1)
+      </div>
+      <p class="meth-p">
+        Within each dimension, indicators are normalised and combined. The normalisation approach
+        varies by indicator type:
+      </p>
+      <p class="meth-p">
+        <strong>Continuous indicators</strong> (depth, LPI score, PGA values) are min-max
+        normalised against the empirical range of the full WPI population and rescaled to 0–10.
+        For risk indicators, direction is inverted so higher raw values (higher hazard) map to
+        higher scores (higher risk).
+      </p>
+      <p class="meth-p">
+        <strong>Count indicators</strong> (terminal count, vessel class count) are scored via a
+        stepped function mapping discrete counts to risk levels. Higher counts receive lower scores
+        — more capacity and redundancy means lower risk.
+      </p>
+      <p class="meth-p">
+        <strong>Ordinal indicators</strong> (labour regime, sanctions level, dispute level) are
+        mapped from categorical values to numeric scores via fixed scoring tables, documented in
+        the indicator sections below.
+      </p>
+      <p class="meth-p">
+        The composite PRI is not rescaled back to 0–10. Because the structural moderation of D1
+        — most ports have serviceable physical infrastructure — the empirical maximum is 3.71
+        rather than 10. This is intentional: the score preserves the absolute signal from
+        individual dimensions rather than normalising it away.
+      </p>
+    </div>
+
+    <!-- 4 D1 -->
+    <div class="meth-section" id="d1">
+      <div class="meth-section-num">Section 4</div>
+      <h2>D1: Accessibility</h2>
+      <h3><span class="dim-dot" style="background:#378ADD"></span>Physical access risk</h3>
+      <p class="meth-p">
+        D1 measures the inherent physical constraints on port access and the natural hazard
+        exposure of the port location. A port scores higher on D1 if it has limited depth, cannot
+        accommodate large vessel classes, has few terminals, or faces elevated cyclone or seismic
+        risk.
+      </p>
+      <p class="meth-p">
+        Physical access risk is the most structurally stable dimension: it changes only when ports
+        invest in infrastructure or when hazard assessments are updated. It also has the most
+        consistent data coverage across the WPI universe, since the WPI itself captures the core
+        physical attributes.
+      </p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Risk direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ctrl_depth_final</code></td>
+              <td>Controlling depth in metres. The minimum depth across approach channel, anchorage, and berth. Determines maximum vessel draft.</td>
+              <td>WPI Pub. 150</td>
+              <td>Shallower = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>vessel_class_count</code></td>
+              <td>Number of vessel classes the port explicitly accepts per WPI (general cargo, tankers, bulk carriers, container ships, Ro-Ro, passenger).</td>
+              <td>WPI Pub. 150</td>
+              <td>Fewer classes = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>terminal_count</code></td>
+              <td>Number of distinct terminal facilities. Higher counts indicate operational redundancy and lower single-point concentration within the port.</td>
+              <td>WPI Pub. 150</td>
+              <td>Fewer terminals = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>cyclone_passes</code></td>
+              <td>Count of historical tropical cyclone tracks (Category 3+ Saffir-Simpson) passing within 250 km of the port, drawn from the full IBTrACS record (1842–2023).</td>
+              <td>IBTrACS v04r01 (NOAA)</td>
+              <td>More passes = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>pga_g</code></td>
+              <td>Peak ground acceleration at 10% exceedance probability in 50 years, in units of g. From the USGS Global Seismic Hazard model at 0.1-degree resolution.</td>
+              <td>USGS PSHA (Petersen et al.)</td>
+              <td>Higher PGA = higher risk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p">
+        The five D1 source fields are normalised individually, then combined via unweighted
+        arithmetic mean to produce the D1 dimension score.
+      </p>
+    </div>
+
+    <!-- 5 D2 -->
+    <div class="meth-section" id="d2">
+      <div class="meth-section-num">Section 5</div>
+      <h2>D2: Reliability</h2>
+      <h3><span class="dim-dot" style="background:#EF9F27"></span>Operational reliability risk</h3>
+      <p class="meth-p">
+        D2 measures the operational environment at country and port level: how efficiently cargo
+        moves through the port, how reliable the surrounding logistics network is, and whether
+        labour conditions create structural friction. A port scores higher on D2 if it sits in a
+        country with weak logistics performance, has elevated dwell times, or operates under an
+        unstable labour regime.
+      </p>
+      <p class="meth-p">
+        D2 is the most country-dependent dimension. The World Bank LPI is a country-level
+        composite, meaning ports within the same country share an LPI score. Port-level
+        differentiation within a country is introduced via dwell time and labour regime where
+        port-specific data is available.
+      </p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Risk direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lpi_score</code></td>
+              <td>World Bank Logistics Performance Index overall score (1–5 scale). Covers customs efficiency, infrastructure quality, ease of arranging shipments, logistics service quality, tracking capability, and timeliness. Applied at country level.</td>
+              <td>World Bank LPI 2023</td>
+              <td>Lower LPI = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>dwell_hours</code></td>
+              <td>Estimated average container dwell time in hours. Derived from a Narrows dwell-time index combining World Bank port performance data and industry benchmarks. Country-level estimates are used where port-specific data is unavailable.</td>
+              <td>World Bank PPPI, industry sources</td>
+              <td>Longer dwell = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>labour_regime</code></td>
+              <td>Categorical assessment of port labour environment. Values: <code>stable</code>, <code>disputed</code>, <code>volatile</code>. Derived from strike history, union concentration, and labour dispute records. Ordinal map: stable = 1.0, disputed = 5.5, volatile = 9.0 (on 0–10 risk scale).</td>
+              <td>ILO, national labour records</td>
+              <td>Volatile = highest risk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p">
+        The three D2 indicators are combined via weighted arithmetic mean, with LPI carrying the
+        highest weight given its methodological rigour and global coverage.
+      </p>
+    </div>
+
+    <!-- 6 D3 -->
+    <div class="meth-section" id="d3">
+      <div class="meth-section-num">Section 6</div>
+      <h2>D3: Concentration</h2>
+      <h3><span class="dim-dot" style="background:#7F77DD"></span>Trade concentration risk</h3>
+      <p class="meth-p">
+        D3 measures how dependent a port's catchment economy is on a narrow set of trades or
+        commodities, and how substitutable the port is if it became unavailable. A port scores
+        higher on D3 if it serves a highly specialised hinterland, if it dominates its catchment
+        with few alternatives nearby, or if trade is concentrated in a small number of commodity
+        categories.
+      </p>
+      <p class="meth-p">
+        Concentration risk is the dimension most likely to be underestimated in qualitative
+        assessments. Ports that appear operationally sound can carry severe systemic risk if their
+        catchment is a mono-commodity economy with no viable alternative port within a realistic
+        rerouting radius.
+      </p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Risk direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>catchment_share_pct</code></td>
+              <td>Estimated share of the port's national or sub-national hinterland trade volume flowing through this single port. High values indicate gateway concentration: a port outage has outsized national impact.</td>
+              <td>UN Comtrade, WPI, Narrows catchment model</td>
+              <td>Higher share = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>herfindahl</code></td>
+              <td>Herfindahl-Hirschman Index calculated across commodity categories in the port's trade flows (range 0–1). A value approaching 1.0 indicates near-total dependence on a single commodity.</td>
+              <td>UN Comtrade HS-2 aggregation</td>
+              <td>Higher HHI = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>alt_distance_km</code></td>
+              <td>Great-circle distance in kilometres to the nearest alternative port capable of handling the same vessel classes. Longer distance means fewer viable alternatives and higher concentration risk.</td>
+              <td>WPI, Narrows routing model</td>
+              <td>Longer distance = higher risk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p">
+        The three D3 indicators are combined via unweighted arithmetic mean. D3 is the dimension
+        most sensitive to trade flow data quality. UN Comtrade data is incomplete or significantly
+        delayed for a non-trivial fraction of the WPI universe — particularly in smaller island
+        economies and parts of Sub-Saharan Africa. These gaps are captured in the data tier system.
+      </p>
+    </div>
+
+    <!-- 7 D4 -->
+    <div class="meth-section" id="d4">
+      <div class="meth-section-num">Section 7</div>
+      <h2>D4: Stability</h2>
+      <h3><span class="dim-dot" style="background:#D85A30"></span>Geopolitical and institutional risk</h3>
+      <p class="meth-p">
+        D4 measures the political and institutional environment in which the port operates. A port
+        scores higher on D4 if it sits in a country with weak rule of law and poor governance, is
+        subject to active international sanctions, or sits within a territory affected by an
+        unresolved maritime or territorial dispute.
+      </p>
+      <p class="meth-p">
+        D4 has the highest volatility relative to the other dimensions: political conditions can
+        shift rapidly. The PRI D4 score should be read as a structural baseline, not a real-time
+        political risk monitor. Users requiring live sanctions screening should supplement the
+        index with a dedicated screening service.
+      </p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Description</th>
+              <th>Source</th>
+              <th>Risk direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>wgi_ps</code></td>
+              <td>World Bank WGI Political Stability and Absence of Violence sub-index. Standard normal units (typically -2.5 to +2.5). Higher values indicate greater stability. Rescaled to 0–10 for compositing.</td>
+              <td>World Bank WGI 2023</td>
+              <td>Lower WGI = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>wgi_ge</code></td>
+              <td>World Bank WGI Government Effectiveness sub-index. Captures perceptions of public service quality, civil service independence, and policy credibility. Same scale and rescaling as wgi_ps.</td>
+              <td>World Bank WGI 2023</td>
+              <td>Lower WGI = higher risk</td>
+            </tr>
+            <tr>
+              <td><code>sanctions_level</code></td>
+              <td>Active international sanctions exposure affecting the port's country or port directly. Values: <code>none</code>, <code>partial</code>, <code>comprehensive</code>. Ordinal map: none = 0, partial = 5.0, comprehensive = 10.0. Derived from OFAC SDN list, EU Consolidated List, and UN Security Council resolutions.</td>
+              <td>OFAC, EU OJ, UN SC</td>
+              <td>Comprehensive = highest risk</td>
+            </tr>
+            <tr>
+              <td><code>dispute_level</code></td>
+              <td>Active territorial or maritime boundary disputes affecting the port's operating jurisdiction. Values: <code>none</code>, <code>latent</code>, <code>active</code>. Ordinal map: none = 0, latent = 3.5, active = 8.5. Sourced from ICJ dockets and UNCLOS arbitration records.</td>
+              <td>ICJ, PCA, UNCLOS records</td>
+              <td>Active = highest risk</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p">
+        The four D4 indicators are combined via unweighted arithmetic mean.
+      </p>
+    </div>
+
+    <!-- 8 -->
+    <div class="meth-section" id="interpretation">
+      <div class="meth-section-num">Section 8</div>
+      <h2>Score Interpretation</h2>
+      <p class="meth-p">
+        The PRI is a relative risk measure, not an absolute probability of disruption. It supports
+        comparison within and across port populations. The following bands reflect the empirical
+        distribution of the 3804-port universe.
+      </p>
+
+      <div class="meth-bands">
+        <div class="meth-band">
+          <span class="meth-band-score" style="color:#378ADD">Below 1.2</span>
+          <span class="meth-band-label" style="color:#378ADD">Low risk</span>
+          <span class="meth-band-desc">Top quartile globally. Strong across all four dimensions. Singapore, Rotterdam, Hamburg.</span>
+        </div>
+        <div class="meth-band">
+          <span class="meth-band-score" style="color:#1565A8">1.2 – 2.0</span>
+          <span class="meth-band-label" style="color:#1565A8">Moderate risk</span>
+          <span class="meth-band-desc">The bulk of the global port population. Adequate infrastructure with some dimensional weakness.</span>
+        </div>
+        <div class="meth-band">
+          <span class="meth-band-score" style="color:#EF9F27">2.0 – 2.8</span>
+          <span class="meth-band-label" style="color:#EF9F27">Elevated risk</span>
+          <span class="meth-band-desc">Material weakness in one or more dimensions. Warrants attention in supply chain risk assessments.</span>
+        </div>
+        <div class="meth-band">
+          <span class="meth-band-score" style="color:#D85A30">Above 2.8</span>
+          <span class="meth-band-label" style="color:#D85A30">High risk</span>
+          <span class="meth-band-desc">Severe weakness across multiple dimensions. Conflict-zone ports, comprehensively sanctioned ports, isolated mono-commodity gateways.</span>
+        </div>
+      </div>
+
+      <p class="meth-p">
+        Dimension scores should always be read alongside the composite. Two ports with identical
+        composite scores can have very different risk profiles: a port scoring 2.0 evenly across
+        all four dimensions is categorically different from one scoring 0.5/0.5/0.5/9.0. The
+        composite captures the systemic risk level; the dimension breakdown shows where the risk
+        is concentrated.
+      </p>
+    </div>
+
+    <!-- 9 -->
+    <div class="meth-section" id="tiers">
+      <div class="meth-section-num">Section 9</div>
+      <h2>Data Tiers</h2>
+      <p class="meth-p">
+        The <code>data_tier</code> field (A, B, or C) reflects overall data coverage quality for
+        each port. It is a summary signal, not an additional risk score.
+      </p>
+      <p class="meth-p">
+        <strong>Tier A:</strong> Full primary data across all four dimensions. The composite PRI
+        is based entirely on directly sourced indicators. Approximately 60% of the WPI universe.
+      </p>
+      <p class="meth-p">
+        <strong>Tier B:</strong> Partial gaps in one or two dimensions, filled with country-level
+        or imputed estimates. The composite is reliable but carries additional uncertainty in the
+        affected dimensions.
+      </p>
+      <p class="meth-p">
+        <strong>Tier C:</strong> Significant gaps in three or more dimensions. The composite
+        should be treated as an indicative estimate. Tier C ports are typically very small
+        facilities for which public source data is sparse.
+      </p>
+      <p class="meth-p">
+        The <code>n_dims</code> field records how many of the four dimension scores are based on
+        complete primary data (0–4), providing more granular coverage information than the tier alone.
+      </p>
+    </div>
+
+    <!-- 10 -->
+    <div class="meth-section" id="limitations">
+      <div class="meth-section-num">Section 10</div>
+      <h2>Known Limitations</h2>
+      <p class="meth-p">
+        The PRI is built on the best publicly available source data. The following limitations
+        are inherent to the current version and should inform how the index is used.
+      </p>
+
+      <div class="meth-limits">
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body">
+            <strong>Country-level proxies for port-level conditions.</strong>
+            LPI, WGI, and trade flow data are country-level indicators matched to individual ports.
+            Within large countries (China, USA, Brazil), there can be substantial port-to-port
+            variation that national indices cannot capture. D2 and D4 scores for ports within the
+            same country will be identical unless port-specific data is available.
+          </div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body">
+            <strong>Static snapshot, not a real-time monitor.</strong>
+            The PRI is updated annually. Sudden political shocks, port closures, or sanctions
+            actions will not be reflected until the next update cycle. D4 scores in particular
+            should be treated as a structural baseline.
+          </div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body">
+            <strong>Trade concentration data gaps.</strong>
+            UN Comtrade data is unavailable, delayed, or unreliable for a non-trivial fraction
+            of the WPI universe. D3 scores for Tier B and C ports in affected regions rely on
+            imputed estimates and carry higher uncertainty.
+          </div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body">
+            <strong>Equal dimensional weighting.</strong>
+            The geometric mean treats each dimension as equally important. This is a reasonable
+            default but different supply chain contexts may warrant different relative weights.
+            Custom weighting is available on the Narrows platform for commercial users.
+          </div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body">
+            <strong>WPI port universe only.</strong>
+            The PRI covers only ports listed in WPI Publication 150. Small craft facilities,
+            river jetties, and offshore terminals not in the WPI are not scored.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="meth-section" id="vintage">
+      <div class="meth-section-num">Section 11</div>
+      <h2>Data Vintage and Update Cadence</h2>
+      <p class="meth-p">
+        The current PRI (v1.1, May 2026) uses the following source vintages.
+      </p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Edition</th>
+              <th>Coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NGA World Port Index (Pub. 150)</td>
+              <td>2024 release</td>
+              <td>Current at time of publication</td>
+            </tr>
+            <tr>
+              <td>IBTrACS tropical cyclone tracks</td>
+              <td>v04r01 (NOAA, 2024)</td>
+              <td>1842–2023 historical record</td>
+            </tr>
+            <tr>
+              <td>USGS Global Seismic Hazard</td>
+              <td>Petersen et al. 2020</td>
+              <td>Probabilistic at 50-year exceedance</td>
+            </tr>
+            <tr>
+              <td>World Bank LPI</td>
+              <td>2023 edition</td>
+              <td>Survey-based, 2022/23</td>
+            </tr>
+            <tr>
+              <td>World Bank WGI</td>
+              <td>2023 edition</td>
+              <td>Estimates for 2022</td>
+            </tr>
+            <tr>
+              <td>UN Comtrade</td>
+              <td>HS-2 aggregation</td>
+              <td>2022 (latest available at model build)</td>
+            </tr>
+            <tr>
+              <td>OFAC / EU / UN sanctions lists</td>
+              <td>Q1 2026 snapshot</td>
+              <td>Static; not updated continuously</td>
+            </tr>
+            <tr>
+              <td>ICJ / PCA dispute records</td>
+              <td>Q1 2026 snapshot</td>
+              <td>Active cases and unresolved claims</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p">
+        The PRI is rebuilt annually. Between releases, methodology corrections are noted in the
+        version changelog. Questions about methodology or errors in scoring can be directed to
+        <a href="mailto:fysh@narrows.io" style="color:var(--blue);text-decoration:none">fysh@narrows.io</a>.
+        The full model code and indicator construction notebooks are available on request for
+        institutional users.
+      </p>
+
+      <a href="/pri" class="btn-ghost" style="display:inline-block;margin-top:var(--s3)">
+        Open the Port Risk Index →
+      </a>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end meth-body -->
+
+</BaseLayout>
