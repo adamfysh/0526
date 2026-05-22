@@ -1,0 +1,246 @@
+---
+const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>`;
+---
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <Fragment set:html={NAV_LOGO_SVG} />
+      <span class="nav-logo-word">NARROWS</span>
+    </a>
+
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/about">About</a></li>
+      <li><a href="/pri">Port Risk Index</a></li>
+      <li><a href="/analysis">Analysis</a></li>
+      <li><a href="https://app.narrows.io" class="nav-login">Client login</a></li>
+      <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="nav-cta">Request demo</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+  <ul class="nav-mobile-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/pri">Port Risk Index</a></li>
+    <li><a href="/analysis">Analysis</a></li>
+    <li><a href="https://app.narrows.io" class="mobile-login">Client login</a></li>
+    <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="mobile-cta">Request demo</a></li>
+  </ul>
+</div>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<style>
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--rule-light);
+  padding: 0 var(--s4);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo :global(.nav-logo-mark) {
+  width: 56px;
+  height: auto;
+  display: block;
+}
+.nav-logo :global(.nav-logo-mark path) { fill: var(--navy); }
+.nav-logo-word {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Desktop nav links ── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-cta {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--white) !important;
+  background: var(--blue);
+  padding: 9px 20px;
+  border-radius: 4px;
+  transition: background 0.15s !important;
+  letter-spacing: 0 !important;
+}
+.nav-cta:hover { background: var(--navy) !important; }
+.nav-login {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  border: var(--rule-light);
+  padding: 8px 18px;
+  border-radius: 4px;
+  transition: border-color 0.15s, color 0.15s !important;
+  letter-spacing: 0 !important;
+}
+.nav-login:hover { border-color: var(--navy) !important; color: var(--navy) !important; }
+
+/* ── Hamburger button ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.nav-hamburger:hover { background: var(--surface); }
+.ham-line {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform 0.25s var(--ease), opacity 0.2s;
+  transform-origin: center;
+}
+
+/* Open state: animate to X */
+.nav-hamburger[aria-expanded="true"] .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger[aria-expanded="true"] .ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger[aria-expanded="true"] .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile dropdown menu ── */
+.nav-mobile-menu {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  z-index: 199;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--gold);
+  padding: var(--s3) var(--s4) var(--s4);
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s var(--ease), opacity 0.2s;
+}
+.nav-mobile-menu.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-mobile-links {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.nav-mobile-links li { border-bottom: var(--rule-light); }
+.nav-mobile-links li:last-child { border-bottom: none; }
+.nav-mobile-links a {
+  display: block;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+}
+.nav-mobile-links a:hover { color: var(--navy); }
+.mobile-login {
+  font-weight: 500 !important;
+  color: var(--navy) !important;
+}
+.mobile-cta {
+  font-weight: 600 !important;
+  color: var(--blue) !important;
+}
+
+/* ── Overlay ── */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 198;
+  background: rgba(10,37,64,0.2);
+}
+.nav-overlay.is-open { display: block; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) { nav { padding: 0 var(--s2); } }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-mobile-menu { padding: var(--s3) var(--s2) var(--s4); }
+}
+</style>
+
+<script>
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  const overlay = document.getElementById('nav-overlay');
+
+  function openMenu() {
+    hamburger?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.classList.add('is-open');
+    mobileMenu?.removeAttribute('aria-hidden');
+    overlay?.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburger?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.classList.remove('is-open');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    overlay?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  overlay?.addEventListener('click', closeMenu);
+
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
