@@ -1,0 +1,348 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+  title="El Niño does not close the Panama Canal. <em>It throttles it. That is the harder problem.</em>"
+  description="A full closure is dramatic and unlikely. A sustained partial disruption, the kind that El Niño reliably produces, is harder to price, harder to hedge, and more consequential for food supply chains than the headline scenario suggests."
+  eyebrow="Scenario analysis · Panama Canal · May 2026"
+  publishDate="May 2026"
+  readTime="14 min read"
+  author="Narrows Research"
+>
+
+<div slot="stat-bar" class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Grain trade at risk: 50% severity, 90 days</div>
+      <div class="stat-bar-value">$46.5B</div>
+      <div class="stat-bar-unit">Corn, soy, wheat combined · model output</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Aggregate VaR: Feb 2024 equivalent severity</div>
+      <div class="stat-bar-value">$53.8B</div>
+      <div class="stat-bar-unit">All commodities · blended bulk/container severity</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Cape Horn reroute: Handymax bulk carrier</div>
+      <div class="stat-bar-value">+38 days</div>
+      <div class="stat-bar-unit">$1.14M voyage overrun per vessel</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">El Niño emergence probability: mid-2026</div>
+      <div class="stat-bar-value">61%</div>
+      <div class="stat-bar-unit">NOAA CPC April 2026 · 75% chance moderate-to-very-strong by Nov 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-eyebrow">The framing problem</div>
+<h2 class="article-section-title">The Panama Canal has not closed in 110 years. It has narrowed. That is a different analytical problem.</h2>
+
+<p class="prose">The standard scenario analysis for maritime chokepoints is binary: open or closed. For the Strait of Hormuz, that framing is appropriate. A closure is the result of deliberate interdiction, and the question is whether it happens at all. For the Panama Canal, the framing is wrong. The Panama Canal does not close. It throttles. Under drought conditions, the Autoridad del Canal de Panamá progressively restricts the number of daily transits and the maximum permitted vessel draft, reducing effective throughput over weeks and months rather than hours. The 2023–24 El Niño drought event did not produce a single catastrophic event. It produced a six-month, stepwise reduction in canal capacity from 36 transits per day in normal operations to 18 per day at the February 2024 nadir, a 50% throughput reduction at peak, sustained over a period long enough to restructure trade routing patterns across the Pacific Basin.</p>
+
+<p class="prose">This distinction matters for two reasons. First, a progressive throttle is harder to price than a binary closure. The onset is gradual, the severity uncertain, and the duration dependent on rainfall patterns that are themselves probabilistic. Second, a throttle does not affect all vessel classes or all commodity types equally. The distribution of impact across the vessel hierarchy is asymmetric in ways that have direct implications for the agricultural supply chains that depend on Handymax and Supramax bulk carriers, underrepresented in the energy-focused analysis that dominates current coverage.</p>
+
+<p class="prose">This paper has three purposes. It quantifies the probable range of trade exposure under throttling scenarios calibrated to the 2023–24 event. It validates those outputs against documented actuals to assess model performance in a partial-severity condition. And it situates the analysis within a forward-looking risk framework that is not speculative: NOAA's Climate Prediction Center assigned a 61% probability to El Niño emergence by mid-2026 in its April 2026 update, with a further finding that by the November 2026 to January 2027 peak, the probability of a moderate-to-very-strong event reaches approximately 75% (ACP, 2026; NOAA CPC, 2026).</p>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">The causal mechanism</div>
+<h2 class="article-section-title">Gatun Lake is not background infrastructure. It is the operational constraint binding everything downstream.</h2>
+
+<p class="prose">The Panama Canal's operational capacity is determined by the water level of Gatun Lake, the artificial reservoir that feeds both the Panamax locks and the larger Neopanamax locks opened in 2016. Gatun Lake is freshwater-fed: its level is maintained entirely by rainfall over the Panama watershed, averaging approximately 2,600mm per year. There is no significant alternative source and no pumping infrastructure of the scale required to compensate for a rainfall deficit. Each lockage displaces approximately 200 million litres of freshwater into the ocean. When the lake level drops, the ACP has a single lever: reduce lockage frequency and restrict the maximum draft of transiting vessels.</p>
+
+<p class="prose">El Niño events suppress wet season rainfall over the Panama watershed through a well-documented teleconnection mechanism. During the 2023–24 event, total calendar year 2023 rainfall was 30% below the long-run average. October 2023 recorded 41% below average, the lowest October precipitation since records began in 1950 (World Weather Attribution, 2024). The cumulative effect was a Gatun Lake level decline from its normal end-of-rainy-season high of approximately 88 feet above mean sea level to 79.6 feet at the August 2023 low, recovering partially but remaining below operational norms through Q1 2024. An independent attribution analysis found that the level of drought that produced the 2023 shipping disruption was "unlikely" without the concurrent El Niño forcing (World Weather Attribution, 2024).</p>
+
+<p class="prose">The structural risk is not limited to the 2023–24 event. Muñoz, Lawrence, and Wang (2025), analysing Gatun Lake hydrology under CMIP6 climate projections, found that minimum annual lake levels decline substantially through the 21st century under moderately high and high emissions pathways (SSP3-7.0 and SSP5-8.5), driven primarily by reduced wet season precipitation. Under those scenarios, the frequency of droughts equivalent to the 2023–24 event approximately doubles by the end of the century. The implication is not that conditions will deteriorate linearly, but that the 2023–24 disruption should be understood as a recurring risk within a normal operational planning horizon, not a once-in-a-generation event.</p>
+
+<div class="callout">
+  <div class="callout-label">The Gatun Lake to throughput transmission</div>
+  <div class="callout-body">The ACP's operational response to declining lake levels follows a documented stepwise protocol. As levels fall below approximately 84 feet, draft restrictions are implemented first, reducing the maximum permitted vessel draft for Neopanamax transits from the standard 50 feet toward 44 feet at the 2023 floor. As levels continue to fall, daily transit slots are progressively reduced. At 79.6 feet, the ACP had cut daily transits from 36–38 (normal operations) to 18 (February 2024 minimum) and had imposed a 44-foot maximum draft on Neopanamax transits. The relationship between lake level, draft restriction, and transit capacity is not linear at all points, but is sufficiently consistent to support scenario modelling across a plausible severity range. Source: BTS (2024); ACP operational notices 2023–24.</div>
+</div>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">Vessel class differentiation</div>
+<h2 class="article-section-title">The draft restriction is not symmetric. Neopanamax vessels lose 40% cargo capacity. Bulk carriers lose transit priority.</h2>
+
+<p class="prose">A Panama Canal throttle distributes costs unequally across the vessel hierarchy. The mechanism differs by vessel type, and the practical consequence is that the trade flows most affected are not those that dominate financial coverage.</p>
+
+<p class="prose">The Neopanamax locks, opened in 2016, accommodate vessels up to 1,200 feet in length with drafts up to 50 feet. These locks handle the largest container ships transiting the canal. Under the 44-foot draft restriction imposed in 2023, a Neopanamax container vessel that would normally transit laden to approximately 12,500 TEU is limited to approximately 7,500 TEU: a 40% reduction in cargo capacity per transit (Port Economics, Management and Policy, 2024). This creates a direct and quantifiable capacity loss for container trade even with no reduction in transit frequency.</p>
+
+<p class="prose">The original Panamax locks, handling vessels up to approximately 39.5-foot draft, are less directly affected by a 44-foot restriction because Panamax-class vessels already operate within that envelope under normal conditions. The primary impact on Panamax-class traffic is the reduction in daily transit slots, which affects all vessel types proportionally but is compounded by the priority slot auction system.</p>
+
+<p class="prose">The priority slot auction mechanism is the critical distributional variable for agricultural commodity flows. When the ACP reduces available daily transit slots, it operates a tiered auction system in which operators can bid for priority passage. High-value container cargo, where the cost of a week's delay on time-sensitive manufactured goods is significant, consistently outbids lower-value bulk commodity cargo. The empirical result is that bulk carrier operators, who carry grain, coal, and fertiliser, are displaced from the transit queue at rates higher than the simple transit reduction percentage would imply. Fuentes and Munim (2025), analysing the relationship between ENSO indices and Panama Canal operational data, confirmed that El Niño events reduce bulk carrier transits proportionally more than container or other high-value segments, consistent with this auction mechanism.</p>
+
+<p class="prose">A further constraint applies to the largest dry bulk vessels. Capesize bulk carriers, with beam widths exceeding the Panamax lock constraint, cannot transit the Panama Canal under any conditions. Iron ore and coal flows on Capesize vessels, notably Australian coal to East Asia, are already routed via the Cape of Good Hope as standard operations. The Panama Canal throttle does not affect these flows at all. The commodity classes that depend on Handymax and Supramax bulk carriers for Pacific Basin routing, principally grain, bear the concentrated operational risk of both transit reduction and priority displacement.</p>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">Agricultural exposure</div>
+<h2 class="article-section-title">The energy story dominates coverage. The agricultural story is where the binary constraints are.</h2>
+
+<p class="prose">Panama Canal analysis in commercial shipping focuses disproportionately on container trade. The agricultural commodity exposure is structurally different and, for a subset of importers, considerably more acute. The canal carries a significant fraction of US corn and soybean exports destined for Asia, Southern Cone grain flows, and wheat imports for several Latin American economies with limited overland alternatives.</p>
+
+<div class="n-table-wrap" style="margin:28px 0;">
+  <div class="n-table-title">Panama Canal bilateral dependency: corn (HS 1005), 2023</div>
+  <table class="n-table">
+    <thead>
+      <tr>
+        <th>Importer</th>
+        <th class="num">Dep. %</th>
+        <th class="num">VaR at 100%</th>
+        <th class="num">VaR at 50% sev.</th>
+        <th>Alternative path</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="bold">Mexico</td><td class="num dep-high">53.2%</td><td class="num">$5.76B</td><td class="num bold">$2.59B</td><td><span class="verdict-caution">Partial: Pacific ports and land border available. See note.</span></td></tr>
+      <tr><td class="bold">Vietnam</td><td class="num dep-mid">17.1%</td><td class="num">$2.19B</td><td class="num bold">$0.98B</td><td><span class="verdict-no">No viable alternative at scale within a single season</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-low">6.3%</td><td class="num">$4.65B</td><td class="num bold">$2.09B</td><td><span class="verdict-caution">Partial: PNW and Ukraine routes exist but are volume-constrained. See note.</span></td></tr>
+      <tr><td class="bold">South Korea</td><td class="num dep-low">5.8%</td><td class="num">$2.27B</td><td class="num bold">$1.02B</td><td><span class="verdict-caution">Partial: same constraints as Japan</span></td></tr>
+      <tr><td class="bold">Taiwan</td><td class="num dep-low">6.8%</td><td class="num">$1.08B</td><td class="num bold">$0.49B</td><td><span class="verdict-no">No land alternative · island economy · PNW volumes insufficient</span></td></tr>
+      <tr><td class="bold">China</td><td class="num dep-low">1.1%</td><td class="num">$6.66B</td><td class="num bold">$3.00B</td><td><span class="verdict-caution">Brazilian and Argentine origin viable substitute but faces same Canal constraint</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="n-table-wrap" style="margin:28px 0;">
+  <div class="n-table-title">Panama Canal bilateral dependency: soybean (HS 1201), 2023</div>
+  <table class="n-table">
+    <thead>
+      <tr>
+        <th>Importer</th>
+        <th class="num">Dep. %</th>
+        <th class="num">VaR at 100%</th>
+        <th class="num">VaR at 50% sev.</th>
+        <th>Alternative path</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="bold">China</td><td class="num dep-low">9.6%</td><td class="num">$58.42B</td><td class="num bold">$26.29B</td><td><span class="verdict-caution">Brazilian origin via Atlantic viable but ships through Canal or Cape Horn</span></td></tr>
+      <tr><td class="bold">Thailand</td><td class="num dep-mid">32.9%</td><td class="num">$1.95B</td><td class="num bold">$0.88B</td><td><span class="verdict-no">No alternative soy source at comparable scale</span></td></tr>
+      <tr><td class="bold">Mexico</td><td class="num dep-mid">18.4%</td><td class="num">$2.00B</td><td class="num bold">$0.90B</td><td><span class="verdict-caution">Partial: Pacific-side import infrastructure available</span></td></tr>
+      <tr><td class="bold">Colombia</td><td class="num dep-mid">31.5%</td><td class="num">$0.57B</td><td class="num bold">$0.26B</td><td><span class="verdict-no">Atlantic side only: Panama routing required for Pacific-origin soy</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-low">3.0%</td><td class="num">$2.18B</td><td class="num bold">$0.98B</td><td><span class="verdict-no">No alternative soy source that bypasses Panama at scale</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <div class="callout-label">On sourcing alternatives: why substitution is slower than it looks</div>
+  <div class="callout-body">
+    <p>The obvious question is why Japan, South Korea, and Vietnam cannot simply source corn from US Pacific Northwest ports or alternative origins. The answer is structural, not theoretical.</p>
+    <p><strong>US Pacific Northwest corn:</strong> The Columbia River grain terminals, primarily Portland and Longview, do export corn directly to Asian buyers. This route requires no Panama transit. But PNW corn export capacity is a fraction of Gulf capacity, constrained by rail throughput from the Midwest and fixed terminal infrastructure. Japan imports approximately 15–16 million tonnes of corn per year. PNW corn export volumes cannot compensate for Gulf displacement within a single season, and terminal capacity cannot be rapidly scaled.</p>
+    <p><strong>Brazilian and Argentine corn:</strong> Both countries are now among the world's largest corn exporters, but they ship from Atlantic ports, principally Santos and Rosario. A vessel carrying Brazilian corn to Japan must either transit the Panama Canal (also affected under this scenario) or reroute via Cape Horn, adding 38 days and approximately $1.14M in voyage cost per Handymax. Substituting South American origin does not eliminate the Panama constraint for Asian buyers. It replaces one exposure with another.</p>
+    <p><strong>Ukrainian and Black Sea corn:</strong> Ukraine ships from Black Sea ports through the Bosphorus and Suez Canal to Asia. This route does not touch Panama and represents a genuine sourcing alternative that bypasses the Canal constraint entirely. Japan and South Korea do import Ukrainian corn. The limitation is war-related supply uncertainty and elevated Black Sea insurance costs, which constrain available volumes and add their own freight premium.</p>
+    <p><strong>Africa:</strong> Sub-Saharan Africa is a net corn importer across most of the continent. South Africa exports 2–3 million tonnes per year in a good season, relevant for regional food security but not at the scale required to substitute for Japan or Korea's annual import volumes.</p>
+    <p><strong>The practical constraint:</strong> Sourcing substitution is possible over two to three seasons, given time to renegotiate purchase contracts, secure vessel capacity, and adjust storage logistics. Within a single six-month disruption event, the combination of volume constraints (PNW), concurrent Canal exposure (South America), war risk (Ukraine), and contract rigidity means that most exposed buyers face higher costs, not alternative supply. The model VaR figures reflect this short-run constraint.</p>
+  </div>
+</div>
+
+<p class="prose">The wheat picture adds a further dimension. Ecuador carries 100% canal dependency for wheat imports in the model, a structural exposure reflecting the absence of a viable Atlantic-side sourcing alternative at comparable freight economics. Colombia at 48.2% and Brazil at 14.3% round out the Latin American wheat exposure. These are not large absolute numbers, but they represent commodity flows with limited substitution flexibility and import-dependent domestic food systems.</p>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">Throttling scenarios</div>
+<h2 class="article-section-title">The model run at three severity levels, calibrated to the 2023–24 event.</h2>
+
+<p class="prose">The Narrows Chokepoint Dependency Model is designed for binary closure scenarios at adjustable severity and duration. For Panama Canal analysis, a partial-severity run more accurately reflects the nature of the disruption mechanism: the model is applied at 33%, 50%, and 100% severity, corresponding respectively to the November 2023 throughput (24 transits per day), the February 2024 peak (18 transits per day), and the analytical full-closure ceiling.</p>
+
+<p class="prose">The model applies a Panama-specific sensitivity factor of 0.90 to reflect the partial substitutability of canal routing via alternative vessel paths. Value at risk is calculated as exposed trade value multiplied by severity multiplied by the sensitivity factor. Rerouting penalty is calculated on a Handymax bulk carrier basis, the relevant vessel class for agricultural commodity flows, at $30,000 per day all-in (bunker plus charter) over 38 days to Cape Horn, producing a per-voyage overrun of $1.14 million. This figure should be treated as a floor rather than a ceiling: current BCI Capesize spot rates in May 2026 of approximately $35,000 per day suggest real-world rerouting costs are materially higher than the 2023 model baseline.</p>
+
+<div class="n-table-wrap" style="margin:28px 0;">
+  <div class="n-table-title">Panama Canal throttling scenarios: grain trade at risk (corn + soybean + wheat)</div>
+  <table class="n-table">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th class="num">Transit rate</th>
+        <th class="num">Throughput reduction</th>
+        <th class="num">Grain VaR</th>
+        <th class="num">Reroute / voyage</th>
+        <th>Historical analogue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">Low</td>
+        <td class="num">24/day</td>
+        <td class="num">33.3%</td>
+        <td class="num bold">$31.0B</td>
+        <td class="num">$1.14M</td>
+        <td>Nov 2023: initial ACP intervention</td>
+      </tr>
+      <tr>
+        <td class="bold">Mid</td>
+        <td class="num">18/day</td>
+        <td class="num">50.0%</td>
+        <td class="num bold">$46.5B</td>
+        <td class="num">$1.14M</td>
+        <td>Feb 2024: peak drought severity</td>
+      </tr>
+      <tr>
+        <td class="bold">High (ceiling)</td>
+        <td class="num">0/day</td>
+        <td class="num">100%</td>
+        <td class="num bold">$93.1B</td>
+        <td class="num">$1.14M</td>
+        <td>Analytical ceiling: no historical precedent</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="prose">A further finding from the model run deserves separate attention. The monthly progression of the 2023–24 event, applied to the Narrows model, shows that the Neopanamax draft restriction imposed in May 2023, before the ACP reduced a single transit slot, produced approximately $8.0 billion in container-side exposure purely from the 40% per-transit cargo capacity loss. A vessel operator does not require a transit reduction to absorb a material cost: the draft restriction alone, if sustained over a full quarter, generates a significant volume impact on container trade flows even with the same number of transits running. This is the vessel-class differentiation story in a quantified form that is absent from most Canal coverage.</p>
+
+<div class="n-table-wrap" style="margin:28px 0;">
+  <div class="n-table-title">Monthly model progression: 2023–24 El Niño drought event</div>
+  <table class="n-table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th class="num">Transits/day</th>
+        <th class="num">Bulk severity</th>
+        <th class="num">Container severity</th>
+        <th class="num">Aggregate VaR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>May 2023</td><td class="num">36</td><td class="num">0.0%</td><td class="num">16.0%</td><td class="num bold">$8.0B</td></tr>
+      <tr><td>Jul 2023</td><td class="num">32</td><td class="num">11.1%</td><td class="num">25.3%</td><td class="num bold">$18.2B</td></tr>
+      <tr><td>Sep 2023</td><td class="num">28</td><td class="num">22.2%</td><td class="num">34.7%</td><td class="num bold">$28.4B</td></tr>
+      <tr><td>Nov 2023</td><td class="num">24</td><td class="num">33.3%</td><td class="num">44.0%</td><td class="num bold">$38.6B</td></tr>
+      <tr><td>Jan 2024</td><td class="num">22</td><td class="num">38.9%</td><td class="num">48.7%</td><td class="num bold">$43.6B</td></tr>
+      <tr><td>Feb 2024</td><td class="num">18</td><td class="num">50.0%</td><td class="num">58.0%</td><td class="num bold">$53.8B</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">Validation</div>
+<h2 class="article-section-title">Model outputs at 50% severity against documented 2023–24 actuals.</h2>
+
+<p class="prose">The 2023–24 El Niño drought provides a rare opportunity to test a throttling model against observed outcomes. The model was not calibrated to the 2023–24 event: it is run post-hoc at the severity parameters that match the documented ACP operational record, and the outputs are compared against reported market outcomes.</p>
+
+<p class="prose"><strong>Grain routing diversion.</strong> In the four-week period ending 31 October 2023, US Gulf grain vessels transiting the Panama Canal declined from 34 to 5, an 85% reduction in bulk grain transit volumes at a point when the ACP had reduced daily transits by approximately 33% from baseline (Rabobank, 2023). The model at 33% severity (Low scenario) produces a bulk displacement of 33% through the transit reduction mechanism alone. The observed 85% diversion rate implies a substantially higher effective displacement of bulk cargo than the transit count reduction alone would produce. This is consistent with the priority auction mechanism described by Fuentes and Munim (2025): the residual transit capacity at 24 per day was preferentially allocated to higher-value container cargo, displacing bulk at rates exceeding the proportional throughput reduction. The model correctly identifies the direction and relative magnitude of this displacement, though it does not explicitly model the auction mechanism.</p>
+
+<p class="prose"><strong>Freight rate pressure.</strong> Average container freight rates rose from approximately $700 per TEU in November 2023 to approximately $1,900 per TEU in January 2024 (S&P Global, 2024). The Handymax Cape Horn rerouting penalty of $1.14 million per voyage, 38 days at $30,000 per day, represents a floor on the additional operating cost that canal-dependent bulk operators faced when displaced to the Cape route. The observed freight rate increase is directionally consistent with this cost pressure. The model does not forecast freight rates; it provides the cost input from which rate pressure is derivable.</p>
+
+<p class="prose"><strong>Aggregate exposure magnitude.</strong> The ACP reported that the 2023–24 drought produced its most severe operational disruption in the canal's 110-year history (ACP, 2024). Independent analyses estimated total economic impact to global trade in the range of tens of billions of dollars across the disruption period. The model's aggregate VaR range of $38.6B (November 2023 equivalent) to $53.8B (February 2024 equivalent) is consistent with this order of magnitude.</p>
+
+<div class="callout">
+  <div class="callout-label">Model limitations in this validation context</div>
+  <div class="callout-body">All grain commodity data in the Narrows model for Panama is Tier 3: aggregate routing derived from bilateral trade flows, not direct vessel-level routing validation. The model treats throughput severity as a uniform proportional reduction and does not account for the priority auction mechanism that distributes residual capacity unequally across vessel classes. Both effects mean the model likely underestimates bulk displacement relative to what the auction mechanism produces in practice. This is a known and documented limitation. The validation exercise above suggests the model is directionally correct but should be understood as a lower bound on bulk trade disruption rather than a central estimate.</div>
+</div>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">The 2026–27 risk window</div>
+<h2 class="article-section-title">The canal is fully operational today. NOAA gives a 75% probability of a moderate-to-very-strong El Niño by peak season. History puts the impact window in 2027.</h2>
+
+<p class="prose">The canal recovered through 2025 as a La Niña pattern restored above-average wet season rainfall. By early 2026, the ACP had rebuilt Gatun Lake reserves to historically high values and was operating at near-normal throughput of approximately 36 daily transits. From a market perspective, the 2023–24 event appeared to have passed.</p>
+
+<p class="prose">NOAA's Climate Prediction Center April 2026 update presents a different picture for the coming 12 months. ENSO-neutral conditions are currently in place, with La Niña ending. El Niño is assessed as likely to emerge in the June to August 2026 window, with a 61% probability of emergence by mid-year and persistence through at least end-2026. The more operationally significant figure is in the strength distribution: for the November 2026 to January 2027 peak season, the CPC assigns approximately equal 25% probability to very strong, strong, and moderate El Niño events, with roughly 10% probability of neutral conditions. That puts the combined probability of at least a moderate event at approximately 75% at peak season (NOAA CPC, 2026).</p>
+
+<p class="prose">This matters for Panama Canal operational planning because the most pronounced effects on canal throughput have consistently materialised in the year following El Niño onset. The 1982–83, 1997–98, 2015–16, and 2023–24 events all show the same pattern: an El Niño develops mid-year, the wet season delivers below-average rainfall, and by the following dry season Gatun Lake levels are sufficiently reduced to trigger draft restrictions and transit cuts. Applied to a 2026 El Niño onset, the operational impact window falls in 2027, consistent with the ACP's own forward guidance (ACP, 2026; Riviera Maritime Media, 2026).</p>
+
+<p class="prose">The structural trajectory compounds this. Muñoz et al. (2025) project that under moderately high emissions pathways (SSP3-7.0), the frequency of low-water events equivalent to the 2023–24 drought doubles by the end of the century. The water-saving measures the ACP introduced in late 2025, including cross-filling procedures, suspension of hydroelectric generation during low-water periods, and increased use of water-saving basins in the Neopanamax locks, extend the operational buffer but do not address the underlying hydrological constraint.</p>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">What the exposure means</div>
+<h2 class="article-section-title">The numbers are in the model. The pricing is not in the market. Here is what each desk should be doing with the gap.</h2>
+
+<p class="prose">The 2023–24 event established that a Panama Canal throttle produces quantifiable, bilateral, commodity-specific financial exposure. The Narrows model provides those numbers. The observation that is more useful to a risk professional than any single VaR figure is that this exposure is, in most cases, not currently priced or hedged in the counterparties that carry it. The following is how the analysis translates into action across the desks that are most directly affected.</p>
+
+<p class="prose"><strong>Underwriters and P&I clubs.</strong> Traditional cargo policies do not cover throttle-related losses. There is no physical damage trigger. What accumulates instead is indirect exposure: delay claims, spoilage on extended Cape Horn voyages for temperature-sensitive cargo, general average contributions where rerouted vessels encounter further incidents, and reinsurance accumulation across books with correlated Canal exposure. The critical analytical gap for underwriters is accumulation modelling. A cargo book that is diversified by geography can still be substantially concentrated in Panama-dependent routing if a significant portion of its Handymax and Supramax bulk exposures move on the US Gulf to Asia corridor. The Narrows model provides the bilateral dependency matrix to identify that concentration. The natural product that closes this gap is a parametric structure linked to ACP transit counts: a trigger at fewer than 24 transits per day sustained for 30 consecutive days, with a payout schedule calibrated against the corridor dependency matrix. The model provides the exposure layer; the trigger is already observable and publicly reported.</p>
+
+<p class="prose"><strong>Commodity trading desks.</strong> The immediate price signal in a throttle event is basis widening: the freight differential between US Gulf delivery and Pacific Asian destination blows out as displaced vessels seek the Cape Horn alternative. At $1.14 million additional voyage cost on a Handymax carrying approximately 50,000 tonnes of corn, that is $22.80 per tonne in additional freight, roughly 11% of the delivered corn price at current levels. Trading houses with contractual optionality on origin, the ability to shift purchasing toward US Pacific Northwest, Ukrainian, or Australian origins, capture the basis differential as margin. Those without that optionality pass the cost to buyers or take it as a loss on open positions. The model identifies which bilateral trade flows are most exposed and by what magnitude, giving a cargo desk the information needed to restructure origin mix before a disruption rather than during it.</p>
+
+<p class="prose"><strong>Commodity derivatives and freight markets.</strong> A Panama throttle is structurally bullish CBOT corn: reduced export capacity tightens US domestic stocks while simultaneously reducing supply to the most import-dependent Asian buyers. The basis trade is straightforward in principle, long CBOT corn versus short Pacific freight, but the freight derivatives market for Panamax and Handymax routes is thin and illiquid compared to the Capesize market. The model does not generate a derivatives position directly, but it produces the position size, the bilateral exposure in dollars by commodity, that a trader would need to justify a futures or options structure. The gap between the model's $46.5B mid-severity grain VaR and the typical open interest in grain freight derivatives indicates the extent to which this risk is unhedged at an industry level.</p>
+
+<p class="prose"><strong>Food security and policy.</strong> The financial desks absorb cost through freight premiums and basis adjustments. The food security question is different: who cannot absorb the cost at all. Japan and South Korea have the foreign exchange reserves and import flexibility to pay higher delivered grain prices for a season without a domestic supply crisis. Vietnam, Colombia, and Ecuador operate at tighter margins. A sustained six-month throttle that adds $22 to $30 per tonne to delivered corn and wheat costs passes through to domestic feed prices, then to livestock production costs, then to retail food prices, in economies where food expenditure is a higher share of household income. The 2023–24 event contributed to elevated agricultural commodity prices across Canal-dependent economies in Q4 2023 and Q1 2024. A repeat event with a moderate-to-strong El Niño driver would produce the same transmission. The policy question, for institutions such as ERIA, ADB, and the ASEAN Secretariat, is whether regional food security frameworks account for a recurring, hydrologically-driven supply chain shock that bilateral trade dependency analysis can now quantify in advance.</p>
+
+<hr class="section-rule" />
+
+<div class="section-eyebrow">What the model shows</div>
+<h2 class="article-section-title">The probable range is $31B to $93B in grain trade at risk. The mid-point is $46.5B. Neither figure is in most risk models.</h2>
+
+<p class="prose">The Narrows Chokepoint Dependency Model produces three outputs for Panama Canal throttling scenarios: value at risk, rerouting penalty, and the commodity and country breakdown of exposure. The grain trade at risk range, $31B at 33% severity, $46.5B at 50% severity, and $93B at full closure, is derived from bilateral 2023 UN Comtrade data applied to a corridor dependency matrix for corn, soybean, and wheat. All grain data is Tier 3 and should be read as directionally correct rather than Tier 1 bilateral precision.</p>
+
+<p class="prose">The figures that are most analytically stable are those for the East Asian importers: Japan corn and soybean exposure at the mid-point severity runs to approximately $3B combined; South Korea approximately $1.4B. These are not the largest absolute numbers in the matrix. China's soybean exposure at 50% severity is $26.3B. But Japan and South Korea carry a structural constraint that China does not: no viable domestic production substitute at scale, and Pacific routing that is physically dependent on canal access or Cape Horn. For an underwriter assessing accumulation risk or a project finance team stress-testing a food import facility, those are the figures that belong in a scenario model.</p>
+
+<p class="prose">The throttle problem, in the end, is a pricing problem. A full closure is dramatic, discussable, and precisely because it is dramatic, already present in most scenario frameworks. A sustained six-month reduction to 50% throughput is less dramatic, harder to communicate, and almost entirely absent from the risk models of the counterparties most exposed to it. The 2023–24 event established an empirical baseline. The forward ENSO outlook indicates the relevant risk horizon. The bilateral dependency data identifies who is on the hook. Running those inputs through a parametric model before the disruption begins is the step that most desks have not taken.</p>
+
+<div class="method-note">
+  <div class="method-note-label">Data and methodology</div>
+  <div class="method-note-body">
+    Bilateral dependency figures: Narrows Chokepoint Dependency Model v0.3 (May 2026). Source data: WITS UN Comtrade 2023 bilateral import data. All grain commodity figures (HS 1001, 1005, 1201) are Tier 3: aggregate routing. Aggregate and coal figures include Tier 1 bilateral data where available. Dep% = Panama-routed exposed value divided by total commodity imports. Panama sensitivity factor: 0.90. Value at risk = exposed trade value × severity × sensitivity. Rerouting penalty: Handymax all-in rate $30,000/day × 38-day Cape Horn detour = $1.14M/voyage. Neopanamax capacity loss: 44ft draft vs 50ft standard yields approximately 7,500 TEU vs 12,500 TEU per transit (Port Economics, Management and Policy, 2024). Monthly throughput data: ACP operational notices and BTS (2024). Rainfall and attribution data: World Weather Attribution (2024). Climate projections: Muñoz, Lawrence and Wang (2025). ENSO forecast and strength outlook: NOAA CPC, April 2026. Forward ENSO risk pattern: ACP (2026); Riviera Maritime Media (2026).
+    <br /><br />
+    <strong>References</strong><br />
+    ACP (2026). The Panama Canal responds to the risk of El Niño with foresight. Autoridad del Canal de Panamá.<br />
+    BTS (2024). Vessel Draft Restrictions on the Panama Canal by Locks: February 2022–August 2024. Bureau of Transportation Statistics.<br />
+    Fuentes, G. and Munim, Z.H. (2025). Climate influence on Panama Canal operations: predicting canal water times with integrated environmental and operational data. <em>Transportation Research Part E</em>, 203. DOI: 10.1016/j.tre.2025.103606.<br />
+    Muñoz, S., Lawrence, Z. and Wang, S. (2025). Drying of the Panama Canal in a warming climate. <em>Geophysical Research Letters</em>, 52(18), e2025GL117038. DOI: 10.1029/2025GL117038.<br />
+    NOAA CPC (2026). ENSO: Recent Evolution, Current Status and Predictions. Climate Prediction Center / NCEP, 13 April 2026.<br />
+    Port Economics, Management and Policy (2024). Effect of the Panama Canal draft limitation on containership capacity. porteconomicsmanagement.org.<br />
+    Rabobank (2023). The Panama Canal needs a rainy October: impacts of Panama Canal drought on global agricultural trade.<br />
+    Riviera Maritime Media (2026). Panama Canal Authority warns of potential El Niño impacts in 2027.<br />
+    S&P Global (2024). Panama Canal draft restrictions offer sustained challenge for carriers.<br />
+    World Weather Attribution (2024). Low water levels in Panama Canal due to increasing demand exacerbated by El Niño event.
+    <br /><br />
+    All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario against your specific inputs.
+  </div>
+</div>
+
+</ArticleLayout>
+
+<style is:global>
+/* Narrows article table styles */
+.n-table-wrap {
+  overflow-x: auto;
+  border-radius: 6px;
+  border: var(--rule-light);
+  box-shadow: 0 2px 12px rgba(10,37,64,0.05);
+}
+.n-table-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 12px 16px 0;
+  background: var(--white);
+  border-radius: 6px 6px 0 0;
+}
+.n-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--white);
+}
+.n-table thead { background: var(--navy); }
+.n-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.n-table th.num { text-align: right; }
+.n-table td { padding: 10px 16px; border-bottom: var(--rule-light); color: var(--text-secondary); vertical-align: top; line-height: 1.5; }
+.n-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.n-table td.bold { font-weight: 600; color: var(--navy); }
+.n-table td.subhead { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); background: var(--surface); padding: 8px 16px; }
+.n-table tr:last-child td { border-bottom: none; }
+.n-table tbody tr:hover td { background: var(--blue-pale); }
+.dep-high { color: #C0392B; font-weight: 700; }
+.dep-mid  { color: #E67E22; font-weight: 600; }
+.dep-low  { color: var(--text-secondary); }
+.verdict-no      { font-size: 11px; color: #C0392B; font-weight: 500; }
+.verdict-caution { font-size: 11px; color: #E67E22; font-weight: 500; }
+.verdict-ok      { font-size: 11px; color: #27AE60; font-weight: 500; }
+</style>

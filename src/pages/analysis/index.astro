@@ -55,6 +55,16 @@ const papers = [
     featured: false,
   },
   {
+    slug: '/analysis/panama',
+    title: 'El Niño Does Not Close the Panama Canal. It Throttles It. That Is the Harder Problem.',
+    eyebrow: 'Panama Canal · May 2026',
+    body: 'A drought scenario is not binary. The 2023 El Niño cut transits by 36% over nine months, shifted 100M tonnes of grain to longer routes, and imposed a freight cost penalty that fell hardest on importers with no land alternative. The model quantifies grain VaR across three severity bands and names the countries for whom rerouting is not a serious option.',
+    stat: '$46.5B grain VaR (50% severity) · +38 days via Cape Horn · Mexico corn: land-route alternative exists',
+    tags: ['panama', 'grain', 'corn', 'soybean', 'bulk', 'capesize', 'japan', 'south-korea', 'rerouting', 'el-nino'],
+    date: 'May 2026',
+    featured: false,
+  },
+  {
     slug: '/analysis/model-validation-2024',
     title: 'We Built the Model on 2023 Data. Then 2024 Happened.',
     eyebrow: 'Model Validation · May 2026',
@@ -72,6 +82,8 @@ const allTags = [...new Set(papers.flatMap(p => p.tags))].sort();
 // Tag display labels — add readable versions here
 const tagLabels: Record<string, string> = {
   'hormuz':         'Hormuz',
+  'panama':         'Panama',
+  'el-nino':        'El Niño',
   'malacca':        'Malacca',
   'kra':            'Kra',
   'crude':          'Crude oil',
