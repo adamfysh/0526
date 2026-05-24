@@ -113,6 +113,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .principle-text strong { color: var(--text-primary); font-weight: 600; }
 
+/* Founder */
+.founder-block {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s4);
+  align-items: start;
+  margin-top: var(--s3);
+}
+.founder-photo-slot {
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: var(--rule-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.founder-photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .founder-block { grid-template-columns: 1fr; }
+  .founder-photo-slot { width: 100px; height: 100px; }
+}
+
 /* Contact */
 .contact-block {
   background: var(--surface);
@@ -248,6 +284,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="principle-item">
         <div class="principle-mark"></div>
         <div class="principle-text"><strong>No sales funnel.</strong> A person responds to every enquiry. There is no CRM sequence, no free trial tier, and no self-serve onboarding. Access is a conversation.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">Who built this</div>
+    <h2 class="about-section-title">The methodology came from a different kind of risk work.</h2>
+    <div class="founder-block">
+      <div class="founder-photo-slot">
+        <img src="/founder.jpg" alt="Adam Fysh — Founder, Narrows" />
+      </div>
+      <div class="about-body">
+        <p><strong>Adam Fysh</strong> spent several years building quantitative risk frameworks within the United Nations system, working on disaster risk reduction and structural vulnerability analysis in fragile and trade-dependent economies. The work was always the same question in different forms: which bilateral dependencies concentrate the most risk, and what does a credible alternative actually cost.</p>
+        <p>The transition to maritime trade risk follows directly from that background. The analytical structure that identifies which nations bear the greatest cost when a supply chain breaks also identifies which importers are most exposed when a trade corridor fails. The Narrows applies the same methodology to the geography of global trade.</p>
+        <p>The analysis published here is primary research. Every assumption is stated. The model reflects one person's careful view of what the data shows and what it does not.</p>
       </div>
     </div>
   </div>

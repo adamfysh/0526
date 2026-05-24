@@ -423,15 +423,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="sim-card-header">
       <div class="sim-card-eyebrow">Model output</div>
       <div class="sim-card-scenario">
-        <strong>Strait of Hormuz — 100% closure, 30 days</strong><br>
+        <strong>Strait of Hormuz — 100% closure, 80 days</strong><br>
         All commodities · Sensitivity 1.00 · No alternative route · 2023 data
       </div>
     </div>
-    <div class="sim-row"><span class="sim-row-label">Value at risk</span><span class="sim-row-value">$31.8B<span class="unit">USD</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Value at risk</span><span class="sim-row-value">$84.8B<span class="unit">USD</span></span></div>
     <div class="sim-row"><span class="sim-row-label">Countries exposed</span><span class="sim-row-value">11<span class="unit">countries</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Japan alone</span><span class="sim-row-value">$6.3B<span class="unit">USD</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Est. VLCCs in-window</span><span class="sim-row-value">28<span class="unit">vessels</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Portfolio rerouting overrun</span><span class="sim-row-value">$28M<span class="unit">overrun</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Japan alone</span><span class="sim-row-value">$16.8B<span class="unit">USD</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Est. VLCCs in-window</span><span class="sim-row-value">75<span class="unit">vessels</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Portfolio rerouting overrun</span><span class="sim-row-value">$74.7M<span class="unit">overrun</span></span></div>
     <div class="sim-card-footer">All assumptions substitutable · Request a demo to run your scenario</div>
   </div>
 </section>
@@ -618,7 +618,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="map-stat-dot gold"></div>
           <div>
             <div class="map-stat-name">Strait of Hormuz</div>
-            <div class="map-stat-val">$31.8B at risk · 30d closure</div>
+            <div class="map-stat-val">$84.8B at risk · 80d closure</div>
           </div>
         </div>
         <div class="map-stat-item primary">
@@ -668,7 +668,7 @@ const CHOKEPOINTS = [
   {
     name: "Strait of Hormuz",
     lat: 26.6, lng: 56.3,
-    stat: "$31.8B at risk · 30d closure",
+    stat: "$84.8B at risk · 80d closure",
     primary: true
   },
   {
@@ -1064,10 +1064,10 @@ window.addEventListener('load', () => {
             <span class="app-control-label">Duration</span>
             <div class="app-slider-row">
               <div class="app-slider-track">
-                <div class="app-slider-fill" style="width:60%"></div>
-                <div class="app-slider-thumb" style="left:60%"></div>
+                <div class="app-slider-fill" style="width:89%"></div>
+                <div class="app-slider-thumb" style="left:89%"></div>
               </div>
-              <span class="app-slider-val">30d</span>
+              <span class="app-slider-val">80d</span>
             </div>
           </div>
           <div class="app-control">
@@ -1084,7 +1084,7 @@ window.addEventListener('load', () => {
           <span class="app-output-label">Simulation output</span>
           <div class="app-output-row">
             <span class="app-output-row-label">Value at risk</span>
-            <span class="app-output-row-val">$31.8B<span>USD</span></span>
+            <span class="app-output-row-val">$84.8B<span>USD</span></span>
           </div>
           <div class="app-output-row">
             <span class="app-output-row-label">Rerouting penalty / VLCC</span>
@@ -1092,7 +1092,7 @@ window.addEventListener('load', () => {
           </div>
           <div class="app-output-row">
             <span class="app-output-row-label">VLCCs in-window</span>
-            <span class="app-output-row-val">28<span>vessels</span></span>
+            <span class="app-output-row-val">75<span>vessels</span></span>
           </div>
           <div class="app-cta-row">
             <span class="app-cta-text">All assumptions adjustable in session</span>
@@ -1140,7 +1140,7 @@ window.addEventListener('load', () => {
   <div class="live-inner">
     <div>
       <div class="live-tag">Current context</div>
-      <h2 class="live-title">The Strait of Hormuz has been effectively closed since February 2026 — <span id="hormuz-day-count">day 80</span> and counting.</h2>
+      <h2 class="live-title">The Strait of Hormuz has been effectively closed since February 2026: <span id="hormuz-day-count">day 80</span> and counting.</h2>
       <p class="live-body">Iran is charging <strong>over $1 million per vessel</strong> to transit the strait. 230 loaded tankers are at anchor inside the Gulf. The BDTI is up 156%.</p>
       <p class="live-body">The model maps that exposure: which importers face binary dependency, what rerouting costs at today's rates, and what the accumulation number looks like across a fleet. Japan is 94.2% dependent on Hormuz for crude. Korea 71.5%. Philippines LPG 83.2%. Qatar LNG 100%.</p>
       <a href="/analysis/hormuz" class="btn btn-gold" style="margin-top:var(--s2);">Read the Hormuz analysis</a>
@@ -1151,13 +1151,52 @@ window.addEventListener('load', () => {
         <div class="live-stat-desc"><strong>Japan crude — Hormuz dependency</strong>Highest bilateral figure in the model. No substitution path at scale.</div>
       </div>
       <div class="live-stat">
-        <div class="live-stat-value">$31.8B</div>
-        <div class="live-stat-desc"><strong>Total crude 30d VaR — Hormuz 100% closure</strong>11 countries, T1 bilateral. 2023 UN Comtrade base.</div>
+        <div class="live-stat-value">$84.8B</div>
+        <div class="live-stat-desc"><strong>Total crude 80d VaR — Hormuz 100% closure</strong>11 countries, T1 bilateral. 2023 UN Comtrade base.</div>
       </div>
       <div class="live-stat">
         <div class="live-stat-value">100%</div>
         <div class="live-stat-desc"><strong>Qatar LNG — Hormuz dependency</strong>No Cape rerouting option for laden LNG carriers. Binary constraint, not a price threshold.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- ══════════════════════════════
+     ANALYSIS STRIP
+══════════════════════════════ -->
+<section class="analysis-section">
+  <div class="analysis-section-inner">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--s2);">
+      <div class="eyebrow">Latest analysis</div>
+      <a href="/analysis" style="font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;">View all papers →</a>
+    </div>
+    <p style="font-size:15px;color:var(--text-secondary);font-weight:300;line-height:1.6;max-width:640px;margin-bottom:0;">Model outputs applied to live events. Every assumption stated. Published before the disruption, not after.</p>
+    <div class="analysis-grid">
+
+      <a href="/analysis/panama" class="analysis-card">
+        <div class="analysis-card-chokepoint">Panama Canal · May 2026</div>
+        <div class="analysis-card-title">El Niño Does Not Close the Panama Canal. It Throttles It. That Is the Harder Problem.</div>
+        <div class="analysis-card-stat">$46.5B grain VaR · +38 days via Cape Horn · Mexico corn: land alternative exists</div>
+        <span class="analysis-card-link">Read the analysis</span>
+      </a>
+
+      <a href="/analysis/hormuz-who-pays" class="analysis-card">
+        <div class="analysis-card-chokepoint">Strait of Hormuz · May 2026</div>
+        <div class="analysis-card-title">Iran Can Hold Out. Here Is Who Pays.</div>
+        <div class="analysis-card-stat">Greece 54.6% dep · China adj. VaR $128B · 5 SE Asia LPG nations uncovered</div>
+        <span class="analysis-card-link">Read the analysis</span>
+      </a>
+
+      <a href="/analysis/model-validation-2024" class="analysis-card">
+        <div class="analysis-card-chokepoint">Model Validation · May 2026</div>
+        <div class="analysis-card-title">We Built the Model on 2023 Data. Then 2024 Happened.</div>
+        <div class="analysis-card-stat">5 of 6 predictions validated · $1.4M rerouting cost confirmed · Greece ranked #1 European exposure: confirmed</div>
+        <span class="analysis-card-link">Read the validation report</span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -1177,7 +1216,7 @@ window.addEventListener('load', () => {
         <div class="aud-role">P&amp;I clubs · Reinsurers</div>
         <h3 class="aud-title">Accumulation underwriters</h3>
         <p class="aud-body">Your accumulation model tracks hull. The Narrows adds the cargo dependency layer. Which commodities, from which origins, through which corridors, at what bilateral dependency percentage? The fleet-at-risk output is your accumulation number.</p>
-        <span class="aud-num">Hormuz 30d: 28 VLCCs in-window · $3.4B cargo at risk</span>
+        <span class="aud-num">Hormuz 80d: 75 VLCCs in-window · $9.1B cargo at risk</span>
       </div>
       <div class="aud-card fade-up">
         <div class="aud-role">Glencore · Trafigura · Vitol · Gunvor</div>
@@ -1356,7 +1395,7 @@ window.addEventListener('load', () => {
     <div class="pri-header fade-up">
       <div class="pri-eyebrow">Port Risk Index</div>
       <h2 class="pri-title">3,804 ports scored.<br><em>Across four dimensions of risk.</em></h2>
-      <p class="pri-lead">The Narrows Port Risk Index applies an INFORM-style composite methodology to every major port in the World Port Index. Physical accessibility, operational reliability, trade concentration, and political stability — each scored, each decomposable, one composite number per port.</p>
+      <p class="pri-lead">The Narrows Port Risk Index applies an INFORM-style composite methodology to every major port in the World Port Index. Physical accessibility, operational reliability, trade concentration, and political stability: each scored, each decomposable, one composite number per port.</p>
     </div>
 
     <!-- Static preview of the PRI explorer -->
