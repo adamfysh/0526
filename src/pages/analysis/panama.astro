@@ -61,6 +61,190 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="callout-body">The ACP's operational response to declining lake levels follows a documented protocol. As levels fall below approximately 84 feet, draft restrictions are implemented first, reducing the maximum permitted vessel draft for Neopanamax transits from the standard 50 feet toward 44 feet at the 2023 floor. As levels continue to fall, daily transit slots are progressively reduced. At 79.6 feet, the ACP had cut daily transits from 36–38 (normal operations) to 18 (February 2024 minimum) and had imposed a 44-foot maximum draft on Neopanamax transits. The relationship between lake level, draft restriction, and transit capacity is not linear at all points, but is sufficiently consistent to support scenario modelling across a plausible severity range. Source: BTS (2024); ACP operational notices 2023–24.</div>
 </div>
 
+<!-- Gatun Lake Chart -->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<div class="n-chart-wrap">
+  <div class="n-chart-eyebrow">Panama Canal · Operational history 2022–2026</div>
+  <div class="n-chart-title">Gatun Lake level vs. daily transit authorisations</div>
+  <div class="n-chart-sub">Feet above mean sea level (left axis) · Transits per day (right axis)</div>
+  <div style="position:relative;height:300px;">
+    <canvas id="gatunChart"></canvas>
+  </div>
+  <div class="n-chart-legend">
+    <div class="n-legend-item">
+      <div style="width:22px;height:3px;background:var(--navy);border-radius:2px;flex-shrink:0;"></div>
+      Gatun Lake level (ft)
+    </div>
+    <div class="n-legend-item">
+      <div style="width:22px;height:10px;background:var(--gold);opacity:0.7;border-radius:2px;flex-shrink:0;"></div>
+      Daily transits authorised
+    </div>
+    <div class="n-legend-item">
+      <div style="width:22px;height:0;border-top:2px dashed #C0392B;flex-shrink:0;"></div>
+      <span style="color:#C0392B;">Restriction threshold (84 ft)</span>
+    </div>
+    <div class="n-legend-item">
+      <div style="width:22px;height:0;border-top:1px dashed rgba(10,37,64,0.25);flex-shrink:0;"></div>
+      Normal seasonal high (~88 ft)
+    </div>
+  </div>
+  <div class="n-chart-source">Sources: ACP operational notices 2023–24; BTS (2024); Narrows estimates for 2025–26 based on ACP recovery reporting. Gatun Lake levels are monthly estimates derived from documented ACP operational data and independent hydrological reporting.</div>
+</div>
+<script is:inline>
+(function() {
+  var labels = [
+    'Jan 22','Feb 22','Mar 22','Apr 22','May 22','Jun 22',
+    'Jul 22','Aug 22','Sep 22','Oct 22','Nov 22','Dec 22',
+    'Jan 23','Feb 23','Mar 23','Apr 23','May 23','Jun 23',
+    'Jul 23','Aug 23','Sep 23','Oct 23','Nov 23','Dec 23',
+    'Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24',
+    'Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24',
+    'Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25',
+    'Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25',
+    'Jan 26','Feb 26','Mar 26','Apr 26','May 26'
+  ];
+  var lakeLevel = [
+    86.5,85.8,85.0,84.5,84.8,85.5,
+    86.5,87.5,88.0,88.2,87.8,87.2,
+    86.0,85.0,84.2,83.5,83.0,82.0,
+    81.0,79.6,80.2,80.5,80.8,80.5,
+    79.8,79.6,80.5,81.5,83.0,84.5,
+    85.5,86.5,87.0,87.5,87.8,87.5,
+    86.5,85.8,85.2,85.0,85.5,86.5,
+    87.5,88.5,89.0,89.2,88.8,88.5,
+    87.8,87.2,86.8,86.5,86.2
+  ];
+  var transits = [
+    37,37,37,37,37,37,
+    37,37,37,37,37,37,
+    36,36,36,36,36,34,
+    32,28,28,24,24,22,
+    22,18,22,26,30,33,
+    35,36,36,36,36,36,
+    36,36,36,36,36,36,
+    36,36,36,36,36,36,
+    36,36,36,36,36
+  ];
+
+  var droughtPlugin = {
+    id: 'droughtShade',
+    beforeDraw: function(chart) {
+      var ctx = chart.ctx, ca = chart.chartArea, sc = chart.scales;
+      if (!ca) return;
+      var x0 = sc.x.getPixelForValue(16), x1 = sc.x.getPixelForValue(29);
+      ctx.save();
+      ctx.fillStyle = 'rgba(201,168,76,0.07)';
+      ctx.fillRect(x0, ca.top, x1 - x0, ca.bottom - ca.top);
+      ctx.font = '9px -apple-system,sans-serif';
+      ctx.fillStyle = 'rgba(201,168,76,0.55)';
+      ctx.textAlign = 'center';
+      ctx.fillText('2023–24 El Niño drought', (x0+x1)/2, ca.top + 12);
+      ctx.restore();
+    }
+  };
+
+  var thresholdPlugin = {
+    id: 'thresholds',
+    beforeDraw: function(chart) {
+      var ctx = chart.ctx, ca = chart.chartArea, sc = chart.scales;
+      if (!ca) return;
+      var y88  = sc.yLeft.getPixelForValue(88);
+      var y84  = sc.yLeft.getPixelForValue(84);
+      var y796 = sc.yLeft.getPixelForValue(79.6);
+      ctx.save();
+      ctx.font = '9px -apple-system,sans-serif';
+      // 88ft
+      ctx.setLineDash([4,6]); ctx.strokeStyle='rgba(10,37,64,0.18)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(ca.left,y88); ctx.lineTo(ca.right,y88); ctx.stroke();
+      ctx.setLineDash([]); ctx.fillStyle='rgba(10,37,64,0.3)'; ctx.textAlign='right';
+      ctx.fillText('Normal high ~88 ft', ca.right-4, y88-4);
+      // 84ft
+      ctx.setLineDash([6,4]); ctx.strokeStyle='#C0392B'; ctx.lineWidth=1.5; ctx.globalAlpha=0.5;
+      ctx.beginPath(); ctx.moveTo(ca.left,y84); ctx.lineTo(ca.right,y84); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha=1; ctx.fillStyle='#C0392B'; ctx.textAlign='left';
+      ctx.fillText('84 ft: draft restrictions begin', ca.left+6, y84-4);
+      // 79.6ft
+      ctx.setLineDash([2,4]); ctx.strokeStyle='#C0392B'; ctx.lineWidth=1; ctx.globalAlpha=0.65;
+      ctx.beginPath(); ctx.moveTo(ca.left,y796); ctx.lineTo(ca.right,y796); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha=1; ctx.fillStyle='#C0392B'; ctx.textAlign='left';
+      ctx.fillText('79.6 ft: 2024 nadir · 18 transits/day', ca.left+6, y796+12);
+      ctx.restore();
+    }
+  };
+
+  Chart.register(droughtPlugin, thresholdPlugin);
+
+  var ctx = document.getElementById('gatunChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          type: 'line',
+          label: 'Gatun Lake level (ft)',
+          data: lakeLevel,
+          yAxisID: 'yLeft',
+          borderColor: '#0A2540',
+          backgroundColor: 'rgba(10,37,64,0.06)',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          tension: 0.35,
+          fill: true,
+          order: 1
+        },
+        {
+          type: 'bar',
+          label: 'Daily transits',
+          data: transits,
+          yAxisID: 'yRight',
+          backgroundColor: labels.map(function(_,i){ return (i>=16&&i<=29)?'rgba(201,168,76,0.75)':'rgba(201,168,76,0.25)'; }),
+          borderColor: 'transparent',
+          borderRadius: 2,
+          order: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0A2540',
+          titleColor: 'rgba(255,255,255,0.6)',
+          bodyColor: '#fff',
+          padding: 10,
+          callbacks: {
+            label: function(c) {
+              if (c.datasetIndex===0) return ' Lake level: '+c.parsed.y.toFixed(1)+' ft';
+              return ' Daily transits: '+c.parsed.y;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid:{display:false}, ticks:{font:{size:10},color:'#8896A5',maxRotation:45,autoSkip:true,maxTicksLimit:18}, border:{color:'#e5e8ec'} },
+        yLeft: {
+          type:'linear', position:'left', min:76, max:92,
+          title:{display:true,text:'Lake level (ft above MSL)',font:{size:10},color:'#0A2540'},
+          ticks:{font:{size:10},color:'#0A2540',callback:function(v){return v+' ft';}},
+          grid:{color:'rgba(0,0,0,0.05)'}, border:{color:'#e5e8ec'}
+        },
+        yRight: {
+          type:'linear', position:'right', min:0, max:50,
+          title:{display:true,text:'Daily transits authorised',font:{size:10},color:'#C9A84C'},
+          ticks:{font:{size:10},color:'#C9A84C'},
+          grid:{drawOnChartArea:false}, border:{color:'#e5e8ec'}
+        }
+      }
+    }
+  });
+})();
+</script>
+
+
 <hr class="section-rule" />
 
 <div class="section-eyebrow">Vessel class differentiation</div>
@@ -73,6 +257,147 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <p class="prose">The original Panamax locks, handling vessels up to approximately 39.5-foot draft, are less directly affected by a 44-foot restriction because Panamax-class vessels already operate within that envelope under normal conditions. The primary impact on Panamax-class traffic is the reduction in daily transit slots, which affects all vessel types proportionally but is compounded by the priority slot auction system.</p>
 
 <p class="prose">The priority slot auction mechanism is the critical distributional variable for agricultural commodity flows. When the ACP reduces available daily transit slots, it operates a tiered auction system in which operators can bid for priority passage. High-value container cargo, where the cost of a week's delay on time-sensitive manufactured goods is significant, consistently outbids lower-value bulk commodity cargo. The empirical result is that bulk carrier operators, who carry grain, coal, and fertiliser, are displaced from the transit queue at rates higher than the simple transit reduction percentage would imply. Fuentes and Munim (2025), analysing the relationship between ENSO indices and Panama Canal operational data, confirmed that El Niño events reduce bulk carrier transits proportionally more than container or other high-value segments, consistent with this auction mechanism.</p>
+
+<p class="prose">When available transit slots fall below demand, the ACP runs a daily priority auction for one or more additional slots. Any vessel that has been waiting in the anchorage queue for at least ten days may participate, with an opening bid of $55,000. During normal operations, super booking fees run $135,000 to $140,000. During the 2023–24 drought, winning bids reached $3.975 million: the documented record, paid in November 2023 by Japan's Eneos Group for an LPG carrier named Sunny Bright.</p>
+
+<p class="prose">The price escalation was not arbitrary. It was the market revealing each vessel class's walk-away price: the maximum a rational operator would pay for a canal slot before finding the Cape Horn alternative cheaper. That walk-away price is a function of three variables: cargo value, scheduling constraint, and whether a Cape Horn detour is physically or commercially feasible.</p>
+
+<p class="prose">For an LPG or LNG carrier, the Cape Horn alternative is not viable at scale. The transit adds weeks, LNG boil-off losses accumulate, and the cargo value justifies almost any slot price. For a Neopanamax container ship, the locks themselves are the constraint: the vessel's beam exceeds the original Panamax lock dimensions, so the Neopanamax locks are the only available passage regardless of price. Both vessel types bid to the top. For a Handymax bulk carrier with 50,000 tonnes of grain, the arithmetic is different. The Cape Horn detour costs $1.14 million in additional voyage expense. When auction bids exceeded that threshold, which they did throughout November 2023, the rational choice was to leave the queue and go around. That is precisely what happened: documented grain vessel transits through the canal fell 85% in the four weeks ending 31 October 2023, at a point when auction prices had already moved well above the Cape Horn walk-away price for bulk operators.</p>
+
+<p class="prose">The auction, in other words, is not merely a pricing mechanism. It is a sorting instrument. It systematically displaces low-value bulk cargo, grain, coal, and fertiliser, while preserving transit access for high-value cargo that can afford to bid. For an underwriter or a commodity desk, the relevant number is not the transit count reduction alone, but the price at which their cargo class exits the queue.</p>
+
+<div class="n-auction-wrap">
+  <div class="n-chart-eyebrow">Panama Canal · Priority slot auction · November 2023 peak</div>
+  <div class="n-chart-title">At $3.97M, the auction sorted vessel classes by cargo value</div>
+  <div class="n-chart-sub">Estimated maximum rational bid per vessel class vs. documented Nov 2023 peak auction price. Vessels left of the red line diverted to Cape Horn.</div>
+  <div class="n-auction-axis" id="auctionAxis"></div>
+  <div class="n-auction-rows" id="auctionRows"></div>
+  <div class="n-auction-legend">
+    <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(10,37,64,0.12);height:14px;border-radius:2px;"></div>Diverts to Cape Horn</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(201,168,76,0.4);height:14px;border-radius:2px;"></div>Marginal</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(26,94,191,0.22);height:14px;border-radius:2px;"></div>Transits: bids and wins</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="border-top:2px solid #C0392B;height:0;"></div>Peak auction $3.97M (documented)</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="border-top:2px dashed #C9A84C;height:0;"></div>Cape Horn cost, Handymax ($1.14M)</div>
+  </div>
+  <div class="n-auction-callout">
+    <div class="n-auction-callout-title">What this meant for a Handymax grain carrier</div>
+    <div class="n-auction-scenarios">
+      <div class="n-scenario">
+        <div class="n-scenario-label">Normal operations</div>
+        <div class="n-scenario-cost" style="color:#27AE60;">~$300K</div>
+        <div class="n-scenario-desc">Standard canal toll. No queue. Grain delivered on schedule.</div>
+      </div>
+      <div class="n-scenario">
+        <div class="n-scenario-label">Bid for auction slot</div>
+        <div class="n-scenario-cost" style="color:#C0392B;">$2–4M+</div>
+        <div class="n-scenario-desc">Peak Nov 2023 price. Freight cost up approximately 50% per tonne. Uneconomic for bulk grain.</div>
+      </div>
+      <div class="n-scenario">
+        <div class="n-scenario-label">Divert via Cape Horn</div>
+        <div class="n-scenario-cost" style="color:#C9A84C;">+$1.14M</div>
+        <div class="n-scenario-desc">38 extra days. Cheaper than bidding. The rational choice for grain at peak drought.</div>
+      </div>
+    </div>
+  </div>
+  <div class="n-chart-source">Documented: Eneos Group (Sunny Bright LPG carrier) paid $3.975M, Nov 2023 record (Splash247; Maritime Executive). Chemical tanker documented at $1.1M. Grain ships documented in $2–4M+ range (Grain Journal, 2023). Normal super booking pre-drought: $135–140K. Max rational bid figures are Narrows estimates based on cargo value, Cape Horn feasibility by vessel class, and lock-type constraint. Not ACP data.</div>
+</div>
+<script is:inline>
+(function() {
+  var MAX = 5000000, PEAK = 3975000, CAPE = 1140000;
+  var vessels = [
+    { name:'Handymax bulk',        sub:'Grain, coal · 25–60k DWT',      bid:1000000, cls:'diverts'  },
+    { name:'Supramax bulk',        sub:'Grain, fertiliser · 50–65k DWT', bid:1100000, cls:'diverts'  },
+    { name:'Panamax bulk',         sub:'Coal, grain · 65–80k DWT',       bid:1250000, cls:'diverts'  },
+    { name:'Aframax tanker',       sub:'Crude, products · 80–120k DWT',  bid:1800000, cls:'marginal' },
+    { name:'Panamax container',    sub:'General cargo · ~5,000 TEU',     bid:2200000, cls:'marginal' },
+    { name:'VLCC crude tanker',    sub:'Crude oil · 200–320k DWT',       bid:3200000, cls:'marginal' },
+    { name:'Neopanamax container', sub:'No Cape option: beam too wide',   bid:4400000, cls:'transits', noCape:true },
+    { name:'LPG / LNG carrier',    sub:'No viable Cape alternative',      bid:4900000, cls:'transits', noCape:true },
+  ];
+  var bgMap = { diverts:'rgba(10,37,64,0.12)', marginal:'rgba(201,168,76,0.4)', transits:'rgba(26,94,191,0.22)' };
+  var colMap = { diverts:'#6B7280', marginal:'#9A7A20', transits:'#1A5EBF' };
+
+  var axisEl = document.getElementById('auctionAxis');
+  var rowsEl = document.getElementById('auctionRows');
+
+  [0,1e6,2e6,3e6,4e6,5e6].forEach(function(t) {
+    var sp = document.createElement('span');
+    sp.style.cssText = 'position:absolute;transform:translateX(-50%);font-size:9px;color:#8896A5;';
+    sp.style.left = (t/MAX*100)+'%';
+    sp.textContent = t===0 ? '$0' : '$'+(t/1e6)+'M';
+    axisEl.appendChild(sp);
+  });
+
+  vessels.forEach(function(v, i) {
+    var pct  = Math.min(v.bid/MAX*100, 98);
+    var isWide = pct > 72;
+    var row  = document.createElement('div');
+    row.className = 'n-auction-row';
+
+    var lbl = document.createElement('div');
+    lbl.className = 'n-auction-label';
+    lbl.innerHTML = '<div class="n-auction-name">'+v.name+'</div><div class="n-auction-sub">'+v.sub+'</div>';
+
+    var barArea = document.createElement('div');
+    barArea.style.cssText = 'position:relative;height:44px;display:flex;align-items:center;';
+
+    var track = document.createElement('div');
+    track.style.cssText = 'position:absolute;left:0;right:0;height:24px;background:#f5f6f8;border-radius:3px;overflow:hidden;';
+
+    var fill = document.createElement('div');
+    fill.style.cssText = 'height:100%;border-radius:3px;width:'+pct+'%;background:'+bgMap[v.cls]+';position:relative;';
+
+    if (isWide) {
+      var valIn = document.createElement('div');
+      valIn.style.cssText = 'position:absolute;right:7px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:rgba(10,37,64,0.55);white-space:nowrap;';
+      var fmt = v.bid>=1e6 ? '$'+(v.bid/1e6).toFixed(1)+'M'+(v.noCape?': no Cape option':'') : '$'+(v.bid/1000).toFixed(0)+'K';
+      valIn.textContent = fmt;
+      fill.appendChild(valIn);
+    }
+    track.appendChild(fill);
+
+    var outer = document.createElement('div');
+    outer.style.cssText = 'position:absolute;left:0;right:0;height:24px;pointer-events:none;';
+
+    // Peak line
+    var peakLine = document.createElement('div');
+    peakLine.style.cssText = 'position:absolute;top:-4px;bottom:-4px;left:'+(PEAK/MAX*100)+'%;width:2px;background:#C0392B;z-index:10;';
+    if (i===0) {
+      var pl = document.createElement('div');
+      pl.style.cssText = 'position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:#C0392B;white-space:nowrap;';
+      pl.textContent = 'Peak auction $3.97M';
+      peakLine.appendChild(pl);
+    }
+    outer.appendChild(peakLine);
+
+    // Cape line
+    var capeLine = document.createElement('div');
+    capeLine.style.cssText = 'position:absolute;top:-4px;bottom:-4px;left:'+(CAPE/MAX*100)+'%;width:0;border-left:2px dashed #C9A84C;z-index:9;';
+    if (i===vessels.length-1) {
+      var cl = document.createElement('div');
+      cl.style.cssText = 'position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:#C9A84C;white-space:nowrap;';
+      cl.textContent = 'Cape Horn $1.14M';
+      capeLine.appendChild(cl);
+    }
+    outer.appendChild(capeLine);
+
+    if (!isWide) {
+      var valOut = document.createElement('div');
+      valOut.style.cssText = 'position:absolute;left:calc('+pct+'% + 6px);top:50%;transform:translateY(-50%);font-size:10px;font-weight:700;color:'+colMap[v.cls]+';white-space:nowrap;';
+      var fmt2 = v.bid>=1e6 ? '$'+(v.bid/1e6).toFixed(1)+'M' : '$'+(v.bid/1000).toFixed(0)+'K';
+      valOut.textContent = fmt2;
+      outer.appendChild(valOut);
+    }
+
+    barArea.appendChild(track);
+    barArea.appendChild(outer);
+    row.appendChild(lbl);
+    row.appendChild(barArea);
+    rowsEl.appendChild(row);
+  });
+})();
+</script>
+
 
 <p class="prose">A further constraint applies to the largest dry bulk vessels. Capesize bulk carriers, with beam widths exceeding the Panamax lock constraint, cannot transit the Panama Canal under any conditions. Iron ore and coal flows on Capesize vessels, notably Australian coal to East Asia, are already routed via the Cape of Good Hope as standard operations. The Panama Canal throttle does not affect these flows at all. The commodity classes that depend on Handymax and Supramax bulk carriers for Pacific Basin routing, principally grain, bear the concentrated operational risk of both transit reduction and priority displacement.</p>
 
@@ -345,4 +670,116 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 .verdict-no      { font-size: 11px; color: #C0392B; font-weight: 500; }
 .verdict-caution { font-size: 11px; color: #E67E22; font-weight: 500; }
 .verdict-ok      { font-size: 11px; color: #27AE60; font-weight: 500; }
+
+/* Narrows chart card */
+.n-chart-wrap {
+  margin: 28px 0;
+  border-radius: 6px;
+  border: var(--rule-light);
+  box-shadow: 0 2px 12px rgba(10,37,64,0.05);
+  padding: 20px 20px 16px;
+  background: var(--white);
+}
+.n-chart-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.n-chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+.n-chart-sub {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.n-chart-legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.n-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.n-legend-swatch { width: 22px; flex-shrink: 0; }
+.n-chart-source {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* Auction chart */
+.n-auction-wrap {
+  margin: 28px 0;
+  border-radius: 6px;
+  border: var(--rule-light);
+  box-shadow: 0 2px 12px rgba(10,37,64,0.05);
+  padding: 20px 20px 20px;
+  background: var(--white);
+}
+.n-auction-axis {
+  position: relative;
+  height: 18px;
+  margin: 0 0 4px 188px;
+}
+.n-auction-rows { display: flex; flex-direction: column; gap: 0; }
+.n-auction-row {
+  display: grid;
+  grid-template-columns: 188px 1fr;
+  align-items: center;
+  border-bottom: 1px solid #f0f2f5;
+  min-height: 46px;
+  padding: 4px 0;
+}
+.n-auction-row:last-child { border-bottom: none; }
+.n-auction-label { padding-right: 12px; }
+.n-auction-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+.n-auction-sub  { font-size: 10px; color: var(--text-tertiary); line-height: 1.3; }
+.n-auction-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: var(--rule-light);
+}
+.n-auction-callout {
+  margin-top: 16px;
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: 14px 16px;
+}
+.n-auction-callout-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.n-auction-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.n-scenario { display: flex; flex-direction: column; gap: 3px; }
+.n-scenario-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); }
+.n-scenario-cost  { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; margin: 2px 0; }
+.n-scenario-desc  { font-size: 10px; color: var(--text-secondary); line-height: 1.4; }
+
 </style>
