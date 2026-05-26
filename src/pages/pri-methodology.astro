@@ -198,6 +198,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <li><a href="#tiers">9. Data Tiers</a></li>
       <li><a href="#limitations">10. Limitations</a></li>
       <li><a href="#vintage">11. Data Vintage</a></li>
+      <li><a href="#cppi">12. Related Indices</a></li>
     </ol>
   </nav>
 
@@ -752,6 +753,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <a href="/pri" class="btn-ghost" style="display:inline-block;margin-top:var(--s3)">
         Open the Port Risk Index →
       </a>
+    </div>
+
+
+    <!-- 12 -->
+    <div class="meth-section" id="cppi">
+      <div class="meth-section-num">Section 12</div>
+      <h2>Relationship to the World Bank CPPI</h2>
+      <p class="meth-p">
+        The World Bank Container Port Performance Index (CPPI), published annually in partnership
+        with S&P Global Market Intelligence, ranks container ports by vessel time in port. The
+        methodology aggregates arrival and berth hours from AIS position data, controls for ship
+        size (five TEU capacity categories) and call size (ten container move categories) via
+        mean-centering within peer groups, and weights the final score by a Fuel Consumption
+        Index that gives greater influence to larger vessels. Two complementary scoring
+        approaches are published: an administrative approach based on direct time aggregation,
+        and a statistical approach applying factor analysis to the same scaled port time matrix.
+        The resulting index measures how efficiently a port processes container vessels relative
+        to peers handling similar call sizes and vessel sizes.
+      </p>
+      <p class="meth-p">
+        The CPPI and the PRI measure different things for different purposes. The CPPI is a
+        retrospective efficiency benchmark: it records how long vessels actually spent in port
+        and compares that outcome to peers. The PRI is a risk composite: it asks what conditions
+        make a port likely to cause disruption, delay, or loss. A port with very high call volume
+        may score below peers on the CPPI because berth queuing is a function of demand, not
+        dysfunction. That same port may score well on the PRI because its infrastructure is
+        sound, its labour regime is stable, and its geopolitical environment is benign. The CPPI
+        cannot distinguish a slow port from a risky one. The PRI is designed around that
+        distinction. Scope differs as well: the CPPI covers container operations only, and its
+        Fuel Consumption Index weighting is appropriate for container logistics optimisation but
+        not for a risk index used across vessel types. The PRI covers 3,804 ports across all
+        vessel classes, including bulk, tanker, general cargo, and RoRo facilities for which no
+        CPPI equivalent exists.
+      </p>
+      <p class="meth-p">
+        The two indices are complementary rather than competitive. The CPPI mean-centered port
+        time data — adjusted for call size and vessel class — is a more precise dwell time signal
+        than raw dwell figures, and where CPPI coverage overlaps with the PRI universe it is a
+        candidate calibration input for the D2 reliability dimension. Users who need to benchmark
+        container port efficiency for logistics planning should consult the CPPI directly. Users
+        assessing port risk across a mixed cargo or vessel book — for underwriting, supply chain
+        stress testing, or trade finance — are working a question the CPPI is not designed to
+        answer.
+      </p>
     </div>
 
   </div><!-- end content -->
