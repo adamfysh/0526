@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Model Validation: 2024 Disruptions — The Narrows"
+  title="Model Validation: 2024 Disruptions | The Narrows"
   description="The Chokepoint Dependency Model was built on 2023 data and locked before the Houthi Red Sea campaign and Panama Canal drought began. Here is what it predicted and what the disruptions confirmed."
 >
 
@@ -374,7 +374,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <h2 class="score-hero-headline">Six predictions testable against live data. <strong>Five validated directly.</strong> One partial. No false positives.</h2>
     <div class="score-grid">
       <div class="score-cell">
-        <div class="score-cell-label">Rerouting cost — per large tanker</div>
+        <div class="score-cell-label">Rerouting cost: per large tanker</div>
         <div class="score-cell-value">$1.4M</div>
         <div class="score-cell-desc">Predicted before disruption. Actual: $1.0–1.4M (UNCTAD / World Bank)</div>
         <div class="score-cell-verdict">✓ Validated</div>
@@ -392,7 +392,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="score-cell-verdict">✓ Validated</div>
       </div>
       <div class="score-cell">
-        <div class="score-cell-label">Top Panama commodity — dollar exposure</div>
+        <div class="score-cell-label">Top Panama commodity: dollar exposure</div>
         <div class="score-cell-value">LNG #1</div>
         <div class="score-cell-desc">Model ranked LNG first. Actual: LNG transits fell 66%, largest decline of any commodity class.</div>
         <div class="score-cell-verdict">✓ Validated</div>
@@ -419,12 +419,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- TEST 1 -->
   <div class="test-block">
-    <div class="test-eyebrow">Test 1 — Bab-el-Mandeb rerouting cost</div>
+    <div class="test-eyebrow">Test 1: Bab-el-Mandeb rerouting cost</div>
     <h2 class="test-headline">The model predicted $1.4 million per voyage via the Cape. Actuals came in at $1.0–1.4 million. This is the cleanest result.</h2>
 
     <p class="n">When a loaded tanker can no longer transit Bab-el-Mandeb and the Suez Canal, the alternative is the Cape of Good Hope route around the southern tip of Africa. The detour is long: for a large oil tanker travelling from the Persian Gulf to a European destination, rerouting via the Cape adds approximately 14 days of sea time.</p>
 
-    <p class="n">At the vessel operating costs built into the model — $55,000 per day in fuel and $45,000 per day in time charter equivalent — 14 additional days produces a per-voyage premium of $1.4 million. This calculation was made before the Red Sea disruption and published as a model output.</p>
+    <p class="n">At the vessel operating costs built into the model ($55,000 per day in fuel and $45,000 per day in time charter equivalent), 14 additional days produces a per-voyage premium of $1.4 million. This calculation was made before the Red Sea disruption and published as a model output.</p>
 
     <p class="n">UNCTAD's impact assessment of the Red Sea disruption, published in early 2024, reported that rerouting added approximately $1 million per voyage in fuel costs alone, with total additional costs reaching $1.0 to $1.4 million depending on vessel class. World Bank analysis produced consistent figures. The model's $1.4 million estimate sits at the top of the reported range, which is consistent: the model uses the largest tanker class (VLCCs, which carry around 2 million barrels of crude) as its reference vessel, while the published averages cover a broader mix of vessel sizes.</p>
 
@@ -474,14 +474,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- TEST 2 -->
   <div class="test-block">
-    <div class="test-eyebrow">Test 2 — Bab-el-Mandeb importer ranking</div>
+    <div class="test-eyebrow">Test 2: Bab-el-Mandeb importer ranking</div>
     <h2 class="test-headline">The model ranked Greece as the most exposed European crude importer. The disruption confirmed it.</h2>
 
-    <p class="n">The model uses real bilateral trade data — actual country-to-country import flows from UN Comtrade — to calculate each importer's dependency on a given corridor. For Bab-el-Mandeb crude, the European ordering was stark: Greece at 54.6% dependency, France at 12.9%, Germany at 4.6%. Greece's exposure was more than four times France's and twelve times Germany's.</p>
+    <p class="n">The model uses real bilateral trade data (actual country-to-country import flows from UN Comtrade) to calculate each importer's dependency on a given corridor. For Bab-el-Mandeb crude, the European ordering was stark: Greece at 54.6% dependency, France at 12.9%, Germany at 4.6%. Greece's exposure was more than four times France's and twelve times Germany's.</p>
 
-    <p class="n">The underlying reason is geography and sourcing. Greek independent refiners source heavily from Persian Gulf producers — Saudi Arabia, Iraq, the UAE — whose cargoes transit Bab-el-Mandeb on the way to Europe. French and German operators have more access to Atlantic Basin alternatives: Azerbaijani crude via the Bosphorus, Norwegian crude from the North Sea, pipeline routes from Kazakhstan. When the Red Sea corridor came under attack, those alternatives provided meaningful insulation. Greece had fewer of them.</p>
+    <p class="n">The underlying reason is geography and sourcing. Greek independent refiners source heavily from Persian Gulf producers (Saudi Arabia, Iraq, the UAE) whose cargoes transit Bab-el-Mandeb on the way to Europe. French and German operators have more access to Atlantic Basin alternatives: Azerbaijani crude via the Bosphorus, Norwegian crude from the North Sea, pipeline routes from Kazakhstan. When the Red Sea corridor came under attack, those alternatives provided meaningful insulation. Greece had fewer of them.</p>
 
-    <p class="n">This is precisely what the disruption produced. Greek independent refiners reported acute supply chain pressure through the first half of 2024. Greece's shipping industry — the world's largest commercial fleet by deadweight tonnage — bore a disproportionate operational cost burden as tanker operators were forced around the Cape. France and Germany reported materially lower disruption consistent with the model's much lower dependency scores for both countries.</p>
+    <p class="n">This is precisely what the disruption produced. Greek independent refiners reported acute supply chain pressure through the first half of 2024. Greece's shipping industry, the world's largest commercial fleet by deadweight tonnage, bore a disproportionate operational cost burden as tanker operators were forced around the Cape. France and Germany reported materially lower disruption consistent with the model's much lower dependency scores for both countries.</p>
 
     <div class="verdict pass">
       <div class="verdict-icon">✓</div>
@@ -536,10 +536,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- TEST 3 -->
   <div class="test-block">
-    <div class="test-eyebrow">Test 3 — Bab-el-Mandeb commodity mix</div>
-    <h2 class="test-headline">The model identified crude oil as 78% of Bab-el-Mandeb exposure. The disruption confirmed crude dominance — with an honest caveat on containers.</h2>
+    <div class="test-eyebrow">Test 3: Bab-el-Mandeb commodity mix</div>
+    <h2 class="test-headline">The model identified crude oil as 78% of Bab-el-Mandeb exposure. The disruption confirmed crude dominance, with an honest caveat on containers.</h2>
 
-    <p class="n">Of the model's total Bab-el-Mandeb bilateral exposure across covered importers ($74.7 billion), crude petroleum accounts for $58.3 billion — 78%. Vehicles, palm oil, and copper ores make up most of the remainder. The model's prediction: if Bab fails, crude supply chains bear the largest financial impact.</p>
+    <p class="n">Of the model's total Bab-el-Mandeb bilateral exposure across covered importers ($74.7 billion), crude petroleum accounts for $58.3 billion: 78%. Vehicles, palm oil, and copper ores make up most of the remainder. The model's prediction: if Bab fails, crude supply chains bear the largest financial impact.</p>
 
     <p class="n">The disruption confirmed this in dollar terms. The Red Sea corridor's share of global seaborne crude volumes fell from approximately 12% in April 2023 to 6% in August 2024, a halving of crude transit consistent with the scale of exposure the model identifies. The EIA, IEA, and Kpler all confirmed significant declines in seaborne crude via the corridor.</p>
 
@@ -553,18 +553,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <!-- TEST 4 -->
   <div class="test-block">
-    <div class="test-eyebrow">Test 4 — Panama Canal commodity ranking</div>
+    <div class="test-eyebrow">Test 4: Panama Canal commodity ranking</div>
     <h2 class="test-headline">The Panama drought hit LNG hardest: transits fell 66%. The model ranked LNG as the largest Panama exposure by dollar value. This is the second clean validation.</h2>
 
     <p class="n">The Panama Canal drought cut daily transits from 36–38 in July 2023 to 18 per day by February 2024. Among all commodity classes transiting the canal, liquefied natural gas fell hardest: the Canal Authority reported a 66% decline in LNG transits, the single largest proportional drop of any cargo type.</p>
 
-    <p class="n">LNG carriers — vessels that move gas cooled to minus 162 degrees Celsius in insulated tanks — are largely captive to the Panama route for US Gulf to Asian Pacific deliveries. Unlike bulk vessels, they cannot easily divert to alternative routes without transforming the economics of the voyage entirely. Japan and South Korea, which import significant volumes of US LNG through the canal, reported elevated LNG spot prices and accelerated purchases from alternative suppliers through the first half of 2024.</p>
+    <p class="n">LNG carriers (vessels that move gas cooled to minus 162 degrees Celsius in insulated tanks) are largely captive to the Panama route for US Gulf to Asian Pacific deliveries. Unlike bulk vessels, they cannot easily divert to alternative routes without transforming the economics of the voyage entirely. Japan and South Korea, which import significant volumes of US LNG through the canal, reported elevated LNG spot prices and accelerated purchases from alternative suppliers through the first half of 2024.</p>
 
     <p class="n">The model's Panama rankings, calibrated against Panama Canal Authority tonnage data, place LNG and LPG as the largest dollar-value exposure: China at $8.3 billion, Japan at $5.1 billion, South Korea at $4.8 billion. The 2024 drought confirmed LNG as the single most impacted commodity class, precisely matching the model's ranking.</p>
 
     <div class="verdict pass">
       <div class="verdict-icon">✓</div>
-      <div class="verdict-body"><strong>Validated: commodity ranking correct</strong>The model ranked LNG as the dominant Panama exposure by dollar value. The 2024 drought confirmed LNG as the single most impacted commodity class (minus 66% transits). Dry bulk ranking — soybeans ahead of coal ahead of corn ahead of wheat — was also consistent with Canal Authority impact data.</div>
+      <div class="verdict-body"><strong>Validated: commodity ranking correct</strong>The model ranked LNG as the dominant Panama exposure by dollar value. The 2024 drought confirmed LNG as the single most impacted commodity class (minus 66% transits). Dry bulk ranking (soybeans ahead of coal ahead of corn ahead of wheat) was also consistent with Canal Authority impact data.</div>
     </div>
 
     <div class="data-table-wrap">
@@ -633,7 +633,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   <div class="verdict scope" style="margin-bottom:var(--s2);">
     <div class="verdict-icon" style="color:var(--text-tertiary);">○</div>
-    <div class="verdict-body"><strong>Full container goods universe at Bab-el-Mandeb</strong>The model's Bab-el-Mandeb coverage is strong for bulk commodities and crude but narrower for containerised goods, which are carried in lower-confidence estimates. The total corridor exposure figure ($74.7B) is a floor on trade at risk, not a ceiling. Container tonnage at Suez fell 82% at the 2024 trough — a steeper proportional decline than the model's non-crude coverage captures.</div>
+    <div class="verdict-body"><strong>Full container goods universe at Bab-el-Mandeb</strong>The model's Bab-el-Mandeb coverage is strong for bulk commodities and crude but narrower for containerised goods, which are carried in lower-confidence estimates. The total corridor exposure figure ($74.7B) is a floor on trade at risk, not a ceiling. Container tonnage at Suez fell 82% at the 2024 trough, a steeper proportional decline than the model's non-crude coverage captures.</div>
   </div>
 
   <!-- FINAL SCORECARD -->
@@ -641,9 +641,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <div class="test-eyebrow" style="margin-bottom:var(--s2);">Final scorecard</div>
 
   <div class="scorecard-wrap">
-    <div class="scorecard-head">Narrows Chokepoint Dependency Model — Validation scorecard: 2024 disruptions</div>
+    <div class="scorecard-head">Narrows Chokepoint Dependency Model: Validation scorecard: 2024 disruptions</div>
 
-    <div class="scorecard-group-head">Rerouting cost — Bab-el-Mandeb / Cape of Good Hope</div>
+    <div class="scorecard-group-head">Rerouting cost: Bab-el-Mandeb / Cape of Good Hope</div>
     <div class="scorecard-row">
       <div class="sc-prediction">Cape detour +14 days (large tanker)</div>
       <div class="sc-basis">Vessel economics; routing geometry</div>
@@ -659,13 +659,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     <div class="scorecard-group-head">Bab-el-Mandeb importer ranking</div>
     <div class="scorecard-row">
-      <div class="sc-prediction">Greece — highest European crude dependency (54.6%)</div>
+      <div class="sc-prediction">Greece: highest European crude dependency (54.6%)</div>
       <div class="sc-basis">Tier 1 bilateral Comtrade 2023</div>
       <div class="sc-actual">Greek refiners most severely impacted in Europe; disproportionate shipping cost exposure</div>
       <div class="sc-verdict-pass">✓ Validated</div>
     </div>
     <div class="scorecard-row">
-      <div class="sc-prediction">Germany — lowest European crude dependency (4.6%)</div>
+      <div class="sc-prediction">Germany: lowest European crude dependency (4.6%)</div>
       <div class="sc-basis">TAL pipeline; Kazakhstani crude via Bosphorus</div>
       <div class="sc-actual">Minimal crude disruption; pipeline routes unaffected</div>
       <div class="sc-verdict-pass">✓ Validated</div>
@@ -693,7 +693,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div class="sc-verdict-pass">✓ Validated</div>
     </div>
 
-    <div class="scorecard-group-head">Outside model scope — noted for completeness</div>
+    <div class="scorecard-group-head">Outside model scope: noted for completeness</div>
     <div class="scorecard-row">
       <div class="sc-prediction">Container freight rate spike</div>
       <div class="sc-basis">Not modelled: fleet capacity market dynamics</div>
