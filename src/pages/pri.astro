@@ -1217,6 +1217,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
 
 <script is:inline>
+window.addEventListener('load', function() {
 (function() {
   var TIER_COLOURS = {
     Moderate: '#2E86D4',
@@ -1327,6 +1328,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     });
   });
 })();
+}); // load
 </script>
 
 </BaseLayout>
