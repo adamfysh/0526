@@ -1142,7 +1142,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     const err  = document.getElementById('pri-gate-error');
 
     // Check if already unlocked
-    const stored = localStorage.getItem(GATE_KEY);
+    let stored = null;
+    try { stored = localStorage.getItem(GATE_KEY); } catch(e) {}
     if (stored && (Date.now() - parseInt(stored, 10)) < EXPIRY_MS) {
       gate.classList.add('hidden');
       return;
@@ -1152,7 +1153,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     gate.classList.remove('hidden');
 
     function grantAccess() {
-      localStorage.setItem(GATE_KEY, Date.now().toString());
+      try { localStorage.setItem(GATE_KEY, Date.now().toString()); } catch(e) {}
       gate.classList.add('dismissing');
       setTimeout(() => gate.classList.add('hidden'), 420);
     }
