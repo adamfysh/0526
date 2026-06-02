@@ -483,11 +483,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     <!-- Branding -->
     <div class="pri-gate-eyebrow">
-      <div class="pri-gate-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 3L20 8V16L12 21L4 16V8L12 3Z" stroke="#F0B429" stroke-width="1.5" fill="none"/>
-          <path d="M12 7L17 10V14L12 17L7 14V10L12 7Z" fill="#F0B429" opacity="0.35"/>
-        </svg>
+      <div class="pri-gate-mark" style="background:var(--navy);border:1px solid rgba(255,255,255,0.12);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span style="font-family:var(--font);font-size:16px;font-weight:700;color:var(--gold);letter-spacing:-0.02em;">N</span>
       </div>
       <div class="pri-gate-brand">
         Narrows
@@ -1192,11 +1189,15 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
           payload.set('company', companyEl.value.trim());
         }
 
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
         const res = await fetch(`https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: payload.toString()
+          body: payload.toString(),
+          signal: controller.signal,
         });
+        clearTimeout(timeout);
 
         // Grant access on any 2xx response — Loops body shape can vary
         if (res.ok) {
