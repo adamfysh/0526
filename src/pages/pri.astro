@@ -617,7 +617,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       </button>
     </div>
   </div>
-  <div id="pri-leaflet-map"></div>
+  <div id="pri-leaflet-map" style="position:absolute;top:40px;left:0;right:0;bottom:0;min-height:400px;"></div>
   <div class="pri-map-legend">
     <div class="pri-map-legend-item">
       <div class="pri-map-legend-dot" style="background:#2E86D4"></div>
@@ -1230,7 +1230,12 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   var mapEl = document.getElementById('pri-leaflet-map');
   if (!mapEl) { console.error('[PRI Map] container not found'); return; }
   if (!window.L) { console.error('[PRI Map] Leaflet not loaded'); return; }
-  mapEl.style.height = (mapEl.offsetHeight || 480) + 'px';
+  console.log('[MAP] container size:', mapEl.offsetWidth, 'x', mapEl.offsetHeight, '| L defined:', typeof L);
+  // Force explicit pixel dimensions so Leaflet never sees a zero-size container
+  var mapH = mapEl.offsetHeight || 480;
+  var mapW = mapEl.offsetWidth || window.innerWidth || 800;
+  mapEl.style.width  = mapW + 'px';
+  mapEl.style.height = mapH + 'px';
 
   var map = L.map('pri-leaflet-map', {
     center: [20, 10], zoom: 2,
@@ -1244,6 +1249,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
     subdomains: 'abcd', maxZoom: 19, pane: 'shadowPane',
   }).addTo(map);
+
+  console.log('[MAP] tile layers added, map size:', JSON.stringify(map.getSize()));
 
   var layerGroups = {};
   TIER_ORDER.forEach(function(t) { layerGroups[t] = L.layerGroup().addTo(map); });
