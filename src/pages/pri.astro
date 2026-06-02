@@ -1198,18 +1198,17 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
           body: payload.toString()
         });
 
-        const data = await res.json().catch(() => ({}));
-
-        if (res.ok && data.success !== false) {
+        // Grant access on any 2xx response — Loops body shape can vary
+        if (res.ok) {
           grantAccess();
         } else {
+          const data = await res.json().catch(() => ({}));
           throw new Error(data.message || `status ${res.status}`);
         }
       } catch (ex) {
-        console.error('[Narrows PRI] Gate submit error:', ex);
-        btn.disabled = false;
-        btn.textContent = 'Try again';
-        err.style.display = 'block';
+        // Loops submission failed — grant access anyway so users are never locked out
+        console.warn('[Narrows PRI] Loops submission failed, granting access locally:', ex);
+        grantAccess();
       }
     });
   })();
