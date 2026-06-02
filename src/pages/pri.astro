@@ -13,6 +13,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 >
 
 <!-- Data baked in at build time — no fetch, no runtime dependency -->
+<Fragment slot="head"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/></Fragment>
 <Fragment set:html={`<script>window.__PRI__=${priDataStr};</script>`} />
 
 <style>
@@ -596,7 +597,6 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 <!-- ══════════════════════════════
      MAP
 ══════════════════════════════ -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <section class="pri-map-section">
@@ -1217,7 +1217,6 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
 
 <script is:inline>
-window.addEventListener('load', function() {
 (function() {
   var TIER_COLOURS = {
     Moderate: '#2E86D4',
@@ -1327,8 +1326,9 @@ window.addEventListener('load', function() {
       }
     });
   });
+  // Force tile repaint after gate dismissal
+  setTimeout(function() { map.invalidateSize(); }, 300);
 })();
-}); // load
 </script>
 
 </BaseLayout>
