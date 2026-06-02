@@ -599,48 +599,15 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 ══════════════════════════════ -->
 <script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<section class="pri-map-section">
-  <div class="pri-map-bar">
-    <span class="pri-map-bar-title">Global port risk index &mdash; 3,804 ports</span>
-    <div class="pri-map-filters" id="pri-map-filters">
-      <button class="pri-map-filter active" data-tier="Moderate">
-        <span class="pri-map-filter-dot" style="background:#2E86D4"></span>Moderate
-      </button>
-      <button class="pri-map-filter active" data-tier="Elevated">
-        <span class="pri-map-filter-dot" style="background:#7FA8C9"></span>Elevated
-      </button>
-      <button class="pri-map-filter active" data-tier="High">
-        <span class="pri-map-filter-dot" style="background:#E8952A"></span>High
-      </button>
-      <button class="pri-map-filter active" data-tier="Critical">
-        <span class="pri-map-filter-dot" style="background:#F0B429"></span>Critical
-      </button>
-    </div>
-  </div>
-  <div id="pri-leaflet-map" style="position:absolute;top:40px;left:0;right:0;bottom:0;min-height:400px;"></div>
-  <div class="pri-map-legend">
-    <div class="pri-map-legend-item">
-      <div class="pri-map-legend-dot" style="background:#2E86D4"></div>
-      <div class="pri-map-legend-n">3,345</div>
-      <div class="pri-map-legend-lbl">Moderate</div>
-    </div>
-    <div class="pri-map-legend-item">
-      <div class="pri-map-legend-dot" style="background:#7FA8C9"></div>
-      <div class="pri-map-legend-n">348</div>
-      <div class="pri-map-legend-lbl">Elevated</div>
-    </div>
-    <div class="pri-map-legend-item">
-      <div class="pri-map-legend-dot" style="background:#E8952A"></div>
-      <div class="pri-map-legend-n">84</div>
-      <div class="pri-map-legend-lbl">High</div>
-    </div>
-    <div class="pri-map-legend-item">
-      <div class="pri-map-legend-dot" style="background:#F0B429"></div>
-      <div class="pri-map-legend-n">27</div>
-      <div class="pri-map-legend-lbl">Critical</div>
-    </div>
-  </div>
-</section>
+<div class="pri-map-iframe-wrap">
+  <iframe
+    src="/primap.html"
+    title="Global Port Risk Index map"
+    scrolling="no"
+    frameborder="0"
+    style="width:100%;height:520px;border:none;display:block;"
+  ></iframe>
+</div>
 
 <!-- ══════════════════════════════
      EXPLORER
