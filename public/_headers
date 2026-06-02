@@ -1,7 +1,4 @@
 # Narrows — Cloudflare Pages headers
 
-/pri*
+/*
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.cartocdn.com https://*.basemaps.cartocdn.com; connect-src 'self' https://unpkg.com https://app.loops.so https://*.cartocdn.com https://*.basemaps.cartocdn.com; frame-ancestors 'none'
-
-/
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.cartocdn.com; connect-src 'self' https://unpkg.com https://app.loops.so; frame-ancestors 'none'
