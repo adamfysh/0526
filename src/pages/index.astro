@@ -338,6 +338,92 @@ import BaseLayout from '../layouts/BaseLayout.astro';
    FOR WHOM
 ───────────────────────────────────────── */
 .audience-section { padding: var(--s6) var(--s4); border-bottom: var(--rule-light); }
+
+/* ── PRI CALLOUT ── */
+.pri-callout {
+  padding: var(--s6) var(--s4);
+  background: var(--navy);
+  border-bottom: var(--rule-light);
+  overflow: hidden;
+}
+.pri-callout-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: center;
+}
+.pri-callout-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: var(--s2);
+}
+.pri-callout-kicker::before { content: ''; width: 20px; height: 2px; background: var(--gold); }
+.pri-callout-h {
+  font-size: clamp(24px, 3vw, 36px); font-weight: 700;
+  color: var(--white); line-height: 1.1; letter-spacing: -0.025em;
+  margin-bottom: var(--s2);
+}
+.pri-callout-h em { font-style: italic; font-weight: 400; color: var(--blue-light); }
+.pri-callout-body {
+  font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7;
+  font-weight: 300; max-width: 480px; margin-bottom: var(--s3);
+}
+.pri-callout-stats {
+  display: flex; gap: 32px; margin-bottom: var(--s4);
+  padding-bottom: var(--s3); border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.pri-callout-stat-val {
+  font-size: 28px; font-weight: 700; color: var(--white);
+  letter-spacing: -0.02em; line-height: 1;
+}
+.pri-callout-stat-val.gold { color: var(--gold); }
+.pri-callout-stat-lbl {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-top: 4px;
+}
+.pri-callout-actions { display: flex; align-items: center; gap: 20px; }
+.pri-callout-btn {
+  display: inline-block; background: var(--gold); color: var(--navy);
+  font-family: var(--font); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  padding: 13px 24px; border-radius: 4px; transition: background 0.15s;
+  white-space: nowrap;
+}
+.pri-callout-btn:hover { background: var(--gold-dark); }
+.pri-callout-link {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+  text-decoration: none; transition: color 0.15s;
+}
+.pri-callout-link:hover { color: var(--white); }
+/* Mini map */
+.pri-callout-map-wrap {
+  position: relative; border-radius: 8px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  height: 320px;
+}
+.pri-callout-map-cap {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 800;
+  background: linear-gradient(transparent, rgba(10,37,64,0.9));
+  padding: 24px 16px 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pri-callout-map-cap-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+.pri-callout-map-cap-stat {
+  font-size: 11px; font-weight: 700; color: var(--gold);
+}
+#pri-mini-map { position: absolute; inset: 0; }
+@media (max-width: 900px) {
+  .pri-callout-inner { grid-template-columns: 1fr; }
+  .pri-callout-map-wrap { height: 260px; }
+}
 .audience-inner { max-width: var(--max-w); margin: 0 auto; }
 .audience-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--s3); margin-top: var(--s4); }
 .aud-card { background: var(--white); border: var(--rule-light); border-radius: 6px; padding: var(--s3) var(--s4); transition: border-color 0.2s,box-shadow 0.2s; }
@@ -1204,6 +1290,57 @@ window.addEventListener('load', () => {
 <hr class="div" />
 
 <!-- ══════════════════════════════
+     PORT RISK INDEX CALLOUT
+══════════════════════════════ -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>
+
+<section class="pri-callout">
+  <div class="pri-callout-inner">
+    <div>
+      <div class="pri-callout-kicker">Port Risk Index</div>
+      <h2 class="pri-callout-h">3,804 ports scored.<br><em>Free access, always.</em></h2>
+      <p class="pri-callout-body">
+        Every major port in the World Port Index, scored across four dimensions:
+        physical accessibility, operational reliability, trade concentration, and geopolitical stability.
+        The foundation that connects port-level risk to chokepoint exposure.
+      </p>
+      <div class="pri-callout-stats">
+        <div>
+          <div class="pri-callout-stat-val">3,804</div>
+          <div class="pri-callout-stat-lbl">Ports indexed</div>
+        </div>
+        <div>
+          <div class="pri-callout-stat-val gold">27</div>
+          <div class="pri-callout-stat-lbl">Critical risk</div>
+        </div>
+        <div>
+          <div class="pri-callout-stat-val">195</div>
+          <div class="pri-callout-stat-lbl">Countries</div>
+        </div>
+        <div>
+          <div class="pri-callout-stat-val">16</div>
+          <div class="pri-callout-stat-lbl">Indicators</div>
+        </div>
+      </div>
+      <div class="pri-callout-actions">
+        <a href="/pri" class="pri-callout-btn">Explore the index →</a>
+        <a href="/pri-methodology" class="pri-callout-link">Methodology</a>
+      </div>
+    </div>
+    <div class="pri-callout-map-wrap">
+      <div id="pri-mini-map"></div>
+      <div class="pri-callout-map-cap">
+        <span class="pri-callout-map-cap-label">High &amp; critical risk ports shown</span>
+        <span class="pri-callout-map-cap-stat">111 ports &mdash; 27 critical</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div" />
+
+<!-- ══════════════════════════════
      FOR WHOM
 ══════════════════════════════ -->
 <section class="audience-section">
@@ -1587,4 +1724,44 @@ document.getElementById('demo-email')?.addEventListener('keydown', (e: KeyboardE
   })();
 </script>
 
+
+<script is:inline>
+(function() {
+  // Wait for Leaflet to be available
+  function initMiniMap() {
+    if (typeof L === 'undefined') { setTimeout(initMiniMap, 100); return; }
+    var mapEl = document.getElementById('pri-mini-map');
+    if (!mapEl) return;
+
+    var map = L.map('pri-mini-map', {
+      center: [20, 10], zoom: 2,
+      zoomControl: false, attributionControl: false,
+      dragging: false, scrollWheelZoom: false,
+      doubleClickZoom: false, touchZoom: false,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd', maxZoom: 19,
+    }).addTo(map);
+
+    var COLOURS = { High: '#E8952A', Critical: '#F0B429' };
+
+    fetch('/pri_ports.json')
+      .then(function(r) { return r.json(); })
+      .then(function(ports) {
+        ports.forEach(function(p) {
+          if (p.t !== 'High' && p.t !== 'Critical') return;
+          var c = COLOURS[p.t];
+          L.circleMarker([p.la, p.lo], {
+            radius: p.t === 'Critical' ? 6 : 4,
+            fillColor: c, fillOpacity: p.t === 'Critical' ? 0.95 : 0.75,
+            color: p.t === 'Critical' ? c : 'transparent',
+            weight: p.t === 'Critical' ? 1.5 : 0,
+          }).addTo(map);
+        });
+      });
+  }
+  initMiniMap();
+})();
+</script>
 </BaseLayout>

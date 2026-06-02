@@ -288,6 +288,72 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 .pri-dim-legend-text h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; letter-spacing: -0.01em; }
 .pri-dim-legend-text p { font-size: 13px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
 
+/* ── MAP SECTION ── */
+.pri-map-section {
+  position: relative;
+  height: 520px;
+  border-bottom: var(--rule-light);
+  overflow: hidden;
+}
+.pri-map-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 800;
+  background: var(--navy);
+  border-bottom: 2px solid var(--gold);
+  padding: 9px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pri-map-bar-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45); white-space: nowrap;
+}
+.pri-map-filters { display: flex; gap: 5px; flex-wrap: wrap; }
+.pri-map-filter {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18); background: transparent;
+  color: rgba(255,255,255,0.55); font-family: var(--font);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; cursor: pointer; transition: all 0.15s;
+}
+.pri-map-filter:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+.pri-map-filter.active { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); color: #fff; }
+.pri-map-filter-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+#pri-leaflet-map { position: absolute; top: 40px; left: 0; right: 0; bottom: 0; }
+.pri-map-legend {
+  position: absolute; bottom: 16px; left: 16px; z-index: 800;
+  background: var(--navy); border: 1px solid rgba(255,255,255,0.1);
+  border-top: 2px solid var(--gold); border-radius: 4px;
+  padding: 10px 14px; display: flex; gap: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.pri-map-legend-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.pri-map-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.pri-map-legend-n { font-size: 12px; font-weight: 700; color: #fff; line-height: 1; }
+.pri-map-legend-lbl { font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.pri-map-section .leaflet-control-zoom { border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 4px !important; overflow: hidden; }
+.pri-map-section .leaflet-control-zoom a { background: var(--navy) !important; color: rgba(255,255,255,0.6) !important; border: none !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
+.pri-map-section .leaflet-control-zoom a:hover { color: #fff !important; }
+.pri-map-section .leaflet-control-attribution { display: none !important; }
+.pri-map-section .leaflet-popup-content-wrapper { background: var(--navy); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); padding: 0; }
+.pri-map-section .leaflet-popup-tip { background: var(--navy); }
+.pri-map-section .leaflet-popup-content { margin: 0; width: 220px !important; }
+.map-popup-inner { padding: 14px 16px; }
+.map-popup-tier { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+.map-popup-name { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 2px; }
+.map-popup-country { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+.map-popup-hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 8px 0; }
+.map-popup-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.map-popup-stat-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 2px; }
+.map-popup-stat-val { font-size: 16px; font-weight: 700; color: #fff; line-height: 1; }
+.map-popup-stat-unit { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 1px; }
+.map-popup-cta { display: block; text-align: center; padding: 9px; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0 0 5px 5px; transition: background 0.15s; }
+.map-popup-cta:hover { background: var(--gold-dark); }
+
 /* ─────────────────────────────────────────
    EMAIL GATE
 ───────────────────────────────────────── */
@@ -528,6 +594,56 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     <a href="/pri-methodology" class="pri-meth-link">Methodology →</a>
   </div>
 </div>
+
+
+<!-- ══════════════════════════════
+     MAP
+══════════════════════════════ -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>
+
+<section class="pri-map-section">
+  <div class="pri-map-bar">
+    <span class="pri-map-bar-title">Global port risk index &mdash; 3,804 ports</span>
+    <div class="pri-map-filters" id="pri-map-filters">
+      <button class="pri-map-filter active" data-tier="Moderate">
+        <span class="pri-map-filter-dot" style="background:#2E86D4"></span>Moderate
+      </button>
+      <button class="pri-map-filter active" data-tier="Elevated">
+        <span class="pri-map-filter-dot" style="background:#7FA8C9"></span>Elevated
+      </button>
+      <button class="pri-map-filter active" data-tier="High">
+        <span class="pri-map-filter-dot" style="background:#E8952A"></span>High
+      </button>
+      <button class="pri-map-filter active" data-tier="Critical">
+        <span class="pri-map-filter-dot" style="background:#F0B429"></span>Critical
+      </button>
+    </div>
+  </div>
+  <div id="pri-leaflet-map"></div>
+  <div class="pri-map-legend">
+    <div class="pri-map-legend-item">
+      <div class="pri-map-legend-dot" style="background:#2E86D4"></div>
+      <div class="pri-map-legend-n">3,345</div>
+      <div class="pri-map-legend-lbl">Moderate</div>
+    </div>
+    <div class="pri-map-legend-item">
+      <div class="pri-map-legend-dot" style="background:#7FA8C9"></div>
+      <div class="pri-map-legend-n">348</div>
+      <div class="pri-map-legend-lbl">Elevated</div>
+    </div>
+    <div class="pri-map-legend-item">
+      <div class="pri-map-legend-dot" style="background:#E8952A"></div>
+      <div class="pri-map-legend-n">84</div>
+      <div class="pri-map-legend-lbl">High</div>
+    </div>
+    <div class="pri-map-legend-item">
+      <div class="pri-map-legend-dot" style="background:#F0B429"></div>
+      <div class="pri-map-legend-n">27</div>
+      <div class="pri-map-legend-lbl">Critical</div>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════
      EXPLORER
@@ -1113,6 +1229,120 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     drawHistogram(null);
   })();
 
+})();
+</script>
+
+
+<script is:inline>
+(function() {
+  var TIER_COLOURS = {
+    Moderate: '#2E86D4',
+    Elevated: '#7FA8C9',
+    High:     '#E8952A',
+    Critical: '#F0B429',
+  };
+  var TIER_ORDER = ['Moderate','Elevated','High','Critical'];
+
+  var map = L.map('pri-leaflet-map', {
+    center: [20, 10], zoom: 2,
+    zoomControl: true, maxZoom: 14, minZoom: 2,
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd', maxZoom: 19,
+  }).addTo(map);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd', maxZoom: 19, pane: 'shadowPane',
+  }).addTo(map);
+
+  var layerGroups = {};
+  TIER_ORDER.forEach(function(t) { layerGroups[t] = L.layerGroup().addTo(map); });
+
+  var activeFilters = new Set(TIER_ORDER);
+  var allMarkers = [];
+
+  function fmtDwell(v) {
+    if (!v || v === 'null') return '—';
+    var h = parseFloat(v);
+    if (isNaN(h)) return '—';
+    return h >= 24 ? (h/24).toFixed(1) + 'd' : Math.round(h) + 'h';
+  }
+  function fmtDepth(v) {
+    if (!v || v === 'null') return '—';
+    var d = parseFloat(v);
+    if (isNaN(d)) return '—';
+    return d.toFixed(1) + ' m';
+  }
+
+  function buildPopup(p) {
+    var c = TIER_COLOURS[p.t] || '#fff';
+    return '<div class="map-popup-inner">' +
+      '<div class="map-popup-tier" style="color:' + c + '">' + p.t + ' Risk</div>' +
+      '<div class="map-popup-name">' + p.n + '</div>' +
+      '<div class="map-popup-country">' + p.c + '</div>' +
+      '<hr class="map-popup-hr">' +
+      '<div class="map-popup-stats">' +
+        '<div><div class="map-popup-stat-lbl">PRI Score</div>' +
+        '<div class="map-popup-stat-val" style="color:' + c + '">' + p.s.toFixed(2) + '</div>' +
+        '<div class="map-popup-stat-unit">composite index</div></div>' +
+        '<div><div class="map-popup-stat-lbl">Dwell Time</div>' +
+        '<div class="map-popup-stat-val">' + fmtDwell(p.d) + '</div>' +
+        '<div class="map-popup-stat-unit">avg cargo wait</div></div>' +
+        '<div><div class="map-popup-stat-lbl">Depth</div>' +
+        '<div class="map-popup-stat-val">' + fmtDepth(p.dp) + '</div>' +
+        '<div class="map-popup-stat-unit">controlling</div></div>' +
+      '</div></div>' +
+      '<a class="map-popup-cta" href="#pri-search" onclick="document.getElementById('pri-search').value='' + p.n.replace(/'/g, '') + '';document.getElementById('pri-search').dispatchEvent(new Event('input'));">View full index →</a>';
+  }
+
+  function getRadius(tier, zoom) {
+    var base = { Moderate: 4, Elevated: 5, High: 6, Critical: 7 };
+    var r = base[tier] || 4;
+    return zoom > 6 ? r + (zoom - 6) * 0.7 : r;
+  }
+
+  fetch('/pri_ports.json')
+    .then(function(r) { return r.json(); })
+    .then(function(ports) {
+      ports.forEach(function(p) {
+        var colour = TIER_COLOURS[p.t] || '#888';
+        var isCrit = p.t === 'Critical';
+        var marker = L.circleMarker([p.la, p.lo], {
+          radius: getRadius(p.t, map.getZoom()),
+          fillColor: colour,
+          fillOpacity: isCrit ? 0.95 : 0.72,
+          color: isCrit ? colour : 'transparent',
+          weight: isCrit ? 1.5 : 0,
+        });
+        marker.bindPopup(buildPopup(p), { maxWidth: 220 });
+        marker._tier = p.t;
+        marker._portData = p;
+        allMarkers.push(marker);
+        layerGroups[p.t].addLayer(marker);
+      });
+    });
+
+  map.on('zoomend', function() {
+    var z = map.getZoom();
+    allMarkers.forEach(function(m) { m.setRadius(getRadius(m._tier, z)); });
+  });
+
+  // Filters
+  document.querySelectorAll('#pri-map-filters .pri-map-filter').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tier = btn.dataset.tier;
+      if (activeFilters.has(tier)) {
+        activeFilters.delete(tier);
+        map.removeLayer(layerGroups[tier]);
+        btn.classList.remove('active');
+      } else {
+        activeFilters.add(tier);
+        layerGroups[tier].addTo(map);
+        btn.classList.add('active');
+      }
+    });
+  });
 })();
 </script>
 
