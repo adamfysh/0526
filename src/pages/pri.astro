@@ -1141,24 +1141,30 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     const btn  = document.getElementById('pri-gate-btn');
     const err  = document.getElementById('pri-gate-error');
 
+    console.log('[PRI Gate] init — gate:', !!gate, 'form:', !!form, 'btn:', !!btn);
+    if (!gate || !form || !btn) { console.error('[PRI Gate] missing elements'); return; }
+
     // Check if already unlocked
     let stored = null;
-    try { stored = localStorage.getItem(GATE_KEY); } catch(e) {}
+    try { stored = localStorage.getItem(GATE_KEY); } catch(e) { console.warn('[PRI Gate] localStorage read error:', e); }
     if (stored && (Date.now() - parseInt(stored, 10)) < EXPIRY_MS) {
+      console.log('[PRI Gate] already unlocked');
       gate.classList.add('hidden');
       return;
     }
 
-    // Show gate
+    console.log('[PRI Gate] showing gate');
     gate.classList.remove('hidden');
 
     function grantAccess() {
+      console.log('[PRI Gate] grantAccess called');
       try { localStorage.setItem(GATE_KEY, Date.now().toString()); } catch(e) {}
       gate.classList.add('dismissing');
       setTimeout(() => gate.classList.add('hidden'), 420);
     }
 
     form.addEventListener('submit', function(e) {
+      console.log('[PRI Gate] submit fired');
       e.preventDefault();
 
       const emailEl   = document.getElementById('pri-gate-email');
