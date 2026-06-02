@@ -1,0 +1,8 @@
+# Narrows — Cloudflare Pages headers
+# Leaflet requires unsafe-eval on pages that load it
+
+/pri/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://a.basemaps.cartocdn.com https://b.basemaps.cartocdn.com https://c.basemaps.cartocdn.com https://d.basemaps.cartocdn.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.cartocdn.com https://*.basemaps.cartocdn.com; connect-src 'self' https://app.loops.so https://*.cartocdn.com; frame-ancestors 'none'
+
+/
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://a.basemaps.cartocdn.com https://b.basemaps.cartocdn.com https://c.basemaps.cartocdn.com https://d.basemaps.cartocdn.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.cartocdn.com; connect-src 'self' https://app.loops.so; frame-ancestors 'none'
