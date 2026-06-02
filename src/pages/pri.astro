@@ -1158,9 +1158,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       setTimeout(() => gate.classList.add('hidden'), 420);
     }
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      err.style.display = 'none';
 
       const emailEl   = document.getElementById('pri-gate-email');
       const companyEl = document.getElementById('pri-gate-company');
@@ -1174,43 +1173,20 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       }
       emailEl.style.borderColor = '';
 
-      // If no Loops form ID set, grant access locally (dev mode)
-      if (LOOPS_FORM_ID === 'YOUR_LOOPS_FORM_ID') {
-        console.warn('[Narrows PRI] Loops form ID not set — granting access without submission.');
-        grantAccess();
-        return;
-      }
+      // Grant access immediately — never block on API response
+      grantAccess();
 
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
-
-      try {
+      // Send to Loops in background (fire and forget)
+      if (LOOPS_FORM_ID && LOOPS_FORM_ID !== 'YOUR_LOOPS_FORM_ID') {
         const payload = new URLSearchParams({ email });
         if (companyEl && companyEl.value.trim()) {
           payload.set('company', companyEl.value.trim());
         }
-
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000);
-        const res = await fetch(`https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}`, {
+        fetch(`https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: payload.toString(),
-          signal: controller.signal,
-        });
-        clearTimeout(timeout);
-
-        // Grant access on any 2xx response — Loops body shape can vary
-        if (res.ok) {
-          grantAccess();
-        } else {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.message || `status ${res.status}`);
-        }
-      } catch (ex) {
-        // Loops submission failed — grant access anyway so users are never locked out
-        console.warn('[Narrows PRI] Loops submission failed, granting access locally:', ex);
-        grantAccess();
+        }).catch(function() {});
       }
     });
   })();
