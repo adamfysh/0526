@@ -398,7 +398,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1 class="hero-headline">
       Every chokepoint<br>
       <em>has a number.</em><br>
-      Most desks don't have it.
+      Most desks do not have it.
     </h1>
     <p class="hero-tagline">
       <strong>Dollar-denominated exposure, rerouting cost, and fleet-at-risk data.</strong><br>
@@ -805,7 +805,7 @@ function handleDemoRequest() {
     }, 2000);
     return;
   }
-  window.location.href = `mailto:fysh@narrows.io?subject=Demo request — Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):`;
+  window.location.href = `mailto:fysh@narrows.io?subject=Demo request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):`;
 }
 document.getElementById('demo-btn')?.addEventListener('click', handleDemoRequest);
 document.getElementById('demo-email')?.addEventListener('keydown', (e: KeyboardEvent) => {

@@ -227,7 +227,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         The geometric mean is standard practice in multi-dimensional risk compositing because it
         penalises dimensional extremes. A port that scores very well on physical access cannot offset
         a severe stability deficit: both the dimension weakness and the composite will reflect the
-        exposure. This property is essential in a risk instrument — compensatory arithmetic means
+        exposure. This property is essential in a risk instrument: compensatory arithmetic means
         systematically understate concentrated risk.
       </p>
       <p class="meth-p">
@@ -243,7 +243,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>Data Universe</h2>
       <p class="meth-p">
         The PRI covers all ports in the <strong>National Geospatial-Intelligence Agency World Port
-        Index (WPI), Publication 150</strong> — the standard global port registry used by the
+        Index (WPI), Publication 150</strong>, the standard global port registry used by the
         maritime industry. The WPI lists 3804 ports across 195 countries, from major transshipment
         hubs to small coastal facilities.
       </p>
@@ -255,7 +255,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <p class="meth-p">
         Not all ports have complete data across all dimensions. Where source data is unavailable
-        for a given indicator, the scoring procedure applies a conservative imputation — typically
+        for a given indicator, the scoring procedure applies a conservative imputation, typically
         the global mean or a data-tier-adjusted estimate. Coverage quality is captured in the
         <code>data_tier</code> and <code>n_dims</code> fields (see Section 9).
       </p>
@@ -288,7 +288,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         <strong>Count indicators</strong> (terminal count, vessel class count) are scored via a
         stepped function mapping discrete counts to risk levels. Higher counts receive lower scores
-        — more capacity and redundancy means lower risk.
+        More capacity and redundancy means lower risk.
       </p>
       <p class="meth-p">
         <strong>Ordinal indicators</strong> (labour regime, sanctions level, dispute level) are
@@ -297,7 +297,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <p class="meth-p">
         The composite PRI is not rescaled back to 0–10. Because the structural moderation of D1
-        — most ports have serviceable physical infrastructure — the empirical maximum is 3.71
+        Most ports have serviceable physical infrastructure, and the empirical maximum is 3.71
         rather than 10. This is intentional: the score preserves the absolute signal from
         individual dimensions rather than normalising it away.
       </p>
@@ -485,7 +485,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         The three D3 indicators are combined via unweighted arithmetic mean. D3 is the dimension
         most sensitive to trade flow data quality. UN Comtrade data is incomplete or significantly
-        delayed for a non-trivial fraction of the WPI universe — particularly in smaller island
+        delayed for a non-trivial fraction of the WPI universe, particularly in smaller island
         economies and parts of Sub-Saharan Africa. These gaps are captured in the data tier system.
       </p>
     </div>
@@ -789,12 +789,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <p class="meth-p">
         The two indices are complementary rather than competitive. The CPPI mean-centered port
-        time data — adjusted for call size and vessel class — is a more precise dwell time signal
+        time data, adjusted for call size and vessel class, is a more precise dwell time signal
         than raw dwell figures, and where CPPI coverage overlaps with the PRI universe it is a
         candidate calibration input for the D2 reliability dimension. Users who need to benchmark
         container port efficiency for logistics planning should consult the CPPI directly. Users
-        assessing port risk across a mixed cargo or vessel book — for underwriting, supply chain
-        stress testing, or trade finance — are working a question the CPPI is not designed to
+        assessing port risk across a mixed cargo or vessel book: for underwriting, supply chain
+        stress testing, or trade finance, are working a question the CPPI is not designed to
         answer.
       </p>
     </div>
