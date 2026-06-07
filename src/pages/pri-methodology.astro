@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="PRI Methodology — Narrows"
+  title="PRI Methodology | Narrows"
   description="Full technical documentation for the Narrows Port Risk Index: data sources, indicator definitions, normalisation procedures, and composite scoring."
 >
 
@@ -174,8 +174,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     normalisation procedures, composite scoring, and known limitations.
   </p>
   <div class="meth-meta">
-    <span class="meth-meta-item">Version 1.1</span>
-    <span class="meth-meta-item">May 2026</span>
+    <span class="meth-meta-item">Version 1.2</span>
+    <span class="meth-meta-item">June 2026</span>
     <span class="meth-meta-item">3804 ports · 28 fields</span>
     <span class="meth-meta-item">Data vintage 2023/24</span>
   </div>
@@ -198,7 +198,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <li><a href="#tiers">9. Data Tiers</a></li>
       <li><a href="#limitations">10. Limitations</a></li>
       <li><a href="#vintage">11. Data Vintage</a></li>
-      <li><a href="#cppi">12. Related Indices</a></li>
+      <li><a href="#charter-bleed">12. Charter Bleed</a></li>
+      <li><a href="#cppi">13. Related Indices</a></li>
     </ol>
   </nav>
 
@@ -232,8 +233,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
       <p class="meth-p">
         <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3804-port
-        universe is approximately 0.75 to 3.71. Score distributions are right-skewed: the median
-        port falls below 1.8, and the large majority of ports fall below 2.0.
+        universe is approximately 0.69 to 3.65. Score distributions are right-skewed: the median
+        port falls below 1.3, and the large majority of ports fall below 2.0.
       </p>
     </div>
 
@@ -385,10 +386,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         unstable labour regime.
       </p>
       <p class="meth-p">
-        D2 is the most country-dependent dimension. The World Bank LPI is a country-level
-        composite, meaning ports within the same country share an LPI score. Port-level
-        differentiation within a country is introduced via dwell time and labour regime where
-        port-specific data is available.
+        D2 is the most operationally variable dimension. Dwell time is the primary signal:
+        the hours a vessel sits idle at berth represent charter cost bleeding away in real time.
+        Port-level differentiation is introduced via dwell time and port state control inspection
+        records where port-specific data is available. The World Bank LPI is retained as a stored
+        reference field but is not included in the v1.2 composite, as dwell time is derived from
+        LPI for non-CPPI ports (Spearman rho = -0.94), creating a near-identical collinear signal
+        that would violate the OECD Handbook double-counting rule.
       </p>
 
       <div class="meth-table-wrap">
@@ -403,30 +407,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </thead>
           <tbody>
             <tr>
-              <td><code>lpi_score</code></td>
-              <td>World Bank Logistics Performance Index overall score (1–5 scale). Covers customs efficiency, infrastructure quality, ease of arranging shipments, logistics service quality, tracking capability, and timeliness. Applied at country level.</td>
-              <td>World Bank LPI 2023</td>
-              <td>Lower LPI = higher risk</td>
-            </tr>
-            <tr>
               <td><code>dwell_hours</code></td>
-              <td>Estimated average container dwell time in hours. Derived from a Narrows dwell-time index combining World Bank port performance data and industry benchmarks. Country-level estimates are used where port-specific data is unavailable.</td>
-              <td>World Bank PPPI, industry sources</td>
+              <td>Estimated average container dwell time in hours. For ports in the World Bank Container Port Performance Index (CPPI), direct port-level dwell data is used. For all other ports, dwell is estimated from the World Bank LPI via a calibrated proxy. Longer dwell time represents charter cost accruing without productive use of the vessel.</td>
+              <td>World Bank PPPI / CPPI, industry sources</td>
               <td>Longer dwell = higher risk</td>
             </tr>
             <tr>
               <td><code>labour_regime</code></td>
-              <td>Categorical assessment of port labour environment. Values: <code>stable</code>, <code>disputed</code>, <code>volatile</code>. Derived from strike history, union concentration, and labour dispute records. Ordinal map: stable = 1.0, disputed = 5.5, volatile = 9.0 (on 0–10 risk scale).</td>
+              <td>Categorical assessment of port labour environment. Values: <code>stable</code>, <code>disputed</code>, <code>volatile</code>. Derived from strike history, union concentration, and labour dispute records. Ordinal map: stable = 1.0, disputed = 5.5, volatile = 9.0 (on 0-10 risk scale).</td>
               <td>ILO, national labour records</td>
               <td>Volatile = highest risk</td>
+            </tr>
+            <tr>
+              <td><code>psc_flag_tier</code></td>
+              <td>Port State Control safety inspection record. Combines flag state PSC detention rate tier (Paris MOU, Tokyo MOU, and regional MOUs), regional detention rate, and historical incident record. Ordinal map aligned to MOU white/grey/black list classifications. Higher detention rates and black-list flag states receive higher risk scores.</td>
+              <td>Paris MOU, Tokyo MOU, IMO GISIS</td>
+              <td>Black-list tier = highest risk</td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <p class="meth-p">
-        The three D2 indicators are combined via weighted arithmetic mean, with LPI carrying the
-        highest weight given its methodological rigour and global coverage.
+        The three D2 indicators (dwell time, labour regime, PSC flag tier) are combined via
+        unweighted geometric mean to produce the D2 dimension score. The geometric mean is used
+        so that a severe weakness in any single indicator cannot be offset by strong performance
+        in the others. The World Bank LPI score is stored in the output as <code>lpi_score</code>
+        for reference but is not included in the composite.
       </p>
     </div>
 
@@ -520,16 +527,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </thead>
           <tbody>
             <tr>
-              <td><code>wgi_ps</code></td>
-              <td>World Bank WGI Political Stability and Absence of Violence sub-index. Standard normal units (typically -2.5 to +2.5). Higher values indicate greater stability. Rescaled to 0–10 for compositing.</td>
+              <td><code>score_4_wgi</code></td>
+              <td>Merged governance score: arithmetic mean of the WGI Political Stability (wgi_ps) and Government Effectiveness (wgi_ge) sub-indices, both rescaled to 0-10. The two sub-indices are merged before compositing because they have Spearman rho = 0.864 across the WPI universe. Combining them separately at equal weight would give the shared governance signal double the effective weight, violating the OECD Handbook double-counting rule. Both source fields are retained in the output for reference.</td>
               <td>World Bank WGI 2023</td>
-              <td>Lower WGI = higher risk</td>
-            </tr>
-            <tr>
-              <td><code>wgi_ge</code></td>
-              <td>World Bank WGI Government Effectiveness sub-index. Captures perceptions of public service quality, civil service independence, and policy credibility. Same scale and rescaling as wgi_ps.</td>
-              <td>World Bank WGI 2023</td>
-              <td>Lower WGI = higher risk</td>
+              <td>Lower score = higher risk</td>
             </tr>
             <tr>
               <td><code>sanctions_level</code></td>
@@ -548,7 +549,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <p class="meth-p">
-        The four D4 indicators are combined via unweighted arithmetic mean.
+        The three D4 composite indicators (merged WGI governance score, sanctions level, dispute
+        level) are combined via unweighted geometric mean. The raw wgi_ps and wgi_ge fields are
+        stored in the output as reference columns.
       </p>
     </div>
 
@@ -685,7 +688,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="meth-section-num">Section 11</div>
       <h2>Data Vintage and Update Cadence</h2>
       <p class="meth-p">
-        The current PRI (v1.1, May 2026) uses the following source vintages.
+        The current PRI (v1.2, June 2026) uses the following source vintages.
       </p>
 
       <div class="meth-table-wrap">
@@ -757,8 +760,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 
     <!-- 12 -->
-    <div class="meth-section" id="cppi">
+    <div class="meth-section" id="charter-bleed">
       <div class="meth-section-num">Section 12</div>
+      <h2>Charter Bleed: Translating Dwell Into Cost</h2>
+      <p class="meth-p">
+        Dwell time is the most commercially actionable signal in the PRI. Every hour a vessel
+        sits idle at berth, charter cost accrues with no productive output. The charter bleed
+        framework converts the D2 dwell signal into a direct cost estimate per port call, using
+        the vessel class rate schedule from the Narrows live rate module.
+      </p>
+      <div class="meth-formula">
+        <span class="formula-label">Charter bleed per port call</span>
+        charter_bleed_usd = (dwell_hours / 24) &times; charterPerDay<br><br>
+        total_idle_usd    = (dwell_hours / 24) &times; (charterPerDay + bunkerPerDay)
+      </div>
+      <p class="meth-p">
+        <code>charterPerDay</code> and <code>bunkerPerDay</code> are drawn from the Narrows rate
+        module, which carries a trailing average updated by automated feed. Rates are defined per
+        vessel class: VLCC, Aframax, Suezmax, Capesize, Handymax, LNG Carrier, Container,
+        Neopanamax, RoRo, and LPG. The total idle cost adds bunker consumption during dwell to
+        the pure time-charter cost, reflecting the full commercial exposure.
+      </p>
+      <p class="meth-p">
+        To annualise the bleed across a port call schedule, multiply charter bleed per call by
+        the expected call count for the relevant vessel class. Call count is derived from annual
+        trade volume (tonnes) divided by average parcel size for that vessel class and commodity.
+        This gives a total annual charter exposure attributable to a specific port's dwell
+        performance, comparable across corridors and vessel books.
+      </p>
+      <p class="meth-p">
+        <strong>Illustrative example.</strong> A VLCC with a charterPerDay of USD 84,000 sitting
+        at a port with average 72-hour dwell incurs a charter bleed of 3 days &times; USD 84,000
+        = USD 252,000 per call. An equivalent vessel at Rotterdam (average dwell 18 hours) incurs
+        USD 63,000 per call. The 54-hour dwell gap costs USD 189,000 per call in pure charter
+        terms, before bunker and port fees.
+      </p>
+      <p class="meth-p">
+        Charter bleed is available as an interactive calculator within the Narrows CDM and CAPE
+        tools. The calculation uses live rate data and updates automatically when the rate module
+        refreshes. For methodology questions or access to the underlying rate schedule, contact
+        <a href="mailto:fysh@narrows.io" style="color:var(--blue);text-decoration:none">fysh@narrows.io</a>.
+      </p>
+    </div>
+
+    <!-- 13 -->
+    <div class="meth-section" id="cppi">
+      <div class="meth-section-num">Section 13</div>
       <h2>Relationship to the World Bank CPPI</h2>
       <p class="meth-p">
         The World Bank Container Port Performance Index (CPPI), published annually in partnership
