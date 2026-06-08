@@ -176,7 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="meth-meta">
     <span class="meth-meta-item">Version 1.2</span>
     <span class="meth-meta-item">June 2026</span>
-    <span class="meth-meta-item">3804 ports · 28 fields</span>
+    <span class="meth-meta-item">3778 ports · 28 fields</span>
     <span class="meth-meta-item">Data vintage 2023/24</span>
   </div>
 </div>
@@ -232,7 +232,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         systematically understate concentrated risk.
       </p>
       <p class="meth-p">
-        <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3804-port
+        <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3778-port
         universe is approximately 0.69 to 3.65. Score distributions are right-skewed: the median
         port falls below 1.3, and the large majority of ports fall below 2.0.
       </p>
@@ -245,7 +245,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         The PRI covers all ports in the <strong>National Geospatial-Intelligence Agency World Port
         Index (WPI), Publication 150</strong>, the standard global port registry used by the
-        maritime industry. The WPI lists 3804 ports across 195 countries, from major transshipment
+        maritime industry. The WPI lists 3778 ports across 195 countries, from major transshipment
         hubs to small coastal facilities.
       </p>
       <p class="meth-p">
@@ -281,7 +281,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         varies by indicator type:
       </p>
       <p class="meth-p">
-        <strong>Continuous indicators</strong> (depth, LPI score, PGA values) are min-max
+        <strong>Continuous indicators</strong> (depth, PGA values, dwell time, and similar) are min-max
         normalised against the empirical range of the full WPI population and rescaled to 0–10.
         For risk indicators, direction is inverted so higher raw values (higher hazard) map to
         higher scores (higher risk).
@@ -529,7 +529,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <tr>
               <td><code>score_4_wgi</code></td>
               <td>Merged governance score: arithmetic mean of the WGI Political Stability (wgi_ps) and Government Effectiveness (wgi_ge) sub-indices, both rescaled to 0-10. The two sub-indices are merged before compositing because they have Spearman rho = 0.864 across the WPI universe. Combining them separately at equal weight would give the shared governance signal double the effective weight, violating the OECD Handbook double-counting rule. Both source fields are retained in the output for reference.</td>
-              <td>World Bank WGI 2023</td>
+              <td>World Bank WGI 2022</td>
               <td>Higher score = higher risk</td>
             </tr>
             <tr>
@@ -562,7 +562,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         The PRI is a relative risk measure, not an absolute probability of disruption. It supports
         comparison within and across port populations. The following bands reflect the empirical
-        distribution of the 3804-port universe.
+        distribution of the 3778-port universe.
       </p>
 
       <div class="meth-bands">
@@ -830,7 +830,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         cannot distinguish a slow port from a risky one. The PRI is designed around that
         distinction. Scope differs as well: the CPPI covers container operations only, and its
         Fuel Consumption Index weighting is appropriate for container logistics optimisation but
-        not for a risk index used across vessel types. The PRI covers 3,804 ports across all
+        not for a risk index used across vessel types. The PRI covers 3,778 ports across all
         vessel classes, including bulk, tanker, general cargo, and RoRo facilities for which no
         CPPI equivalent exists.
       </p>
