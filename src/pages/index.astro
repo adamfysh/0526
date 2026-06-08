@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Narrows — Risk Intelligence"
+  title="Narrows | Risk Intelligence"
   description="Dollar-denominated chokepoint exposure. Which importers pay, by how much, through which corridor. Built for underwriters, traders, and lenders."
 >
 
@@ -697,37 +697,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="pri-hist-section">
         <div class="pri-hist-label">Global PRI distribution · 3,804 ports · geometric mean composite</div>
         <svg class="pri-hist-svg" viewBox="0 0 960 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <!-- 20 bins spanning PRI 0.75 → 3.75, bin width 0.15, each bar 46px wide, 2px gap -->
+          <!-- 20 bins spanning PRI 0.65 → 3.65, bin width 0.15, each bar 46px wide, 2px gap — v1.2 -->
           <!-- Heights normalized: peak bin (1.05-1.2) ≈ 750 ports → 80px -->
-          <rect x="0"   y="81" width="46" height="9"  fill="rgba(55,138,221,0.28)"/>
-          <rect x="48"  y="32" width="46" height="58" fill="rgba(55,138,221,0.38)"/>
-          <rect x="96"  y="0"  width="46" height="90" fill="rgba(55,138,221,0.48)"/>
-          <rect x="144" y="6"  width="46" height="84" fill="rgba(55,138,221,0.44)"/>
-          <rect x="192" y="18" width="46" height="72" fill="rgba(55,138,221,0.40)"/>
-          <rect x="240" y="32" width="46" height="58" fill="rgba(55,138,221,0.36)"/>
-          <rect x="288" y="52" width="46" height="38" fill="rgba(55,138,221,0.30)"/>
-          <rect x="336" y="67" width="46" height="23" fill="rgba(55,138,221,0.24)"/>
-          <rect x="384" y="77" width="46" height="13" fill="rgba(100,130,180,0.28)"/>
-          <rect x="432" y="83" width="46" height="7"  fill="rgba(150,120,150,0.32)"/>
-          <rect x="480" y="84" width="46" height="6"  fill="rgba(180,110,120,0.36)"/>
-          <rect x="528" y="85" width="46" height="5"  fill="rgba(200,100,80,0.40)"/>
-          <rect x="576" y="87" width="46" height="3"  fill="rgba(216,90,48,0.48)"/>
-          <rect x="624" y="88" width="46" height="2"  fill="rgba(216,90,48,0.56)"/>
+          <rect x="0"   y="84" width="46" height="6"  fill="rgba(55,138,221,0.28)"/>
+          <rect x="48"  y="69" width="46" height="21" fill="rgba(55,138,221,0.38)"/>
+          <rect x="96"  y="21" width="46" height="69" fill="rgba(55,138,221,0.48)"/>
+          <rect x="144" y="14" width="46" height="76" fill="rgba(55,138,221,0.44)"/>
+          <rect x="192" y="0"  width="46" height="90" fill="rgba(55,138,221,0.48)"/>
+          <rect x="240" y="31" width="46" height="59" fill="rgba(55,138,221,0.40)"/>
+          <rect x="288" y="61" width="46" height="29" fill="rgba(55,138,221,0.34)"/>
+          <rect x="336" y="76" width="46" height="14" fill="rgba(55,138,221,0.28)"/>
+          <rect x="384" y="80" width="46" height="10" fill="rgba(100,130,180,0.28)"/>
+          <rect x="432" y="81" width="46" height="9"  fill="rgba(150,120,150,0.32)"/>
+          <rect x="480" y="85" width="46" height="5"  fill="rgba(180,110,120,0.36)"/>
+          <rect x="528" y="87" width="46" height="3"  fill="rgba(200,100,80,0.40)"/>
+          <rect x="576" y="88" width="46" height="2"  fill="rgba(216,90,48,0.48)"/>
+          <rect x="624" y="89" width="46" height="1"  fill="rgba(216,90,48,0.56)"/>
           <rect x="672" y="88" width="46" height="2"  fill="rgba(216,90,48,0.64)"/>
-          <!-- Critical tier (PRI≥3.0): bins 15-19 highlighted -->
-          <rect x="720" y="79" width="46" height="11" fill="rgba(216,90,48,0.75)"/>
-          <rect x="768" y="85" width="46" height="5"  fill="rgba(216,90,48,0.82)"/>
-          <rect x="816" y="88" width="46" height="2"  fill="rgba(216,90,48,0.88)"/>
-          <rect x="864" y="89" width="46" height="1"  fill="rgba(216,90,48,0.92)"/>
+          <!-- Critical tier (PRI>=3.0): bins 16-19 highlighted -->
+          <rect x="720" y="89" width="46" height="1"  fill="rgba(216,90,48,0.70)"/>
+          <rect x="768" y="90" width="46" height="0"  fill="rgba(216,90,48,0.75)"/>
+          <rect x="816" y="90" width="46" height="0"  fill="rgba(216,90,48,0.82)"/>
+          <rect x="864" y="90" width="46" height="0"  fill="rgba(216,90,48,0.88)"/>
           <rect x="912" y="89" width="46" height="1"  fill="rgba(216,90,48,0.95)"/>
-          <!-- Selected port marker: Durban PRI 1.52 → x ≈ 245 -->
-          <line x1="245" y1="0" x2="245" y2="90" stroke="#378ADD" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle cx="245" cy="84" r="4" fill="#378ADD"/>
-          <text x="255" y="14" font-size="10" fill="#378ADD" font-family="system-ui,sans-serif" font-weight="600">Durban · 1.52</text>
+          <!-- Selected port marker: Durban PRI 1.29 → x ≈ 216 -->
+          <line x1="216" y1="0" x2="216" y2="90" stroke="#378ADD" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle cx="216" cy="84" r="4" fill="#378ADD"/>
+          <text x="226" y="14" font-size="10" fill="#378ADD" font-family="system-ui,sans-serif" font-weight="600">Durban · 1.29</text>
           <!-- Axis labels -->
-          <text x="2"   y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">0.75</text>
-          <text x="432" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">1.8</text>
-          <text x="916" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">3.75</text>
+          <text x="2"   y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">0.65</text>
+          <text x="432" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">2.0</text>
+          <text x="916" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">3.65</text>
         </svg>
       </div>
 
@@ -741,12 +741,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </tr>
           </thead>
           <tbody>
-            <tr><td>3,804</td><td>Aden</td><td>Yemen</td><td>3.71</td><td>1.5</td><td>6.7</td><td>2.6</td><td>7.1</td></tr>
-            <tr><td>3,803</td><td>Nueva Gerona</td><td>Cuba</td><td>3.36</td><td>5.9</td><td>5.9</td><td>1.5</td><td>2.4</td></tr>
-            <tr><td>3,802</td><td>Puerto Cabezas</td><td>Nicaragua</td><td>3.23</td><td>6.3</td><td>5.0</td><td>2.0</td><td>1.7</td></tr>
-            <tr style="background:rgba(240,180,41,0.07)"><td>2,168</td><td>Durban</td><td>South Africa</td><td>1.52</td><td>0.5</td><td>4.3</td><td>3.4</td><td>0.7</td></tr>
+            <tr><td>3,804</td><td>Aden</td><td>Yemen</td><td>3.64</td><td>1.5</td><td>6.7</td><td>2.6</td><td>6.6</td></tr>
+            <tr><td>3,803</td><td>Nueva Gerona</td><td>Cuba</td><td>3.12</td><td>5.9</td><td>5.9</td><td>1.5</td><td>1.8</td></tr>
+            <tr><td>3,802</td><td>Puerto Cabezas</td><td>Nicaragua</td><td>2.94</td><td>6.3</td><td>5.0</td><td>2.0</td><td>1.2</td></tr>
+            <tr style="background:rgba(240,180,41,0.07)"><td>2,515</td><td>Durban</td><td>South Africa</td><td>1.29</td><td>0.5</td><td>4.3</td><td>3.4</td><td>0.4</td></tr>
             <tr><td>…</td><td colspan="7"></td></tr>
-            <tr><td>1</td><td>Jurong Island</td><td>Singapore</td><td>0.76</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>1</td><td>Jurong Island</td><td>Singapore</td><td>0.71</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
           </tbody>
         </table>
         <div class="pri-blur-overlay">

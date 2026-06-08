@@ -8,7 +8,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 ---
 
 <BaseLayout
-  title="Port Risk Index — Narrows"
+  title="Port Risk Index | Narrows"
   description="3804 ports scored across four dimensions of risk: accessibility, reliability, concentration, and stability. The Narrows Port Risk Index."
 >
 
@@ -507,7 +507,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       <span class="pri-gate-pill">3804 ports</span>
       <span class="pri-gate-pill">195 countries</span>
       <span class="pri-gate-pill">4 risk dimensions</span>
-      <span class="pri-gate-pill">16 indicators</span>
+      <span class="pri-gate-pill">14 indicators</span>
       <span class="pri-gate-pill">Sortable + searchable</span>
     </div>
 
@@ -585,7 +585,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 <div class="pri-stats">
   <div class="pri-stat"><span class="pri-stat-val">3804</span><span class="pri-stat-lbl">Ports indexed · World Port Index universe</span></div>
   <div class="pri-stat"><span class="pri-stat-val">4</span><span class="pri-stat-lbl">Dimensions · Physical, operational, concentration, stability</span></div>
-  <div class="pri-stat"><span class="pri-stat-val">16</span><span class="pri-stat-lbl">Indicators · 4 per dimension, independently sourced</span></div>
+  <div class="pri-stat"><span class="pri-stat-val">14</span><span class="pri-stat-lbl">Indicators · 5+3+3+3 across four dimensions</span></div>
   <div class="pri-stat"><span class="pri-stat-val">195</span><span class="pri-stat-lbl">Countries · WPI + LPI + WGI base data</span></div>
   <div class="pri-stat pri-stat-actions">
     <a href="/narrows_pri_latest.csv" download class="btn-ghost" style="font-size:13px;white-space:nowrap;">↓ Download CSV</a>
@@ -686,9 +686,9 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         </div>
         <div class="pri-hist-svg-wrap" id="hist-wrap"></div>
         <div class="pri-hist-axis">
-          <span>0.75 (lowest)</span>
-          <span id="hist-mean-lbl">mean 1.55</span>
-          <span>3.71 (highest)</span>
+          <span>0.69 (lowest)</span>
+          <span id="hist-mean-lbl">mean 1.35</span>
+          <span>3.65 (highest)</span>
         </div>
       </div>
     </div>
@@ -741,7 +741,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         very poorly on stability cannot be rescued by good physical access.
       </p>
       <p class="pri-method-body">
-        The effective empirical maximum in the World Port Index universe is <strong>3.71</strong>,
+        The effective empirical maximum in the World Port Index universe is <strong>3.645</strong>,
         not 10. Most ports have reasonable physical infrastructure, which structurally moderates D1.
         Score distribution is right-skewed; the vast majority of ports fall below 2.0.
       </p>
@@ -759,7 +759,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         <div class="pri-dim-legend-dot" style="background:#EF9F27"></div>
         <div class="pri-dim-legend-text">
           <h4>D2: Reliability</h4>
-          <p>LPI score, dwell time, labour regime stability, port efficiency. Source: World Bank LPI, proprietary dwell-time index.</p>
+          <p>Dwell time, labour regime stability, port state control record. Source: World Bank CPPI/PPPI, ILO, Paris/Tokyo MOU.</p>
         </div>
       </div>
       <div class="pri-dim-legend-item">
@@ -773,7 +773,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         <div class="pri-dim-legend-dot" style="background:#D85A30"></div>
         <div class="pri-dim-legend-text">
           <h4>D4: Stability</h4>
-          <p>WGI political stability, WGI government effectiveness, sanctions exposure, active territorial dispute. Source: World Bank WGI, OFAC, ICJ.</p>
+          <p>WGI governance score (PS and GE merged), sanctions exposure, active territorial dispute. Source: World Bank WGI, OFAC, ICJ.</p>
         </div>
       </div>
     </div>
@@ -786,7 +786,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
   /* ── CONFIG ── */
   const DIM_COLORS = ['#378ADD', '#EF9F27', '#7F77DD', '#D85A30'];
-  const EFF_MAX = 3.712; // empirical max
+  const EFF_MAX = 3.645; // empirical max, v1.2
 
   /* ── STATE ── */
   let allPorts = [];
@@ -899,7 +899,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         { l: 'Peak ground accel.', v: port.pga_g !== null ? port.pga_g.toFixed(3) + 'g' : '—' },
       ]},
       { id: 'd2', score: port.d2_score, color: '#EF9F27', subs: [
-        { l: 'LPI score', v: port.lpi_score !== null ? port.lpi_score.toFixed(2) : '—' },
+        { l: 'LPI score (ref)', v: port.lpi_score !== null ? port.lpi_score.toFixed(2) : '—' },
         { l: 'Dwell time', v: port.dwell_hours !== null ? port.dwell_hours.toFixed(0) + 'h' : '—' },
         { l: 'Labour regime', v: port.labour_regime ?? '—' },
       ]},
@@ -909,8 +909,9 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         { l: 'Alt. port distance', v: port.alt_distance_km !== null ? port.alt_distance_km.toFixed(0) + 'km' : '—' },
       ]},
       { id: 'd4', score: port.d4_score, color: '#D85A30', subs: [
-        { l: 'WGI pol. stability', v: port.wgi_ps !== null ? port.wgi_ps.toFixed(2) : '—' },
-        { l: 'WGI gov. effectiveness', v: port.wgi_ge !== null ? port.wgi_ge.toFixed(2) : '—' },
+        { l: 'WGI governance (merged)', v: port.score_4_wgi !== null ? port.score_4_wgi.toFixed(2) : '—' },
+        { l: 'WGI pol. stability (src)', v: port.wgi_ps !== null ? port.wgi_ps.toFixed(2) : '—' },
+        { l: 'WGI gov. effectiveness (src)', v: port.wgi_ge !== null ? port.wgi_ge.toFixed(2) : '—' },
         { l: 'Sanctions level', v: port.sanctions_level ?? '—' },
         { l: 'Dispute level', v: port.dispute_level ?? '—' },
       ]},
