@@ -530,17 +530,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <td><code>score_4_wgi</code></td>
               <td>Merged governance score: arithmetic mean of the WGI Political Stability (wgi_ps) and Government Effectiveness (wgi_ge) sub-indices, both rescaled to 0-10. The two sub-indices are merged before compositing because they have Spearman rho = 0.864 across the WPI universe. Combining them separately at equal weight would give the shared governance signal double the effective weight, violating the OECD Handbook double-counting rule. Both source fields are retained in the output for reference.</td>
               <td>World Bank WGI 2023</td>
-              <td>Lower score = higher risk</td>
+              <td>Higher score = higher risk</td>
             </tr>
             <tr>
               <td><code>sanctions_level</code></td>
-              <td>Active international sanctions exposure affecting the port's country or port directly. Values: <code>none</code>, <code>partial</code>, <code>comprehensive</code>. Ordinal map: none = 0, partial = 5.0, comprehensive = 10.0. Derived from OFAC SDN list, EU Consolidated List, and UN Security Council resolutions.</td>
+              <td>Active international sanctions exposure affecting the port's country or port directly. Values: <code>none</code>, <code>sdn_adjacent</code>, <code>sectoral</code>, <code>comprehensive</code>. Ordinal map: none = 0, sdn_adjacent = 3.0, sectoral = 6.0, comprehensive = 10.0. Derived from OFAC SDN list, EU Consolidated List, and UN Security Council resolutions.</td>
               <td>OFAC, EU OJ, UN SC</td>
               <td>Comprehensive = highest risk</td>
             </tr>
             <tr>
               <td><code>dispute_level</code></td>
-              <td>Active territorial or maritime boundary disputes affecting the port's operating jurisdiction. Values: <code>none</code>, <code>latent</code>, <code>active</code>. Ordinal map: none = 0, latent = 3.5, active = 8.5. Sourced from ICJ dockets and UNCLOS arbitration records.</td>
+              <td>Active territorial or maritime boundary disputes affecting the port's operating jurisdiction. Values: <code>none</code>, <code>historical</code>, <code>active_diplomatic</code>, <code>active_military</code>. Ordinal map: none = 0, historical = 2.0, active_diplomatic = 6.0, active_military = 10.0. Sourced from conflict zone monitoring and ICJ/PCA dockets.</td>
               <td>ICJ, PCA, UNCLOS records</td>
               <td>Active = highest risk</td>
             </tr>
