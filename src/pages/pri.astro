@@ -888,7 +888,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     document.getElementById('dd-name').textContent = port.port_name;
     document.getElementById('dd-meta').textContent =
-      `${port.country_name} · Rank #${port.pri_rank.toLocaleString()} of 3804 · rank 1 = lowest risk · Data tier ${port.data_tier}`;
+      `${port.country_name} · Rank #${port.pri_rank.toLocaleString()} of 3804 · rank 1 = highest risk · Data tier ${port.data_tier}`;
     document.getElementById('dd-score').textContent = port.pri_score.toFixed(2);
 
     const dims = [
