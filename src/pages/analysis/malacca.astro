@@ -16,12 +16,12 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
  <div class="stat-bar-inner">
   <div class="stat-bar-item">
    <div class="stat-bar-label">Value at risk 100% / 14 days</div>
-   <div class="stat-bar-value">$30.0B</div>
-   <div class="stat-bar-unit">USD, 27 countries</div>
+   <div class="stat-bar-value">$22.0B</div>
+   <div class="stat-bar-unit">USD, 14 countries</div>
   </div>
   <div class="stat-bar-item">
    <div class="stat-bar-label">Japan crude dependency</div>
-   <div class="stat-bar-value">100%</div>
+   <div class="stat-bar-value">88%</div>
    <div class="stat-bar-unit">of seaborne crude imports via Malacca</div>
   </div>
   <div class="stat-bar-item">
@@ -67,7 +67,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <p class="prose">The aggregate statistic "30% of global seaborne trade transits Malacca" circulates widely and tells you almost nothing useful. What matters is which countries depend on Malacca for which commodities at what percentage of their total seaborne supply. These are the bilateral dependency figures from the Narrows model.</p>
 
 <div class="n-table-wrap">
- <div class="n-table-title">Bilateral dependency matrix Strait of Malacca, all commodities, 2023</div>
+ <div class="n-table-title">Bilateral dependency matrix · Strait of Malacca · Energy commodities, 2023 (CDM Fix-15)</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -79,24 +79,23 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
    </tr>
   </thead>
   <tbody>
-   <tr><td class="bold">China</td><td>Crude petroleum</td><td class="num dep-high">81.8%</td><td class="num bold">$3.8B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:100%"></div></div></div></td></tr>
-   <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">100%</td><td class="num bold">$3.1B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:34%"></div></div></div></td></tr>
-   <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">100%</td><td class="num bold">$3.3B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:36%"></div></div></div></td></tr>
-   <tr><td class="bold">India</td><td>Crude petroleum</td><td class="num dep-high">~72%</td><td class="num bold">~$700M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:18%"></div></div></div></td></tr>
-   <tr><td class="bold">Taiwan</td><td>Electronics components</td><td class="num dep-high">68%</td><td class="num bold">$550M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:14%"></div></div></div></td></tr>
-   <tr><td class="bold">Germany</td><td>Vehicles (RoRo)</td><td class="num dep-mid">35%</td><td class="num bold">$450M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:12%"></div></div></div></td></tr>
-   <tr><td class="bold">Netherlands</td><td>Crude petroleum</td><td class="num dep-mid">32%</td><td class="num bold">$380M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:10%"></div></div></div></td></tr>
-   <tr><td class="bold">Thailand</td><td>Electronics components</td><td class="num dep-high">88%</td><td class="num bold">$340M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:9%"></div></div></div></td></tr>
-   <tr><td class="bold">Vietnam</td><td>Apparel / textiles</td><td class="num dep-high">74%</td><td class="num bold">$210M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:6%"></div></div></div></td></tr>
-   <tr><td class="bold">Indonesia</td><td>Iron ores</td><td class="num dep-high">100%</td><td class="num bold">$180M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:5%"></div></div></div></td></tr>
-   <tr><td class="bold">Bangladesh</td><td>Wheat (Handymax)</td><td class="num dep-mid">62%</td><td class="num bold">$90M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:2%"></div></div></div></td></tr>
+   <tr><td class="bold">China</td><td>Crude petroleum</td><td class="num dep-mid">61.4%</td><td class="num bold">$8.5B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:100%"></div></div></div></td></tr>
+   <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">88.0%</td><td class="num bold">$2.7B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:32%"></div></div></div></td></tr>
+   <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">81.0%</td><td class="num bold">$2.7B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:31%"></div></div></div></td></tr>
+   <tr><td class="bold">Singapore</td><td>Refined petroleum (2710)</td><td class="num dep-high">86.7%</td><td class="num bold">$1.6B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:19%"></div></div></div></td></tr>
+   <tr><td class="bold">Thailand</td><td>Crude petroleum</td><td class="num dep-high">87.5%</td><td class="num bold">$1.0B</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:12%"></div></div></div></td></tr>
+   <tr><td class="bold">Singapore</td><td>Crude petroleum</td><td class="num dep-high">90.0%</td><td class="num bold">$947M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:11%"></div></div></div></td></tr>
+   <tr><td class="bold">Japan</td><td>LNG</td><td class="num dep-mid">45.5%</td><td class="num bold">$856M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:10%"></div></div></div></td></tr>
+   <tr><td class="bold">China</td><td>LNG</td><td class="num dep-mid">42.8%</td><td class="num bold">$814M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:10%"></div></div></div></td></tr>
+   <tr><td class="bold">Taiwan</td><td>Crude petroleum</td><td class="num dep-high">75.0%</td><td class="num bold">$773M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:9%"></div></div></div></td></tr>
+   <tr><td class="bold">South Korea</td><td>LNG</td><td class="num dep-mid">45.3%</td><td class="num bold">$689M</td><td><div class="n-bar-cell"><div class="n-bar-bg"><div class="n-bar-fill" style="width:8%"></div></div></div></td></tr>
   </tbody>
  </table>
 </div>
 
 <div class="callout">
  <div class="callout-label">The number that does not travel</div>
- <div class="callout-body">Thailand routes <strong>88% of its electronics component imports</strong> through Malacca the highest dependency in the matrix. Indonesia, the country proposing the toll, routes 100% of its own iron ore imports through the same strait. A Malacca toll is not cost-free for its proponents.</div>
+ <div class="callout-body">Thailand routes <strong>87.5% of its crude petroleum imports</strong> through Malacca. Singapore routes 90%. Indonesia, the country proposing the toll, routes 41.6% of its own crude imports and 80.4% of its iron ore imports through the same strait. A Malacca toll is not cost-free for its proponents.</div>
 </div>
 
 <hr class="section-rule" />
@@ -180,7 +179,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="method-note">
  <div class="method-note-label">Methodology</div>
- <div class="method-note-body">All figures derived from the Narrows Chokepoint Dependency Simulation Model. Data source: UN Comtrade 2023 bilateral import data, 17 commodity classes, 44 importing nations, 15 data chokepoints. Model coverage: 87.2% of trade value ($2.15T of $2.47T). The $1.8T gross Comtrade universe includes landlocked flows and routes not requiring chokepoint assignment. Bilateral flows are classified by data quality tier: Tier 1 flows are direct bilateral reporter pairs; Tier 3 flows are aggregate or partner-imputed. The large majority of reporters in this analysis are Tier 1; any aggregate-reported flows are identified accordingly. Rerouting costs based on representative vessel-class rates: VLCC bunker $55k/day, charter $45k/day; Capesize bunker $32k/day, charter $18k/day; Container bunker $30k/day, charter $25k/day. Lombok detour costs include a CII-compliance adjustment of +0.7 effective days for Capesize vessels operating under slow-steaming constraints (~11 knots). Carrying cost at 5% p.a. on representative cargo values. Capacity sensitivity score of 0.85 for Malacca reflects Sunda and Lombok as partial alternatives with draft and throughput constraints. All model assumptions are substitutable; contact fysh@narrows.io to run a scenario with your own rate inputs.</div>
+ <div class="method-note-body">All figures derived from the Narrows Chokepoint Dependency Simulation Model. Data source: UN Comtrade 2023 bilateral import data. CDM Fix-15. Malacca bilateral matrix covers 14 importing nations across 11 commodity codes (crude petroleum, refined products, LNG, iron ore, copper ore, palm oil, coal, ammonia, fertilizer, soy, wheat). The model does not currently cover electronics, vehicles, or apparel at chokepoint resolution. Bilateral flows are classified by data quality tier: Tier 1 flows are direct bilateral reporter pairs; Tier 3 flows are aggregate or partner-imputed. Rerouting costs based on representative vessel-class rates: VLCC bunker $55k/day, charter $45k/day; Capesize bunker $32k/day, charter $18k/day; Container bunker $30k/day, charter $25k/day. Lombok detour costs include a CII-compliance adjustment of +0.7 effective days for Capesize vessels operating under slow-steaming constraints (~11 knots). Carrying cost at 5% p.a. on representative cargo values. Capacity sensitivity score of 0.85 for Malacca reflects Sunda and Lombok as partial alternatives with draft and throughput constraints. All model assumptions are substitutable; contact fysh@narrows.io to run a scenario with your own rate inputs.</div>
 </div>
 
 <!-- CTA -->
