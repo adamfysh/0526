@@ -63,7 +63,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <!-- PHOTO BAND -->
 <div slot="photo-band" class="article-photo-band">
- <img src="/images/panama-n.jpg" alt="Panama Canal — satellite view" loading="eager" />
+ <img src="/images/panama-n.jpg" alt="Panama Canal — satellite view" loading="eager" style="object-position: center 35%;" />
  <span class="article-photo-caption">Panama Canal · Pacific entrance · 14,000 vessels annually</span>
 </div>
 <!-- Gatun Lake Chart -->
@@ -629,6 +629,10 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 </ArticleLayout>
 
 <style is:global>
+  /* Panama photo band — tighter crop on canal entrance */
+  .article-photo-band { height: 260px !important; }
+  .article-photo-band img { object-position: 40% 50% !important; }
+
 /* Narrows article table styles */
 .n-table-wrap {
   overflow-x: auto;

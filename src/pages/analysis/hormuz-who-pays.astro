@@ -177,4 +177,36 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Simulation Model v0.3 (May 2026). Data source: WITS UN Comtrade 2023 bilateral import data. Dep% = Gulf-origin exposed value ÷ total commodity imports of that commodity. Oman excluded from Hormuz-captive supplier set: loading terminals (Mina al-Fahal, OQ Fertilizers Sur) are on the Gulf of Oman side of the Strait and do not transit Hormuz. All crude petroleum and LPG figures are Tier 1 bilateral data: real country-pair flows validated against WITS and cross-corroborated against IEA, METI, and S&P Global where available. Japan 83.0% (CDM v2 2023 bilateral; vs METI-reported 95.9% FY2024 Middle East dependency (S&P Global, August 2025); difference attributable to Oman exclusion, year, and updated bilateral flow data). Rerouting cost estimates: VLCC bunker $55k/day, charter $45k/day; Aframax $28k/$22k; Capesize $32k/$18k; Handymax $18k/$12k; Container $28k/$17k. CIA assessment sourced from reporting by The Washington Post, 7 May 2026. All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario against your specific inputs.</div>
 </div>
 
+
+<style>
+  /* ── Table ── */
+  .n-table-wrap { background: var(--white); border: var(--rule-light); border-radius: 6px; overflow: hidden; margin: 24px 0; overflow-x: auto; }
+  .n-table-title { background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px; border-bottom: 2px solid var(--gold); }
+  table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
+  .n-table thead th.num { text-align: right; }
+  .n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+  .n-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+  .n-table tbody td.bold { font-weight: 600; color: var(--navy); }
+  .n-table tbody td.subhead { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); background: var(--surface); padding: 6px 14px; }
+  .n-table tbody tr:last-child td { border-bottom: none; }
+  .n-table tbody tr:hover td { background: var(--blue-pale); }
+  .n-table tbody tr:hover td.subhead { background: var(--surface); }
+  /* Dependency colouring */
+  .dep-high { color: #C0392B; font-weight: 700; }
+  .dep-mid  { color: #B87333; font-weight: 600; }
+  .dep-low  { color: var(--text-secondary); font-weight: 400; }
+  /* Verdict chips */
+  .verdict-ok      { display: inline-block; background: #0f2318; color: #86efac; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 3px; }
+  .verdict-caution { display: inline-block; background: #231f0e; color: #fde68a; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 3px; }
+  .verdict-no      { display: inline-block; background: #2a1a1a; color: #f87171; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 3px; }
+  /* Callout / method-note (inherited from global but repeated for safety) */
+  .callout { background: var(--surface); border-left: 3px solid var(--gold); border-radius: 4px; padding: 16px 20px; }
+  .callout-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .method-note { border-top: var(--rule-light); padding-top: 20px; margin-top: 32px; }
+  .method-note-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+  .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.7; }
+</style>
+
 </ArticleLayout>
