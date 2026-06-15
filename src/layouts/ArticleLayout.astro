@@ -273,6 +273,30 @@ const {
       .stat-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .cta-strip-inner { flex-direction: column; align-items: flex-start; }
     }
+
+    /* Article photo band — full-width image between stat-bar and body */
+    .article-photo-band {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+    }
+    .article-photo-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .article-photo-caption {
+      position: absolute;
+      bottom: 14px;
+      right: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
   </style>
 </head>
 <body>
@@ -294,6 +318,9 @@ const {
 
   <!-- Optional stat bar (pass via named slot) -->
   <slot name="stat-bar" />
+
+  <!-- Optional photo band (full-width, between stat-bar and body) -->
+  <slot name="photo-band" />
 
   <!-- Article body -->
   <div class="article-body">

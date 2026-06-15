@@ -387,6 +387,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .analysis-grid { grid-template-columns: 1fr; }
   .audience-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Suez photo band ── */
+.suez-band {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  display: block;
+}
+.suez-band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+}
+.suez-band-caption {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
 </style>
 
 <!-- ══════════════════════════════
@@ -438,7 +465,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </section>
 
-<hr class="div" />
+<div class="suez-band">
+  <img src="/images/suez-n.jpg" alt="Suez Canal — satellite view" loading="eager" fetchpriority="high" />
+  <span class="suez-band-caption">Suez Canal · 193 km · 12% of global trade</span>
+</div>
 
 <!-- ══════════════════════════════
      FOR WHOM
