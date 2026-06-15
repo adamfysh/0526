@@ -145,6 +145,12 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 }
 .pri-detail-badge-score { font-size: 36px; font-weight: 700; color: var(--gold); letter-spacing: -0.03em; line-height: 1; }
 
+/* Commodity chips in detail panel */
+.pri-coms-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px var(--s4) 14px; border-bottom: var(--rule-light); }
+.pri-coms-row:empty { display: none; }
+.pri-com-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.pri-com-chip-label { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); margin-right: 2px; }
+
 /* Dimension cards */
 .pri-dim-row {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -643,6 +649,9 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
         </div>
       </div>
 
+      <!-- Commodity tags (populated by showDetail) -->
+      <div class="pri-coms-row" id="dd-coms"></div>
+
       <div class="pri-dim-row">
         <!-- D1 Accessibility -->
         <div class="pri-dim-card">
@@ -890,6 +899,26 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     document.getElementById('dd-meta').textContent =
       `${port.country_name} · Rank #${port.pri_rank.toLocaleString()} of 3778 · rank 1 = highest risk · Data tier ${port.data_tier}`;
     document.getElementById('dd-score').textContent = port.pri_score.toFixed(2);
+
+    // Commodity chips
+    const comsEl = document.getElementById('dd-coms');
+    const COM_COLORS = {
+      'CRUDE':     {bg:'#1a3a5c', color:'#7EC8E3'},
+      'LNG':       {bg:'#163040', color:'#a8d5e8'},
+      'REFINED':   {bg:'#1e1535', color:'#c4b5fd'},
+      'COAL':      {bg:'#2a1a1a', color:'#d4a4a4'},
+      'IRON_ORE':  {bg:'#0f2318', color:'#86efac'},
+      'GRAIN':     {bg:'#231f0e', color:'#fde68a'},
+      'CONTAINER': {bg:'#0f2020', color:'#67e8f9'},
+    };
+    if (port.coms && port.coms.length) {
+      comsEl.innerHTML = port.coms.map(c => {
+        const s = COM_COLORS[c] || {bg:'#1e2433', color:'#94a3b8'};
+        return `<span class="pri-com-chip" style="background:${s.bg};color:${s.color}">${c.replace('_',' ')}</span>`;
+      }).join('');
+    } else {
+      comsEl.innerHTML = '';
+    }
 
     const dims = [
       { id: 'd1', score: port.d1_score, color: '#378ADD', subs: [
