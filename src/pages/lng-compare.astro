@@ -1,0 +1,317 @@
+---
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+
+// ── Web3Forms key ──────────────────────────────────────────────────────────────
+// Get yours free in ~20 seconds: go to web3forms.com, enter fysh@narrows.io,
+// copy the key from the confirmation email, paste it here.
+const W3F_KEY = '7f12c345-c559-4e89-8347-d0910230ed22';
+---
+
+<ArticleLayout
+  title="Gulf LNG: route trees vs. Sankey — which tells the story better?"
+  description="Two ways to visualise $51.5B of annual Gulf LNG flows and the chokepoints every cargo must survive. We want your view."
+  eyebrow="Interactive Analysis"
+  publishDate="June 2026"
+  author="Narrows Research"
+>
+
+<style>
+  /* ── Section rhythm ─────────────────────────────────────────────────────── */
+  .lede { font-size: 16px; color: var(--text-secondary); line-height: 1.8; font-weight: 300; margin-bottom: 32px; max-width: 680px; }
+  .lede strong { color: var(--text-primary); font-weight: 600; }
+
+  .section-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-tertiary);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+  }
+  .section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--gold); }
+
+  h2.section-title {
+    font-size: clamp(20px, 2.8vw, 26px); font-weight: 700;
+    color: var(--navy); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px;
+  }
+  .prose { font-size: 15px; color: var(--text-secondary); line-height: 1.8; font-weight: 300; margin-bottom: 20px; }
+  .prose strong { color: var(--text-primary); font-weight: 600; }
+  hr.rule { border: none; border-top: 1px solid var(--rule-light, #e5e7eb); margin: 52px 0; }
+
+  /* ── Stat bar ────────────────────────────────────────────────────────────── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: #e5e7eb; border: 1px solid #e5e7eb;
+    border-radius: 6px; overflow: hidden; margin: 32px 0;
+  }
+  .stat-cell { background: #fff; padding: 18px 22px; }
+  .stat-lbl  { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
+  .stat-val  { font-size: 28px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1; }
+  .stat-unit { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-weight: 300; }
+
+  /* ── Callout ─────────────────────────────────────────────────────────────── */
+  .callout { background: #f0f9ff; border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 18px 22px; margin: 28px 0; }
+  .callout-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .callout-body strong { color: var(--text-primary); font-weight: 600; }
+
+  /* ── Viz frames ──────────────────────────────────────────────────────────── */
+  .viz-section { margin: 44px 0; }
+  .viz-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .viz-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 10px; font-weight: 700; }
+  .viz-caption { font-size: 13px; color: var(--text-tertiary); margin-top: 10px; line-height: 1.6; }
+  .chart-frame { width: 100%; border: none; border-radius: 8px; display: block; background: #0A2540; }
+
+  /* ── Vote ────────────────────────────────────────────────────────────────── */
+  .vote-section {
+    background: var(--navy); border-radius: 8px;
+    padding: 40px 36px; margin: 52px 0; text-align: center;
+  }
+  .vote-eyebrow {
+    display: inline-flex; align-items: center;
+    background: var(--gold); color: var(--navy);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px;
+  }
+  .vote-title { font-size: clamp(20px, 2.8vw, 26px); font-weight: 700; color: #fff; letter-spacing: -0.01em; line-height: 1.25; margin-bottom: 10px; }
+  .vote-sub { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 500px; margin: 0 auto 32px; font-weight: 300; }
+
+  .vote-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .vote-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 28px; border-radius: 6px; font-size: 14px;
+    font-weight: 700; cursor: pointer;
+    font-family: inherit; border: none;
+    transition: transform 0.12s, opacity 0.15s;
+  }
+  .vote-btn:hover:not([disabled]) { transform: translateY(-2px); }
+  .vote-btn[disabled] { opacity: 0.45; cursor: default; transform: none; pointer-events: none; }
+  .vote-btn-tree   { background: var(--gold); color: var(--navy); }
+  .vote-btn-sankey { background: rgba(255,255,255,0.10); color: #fff; border: 1px solid rgba(255,255,255,0.20); }
+
+  /* Post-vote states */
+  #vote-result { display: none; padding: 8px 0; }
+  #vote-result.visible { display: block; }
+  .vote-thanks { font-size: 19px; font-weight: 600; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 10px; padding-top: 4px; }
+  .vote-thanks-sub { font-size: 13px; color: rgba(255,255,255,0.42); margin-top: 8px; line-height: 1.6; }
+  .vote-note { font-size: 11px; color: rgba(255,255,255,0.22); margin-top: 20px; }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .vote-buttons { flex-direction: column; align-items: center; }
+    .vote-btn { width: 100%; max-width: 320px; justify-content: center; }
+  }
+</style>
+
+<!-- ── Lede ───────────────────────────────────────────────────────────────── -->
+<p class="lede">
+  Every liquefied natural gas cargo that leaves the Gulf &mdash; Qatar, the UAE, Oman &mdash;
+  passes through the <strong>Strait of Hormuz</strong>. There is no alternative. From there,
+  routes diverge through a sequence of further chokepoints before reaching import terminals
+  in Asia, Europe, and the Americas. We built two different ways to visualise the same data,
+  and we want to know which one actually communicates the story.
+</p>
+
+<!-- ── Stats ─────────────────────────────────────────────────────────────── -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-lbl">Annual Gulf LNG flow</div>
+    <div class="stat-val">$51.5<span style="font-size:18px;font-weight:400">B</span></div>
+    <div class="stat-unit">HS 271111 bilateral trade, all exporters</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Mandatory Hormuz transit</div>
+    <div class="stat-val">100<span style="font-size:18px;font-weight:400">%</span></div>
+    <div class="stat-unit">No pipeline or bypass route exists</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-lbl">Pakistan Hormuz dependency</div>
+    <div class="stat-val">98.2<span style="font-size:18px;font-weight:400">%</span></div>
+    <div class="stat-unit">Highest of any importing nation globally</div>
+  </div>
+</div>
+
+<!-- ── Background ────────────────────────────────────────────────────────── -->
+<div class="section-label">Background</div>
+<h2 class="section-title">Why LNG chokepoints matter to risk and insurance</h2>
+
+<p class="prose">
+  Liquefied natural gas has become the critical swing fuel in the global energy system. Unlike
+  pipeline gas, LNG can be redirected &mdash; cargo by cargo &mdash; to wherever the price is
+  highest. This flexibility is commercially valuable, but it concentrates physical risk at a
+  handful of maritime chokepoints that cannot be bypassed by laden tankers.
+</p>
+
+<p class="prose">
+  A closure of <strong>Hormuz</strong> &mdash; even temporary &mdash; would strand every Gulf
+  LNG cargo at source. <strong>Malacca</strong> controls onward delivery to China, Japan, South
+  Korea, Taiwan, and Thailand: collectively the largest LNG import market in the world.
+  <strong>Bab el-Mandeb</strong> (currently under active disruption by Houthi forces) and the
+  <strong>Suez Canal</strong> together control the European route. Atlantic-facing terminals in
+  Belgium, the UK, and the Netherlands add <strong>Gibraltar</strong> as a fifth sequential
+  chokepoint.
+</p>
+
+<div class="callout">
+  <div class="callout-label">Accumulation note</div>
+  <div class="callout-body">
+    These are <strong>sequential chokepoints</strong>, not alternatives. A cargo bound for
+    Zeebrugge transits Hormuz, Bab, Suez, and Gibraltar &mdash; four separate points of failure
+    &mdash; before arriving. Disruption at any one cascades to the destination. This is the
+    accumulation problem that conventional cargo models undercount.
+  </div>
+</div>
+
+<p class="prose">
+  Data: Narrows CDM v0.3, UN Comtrade HS 271111 bilateral trade flows. Dependency
+  percentages reflect each country&rsquo;s share of total LNG imports originating in
+  Hormuz-transit corridors.
+</p>
+
+<hr class="rule" />
+
+<!-- ── Visualisation 1 ────────────────────────────────────────────────────── -->
+<div class="section-label">Visualisation 1 of 2</div>
+<h2 class="section-title">Route tree &mdash; geography and sequence</h2>
+<p class="prose">
+  The route tree maps the physical journey: one origin, one mandatory chokepoint, then three
+  corridors to their destinations. Line weight scales with trade value. Pills on trunk segments
+  show transit days; country nodes show dollar value and total days from origin. Hover any
+  element for full detail.
+</p>
+<div class="viz-section">
+  <div class="viz-label"><span class="viz-num">1</span> Route Tree &mdash; hover nodes and segments</div>
+  <iframe id="frame-tree" class="chart-frame" src="/viz/qatar-route-tree.html"
+    scrolling="no" title="Gulf LNG route tree"></iframe>
+  <p class="viz-caption">
+    <strong style="color:#38bdf8">Asia-Pacific via Malacca</strong> &nbsp;&middot;&nbsp;
+    <strong style="color:#c084fc">Europe via Bab / Suez</strong> &nbsp;&middot;&nbsp;
+    <strong style="color:#34d399">South Asia &amp; Americas</strong>.
+    Chokepoints in <strong style="color:#F0B429">gold</strong>.
+  </p>
+</div>
+
+<hr class="rule" />
+
+<!-- ── Visualisation 2 ────────────────────────────────────────────────────── -->
+<div class="section-label">Visualisation 2 of 2</div>
+<h2 class="section-title">Sankey diagram &mdash; flow volume and concentration</h2>
+<p class="prose">
+  The Sankey shows the same data with ribbon width proportional to dollar value. The full
+  height of the Hormuz node &mdash; spanning the entire diagram &mdash; makes the concentration
+  of exposure instantly visible. Hover ribbons and nodes for dependency data.
+</p>
+<div class="viz-section">
+  <div class="viz-label"><span class="viz-num">2</span> Sankey &mdash; ribbon width = trade value</div>
+  <iframe id="frame-sankey" class="chart-frame" src="/viz/gulf-lng-sankey.html"
+    scrolling="no" title="Gulf LNG Sankey flow diagram"></iframe>
+  <p class="viz-caption">
+    All 14 destination countries in the rightmost column. The full width of
+    <strong style="color:#F0B429">Hormuz</strong> = $51.5B of annual exposure at a single point.
+  </p>
+</div>
+
+<hr class="rule" />
+
+<!-- ── Vote ──────────────────────────────────────────────────────────────── -->
+<div class="vote-section">
+  <div class="vote-eyebrow">Your view</div>
+  <h3 class="vote-title">Which tells the story better?</h3>
+  <p class="vote-sub">
+    One click. No email, no form, no account. We&rsquo;ll share the tally.
+  </p>
+
+  <div id="vote-ui">
+    <div class="vote-buttons">
+      <button class="vote-btn vote-btn-tree" onclick="castVote('Route Tree')">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="4" r="2.5" fill="currentColor"/>
+          <circle cx="2.5" cy="14" r="2.5" fill="currentColor"/>
+          <circle cx="15.5" cy="14" r="2.5" fill="currentColor"/>
+          <line x1="9" y1="6.5" x2="2.5" y2="11.5" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="9" y1="6.5" x2="15.5" y2="11.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Route Tree works better
+      </button>
+      <button class="vote-btn vote-btn-sankey" onclick="castVote('Sankey')">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+          <rect x="1" y="2" width="4" height="14" rx="1.5" fill="currentColor"/>
+          <rect x="7" y="5" width="4" height="8" rx="1.5" fill="currentColor"/>
+          <rect x="13" y="1" width="4" height="16" rx="1.5" fill="currentColor"/>
+        </svg>
+        Sankey works better
+      </button>
+    </div>
+    <p class="vote-note" id="vote-note">Anonymous &middot; one vote recorded per visit</p>
+  </div>
+
+  <div id="vote-result">
+    <div class="vote-thanks">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="10" stroke="#F0B429" stroke-width="1.5"/>
+        <path d="M6.5 11.5 L9.5 14.5 L15.5 8.5" stroke="#F0B429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Vote recorded &mdash; thank you.
+    </div>
+    <p class="vote-thanks-sub" id="vote-thanks-sub"></p>
+  </div>
+</div>
+
+</ArticleLayout>
+
+<script is:inline>
+  // ── iframe auto-height ──────────────────────────────────────────────────────
+  function sizeFrame(id, fallback) {
+    var f = document.getElementById(id);
+    if (!f) return;
+    f.style.height = fallback + 'px';
+    f.addEventListener('load', function () {
+      try {
+        var h = f.contentDocument.documentElement.scrollHeight;
+        if (h > 100) f.style.height = h + 'px';
+      } catch(e) { /* cross-origin fallback */ }
+    });
+  }
+  sizeFrame('frame-tree',   860);
+  sizeFrame('frame-sankey', 980);
+
+  // ── Vote via Web3Forms ──────────────────────────────────────────────────────
+  // web3forms.com — enter fysh@narrows.io, get a key instantly, paste below.
+  var W3F_KEY = '7f12c345-c559-4e89-8347-d0910230ed22';
+
+  async function castVote(choice) {
+    document.querySelectorAll('.vote-btn').forEach(function(b) {
+      b.setAttribute('disabled', true);
+    });
+    document.getElementById('vote-note').textContent = 'Sending…';
+
+    try {
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key:  W3F_KEY,
+          subject:     'LNG viz vote: ' + choice,
+          from_name:   'Narrows vote page',
+          vote:        choice,
+          page:        window.location.href,
+          botcheck:    ''
+        })
+      });
+
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('vote-ui').style.display = 'none';
+        var result = document.getElementById('vote-result');
+        result.classList.add('visible');
+        document.getElementById('vote-thanks-sub').textContent =
+          'You voted: “' + choice + '”. We’ll share the results on LinkedIn.';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch(err) {
+      document.getElementById('vote-note').textContent =
+        'Something went wrong — try refreshing the page.';
+      document.querySelectorAll('.vote-btn').forEach(function(b) {
+        b.removeAttribute('disabled');
+      });
+    }
+  }
+</script>

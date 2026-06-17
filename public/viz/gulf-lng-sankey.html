@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gulf LNG Flow — Narrows Sankey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0A2540;
+    --navy-mid: #0d304f;
+    --gold:     #F0B429;
+    --white:    #FFFFFF;
+    --tw2:      rgba(255,255,255,0.55);
+    --tw3:      rgba(255,255,255,0.32);
+    --rule-gold: 2px solid #F0B429;
+    --font: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--navy); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 24px 56px; }
+  .card { width: 100%; max-width: 1060px; background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
+  .card-header { padding: 28px 36px 24px; border-bottom: var(--rule-gold); }
+  .card-topline { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 40px; height: auto; display: block; }
+  .logo-mark path { fill: var(--gold); }
+  .logo-word { font-size: 15px; font-weight: 700; color: var(--white); letter-spacing: 0.10em; text-transform: uppercase; }
+  .eyebrow-pill { display: inline-flex; align-items: center; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 13px; border-radius: 20px; }
+  .card-title { font-size: clamp(17px, 2.2vw, 22px); font-weight: 700; color: var(--white); line-height: 1.25; letter-spacing: -0.01em; max-width: 740px; }
+  .card-sub { font-size: 13px; color: var(--tw2); font-weight: 300; line-height: 1.65; margin-top: 8px; max-width: 700px; }
+  .card-body { padding: 28px 20px 16px; }
+  #sankey { display: block; overflow: visible; }
+  .card-footer { padding: 14px 36px 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+  .legend-swatch { width: 22px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+  .legend-label { font-size: 11px; color: var(--tw3); }
+  .source-note { font-size: 10px; color: var(--tw3); text-align: right; line-height: 1.5; }
+  .tooltip { position: fixed; background: #071b30; border: 1px solid rgba(240,180,41,0.4); border-radius: 6px; padding: 14px 18px; pointer-events: none; opacity: 0; transition: opacity 0.1s; z-index: 99; max-width: 300px; box-shadow: 0 12px 36px rgba(0,0,0,0.75); font-family: var(--font); }
+  .tt-name { font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 14px; }
+  .tt-val  { color: rgba(255,255,255,0.88); margin-bottom: 4px; font-size: 13px; }
+  .tt-dep  { color: rgba(255,255,255,0.70); font-size: 12px; font-weight: 500; }
+  .tt-note { color: rgba(255,255,255,0.65); font-size: 12px; font-weight: 300; margin-top: 9px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 9px; line-height: 1.6; display: none; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-topline">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg">
+          <path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+        </svg>
+        <span class="logo-word">Narrows</span>
+      </div>
+      <span class="eyebrow-pill">Sankey Flow Analysis</span>
+    </div>
+    <div class="card-title">Gulf LNG — annual bilateral flows through sequential chokepoints</div>
+    <div class="card-sub">Ribbon width is proportional to annual trade value ($B). All cargo transits Hormuz. Asia-Pacific adds Malacca; European routes add Bab el-Mandeb and Suez, with Atlantic terminals adding Gibraltar. Hover for detail.</div>
+  </div>
+
+  <div class="card-body">
+    <svg id="sankey"></svg>
+  </div>
+
+  <div class="card-footer">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-swatch" style="background:#F0B429"></div><span class="legend-label">Chokepoint</span></div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#38bdf8"></div><span class="legend-label">Asia-Pacific via Malacca</span></div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#c084fc"></div><span class="legend-label">Europe via Bab / Suez</span></div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#34d399"></div><span class="legend-label">South Asia &amp; Americas</span></div>
+    </div>
+    <div class="source-note">
+      Source: Narrows CDM v0.3 &middot; HS 271111 bilateral trade data<br>
+      Dep% = share of national LNG imports sourced via Hormuz
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tt">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-val"  id="tt-val"></div>
+  <div class="tt-dep"  id="tt-dep"></div>
+  <div class="tt-note" id="tt-note"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<script>
+window.addEventListener('load', function () {
+
+  const GOLD = '#F0B429';
+  const NAVY = '#0A2540';
+  const FONT = "'Plus Jakarta Sans', sans-serif";
+  // 'phantom' nodes are invisible col-3 passthroughs for Med-terminal flows.
+  // They prevent d3-sankey from drawing cross-column bezier arcs (col 2 → col 4)
+  // that bump unpredictably through Gibraltar's space.
+  const COLS = { origin:'#F0B429', choke:'#F0B429', asia:'#38bdf8', europe:'#c084fc', south:'#34d399', phantom:'#c084fc' };
+
+  // ── Nodes ──────────────────────────────────────────────────────────────────
+  const rawNodes = [
+    { id:'gulf',        name:'Gulf LNG',              type:'origin',
+      note:'Qatar accounts for ~75% of Gulf LNG. Total annual flow: $51.5B. All cargo must transit Hormuz — no alternative maritime route exists.' },
+    { id:'hormuz',      name:'Hormuz',                type:'choke',
+      note:'Single mandatory transit for 100% of Gulf LNG. The full width of this node represents the entire $51.5B annual exposure at one bottleneck.' },
+    { id:'malacca',     name:'Malacca',               type:'choke',
+      note:'Second mandatory chokepoint for all Asia-Pacific LNG. $27.8B — 54% of Gulf LNG — passes here. No viable bypass exists for laden tankers.' },
+    { id:'bab',         name:'Bab el-Mandeb / Suez',  type:'choke',
+      note:'Bab el-Mandeb (active Houthi threat zone since late 2023) and Suez Canal in sequence. $19.1B — 37% of Gulf LNG. Disruption adds 14-16 days around the Cape.' },
+    // Col-3 nodes: Gibraltar (visible) + phantom passthroughs for Med terminals (invisible)
+    // Atlantic terminals first → Gibraltar at top of European block in col 3
+    { id:'gibraltar',   name:'Gibraltar',              type:'choke',
+      note:'Transit point for Atlantic-facing European terminals. Belgium (Zeebrugge), UK (Isle of Grain, South Hook) and Netherlands (Gate Rotterdam) all transit Gibraltar. France, Italy and Spain use Mediterranean terminals and bypass it.' },
+    // Invisible phantom nodes sit below Gibraltar; their ribbons flow straight
+    // through col 3 without a visible node, solving the cross-column bump issue.
+    { id:'_fp', name:'', type:'phantom', dep:null, td:null, note:'' },
+    { id:'_ip', name:'', type:'phantom', dep:null, td:null, note:'' },
+    { id:'_sp', name:'', type:'phantom', dep:null, td:null, note:'' },
+    // Asia-Pacific destinations
+    { id:'china',       name:'China',        type:'asia',   dep:23.6, td:11, note:'Largest single buyer of Gulf LNG. 23.6% of Chinese imports via Hormuz and Malacca.' },
+    { id:'korea',       name:'S. Korea',     type:'asia',   dep:20.0, td:13, note:'20.0% of South Korean LNG via Hormuz. Route continues through the Taiwan and Korea Straits.' },
+    { id:'japan',       name:'Japan',        type:'asia',   dep:6.5,  td:14, note:'6.5% of Japanese imports via Hormuz. Japan has diversified substantially to Australian and US LNG.' },
+    { id:'thailand',    name:'Thailand',     type:'asia',   dep:30.0, td:10, note:'30.0% of Thai LNG imports via Hormuz — among the higher Asian dependencies.' },
+    { id:'taiwan',      name:'Taiwan',       type:'asia',   dep:23.2, td:12, note:'23.2% of Taiwanese imports via Hormuz. The Taiwan Strait adds a further potential chokepoint.' },
+    // European destinations — Atlantic terminals first (align with Gibraltar in col 3)
+    { id:'belgium',     name:'Belgium',      type:'europe', dep:55.8, td:20, note:'55.8% Hormuz dependency — highest in Europe. Zeebrugge transits five chokepoints in sequence: Hormuz, Bab, Suez, Gibraltar, then destination.' },
+    { id:'uk',          name:'UK',           type:'europe', dep:26.9, td:21, note:'26.9% via Hormuz. Atlantic-facing terminals (Isle of Grain, South Hook) transit Gibraltar as the final chokepoint.' },
+    { id:'netherlands', name:'Netherlands',  type:'europe', dep:13.2, td:21, note:'13.2% via Hormuz. Gate Terminal Rotterdam is Atlantic-facing; Gibraltar transited en route.' },
+    { id:'france',      name:'France',       type:'europe', dep:10.2, td:15, note:'10.2% via Hormuz. Fos-sur-Mer is Mediterranean-facing — Suez is the last chokepoint; Gibraltar bypassed.' },
+    { id:'italy',       name:'Italy',        type:'europe', dep:21.6, td:14, note:'21.6% via Hormuz. Mediterranean terminals route via Suez — Gibraltar not transited.' },
+    { id:'spain',       name:'Spain',        type:'europe', dep:17.2, td:15, note:'17.2% via Hormuz. Primarily Mediterranean terminals via Suez.' },
+    // South Asia & Americas — direct from Hormuz, no intermediate named chokepoint
+    { id:'pakistan',    name:'Pakistan',     type:'south',  dep:98.2, td:2,  note:'98.2% Hormuz dependency — highest globally. No credible alternative at scale. A closure would rapidly paralyse Pakistani power generation.' },
+    { id:'india',       name:'India',        type:'south',  dep:2.5,  td:4,  note:'2.5% of Indian imports via Hormuz. India has diversified across Australia, US, and domestic production.' },
+    { id:'brazil',      name:'Brazil',       type:'south',  dep:5.9,  td:19, note:'5.9% via Hormuz. Cape of Good Hope route — comparable transit time to Atlantic European destinations.' },
+  ];
+
+  // ── Links ──────────────────────────────────────────────────────────────────
+  // Med terminals route Bab → phantom → country (one column per hop, no cross-column arc).
+  // Atlantic terminals route Bab → Gibraltar → country as before.
+  const rawLinks = [
+    { source:'gulf',      target:'hormuz',      value:51.5 },
+    { source:'hormuz',    target:'malacca',     value:27.8 },
+    { source:'hormuz',    target:'bab',         value:19.1 },
+    { source:'hormuz',    target:'pakistan',    value:4.0  },
+    { source:'hormuz',    target:'india',       value:0.4  },
+    { source:'hormuz',    target:'brazil',      value:0.2  },
+    { source:'malacca',   target:'china',       value:11.7 },
+    { source:'malacca',   target:'korea',       value:7.9  },
+    { source:'malacca',   target:'japan',       value:3.0  },
+    { source:'malacca',   target:'thailand',    value:2.5  },
+    { source:'malacca',   target:'taiwan',      value:2.2  },
+    { source:'bab',       target:'gibraltar',   value:12.1 },
+    { source:'bab',       target:'_fp',         value:3.4  }, // France via phantom
+    { source:'bab',       target:'_ip',         value:2.0  }, // Italy via phantom
+    { source:'bab',       target:'_sp',         value:1.6  }, // Spain via phantom
+    { source:'gibraltar', target:'belgium',     value:6.2  },
+    { source:'gibraltar', target:'uk',          value:3.1  },
+    { source:'gibraltar', target:'netherlands', value:2.8  },
+    { source:'_fp',       target:'france',      value:3.4  },
+    { source:'_ip',       target:'italy',       value:2.0  },
+    { source:'_sp',       target:'spain',       value:1.6  },
+  ];
+
+  // ── Canvas ─────────────────────────────────────────────────────────────────
+  const cardBody = document.querySelector('.card-body');
+  const CW  = Math.max(640, Math.min(cardBody.clientWidth - 40, 1000));
+  const CH  = 700;
+  const ML  = 82, MR = 134, MT = 8, MB = 8;
+
+  // ── Sankey layout ──────────────────────────────────────────────────────────
+  // sankeyJustify: leaf nodes (no outgoing) → rightmost column.
+  // Pakistan/India/Brazil are leaves, so they align with other destinations
+  // despite connecting directly from Hormuz (fewer hops).
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.id)
+    .nodeAlign(d3.sankeyJustify)
+    .nodeSort(null)
+    .nodeWidth(14)
+    .nodePadding(13)
+    .extent([[ML, MT], [CW - MR, CH - MB]]);
+
+  const nodes = rawNodes.map(d => ({ ...d }));
+  const links = rawLinks.map(d => ({ ...d }));
+  sankeyGen({ nodes, links });
+
+  // ── Post-layout: realign col-3 nodes to match Bab's vertical output ────────
+  // sankeyJustify places Gibraltar at the top of col-3 space. But Gibraltar
+  // must connect down to Belgium/UK/Netherlands in col-4 (mid-diagram), so the
+  // ribbon from Bab arcs upward through the Asia section — the bump the user sees.
+  // Fix: shift each col-3 node so its vertical centre matches the y of its
+  // incoming link's SOURCE side (i.e., where the ribbon exits Bab).
+  // Then shift all connected link endpoints by the same delta.
+  ['gibraltar', '_fp', '_ip', '_sp'].forEach(id => {
+    const nd     = nodes.find(d => d.id === id);
+    const inLink = links.find(l => l.target.id === id);
+    if (!nd || !inLink) return;
+    const origY0 = nd.y0;
+    const h      = nd.y1 - nd.y0;
+    nd.y0 = inLink.y0 - h / 2;
+    nd.y1 = nd.y0 + h;
+    const dy = nd.y0 - origY0;
+    nd.sourceLinks.forEach(lk => { lk.y0 += dy; });
+    nd.targetLinks.forEach(lk => { lk.y1 += dy; });
+  });
+
+  // ── SVG setup ──────────────────────────────────────────────────────────────
+  const svg = d3.select('#sankey')
+    .attr('width',  CW)
+    .attr('height', CH);
+
+  // ── Per-link gradients ─────────────────────────────────────────────────────
+  const defs = svg.append('defs');
+  links.forEach((lk, i) => {
+    const sc = COLS[lk.source.type] || GOLD;
+    const tc = COLS[lk.target.type] || GOLD;
+    const g  = defs.append('linearGradient')
+      .attr('id', `g${i}`)
+      .attr('gradientUnits', 'userSpaceOnUse')
+      .attr('x1', lk.source.x1).attr('y1', 0)
+      .attr('x2', lk.target.x0).attr('y2', 0);
+    g.append('stop').attr('offset', '0%')  .attr('stop-color', sc);
+    g.append('stop').attr('offset', '100%').attr('stop-color', tc);
+    lk._gid = `g${i}`;
+  });
+
+  // ── Tooltip ────────────────────────────────────────────────────────────────
+  const tt    = document.getElementById('tt');
+  const ttN   = document.getElementById('tt-name');
+  const ttV   = document.getElementById('tt-val');
+  const ttD   = document.getElementById('tt-dep');
+  const ttNot = document.getElementById('tt-note');
+
+  function showTT(ev, name, val, dep, note) {
+    ttN.textContent   = name;
+    ttV.textContent   = val  || '';
+    ttD.textContent   = dep  || '';
+    ttNot.textContent = note || '';
+    ttNot.style.display = note ? 'block' : 'none';
+    tt.style.opacity = '1';
+    tt.style.left = Math.min(ev.clientX + 18, window.innerWidth  - 320) + 'px';
+    tt.style.top  = Math.min(ev.clientY - 14, window.innerHeight - 210) + 'px';
+  }
+  function hideTT() { tt.style.opacity = '0'; }
+
+  // ── Ribbons ────────────────────────────────────────────────────────────────
+  // d3.sankeyLinkHorizontal() generates a single bezier CURVE (open path).
+  // Ribbon width comes from stroke-width: link.width — not fill.
+  svg.append('g')
+    .selectAll('path')
+    .data(links)
+    .join('path')
+      .attr('d', d3.sankeyLinkHorizontal())
+      .attr('fill', 'none')
+      .attr('stroke',        (d, i) => `url(#g${i})`)
+      .attr('stroke-width',  d => Math.max(1, d.width))
+      .attr('stroke-opacity', 0.48)
+      .style('cursor', 'default')
+      .on('mousemove', function(ev, d) {
+        d3.select(this).attr('stroke-opacity', 0.72);
+        showTT(ev,
+          `${d.source.name}  →  ${d.target.name}`,
+          `$${d.value.toFixed(1)}B annual flow`,
+          null,
+          d.target.note || null
+        );
+      })
+      .on('mouseleave', function() {
+        d3.select(this).attr('stroke-opacity', 0.48);
+        hideTT();
+      });
+
+  // ── Nodes ──────────────────────────────────────────────────────────────────
+  const nodeG = svg.append('g')
+    .selectAll('g')
+    .data(nodes)
+    .join('g')
+      .style('cursor', 'default')
+      .on('mousemove', function(ev, d) {
+        if (d.type === 'phantom') return;
+        const dep = d.dep != null ? `Hormuz dependency: ${d.dep}%` : null;
+        const val = `$${(d.value || 0).toFixed(1)}B` + (d.td ? `  ·  ~${d.td}d from origin` : '');
+        showTT(ev, d.name, val, dep, d.note);
+      })
+      .on('mouseleave', hideTT);
+
+  nodeG.append('rect')
+    .filter(d => d.type !== 'phantom')
+    .attr('x',      d => d.x0)
+    .attr('y',      d => d.y0)
+    .attr('width',  d => d.x1 - d.x0)
+    .attr('height', d => Math.max(2, d.y1 - d.y0))
+    .attr('rx', 3)
+    .attr('fill',          d => COLS[d.type] || GOLD)
+    .attr('fill-opacity',  0.18)
+    .attr('stroke',        d => COLS[d.type] || GOLD)
+    .attr('stroke-width',  1.8)
+    .attr('stroke-opacity', 0.90);
+
+  // ── Labels ─────────────────────────────────────────────────────────────────
+  // All labels sit outside the ribbon area — no text outline needed.
+  // Interior nodes (chokepoints): label LEFT of node, $B value on a second line.
+  // Destination nodes (leaves): label RIGHT of node, $B·days sub-label below.
+  nodeG.each(function(d) {
+    if (d.type === 'phantom') return; // invisible passthrough — no label
+    const g      = d3.select(this);
+    const nodeH  = d.y1 - d.y0;
+    const cy     = (d.y0 + d.y1) / 2;
+    const col    = COLS[d.type] || GOLD;
+    const isChoke = d.type === 'choke' || d.type === 'origin';
+    const isDest  = !d.sourceLinks || d.sourceLinks.length === 0;
+
+    if (nodeH < 5 && !isChoke) return;
+
+    if (isDest) {
+      // ── Destination (rightmost column) ──────────────────────────────────
+      const lx = d.x1 + 11;
+      const hasSubLabel = d.td != null && nodeH >= 13;
+      const nameY = hasSubLabel ? cy - 8 : cy;
+
+      // Country name — larger and bolder, the meaningful part of the story
+      g.append('text')
+        .attr('x', lx).attr('y', nameY)
+        .attr('text-anchor', 'start')
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', col)
+        .attr('font-size', 14)
+        .attr('font-weight', 700)
+        .attr('font-family', FONT)
+        .text(d.name);
+
+      // $B · days — clearly legible
+      if (hasSubLabel) {
+        g.append('text')
+          .attr('x', lx).attr('y', cy + 8)
+          .attr('text-anchor', 'start')
+          .attr('dominant-baseline', 'middle')
+          .attr('fill', col)
+          .attr('fill-opacity', 0.82)
+          .attr('font-size', 12)
+          .attr('font-weight', 500)
+          .attr('font-family', FONT)
+          .text(`$${(d.value || 0).toFixed(1)}B · ${d.td}d`);
+      }
+
+    } else {
+      // ── Interior node (chokepoints, origin) — label LEFT of node ────────
+      const lx = d.x0 - 10;
+
+      // Name
+      g.append('text')
+        .attr('x', lx).attr('y', cy - (d.value ? 8 : 0))
+        .attr('text-anchor', 'end')
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', isChoke ? GOLD : col)
+        .attr('font-size', 13)
+        .attr('font-weight', 700)
+        .attr('font-family', FONT)
+        .text(d.name);
+
+      // $B on second line — outside ribbons, fully legible
+      if (d.value) {
+        g.append('text')
+          .attr('x', lx).attr('y', cy + 8)
+          .attr('text-anchor', 'end')
+          .attr('dominant-baseline', 'middle')
+          .attr('fill', isChoke ? GOLD : col)
+          .attr('fill-opacity', 0.65)
+          .attr('font-size', 11)
+          .attr('font-weight', 400)
+          .attr('font-family', FONT)
+          .text(`$${(d.value || 0).toFixed(1)}B`);
+      }
+    }
+  });
+
+}); // window.load
+</script>
+</body>
+</html>
