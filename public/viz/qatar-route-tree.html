@@ -192,6 +192,7 @@
 </div>
 
 <script>
+window.addEventListener('load', function () {
 // ── Canvas ────────────────────────────────────────────────────────────────────
 const cardBody = document.querySelector('.card-body');
 const W  = Math.min(cardBody.clientWidth - 48, 980);
@@ -432,12 +433,18 @@ nodes.forEach(n => {
     tt.style.left = (e.clientX + 18) + 'px';
     tt.style.top  = (e.clientY - 14) + 'px';
   };
-  circle.addEventListener('mousemove', showTT);
-  circle.addEventListener('mouseleave', () => { tt.style.opacity = '0'; });
+  // Larger invisible hit target so small country circles are easy to hover
+  const hitR = Math.max(20, r + 8);
+  const hit = at(mk('circle'), {
+    cx:n.x, cy:n.y, r:hitR,
+    fill:'transparent', stroke:'none', style:'cursor:pointer'
+  });
+  root.appendChild(hit);
+  hit.addEventListener('mousemove', showTT);
+  hit.addEventListener('mouseleave', () => { tt.style.opacity = '0'; });
 });
 
-// Clean up the duplicate path issue from earlier draft
-// (remove any paths accidentally appended twice — not a concern here, code is clean)
+}); // end window load
 </script>
 </body>
 </html>
