@@ -3,8 +3,8 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
 ---
 
 <ArticleLayout
-  title="Gulf LNG: route tree vs. Sankey — which tells the story better?"
-  description="Two ways to visualise $51.5B of annual Gulf LNG flows and the chokepoints every cargo must survive. We want your view."
+  title="Gulf LNG: Route Tree or Sankey?"
+  description="Two visualisations of the same data. Please tell us which tells the story better."
   eyebrow="Interactive Analysis"
   publishDate="June 2026"
   author="Narrows Research"
@@ -18,33 +18,31 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
   }
   .lede strong { color: var(--text-primary); font-weight: 600; }
 
-  /* ── Side-by-side chart grid ─────────────────────────────────────────────── */
-  .charts-grid {
+  /* ── Thumbnail grid ──────────────────────────────────────────────────────── */
+  .thumb-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    margin: 0 0 40px;
+    margin: 0 0 12px;
   }
-  .chart-col { display: flex; flex-direction: column; gap: 12px; }
-  .chart-label {
+  .thumb-col { display: flex; flex-direction: column; gap: 10px; }
+  .thumb-label {
     font-size: 9px; font-weight: 700; letter-spacing: 0.13em;
     text-transform: uppercase; color: var(--text-tertiary);
     display: flex; align-items: center; gap: 8px;
   }
-  .chart-num {
+  .thumb-num {
     display: inline-flex; align-items: center; justify-content: center;
     width: 20px; height: 20px; border-radius: 50%;
     background: var(--navy); color: #fff; font-size: 9px; font-weight: 700;
+    flex-shrink: 0;
   }
-  .chart-frame {
-    width: 100%; border: none; border-radius: 8px;
-    display: block; background: #0A2540; flex: 1;
-  }
-  .chart-caption {
-    font-size: 12px; color: var(--text-tertiary); line-height: 1.55;
+  .thumb-svg {
+    width: 100%; border-radius: 8px; background: #0A2540;
+    display: block; aspect-ratio: 16/9;
   }
 
-  /* ── Vote ────────────────────────────────────────────────────────────────── */
+  /* ── Vote buttons ────────────────────────────────────────────────────────── */
   .vote-btn {
     display: flex; align-items: center; justify-content: center; gap: 8px;
     width: 100%; padding: 13px 20px; border-radius: 6px;
@@ -59,12 +57,33 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
 
   #vote-status {
     text-align: center; font-size: 14px; color: var(--text-secondary);
-    padding: 10px 0; min-height: 20px;
+    min-height: 22px; padding: 4px 0 20px;
   }
   #vote-status.sent { color: var(--gold); font-weight: 600; }
 
   /* ── Rule ────────────────────────────────────────────────────────────────── */
-  hr.rule { border: none; border-top: 1px solid var(--rule-light, #e5e7eb); margin: 48px 0; }
+  hr.rule { border: none; border-top: 1px solid var(--rule-light, #e5e7eb); margin: 40px 0; }
+
+  /* ── Full iframes ────────────────────────────────────────────────────────── */
+  .viz-section { margin: 36px 0; }
+  .viz-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--text-tertiary);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  }
+  .viz-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--navy); color: #fff; font-size: 9px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .chart-frame {
+    width: 100%; border: none; border-radius: 8px;
+    display: block; background: #0A2540;
+  }
+  .viz-caption {
+    font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.55;
+  }
 
   /* ── Background section ──────────────────────────────────────────────────── */
   .section-label {
@@ -108,45 +127,126 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
   .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
   .callout-body strong { color: var(--text-primary); font-weight: 600; }
 
-  @media (max-width: 680px) {
-    .charts-grid { grid-template-columns: 1fr; }
-    .stat-row { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) {
+    .thumb-grid { grid-template-columns: 1fr; }
+    .stat-row   { grid-template-columns: 1fr 1fr; }
   }
 </style>
 
 <!-- ── Lede ───────────────────────────────────────────────────────────────── -->
 <p class="lede">
-  Every Gulf LNG cargo passes through <strong>Hormuz</strong>, then a further sequence of
-  chokepoints before reaching its destination. We built two visualisations of the same data.
-  Which one tells the story better?
+  Every Gulf LNG cargo ship passes through the <strong>Strait of Hormuz</strong>, then a
+  further sequence of chokepoints before reaching its destination. These two charts show
+  the same data in different ways. Please tell us which tells the story better.
 </p>
 
-<!-- ── Charts + vote ─────────────────────────────────────────────────────── -->
-<div class="charts-grid">
+<!-- ── Thumbnails + vote ──────────────────────────────────────────────────── -->
+<div class="thumb-grid">
 
-  <!-- Route tree -->
-  <div class="chart-col">
-    <div class="chart-label"><span class="chart-num">1</span> Route Tree</div>
-    <iframe id="frame-tree" class="chart-frame" src="/viz/qatar-route-tree.html"
-      scrolling="no" title="Gulf LNG route tree" style="height:600px"></iframe>
-    <p class="chart-caption">
-      Geography and sequence. Line weight scales with trade value.
-      Hover nodes for detail.
-    </p>
+  <!-- Route tree thumbnail -->
+  <div class="thumb-col">
+    <div class="thumb-label"><span class="thumb-num">1</span> Route Tree</div>
+    <svg class="thumb-svg" viewBox="0 0 380 215" xmlns="http://www.w3.org/2000/svg">
+      <!-- Origin -->
+      <circle cx="38" cy="107" r="14" fill="#F0B429" fill-opacity="0.18" stroke="#F0B429" stroke-width="2"/>
+      <text x="38" y="130" text-anchor="middle" fill="#F0B429" font-size="8" font-family="sans-serif" opacity="0.7">Gulf LNG</text>
+      <!-- Hormuz -->
+      <path d="M52,107 C72,107 72,107 92,107" stroke="#F0B429" stroke-width="3.5" fill="none" stroke-opacity="0.6"/>
+      <circle cx="106" cy="107" r="14" fill="#F0B429" fill-opacity="0.18" stroke="#F0B429" stroke-width="2"/>
+      <text x="106" y="130" text-anchor="middle" fill="#F0B429" font-size="8" font-family="sans-serif" opacity="0.7">Hormuz</text>
+      <!-- Malacca branch -->
+      <path d="M120,102 C152,102 152,46 172,46" stroke="#38bdf8" stroke-width="2.5" fill="none" stroke-opacity="0.5"/>
+      <circle cx="183" cy="46" r="9" fill="#F0B429" fill-opacity="0.18" stroke="#F0B429" stroke-width="1.5"/>
+      <text x="183" y="60" text-anchor="middle" fill="#F0B429" font-size="7" font-family="sans-serif" opacity="0.6">Malacca</text>
+      <!-- Asia dots -->
+      <path d="M192,42 C220,42 220,18 248,18" stroke="#38bdf8" stroke-width="1.5" fill="none" stroke-opacity="0.4"/>
+      <path d="M192,44 C220,44 220,34 248,34" stroke="#38bdf8" stroke-width="1.2" fill="none" stroke-opacity="0.35"/>
+      <path d="M192,46 C220,46 220,46 248,46" stroke="#38bdf8" stroke-width="1" fill="none" stroke-opacity="0.3"/>
+      <path d="M192,48 C220,48 220,58 248,58" stroke="#38bdf8" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <path d="M192,50 C220,50 220,70 248,70" stroke="#38bdf8" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <circle cx="253" cy="18" r="5" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1.2"/>
+      <circle cx="253" cy="34" r="5" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1.2"/>
+      <circle cx="253" cy="46" r="4" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1"/>
+      <circle cx="253" cy="58" r="4" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1"/>
+      <circle cx="253" cy="70" r="4" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1"/>
+      <!-- Bab branch -->
+      <path d="M120,110 C152,110 152,138 172,138" stroke="#c084fc" stroke-width="2" fill="none" stroke-opacity="0.5"/>
+      <circle cx="183" cy="138" r="9" fill="#F0B429" fill-opacity="0.18" stroke="#F0B429" stroke-width="1.5"/>
+      <text x="183" y="153" text-anchor="middle" fill="#F0B429" font-size="7" font-family="sans-serif" opacity="0.6">Bab/Suez</text>
+      <!-- Gibraltar -->
+      <path d="M192,134 C215,134 215,112 232,112" stroke="#c084fc" stroke-width="1.5" fill="none" stroke-opacity="0.45"/>
+      <circle cx="240" cy="112" r="6" fill="#F0B429" fill-opacity="0.18" stroke="#F0B429" stroke-width="1.2"/>
+      <!-- Atlantic Europe -->
+      <path d="M246,110 C260,110 260,96 272,96" stroke="#c084fc" stroke-width="1.2" fill="none" stroke-opacity="0.4"/>
+      <path d="M246,112 C260,112 260,108 272,108" stroke="#c084fc" stroke-width="1" fill="none" stroke-opacity="0.35"/>
+      <path d="M246,114 C260,114 260,120 272,120" stroke="#c084fc" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <!-- Med Europe direct -->
+      <path d="M192,142 C220,142 220,134 272,134" stroke="#c084fc" stroke-width="1" fill="none" stroke-opacity="0.35"/>
+      <path d="M192,144 C220,144 220,144 272,144" stroke="#c084fc" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <path d="M192,146 C220,146 220,154 272,154" stroke="#c084fc" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <circle cx="277" cy="96"  r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <circle cx="277" cy="108" r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <circle cx="277" cy="120" r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <circle cx="277" cy="134" r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <circle cx="277" cy="144" r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <circle cx="277" cy="154" r="4" fill="#c084fc" fill-opacity="0.25" stroke="#c084fc" stroke-width="1"/>
+      <!-- Direct South Asia -->
+      <path d="M120,114 C152,114 152,182 248,172" stroke="#34d399" stroke-width="1.5" fill="none" stroke-opacity="0.45"/>
+      <path d="M120,114 C152,114 152,186 248,186" stroke="#34d399" stroke-width="1" fill="none" stroke-opacity="0.35"/>
+      <path d="M120,114 C152,114 152,198 248,200" stroke="#34d399" stroke-width="0.8" fill="none" stroke-opacity="0.3"/>
+      <circle cx="253" cy="172" r="5" fill="#34d399" fill-opacity="0.25" stroke="#34d399" stroke-width="1"/>
+      <circle cx="253" cy="186" r="4" fill="#34d399" fill-opacity="0.25" stroke="#34d399" stroke-width="1"/>
+      <circle cx="253" cy="200" r="3" fill="#34d399" fill-opacity="0.25" stroke="#34d399" stroke-width="1"/>
+    </svg>
     <button class="vote-btn vote-btn-tree" onclick="castVote('Route Tree')">
       Route Tree works better
     </button>
   </div>
 
-  <!-- Sankey -->
-  <div class="chart-col">
-    <div class="chart-label"><span class="chart-num">2</span> Sankey</div>
-    <iframe id="frame-sankey" class="chart-frame" src="/viz/gulf-lng-sankey.html"
-      scrolling="no" title="Gulf LNG Sankey" style="height:600px"></iframe>
-    <p class="chart-caption">
-      Ribbon width proportional to dollar value. The full height of Hormuz = $51.5B.
-      Hover ribbons for detail.
-    </p>
+  <!-- Sankey thumbnail -->
+  <div class="thumb-col">
+    <div class="thumb-label"><span class="thumb-num">2</span> Sankey</div>
+    <svg class="thumb-svg" viewBox="0 0 380 215" xmlns="http://www.w3.org/2000/svg">
+      <!-- Col 1: Gulf LNG -->
+      <rect x="20" y="10" width="16" height="195" rx="3" fill="#F0B429" fill-opacity="0.35"/>
+      <!-- Col 2: Hormuz -->
+      <rect x="105" y="10" width="16" height="195" rx="3" fill="#F0B429" fill-opacity="0.35"/>
+      <!-- Ribbons Gulf -> Hormuz -->
+      <path d="M36,10 C70,10 71,10 105,10 L105,205 C71,205 70,205 36,205 Z" fill="#F0B429" fill-opacity="0.12"/>
+      <!-- Col 3a: Malacca -->
+      <rect x="192" y="10" width="12" height="113" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <!-- Col 3b: Bab/Suez -->
+      <rect x="192" y="130" width="12" height="75" rx="2" fill="#c084fc" fill-opacity="0.5"/>
+      <!-- Ribbons Hormuz -> Malacca -->
+      <path d="M121,10 C155,10 158,10 192,10 L192,123 C158,123 155,123 121,123 Z" fill="#38bdf8" fill-opacity="0.18"/>
+      <!-- Ribbons Hormuz -> Bab -->
+      <path d="M121,130 C155,130 158,130 192,130 L192,205 C158,205 155,205 121,205 Z" fill="#c084fc" fill-opacity="0.18"/>
+      <!-- Asia destinations -->
+      <rect x="296" y="10"  width="12" height="38" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <rect x="296" y="52"  width="12" height="28" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <rect x="296" y="84"  width="12" height="16" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <rect x="296" y="104" width="12" height="14" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <rect x="296" y="122" width="12" height="10" rx="2" fill="#38bdf8" fill-opacity="0.5"/>
+      <!-- Malacca ribbons to Asia -->
+      <path d="M204,10 C248,10 250,10 296,10 L296,48 C250,48 248,48 204,48 Z" fill="#38bdf8" fill-opacity="0.15"/>
+      <path d="M204,52 C248,52 250,52 296,52 L296,80 C250,80 248,80 204,80 Z" fill="#38bdf8" fill-opacity="0.12"/>
+      <path d="M204,84 C248,84 250,84 296,84 L296,100 C250,100 248,100 204,100 Z" fill="#38bdf8" fill-opacity="0.1"/>
+      <path d="M204,104 C248,104 250,104 296,104 L296,118 C250,118 248,118 204,118 Z" fill="#38bdf8" fill-opacity="0.1"/>
+      <path d="M204,118 C248,118 250,118 296,118 L296,132 C250,132 248,132 204,132 Z" fill="#38bdf8" fill-opacity="0.08"/>
+      <!-- Europe destinations -->
+      <rect x="296" y="138" width="12" height="26" rx="2" fill="#c084fc" fill-opacity="0.5"/>
+      <rect x="296" y="168" width="12" height="16" rx="2" fill="#c084fc" fill-opacity="0.5"/>
+      <rect x="296" y="188" width="12" height="10" rx="2" fill="#c084fc" fill-opacity="0.5"/>
+      <!-- Direct -->
+      <rect x="296" y="142" width="0" height="0"/>
+      <!-- Bab ribbons to Europe -->
+      <path d="M204,130 C248,130 250,138 296,138 L296,164 C250,164 248,160 204,160 Z" fill="#c084fc" fill-opacity="0.15"/>
+      <path d="M204,165 C248,165 250,168 296,168 L296,184 C250,184 248,180 204,180 Z" fill="#c084fc" fill-opacity="0.12"/>
+      <path d="M204,184 C248,184 250,188 296,188 L296,198 C250,198 248,195 204,195 Z" fill="#c084fc" fill-opacity="0.1"/>
+      <!-- Direct South Asia ribbons (from Hormuz directly) -->
+      <rect x="296" y="200" width="12" height="5"  rx="1" fill="#34d399" fill-opacity="0.5"/>
+      <path d="M121,196 C155,196 158,200 296,200 L296,205 C158,205 155,201 121,201 Z" fill="#34d399" fill-opacity="0.18"/>
+    </svg>
     <button class="vote-btn vote-btn-sankey" onclick="castVote('Sankey')">
       Sankey works better
     </button>
@@ -158,13 +258,40 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
 
 <hr class="rule" />
 
+<!-- ── Full interactive charts ────────────────────────────────────────────── -->
+<div class="viz-section">
+  <div class="viz-label"><span class="viz-num">1</span> Route Tree — hover nodes and links for detail</div>
+  <iframe id="frame-tree" class="chart-frame" src="/viz/qatar-route-tree.html"
+    scrolling="no" title="Gulf LNG route tree" style="height:700px"></iframe>
+  <p class="viz-caption">
+    <strong style="color:#38bdf8">Asia-Pacific via Malacca</strong> &nbsp;&middot;&nbsp;
+    <strong style="color:#c084fc">Europe via Bab el-Mandeb / Suez</strong> &nbsp;&middot;&nbsp;
+    <strong style="color:#34d399">South Asia and Americas</strong>.
+    Chokepoints in <strong style="color:#F0B429">gold</strong>.
+  </p>
+</div>
+
+<hr class="rule" />
+
+<div class="viz-section">
+  <div class="viz-label"><span class="viz-num">2</span> Sankey — ribbon width proportional to trade value</div>
+  <iframe id="frame-sankey" class="chart-frame" src="/viz/gulf-lng-sankey.html"
+    scrolling="no" title="Gulf LNG Sankey" style="height:760px"></iframe>
+  <p class="viz-caption">
+    The full height of <strong style="color:#F0B429">Hormuz</strong> = $51.5B of annual exposure
+    at a single mandatory chokepoint. Hover ribbons and nodes for detail.
+  </p>
+</div>
+
+<hr class="rule" />
+
 <!-- ── Background ────────────────────────────────────────────────────────── -->
 <div class="section-label">Background</div>
 <h2 class="section-title">Why LNG chokepoints matter to risk and insurance</h2>
 
 <p class="prose">
   Liquefied natural gas has become the critical swing fuel in the global energy system.
-  Unlike pipeline gas, LNG can be redirected cargo by cargo to wherever the price is highest.
+  Unlike pipeline gas, LNG shipments can be rerouted to wherever the price is highest.
   This flexibility is commercially valuable, but it concentrates physical risk at a handful
   of maritime chokepoints that cannot be bypassed by laden tankers.
 </p>
@@ -183,9 +310,9 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
   <div class="callout-label">Accumulation note</div>
   <div class="callout-body">
     These are <strong>sequential chokepoints</strong>, not alternatives. A cargo bound for
-    Zeebrugge transits Hormuz, Bab, Suez, and Gibraltar before arriving. Disruption at any
-    one cascades to the destination. This is the accumulation problem that conventional
-    cargo models undercount.
+    Zeebrugge transits Hormuz, Bab el-Mandeb, Suez, and Gibraltar before arriving.
+    Disruption at any one cascades to the destination. This is the accumulation problem
+    that conventional cargo models undercount.
   </div>
 </div>
 
@@ -193,7 +320,7 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
   <div class="stat-cell">
     <div class="stat-lbl">Annual Gulf LNG flow</div>
     <div class="stat-val">$51.5<span style="font-size:16px;font-weight:400">B</span></div>
-    <div class="stat-unit">HS 271111 bilateral trade, all exporters</div>
+    <div class="stat-unit">Bilateral trade data, all exporters</div>
   </div>
   <div class="stat-cell">
     <div class="stat-lbl">Mandatory Hormuz transit</div>
@@ -208,16 +335,14 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
 </div>
 
 <p class="prose" style="font-size:13px; color:var(--text-tertiary);">
-  Source: Narrows CDM v0.3, UN Comtrade HS 271111 bilateral trade flows.
-  Dependency percentages reflect each country's share of total LNG imports
-  originating in Hormuz-transit corridors.
+  Source: Narrows CDM v0.3. Bilateral trade data. Dependency percentages reflect each
+  country's share of total LNG imports originating in Hormuz-transit corridors.
 </p>
 
 </ArticleLayout>
 
 <script is:inline>
-  // ── iframe sizing ───────────────────────────────────────────────────────────
-  // Fixed height 600px; expand if content is taller
+  // ── iframe auto-height ──────────────────────────────────────────────────────
   ['frame-tree', 'frame-sankey'].forEach(function(id) {
     var f = document.getElementById(id);
     if (!f) return;
