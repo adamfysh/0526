@@ -274,20 +274,20 @@ const {
       .cta-strip-inner { flex-direction: column; align-items: flex-start; }
     }
 
-    /* Article photo band — full-width image between stat-bar and body */
-    .article-photo-band {
+    /* Article photo band — :global so styles reach slot content */
+    :global(.article-photo-band) {
       position: relative;
       width: 100%;
       height: 380px;
       overflow: hidden;
     }
-    .article-photo-band img {
+    :global(.article-photo-band) img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .article-photo-caption {
+    :global(.article-photo-caption) {
       position: absolute;
       bottom: 14px;
       right: 20px;
