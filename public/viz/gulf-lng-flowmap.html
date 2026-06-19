@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gulf LNG Export Routes | Narrows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0A2540; --gold:#F0B429; --asia:#38bdf8; --euro:#c084fc; --india:#34d399; }
+    body { background:#071929; font-family:'Plus Jakarta Sans',system-ui,sans-serif; height:100vh; overflow:hidden; color:#e2e8f0; }
+    #wrap { position:relative; width:100vw; height:100vh; }
+    svg#map { position:absolute; inset:0; width:100%; height:100%; }
+
+    #header { position:absolute; top:18px; left:18px; z-index:5; }
+    #header .eyebrow { font-size:8.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+    #header .eyebrow::after { content:''; display:block; width:28px; height:1px; background:var(--gold); opacity:.5; }
+    #header h1 { font-size:15px; font-weight:700; letter-spacing:-.015em; color:#fff; line-height:1.2; }
+    #header .sub { font-size:10px; color:#3a5570; margin-top:3px; font-weight:300; letter-spacing:.02em; }
+
+    #tt { position:absolute; background:rgba(4,16,32,.97); border:1px solid rgba(240,180,41,.3); border-radius:6px; padding:10px 14px; pointer-events:none; opacity:0; transition:opacity .1s; z-index:20; min-width:148px; }
+    #tt .tt-lbl  { font-size:8.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+    #tt .tt-row  { display:flex; align-items:baseline; gap:3px; }
+    #tt .tt-val  { font-size:24px; font-weight:700; color:#fff; line-height:1; }
+    #tt .tt-unit { font-size:10px; color:#94a3b8; }
+    #tt .tt-note { font-size:10px; color:#4a6a8a; margin-top:5px; line-height:1.45; }
+
+    #legend { position:absolute; bottom:18px; left:18px; background:rgba(4,16,32,.92); border:1px solid rgba(255,255,255,.07); border-radius:8px; padding:13px 16px; z-index:5; }
+    .leg-title { font-size:8px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#2a4060; margin-bottom:10px; }
+    .leg-item  { display:flex; align-items:center; gap:9px; margin-bottom:6px; font-size:10.5px; color:#a0b8cc; }
+    .leg-swatch { flex-shrink:0; border-radius:2px; }
+    .leg-note  { margin-top:10px; font-size:9px; color:#2a4060; }
+
+    #source { position:absolute; bottom:18px; right:18px; font-size:8.5px; color:#1a3050; z-index:5; text-align:right; line-height:1.7; }
+    #loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:30; pointer-events:none; }
+    #loading span { font-size:11px; color:#2a4060; letter-spacing:.1em; text-transform:uppercase; }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <div id="header">
+    <div class="eyebrow">Narrows Research</div>
+    <h1>Gulf LNG Export Routes</h1>
+    <div class="sub">Geographic flow map · annual cargo volume (approx. MTPA)</div>
+  </div>
+  <svg id="map"></svg>
+  <div id="tt"></div>
+  <div id="legend">
+    <div class="leg-title">Corridor</div>
+    <div class="leg-item"><div class="leg-swatch" style="width:30px;height:7px;background:var(--gold);opacity:.85"></div>Strait of Hormuz (trunk)</div>
+    <div class="leg-item"><div class="leg-swatch" style="width:30px;height:5px;background:var(--asia);opacity:.75"></div>Asia-Pacific</div>
+    <div class="leg-item"><div class="leg-swatch" style="width:30px;height:3px;background:var(--euro);opacity:.75"></div>Europe (via Suez)</div>
+    <div class="leg-item"><div class="leg-swatch" style="width:30px;height:2px;background:var(--india);opacity:.75"></div>South Asia</div>
+    <div class="leg-note">Width ∝ cargo volume · flows clipped to ocean</div>
+  </div>
+  <div id="source">Narrows Research · Approximate volumes, 2023–24 avg<br>Qatar LNG exports · Public shipping data</div>
+  <div id="loading"><span>Loading chart…</span></div>
+</div>
+
+<script>
+window.addEventListener('load', function () {
+
+  var W = window.innerWidth, H = window.innerHeight;
+
+  var svg = d3.select('#map').attr('viewBox', '0 0 ' + W + ' ' + H);
+
+  // Mercator centred on Indian Ocean basin
+  var proj = d3.geoMercator()
+    .center([74, 20])
+    .scale(W * 0.62)
+    .translate([W * 0.42, H * 0.52]);
+
+  var gPath = d3.geoPath().projection(proj);
+
+  // ── Shared junction coordinates ──────────────────────────────────────
+  var AS   = [61.0, 22.5];   // Arabian Sea (post-Hormuz)
+  var MAL  = [103.8, 1.3];   // Malacca / Singapore exit
+  var SUEZ = [32.5, 30.8];   // Suez Canal north end
+
+  // ── Route definitions ────────────────────────────────────────────────
+  //
+  //  Waypoints are [lon, lat] following navigable water bodies.
+  //  Dense waypoints keep geodesic arcs in the correct sea lane.
+  //  The ocean clip-path (built below) ensures nothing renders on land.
+  //
+  //  Trunk architecture:
+  //   Ras Laffan → [Persian Gulf] → Hormuz → AS
+  //     ├─ AS → [Arabian Sea, south of India] → MAL
+  //     │    ├─ → [South China Sea] → Japan
+  //     │    ├─ → [South China Sea] → South Korea
+  //     │    └─ → [South China Sea] → China
+  //     ├─ AS → [Gulf of Aden] → Bab el-Mandeb → [Red Sea] → SUEZ
+  //     │    └─ SUEZ → [Mediterranean] → Gibraltar → NW Europe
+  //     └─ AS → [Arabian Sea west of India] → India
+
+  var ROUTES = [
+
+    // 1. HORMUZ TRUNK — threads east through the Persian Gulf
+    {
+      id:'hormuz', label:'Strait of Hormuz', color:'#F0B429', vol:68,
+      note:'Every Gulf LNG cargo passes here',
+      coords:[
+        [51.55,25.90],  // Ras Laffan
+        [52.30,26.05],
+        [53.10,26.25],
+        [54.00,26.50],
+        [54.90,26.72],
+        [55.70,26.88],  // mid-Gulf, approaching Hormuz
+        [56.20,26.72],
+        [56.55,26.42],  // through the narrows
+        [57.00,25.90],
+        [57.60,25.20],
+        [58.30,24.40],
+        [59.20,23.20],
+        [60.10,22.80],
+        AS
+      ]
+    },
+
+    // 2. INDIAN OCEAN TRUNK → MALACCA
+    //    Sweeps south of India's tip (Kanyakumari 8.1°N/77.6°E)
+    //    and south of Sri Lanka (south tip 5.9°N/80.7°E)
+    {
+      id:'to-malacca', label:'Indian Ocean → Malacca Strait', color:'#38bdf8', vol:44,
+      note:'Japan + S. Korea + China combined',
+      coords:[
+        AS,
+        [63.0,17.5],
+        [65.5,13.5],
+        [67.5,10.5],
+        [69.5, 8.5],
+        [73.0, 7.0],   // Laccadive Sea — India coast is ~77°E here
+        [77.5, 5.8],   // south of Kanyakumari ✓
+        [80.5, 4.8],   // south of Sri Lanka ✓
+        [84.5, 5.0],   // Bay of Bengal, turning northeast
+        [88.0, 6.0],
+        [92.0, 6.5],   // approaching Andaman Sea from west
+        [94.0, 6.5],   // north of Banda Aceh (5.55°N) — tip of Sumatra ✓
+        [96.5, 5.5],   // east of Banda Aceh, NW Malacca approach
+        [98.5, 5.0],   // NW entrance of Malacca Strait
+        [100.0, 4.5],  // Malacca Strait (near Penang)
+        [101.5, 3.5],
+        [102.5, 2.5],
+        [103.5, 1.5],
+        MAL            // Singapore exit
+      ]
+    },
+
+    // 3. INDIA BRANCH — stays west of India's coast in the Arabian Sea
+    {
+      id:'india', label:'India (west coast)', color:'#34d399', vol:8,
+      note:'Petronet LNG, Dahej & Hazira terminals',
+      coords:[
+        AS,
+        [63.0,20.5],
+        [65.5,19.0],
+        [68.0,18.5],
+        [70.0,19.5],
+        [71.5,21.0],
+        [72.5,22.5]
+      ]
+    },
+
+    // 4. BAB EL-MANDEB / RED SEA / SUEZ
+    //    Gulf of Aden between Yemen (N) and Somalia (S),
+    //    then up the centre of the Red Sea to Suez
+    {
+      id:'to-suez', label:'Bab el-Mandeb → Suez Canal', color:'#c084fc', vol:14,
+      note:'All Europe-bound LNG',
+      coords:[
+        AS,
+        [58.5,17.5],
+        [55.5,14.0],
+        [52.0,13.0],
+        [49.0,12.5],
+        [46.0,12.5],
+        [43.4,12.5],  // Bab el-Mandeb
+        // Red Sea centre (longitudinal midpoint of sea at each latitude)
+        [42.2,14.5],
+        [41.0,17.0],
+        [39.8,19.0],
+        [38.8,21.5],
+        [37.5,23.5],
+        [36.5,25.5],
+        [35.2,27.5],
+        [34.0,28.8],
+        [32.8,30.0],
+        SUEZ
+      ]
+    },
+
+    // 5. JAPAN — South China Sea (west of Philippines) → East China Sea
+    {
+      id:'japan', label:'Japan', color:'#38bdf8', vol:20,
+      note:"World's largest LNG importer",
+      coords:[
+        MAL,
+        [106.5, 4.5],
+        [110.0, 9.5],
+        [114.0,15.0],
+        [118.0,20.5],
+        [121.5,25.5],
+        [125.5,30.0],
+        [129.0,33.0],
+        [133.5,34.5],
+        [137.5,35.5]
+      ]
+    },
+
+    // 6. SOUTH KOREA
+    {
+      id:'korea', label:'South Korea', color:'#38bdf8', vol:10,
+      note:'KOGAS & Posco terminals',
+      coords:[
+        MAL,
+        [107.0, 5.0],
+        [111.0,11.0],
+        [115.0,17.0],
+        [119.0,23.0],
+        [123.0,28.5],
+        [126.0,32.5],
+        [128.0,35.5],
+        [129.5,37.5]
+      ]
+    },
+
+    // 7. CHINA
+    {
+      id:'china', label:'China', color:'#38bdf8', vol:14,
+      note:'CNOOC, CNPC, Sinopec LNG terminals',
+      coords:[
+        MAL,
+        [107.5, 5.5],
+        [111.5,11.5],
+        [115.0,17.5],
+        [118.0,22.5],
+        [119.5,26.5],
+        [120.5,29.5],
+        [121.5,31.5]
+      ]
+    },
+
+    // 8. EUROPE (post-Suez)
+    //    Routes south of Sicily through the Sicilian Channel,
+    //    then west to Gibraltar, north along the Atlantic coast
+    {
+      id:'europe', label:'Europe', color:'#c084fc', vol:14,
+      note:'Belgium, Netherlands, Spain, France',
+      coords:[
+        SUEZ,
+        [27.5,33.5],
+        [23.0,34.8],
+        [19.0,35.5],
+        [15.5,36.2],
+        [12.5,36.5],  // Sicilian Channel (south of Sicily ~37.1°N)
+        [11.5,37.0],
+        [ 9.0,37.5],
+        [ 6.0,38.5],
+        [ 2.0,38.5],
+        [-1.0,37.5],
+        [-4.0,36.8],
+        [-5.4,36.1], // Gibraltar
+        [-8.0,36.5],
+        [-10.5,39.5],
+        [-10.5,43.5],
+        [ -8.5,47.5],
+        [ -4.5,50.5],
+        [  1.5,51.5],
+        [  4.0,52.0]
+      ]
+    }
+  ];
+
+  var wScale = d3.scalePow().exponent(0.55).domain([0,68]).range([2,26]);
+
+  function toFeature(coords) {
+    return { type:'Feature', geometry:{ type:'LineString', coordinates:coords } };
+  }
+
+  // Use 50m resolution for better strait detail
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+    .then(function (world) {
+
+      document.getElementById('loading').style.display = 'none';
+
+      var land      = topojson.feature(world, world.objects.land);
+      var countries = topojson.feature(world, world.objects.countries);
+
+      var defs = svg.append('defs');
+
+      // Ocean radial gradient
+      var og = defs.append('radialGradient').attr('id','ocean-grad')
+        .attr('cx','43%').attr('cy','50%').attr('r','65%');
+      og.append('stop').attr('offset','0%') .attr('stop-color','#0b2a40');
+      og.append('stop').attr('offset','100%').attr('stop-color','#06172b');
+
+      // ── OCEAN CLIP PATH ───────────────────────────────────────────────
+      //
+      //  Strategy: a single <path> that is:
+      //    1. The full viewport rectangle  (outer boundary)
+      //    2. + all land polygons          (inner subpaths)
+      //  With clip-rule="evenodd":
+      //    • Ocean points: enclosed by rect once  → count 1 (odd)  → VISIBLE ✓
+      //    • Land points:  enclosed by rect + land → count 2 (even) → CLIPPED ✓
+      //
+      //  Result: flows are rendered only where there is water.
+      //  Thick flow lines will be physically squeezed at narrow straits.
+
+      var rectPath  = 'M0,0 H' + W + ' V' + H + ' H0 Z';
+      var landPath  = gPath(land);   // projected SVG path for all land masses
+
+      defs.append('clipPath').attr('id','ocean-clip')
+        .append('path')
+          .attr('d', rectPath + ' ' + landPath)
+          .attr('clip-rule','evenodd');
+
+      // ── BASE LAYERS ─────────────────────────────────────────────────
+      // 1. Ocean background
+      svg.append('rect').attr('width',W).attr('height',H).attr('fill','url(#ocean-grad)');
+
+      // 2. Graticule
+      var grat = d3.geoGraticule().step([20,20])();
+      svg.append('path').datum(grat).attr('d',gPath)
+        .attr('fill','none').attr('stroke','rgba(255,255,255,0.028)').attr('stroke-width',0.6);
+
+      // 3. Land (fill + coastline stroke)
+      svg.append('path').datum(land).attr('d',gPath)
+        .attr('fill','#0e2d44').attr('stroke','#1d3e58').attr('stroke-width',0.8);
+
+      // 4. Country borders
+      svg.selectAll('.cntry').data(countries.features).join('path')
+        .attr('class','cntry').attr('d',gPath)
+        .attr('fill','none').attr('stroke','rgba(255,255,255,0.05)').attr('stroke-width',0.3)
+        .attr('pointer-events','none');
+
+      // ── FLOW LINES (clipped to ocean) ─────────────────────────────────
+      //
+      //  All elements in this group are clipped to ocean-only.
+      //  Wide flow lines will be visually squeezed at narrow straits —
+      //  the clip masks everything that extends onto land at the strait edges.
+
+      var flowG = svg.append('g').attr('class','flows').attr('clip-path','url(#ocean-clip)');
+      var tt    = document.getElementById('tt');
+
+      ROUTES.forEach(function (route) {
+        var w       = wScale(route.vol);
+        var feature = toFeature(route.coords);
+
+        // Outer diffuse glow
+        flowG.append('path').datum(feature).attr('d',gPath)
+          .attr('fill','none').attr('stroke',route.color)
+          .attr('stroke-width',w + 10).attr('stroke-opacity',0.05)
+          .attr('stroke-linecap','round').attr('pointer-events','none');
+
+        // Inner glow
+        flowG.append('path').datum(feature).attr('d',gPath)
+          .attr('fill','none').attr('stroke',route.color)
+          .attr('stroke-width',w + 4).attr('stroke-opacity',0.12)
+          .attr('stroke-linecap','round').attr('pointer-events','none');
+
+        // Main flow line
+        flowG.append('path').datum(feature).attr('d',gPath)
+          .attr('fill','none').attr('stroke',route.color)
+          .attr('stroke-width',w)
+          .attr('stroke-opacity', route.id === 'hormuz' ? 0.90 : 0.75)
+          .attr('stroke-linecap','round').attr('pointer-events','none');
+
+        // Invisible wide hit area (also clipped — hover only fires in water)
+        flowG.append('path').datum(feature).attr('d',gPath)
+          .attr('fill','none').attr('stroke','transparent')
+          .attr('stroke-width', Math.max(w + 14, 20))
+          .style('cursor','crosshair')
+          .on('mousemove', function (event) {
+            tt.style.opacity = '1';
+            var ex = event.pageX, ey = event.pageY;
+            var tx = ex + 14, ty = ey - 52;
+            if (tx + 175 > W) tx = ex - 188;
+            if (ty < 0)        ty = ey + 14;
+            tt.style.left = tx + 'px';
+            tt.style.top  = ty + 'px';
+            tt.innerHTML =
+              '<div class="tt-lbl">' + route.label + '</div>' +
+              '<div class="tt-row"><span class="tt-val">' + route.vol +
+              '</span><span class="tt-unit"> MTPA</span></div>' +
+              (route.note ? '<div class="tt-note">' + route.note + '</div>' : '');
+          })
+          .on('mouseleave', function () { tt.style.opacity = '0'; });
+      });
+
+      // ── CHOKEPOINT MARKERS ─────────────────────────────────────────
+      var chokes = [
+        { name:['Strait of','Hormuz'],    lon:56.5, lat:24.0, dx: 9, anchor:'start'  },
+        { name:['Bab el-','Mandeb'],      lon:43.4, lat:10.8, dx: 9, anchor:'start'  },
+        { name:['Malacca','Strait'],      lon:99.5, lat: 0.5, dx:-9, anchor:'end'    },
+        { name:['Suez','Canal'],          lon:33.5, lat:32.5, dx: 9, anchor:'start'  },
+        { name:['Strait of','Gibraltar'], lon:-4.5, lat:34.5, dx: 0, anchor:'middle' },
+      ];
+
+      var cpG = svg.append('g').attr('class','chokepoints');
+      chokes.forEach(function (cp) {
+        var pos = proj([cp.lon, cp.lat]);
+        var x = pos[0], y = pos[1];
+        cpG.append('path')
+          .attr('d','M'+x+','+(y-5.5)+' L'+(x+5.5)+','+y+' L'+x+','+(y+5.5)+' L'+(x-5.5)+','+y+'Z')
+          .attr('fill','#F0B429').attr('opacity',0.88);
+        var txt = cpG.append('text')
+          .attr('fill','#F0B429').attr('font-size','8px')
+          .attr('font-family',"'Plus Jakarta Sans',system-ui").attr('font-weight','700')
+          .attr('letter-spacing','0.06em').attr('text-anchor',cp.anchor).attr('opacity',0.82);
+        cp.name.forEach(function (line, i) {
+          txt.append('tspan').attr('x', x + cp.dx)
+            .attr('y', y - 8 - (cp.name.length - 1 - i) * 11).text(line);
+        });
+      });
+
+      // ── ORIGIN + DESTINATION LABELS ─────────────────────────────────
+      var dests = [
+        { name:'Ras Laffan', sub:'Qatar',  lon: 50.5, lat:24.2, color:'#F0B429', anchor:'end'    },
+        { name:'Japan',                    lon:138.5, lat:37.0, color:'#38bdf8', anchor:'start'  },
+        { name:'S. Korea',                 lon:131.0, lat:39.2, color:'#38bdf8', anchor:'start'  },
+        { name:'China',                    lon:123.5, lat:33.0, color:'#38bdf8', anchor:'start'  },
+        { name:'India',                    lon: 74.0, lat:23.5, color:'#34d399', anchor:'start'  },
+        { name:'NW Europe',                lon:  5.5, lat:54.2, color:'#c084fc', anchor:'middle' },
+      ];
+
+      var labG = svg.append('g').attr('class','dest-labels');
+      dests.forEach(function (d) {
+        var pos = proj([d.lon, d.lat]);
+        var x = pos[0], y = pos[1];
+        labG.append('text').attr('x',x).attr('y',y)
+          .attr('fill',d.color).attr('font-size','9.5px')
+          .attr('font-family',"'Plus Jakarta Sans',system-ui").attr('font-weight','700')
+          .attr('text-anchor',d.anchor || 'middle').attr('opacity',0.88).text(d.name);
+        if (d.sub) {
+          labG.append('text').attr('x',x).attr('y',y+13)
+            .attr('fill',d.color).attr('font-size','7.5px')
+            .attr('font-family',"'Plus Jakarta Sans',system-ui").attr('font-weight','400')
+            .attr('text-anchor',d.anchor || 'middle').attr('opacity',0.5).text(d.sub);
+        }
+      });
+
+    })
+    .catch(function (err) {
+      console.error('Map load failed:', err);
+      document.getElementById('loading').innerHTML =
+        '<span style="color:#c0392b">Map data failed to load. Check network.</span>';
+    });
+
+}); // end window load
+</script>
+</body>
+</html>
