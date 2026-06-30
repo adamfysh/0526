@@ -1,0 +1,325 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="CAPE — Corridor Accumulation and Portfolio Exposure | Narrows"
+  description="CAPE calculates your fleet's aggregate exposure to corridor disruption events. Powered by the Narrows CDM and TIDE accumulation model."
+>
+
+<style>
+/* ── Hero ── */
+.cape-hero {
+  padding: 120px var(--s4) var(--s5);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.cape-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s2);
+}
+.cape-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.cape-hero h1 {
+  font-size: clamp(32px, 4vw, 54px); font-weight: 700; color: var(--navy);
+  line-height: 1.06; letter-spacing: -0.03em; margin-bottom: var(--s2);
+}
+.cape-hero h1 em { font-style: italic; font-weight: 400; color: var(--blue-light); }
+.cape-hero-lead {
+  font-size: 17px; color: var(--text-secondary); line-height: 1.7;
+  font-weight: 300; max-width: 600px; margin-bottom: var(--s4);
+}
+.cape-hero-actions { display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; }
+.btn-primary-lg {
+  display: inline-block; background: var(--navy); color: #fff;
+  font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 5px;
+  text-decoration: none; transition: background 0.15s; letter-spacing: 0.02em;
+}
+.btn-primary-lg:hover { background: var(--blue); }
+.btn-ghost-lg {
+  display: inline-block; border: 1px solid var(--border); color: var(--text-secondary);
+  font-size: 14px; font-weight: 400; padding: 12px 24px; border-radius: 5px;
+  text-decoration: none; transition: border-color 0.15s, color 0.15s;
+}
+.btn-ghost-lg:hover { border-color: var(--navy); color: var(--navy); }
+
+/* ── What it is ── */
+.cape-what {
+  background: var(--surface);
+  border-top: var(--rule-light); border-bottom: var(--rule-light);
+  padding: var(--s5) var(--s4);
+}
+.cape-what-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--s6);
+  align-items: center;
+}
+@media (max-width: 768px) { .cape-what-inner { grid-template-columns: 1fr; gap: var(--s4); } }
+.cape-what-text h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.02em; margin-bottom: var(--s2);
+}
+.cape-what-text p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+  margin-bottom: var(--s2);
+}
+.cape-what-text p:last-child { margin-bottom: 0; }
+.cape-distinction {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.cape-distinction-row {
+  display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start;
+  background: #fff; border: var(--rule-light); border-radius: 8px; padding: 16px;
+}
+.cape-distinction-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); background: var(--navy); padding: 4px 10px; border-radius: 3px;
+  white-space: nowrap; line-height: 1.5;
+}
+.cape-distinction-text strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 2px; }
+.cape-distinction-text span { font-size: 12px; color: var(--text-tertiary); line-height: 1.5; }
+
+/* ── TIDE strip ── */
+.tide-strip {
+  background: var(--navy);
+  padding: var(--s5) var(--s4);
+}
+.tide-strip-inner { max-width: var(--max-w); margin: 0 auto; }
+.tide-strip-head {
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: var(--s4);
+}
+.tide-strip-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold);
+}
+.tide-strip-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
+.tide-numbers {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-bottom: var(--s3);
+}
+@media (max-width: 900px) { .tide-numbers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .tide-numbers { grid-template-columns: 1fr; } }
+.tide-num {
+  background: rgba(255,255,255,0.07); border-radius: 8px;
+  padding: 18px 20px;
+}
+.tide-num-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 6px; }
+.tide-num-value { font-size: 28px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 4px; }
+.tide-num.accent .tide-num-value { color: var(--gold); }
+.tide-num-note { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.4; }
+.tide-cascade-note {
+  background: rgba(240,180,41,0.12); border-radius: 6px;
+  padding: 12px 16px; font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.6;
+}
+.tide-cascade-note strong { color: var(--gold); }
+
+/* ── How it works ── */
+.cape-how {
+  padding: var(--s5) var(--s4);
+  max-width: var(--max-w); margin: 0 auto;
+}
+.cape-how h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.02em; margin-bottom: var(--s4);
+}
+.cape-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s3); }
+@media (max-width: 768px) { .cape-steps { grid-template-columns: 1fr; } }
+.cape-step {
+  border: var(--rule-light); border-radius: 8px; padding: 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cape-step-num {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--gold); text-transform: uppercase;
+}
+.cape-step h3 { font-size: 15px; font-weight: 700; color: var(--navy); }
+.cape-step p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.cape-step.locked { background: var(--surface); }
+.cape-step.locked .cape-step-num { color: var(--text-tertiary); }
+.cape-step-gate {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--navy); background: rgba(240,180,41,0.15);
+  border: 1px solid rgba(240,180,41,0.3); border-radius: 4px;
+  padding: 4px 10px; margin-top: auto;
+}
+
+/* ── Privacy + CTA ── */
+.cape-cta-section {
+  background: var(--surface);
+  border-top: var(--rule-light);
+  padding: var(--s5) var(--s4);
+  text-align: center;
+}
+.cape-cta-section h2 {
+  font-size: 26px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.02em; margin-bottom: var(--s2);
+}
+.cape-cta-section p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+  max-width: 520px; margin: 0 auto var(--s3);
+}
+.cape-privacy {
+  font-size: 12px; color: var(--text-tertiary);
+  margin-top: var(--s3); display: flex; align-items: center;
+  justify-content: center; gap: 6px;
+}
+</style>
+
+<!-- Hero -->
+<section class="cape-hero">
+  <div class="cape-kicker">Narrows analytics</div>
+  <h1>Corridor Accumulation<br>and <em>Portfolio Exposure</em></h1>
+  <p class="cape-hero-lead">
+    CAPE tells you what is physically at risk on a single bad day. Load your vessel portfolio,
+    select a corridor event, and get aggregate exposure by vessel class, corridor, and scenario severity.
+    Powered by the Narrows CDM and TIDE accumulation model.
+  </p>
+  <div class="cape-hero-actions">
+    <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
+    <a href="mailto:fysh@narrows.io?subject=CAPE access request" class="btn-ghost-lg">Request full access</a>
+  </div>
+</section>
+
+<!-- What it is -->
+<section class="cape-what">
+  <div class="cape-what-inner">
+    <div class="cape-what-text">
+      <h2>Two questions. Two different answers.</h2>
+      <p>
+        The Narrows simulator answers the structural question: what share of Japan's crude imports
+        depends on Hormuz each year? That is a dependency figure. It tells you what is exposed.
+      </p>
+      <p>
+        CAPE answers the underwriting question: if Hormuz restricts today, how much cargo value
+        is simultaneously in transit through the corridor right now, at the worst point in the
+        seasonal calendar, including the approach window where vessels cannot economically divert?
+        That is an accumulation figure. It tells you what is at risk.
+      </p>
+      <p>
+        These are different numbers for different audiences. Both are in CAPE.
+      </p>
+    </div>
+    <div class="cape-distinction">
+      <div class="cape-distinction-row">
+        <div class="cape-distinction-label">CDM</div>
+        <div class="cape-distinction-text">
+          <strong>Annual structural dependency</strong>
+          <span>What percentage of a country's imports transit a given corridor each year. The strategic exposure view.</span>
+        </div>
+      </div>
+      <div class="cape-distinction-row">
+        <div class="cape-distinction-label">CAPE</div>
+        <div class="cape-distinction-text">
+          <strong>Portfolio corridor exposure</strong>
+          <span>Your vessel book's aggregate VaR under a named corridor scenario. The underwriting view.</span>
+        </div>
+      </div>
+      <div class="cape-distinction-row">
+        <div class="cape-distinction-label">TIDE</div>
+        <div class="cape-distinction-text">
+          <strong>Market accumulation at risk</strong>
+          <span>Total cargo in transit through a chokepoint at seasonal peak, including cascade effects on diversion routes. The reinsurance and ILS view.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIDE strip -->
+<section class="tide-strip">
+  <div class="tide-strip-inner">
+    <div class="tide-strip-head">
+      <span class="tide-strip-label">TIDE</span>
+      <span class="tide-strip-sub">Strait of Hormuz — accumulation at risk</span>
+    </div>
+    <div class="tide-numbers">
+      <div class="tide-num">
+        <div class="tide-num-label">Baseline (avg day)</div>
+        <div class="tide-num-value">$25.7B</div>
+        <div class="tide-num-note">Annual flow divided by 365, weighted by transit duration</div>
+      </div>
+      <div class="tide-num">
+        <div class="tide-num-label">Seasonal peak</div>
+        <div class="tide-num-value">$30.5B</div>
+        <div class="tide-num-note">January — winter LNG demand drives peak flows</div>
+      </div>
+      <div class="tide-num accent">
+        <div class="tide-num-label">Event horizon</div>
+        <div class="tide-num-value">$36.5B</div>
+        <div class="tide-num-note">Seasonal peak plus 3-day approach window — the insurer's at-risk number</div>
+      </div>
+      <div class="tide-num">
+        <div class="tide-num-label">War risk PML</div>
+        <div class="tide-num-value">$3.97B</div>
+        <div class="tide-num-note">Event horizon at 15% severity, weighted attachment rate</div>
+      </div>
+    </div>
+    <div class="tide-cascade-note">
+      <strong>Cascade effect:</strong> When Suez closes, Cape of Good Hope accumulation spikes
+      <strong>71%</strong> above normal — more cargo is simultaneously at sea on the diversion route.
+      A Lloyd's syndicate writing Cape war risk has correlated exposure to Red Sea events.
+      TIDE models cascade ratios for all corridors.
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="cape-how">
+  <h2>How CAPE works</h2>
+  <div class="cape-steps">
+    <div class="cape-step">
+      <div class="cape-step-num">Step 01 — Free demo</div>
+      <h3>Illustrative fleet</h3>
+      <p>
+        Twelve representative vessels across all major corridors are pre-loaded: VLCCs on Hormuz,
+        LNG carriers on Qatar routes, Neopanamax containers through Panama, Capesize bulk through
+        Malacca. Each vessel carries full JWC listing status, CII rating, diversion cost, and
+        cargo value. Run any scenario immediately.
+      </p>
+    </div>
+    <div class="cape-step locked">
+      <div class="cape-step-num">Step 02 — Full access</div>
+      <h3>Your portfolio</h3>
+      <p>
+        Upload your own vessel book as a CSV or enter vessels individually. CAPE maps each vessel
+        to its corridor exposure and computes aggregate VaR, diversion cost, and JWC status
+        across your actual positions.
+      </p>
+      <span class="cape-step-gate">Request access</span>
+    </div>
+    <div class="cape-step locked">
+      <div class="cape-step-num">Step 03 — Full access</div>
+      <h3>TIDE accumulation output</h3>
+      <p>
+        Full TIDE report: event horizon by corridor, seasonal peak calendar, cascade ratios
+        for diversion routes, vessel-count breakdown, and war risk PML by scenario severity.
+        Exportable as a plain-text report for use in capital models.
+      </p>
+      <span class="cape-step-gate">Request access</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cape-cta-section">
+  <h2>Run your own book</h2>
+  <p>
+    CAPE is available to marine underwriters, reinsurers, P&I clubs, and commodity desks.
+    Full access includes portfolio upload, all TIDE accumulation outputs, and corridor
+    scenario export.
+  </p>
+  <div class="cape-hero-actions" style="justify-content:center">
+    <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
+    <a href="mailto:fysh@narrows.io?subject=CAPE access request" class="btn-ghost-lg">Request access</a>
+  </div>
+  <p class="cape-privacy">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="11" width="18" height="11" rx="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+    Portfolio data is processed in your browser and never transmitted to any server.
+  </p>
+</section>
+
+</BaseLayout>

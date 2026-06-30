@@ -1,0 +1,284 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="The <em>80 percent</em> Malacca figure is wrong."
+ description="Every risk report, every trade desk briefing, every reinsurance presentation cites the same number: roughly 80 percent of China's energy imports transit the Strait of Malacca. The Narrows CDM puts China's structural crude dependency at 55.8 percent. The gap between those two numbers is where mispriced accumulation risk lives."
+ eyebrow="Corridor analysis · Strait of Malacca · June 2026"
+ publishDate="June 2026"
+ readTime="11 min read"
+ author="Narrows Research"
+>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+ <div class="stat-bar-inner">
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">China crude: structural dependency</div>
+   <div class="stat-bar-value">55.8%</div>
+   <div class="stat-bar-unit">Via Malacca · CDM bilateral data · 2022 base year</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Commonly cited figure</div>
+   <div class="stat-bar-value" style="color:var(--red);">~80%</div>
+   <div class="stat-bar-unit">Throughput statistic misread as dependency</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">China crude via Lombok bypass</div>
+   <div class="stat-bar-value">20.6%</div>
+   <div class="stat-bar-unit">$74.4B annual VaR · reroutable at cost</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Capesize Lombok detour</div>
+   <div class="stat-bar-value">+4 days</div>
+   <div class="stat-bar-unit">~$268k voyage cost overrun at current rates</div>
+  </div>
+ </div>
+</div>
+
+<!-- PHOTO BAND -->
+<div slot="photo-band" class="article-photo-band">
+ <img src="/images/malacca-n.jpg" alt="Strait of Malacca — satellite view" loading="eager" />
+ <span class="article-photo-caption">Strait of Malacca · 2.7 km minimum navigable width · 600 vessels per day at peak</span>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section-eyebrow">The zombie statistic</div>
+<h2 class="article-section-title">A number that circulates everywhere and means something different from what everyone thinks.</h2>
+
+<p class="prose">The 80 percent figure for China's Malacca oil dependency has appeared in IMF working papers, Lloyd's market briefings, academic journals, and parliamentary security hearings. It is cited by commodity desks to support China's energy vulnerability thesis. It is used by accumulation underwriters to size corridor exposure. It is the foundation of a decade of geopolitical analysis on the so-called Malacca Dilemma.</p>
+
+<p class="prose">It is a throughput number. It is not a dependency number. These are different quantities, and the difference between them is approximately 24 percentage points of China's crude import book.</p>
+
+<p class="prose">The Narrows Commodity Dependency Model produces bilateral structural dependency figures: the share of each importer's total supply of each commodity that cannot realistically be sourced or routed without transiting a named chokepoint, accounting for bypass routes, alternative supply origins, and supply substitution lag. For China crude petroleum via Malacca, that figure is 55.8 percent.</p>
+
+<div class="callout">
+ <div class="callout-label">Throughput vs. structural dependency: the distinction that matters</div>
+ <div class="callout-body"><strong>Throughput</strong> counts every vessel that physically passes through a strait. If a VLCC loaded in the Middle East transits Malacca en route to China, it contributes to the throughput figure. If it had instead taken the Lombok Strait, it would not. The 80 percent figure counts all the vessels currently transiting Malacca, including those that transit it only because it is cheaper and faster than the alternative, not because no alternative exists.<br><br><strong>Structural dependency</strong> asks a different question: what fraction of China's crude supply has no viable routing alternative to Malacca? A vessel that could reroute via Lombok at a cost of four extra days and $268,000 in voyage overrun represents an economic burden if Malacca closes, but it does not represent a supply halt. These are different risk exposures that require different reserve calculations.<br><br>The Narrows CDM models rerouting viability, bypass capacity, and alternative supply availability at the bilateral level for each importer-chokepoint-commodity combination. The 55.8 percent figure for China crude is the fraction that cannot be resolved without genuine supply disruption, not the fraction currently choosing the cheapest route.</div>
+</div>
+
+<hr class="section-rule" />
+
+<!-- SECTION 2 -->
+<div class="section-eyebrow">The bilateral routing map</div>
+<h2 class="article-section-title">Where China's crude actually comes from, and which chokepoints each origin actually requires.</h2>
+
+<p class="prose">The throughput fallacy becomes visible when you look at China's crude import origin mix alongside its routing geography. China's crude supply comes from four broad origin clusters: Middle Eastern Gulf producers (Saudi Arabia, Iraq, UAE, Kuwait), Russia, West Africa (Angola, Nigeria, Congo), and smaller volumes from the Americas and North Sea. Each origin cluster has a different routing profile and a different set of mandatory chokepoints.</p>
+
+<div class="compare-grid">
+ <div class="compare-card featured">
+  <div class="compare-card-label">Malacca-dependent origins</div>
+  <div class="compare-card-title">Middle East Gulf crude: no exit without Hormuz, then Malacca or Lombok.</div>
+  <div class="compare-card-body">Saudi, Iraqi, UAE, and Kuwaiti crude must exit the Persian Gulf via Hormuz. Eastbound to China, the standard routing continues through the Indian Ocean and either Malacca or Lombok. Neither route can be avoided entirely. For this traffic, both Hormuz and the Indonesian passages carry genuine structural dependency. The question is which passage, not whether a passage is required.</div>
+ </div>
+ <div class="compare-card">
+  <div class="compare-card-label">Non-Malacca origins</div>
+  <div class="compare-card-title">Russia, West Africa, Americas: no Malacca required.</div>
+  <div class="compare-card-body">Russian crude arrives via the ESPO pipeline directly to Kozmino, or via Arctic routes, without transiting Malacca. West African and Brazilian crude arrives via Cape of Good Hope westabout, or via Suez/Red Sea, neither of which requires Malacca. These flows are counted in China's total crude import volume but they do not transit Malacca. Including them in a "Malacca dependency" figure is the root of the error.</div>
+ </div>
+</div>
+
+<p class="prose">The structural dependency figure of 55.8 percent reflects this origin mix. It is not an underestimate of the physical traffic. It is the correct answer to a different question: what share of China's crude supply is structurally constrained by Malacca's navigability status, as opposed to merely currently transiting it?</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 3 -->
+<div class="section-eyebrow">The bypass correction</div>
+<h2 class="article-section-title">Lombok handles 20.6 percent of China's crude. That traffic is exposed but not trapped.</h2>
+
+<p class="prose">The Lombok Strait, 400 km east of Malacca, is navigable by laden VLCCs. It handles deep-draft vessels that cannot transit Malacca's 25-metre depth limit. It adds approximately four days to a voyage from the Indian Ocean to Chinese ports. At current Capesize day rates, that represents roughly $268,000 in voyage cost overrun per transit. That cost is real. The option to use it is also real.</p>
+
+<p class="prose">The CDM shows that 20.6 percent of China's crude is currently routed via Lombok rather than Malacca. That traffic represents $74.4 billion in annual trade value and it is structurally reroutable away from Malacca because it is already using the alternative. If Malacca closes, this 20.6 percent of China's crude supply continues to arrive. It is not at Malacca risk. Including it in a Malacca dependency figure is double-counting the corridor's leverage.</p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">China crude routing by corridor · structural dependency · CDM 2022 base year</div>
+ <table class="n-table">
+  <thead>
+   <tr>
+    <th>Corridor</th>
+    <th class="num">Structural dependency</th>
+    <th class="num">Annual exposure (VaR)</th>
+    <th>Bypass available?</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td class="bold">Strait of Malacca</td>
+    <td class="num dep-mid">55.8%</td>
+    <td class="num bold">$201.7B</td>
+    <td><span class="verdict-caution">Yes: Lombok (+4 days, $268k/voyage)</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Strait of Lombok</td>
+    <td class="num dep-low">20.6%</td>
+    <td class="num bold">$74.4B</td>
+    <td><span class="verdict-caution">Yes: Malacca (reverse); Sunda (partial)</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Hormuz</td>
+    <td class="num dep-mid">46.3%</td>
+    <td class="num bold">$167.4B</td>
+    <td><span class="verdict-no">No: no alternative Gulf exit for loaded VLCCs</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Luzon Strait</td>
+    <td class="num dep-low">6.1%</td>
+    <td class="num bold">$22.2B</td>
+    <td><span class="verdict-caution">Partial: routing-dependent</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Bab el-Mandeb / Suez</td>
+    <td class="num dep-low">0.8%</td>
+    <td class="num bold">$3.1B</td>
+    <td><span class="verdict-caution">Yes: Cape of Good Hope</span></td>
+   </tr>
+  </tbody>
+ </table>
+ <div class="n-table-note">Note: corridor rows are not additive. Multi-chokepoint voyages appear in multiple rows. Do not sum dependency percentages across corridors.</div>
+</div>
+
+<p class="prose">The table makes visible something that the 80 percent figure obscures: Hormuz carries higher structural exposure for China's crude book than Malacca does for a significant portion of the same cargo. Middle Eastern crude that currently transits Malacca first passes through Hormuz. Hormuz has no bypass. Malacca does. A risk model that sizes Malacca exposure at 80 percent may simultaneously be undersizing the Hormuz component of the same cargo's exposure.</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 4 -->
+<div class="section-eyebrow">Where the 80 percent actually holds</div>
+<h2 class="article-section-title">For smaller SE Asian importers, Malacca dependency is structural and genuine.</h2>
+
+<p class="prose">The CDM does produce very high Malacca dependency figures. They just apply to different countries than the ones most commonly cited. Vietnam carries 93.4 percent structural crude dependency on Malacca. The Philippines carries 95.6 percent. These economies have limited alternative routing, lower volumes of non-Malacca origin crude, and fewer bypass options in practical terms. For them, Malacca dependency is close to total dependency. A Malacca closure is a supply crisis, not a rerouting problem.</p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">Malacca crude dependency by importer · structural · CDM 2022 base year</div>
+ <table class="n-table">
+  <thead>
+   <tr>
+    <th>Country</th>
+    <th class="num">Malacca dep. (crude)</th>
+    <th class="num">Annual VaR</th>
+    <th>Character of exposure</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td class="bold">Philippines</td>
+    <td class="num dep-high">95.6%</td>
+    <td class="num bold">$3.6B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Near-captive: limited bypass optionality, high origin concentration</td>
+   </tr>
+   <tr>
+    <td class="bold">Brunei Darussalam</td>
+    <td class="num dep-high">100.0%</td>
+    <td class="num bold">$1.6B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Captive: no practical alternative routing</td>
+   </tr>
+   <tr>
+    <td class="bold">Viet Nam</td>
+    <td class="num dep-high">93.4%</td>
+    <td class="num bold">$6.3B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Near-captive: Gulf origins dominant, Lombok access limited</td>
+   </tr>
+   <tr>
+    <td class="bold">Indonesia</td>
+    <td class="num dep-mid">41.6%</td>
+    <td class="num bold">$4.2B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Split exposure: domestic ports access both Malacca and Lombok sides</td>
+   </tr>
+   <tr>
+    <td class="bold">China</td>
+    <td class="num dep-mid">55.8%</td>
+    <td class="num bold">$201.7B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Diversified: multi-origin, multi-corridor, Lombok bypass material</td>
+   </tr>
+   <tr>
+    <td class="bold">New Zealand</td>
+    <td class="num dep-high">100.0%</td>
+    <td class="num bold">$0.5B</td>
+    <td style="font-size:12px;color:var(--text-secondary);">Captive at low absolute volume</td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+
+<p class="prose">The correct statement is not "Malacca is less important than we thought." Malacca handles extraordinary volumes of cargo and its disruption would cause severe economic harm. The correct statement is that China's exposure to a Malacca event is meaningfully lower than the 80 percent figure implies, and several smaller economies in the same region carry exposure closer to total that rarely appears in the same analysis.</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 5 -->
+<div class="section-eyebrow">The LNG dimension</div>
+<h2 class="article-section-title">LNG via Malacca: 60.8 percent for China, and this component has no bypass.</h2>
+
+<p class="prose">The crude figure comes with a bypass correction. The LNG figure does not carry the same relief. China, Japan, and South Korea all import Australian and South-East Asian LNG that transits Malacca southbound. LNG carriers cannot use Lombok as freely as VLCCs; the Strait's geometry and traffic separation scheme create practical constraints at LNG carrier drafts. More critically, the LNG source geography for Malacca-dependent imports does not have a Cape-routable alternative in the way that crude oil does.</p>
+
+<div class="n-table-wrap">
+ <div class="n-table-title">LNG structural dependency via Malacca · selected importers · CDM 2022 base year</div>
+ <table class="n-table">
+  <thead>
+   <tr>
+    <th>Country</th>
+    <th class="num">Malacca dep. (LNG)</th>
+    <th class="num">Annual VaR</th>
+    <th>Bypass optionality</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td class="bold">Rep. of Korea</td>
+    <td class="num dep-high">64.3%</td>
+    <td class="num bold">$30.8B</td>
+    <td><span class="verdict-no">No viable alternative routing at scale</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Japan</td>
+    <td class="num dep-high">62.2%</td>
+    <td class="num bold">$37.5B</td>
+    <td><span class="verdict-no">No viable alternative routing at scale</span></td>
+   </tr>
+   <tr>
+    <td class="bold">China</td>
+    <td class="num dep-mid">60.8%</td>
+    <td class="num bold">$30.1B</td>
+    <td><span class="verdict-no">No viable alternative routing at scale</span></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+
+<p class="prose">The LNG dependency figure for North Asian importers is structurally harder than the crude figure, for the same reason Hormuz LNG exposure is harder than Hormuz crude exposure: there is no supply substitution available at scale within a commercially useful time horizon. Australian and South-East Asian LNG that arrives via Malacca cannot be replaced by Atlantic Basin LNG with sufficient speed to prevent terminal drawdown and industrial disruption. The crude bypass correction applies to crude only.</p>
+
+<hr class="section-rule" />
+
+<!-- SECTION 6 -->
+<div class="section-eyebrow">The accumulation implication</div>
+<h2 class="article-section-title">What the correct figure does to the reserve calculation.</h2>
+
+<p class="prose">The practical consequence of the 80 percent figure is a systematic overstatement of Malacca accumulation exposure in models that use it uncritically. An underwriter sizing a treaty layer on Chinese crude exposure with an 80 percent Malacca dependency assumption is applying a structural factor 43 percent higher than the CDM bilateral figure. The implied PML is wrong in the same direction.</p>
+
+<p class="prose">The correct framework treats Malacca exposure in three distinct buckets:</p>
+
+<div class="cape-steps" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s3) 0 var(--s4);">
+ <div class="cape-step">
+  <div class="cape-step-num">Bucket 01</div>
+  <h3>Genuinely captive</h3>
+  <p>Cargo from origins with no viable routing alternative to Malacca: certain South-East Asian loading ports, specific LNG supply chains. A Malacca disruption is a supply halt for this cargo. Full severity applies.</p>
+ </div>
+ <div class="cape-step">
+  <div class="cape-step-num">Bucket 02</div>
+  <h3>Economically captive</h3>
+  <p>Cargo that could reroute via Lombok but at a cost that, below a certain disruption severity, makes transit preferable. At disruption durations over approximately 10 days, Lombok becomes rational. This cargo faces rerouting cost, not supply halts.</p>
+ </div>
+ <div class="cape-step">
+  <div class="cape-step-num">Bucket 03</div>
+  <h3>Origin-diversified</h3>
+  <p>Chinese crude from Russian and African origins currently not transiting Malacca at all. A Malacca event does not affect this supply. It is not Malacca exposure regardless of how the 80 percent figure is applied.</p>
+ </div>
+</div>
+
+<p class="prose">The Narrows CDM models these distinctions at the bilateral level. The 55.8 percent figure for China crude is the fraction in Buckets 01 and 02 combined. The fraction genuinely in Bucket 01, with no bypass option, is smaller still. An accumulation model that collapses all three buckets into a single 80 percent factor is mispricing risk in both directions simultaneously: overstating the severity of a pure Malacca event while potentially missing the compounded exposure that arises when Hormuz and Malacca stresses coincide.</p>
+
+<div class="callout-verdict">
+ <div class="callout-verdict-label">The model test</div>
+ <div class="callout-verdict-body">Run the same corridor scenario with 80 percent and 55.8 percent Malacca dependency for China crude. The difference in implied 14-day VaR is approximately $34 billion at annual trade values. The difference in war risk PML at standard attachment rates is in the hundreds of millions. That is not a rounding error in a reinsurance treaty. It is a structural mispricing that the 80 percent zombie figure has been building into models for over a decade. The bilateral dependency layer is what corrects it.</div>
+</div>
+
+</ArticleLayout>
