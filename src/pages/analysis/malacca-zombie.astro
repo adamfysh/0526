@@ -103,20 +103,6 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   color: var(--gold); opacity: 0.9;
 }
 
-/* ── Routing flow diagram (dark) ── */
-.sankey-wrap {
-  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; margin: 28px 0;
-  background: #0A2540;
-}
-.sankey-title {
-  background: rgba(0,0,0,0.25); color: var(--gold); font-size: 9px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px;
-  border-bottom: 2px solid rgba(240,180,41,0.4);
-}
-.sankey-note {
-  font-size: 11px; color: rgba(255,255,255,0.38); padding: 8px 16px 10px;
-  background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.08); font-style: italic;
-}
 
 /* ── Exposure buckets ── */
 .bucket-grid {
@@ -295,89 +281,6 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <p class="prose">This means the origin diversity in China's crude import book does not reduce Malacca relevance by as much as a simple geographic split would suggest. West Africa's share of China's crude book adds to the Malacca-or-Lombok traffic, not to a separate non-Malacca stream. What reduces China's structural dependency below 80 percent is not origin diversity per se, but the availability of Lombok as a viable alternative to Malacca for the same cargoes.</p>
 
-<!-- SANKEY FLOW DIAGRAM (dark) -->
-<div class="sankey-wrap">
- <div class="sankey-title">China seaborne crude routing · structural breakdown · Narrows CDM bilateral data</div>
- <svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#0A2540;padding:12px 0;">
-
-  <!-- ── Background grid lines (subtle) ── -->
-  <line x1="200" y1="20" x2="200" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-  <line x1="400" y1="20" x2="400" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-  <line x1="560" y1="20" x2="560" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-
-  <!-- ── MALACCA BAND (gold) — 55.8% — top band ── -->
-  <!-- Thick flowing path: origins left → Hormuz midpoint → Malacca → China right -->
-  <path d="M 168,32 C 280,32 300,52 400,52 C 480,52 500,64 560,64" fill="none" stroke="#f0b429" stroke-width="26" stroke-opacity="0.18" stroke-linecap="round"/>
-  <path d="M 168,32 C 280,32 300,52 400,52 C 480,52 500,64 560,64" fill="none" stroke="#f0b429" stroke-width="2" stroke-opacity="0.9"/>
-
-  <!-- ── LOMBOK BAND (blue) — 20.6% — middle band ── -->
-  <path d="M 168,88 C 280,88 300,130 400,130 C 480,130 500,148 560,148" fill="none" stroke="#3b82f6" stroke-width="10" stroke-opacity="0.2" stroke-linecap="round"/>
-  <path d="M 168,88 C 280,88 300,130 400,130 C 480,130 500,148 560,148" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.9"/>
-
-  <!-- ── NON-MALACCA BANDS (slate) — ~24% ── -->
-  <!-- ESPO: straight across from Russia row -->
-  <path d="M 168,190 C 300,190 400,200 560,200" fill="none" stroke="#64748b" stroke-width="9" stroke-opacity="0.2" stroke-linecap="round"/>
-  <path d="M 168,190 C 300,190 400,200 560,200" fill="none" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.7"/>
-  <!-- Americas via Panama -->
-  <path d="M 168,245 C 300,245 400,230 560,230" fill="none" stroke="#64748b" stroke-width="4" stroke-opacity="0.15" stroke-linecap="round"/>
-  <path d="M 168,245 C 300,245 400,230 560,230" fill="none" stroke="#64748b" stroke-width="1" stroke-opacity="0.5"/>
-
-  <!-- ── ORIGIN LABELS (left column) ── -->
-  <text x="16" y="28" font-size="8" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">MIDDLE EAST</text>
-  <text x="16" y="40" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Gulf producers · ~42%</text>
-
-  <text x="16" y="78" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">WEST AFRICA</text>
-  <text x="16" y="90" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Cape route · ~18%</text>
-
-  <text x="16" y="118" font-size="7.5" fill="rgba(255,255,255,0.5)" letter-spacing="0.06em" font-family="system-ui,sans-serif">→ also via Lombok</text>
-
-  <text x="16" y="182" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">RUSSIA · ESPO</text>
-  <text x="16" y="194" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Pacific direct · ~20%</text>
-
-  <text x="16" y="238" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">AMERICAS · PANAMA</text>
-  <text x="16" y="250" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Pacific direct · ~8%</text>
-
-  <!-- ── CHOKEPOINT NODES ── -->
-  <!-- Hormuz -->
-  <rect x="370" y="37" width="56" height="16" rx="3" fill="rgba(240,180,41,0.12)" stroke="rgba(240,180,41,0.6)" stroke-width="1"/>
-  <text x="398" y="48" text-anchor="middle" font-size="7.5" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">HORMUZ</text>
-
-  <!-- Malacca -->
-  <rect x="468" y="54" width="60" height="16" rx="3" fill="rgba(240,180,41,0.15)" stroke="#f0b429" stroke-width="1.5"/>
-  <text x="498" y="65" text-anchor="middle" font-size="7.5" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">MALACCA</text>
-
-  <!-- Lombok -->
-  <rect x="468" y="138" width="60" height="16" rx="3" fill="rgba(59,130,246,0.18)" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="498" y="149" text-anchor="middle" font-size="7.5" font-weight="700" fill="#60a5fa" letter-spacing="0.07em" font-family="system-ui,sans-serif">LOMBOK</text>
-
-  <!-- Pacific label -->
-  <text x="340" y="198" font-size="7.5" fill="rgba(255,255,255,0.3)" font-style="italic" font-family="system-ui,sans-serif">Pacific direct</text>
-
-  <!-- ── DESTINATION BOX ── -->
-  <rect x="574" y="30" width="88" height="220" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  <text x="618" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#f0b429" letter-spacing="0.1em" font-family="system-ui,sans-serif">CHINA</text>
-  <text x="618" y="132" text-anchor="middle" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">10M+ bpd</text>
-
-  <!-- ── PERCENTAGE BADGES ── -->
-  <rect x="540" y="54" width="44" height="15" rx="2" fill="#f0b429"/>
-  <text x="562" y="64.5" text-anchor="middle" font-size="8" font-weight="700" fill="#0A2540" font-family="system-ui,sans-serif">55.8%</text>
-
-  <rect x="540" y="138" width="44" height="15" rx="2" fill="#3b82f6"/>
-  <text x="562" y="148.5" text-anchor="middle" font-size="8" font-weight="700" fill="white" font-family="system-ui,sans-serif">20.6%</text>
-
-  <rect x="540" y="192" width="44" height="15" rx="2" fill="rgba(100,116,139,0.6)" stroke="rgba(100,116,139,0.8)" stroke-width="1"/>
-  <text x="562" y="202.5" text-anchor="middle" font-size="8" font-weight="700" fill="rgba(255,255,255,0.8)" font-family="system-ui,sans-serif">~24%</text>
-
-  <!-- ── LEGEND ── -->
-  <rect x="24" y="276" width="9" height="9" rx="1.5" fill="#f0b429"/>
-  <text x="39" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Via Malacca (structural dep.: 55.8%)</text>
-  <rect x="242" y="276" width="9" height="9" rx="1.5" fill="#3b82f6"/>
-  <text x="257" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Via Lombok (reroutable: 20.6%)</text>
-  <rect x="440" y="276" width="9" height="9" rx="1.5" fill="#64748b"/>
-  <text x="455" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Non-Malacca zone (~24%)</text>
- </svg>
- <div class="sankey-note">Flows are illustrative proportions based on CDM bilateral data. West Africa and Cape-routed Americas crude approaches Malacca or Lombok, not a separate Pacific track. Do not add corridor percentages (multi-chokepoint voyages appear in multiple CDM rows).</div>
-</div>
 
 <hr class="section-rule" />
 
