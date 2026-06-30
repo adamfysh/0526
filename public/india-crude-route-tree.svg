@@ -1,0 +1,97 @@
+<svg width="1100" height="910" viewBox="0 0 1100 910" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<rect width="1100" height="910" fill="#0A2540"/>
+<rect x="20" y="20" width="1060" height="890" rx="8" fill="#0d304f" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<g transform="translate(56,48) scale(0.035)">
+<path fill="#F0B429" d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+</g>
+<text x="102" y="62" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="2" text-anchor="start">NARROWS</text>
+<rect x="914" y="50" width="130" height="20" rx="10" fill="#F0B429"/>
+<text x="979" y="60" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="9.5" font-weight="700" fill="#0A2540" text-anchor="middle" dominant-baseline="middle" letter-spacing="1.5">CRUDE IMPORT ANALYSIS</text>
+<line x1="20" y1="129" x2="1080" y2="129" stroke="#F0B429" stroke-width="2"/>
+<text x="56" y="92" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="-0.2">
+  India crude supply runs through two distinct chokepoint corridors
+</text>
+<text x="56" y="114" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="12" font-weight="300" fill="rgba(255,255,255,0.52)">
+  Gulf crude exits through Hormuz (~4 days). Russian Ural crude transits Bosphorus then Suez/Bab (~16 days). West Africa and Americas round the Cape.
+</text>
+<g transform="translate(60,158)">
+  <path d="M90,72 C189.5,72 189.5,155 289,155" stroke="#38bdf8" stroke-width="8.75" stroke-opacity="0.38" fill="none"/>
+  <rect x="157.8" y="91.3" width="26.8" height="15" rx="7.5" fill="#38bdf8" fill-opacity="0.13"/>
+  <text x="171.2" y="98.8" text-anchor="middle" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">1d</text>
+  <path d="M90,137 C189.5,137 189.5,155 289,155" stroke="#38bdf8" stroke-width="8.75" stroke-opacity="0.38" fill="none"/>
+  <path d="M90,193 C189.5,193 189.5,155 289,155" stroke="#38bdf8" stroke-width="8.75" stroke-opacity="0.38" fill="none"/>
+  <path d="M90,242 C189.5,242 189.5,155 289,155" stroke="#38bdf8" stroke-width="8.75" stroke-opacity="0.38" fill="none"/>
+  <path d="M289,155 C579.5,155 579.5,320 870,320" stroke="#38bdf8" stroke-width="11.18" stroke-opacity="0.38" fill="none"/>
+  <rect x="512.8" y="200.9" width="26.8" height="15" rx="7.5" fill="#38bdf8" fill-opacity="0.13"/>
+  <text x="526.2" y="208.4" text-anchor="middle" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">4d</text>
+  <path d="M90,375 C189.5,375 189.5,375 289,375" stroke="#f97316" stroke-width="7.71" stroke-opacity="0.38" fill="none"/>
+  <rect x="157.8" y="367.5" width="26.8" height="15" rx="7.5" fill="#f97316" fill-opacity="0.13"/>
+  <text x="171.2" y="375.0" text-anchor="middle" dominant-baseline="middle" fill="#f97316" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">2d</text>
+  <path d="M289,375 C406.5,375 406.5,375 524,375" stroke="#f97316" stroke-width="7.71" stroke-opacity="0.38" fill="none"/>
+  <rect x="371.5" y="367.5" width="26.8" height="15" rx="7.5" fill="#f97316" fill-opacity="0.13"/>
+  <text x="384.9" y="375.0" text-anchor="middle" dominant-baseline="middle" fill="#f97316" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">5d</text>
+  <path d="M524,375 C697.0,375 697.0,320 870,320" stroke="#f97316" stroke-width="11.18" stroke-opacity="0.38" fill="none"/>
+  <rect x="651.9" y="349.7" width="26.8" height="15" rx="7.5" fill="#f97316" fill-opacity="0.13"/>
+  <text x="665.3" y="357.2" text-anchor="middle" dominant-baseline="middle" fill="#f97316" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">7d</text>
+  <path d="M90,490 C307.0,490 307.0,548 524,548" stroke="#34d399" stroke-width="4.15" stroke-opacity="0.38" fill="none"/>
+  <path d="M90,546 C307.0,546 307.0,548 524,548" stroke="#34d399" stroke-width="4.15" stroke-opacity="0.38" fill="none"/>
+  <path d="M90,600 C307.0,600 307.0,548 524,548" stroke="#34d399" stroke-width="4.15" stroke-opacity="0.38" fill="none"/>
+  <path d="M524,548 C697.0,548 697.0,320 870,320" stroke="#34d399" stroke-width="11.18" stroke-opacity="0.38" fill="none"/>
+  <rect x="648.7" y="466.8" width="33.2" height="15" rx="7.5" fill="#34d399" fill-opacity="0.13"/>
+  <text x="665.3" y="474.3" text-anchor="middle" dominant-baseline="middle" fill="#34d399" fill-opacity="0.80" font-size="10" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">12d</text>
+  <circle cx="90" cy="72" r="7.5" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="107.5" y="72.0" text-anchor="start" dominant-baseline="middle" fill="#7dd3fc" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Iraq</text>
+  <text x="107.5" y="87.0" text-anchor="start" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$22.0B · 4d</text>
+  <circle cx="90" cy="137" r="6.4" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="106.4" y="137.0" text-anchor="start" dominant-baseline="middle" fill="#7dd3fc" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Saudi Arabia</text>
+  <text x="106.4" y="152.0" text-anchor="start" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$16.0B · 4d</text>
+  <circle cx="90" cy="193" r="5.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="105.0" y="193.0" text-anchor="start" dominant-baseline="middle" fill="#7dd3fc" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">UAE</text>
+  <text x="105.0" y="208.0" text-anchor="start" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$7.0B · 3d</text>
+  <circle cx="90" cy="242" r="5.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="105.0" y="242.0" text-anchor="start" dominant-baseline="middle" fill="#7dd3fc" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Kuwait</text>
+  <text x="105.0" y="257.0" text-anchor="start" dominant-baseline="middle" fill="#38bdf8" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$4.0B · 4d</text>
+  <circle cx="289" cy="155" r="17.5" fill="#F0B429" fill-opacity="0.20" stroke="#F0B429" stroke-width="2.2" stroke-opacity="1" filter="url(#glow)"/>
+  <text x="316.5" y="155.0" text-anchor="start" dominant-baseline="middle" fill="#F0B429" fill-opacity="1" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Hormuz</text>
+  <circle cx="90" cy="375" r="9.9" fill="#f97316" fill-opacity="0.15" stroke="#f97316" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="109.9" y="367.0" text-anchor="start" dominant-baseline="middle" fill="#fdba74" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Russia</text>
+  <text x="109.9" y="383.0" text-anchor="start" dominant-baseline="middle" fill="#fdba74" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">(Ural seaborne)</text>
+  <text x="109.9" y="399.0" text-anchor="start" dominant-baseline="middle" fill="#f97316" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$38.0B · 16d</text>
+  <circle cx="289" cy="375" r="15.4" fill="#F0B429" fill-opacity="0.20" stroke="#F0B429" stroke-width="2.2" stroke-opacity="1" filter="url(#glow)"/>
+  <text x="314.4" y="375.0" text-anchor="start" dominant-baseline="middle" fill="#F0B429" fill-opacity="1" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Bosphorus</text>
+  <circle cx="524" cy="375" r="15.4" fill="#F0B429" fill-opacity="0.20" stroke="#F0B429" stroke-width="2.2" stroke-opacity="1" filter="url(#glow)"/>
+  <text x="549.4" y="367.0" text-anchor="start" dominant-baseline="middle" fill="#F0B429" fill-opacity="1" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Suez /</text>
+  <text x="549.4" y="383.0" text-anchor="start" dominant-baseline="middle" fill="#F0B429" fill-opacity="1" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Bab el-Mandeb</text>
+  <circle cx="90" cy="490" r="5.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="105.0" y="490.0" text-anchor="start" dominant-baseline="middle" fill="#6ee7b7" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Nigeria</text>
+  <text x="105.0" y="505.0" text-anchor="start" dominant-baseline="middle" fill="#34d399" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$5.0B · 21d</text>
+  <circle cx="90" cy="546" r="5.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="105.0" y="546.0" text-anchor="start" dominant-baseline="middle" fill="#6ee7b7" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Angola</text>
+  <text x="105.0" y="561.0" text-anchor="start" dominant-baseline="middle" fill="#34d399" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$3.0B · 23d</text>
+  <circle cx="90" cy="600" r="5.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.5" stroke-opacity="1"/>
+  <text x="105.0" y="600.0" text-anchor="start" dominant-baseline="middle" fill="#6ee7b7" fill-opacity="1" font-size="12" font-weight="500" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">USA</text>
+  <text x="105.0" y="615.0" text-anchor="start" dominant-baseline="middle" fill="#34d399" fill-opacity="0.52" font-size="10.5" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">$3.0B · 28d</text>
+  <circle cx="524" cy="548" r="8.0" fill="#64748b" fill-opacity="0.07" stroke="#64748b" stroke-width="1" stroke-opacity="0.35"/>
+  <text x="542.0" y="540.0" text-anchor="start" dominant-baseline="middle" fill="rgba(148,163,184,0.85)" fill-opacity="1" font-size="10" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Cape of</text>
+  <text x="542.0" y="556.0" text-anchor="start" dominant-baseline="middle" fill="rgba(148,163,184,0.85)" fill-opacity="1" font-size="10" font-weight="400" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">Good Hope</text>
+  <circle cx="870" cy="320" r="22.4" fill="#F0B429" fill-opacity="0.20" stroke="#F0B429" stroke-width="2.2" stroke-opacity="1" filter="url(#glow)"/>
+  <text x="837.6" y="320.0" text-anchor="end" dominant-baseline="middle" fill="#F0B429" fill-opacity="1" font-size="13" font-weight="700" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif">India</text>
+</g>
+<line x1="20" y1="830" x2="1080" y2="830" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+<circle cx="60.5" cy="858" r="4.5" fill="#F0B429"/>
+<text x="70" y="858" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.28)" dominant-baseline="middle">Chokepoint</text>
+<circle cx="154.5" cy="858" r="4.5" fill="#38bdf8"/>
+<text x="164.0" y="858" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.28)" dominant-baseline="middle">Gulf corridor (Hormuz)</text>
+<circle cx="327.7" cy="858" r="4.5" fill="#f97316"/>
+<text x="337.2" y="858" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.28)" dominant-baseline="middle">Russian corridor (Bosphorus + Suez)</text>
+<circle cx="586.7" cy="858" r="4.5" fill="#34d399"/>
+<text x="596.2" y="858" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.28)" dominant-baseline="middle">Open ocean (Cape — no chokepoint)</text>
+<text x="1044" y="852" text-anchor="end" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.28)">Source: Narrows CDM v0.3 · HS 2709 bilateral crude trade data</text>
+<text x="1044" y="866" text-anchor="end" font-family="Plus Jakarta Sans, Helvetica Neue, Arial, sans-serif" font-size="10" fill="rgba(255,255,255,0.28)">Transit at 13 kts laden · Share% = % of India seaborne crude</text>
+</svg>
