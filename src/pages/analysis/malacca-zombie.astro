@@ -81,7 +81,7 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .social-card-bg {
   position: absolute; inset: 0;
   background: url('/images/malacca-n.jpg') center/cover no-repeat;
-  filter: brightness(0.5) saturate(0.8);
+  filter: brightness(0.72) saturate(0.8);
 }
 .social-card-overlay {
   position: absolute; inset: 0;
@@ -442,12 +442,14 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <div style="margin:28px 0;">
  <iframe
+  id="india-sankey-frame"
   src="/india-crude-sankey.html"
   width="100%"
-  height="820"
+  height="920"
   style="border:none;display:block;border-radius:8px;overflow:hidden;"
   loading="lazy"
   title="India crude import flows by chokepoint corridor"
+  onload="(function(f){try{f.style.height=(f.contentDocument.documentElement.scrollHeight+2)+'px'}catch(e){}})(this)"
  ></iframe>
 </div>
 
