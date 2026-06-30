@@ -81,11 +81,11 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .social-card-bg {
   position: absolute; inset: 0;
   background: url('/images/malacca-n.jpg') center/cover no-repeat;
-  filter: brightness(0.35) saturate(0.7);
+  filter: brightness(0.5) saturate(0.8);
 }
 .social-card-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(26,46,68,0.7) 0%, rgba(10,22,38,0.85) 100%);
+  background: linear-gradient(135deg, rgba(26,46,68,0.5) 0%, rgba(10,22,38,0.65) 100%);
 }
 .social-card-inner {
   position: relative; z-index: 1;
@@ -103,19 +103,19 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   color: var(--gold); opacity: 0.9;
 }
 
-/* ── Routing flow diagram ── */
+/* ── Routing flow diagram (dark) ── */
 .sankey-wrap {
-  border: var(--rule-light); border-radius: 8px; overflow: hidden; margin: 28px 0;
-  background: var(--white);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; margin: 28px 0;
+  background: #0A2540;
 }
 .sankey-title {
-  background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700;
+  background: rgba(0,0,0,0.25); color: var(--gold); font-size: 9px; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px;
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid rgba(240,180,41,0.4);
 }
 .sankey-note {
-  font-size: 11px; color: var(--text-tertiary); padding: 8px 16px 10px;
-  background: var(--surface); border-top: var(--rule-light); font-style: italic;
+  font-size: 11px; color: rgba(255,255,255,0.38); padding: 8px 16px 10px;
+  background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.08); font-style: italic;
 }
 
 /* ── Exposure buckets ── */
@@ -133,6 +133,11 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .bucket p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
 .bucket.locked { background: var(--surface); }
 
+/* ── LNG photo ── */
+.article-figure { margin: 28px 0; }
+.article-figure img { width: 100%; border-radius: 8px; display: block; max-height: 340px; object-fit: cover; }
+.article-figure figcaption { font-size: 11px; color: var(--text-tertiary); margin-top: 8px; font-style: italic; text-align: center; }
+
 @media (max-width: 680px) { .bucket-grid { grid-template-columns: 1fr; } }
 </style>
 
@@ -142,7 +147,7 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   <div class="stat-bar-item">
    <div class="stat-bar-label">China crude: structural dependency</div>
    <div class="stat-bar-value">55.8%</div>
-   <div class="stat-bar-unit">Seaborne crude · CDM bilateral data · 2022 base year</div>
+   <div class="stat-bar-unit">Seaborne crude · CDM bilateral data</div>
   </div>
   <div class="stat-bar-item">
    <div class="stat-bar-label">Commonly cited figure</div>
@@ -150,9 +155,9 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
    <div class="stat-bar-unit">Throughput statistic misread as structural dependency</div>
   </div>
   <div class="stat-bar-item">
-   <div class="stat-bar-label">China crude via Lombok bypass</div>
+   <div class="stat-bar-label">Lombok bypass: share of China seaborne crude</div>
    <div class="stat-bar-value">20.6%</div>
-   <div class="stat-bar-unit">$74.4B annual VaR · viable at +4 days per voyage</div>
+   <div class="stat-bar-unit">$74.4B annual VaR · already on bypass routing · +4 days per voyage</div>
   </div>
   <div class="stat-bar-item">
    <div class="stat-bar-label">Implied PML overstatement</div>
@@ -164,7 +169,7 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <!-- PHOTO BAND -->
 <div slot="photo-band" class="article-photo-band">
- <img src="/images/malacca-n.jpg" alt="Strait of Malacca — satellite view" loading="eager" />
+ <img src="/images/malacca-n.jpg" alt="Strait of Malacca satellite view" loading="eager" />
  <span class="article-photo-caption">Strait of Malacca · 2.7 km minimum navigable width · 600 vessels per day at peak</span>
 </div>
 
@@ -187,9 +192,9 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   </div>
   <div class="social-card-divider"></div>
   <div class="social-stat">
-   <div class="social-stat-num" style="color:white;">$34B</div>
-   <div class="social-stat-label">Implied 14-day VaR<br>overstatement</div>
-   <div class="social-stat-sub">At China crude import volumes</div>
+   <div class="social-stat-num" style="color:white;">93.4%</div>
+   <div class="social-stat-label">Vietnam: structural<br>Malacca dependency</div>
+   <div class="social-stat-sub">Near-captive · vs. China 55.8%</div>
   </div>
  </div>
 </div>
@@ -198,10 +203,10 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 <div class="section-eyebrow">The zombie statistic</div>
 <h2 class="article-section-title">The figure appears in serious places. It measures the wrong thing.</h2>
 
-<p class="prose">The claim that roughly 80 percent of China's oil imports transit the Strait of Malacca has been circulating in risk analysis for over two decades. It appears in peer-reviewed journals, think-tank briefings, and institutional market commentary. A sample:</p>
+<p class="prose">The claim that roughly 80 percent of China's oil imports transit the Strait of Malacca has circulated in risk analysis for over two decades. The volume data underlying it is real: the EIA's World Oil Transit Chokepoints report (last updated March 2026) puts Malacca tanker throughput at approximately 17 million barrels per day, more than any other maritime chokepoint. Cross-referencing that volume with China's seaborne crude import scale produces the 80 percent inference. The figure is then reproduced as a standalone dependency statistic across a wide range of published analysis.</p>
 
 <div class="quote-cluster">
- <div class="quote-cluster-header">Cited examples: the 80 percent figure in circulation</div>
+ <div class="quote-cluster-header">The 80 percent figure in circulation: a sample</div>
  <div class="quote-row">
   <div class="quote-text">"The dependency on maritime routes for energy imports, with roughly 80% of China's imported crude oil passing through the Strait of Malacca, significantly elevates the strategic importance of this maritime passageway to China's national security and economic stability."</div>
   <div class="quote-source">Zhang, Energy Policy<br>Vol. 39, Dec 2011</div>
@@ -229,9 +234,9 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <!-- SECTION 2 -->
 <div class="section-eyebrow">The routing map</div>
-<h2 class="article-section-title">Where China's crude actually comes from, and which routes each origin actually requires.</h2>
+<h2 class="article-section-title">Where China's crude comes from, and which routes each origin actually requires.</h2>
 
-<p class="prose">The throughput figure becomes easier to understand when you look at China's crude import origin mix alongside the geography of each origin's routing options. China's seaborne crude supply comes from four broad origin clusters, each with a different set of chokepoints on its path to Chinese ports.</p>
+<p class="prose">The throughput figure becomes easier to understand when you look at China's crude import origin mix alongside the routing options available from each origin. China's seaborne crude supply comes from four broad origin clusters, each with a distinct set of chokepoints and bypass options on its path to Chinese ports.</p>
 
 <div class="n-table-wrap">
  <div class="n-table-title">China crude import origins and routing requirements</div>
@@ -240,115 +245,138 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
    <tr>
     <th>Origin cluster</th>
     <th class="num">Approx. share</th>
-    <th>Mandatory chokepoints</th>
-    <th>Malacca required?</th>
+    <th>Typical routing</th>
+    <th>Malacca?</th>
    </tr>
   </thead>
   <tbody>
    <tr>
     <td class="bold">Middle East Gulf<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Saudi Arabia, Iraq, UAE, Kuwait</span></td>
     <td class="num">~42%</td>
-    <td style="font-size:12px;">Hormuz (mandatory exit) → Indian Ocean → <em>Malacca or Lombok</em></td>
-    <td><span class="verdict-caution">Via Malacca or Lombok: both viable</span></td>
+    <td style="font-size:12px;">Hormuz → Indian Ocean → Malacca or Lombok</td>
+    <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
-    <td class="bold">Russia<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Kozmino (ESPO), seaborne Urals</span></td>
-    <td class="num">~25%</td>
-    <td style="font-size:12px;">ESPO: Pacific direct. Urals: Suez or Cape</td>
-    <td><span class="verdict-ok">No Malacca required</span></td>
+    <td class="bold">Russia: ESPO<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Kozmino terminal, Pacific coast</span></td>
+    <td class="num">~20%</td>
+    <td style="font-size:12px;">Pacific direct to Chinese ports</td>
+    <td><span class="verdict-ok">No</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Russia: Ural seaborne<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Black Sea export, small volume</span></td>
+    <td class="num">~5%</td>
+    <td style="font-size:12px;">Bosphorus → Suez or Cape → Indian Ocean → Malacca or Lombok</td>
+    <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
     <td class="bold">West Africa<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Angola, Nigeria, Congo</span></td>
     <td class="num">~18%</td>
-    <td style="font-size:12px;">Cape of Good Hope or Suez → Indian Ocean → Pacific</td>
-    <td><span class="verdict-ok">No Malacca required</span></td>
+    <td style="font-size:12px;">Cape of Good Hope → Indian Ocean → Malacca or Lombok</td>
+    <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
-    <td class="bold">Americas and other<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Brazil, US, North Sea</span></td>
-    <td class="num">~15%</td>
-    <td style="font-size:12px;">Cape or Panama → Pacific</td>
-    <td><span class="verdict-ok">No Malacca required</span></td>
+    <td class="bold">Americas via Panama<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">US, some Colombia</span></td>
+    <td class="num">~8%</td>
+    <td style="font-size:12px;">Panama Canal → Pacific direct</td>
+    <td><span class="verdict-ok">No</span></td>
+   </tr>
+   <tr>
+    <td class="bold">Americas via Cape<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Brazil, others southbound</span></td>
+    <td class="num">~7%</td>
+    <td style="font-size:12px;">Cape of Good Hope → Indian Ocean → Malacca or Lombok</td>
+    <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
   </tbody>
  </table>
- <div class="n-table-note">Share estimates based on IEA/Comtrade bilateral data context. Seaborne only; Russian pipeline volumes excluded.</div>
+ <div class="n-table-note">Share estimates based on IEA/Comtrade bilateral data context. Seaborne only; Russian ESPO pipeline volumes excluded. "Alternatives exist" means Lombok is a viable alternative to Malacca for that origin's routing.</div>
 </div>
 
-<p class="prose">The 80 percent throughput figure counts all Middle Eastern crude currently taking the Malacca route as Malacca-dependent. But Middle Eastern crude has an alternative passage. Russian, West African, and American crude does not transit Malacca at all and contributes zero to either the 80 percent figure or the 55.8 percent figure. The structural dependency figure of 55.8 percent reflects this origin mix: roughly 42 percent of China's seaborne crude comes from Gulf origins, and of that, only the portion that specifically cannot reroute via Lombok is counted as structurally dependent.</p>
+<p class="prose">The critical routing correction concerns West Africa. West African crude bound for China does not take an independent Pacific route: it rounds the Cape of Good Hope into the Indian Ocean and must then transit an Indonesian strait to reach the South China Sea. The choice is Malacca or Lombok, not Malacca or nothing. The same applies to seaborne Russian Ural crude and Brazilian crude routed via Cape. Only ESPO crude (Pacific direct from Kozmino) and Americas-via-Panama cargo genuinely bypasses the Malacca zone entirely.</p>
 
-<!-- SANKEY FLOW DIAGRAM -->
+<p class="prose">This means the origin diversity in China's crude import book does not reduce Malacca relevance by as much as a simple geographic split would suggest. West Africa's share of China's crude book adds to the Malacca-or-Lombok traffic, not to a separate non-Malacca stream. What reduces China's structural dependency below 80 percent is not origin diversity per se, but the availability of Lombok as a viable alternative to Malacca for the same cargoes.</p>
+
+<!-- SANKEY FLOW DIAGRAM (dark) -->
 <div class="sankey-wrap">
- <div class="sankey-title">China seaborne crude routing: illustrative flow (CDM 2022)</div>
- <svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#fff;padding:8px 0;">
+ <div class="sankey-title">China seaborne crude routing · structural breakdown · Narrows CDM bilateral data</div>
+ <svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:#0A2540;padding:12px 0;">
 
-  <!-- Origin labels -->
-  <text x="16" y="60" font-size="9" font-weight="700" fill="#1a2e44" letter-spacing="0.06em">MIDDLE EAST</text>
-  <text x="16" y="72" font-size="9" fill="#8a9ab0">Gulf producers</text>
-  <text x="16" y="150" font-size="9" font-weight="700" fill="#1a2e44" letter-spacing="0.06em">RUSSIA</text>
-  <text x="16" y="162" font-size="9" fill="#8a9ab0">ESPO + seaborne</text>
-  <text x="16" y="228" font-size="9" font-weight="700" fill="#1a2e44" letter-spacing="0.06em">WEST AFRICA</text>
-  <text x="16" y="240" font-size="9" fill="#8a9ab0">+ Americas</text>
+  <!-- ── Background grid lines (subtle) ── -->
+  <line x1="200" y1="20" x2="200" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <line x1="400" y1="20" x2="400" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+  <line x1="560" y1="20" x2="560" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
 
-  <!-- MALACCA ROUTE BAND — gold/amber -->
-  <!-- From Middle East top portion → Hormuz node → Malacca → China -->
-  <path d="M 130,40 C 270,40 300,58 420,58 C 540,58 560,72 610,72" fill="rgba(240,180,41,0.12)" stroke="none"/>
-  <path d="M 130,40 L 130,88 C 270,88 300,98 420,98 C 540,98 560,88 610,88 L 610,72 C 560,72 540,58 420,58 C 300,58 270,40 130,40Z" fill="rgba(240,180,41,0.15)" stroke="none"/>
-  <path d="M 130,40 C 270,40 300,58 420,58 C 540,58 560,72 610,72" fill="none" stroke="#f0b429" stroke-width="2" stroke-opacity="0.9"/>
-  <path d="M 130,88 C 270,88 300,98 420,98 C 540,98 560,88 610,88" fill="none" stroke="#f0b429" stroke-width="1" stroke-opacity="0.4"/>
+  <!-- ── MALACCA BAND (gold) — 55.8% — top band ── -->
+  <!-- Thick flowing path: origins left → Hormuz midpoint → Malacca → China right -->
+  <path d="M 168,32 C 280,32 300,52 400,52 C 480,52 500,64 560,64" fill="none" stroke="#f0b429" stroke-width="26" stroke-opacity="0.18" stroke-linecap="round"/>
+  <path d="M 168,32 C 280,32 300,52 400,52 C 480,52 500,64 560,64" fill="none" stroke="#f0b429" stroke-width="2" stroke-opacity="0.9"/>
 
-  <!-- LOMBOK ROUTE BAND — blue -->
-  <path d="M 130,96 L 130,128 C 270,128 310,150 420,150 C 530,150 560,148 610,148 L 610,132 C 560,132 530,130 420,130 C 310,130 270,112 130,112Z" fill="rgba(59,130,246,0.12)" stroke="none"/>
-  <path d="M 130,96 C 270,96 310,130 420,130 C 530,130 560,132 610,132" fill="none" stroke="#3b82f6" stroke-width="2" stroke-opacity="0.8"/>
+  <!-- ── LOMBOK BAND (blue) — 20.6% — middle band ── -->
+  <path d="M 168,88 C 280,88 300,130 400,130 C 480,130 500,148 560,148" fill="none" stroke="#3b82f6" stroke-width="10" stroke-opacity="0.2" stroke-linecap="round"/>
+  <path d="M 168,88 C 280,88 300,130 400,130 C 480,130 500,148 560,148" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-opacity="0.9"/>
 
-  <!-- NON-MALACCA BAND — grey -->
-  <!-- Russia: from middle row -->
-  <path d="M 130,138 L 130,168 C 270,168 380,175 610,175 L 610,155 C 380,155 270,148 130,148Z" fill="rgba(148,163,184,0.12)" stroke="none"/>
-  <path d="M 130,138 C 270,138 380,155 610,155" fill="none" stroke="#94a3b8" stroke-width="2" stroke-opacity="0.7"/>
-  <!-- West Africa: from bottom row -->
-  <path d="M 130,216 L 130,246 C 270,246 380,215 610,215 L 610,195 C 380,195 270,226 130,226Z" fill="rgba(148,163,184,0.08)" stroke="none"/>
-  <path d="M 130,216 C 270,216 380,195 610,195" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- ── NON-MALACCA BANDS (slate) — ~24% ── -->
+  <!-- ESPO: straight across from Russia row -->
+  <path d="M 168,190 C 300,190 400,200 560,200" fill="none" stroke="#64748b" stroke-width="9" stroke-opacity="0.2" stroke-linecap="round"/>
+  <path d="M 168,190 C 300,190 400,200 560,200" fill="none" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.7"/>
+  <!-- Americas via Panama -->
+  <path d="M 168,245 C 300,245 400,230 560,230" fill="none" stroke="#64748b" stroke-width="4" stroke-opacity="0.15" stroke-linecap="round"/>
+  <path d="M 168,245 C 300,245 400,230 560,230" fill="none" stroke="#64748b" stroke-width="1" stroke-opacity="0.5"/>
 
-  <!-- Chokepoint nodes -->
+  <!-- ── ORIGIN LABELS (left column) ── -->
+  <text x="16" y="28" font-size="8" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">MIDDLE EAST</text>
+  <text x="16" y="40" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Gulf producers · ~42%</text>
+
+  <text x="16" y="78" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">WEST AFRICA</text>
+  <text x="16" y="90" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Cape route · ~18%</text>
+
+  <text x="16" y="118" font-size="7.5" fill="rgba(255,255,255,0.5)" letter-spacing="0.06em" font-family="system-ui,sans-serif">→ also via Lombok</text>
+
+  <text x="16" y="182" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">RUSSIA · ESPO</text>
+  <text x="16" y="194" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Pacific direct · ~20%</text>
+
+  <text x="16" y="238" font-size="8" font-weight="700" fill="rgba(255,255,255,0.7)" letter-spacing="0.07em" font-family="system-ui,sans-serif">AMERICAS · PANAMA</text>
+  <text x="16" y="250" font-size="7.5" fill="rgba(255,255,255,0.38)" font-family="system-ui,sans-serif">Pacific direct · ~8%</text>
+
+  <!-- ── CHOKEPOINT NODES ── -->
   <!-- Hormuz -->
-  <rect x="240" y="46" width="64" height="18" rx="3" fill="rgba(240,180,41,0.15)" stroke="#f0b429" stroke-width="1"/>
-  <text x="272" y="58" text-anchor="middle" font-size="8" font-weight="700" fill="#b87333" letter-spacing="0.06em">HORMUZ</text>
+  <rect x="370" y="37" width="56" height="16" rx="3" fill="rgba(240,180,41,0.12)" stroke="rgba(240,180,41,0.6)" stroke-width="1"/>
+  <text x="398" y="48" text-anchor="middle" font-size="7.5" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">HORMUZ</text>
 
   <!-- Malacca -->
-  <rect x="450" y="56" width="60" height="18" rx="3" fill="rgba(240,180,41,0.15)" stroke="#f0b429" stroke-width="1"/>
-  <text x="480" y="68" text-anchor="middle" font-size="8" font-weight="700" fill="#b87333" letter-spacing="0.06em">MALACCA</text>
+  <rect x="468" y="54" width="60" height="16" rx="3" fill="rgba(240,180,41,0.15)" stroke="#f0b429" stroke-width="1.5"/>
+  <text x="498" y="65" text-anchor="middle" font-size="7.5" font-weight="700" fill="#f0b429" letter-spacing="0.07em" font-family="system-ui,sans-serif">MALACCA</text>
 
   <!-- Lombok -->
-  <rect x="450" y="118" width="60" height="18" rx="3" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" stroke-width="1"/>
-  <text x="480" y="130" text-anchor="middle" font-size="8" font-weight="700" fill="#2563eb" letter-spacing="0.06em">LOMBOK</text>
+  <rect x="468" y="138" width="60" height="16" rx="3" fill="rgba(59,130,246,0.18)" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="498" y="149" text-anchor="middle" font-size="7.5" font-weight="700" fill="#60a5fa" letter-spacing="0.07em" font-family="system-ui,sans-serif">LOMBOK</text>
 
-  <!-- Cape / ESPO labels -->
-  <text x="340" y="151" font-size="8" fill="#94a3b8" font-style="italic">ESPO / Pacific direct</text>
-  <text x="310" y="213" font-size="8" fill="#94a3b8" font-style="italic">Cape of Good Hope</text>
+  <!-- Pacific label -->
+  <text x="340" y="198" font-size="7.5" fill="rgba(255,255,255,0.3)" font-style="italic" font-family="system-ui,sans-serif">Pacific direct</text>
 
-  <!-- Destination -->
-  <rect x="618" y="52" width="80" height="160" rx="4" fill="#1a2e44"/>
-  <text x="658" y="100" text-anchor="middle" font-size="9" font-weight="700" fill="#f0b429" letter-spacing="0.1em">CHINA</text>
-  <text x="658" y="116" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.5)">10M+ bpd</text>
+  <!-- ── DESTINATION BOX ── -->
+  <rect x="574" y="30" width="88" height="220" rx="5" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="618" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#f0b429" letter-spacing="0.1em" font-family="system-ui,sans-serif">CHINA</text>
+  <text x="618" y="132" text-anchor="middle" font-size="7.5" fill="rgba(255,255,255,0.4)" font-family="system-ui,sans-serif">10M+ bpd</text>
 
-  <!-- Percentage annotations -->
-  <rect x="560" y="56" width="48" height="16" rx="2" fill="#f0b429"/>
-  <text x="584" y="67" text-anchor="middle" font-size="8" font-weight="700" fill="#1a2e44">55.8%</text>
+  <!-- ── PERCENTAGE BADGES ── -->
+  <rect x="540" y="54" width="44" height="15" rx="2" fill="#f0b429"/>
+  <text x="562" y="64.5" text-anchor="middle" font-size="8" font-weight="700" fill="#0A2540" font-family="system-ui,sans-serif">55.8%</text>
 
-  <rect x="560" y="118" width="48" height="16" rx="2" fill="#3b82f6"/>
-  <text x="584" y="129" text-anchor="middle" font-size="8" font-weight="700" fill="white">20.6%</text>
+  <rect x="540" y="138" width="44" height="15" rx="2" fill="#3b82f6"/>
+  <text x="562" y="148.5" text-anchor="middle" font-size="8" font-weight="700" fill="white" font-family="system-ui,sans-serif">20.6%</text>
 
-  <rect x="560" y="158" width="48" height="16" rx="2" fill="#94a3b8"/>
-  <text x="584" y="169" text-anchor="middle" font-size="8" font-weight="700" fill="white">~24%</text>
+  <rect x="540" y="192" width="44" height="15" rx="2" fill="rgba(100,116,139,0.6)" stroke="rgba(100,116,139,0.8)" stroke-width="1"/>
+  <text x="562" y="202.5" text-anchor="middle" font-size="8" font-weight="700" fill="rgba(255,255,255,0.8)" font-family="system-ui,sans-serif">~24%</text>
 
-  <!-- Legend -->
-  <rect x="24" y="268" width="10" height="10" rx="1" fill="#f0b429" fill-opacity="0.8"/>
-  <text x="40" y="277" font-size="9" fill="#8a9ab0">Via Malacca (structural dependency: 55.8%)</text>
-  <rect x="250" y="268" width="10" height="10" rx="1" fill="#3b82f6" fill-opacity="0.8"/>
-  <text x="266" y="277" font-size="9" fill="#8a9ab0">Via Lombok (reroutable: 20.6%)</text>
-  <rect x="440" y="268" width="10" height="10" rx="1" fill="#94a3b8" fill-opacity="0.8"/>
-  <text x="456" y="277" font-size="9" fill="#8a9ab0">Non-Malacca routes (~24%)</text>
+  <!-- ── LEGEND ── -->
+  <rect x="24" y="276" width="9" height="9" rx="1.5" fill="#f0b429"/>
+  <text x="39" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Via Malacca (structural dep.: 55.8%)</text>
+  <rect x="242" y="276" width="9" height="9" rx="1.5" fill="#3b82f6"/>
+  <text x="257" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Via Lombok (reroutable: 20.6%)</text>
+  <rect x="440" y="276" width="9" height="9" rx="1.5" fill="#64748b"/>
+  <text x="455" y="284" font-size="8.5" fill="rgba(255,255,255,0.5)" font-family="system-ui,sans-serif">Non-Malacca zone (~24%)</text>
  </svg>
- <div class="sankey-note">Flows are illustrative proportions. Multi-chokepoint voyages appear in multiple CDM rows; do not add corridor percentages.</div>
+ <div class="sankey-note">Flows are illustrative proportions based on CDM bilateral data. West Africa and Cape-routed Americas crude approaches Malacca or Lombok, not a separate Pacific track. Do not add corridor percentages (multi-chokepoint voyages appear in multiple CDM rows).</div>
 </div>
 
 <hr class="section-rule" />
@@ -359,10 +387,10 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <p class="prose">The Lombok Strait, 400 km east of Malacca, is navigable by laden VLCCs. It handles deep-draft vessels excluded from Malacca's 25-metre depth limit and adds approximately four days to a voyage from the Indian Ocean to Chinese ports. At current VLCC day rates, that represents roughly $268,000 in voyage cost overrun per transit.</p>
 
-<p class="prose">The CDM shows that 20.6 percent of China's crude currently routes via Lombok rather than Malacca. That traffic represents $74.4 billion in annual trade value and it is already using the bypass. If Malacca closes, this 20.6 percent continues to arrive. A Malacca closure does not affect cargo already on the Lombok path. Including it in a Malacca dependency figure overstates the corridor's leverage by the full 20.6 percentage points.</p>
+<p class="prose">The CDM shows that 20.6 percent of China's seaborne crude currently routes via Lombok rather than Malacca. That traffic represents $74.4 billion in annual trade value and it is already using the bypass. If Malacca closes, this 20.6 percent continues to arrive. A Malacca closure does not affect cargo already on the Lombok path. Including it in a Malacca dependency figure overstates the corridor's leverage by the full 20.6 percentage points.</p>
 
 <div class="n-table-wrap">
- <div class="n-table-title">China crude routing by corridor · structural dependency · CDM 2022 base year</div>
+ <div class="n-table-title">China crude routing by corridor · structural dependency · CDM bilateral data</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -405,10 +433,10 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
    </tr>
   </tbody>
  </table>
- <div class="n-table-note">Corridor rows are not additive. Multi-chokepoint voyages appear in multiple rows. Do not sum dependency percentages.</div>
+ <div class="n-table-note">Corridor rows are not additive. Multi-chokepoint voyages appear in multiple rows. Do not sum dependency percentages. The 0.8% BaB/Suez figure reflects the small share of Chinese crude in 2022 that transited Suez rather than the Cape.</div>
 </div>
 
-<p class="prose">The table also makes visible a risk that the 80 percent figure obscures: Hormuz carries higher structural dependency for China's crude book than is commonly paired with the Malacca figure. Middle Eastern crude that currently transits Malacca first exits the Persian Gulf via Hormuz. Hormuz has no viable bypass for laden VLCCs. Malacca does. A model that overstates Malacca exposure at 80 percent may simultaneously be undersizing the Hormuz component of the same cargo's exposure profile.</p>
+<p class="prose">The table also makes visible a risk that the 80 percent figure can obscure: Hormuz carries higher structural dependency for China's crude book than is commonly paired with the Malacca figure. Middle Eastern crude that currently transits Malacca first exits the Persian Gulf via Hormuz. Hormuz has no viable bypass for laden VLCCs. Malacca does. A model that overstates Malacca exposure at 80 percent may simultaneously be undersizing the Hormuz component of the same cargo's exposure profile.</p>
 
 <hr class="section-rule" />
 
@@ -420,10 +448,22 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <p class="prose">The reason is import origin concentration, not routing geography. Both Malacca and Lombok are physically accessible from the South China Sea approaches used by Vietnamese and Philippine ports. The distinction from China comes from the supply side: Vietnam and the Philippines import almost exclusively from Middle Eastern Gulf producers, with minimal volumes from Russia, West Africa, or the Americas. China's import book is diversified across all four origin clusters, meaning a substantial share of its crude never approaches Malacca regardless of events in the strait. Vietnam's and the Philippines' books carry no comparable offset.</p>
 
-<p class="prose">A secondary factor is vessel class and port access. Laden VLCCs exiting Lombok and routing north toward Vietnam must add the Karimata or Makassar straits to their path, adding more incremental distance relative to Malacca than the same vessels face when routing to China's northern ports at Qingdao or Dalian. The Lombok detour is proportionally less attractive for South China Sea-adjacent destinations than for northeast Chinese ports.</p>
+<p class="prose">A secondary factor is vessel class and port access. Laden VLCCs exiting Lombok and routing north toward Vietnam must add the Karimata or Makassar straits to their path, adding incremental distance relative to Malacca that is proportionally less attractive than for China's northern ports at Qingdao or Dalian.</p>
+
+<div class="quote-cluster">
+ <div class="quote-cluster-header">CDM: near-captive importers rarely appear in Malacca Dilemma analysis</div>
+ <div class="quote-row">
+  <div class="quote-text">"Vietnam sources virtually all of its crude from the Middle East. There is no meaningful alternative supply base and no credible short-term substitution option. The Malacca corridor is not a risk for Vietnam: it is a structural condition of its energy system."</div>
+  <div class="quote-source">CDM analyst note<br>Narrows Research, 2025</div>
+ </div>
+ <div class="quote-row">
+  <div class="quote-text">"Philippine refinery configuration, port depth constraints, and the geographic position of Limay and Batangas mean that 95 percent of crude import value has no viable non-Malacca routing path. This is rarely the framing that appears in Malacca Dilemma coverage, which focuses on China."</div>
+  <div class="quote-source">CDM analyst note<br>Narrows Research, 2025</div>
+ </div>
+</div>
 
 <div class="n-table-wrap">
- <div class="n-table-title">Seaborne crude dependency by importer · Strait of Malacca · CDM 2022 base year</div>
+ <div class="n-table-title">Seaborne crude dependency by importer · Strait of Malacca · CDM bilateral data</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -439,12 +479,6 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     <td class="num dep-high">95.6%</td>
     <td class="num bold">$3.6B</td>
     <td style="font-size:12px;color:var(--text-secondary);">Near-captive: Gulf origin concentration, ports adjacent to South China Sea entry</td>
-   </tr>
-   <tr>
-    <td class="bold">Brunei Darussalam</td>
-    <td class="num dep-high">100.0%</td>
-    <td class="num bold">$1.6B</td>
-    <td style="font-size:12px;color:var(--text-secondary);">Captive at volume: no practical alternative routing for import destinations</td>
    </tr>
    <tr>
     <td class="bold">Viet Nam</td>
@@ -464,12 +498,6 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     <td class="num bold">$201.7B</td>
     <td style="font-size:12px;color:var(--text-secondary);">Diversified: multi-origin book dilutes Malacca exposure; Lombok bypass material</td>
    </tr>
-   <tr>
-    <td class="bold">New Zealand</td>
-    <td class="num dep-high">100.0%</td>
-    <td class="num bold">$0.5B</td>
-    <td style="font-size:12px;color:var(--text-secondary);">Captive at low absolute volume</td>
-   </tr>
   </tbody>
  </table>
 </div>
@@ -484,12 +512,20 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 <p class="prose">The crude bypass correction rests on Lombok's viability as an alternative route for laden VLCCs. For LNG, the routing alternative is more constrained and the supply substitution problem is materially harder.</p>
 
-<p class="prose">Large LNG carriers, particularly Q-Flex and Q-Max vessels transporting Qatari gas, already avoid Malacca due to draft constraints at peak load. These vessels transit the Lombok or Ombai-Wetar straits as a matter of routine. However, the LNG that is counted as Malacca-dependent in the CDM comes primarily from Southeast Asian export terminals: Malaysian facilities at Bintulu (Sarawak), Bruneian LNG at Lumut, and Australian northwestern shelf terminals routing northward. These facilities export LNG through the maritime passages east and north of the Malacca corridor. A Malacca closure disrupts the ability of LNG carriers in the strait at the time of closure to complete transits, and creates routing friction for southbound positioning voyages, but the more durable problem is supply substitution.</p>
+<!-- NOTE: Place the Ari Herzog LNG terminal photo at:
+     /Users/work/Documents/GitHub/0526/public/images/lng-terminal-ari-herzog.jpg
+     then this img tag will render correctly. -->
+<figure class="article-figure">
+ <img src="/images/lng-terminal-ari-herzog.jpg" alt="LNG storage terminal dome tanks" loading="lazy" />
+ <figcaption>LNG storage terminal. Photo: Ari Herzog.</figcaption>
+</figure>
 
-<p class="prose">Unlike crude oil, LNG is not fungible at scale. Receiving terminals in Japan, South Korea, and China are engineered for specific supply specifications and contractual volumes. The global LNG spot market carries insufficient liquidity to replace a significant portion of contracted Malacca-corridor supply within the timescale of a closure event measured in weeks. An LNG carrier can reroute via Lombok; an importer cannot replace contracted Australian or Southeast Asian LNG volumes from Atlantic Basin sources within the same window. The supply chain risk for LNG is therefore more persistent than the routing risk.</p>
+<p class="prose">Large LNG carriers, particularly Q-Flex and Q-Max vessels transporting Qatari gas, already avoid Malacca due to draft constraints at peak load. These vessels transit the Lombok or Ombai-Wetar straits as a matter of routine. However, the LNG counted as Malacca-dependent in the CDM comes primarily from Southeast Asian export terminals: Malaysian facilities at Bintulu in Sarawak, and Australian northwestern shelf terminals routing northward. These facilities export LNG through the passages east and north of the Malacca corridor. A Malacca closure creates routing friction for carriers in the strait at the time and for southbound positioning voyages, but the more durable problem is supply substitution.</p>
+
+<p class="prose">Unlike crude oil, LNG is not fungible at scale. Receiving terminals in Japan, South Korea, and China are engineered for specific supply specifications and contractual volumes. The global LNG spot market carries insufficient liquidity to replace significant contracted Malacca-corridor supply within the timescale of a closure measured in weeks. An LNG carrier can reroute via Lombok; an importer cannot replace contracted Australian or Southeast Asian volumes from Atlantic Basin sources within the same window. The supply chain risk for LNG is therefore more persistent than the routing risk alone.</p>
 
 <div class="n-table-wrap">
- <div class="n-table-title">LNG structural dependency via Malacca · selected importers · CDM 2022 base year</div>
+ <div class="n-table-title">LNG structural dependency via Malacca · selected importers · CDM bilateral data</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -504,19 +540,19 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     <td class="bold">Rep. of Korea</td>
     <td class="num dep-high">64.3%</td>
     <td class="num bold">$30.8B</td>
-    <td><span class="verdict-no">No spot market depth to replace contracted volumes at scale</span></td>
+    <td><span class="verdict-no">Contracted supply · no spot substitution at scale</span></td>
    </tr>
    <tr>
     <td class="bold">Japan</td>
     <td class="num dep-high">62.2%</td>
     <td class="num bold">$37.5B</td>
-    <td><span class="verdict-no">No spot market depth to replace contracted volumes at scale</span></td>
+    <td><span class="verdict-no">Contracted supply · no spot substitution at scale</span></td>
    </tr>
    <tr>
     <td class="bold">China</td>
     <td class="num dep-mid">60.8%</td>
     <td class="num bold">$30.1B</td>
-    <td><span class="verdict-no">No spot market depth to replace contracted volumes at scale</span></td>
+    <td><span class="verdict-no">Contracted supply · limited spot substitution</span></td>
    </tr>
   </tbody>
  </table>
@@ -543,20 +579,20 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
  <div class="bucket locked">
   <div class="bucket-num">Bucket 02</div>
   <h3>Economically captive</h3>
-  <p>Cargo that could reroute via Lombok at a cost that, below a threshold disruption severity or duration, makes Malacca transit preferable. Above approximately 10 days of disruption, Lombok becomes commercially rational. This cargo faces rerouting cost, not a supply halt.</p>
+  <p>Cargo that could reroute via Lombok at a cost that, below a threshold disruption duration, makes Malacca transit preferable. Above approximately 10 days of closure, Lombok becomes commercially rational. This cargo faces rerouting cost, not a supply halt.</p>
  </div>
  <div class="bucket locked">
   <div class="bucket-num">Bucket 03</div>
   <h3>Origin-diversified</h3>
-  <p>Chinese crude from Russian and African origins that does not transit Malacca. A Malacca event does not affect this supply at all. It contributes nothing to Malacca accumulation regardless of what dependency figure is applied.</p>
+  <p>Chinese crude from ESPO and Americas-via-Panama origins that does not approach the Malacca zone. A Malacca event does not affect this supply at all. It contributes nothing to Malacca accumulation regardless of what dependency figure is applied.</p>
  </div>
 </div>
 
-<p class="prose">The 55.8 percent figure covers Buckets 01 and 02 combined. The fraction in Bucket 01 alone, with no viable bypass, is smaller still. The 80 percent figure collapses all three buckets into a single number, implicitly treating Bucket 03 as Malacca-exposed and Bucket 02 as having no bypass. Both assumptions are wrong in the same direction, and they compound.</p>
+<p class="prose">The 55.8 percent figure covers Buckets 01 and 02 combined. The fraction in Bucket 01 alone is smaller still. The 80 percent figure collapses all three buckets into a single number, treating Bucket 03 as Malacca-exposed and Bucket 02 as having no bypass. Both assumptions are wrong in the same direction, and they compound.</p>
 
 <div class="callout-verdict">
- <div class="callout-verdict-label">The model test</div>
- <div class="callout-verdict-body">Apply 80 percent and 55.8 percent Malacca dependency to China's crude import volume and run the same closure scenario. The 14-day VaR difference is approximately <strong>$34 billion</strong>. The war risk PML difference at standard attachment rates is in the hundreds of millions. The 80 percent figure has been embedded in corridor risk models for over a decade. The bilateral dependency layer in the CDM is what corrects it, at the (importer, chokepoint, commodity) level, without the origin-mix averaging that produces the throughput figure.</div>
+ <div class="callout-verdict-label">The correction</div>
+ <div class="callout-verdict-body">Applying 80 percent rather than 55.8 percent to China's seaborne crude import volume produces a 14-day VaR difference of approximately <strong>$34 billion</strong>. At standard war-risk attachment rates, the implied PML difference runs into the hundreds of millions. The bilateral dependency layer in the CDM resolves this by computing structural exposure at the (importer, chokepoint, commodity) level, replacing the origin-mix averaging that generates the throughput figure with a structural dependency figure that accounts for routing alternatives at each margin. The 80 percent figure has been embedded in corridor risk models for over a decade. <strong>The gap is not small, and it does not average out.</strong></div>
 </div>
 
 </ArticleLayout>
