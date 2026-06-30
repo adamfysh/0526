@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Crude Sankey — Narrows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0A2540;
+    --navy-mid: #0d304f;
+    --gold:     #F0B429;
+    --font: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--navy);
+    font-family: var(--font);
+    color: rgba(255,255,255,0.82);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 24px 56px;
+  }
+  .card {
+    width: 100%; max-width: 1040px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .card-header { padding: 28px 36px 24px; border-bottom: 2px solid var(--gold); }
+  .card-topline {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 40px; height: auto; display: block; }
+  .logo-mark path { fill: var(--gold); }
+  .logo-word { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.10em; text-transform: uppercase; }
+  .eyebrow-pill {
+    display: inline-flex; align-items: center;
+    background: var(--gold); color: var(--navy);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 13px; border-radius: 20px;
+  }
+  .card-title { font-size: clamp(17px,2.2vw,22px); font-weight: 700; color: #fff; line-height: 1.25; letter-spacing: -0.01em; max-width: 740px; }
+  .card-sub   { font-size: 13px; color: rgba(255,255,255,0.52); font-weight: 300; line-height: 1.65; margin-top: 8px; max-width: 740px; }
+  .card-body  { padding: 24px 24px 16px; }
+  svg { display: block; width: 100%; overflow: visible; }
+  .card-footer {
+    padding: 16px 36px 22px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { font-size: 11px; color: rgba(255,255,255,0.28); }
+  .source-note { font-size: 10px; color: rgba(255,255,255,0.28); text-align: right; line-height: 1.5; }
+  .tt {
+    position: fixed; background: #071b30;
+    border: 1px solid rgba(240,180,41,0.45); border-radius: 6px;
+    padding: 14px 18px; pointer-events: none; opacity: 0; transition: opacity 0.1s;
+    z-index: 99; max-width: 300px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.8); font-family: var(--font);
+  }
+  .tt-name { font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 14px; }
+  .tt-val  { color: rgba(255,255,255,0.88); font-size: 13px; margin-bottom: 3px; }
+  .tt-sub  { color: rgba(255,255,255,0.60); font-size: 12px; }
+  .tt-note { color: rgba(255,255,255,0.65); font-size: 12px; font-weight: 300; margin-top: 9px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 9px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-topline">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg">
+          <path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+        </svg>
+        <span class="logo-word">Narrows</span>
+      </div>
+      <span class="eyebrow-pill">Crude Import Analysis</span>
+    </div>
+    <div class="card-title">The 80% figure bundles two different things. Only one of them closes with Malacca.</div>
+    <div class="card-sub">~80% of China's seaborne crude physically transits the Malacca–Lombok corridor. But 20.6% of that is already on the Lombok bypass and is unaffected by a Malacca closure. The structural dependency — crude that genuinely cannot arrive if Malacca closes — is 55.8%. Hover any flow or node for detail.</div>
+  </div>
+
+  <div class="card-body">
+    <svg id="sk"></svg>
+  </div>
+
+  <div class="card-footer">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#F0B429"></div><span class="legend-label">Via Malacca — structural dependency (55.8%)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span class="legend-label">Via Lombok — bypass routing, unaffected by Malacca closure (20.6%)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#64748b"></div><span class="legend-label">Pacific / non-Malacca routes (~23.6%)</span></div>
+    </div>
+    <div class="source-note">
+      Narrows CDM v0.3 · HS 2709 bilateral crude · 2022 base year<br>
+      Values = % of China seaborne crude by annual trade value
+    </div>
+  </div>
+</div>
+
+<div class="tt" id="tt">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-val"  id="tt-val"></div>
+  <div class="tt-sub"  id="tt-sub"></div>
+  <div class="tt-note" id="tt-note"></div>
+</div>
+
+<script>
+(function () {
+
+const C = {
+  gulf:    '#38bdf8',
+  africa:  '#fb923c',
+  pacific: '#34d399',
+  mixed:   '#a78bfa',
+  choke:   '#F0B429',
+  bypass:  '#3b82f6',
+  nonmal:  '#64748b',
+  dest:    '#e2e8f0',
+};
+
+const NODE_DEFS = [
+  // Col 0 — origin clusters
+  { id:'mideast',   col:0, v:42, group:'gulf',    label:'Middle East (Gulf)',  sub:'42% · ~$96B',
+    note:'Saudi Arabia, Iraq, UAE, Kuwait, Oman. All seaborne cargoes exit via Hormuz before crossing the Indian Ocean. The majority then transits Malacca or the Lombok bypass to reach Chinese east coast ports at Qingdao, Ningbo-Zhoushan, and Dalian.' },
+  { id:'westafrica',col:0, v:19, group:'africa',  label:'West Africa',         sub:'19% · ~$44B',
+    note:'Nigeria, Angola, Congo, Equatorial Guinea. Crude routes around the Cape of Good Hope into the Indian Ocean, then approaches China via the Indonesian straits — Malacca or Lombok depending on vessel routing decisions and destination port.' },
+  { id:'espo',      col:0, v:18, group:'pacific', label:'Russia (ESPO)',       sub:'18% · ~$41B',
+    note:'ESPO pipeline delivers crude to Kozmino on Russia\'s Pacific coast. Direct Pacific route to Chinese east coast ports — no maritime chokepoint on the supply path. Malacca dependency: zero.' },
+  { id:'other',     col:0, v:21, group:'mixed',   label:'Americas & SE Asia',  sub:'21% · ~$48B',
+    note:'Americas crude (USA, Brazil, Canada) routes via Panama or Cape Horn — Pacific arrival, no Malacca exposure. Southeast Asian and Australian crude may route via Malacca depending on origin port and vessel destination.' },
+
+  // Col 1 — routing outcomes
+  { id:'malacca',   col:1, v:56, group:'choke',   label:'Malacca',             sub:'55.8% structural dependency',
+    note:'The Narrows CDM structural dependency figure. 55.8% of China\'s seaborne crude faces genuine supply disruption if Malacca closes — it has no viable alternative route within a commercially relevant timeframe. This is the correct figure for accumulation modelling, PML calculations, and treaty pricing. It is not 80%.' },
+  { id:'lombok',    col:1, v:21, group:'bypass',  label:'Lombok bypass',        sub:'20.6% — already rerouted',
+    note:'20.6% of China\'s seaborne crude already routes via the Lombok Strait rather than Malacca. This traffic is immune to a Malacca closure event — it is already on the bypass. Including Lombok-routed cargo in a Malacca dependency figure overstates the corridor\'s leverage by the full 20.6 percentage points. This is the primary source of error in the 80% figure.' },
+  { id:'pacific',   col:1, v:23, group:'nonmal',  label:'Pacific routes',       sub:'~23.6% — no Malacca exposure',
+    note:'ESPO crude from Russia\'s Pacific coast and Americas crude via Panama or Cape Horn. These volumes never approach the Malacca/Lombok corridor. Zero structural Malacca dependency for this segment of China\'s crude import book.' },
+
+  // Col 2 — destination
+  { id:'china',     col:2, v:100, group:'dest',   label:'China',               sub:'~$229B seaborne crude',
+    note:'China imports approximately 10–11 million barrels per day of seaborne crude — the world\'s largest importer. Primary east coast import terminals: Qingdao and Shandong refinery cluster, Ningbo-Zhoushan, Tianjin, Dalian. Southern ports: Guangzhou, Zhanjiang. The vast majority of import volume arrives at east coast terminals.' },
+];
+
+const LINK_DEFS = [
+  { s:'mideast',    t:'malacca', v:30, group:'gulf'    },
+  { s:'mideast',    t:'lombok',  v:12, group:'gulf'    },
+  { s:'westafrica', t:'malacca', v:16, group:'africa'  },
+  { s:'westafrica', t:'lombok',  v:3,  group:'africa'  },
+  { s:'espo',       t:'pacific', v:18, group:'pacific' },
+  { s:'other',      t:'malacca', v:10, group:'mixed'   },
+  { s:'other',      t:'lombok',  v:6,  group:'mixed'   },
+  { s:'other',      t:'pacific', v:5,  group:'mixed'   },
+  { s:'malacca',    t:'china',   v:56, group:'choke'   },
+  { s:'lombok',     t:'china',   v:21, group:'bypass'  },
+  { s:'pacific',    t:'china',   v:23, group:'nonmal'  },
+];
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tt     = document.getElementById('tt');
+const ttName = document.getElementById('tt-name');
+const ttVal  = document.getElementById('tt-val');
+const ttSub  = document.getElementById('tt-sub');
+const ttNote = document.getElementById('tt-note');
+
+function showTT(e, name, val, sub, note) {
+  ttName.textContent   = name;
+  ttVal.textContent    = val  || '';
+  ttSub.textContent    = sub  || '';
+  ttSub.style.display  = sub  ? '' : 'none';
+  ttNote.textContent   = note || '';
+  ttNote.style.display = note ? '' : 'none';
+  tt.style.opacity = '1';
+  tt.style.left = Math.min(e.clientX + 18, window.innerWidth  - 320) + 'px';
+  tt.style.top  = Math.min(e.clientY - 14, window.innerHeight - 200) + 'px';
+}
+function hideTT() { tt.style.opacity = '0'; }
+
+// ── Canvas ────────────────────────────────────────────────────────────────────
+const svg   = document.getElementById('sk');
+const cw    = svg.parentElement.clientWidth - 48;
+const W     = Math.min(cw, 960);
+const H     = 520;
+svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+svg.setAttribute('height', H);
+
+const NS = 'http://www.w3.org/2000/svg';
+const mk = t  => document.createElementNS(NS, t);
+const at = (el, o) => { Object.entries(o).forEach(([k,v]) => el.setAttribute(k,v)); return el; };
+const ap = (p, c)  => { p.appendChild(c); return c; };
+const font = "'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif";
+
+const NW     = 14;
+const PAD    = 18;
+const TOP    = 24;
+const BOT    = 12;
+const L_PAD  = 148;
+const R_PAD  = 130;
+const BRAK_W = 54;   // bracket zone between col1 and col2
+
+// Column x positions — leave room for bracket annotation between col1 and col2
+const COL_X = [
+  L_PAD,
+  Math.round(W * 0.43),
+  W - R_PAD - NW,
+];
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+const byCol = [[], [], []];
+NODE_DEFS.forEach(n => byCol[n.col].push(n));
+
+const AVAIL_H = H - TOP - BOT;
+
+function layoutCol(colNodes) {
+  const total = colNodes.reduce((s, n) => s + n.v, 0);
+  const usedH = AVAIL_H - PAD * (colNodes.length - 1);
+  let cursor  = TOP;
+  colNodes.forEach(n => {
+    n.h  = Math.max(4, (n.v / total) * usedH);
+    n.y0 = cursor;
+    n.y1 = cursor + n.h;
+    n.x0 = COL_X[n.col];
+    n.x1 = COL_X[n.col] + NW;
+    cursor += n.h + PAD;
+  });
+}
+byCol.forEach(layoutCol);
+
+const NM = {};
+NODE_DEFS.forEach(n => { NM[n.id] = n; });
+
+// ── Link slot allocation ──────────────────────────────────────────────────────
+const outOff = {}, inOff = {};
+NODE_DEFS.forEach(n => { outOff[n.id] = 0; inOff[n.id] = 0; });
+
+function linkH(n, v) {
+  const colTotal = byCol[n.col].reduce((s,x) => s + x.v, 0);
+  const usedH    = AVAIL_H - PAD * (byCol[n.col].length - 1);
+  return (v / colTotal) * usedH;
+}
+
+const LINKS = LINK_DEFS.map(ld => {
+  const s = NM[ld.s], t = NM[ld.t];
+  const sh = linkH(s, ld.v), th = linkH(t, ld.v);
+  const sy0 = s.y0 + outOff[s.id], sy1 = sy0 + sh;
+  const ty0 = t.y0 + inOff[t.id],  ty1 = ty0 + th;
+  outOff[s.id] += sh;
+  inOff[t.id]  += th;
+  return { ...ld, s, t, sy0, sy1, ty0, ty1 };
+});
+
+// ── SVG defs ──────────────────────────────────────────────────────────────────
+const defs = ap(svg, mk('defs'));
+
+const flt = ap(defs, at(mk('filter'), { id:'glow', x:'-60%', y:'-60%', width:'220%', height:'220%' }));
+ap(flt, at(mk('feGaussianBlur'), { stdDeviation:'5', result:'b' }));
+const fm = ap(flt, mk('feMerge'));
+ap(fm, at(mk('feMergeNode'), { in:'b' }));
+ap(fm, at(mk('feMergeNode'), { in:'SourceGraphic' }));
+
+function makeGrad(id, c1, c2) {
+  const g = ap(defs, at(mk('linearGradient'), { id, x1:'0%', y1:'0%', x2:'100%', y2:'0%' }));
+  ap(g, at(mk('stop'), { offset:'0%',   'stop-color':c1, 'stop-opacity':'1' }));
+  ap(g, at(mk('stop'), { offset:'100%', 'stop-color':c2, 'stop-opacity':'1' }));
+}
+
+LINKS.forEach(lk => {
+  const srcCol = C[lk.group] || C[lk.s.group] || '#64748b';
+  const dstCol = C[lk.t.group] || '#e2e8f0';
+  makeGrad(`g-${lk.s.id}-${lk.t.id}`, srcCol, dstCol);
+});
+
+// ── Ribbons ───────────────────────────────────────────────────────────────────
+function ribbonPath(sx, sy0, sy1, tx, ty0, ty1) {
+  const cx = (sx + tx) / 2;
+  return [`M${sx},${sy0}`, `C${cx},${sy0} ${cx},${ty0} ${tx},${ty0}`,
+          `L${tx},${ty1}`, `C${cx},${ty1} ${cx},${sy1} ${sx},${sy1}`, 'Z'].join(' ');
+}
+
+const linkG = ap(svg, at(mk('g'), { class:'links' }));
+
+LINKS.forEach(lk => {
+  const el = ap(linkG, at(mk('path'), {
+    d: ribbonPath(lk.s.x1, lk.sy0, lk.sy1, lk.t.x0, lk.ty0, lk.ty1),
+    fill: `url(#g-${lk.s.id}-${lk.t.id})`,
+    'fill-opacity': '0.22',
+    style: 'cursor:pointer; transition: fill-opacity 0.12s;'
+  }));
+  el.addEventListener('mousemove', e => {
+    el.setAttribute('fill-opacity', '0.55');
+    showTT(e,
+      `${lk.s.label} → ${lk.t.label}`,
+      `${lk.v}% of China seaborne crude`,
+      `Annual flow: ~$${(lk.v * 2.29).toFixed(0)}B`,
+      null
+    );
+  });
+  el.addEventListener('mouseleave', () => { el.setAttribute('fill-opacity','0.22'); hideTT(); });
+});
+
+// ── Node bars ─────────────────────────────────────────────────────────────────
+const nodeG = ap(svg, at(mk('g'), { class:'nodes' }));
+
+NODE_DEFS.forEach(n => {
+  const isChoke  = n.group === 'choke';
+  const isBypass = n.group === 'bypass';
+  const col = C[n.group] || '#64748b';
+
+  const rect = ap(nodeG, at(mk('rect'), {
+    x: n.x0, y: n.y0, width: NW,
+    height: Math.max(2, n.y1 - n.y0),
+    rx: 3, fill: col,
+    'fill-opacity': isChoke ? '1' : isBypass ? '0.9' : '0.80',
+    filter: isChoke ? 'url(#glow)' : null,
+    style: 'cursor:pointer'
+  }));
+  rect.addEventListener('mousemove', e => showTT(e, n.label, n.sub, null, n.note));
+  rect.addEventListener('mouseleave', hideTT);
+});
+
+// ── Labels ────────────────────────────────────────────────────────────────────
+const lblG = ap(svg, at(mk('g'), { class:'labels' }));
+
+function txt(x, y, str, opts) {
+  const el = ap(lblG, at(mk('text'), {
+    x, y,
+    'text-anchor':       opts.anchor || 'start',
+    'dominant-baseline': 'middle',
+    fill:                opts.fill   || '#fff',
+    'fill-opacity':      opts.op     || '1',
+    'font-size':         opts.fs     || '12',
+    'font-weight':       opts.fw     || '500',
+    'font-family':       font,
+  }));
+  el.textContent = str;
+  if (opts.ls) el.setAttribute('letter-spacing', opts.ls);
+  return el;
+}
+
+const LBL_COL = {
+  gulf:    '#7dd3fc',
+  africa:  '#fdba74',
+  pacific: '#6ee7b7',
+  mixed:   '#c4b5fd',
+  choke:   '#F0B429',
+  bypass:  '#93c5fd',
+  nonmal:  'rgba(148,163,184,0.9)',
+  dest:    '#e2e8f0',
+};
+
+NODE_DEFS.forEach(n => {
+  const cy       = (n.y0 + n.y1) / 2;
+  const isRight  = n.col === 2;
+  const isChoke  = n.group === 'choke';
+  const isBypass = n.group === 'bypass';
+  const isNonMal = n.group === 'nonmal';
+  const lx       = isRight ? n.x1 + 10 : n.x0 - 10;
+  const anchor   = isRight ? 'start'   : 'end';
+  const col      = LBL_COL[n.group] || '#94a3b8';
+
+  // Wrap label text
+  const words = n.label.split(' ');
+  const maxLen = 15;
+  const lines  = [];
+  let cur = '';
+  words.forEach(w => {
+    if ((cur + ' ' + w).trim().length > maxLen && cur) { lines.push(cur.trim()); cur = w; }
+    else cur = (cur + ' ' + w).trim();
+  });
+  if (cur) lines.push(cur);
+
+  const lh   = 16;
+  const fs   = isChoke ? '14' : isBypass ? '13' : isNonMal ? '12' : '13';
+  const fw   = isChoke ? '700' : isBypass ? '600' : '500';
+  const topY = cy - ((lines.length - 1) * lh) / 2;
+
+  lines.forEach((line, i) => txt(lx, topY + i * lh, line, { anchor, fill: col, fs, fw }));
+
+  // Sub-label / badge
+  const subY = topY + lines.length * lh + 2;
+
+  if (isChoke) {
+    // Dark pill badge left of node bar
+    const badge = '55.8%';
+    const bw = 52, bh = 20;
+    ap(lblG, at(mk('rect'), {
+      x: lx - bw, y: subY, width: bw, height: bh, rx: 10,
+      fill: '#0A2540', 'fill-opacity': '1',
+      stroke: C.choke, 'stroke-width': '1.5', 'stroke-opacity': '0.75'
+    }));
+    txt(lx - bw/2, subY + bh/2, badge, { anchor:'middle', fill:C.choke, fs:'12', fw:'700' });
+  } else if (isBypass) {
+    const badge = '20.6%';
+    const bw = 50, bh = 20;
+    ap(lblG, at(mk('rect'), {
+      x: lx - bw, y: subY, width: bw, height: bh, rx: 10,
+      fill: '#0A2540', 'fill-opacity': '1',
+      stroke: C.bypass, 'stroke-width': '1.5', 'stroke-opacity': '0.75'
+    }));
+    txt(lx - bw/2, subY + bh/2, badge, { anchor:'middle', fill:C.bypass, fs:'12', fw:'700' });
+  } else {
+    txt(lx, subY, n.sub, { anchor, fill: col, op:'0.55', fs:'11', fw:'400' });
+  }
+});
+
+// ── 80% bracket annotation ────────────────────────────────────────────────────
+// Spans Malacca + Lombok nodes on the RIGHT side of col1, in the gap before col2
+const mal = NM['malacca'], lom = NM['lombok'];
+const bx  = mal.x1 + 14;   // just right of the node bars
+const by0 = mal.y0;
+const by1 = lom.y1;
+const bcy = (by0 + by1) / 2;
+const barm = bx + 16;       // arm x
+
+// Bracket: vertical line with top + bottom hooks
+ap(lblG, at(mk('path'), {
+  d: `M${bx},${by0} L${barm},${by0} L${barm},${by1} L${bx},${by1}`,
+  stroke: 'rgba(255,255,255,0.22)',
+  'stroke-width': '1.5',
+  fill: 'none',
+  'stroke-linecap': 'round',
+  'stroke-linejoin': 'round',
+}));
+// Tick at centre
+ap(lblG, at(mk('line'), {
+  x1: barm, y1: bcy, x2: barm + 8, y2: bcy,
+  stroke: 'rgba(255,255,255,0.22)', 'stroke-width': '1.5', 'stroke-linecap': 'round'
+}));
+
+// "~80%" label
+txt(barm + 12, bcy - 10, '~80%', { anchor:'start', fill:'rgba(255,255,255,0.55)', fs:'12', fw:'700' });
+txt(barm + 12, bcy + 8,  'physical throughput', { anchor:'start', fill:'rgba(255,255,255,0.28)', fs:'9.5', fw:'400' });
+
+// ── Column headers ────────────────────────────────────────────────────────────
+const hdrY = TOP - 10;
+[
+  [COL_X[0] - 10,        'end',    'SUPPLY ORIGIN'],
+  [COL_X[1] + NW / 2,   'middle', 'ROUTING OUTCOME'],
+  [COL_X[2] + NW + 10,  'start',  'DESTINATION'],
+].forEach(([x, anchor, label]) => {
+  txt(x, hdrY, label, {
+    anchor, fill:'rgba(255,255,255,0.28)', fs:'10.5', fw:'600', ls:'1.2'
+  });
+});
+
+})();
+</script>
+</body>
+</html>
