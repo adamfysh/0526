@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India Crude Route Tree — Narrows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0A2540;
+    --navy-mid: #0d304f;
+    --gold:     #F0B429;
+    --white:    #FFFFFF;
+    --tw:       rgba(255,255,255,0.82);
+    --tw2:      rgba(255,255,255,0.52);
+    --tw3:      rgba(255,255,255,0.28);
+    --rule-gold: 2px solid #F0B429;
+    --font: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+    --gulf:    #38bdf8;
+    --russia:  #f97316;
+    --open:    #34d399;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--navy);
+    font-family: var(--font);
+    color: var(--tw);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 24px 56px;
+  }
+  .card {
+    width: 100%; max-width: 1040px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .card-header { padding: 28px 36px 24px; border-bottom: var(--rule-gold); }
+  .card-topline {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 40px; height: auto; display: block; }
+  .logo-mark path { fill: var(--gold); }
+  .logo-word {
+    font-size: 15px; font-weight: 700; color: var(--white);
+    letter-spacing: 0.10em; text-transform: uppercase;
+  }
+  .eyebrow-pill {
+    display: inline-flex; align-items: center;
+    background: var(--gold); color: var(--navy);
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 13px; border-radius: 20px;
+  }
+  .card-title {
+    font-size: clamp(17px, 2.2vw, 22px);
+    font-weight: 700; color: var(--white);
+    line-height: 1.25; letter-spacing: -0.01em;
+    max-width: 740px;
+  }
+  .card-sub {
+    font-size: 13px; color: var(--tw2);
+    font-weight: 300; line-height: 1.65;
+    margin-top: 8px; max-width: 680px;
+  }
+  .card-body { padding: 28px 24px 20px; }
+  svg { display: block; overflow: visible; }
+  .card-footer {
+    padding: 16px 36px 22px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { font-size: 11px; color: var(--tw3); font-weight: 400; }
+  .source-note { font-size: 10px; color: var(--tw3); text-align: right; line-height: 1.5; }
+  .tooltip {
+    position: fixed; background: #071b30;
+    border: 1px solid rgba(240,180,41,0.4);
+    border-radius: 6px; padding: 14px 18px;
+    font-size: 13px; pointer-events: none;
+    opacity: 0; transition: opacity 0.1s; z-index: 99;
+    max-width: 300px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.75);
+    font-family: var(--font);
+  }
+  .tt-name { font-weight: 700; color: var(--white); margin-bottom: 6px; font-size: 14px; }
+  .tt-val  { color: rgba(255,255,255,0.88); margin-bottom: 4px; font-size: 13px; }
+  .tt-dep  { color: rgba(255,255,255,0.70); font-size: 12px; font-weight: 500; }
+  .tt-note {
+    color: rgba(255,255,255,0.65); font-size: 12px; font-weight: 300;
+    margin-top: 9px; border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 9px; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="card-header">
+    <div class="card-topline">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg">
+          <path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+        </svg>
+        <span class="logo-word">Narrows</span>
+      </div>
+      <span class="eyebrow-pill">Crude Import Analysis</span>
+    </div>
+    <div class="card-title">India crude supply runs through two distinct chokepoint corridors</div>
+    <div class="card-sub">Gulf crude exits through Hormuz (~4 days to Indian west coast). Russian Ural crude transits Bosphorus then Suez (~16 days total). West African and American crude rounds the Cape — no chokepoint constraint. Node size = annual import value. Hover for detail.</div>
+  </div>
+
+  <div class="card-body">
+    <svg id="chart"></svg>
+  </div>
+
+  <div class="card-footer">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#F0B429"></div>
+        <span class="legend-label">Chokepoint</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--gulf)"></div>
+        <span class="legend-label">Gulf corridor (Hormuz)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--russia)"></div>
+        <span class="legend-label">Russian corridor (Bosphorus + Suez)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--open)"></div>
+        <span class="legend-label">Open ocean (Cape — no chokepoint)</span>
+      </div>
+    </div>
+    <div class="source-note">
+      Source: Narrows CDM v0.3 · HS 2709 bilateral crude trade data<br>
+      Transit at 13 kts laden · Share% = % of India seaborne crude
+    </div>
+  </div>
+
+</div>
+
+<div class="tooltip" id="tt">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-val"  id="tt-val"></div>
+  <div class="tt-dep"  id="tt-dep"></div>
+  <div class="tt-note" id="tt-note"></div>
+</div>
+
+<script>
+window.addEventListener('load', function () {
+
+// ── Canvas ─────────────────────────────────────────────────────────────────
+const cardBody = document.querySelector('.card-body');
+const W  = Math.min(cardBody.clientWidth - 48, 980);
+const H  = 660;
+
+// ── Column x positions ──────────────────────────────────────────────────────
+const X1 = 90;                      // Origins
+const X2 = Math.round(W * 0.295);  // First chokepoints (Hormuz, Bosphorus)
+const X3 = Math.round(W * 0.535);  // Second chokepoints (Suez/Bab, Cape)
+const X4 = W - 110;                // India destination
+
+// ── Vertical layout ─────────────────────────────────────────────────────────
+const Y_GULF   = 155;   // Hormuz
+const Y_RUSSIA = 375;   // Russia corridor
+const Y_OPEN   = 548;   // Open ocean cluster
+const Y_INDIA  = 320;   // India (centre of whole diagram)
+
+// ── Colour palette ───────────────────────────────────────────────────────────
+const C = {
+  choke:    '#F0B429',
+  dest:     '#F0B429',
+  gulf:     '#38bdf8',
+  russia:   '#f97316',
+  open:     '#34d399',
+  waypoint: '#64748b',
+};
+
+// ── Nodes ────────────────────────────────────────────────────────────────────
+const nodes = [
+
+  // Gulf origins
+  { id:'iraq',    x:X1, y:72,  label:'Iraq',          type:'gulf',   v:22.0, share:22.0, totalDays:4,
+    note:"Iraq is India's largest single crude supplier by volume. All Iraqi seaborne exports load at Basra Oil Terminal in the northern Persian Gulf — mandatory Hormuz transit. The majority is delivered to Reliance Jamnagar and HPCL Vizag." },
+  { id:'saudi',   x:X1, y:137, label:'Saudi Arabia',  type:'gulf',   v:16.0, share:16.0, totalDays:4,
+    note:"Saudi loadings from Ras Tanura and Juaymah on the Gulf side must transit Hormuz. The Red Sea terminal at Yanbu can technically avoid Hormuz but is rarely used for India-bound VLCC cargoes at scale." },
+  { id:'uae',     x:X1, y:193, label:'UAE',           type:'gulf',   v:7.0,  share:7.0,  totalDays:3,
+    note:"UAE crude loads from Das Island, Ruwais, and Jebel Dhanna — all inside the Persian Gulf, mandatory Hormuz transit. Approximately 3 days to Indian west coast terminals at laden VLCC speed." },
+  { id:'kuwait',  x:X1, y:242, label:'Kuwait',        type:'gulf',   v:4.0,  share:4.0,  totalDays:4,
+    note:"Kuwaiti crude exports from Ahmadi and Mina Abdullah — inside the Persian Gulf, mandatory Hormuz transit. Kuwait's share of India's crude mix has declined since 2022 as Russia's share expanded." },
+
+  // Gulf chokepoint
+  { id:'hormuz',  x:X2, y:Y_GULF, label:'Hormuz', type:'choke', v:49.0,
+    note:"Mandatory exit for 100% of Persian Gulf crude. Minimum navigable width approximately 3 km. No alternative maritime route exists for laden VLCCs out of the Gulf. Hormuz carries approximately 49% of India's seaborne crude — the single largest chokepoint exposure in India's import book." },
+
+  // Russia
+  { id:'russia',  x:X1, y:Y_RUSSIA, label:['Russia','(Ural seaborne)'], type:'russia', v:38.0, share:38.0, totalDays:16,
+    note:"Russian Ural crude grew from under 2% of India's crude book in 2021 to approximately 38% following Western sanctions and sharp price discounts post-February 2022. Primary loadings from Novorossiysk in the Black Sea and Baltic ports (Primorsk, Ust-Luga). Both routes must transit the Bosphorus." },
+  { id:'bosphorus', x:X2, y:Y_RUSSIA, label:'Bosphorus', type:'choke', v:38.0,
+    note:"Mandatory transit for all Black Sea and Baltic-routed Russian crude bound for India. Minimum navigable width approximately 0.7 km at the narrowest point. Transit rights governed by the Montreux Convention (1936). Approximately 38% of India's seaborne crude — the entire Russian seaborne supply — passes here." },
+  { id:'suez_bab',  x:X3, y:Y_RUSSIA, label:['Suez /','Bab el-Mandeb'], type:'choke', v:38.0,
+    note:"Two sequential chokepoints on the Russian Ural route to India: Bab el-Mandeb (Red Sea entry, ~30 km minimum width) and Suez Canal. Russian crude from the Mediterranean transits both en route to the Indian Ocean. Bab el-Mandeb has been under active Houthi disruption since late 2023, forcing some Russian-India cargoes around the Cape of Good Hope, adding ~10 days." },
+
+  // Open ocean origins
+  { id:'nigeria',  x:X1, y:490, label:'Nigeria',  type:'open', v:5.0, share:5.0, totalDays:21,
+    note:"Nigerian Bonny Light and Qua Iboe crude routes around the Cape of Good Hope into the Indian Ocean — no chokepoint constraint on the supply route. Approximately 21 days to Indian west coast at laden speed. A consistent presence in India's crude mix valued for its low-sulphur specification." },
+  { id:'angola',   x:X1, y:546, label:'Angola',   type:'open', v:3.0, share:3.0, totalDays:23,
+    note:"Angolan Cabinda and Girassol crude routes around the Cape of Good Hope. Approximately 23 days transit. No chokepoint on the supply route — the Cape is open ocean and imposes no closure risk comparable to Hormuz or Bosphorus." },
+  { id:'usa',      x:X1, y:600, label:'USA',       type:'open', v:3.0, share:3.0, totalDays:28,
+    note:"US crude (primarily WTI-specification from Gulf of Mexico loadings) routes via Cape of Good Hope to India. Approximately 28 days at laden VLCC speed. Can also route via Panama Canal but the Cape is typically used for VLCC class. No chokepoint risk on the supply route." },
+
+  // Cape waypoint — not a chokepoint
+  { id:'cape', x:X3, y:Y_OPEN, label:['Cape of','Good Hope'], type:'waypoint', v:11.0,
+    note:"Cape of Good Hope: open ocean. No closure risk — no territorial waters, no transit authority, no bottleneck. West African and American crude for India rounds the Cape. Adds approximately 10-12 days versus a Suez routing. Zero structural chokepoint dependency for this segment of India's crude supply." },
+
+  // India destination
+  { id:'india', x:X4, y:Y_INDIA, label:'India', type:'dest', v:80.0, labelLeft:true,
+    note:"India imports approximately 5.5 million barrels per day of seaborne crude — the world's third largest importer. Primary west coast terminals: Vadinar (Jamnagar/Reliance), Mundra, Mumbai refinery complex. East coast: Vizag (HPCL), Paradip (IOC), Chennai (CPCL). Gulf crude predominantly serves west coast refineries given transit distance advantage." },
+];
+
+// ── Links ────────────────────────────────────────────────────────────────────
+const links = [
+  // Gulf → Hormuz
+  { s:'iraq',      t:'hormuz',    col:C.gulf,   pill:true,  days:1   },
+  { s:'saudi',     t:'hormuz',    col:C.gulf,   pill:false           },
+  { s:'uae',       t:'hormuz',    col:C.gulf,   pill:false           },
+  { s:'kuwait',    t:'hormuz',    col:C.gulf,   pill:false           },
+  // Hormuz → India
+  { s:'hormuz',    t:'india',     col:C.gulf,   pill:true,  days:4   },
+  // Russia corridor
+  { s:'russia',    t:'bosphorus', col:C.russia, pill:true,  days:2   },
+  { s:'bosphorus', t:'suez_bab',  col:C.russia, pill:true,  days:5   },
+  { s:'suez_bab',  t:'india',     col:C.russia, pill:true,  days:7   },
+  // Open ocean → Cape → India
+  { s:'nigeria',   t:'cape',      col:C.open,   pill:false           },
+  { s:'angola',    t:'cape',      col:C.open,   pill:false           },
+  { s:'usa',       t:'cape',      col:C.open,   pill:false           },
+  { s:'cape',      t:'india',     col:C.open,   pill:true,  days:12  },
+];
+
+// ── Build lookup ──────────────────────────────────────────────────────────────
+const nm = {};
+nodes.forEach(n => nm[n.id] = n);
+
+// ── SVG scaffold ──────────────────────────────────────────────────────────────
+const svg = document.getElementById('chart');
+svg.setAttribute('width',  W);
+svg.setAttribute('height', H);
+
+const NS = 'http://www.w3.org/2000/svg';
+const mk = t  => document.createElementNS(NS, t);
+const at = (el, o) => { Object.entries(o).forEach(([k,v]) => el.setAttribute(k,v)); return el; };
+
+// Glow filter
+const defs = mk('defs');
+const flt  = mk('filter');
+at(flt, { id:'glow', x:'-50%', y:'-50%', width:'200%', height:'200%' });
+const gb   = mk('feGaussianBlur'); at(gb, { stdDeviation:'5', result:'b' });
+const fme  = mk('feMerge');
+['b','SourceGraphic'].forEach((s,i) => {
+  const n = mk('feMergeNode'); at(n, { in: i===0 ? 'b' : 'SourceGraphic' }); fme.appendChild(n);
+});
+flt.appendChild(gb); flt.appendChild(fme); defs.appendChild(flt);
+svg.appendChild(defs);
+
+const root = mk('g');
+svg.appendChild(root);
+
+// ── Draw links ────────────────────────────────────────────────────────────────
+links.forEach(lk => {
+  const s = nm[lk.s], t = nm[lk.t];
+  if (!s || !t) return;
+
+  const col = lk.col || C[t.type] || C[s.type] || '#64748b';
+  const sw  = Math.max(1.8, Math.sqrt(Math.max(t.v || s.v || 1, 0.1)) * 1.25);
+  const cx  = (s.x + t.x) / 2;
+
+  root.appendChild(at(mk('path'), {
+    d: `M${s.x},${s.y} C${cx},${s.y} ${cx},${t.y} ${t.x},${t.y}`,
+    stroke: col, 'stroke-width': sw, 'stroke-opacity': '0.38', fill: 'none'
+  }));
+
+  if (lk.pill && lk.days != null) {
+    const u = 0.38, u1 = 1 - u;
+    const px = u1**3*s.x + 3*u1**2*u*cx + 3*u1*u**2*cx + u**3*t.x;
+    const py = u1**3*s.y + 3*u1**2*u*s.y + 3*u1*u**2*t.y + u**3*t.y;
+    const txt = `${lk.days}d`;
+    const pw  = txt.length * 6.4 + 14;
+    const ph  = 15;
+    root.appendChild(at(mk('rect'), {
+      x:px-pw/2, y:py-ph/2, width:pw, height:ph, rx:'7.5',
+      fill:col, 'fill-opacity':'0.13'
+    }));
+    root.appendChild(at(mk('text'), {
+      x:px, y:py, 'text-anchor':'middle', 'dominant-baseline':'middle',
+      fill:col, 'fill-opacity':'0.80',
+      'font-size':'10', 'font-weight':'700',
+      'font-family':'Plus Jakarta Sans, sans-serif'
+    })).textContent = txt;
+  }
+});
+
+// ── Draw nodes ────────────────────────────────────────────────────────────────
+const tt    = document.getElementById('tt');
+const ttN   = document.getElementById('tt-name');
+const ttV   = document.getElementById('tt-val');
+const ttD   = document.getElementById('tt-dep');
+const ttNot = document.getElementById('tt-note');
+
+nodes.forEach(n => {
+  const col     = C[n.type] || '#64748b';
+  const isChoke = n.type === 'choke' || n.type === 'dest';
+  const isWay   = n.type === 'waypoint';
+
+  const r = isChoke ? Math.max(14, Math.sqrt(n.v) * 2.5)
+            : isWay  ? Math.max(8,  Math.sqrt(n.v) * 1.1)
+            :           Math.max(5,  Math.sqrt(n.v) * 1.6);
+
+  const circle = at(mk('circle'), {
+    cx: n.x, cy: n.y, r,
+    fill: col,
+    'fill-opacity':   isChoke ? '0.20' : isWay ? '0.07' : '0.15',
+    stroke: col,
+    'stroke-width':   isChoke ? '2.2'  : isWay ? '1'    : '1.5',
+    'stroke-opacity': isWay   ? '0.35' : '1',
+    style: 'cursor:pointer'
+  });
+  if (isChoke) circle.setAttribute('filter', 'url(#glow)');
+  root.appendChild(circle);
+
+  // Label positioning
+  const useLeft = n.labelLeft;
+  const lx      = useLeft ? n.x - r - 10 : n.x + r + 10;
+  const anchor  = useLeft ? 'end' : 'start';
+
+  const lblCol = isChoke ? col
+    : isWay              ? 'rgba(100,116,139,0.65)'
+    : n.type === 'gulf'  ? '#7dd3fc'
+    : n.type === 'russia'? '#fdba74'
+    : n.type === 'open'  ? '#6ee7b7'
+    : col;
+
+  const lines = Array.isArray(n.label) ? n.label : [n.label];
+  lines.forEach((line, i) => {
+    const dy = (i - (lines.length - 1) / 2) * 16;
+    root.appendChild(at(mk('text'), {
+      x: lx, y: n.y + dy,
+      'text-anchor': anchor, 'dominant-baseline': 'middle',
+      fill: lblCol,
+      'font-size':   isChoke ? '13' : isWay ? '10' : '12',
+      'font-weight': isChoke ? '700': isWay ? '400': '500',
+      'font-family': 'Plus Jakarta Sans, sans-serif'
+    })).textContent = line;
+  });
+
+  // Sub-label "$xB · Nd" for origin nodes
+  if (!isChoke && !isWay && n.v != null && n.totalDays != null) {
+    const subY = n.y + (lines.length > 1 ? 24 : 15);
+    root.appendChild(at(mk('text'), {
+      x: lx, y: subY,
+      'text-anchor': anchor, 'dominant-baseline': 'middle',
+      fill: col, 'fill-opacity': '0.52',
+      'font-size': '10.5', 'font-weight': '400',
+      'font-family': 'Plus Jakarta Sans, sans-serif'
+    })).textContent = `$${n.v.toFixed(1)}B · ${n.totalDays}d`;
+  }
+
+  // Tooltip
+  const showTT = e => {
+    const name = Array.isArray(n.label) ? n.label.join(' ') : n.label;
+    ttN.textContent = name;
+    ttV.textContent = n.id === 'india'
+      ? '~$100B annual seaborne crude imports'
+      : (isChoke || isWay)
+        ? `$${n.v.toFixed(1)}B annual flow through this corridor`
+        : `$${n.v.toFixed(1)}B annual supply to India`;
+    ttD.textContent = n.share != null
+      ? `Share of India seaborne crude: ${n.share.toFixed(1)}%`
+      : n.id === 'hormuz'
+        ? 'India Hormuz dependency: ~49% of seaborne crude'
+      : n.id === 'bosphorus'
+        ? 'India Bosphorus dependency: ~38% of seaborne crude'
+      : n.id === 'suez_bab'
+        ? 'India Suez / Bab el-Mandeb dependency: ~38% of seaborne crude'
+      : n.id === 'cape'
+        ? 'No chokepoint constraint — open ocean'
+      : '';
+    ttNot.textContent   = n.note || '';
+    ttNot.style.display = n.note ? 'block' : 'none';
+    tt.style.opacity = '1';
+    tt.style.left    = (e.clientX + 18) + 'px';
+    tt.style.top     = (e.clientY - 14) + 'px';
+  };
+
+  const hitR = Math.max(20, r + 8);
+  const hit  = at(mk('circle'), { cx:n.x, cy:n.y, r:hitR, fill:'transparent', stroke:'none', style:'cursor:pointer' });
+  root.appendChild(hit);
+  hit.addEventListener('mousemove',  showTT);
+  hit.addEventListener('mouseleave', () => { tt.style.opacity = '0'; });
+});
+
+}); // end load
+</script>
+</body>
+</html>
