@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>China Crude Sankey — Narrows</title>
+<title>China Crude Sankey | Narrows</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -90,7 +90,7 @@
       <span class="eyebrow-pill">Crude Import Analysis</span>
     </div>
     <div class="card-title">The 80% figure bundles two different things. Only one of them closes with Malacca.</div>
-    <div class="card-sub">~80% of China's seaborne crude physically transits the Malacca–Lombok corridor. But 20.6% of that is already on the Lombok bypass and is unaffected by a Malacca closure. The structural dependency — crude that genuinely cannot arrive if Malacca closes — is 55.8%. Hover any flow or node for detail.</div>
+    <div class="card-sub">~80% of China's seaborne crude physically transits the Malacca/Lombok corridor. But 20.6% of that is already on the Lombok bypass and is unaffected by a Malacca closure. The structural dependency (crude that genuinely cannot arrive if Malacca closes) is 55.8%. Hover any flow or node for detail.</div>
   </div>
 
   <div class="card-body">
@@ -99,8 +99,8 @@
 
   <div class="card-footer">
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#F0B429"></div><span class="legend-label">Via Malacca — structural dependency (55.8%)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span class="legend-label">Via Lombok — bypass routing, unaffected by Malacca closure (20.6%)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F0B429"></div><span class="legend-label">Via Malacca: structural dependency (55.8%)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span class="legend-label">Via Lombok: bypass routing, unaffected by Malacca closure (20.6%)</span></div>
       <div class="legend-item"><div class="legend-dot" style="background:#64748b"></div><span class="legend-label">Pacific / non-Malacca routes (~23.6%)</span></div>
     </div>
     <div class="source-note">
@@ -132,27 +132,27 @@ const C = {
 };
 
 const NODE_DEFS = [
-  // Col 0 — origin clusters
+  // Col 0  -  origin clusters
   { id:'mideast',   col:0, v:42, group:'gulf',    label:'Middle East (Gulf)',  sub:'42% · ~$96B',
     note:'Saudi Arabia, Iraq, UAE, Kuwait, Oman. All seaborne cargoes exit via Hormuz before crossing the Indian Ocean. The majority then transits Malacca or the Lombok bypass to reach Chinese east coast ports at Qingdao, Ningbo-Zhoushan, and Dalian.' },
   { id:'westafrica',col:0, v:19, group:'africa',  label:'West Africa',         sub:'19% · ~$44B',
-    note:'Nigeria, Angola, Congo, Equatorial Guinea. Crude routes around the Cape of Good Hope into the Indian Ocean, then approaches China via the Indonesian straits — Malacca or Lombok depending on vessel routing decisions and destination port.' },
+    note:'Nigeria, Angola, Congo, Equatorial Guinea. Crude routes around the Cape of Good Hope into the Indian Ocean, then approaches China via the Indonesian straits  -  Malacca or Lombok depending on vessel routing decisions and destination port.' },
   { id:'espo',      col:0, v:18, group:'pacific', label:'Russia (ESPO)',       sub:'18% · ~$41B',
-    note:'ESPO pipeline delivers crude to Kozmino on Russia\'s Pacific coast. Direct Pacific route to Chinese east coast ports — no maritime chokepoint on the supply path. Malacca dependency: zero.' },
+    note:'ESPO pipeline delivers crude to Kozmino on Russia\'s Pacific coast. Direct Pacific route to Chinese east coast ports  -  no maritime chokepoint on the supply path. Malacca dependency: zero.' },
   { id:'other',     col:0, v:21, group:'mixed',   label:'Americas & SE Asia',  sub:'21% · ~$48B',
-    note:'Americas crude (USA, Brazil, Canada) routes via Panama or Cape Horn — Pacific arrival, no Malacca exposure. Southeast Asian and Australian crude may route via Malacca depending on origin port and vessel destination.' },
+    note:'Americas crude (USA, Brazil, Canada) routes via Panama or Cape Horn  -  Pacific arrival, no Malacca exposure. Southeast Asian and Australian crude may route via Malacca depending on origin port and vessel destination.' },
 
-  // Col 1 — routing outcomes
+  // Col 1  -  routing outcomes
   { id:'malacca',   col:1, v:56, group:'choke',   label:'Malacca',             sub:'55.8% structural dependency',
-    note:'The Narrows CDM structural dependency figure. 55.8% of China\'s seaborne crude faces genuine supply disruption if Malacca closes — it has no viable alternative route within a commercially relevant timeframe. This is the correct figure for accumulation modelling, PML calculations, and treaty pricing. It is not 80%.' },
-  { id:'lombok',    col:1, v:21, group:'bypass',  label:'Lombok bypass',        sub:'20.6% — already rerouted',
-    note:'20.6% of China\'s seaborne crude already routes via the Lombok Strait rather than Malacca. This traffic is immune to a Malacca closure event — it is already on the bypass. Including Lombok-routed cargo in a Malacca dependency figure overstates the corridor\'s leverage by the full 20.6 percentage points. This is the primary source of error in the 80% figure.' },
-  { id:'pacific',   col:1, v:23, group:'nonmal',  label:'Pacific routes',       sub:'~23.6% — no Malacca exposure',
+    note:'The Narrows CDM structural dependency figure. 55.8% of China\'s seaborne crude faces genuine supply disruption if Malacca closes  -  it has no viable alternative route within a commercially relevant timeframe. This is the correct figure for accumulation modelling, PML calculations, and treaty pricing. It is not 80%.' },
+  { id:'lombok',    col:1, v:21, group:'bypass',  label:'Lombok bypass',        sub:'20.6% already rerouted',
+    note:'20.6% of China\'s seaborne crude already routes via the Lombok Strait rather than Malacca. This traffic is immune to a Malacca closure event  -  it is already on the bypass. Including Lombok-routed cargo in a Malacca dependency figure overstates the corridor\'s leverage by the full 20.6 percentage points. This is the primary source of error in the 80% figure.' },
+  { id:'pacific',   col:1, v:23, group:'nonmal',  label:'Pacific routes',       sub:'~23.6% no Malacca exposure',
     note:'ESPO crude from Russia\'s Pacific coast and Americas crude via Panama or Cape Horn. These volumes never approach the Malacca/Lombok corridor. Zero structural Malacca dependency for this segment of China\'s crude import book.' },
 
-  // Col 2 — destination
+  // Col 2  -  destination
   { id:'china',     col:2, v:100, group:'dest',   label:'China',               sub:'~$229B seaborne crude',
-    note:'China imports approximately 10–11 million barrels per day of seaborne crude — the world\'s largest importer. Primary east coast import terminals: Qingdao and Shandong refinery cluster, Ningbo-Zhoushan, Tianjin, Dalian. Southern ports: Guangzhou, Zhanjiang. The vast majority of import volume arrives at east coast terminals.' },
+    note:'China imports approximately 10 to 11 million barrels per day of seaborne crude  -  the world\'s largest importer. Primary east coast import terminals: Qingdao and Shandong refinery cluster, Ningbo-Zhoushan, Tianjin, Dalian. Southern ports: Guangzhou, Zhanjiang. The vast majority of import volume arrives at east coast terminals.' },
 ];
 
 const LINK_DEFS = [
@@ -211,7 +211,7 @@ const L_PAD  = 148;
 const R_PAD  = 130;
 const BRAK_W = 54;   // bracket zone between col1 and col2
 
-// Column x positions — leave room for bracket annotation between col1 and col2
+// Column x positions  -  leave room for bracket annotation between col1 and col2
 const COL_X = [
   L_PAD,
   Math.round(W * 0.43),
