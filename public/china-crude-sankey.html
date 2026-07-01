@@ -12,7 +12,7 @@
   *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
   html,body { background:var(--navy); font-family:var(--font); color:rgba(255,255,255,0.82); -webkit-font-smoothing:antialiased; }
   body { min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:40px 24px 56px; }
-  .card { width:100%; max-width:1040px; background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08); border-radius:8px; overflow:hidden; }
+  .card { width:100%; max-width:1100px; background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08); border-radius:8px; overflow:hidden; }
   .card-header { padding:28px 36px 24px; border-bottom:2px solid var(--gold); }
   .card-topline { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
   .logo { display:flex; align-items:center; gap:10px; }
@@ -20,8 +20,8 @@
   .logo-mark path { fill:var(--gold); }
   .logo-word { font-size:15px; font-weight:700; color:#fff; letter-spacing:0.10em; text-transform:uppercase; }
   .eyebrow-pill { display:inline-flex; align-items:center; background:var(--gold); color:var(--navy); font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:4px 13px; border-radius:20px; }
-  .card-title { font-size:clamp(17px,2.2vw,22px); font-weight:700; color:#fff; line-height:1.25; letter-spacing:-0.01em; max-width:740px; }
-  .card-sub { font-size:13px; color:rgba(255,255,255,0.52); font-weight:300; line-height:1.65; margin-top:8px; max-width:740px; }
+  .card-title { font-size:clamp(17px,2.2vw,22px); font-weight:700; color:#fff; line-height:1.25; letter-spacing:-0.01em; max-width:760px; }
+  .card-sub { font-size:13px; color:rgba(255,255,255,0.52); font-weight:300; line-height:1.65; margin-top:8px; max-width:760px; }
   .card-body { padding:24px 24px 16px; }
   svg { display:block; width:100%; overflow:visible; }
   .card-footer { padding:16px 36px 22px; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
@@ -50,24 +50,19 @@
       <span class="eyebrow-pill">Crude Import Analysis</span>
     </div>
     <div class="card-title">The 80% figure bundles two different things. Only one of them closes with Malacca.</div>
-    <div class="card-sub">Gulf crude exits Hormuz, crosses the Indian Ocean, and transits Malacca - two sequential chokepoints. West African and Brazilian VLCCs round the Cape of Good Hope and enter China via Lombok, bypassing Malacca entirely. Russian ESPO loads at Kozmino and crosses the Pacific: no chokepoint. The structural Malacca dependency is 55.8%, not 80%. Hover for detail.</div>
+    <div class="card-sub">Gulf crude exits Hormuz before transiting Malacca - two sequential chokepoints on the same cargo. West African and Americas VLCCs round the Cape of Good Hope and reach China via Lombok, a separate chokepoint with no Malacca exposure. Russian ESPO loads at Kozmino and crosses the Pacific: no maritime chokepoint at all. The structural Malacca dependency is 55.8%, not 80%. Hover any node or flow for detail.</div>
   </div>
   <div class="card-body"><svg id="sk"></svg></div>
   <div class="card-footer">
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div><span class="legend-label">Gulf &amp; Middle East</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div><span class="legend-label">Gulf producers (via Hormuz)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7dd3fc"></div><span class="legend-label">Seaward of Hormuz (Malacca only)</span></div>
       <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div><span class="legend-label">Cape of Good Hope route</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div><span class="legend-label">Russia ESPO</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#94a3b8"></div><span class="legend-label">Pipeline &amp; Pacific other</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#F0B429"></div><span class="legend-label">Hormuz + Malacca (44%)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#e8a820"></div><span class="legend-label">Malacca only (12%)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span class="legend-label">Lombok bypass (20.6%)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#64748b"></div><span class="legend-label">Pacific / no chokepoint (23.6%)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div><span class="legend-label">Pacific / no chokepoint</span></div>
     </div>
     <div class="source-note">Narrows CDM v0.3 · HS 2709 bilateral crude · 2022 base year<br>Values = % of China seaborne crude by annual trade value</div>
   </div>
 </div>
-
 <div class="tt" id="tt">
   <div class="tt-name" id="tt-name"></div>
   <div class="tt-val"  id="tt-val"></div>
@@ -76,116 +71,122 @@
 </div>
 
 <script>
-(function(){
+(function () {
 
-// Corridor colours consistent with India Sankey and narrows.io site-wide palette
+// Colour palette - consistent with India Sankey and site-wide scheme
 const C = {
-  gulf:      '#38bdf8',  // Gulf/ME origins
-  cape:      '#34d399',  // WA + Atlantic Americas cape-route origins
-  russia:    '#f97316',  // Russia ESPO
-  pacific:   '#94a3b8',  // Kazakhstan + other Pacific
-  horm_mal:  '#F0B429',  // Hormuz + Malacca corridor (gold)
-  mal_only:  '#e8a820',  // Malacca only corridor (amber-gold)
-  lombok:    '#3b82f6',  // Lombok bypass
-  nonmal:    '#64748b',  // Pacific no-chokepoint
-  dest:      '#e2e8f0',  // China
+  gulf:    '#38bdf8',   // Gulf-inside producers (Saudi, Iraq, UAE, Kuwait)
+  gulf_s:  '#7dd3fc',   // Seaward of Hormuz (Oman, Malaysia) - lighter blue
+  cape:    '#34d399',   // Cape of Good Hope route (WA + Americas)
+  russia:  '#f97316',   // Russia ESPO + no-chokepoint flows
+  choke:   '#F0B429',   // Chokepoint nodes (Hormuz, Malacca) - gold
+  lombok:  '#3b82f6',   // Lombok chokepoint
+  pacific: '#64748b',   // Pacific / no chokepoint corridor
+  dest:    'rgba(226,232,240,0.6)',
 };
 
-// ── Node definitions ──────────────────────────────────────────────────────────
-// Col 0 = origins (9 nodes, ordered top→bottom to align with their target corridor, no crossings)
-// Col 1 = routing corridors (4 nodes)
-// Col 2 = China
+// ── NODES ─────────────────────────────────────────────────────────────────────
+// 4 columns:
+//   col 0 = supply origins (11 individual nodes)
+//   col 1 = Hormuz (Gulf-inside producers only; others arc directly to col 2)
+//   col 2 = final corridors: Malacca · Lombok · Pacific
+//   col 3 = China
 const NODE_DEFS = [
 
-  // --- Origins that → Hormuz+Malacca (grouped at top of col 0) ---
-  { id:'saudi',  col:0, v:17,  group:'gulf',
+  // ── Gulf-inside producers (transit BOTH Hormuz + Malacca) ──────────────────
+  { id:'saudi',   col:0, v:17,   group:'gulf',
     label:'Saudi Arabia', sub:'17% · ~$62B',
-    note:'Ras Tanura and Juaymah terminals sit inside the Persian Gulf. Every laden VLCC must clear Hormuz before crossing the Indian Ocean to Malacca. Saudi crude is the single largest country input to China\'s Malacca structural dependency. Primary receivers: Qingdao and Ningbo-Zhoushan refineries.' },
+    note:'Ras Tanura and Juaymah are inside the Persian Gulf. Every laden VLCC must clear Hormuz before crossing the Indian Ocean to Malacca. Saudi Arabia is China\'s largest single crude supplier and the dominant contributor to its Malacca structural dependency.' },
+  { id:'iraq',    col:0, v:11,   group:'gulf',
+    label:'Iraq', sub:'11% · ~$40B',
+    note:'Basra Oil Terminal and Khor Al-Amaya are inside the Persian Gulf. Mandatory Hormuz transit. Iraq\'s crude runs long-haul across the Indian Ocean and through Malacca to east coast Chinese ports at Qingdao and Ningbo-Zhoushan.' },
+  { id:'uae',     col:0, v:9,    group:'gulf',
+    label:'UAE', sub:'9% · ~$33B',
+    note:'Das Island, Ruwais, and Jebel Dhanna - all inside the Persian Gulf. Mandatory Hormuz transit for Abu Dhabi crude. UAE is a substantial Malacca-dependent supplier; Red Sea terminal capacity for eastbound VLCC traffic is limited.' },
+  { id:'kuwait',  col:0, v:7,    group:'gulf',
+    label:'Kuwait', sub:'7% · ~$26B',
+    note:'Ahmadi and Mina Abdullah terminals are deep inside the Persian Gulf. Mandatory Hormuz transit for all Kuwait Export Crude destined for China. Kuwait\'s share has held at around 6 to 7 percent.' },
 
-  { id:'iraq',   col:0, v:10,  group:'gulf',
-    label:'Iraq', sub:'10% · ~$37B',
-    note:'Basra Oil Terminal (BOT), the Khor Al-Amaya terminal, and the single-point mooring at Al-Fao. All loadings are inside the Persian Gulf, making Hormuz transit mandatory. Iraq\'s crude runs long-haul across the Indian Ocean to Malacca and on to east coast Chinese ports.' },
-
-  { id:'uaekwt', col:0, v:15,  group:'gulf',
-    label:'UAE & Kuwait', sub:'15% · ~$55B',
-    note:'UAE loads from Das Island and Ruwais (inside the Gulf); Kuwait from Ahmadi and Mina Abdullah. Both require Hormuz egress. Combined value share of ~15% makes this pair the third largest Malacca-dependent block in China\'s crude book.' },
-
-  { id:'qatoth', col:0, v:2,   group:'gulf',
-    label:'Qatar & other Gulf', sub:'2% · ~$7B',
-    note:'Qatar\'s Ras Laffan loads a smaller crude volume alongside its dominant LNG exports. Also includes small Bahrain volumes. All inside-Gulf; Hormuz transit required, then Malacca to China east coast.' },
-
-  // --- Origins that → Malacca only (still Gulf region, seaward of Hormuz) ---
-  { id:'oman',   col:0, v:7.8, group:'gulf',
+  // ── Seaward of Hormuz (Malacca only - no Hormuz exposure) ─────────────────
+  { id:'oman',    col:0, v:7.8,  group:'gulf_s',
     label:'Oman', sub:'8% · ~$29B',
-    note:'Oman loads from Mina Al Fahal and the Duqm terminal on the Gulf of Oman - seaward of the Strait of Hormuz. Ships transit directly into the Arabian Sea without entering the Persian Gulf. No Hormuz exposure. Oman crude still transits Malacca to reach east coast Chinese ports, so Malacca structural dependency applies in full. An important distinction for risk decomposition.' },
+    note:'Mina Al Fahal and Duqm terminals are on the Gulf of Oman, seaward of Hormuz. Ships enter the Arabian Sea directly without transiting the Persian Gulf. No Hormuz exposure. Oman crude still transits Malacca to reach Chinese east coast ports. Hormuz and Malacca are independent risks for Oman volumes - a key distinction in chokepoint risk decomposition.' },
+  { id:'malaysia',col:0, v:4,    group:'gulf_s',
+    label:'Malaysia', sub:'4% · ~$15B',
+    note:'Malaysian crude from Sabah and Sarawak (Labuan, Bintulu) loads in the South China Sea and routes via Malacca to Chinese east coast refineries. Not a Gulf producer at all - included here because it transits Malacca only. Malaysia also functions as a re-export and blending hub; some volumes attributed to Malaysia in bilateral data may originate from sanctioned suppliers.' },
 
-  { id:'malqat', col:0, v:6,   group:'gulf',
-    label:'Malaysia', sub:'6% · ~$22B',
-    note:'Malaysian crude from Sabah and Sarawak (Labuan, Bintulu) routes south through the South China Sea to refinery clusters on China\'s east coast. Malacca Strait transit applies for the west-coast Peninsular Malaysia fields. East Malaysian crude can also reach Chinese ports via the Luzon or Balabac corridors. Net CDM routing: predominantly Malacca.' },
+  // ── Cape of Good Hope route → Lombok ──────────────────────────────────────
+  { id:'angola',  col:0, v:7,    group:'cape',
+    label:'Angola', sub:'7% · ~$26B',
+    note:'Cabinda, Girassol, and CLOV crude loads on VLCCs that exit the Atlantic, round the Cape of Good Hope eastward, and cross the Indian Ocean. CDM Fix-10 confirms West Africa to Asia crude routes via Lombok Strait, not Malacca. A Malacca closure has no effect on Angola supply to China.' },
+  { id:'nigeria', col:0, v:4,    group:'cape',
+    label:'Nigeria', sub:'4% · ~$15B',
+    note:'Bonny Light and Qua Iboe follow the same Cape of Good Hope route as Angola. VLCCs transit Lombok Strait into the South China Sea from the east, bypassing Malacca entirely. Also represents smaller volumes from Congo, Gabon, and Equatorial Guinea on the same routing.' },
+  { id:'brazil',  col:0, v:4.8,  group:'cape',
+    label:'Brazil', sub:'5% · ~$18B',
+    note:'Santos basin and pre-salt FPSO loadings. Atlantic-origin VLCCs at laden draught cannot transit the Panama Canal. The route is eastward around the Cape of Good Hope - not Cape Horn, which is a longer westward passage essentially unused for VLCC crude to China. Lombok Strait entry to South China Sea. Also includes Colombian and Guyanese Atlantic loadings.' },
+  { id:'usa',     col:0, v:4.8,  group:'cape',
+    label:'USA', sub:'5% · ~$18B',
+    note:'Gulf of Mexico loadings (Mars, Thunder Horse, Shenandoah). VLCC class vessels at laden displacement are too large for the Panama Canal. Route is Cape of Good Hope eastward to Lombok. No Malacca transit. Includes some additional Atlantic Americas volumes (Trinidad, Ecuador Atlantic-coast loadings).' },
 
-  // --- Origins that → Lombok bypass (Cape of Good Hope route) ---
-  { id:'wafr',   col:0, v:11,  group:'cape',
-    label:'West Africa', sub:'11% · ~$40B',
-    note:'Angola (Cabinda, Girassol, CLOV), Nigeria (Bonny Light, Qua Iboe), Congo, Gabon, Equatorial Guinea. Cargoes move on VLCCs that exit the Atlantic, round the Cape of Good Hope eastward, and transit the Indian Ocean to the Lombok Strait. CDM Fix-10 confirms VLCC routing via Lombok rather than Malacca for all West Africa to Asia crude flows. A Malacca closure does not affect this supply path.' },
+  // ── Pacific / No Chokepoint ────────────────────────────────────────────────
+  { id:'russia',  col:0, v:23.6, group:'russia',
+    label:'Russia (ESPO)', sub:'24% · ~$86B',
+    note:'East Siberia Pacific Ocean pipeline delivers crude to Kozmino terminal near Nakhodka on Russia\'s Pacific coast. Tankers cross the Sea of Japan directly to Qingdao, Dalian, and Ningbo-Zhoushan. No maritime chokepoint on the supply path. CDM Fix-26 assigns RUS crude to CHN via no-chokepoint Pacific corridor.\n\nNote: Kazakhstan crude to China (~8% of seaborne value) travels via the Atyrau-Alashankou overland pipeline to Xinjiang refineries. Kazakhstan is landlocked and ships no crude by sea; it is absorbed in this node for completeness. Neither supply source has any maritime chokepoint exposure.' },
 
-  { id:'atl',    col:0, v:9.6, group:'cape',
-    label:'Brazil & Atlantic Americas', sub:'10% · ~$35B',
-    note:'Brazil (Santos, Campos basin, pre-salt FPSO loadings), US Gulf of Mexico (Mars, Thunder Horse), Guyana (Stabroek). Atlantic-origin VLCCs are too deep-laden for Panama Canal transit at maximum draught. The preferred route is eastward around the Cape of Good Hope, Indian Ocean, and into the South China Sea via Lombok Strait - bypassing Malacca. Note: Pacific-coast Americas producers (Ecuador, some Canadian) ship direct across the Pacific with no chokepoint; that small volume is included in the Pacific/non-Malacca corridor.' },
+  // ── Intermediate chokepoint (col 1) ───────────────────────────────────────
+  { id:'hormuz',  col:1, v:44,   group:'choke',
+    label:'Hormuz', sub:'44% of China seaborne crude',
+    note:'The Strait of Hormuz is the mandatory exit for all crude loaded inside the Persian Gulf. Minimum navigable width approximately 3.2 km; no alternative maritime route for laden VLCCs. Gulf-inside producers (Saudi Arabia, Iraq, UAE, Kuwait) represent 44% of China\'s seaborne crude import value and all transit Hormuz. A Hormuz closure would be the first interruption point for this supply before it even reaches Malacca. Oman loads seaward of Hormuz and does not transit it.' },
 
-  // --- Origins that → Pacific/no-chokepoint ---
-  { id:'espo',   col:0, v:16,  group:'russia',
-    label:'Russia (ESPO)', sub:'16% · ~$58B',
-    note:'East Siberia Pacific Ocean pipeline delivers crude to Kozmino terminal on Russia\'s Pacific coast near Nakhodka. From Kozmino, tankers cross the Sea of Japan and Yellow Sea directly to Qingdao, Dalian, and Ningbo-Zhoushan. No maritime chokepoint on the supply path. CDM Fix-26 explicitly assigns RUS to CHN crude via the no-chokepoint Pacific corridor. ESPO capacity is ~1.6 mb/d; China receives the dominant share.' },
+  // ── Final corridors (col 2) ───────────────────────────────────────────────
+  { id:'malacca', col:2, v:55.8, group:'choke',
+    label:'Malacca', sub:'55.8% structural dependency',
+    note:'The Malacca Strait narrows to approximately 2.8 km. There is no viable alternative maritime route for laden VLCCs from the Indian Ocean into the South China Sea. A closure event would strand crude equivalent to 55.8% of China\'s annual seaborne import value with no short-run diversion. This is the correct number for the Malacca Dilemma calculation. Gulf-inside producers (44%) face Hormuz and Malacca sequentially. Oman (8%) and Malaysia (4%) face Malacca only.' },
+  { id:'lombok',  col:2, v:20.6, group:'lombok',
+    label:'Lombok', sub:'20.6% · via Cape of Good Hope',
+    note:'The Lombok Strait (between Bali and Lombok, Indonesia) is a deep-water chokepoint handling VLCC traffic from the Indian Ocean that approaches China from the east. West African and Americas cargoes round the Cape of Good Hope, cross the Indian Ocean, and transit Lombok into the South China Sea. A Malacca closure does not interrupt this supply path - and vice versa. These flows account for 20.6% of China\'s seaborne crude; they are the source of the inflated "80%" figure when combined with the Malacca total.' },
+  { id:'pacific', col:2, v:23.6, group:'pacific',
+    label:'Pacific', sub:'23.6% · no maritime chokepoint',
+    note:'Russian ESPO crude from Kozmino (Pacific coast) transits no maritime chokepoint between origin and Chinese east coast terminals. Kazakhstan crude to China travels the Atyrau-Alashankou overland pipeline with no sea leg at all. This 23.6% is structurally insulated from any maritime closure - Malacca, Lombok, or otherwise. Most analyses of the Malacca Dilemma substantially understate this figure.' },
 
-  { id:'kazoth', col:0, v:7.6, group:'pacific',
-    label:'Kazakhstan & other', sub:'8% · ~$28B',
-    note:'Kazakhstan ships crude via the CPC pipeline to Novorossiysk for some volumes, but also via the Kazakhstan-China Oil Pipeline (Atyrau to Alashankou), which is an entirely overland route to Xinjiang refineries - no maritime chokepoint. Also includes Norway (via Suez/Malacca, a small volume), Libya, and Ecuador/Pacific-coast Americas producers that ship direct across the Pacific. Blended group; the dominant contribution is the KAZ-CHN pipeline.' },
-
-  // ── Corridors (col 1) ──────────────────────────────────────────────────────
-  { id:'horm_mal', col:1, v:44,  group:'horm_mal',
-    label:'Hormuz + Malacca', sub:'44% · two sequential chokepoints',
-    note:'All crude loaded inside the Persian Gulf must first clear the Strait of Hormuz (minimum navigable width ~3.2 km), then cross the Arabian Sea and Indian Ocean before transiting the Malacca Strait (minimum width ~2.8 km). Gulf crude to China thus faces two sequential single-point risks. A Hormuz closure alone would strand 44% of China\'s seaborne crude supply. A separate Malacca closure would prevent this same 44% from completing delivery even after clearing Hormuz.' },
-
-  { id:'mal_only', col:1, v:13.8, group:'mal_only',
-    label:'Malacca (no Hormuz)', sub:'12% · Malacca exposure only',
-    note:'Oman and Malaysia both route crude through Malacca but load seaward of Hormuz. Oman\'s terminals (Mina Al Fahal, Duqm) are on the Gulf of Oman, outside the Persian Gulf. Malaysian crude loads on the South China Sea side. Neither origin transits Hormuz. A Hormuz closure does not interrupt this supply. A Malacca closure does. Combined with the Hormuz+Malacca group, total Malacca structural dependency = 55.8% (CDM v0.3).' },
-
-  { id:'lombok',   col:1, v:20.6, group:'lombok',
-    label:'Lombok Bypass', sub:'20.6% · unaffected by Malacca closure',
-    note:'The Lombok Strait (between Bali and Lombok, Indonesia) handles VLCC traffic arriving from the Indian Ocean that bypasses Malacca. West African and Brazilian/Americas cargoes round the Cape of Good Hope, cross the Indian Ocean, and enter the South China Sea via Lombok and the Makassar corridor. A Malacca closure event does not interrupt this supply path. These flows represent 20.6% of China\'s annual seaborne crude by value.' },
-
-  { id:'pacific',  col:1, v:23.6, group:'nonmal',
-    label:'Pacific / No Chokepoint', sub:'23.6% · no maritime chokepoint',
-    note:'Russian ESPO crude from Kozmino and Kazakhstan pipeline crude together make up the core of this corridor. Neither has a maritime chokepoint between origin and Chinese east coast terminals. This is the portion of China\'s import book that is structurally insulated from any Malacca or Lombok disruption. It is also the portion most underweighted in conventional Malacca Dilemma analyses.' },
-
-  // ── Destination (col 2) ───────────────────────────────────────────────────
-  { id:'china', col:2, v:100, group:'dest',
-    label:'China', sub:'~$365B annual seaborne crude',
-    note:'China is the world\'s largest crude importer by volume, receiving approximately 11 to 12 mb/d of seaborne crude in 2022. Primary east coast receiving terminals: Qingdao (Shandong independent refiners), Ningbo-Zhoushan (world\'s largest port by cargo tonnage), Dalian (CNPC Dalian), and Tianjin. The east coast refinery geography explains the Malacca dependency: every barrel arriving from the Indian Ocean - whether Gulf, West African, or Brazilian origin - must pass through either Malacca or Lombok to reach these ports.' },
+  // ── Destination (col 3) ───────────────────────────────────────────────────
+  { id:'china',   col:3, v:100,  group:'dest',
+    label:'China', sub:'~$365B seaborne crude',
+    note:'China is the world\'s largest crude importer by volume, receiving approximately 11 to 12 mb/d of seaborne crude in 2022. Primary east coast receiving terminals: Qingdao (Shandong independent refiners), Ningbo-Zhoushan (the world\'s largest port by cargo tonnage), Dalian (CNPC), and Tianjin. The east coast refinery geography is the structural driver of Malacca dependency - every barrel arriving from the Indian Ocean must pass through either Malacca or Lombok.' },
 ];
 
-// ── Link definitions ─────────────────────────────────────────────────────────
+// ── LINKS ─────────────────────────────────────────────────────────────────────
+// Gulf-inside → Hormuz (col 0 → col 1)
+// Everything else → final corridor (col 0 → col 2, arcing over the Hormuz column)
+// Hormuz → Malacca (col 1 → col 2)
+// Corridors → China (col 2 → col 3)
 const LINK_DEFS = [
-  // Origins → Corridors
-  { s:'saudi',   t:'horm_mal', v:17,   group:'gulf'    },
-  { s:'iraq',    t:'horm_mal', v:10,   group:'gulf'    },
-  { s:'uaekwt',  t:'horm_mal', v:15,   group:'gulf'    },
-  { s:'qatoth',  t:'horm_mal', v:2,    group:'gulf'    },
-  { s:'oman',    t:'mal_only', v:7.8,  group:'gulf'    },
-  { s:'malqat',  t:'mal_only', v:6,    group:'gulf'    },
-  { s:'wafr',    t:'lombok',   v:11,   group:'cape'    },
-  { s:'atl',     t:'lombok',   v:9.6,  group:'cape'    },
-  { s:'espo',    t:'pacific',  v:16,   group:'russia'  },
-  { s:'kazoth',  t:'pacific',  v:7.6,  group:'pacific' },
+  // Through Hormuz
+  { s:'saudi',   t:'hormuz',  v:17,   group:'gulf'    },
+  { s:'iraq',    t:'hormuz',  v:11,   group:'gulf'    },
+  { s:'uae',     t:'hormuz',  v:9,    group:'gulf'    },
+  { s:'kuwait',  t:'hormuz',  v:7,    group:'gulf'    },
+  // Direct to Malacca (seaward of Hormuz)
+  { s:'oman',    t:'malacca', v:7.8,  group:'gulf_s'  },
+  { s:'malaysia',t:'malacca', v:4,    group:'gulf_s'  },
+  // Cape of Good Hope → Lombok
+  { s:'angola',  t:'lombok',  v:7,    group:'cape'    },
+  { s:'nigeria', t:'lombok',  v:4,    group:'cape'    },
+  { s:'brazil',  t:'lombok',  v:4.8,  group:'cape'    },
+  { s:'usa',     t:'lombok',  v:4.8,  group:'cape'    },
+  // ESPO Pacific
+  { s:'russia',  t:'pacific', v:23.6, group:'russia'  },
+  // Hormuz → Malacca
+  { s:'hormuz',  t:'malacca', v:44,   group:'choke'   },
   // Corridors → China
-  { s:'horm_mal', t:'china', v:44,   group:'horm_mal' },
-  { s:'mal_only', t:'china', v:13.8, group:'mal_only' },
-  { s:'lombok',   t:'china', v:20.6, group:'lombok'   },
-  { s:'pacific',  t:'china', v:23.6, group:'nonmal'   },
+  { s:'malacca', t:'china',   v:55.8, group:'choke'   },
+  { s:'lombok',  t:'china',   v:20.6, group:'lombok'  },
+  { s:'pacific', t:'china',   v:23.6, group:'pacific' },
 ];
 
-// ── Tooltip ──────────────────────────────────────────────────────────────────
-const tt     = document.getElementById('tt');
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tt = document.getElementById('tt');
 const ttName = document.getElementById('tt-name');
 const ttVal  = document.getElementById('tt-val');
 const ttSub  = document.getElementById('tt-sub');
@@ -202,16 +203,17 @@ function showTT(e, name, val, sub, note) {
   moveTT(e);
 }
 function moveTT(e) {
-  tt.style.left = Math.min(e.clientX + 18, window.innerWidth  - 320) + 'px';
-  tt.style.top  = Math.min(e.clientY - 14, window.innerHeight - 200) + 'px';
+  const x = e.clientX + 18, y = e.clientY - 14;
+  tt.style.left = Math.min(x, window.innerWidth  - 320) + 'px';
+  tt.style.top  = Math.min(y, window.innerHeight - 200) + 'px';
 }
 function hideTT() { tt.style.opacity = '0'; }
 
-// ── Layout constants ─────────────────────────────────────────────────────────
+// ── Layout ────────────────────────────────────────────────────────────────────
 const svg  = document.getElementById('sk');
 const cw   = svg.parentElement.clientWidth - 48;
-const W    = Math.min(cw, 960);
-const H    = 640;
+const W    = Math.min(cw, 1040);
+const H    = 660;
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 svg.setAttribute('height', H);
 
@@ -221,26 +223,28 @@ const at   = (el, o) => { Object.entries(o).forEach(([k,v]) => el.setAttribute(k
 const ap   = (p, c)  => { p.appendChild(c); return c; };
 const font = "'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif";
 
-const NW    = 14;  // node bar width
-const PAD   = 12;  // gap between nodes in same column
-const TOP   = 20;
+const NW    = 14;
+const PAD   = 14;
+const TOP   = 44;   // room for column headers
 const BOT   = 10;
-const L_PAD = 170; // left label area
-const R_PAD = 178; // right label area
+const L_PAD = 155;
+const R_PAD = 160;
 
+// 4 column positions
 const COL_X = [
   L_PAD,
-  Math.round(W * 0.44),
+  Math.round(W * 0.285),
+  Math.round(W * 0.565),
   W - R_PAD - NW,
 ];
 
-const byCol = [[],[],[]];
+const byCol = [[],[],[],[]];
 NODE_DEFS.forEach(n => byCol[n.col].push(n));
 
 const AVAIL_H = H - TOP - BOT;
 
 function layoutCol(nodes) {
-  const total = nodes.reduce((s,n) => s + n.v, 0);
+  const total = nodes.reduce((s,n) => s+n.v, 0);
   const usedH = AVAIL_H - PAD * (nodes.length - 1);
   let cur = TOP;
   nodes.forEach(n => {
@@ -257,174 +261,224 @@ byCol.forEach(layoutCol);
 const NM = {};
 NODE_DEFS.forEach(n => { NM[n.id] = n; });
 
-// ── Link slot offsets ────────────────────────────────────────────────────────
+// ── Hormuz size override ───────────────────────────────────────────────────────
+// layoutCol normalises each column independently, so a single-node col 1
+// (Hormuz only) would fill the entire available height. Override: size Hormuz
+// using the same px-per-unit scale as col 0 (total=100), top-aligned with
+// the Gulf-inside producer block so ribbons converge naturally.
+{
+  const col0usedH = AVAIL_H - PAD * (byCol[0].length - 1);
+  const hormuz = NM['hormuz'];
+  hormuz.h  = (hormuz.v / 100) * col0usedH;   // 44% of col-0 scale
+  hormuz.y0 = NM['saudi'].y0;                  // align with top of Gulf block
+  hormuz.y1 = hormuz.y0 + hormuz.h;
+}
+
+// ── Resolve link geometry ─────────────────────────────────────────────────────
 const outOff = {}, inOff = {};
 NODE_DEFS.forEach(n => { outOff[n.id] = 0; inOff[n.id] = 0; });
 
+// linkH: proportion of the node's actual rendered height.
+// Works for all nodes including the overridden Hormuz.
 function linkH(n, v) {
-  const col   = byCol[n.col];
-  const total = col.reduce((s,x) => s + x.v, 0);
-  const usedH = AVAIL_H - PAD * (col.length - 1);
-  return (v / total) * usedH;
+  return (v / n.v) * n.h;
 }
 
+const LINKS = LINK_DEFS.map(ld => {
+  const s   = NM[ld.s], t = NM[ld.t];
+  const sh  = linkH(s, ld.v);
+  const th  = linkH(t, ld.v);
+  const sy0 = s.y0 + outOff[s.id];
+  const sy1 = sy0 + sh;
+  const ty0 = t.y0 + inOff[t.id];
+  const ty1 = ty0 + th;
+  outOff[s.id] += sh;
+  inOff[t.id]  += th;
+  return { ...ld, s, t, sy0, sy1, ty0, ty1 };
+});
+
+// ── SVG defs ──────────────────────────────────────────────────────────────────
+const defs = ap(svg, mk('defs'));
+
+// Glow filter for chokepoint nodes
+const flt = ap(defs, at(mk('filter'), { id:'glow', x:'-60%', y:'-60%', width:'220%', height:'220%' }));
+ap(flt, at(mk('feGaussianBlur'), { stdDeviation:'5', result:'b' }));
+const fm = ap(flt, mk('feMerge'));
+ap(fm, at(mk('feMergeNode'), { in:'b' }));
+ap(fm, at(mk('feMergeNode'), { in:'SourceGraphic' }));
+
+// Per-link gradient: source colour → corridor colour
+function endColor(group) {
+  const m = { choke:'#F0B429', lombok:C.lombok, pacific:C.pacific, dest:'rgba(226,232,240,0.5)' };
+  return m[group] || C[group] || '#64748b';
+}
+
+LINKS.forEach(lk => {
+  const c1 = C[lk.group] || '#64748b';
+  const c2 = endColor(lk.t.group);
+  const g  = ap(defs, at(mk('linearGradient'), { id:`g-${lk.s.id}-${lk.t.id}`, x1:'0%', y1:'0%', x2:'100%', y2:'0%' }));
+  ap(g, at(mk('stop'), { offset:'0%',   'stop-color':c1, 'stop-opacity':'1' }));
+  ap(g, at(mk('stop'), { offset:'100%', 'stop-color':c2, 'stop-opacity':'1' }));
+});
+
+// ── Ribbon path (filled bezier) ────────────────────────────────────────────────
 function ribbon(sx, sy0, sy1, tx, ty0, ty1) {
   const cx = (sx + tx) / 2;
-  return `M ${sx},${sy0} C ${cx},${sy0} ${cx},${ty0} ${tx},${ty0}` +
-         ` L ${tx},${ty1} C ${cx},${ty1} ${cx},${sy1} ${sx},${sy1} Z`;
+  return `M${sx},${sy0} C${cx},${sy0} ${cx},${ty0} ${tx},${ty0} L${tx},${ty1} C${cx},${ty1} ${cx},${sy1} ${sx},${sy1} Z`;
 }
 
-// ── Draw links ───────────────────────────────────────────────────────────────
-const linkG = ap(svg, mk('g'));
-LINK_DEFS.forEach(lk => {
-  const sn  = NM[lk.s];
-  const tn  = NM[lk.t];
-  const lhS = linkH(sn, lk.v);
-  const lhT = linkH(tn, lk.v);
-  const sy0 = sn.y0 + outOff[sn.id];
-  const sy1 = sy0 + lhS;
-  const ty0 = tn.y0 + inOff[tn.id];
-  const ty1 = ty0 + lhT;
-  outOff[sn.id] += lhS;
-  inOff[tn.id]  += lhT;
-
-  const col = C[lk.group] || '#888';
-  const p   = ap(linkG, mk('path'));
-  at(p, {
-    d:              ribbon(sn.x1, sy0, sy1, tn.x0, ty0, ty1),
-    fill:           col,
-    'fill-opacity': '0.26',
-    stroke:         col,
-    'stroke-width': '0.5',
-    'stroke-opacity':'0.38',
-  });
-  p.addEventListener('mouseenter', e => {
-    at(p, { 'fill-opacity':'0.50', 'stroke-opacity':'0.72' });
+// ── Draw ribbons ──────────────────────────────────────────────────────────────
+const linkG = ap(svg, at(mk('g'), { class:'links' }));
+LINKS.forEach(lk => {
+  const el = ap(linkG, at(mk('path'), {
+    d:    ribbon(lk.s.x1, lk.sy0, lk.sy1, lk.t.x0, lk.ty0, lk.ty1),
+    fill: `url(#g-${lk.s.id}-${lk.t.id})`,
+    'fill-opacity': '0.22',
+    style: 'cursor:pointer; transition:fill-opacity 0.12s;',
+  }));
+  el.addEventListener('mousemove', e => {
+    el.setAttribute('fill-opacity', '0.55');
     showTT(e,
-      sn.label + ' → ' + tn.label,
-      lk.v.toFixed(1) + '% of China seaborne crude', null,
-      sn.label + ' routes via the ' + tn.label + ' corridor.');
+      `${lk.s.label} - ${lk.t.label}`,
+      `${lk.v.toFixed(1)}% of China seaborne crude`,
+      `~$${(lk.v * 3.65).toFixed(0)}B annual trade value`,
+      null
+    );
   });
-  p.addEventListener('mousemove',  moveTT);
-  p.addEventListener('mouseleave', () => {
-    at(p, { 'fill-opacity':'0.26', 'stroke-opacity':'0.38' });
-    hideTT();
+  el.addEventListener('mouseleave', () => { el.setAttribute('fill-opacity', '0.22'); hideTT(); });
+});
+
+// ── Draw node bars ─────────────────────────────────────────────────────────────
+const nodeG = ap(svg, at(mk('g'), { class:'nodes' }));
+NODE_DEFS.forEach(n => {
+  const isChoke = (n.group === 'choke');
+  const col     = n.group === 'dest' ? C.dest : C[n.group] || '#64748b';
+  const rect    = ap(nodeG, at(mk('rect'), {
+    x: n.x0, y: n.y0, width: NW, height: Math.max(2, n.h), rx: 3,
+    fill: col, 'fill-opacity': isChoke ? '1' : '0.88',
+    filter: isChoke ? 'url(#glow)' : '',
+    style: 'cursor:pointer',
+  }));
+  rect.addEventListener('mousemove', e => showTT(e, n.label, n.sub, null, n.note));
+  rect.addEventListener('mouseleave', hideTT);
+});
+
+// ── Labels ─────────────────────────────────────────────────────────────────────
+const lblG = ap(svg, at(mk('g'), { class:'labels' }));
+
+function addTxt(x, y, str, opts) {
+  const el = ap(lblG, at(mk('text'), {
+    x, y, 'text-anchor': opts.anchor || 'start',
+    'dominant-baseline': 'middle',
+    fill: opts.fill || '#fff', 'fill-opacity': opts.op || '1',
+    'font-size': opts.fs || '12', 'font-weight': opts.fw || '500',
+    'font-family': font, 'letter-spacing': opts.ls || '0',
+  }));
+  el.textContent = str;
+  return el;
+}
+
+// Column headers
+const COL_LABELS = [
+  { label:'Supply Origin',         x: COL_X[0] - L_PAD * 0.5 },
+  { label:'Chokepoint',            x: COL_X[1] + NW * 0.5 },
+  { label:'Chokepoint',            x: COL_X[2] + NW * 0.5 },
+  { label:'Destination',           x: COL_X[3] + NW + R_PAD * 0.5 - 10 },
+];
+COL_LABELS.forEach(h => {
+  const el = addTxt(h.x, 18, h.label.toUpperCase(), {
+    anchor:'middle', fill:'rgba(255,255,255,0.26)', fs:'9.5', fw:'600', ls:'0.09em',
   });
 });
 
-// ── Draw nodes & labels ──────────────────────────────────────────────────────
+// Node labels
 NODE_DEFS.forEach(n => {
-  const col  = C[n.group] || '#888';
-  const midY = (n.y0 + n.y1) / 2;
+  const cy      = (n.y0 + n.y1) / 2;
+  const isRight = (n.col === 3);
+  // All non-destination labels go to the LEFT of their bar (right-anchored)
+  const lx     = isRight ? n.x1 + 10 : n.x0 - 10;
+  const anchor  = isRight ? 'start' : 'end';
+  const isChoke = (n.group === 'choke');
 
-  // Node bar
-  const rect = ap(svg, mk('rect'));
-  at(rect, { x:n.x0, y:n.y0, width:NW, height:n.h, rx:3, fill:col,
-    filter:'drop-shadow(0 0 5px ' + col + '88)' });
-  rect.style.cursor = 'default';
-  rect.addEventListener('mouseenter', e => showTT(e, n.label, n.sub, null, n.note));
-  rect.addEventListener('mousemove',  moveTT);
-  rect.addEventListener('mouseleave', hideTT);
+  // Label colour
+  const lc = isChoke ? C.choke
+    : n.group === 'dest'   ? '#e2e8f0'
+    : n.group === 'gulf'   ? '#7dd3fc'
+    : n.group === 'gulf_s' ? '#bae6fd'
+    : n.group === 'cape'   ? '#6ee7b7'
+    : n.group === 'russia' ? '#fdba74'
+    : n.group === 'lombok' ? '#93c5fd'
+    : n.group === 'pacific'? '#94a3b8'
+    : '#94a3b8';
 
-  if (n.col === 0) {
-    // Left column - label to the left of bar
-    const g = ap(svg, mk('g'));
-    g.style.cursor = 'default';
-    const t = ap(g, mk('text'));
-    at(t, { x:n.x0-10, y:midY-7, 'text-anchor':'end',
-      'font-family':font, 'font-size':'13', 'font-weight':'500', fill:'#fff' });
-    t.textContent = n.label;
-    const s = ap(g, mk('text'));
-    at(s, { x:n.x0-10, y:midY+9, 'text-anchor':'end',
-      'font-family':font, 'font-size':'11', fill:'rgba(255,255,255,0.45)' });
-    s.textContent = n.sub;
-    g.addEventListener('mouseenter', e => showTT(e, n.label, n.sub, null, n.note));
-    g.addEventListener('mousemove',  moveTT);
-    g.addEventListener('mouseleave', hideTT);
+  // Word-wrap label
+  const words  = n.label.split(' ');
+  const maxLen = isChoke ? 14 : isRight ? 18 : 15;
+  const lines  = [];
+  let cur = '';
+  words.forEach(w => {
+    if ((cur + ' ' + w).trim().length > maxLen && cur) { lines.push(cur.trim()); cur = w; }
+    else cur = (cur + ' ' + w).trim();
+  });
+  if (cur) lines.push(cur);
 
-  } else if (n.col === 1) {
-    // Middle column - label to the right of bar
-    const g = ap(svg, mk('g'));
-    g.style.cursor = 'default';
-    const t = ap(g, mk('text'));
-    at(t, { x:n.x1+10, y:midY-7, 'text-anchor':'start',
-      'font-family':font, 'font-size':'13', 'font-weight':'600', fill:col });
-    t.textContent = n.label;
-    const s = ap(g, mk('text'));
-    at(s, { x:n.x1+10, y:midY+9, 'text-anchor':'start',
-      'font-family':font, 'font-size':'11', fill:'rgba(255,255,255,0.42)' });
-    s.textContent = n.sub;
-    g.addEventListener('mouseenter', e => showTT(e, n.label, n.sub, null, n.note));
-    g.addEventListener('mousemove',  moveTT);
-    g.addEventListener('mouseleave', hideTT);
+  const lh   = 15;
+  const fs   = isChoke ? '14' : isRight ? '15' : '13';
+  const fw   = isChoke ? '700' : isRight ? '700' : '500';
+  const hasSub = n.sub && n.h > 20;
+  const blockH = lines.length * lh + (hasSub ? 14 : 0);
+  const topY   = cy - blockH / 2 + lh * 0.5;
 
-  } else {
-    // Right column (China)
-    const g = ap(svg, mk('g'));
-    g.style.cursor = 'default';
-    const t = ap(g, mk('text'));
-    at(t, { x:n.x1+10, y:midY-6, 'text-anchor':'start',
-      'font-family':font, 'font-size':'15', 'font-weight':'700', fill:'#fff' });
-    t.textContent = n.label;
-    const s = ap(g, mk('text'));
-    at(s, { x:n.x1+10, y:midY+11, 'text-anchor':'start',
-      'font-family':font, 'font-size':'11', fill:'rgba(255,255,255,0.42)' });
-    s.textContent = n.sub;
-    g.addEventListener('mouseenter', e => showTT(e, n.label, n.sub, null, n.note));
-    g.addEventListener('mousemove',  moveTT);
-    g.addEventListener('mouseleave', hideTT);
+  lines.forEach((line, i) => {
+    const el = addTxt(lx, topY + i * lh, line, { anchor, fill:lc, fs, fw });
+    el.style.cursor = 'default';
+    el.addEventListener('mousemove', e => showTT(e, n.label, n.sub, null, n.note));
+    el.addEventListener('mouseleave', hideTT);
+  });
+
+  if (hasSub) {
+    const subY = topY + lines.length * lh + 1;
+    if (isChoke) {
+      // Percentage badge (pill) in the label area, right-anchored
+      const badge = `${n.v % 1 === 0 ? n.v : n.v.toFixed(1)}%`;
+      const bw    = badge.length * 8 + 14;
+      const bh    = 17;
+      const bx    = lx - bw;
+      ap(lblG, at(mk('rect'), {
+        x:bx, y:subY - bh/2 + 2, width:bw, height:bh, rx:8,
+        fill:'#0A2540',
+        stroke: n.group === 'choke' ? C.choke : n.group === 'lombok' ? C.lombok : C.pacific,
+        'stroke-width':'1.2',
+      }));
+      const bt = ap(lblG, at(mk('text'), {
+        x:bx + bw/2, y:subY + 2,
+        'text-anchor':'middle', 'dominant-baseline':'middle',
+        fill:lc, 'font-size':'10', 'font-weight':'700', 'font-family':font,
+      }));
+      bt.textContent = badge;
+      bt.style.cursor = 'default';
+      bt.addEventListener('mousemove', e => showTT(e, n.label, n.sub, null, n.note));
+      bt.addEventListener('mouseleave', hideTT);
+    } else {
+      const el = addTxt(lx, subY + 6, n.sub, { anchor, fill:'rgba(255,255,255,0.38)', fs:'11', fw:'300' });
+      el.style.cursor = 'default';
+      el.addEventListener('mousemove', e => showTT(e, n.label, n.sub, null, n.note));
+      el.addEventListener('mouseleave', hideTT);
+    }
   }
 });
 
-// ── Bracket: spans Hormuz+Malacca and Malacca-only nodes (~56% Malacca total) ─
-(function drawBracket() {
-  const hm  = NM['horm_mal'];
-  const mo  = NM['mal_only'];
-  if (!hm || !mo) return;
-  const bx  = hm.x1 + 130; // right side of corridor labels
-  const top = hm.y0;
-  const bot = mo.y1;
-  const mid = (top + bot) / 2;
-  const tk  = 6;
-  const g   = ap(svg, mk('g'));
-  ap(g, mk('path')).setAttribute('d',
-    'M '+(bx-tk)+','+top+' L '+bx+','+top+' L '+bx+','+bot+' L '+(bx-tk)+','+bot
-  );
-  g.querySelector('path').setAttribute('fill', 'none');
-  g.querySelector('path').setAttribute('stroke', 'rgba(255,255,255,0.22)');
-  g.querySelector('path').setAttribute('stroke-width', '1.2');
-
-  const l1 = ap(g, mk('text'));
-  at(l1, { x:bx+8, y:mid-6, 'text-anchor':'start',
-    'font-family':font, 'font-size':'10.5', 'font-weight':'600',
-    fill:'rgba(255,255,255,0.36)' });
-  l1.textContent = '55.8%';
-  const l2 = ap(g, mk('text'));
-  at(l2, { x:bx+8, y:mid+9, 'text-anchor':'start',
-    'font-family':font, 'font-size':'10', fill:'rgba(255,255,255,0.24)' });
-  l2.textContent = 'Malacca structural dep.';
-})();
-
-// ── Separator lines between origin groups (subtle) ───────────────────────────
-(function drawSeparators() {
-  // Gap between Malacca group (qatoth) and Malacca-only group (oman) - between node index 3 and 4
-  // Gap between Malacca-only (malqat) and Lombok group (wafr) - between index 5 and 6
-  // Gap between Lombok group (atl) and Pacific group (espo) - between index 7 and 8
-  const col0 = byCol[0];
-  const splits = [4, 6, 8]; // before index 4, 6, 8 draw a faint line
-  splits.forEach(i => {
-    if (!col0[i] || !col0[i-1]) return;
-    const y = (col0[i-1].y1 + col0[i].y0) / 2;
-    const ln = ap(svg, mk('line'));
-    at(ln, {
-      x1: COL_X[0] - L_PAD + 8,
-      x2: COL_X[0] - 4,
-      y1: y, y2: y,
-      stroke:'rgba(255,255,255,0.10)', 'stroke-width':'1',
-      'stroke-dasharray':'3 3',
-    });
-  });
-})();
+// ── Group dividers in origin column (faint dashed lines) ──────────────────────
+const col0 = byCol[0];
+// After Kuwait (index 3, before Oman), after Malaysia (index 5, before Angola), after USA (index 9, before Russia)
+[4, 6, 10].forEach(i => {
+  if (!col0[i] || !col0[i-1]) return;
+  const y = (col0[i-1].y1 + col0[i].y0) / 2;
+  ap(svg, at(mk('line'), {
+    x1:6, x2:COL_X[0] - 4, y1:y, y2:y,
+    stroke:'rgba(255,255,255,0.09)', 'stroke-width':'1', 'stroke-dasharray':'3 4',
+  }));
+});
 
 })();
 </script>
