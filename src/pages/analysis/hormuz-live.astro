@@ -1,0 +1,226 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="Five months of live Hormuz data."
+ description="The WTO and AXSMarine Hormuz Trade Tracker has been running since February 2026. Crude flows are down 95 percent. LNG is down 99 percent. The tracker tells you what moved. The Narrows CDM tells you who bears the cost."
+ eyebrow="Chokepoint validation · Strait of Hormuz · July 2026"
+ publishDate="July 2026"
+ readTime="10 min read"
+ author="Narrows Research"
+>
+
+<style>
+.n-table-wrap { background: var(--white); border: var(--rule-light); border-radius: 6px; overflow: hidden; margin: 24px 0; overflow-x: auto; }
+.n-table-title { background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px; border-bottom: 2px solid var(--gold); }
+.n-table-note { font-size: 11px; color: var(--text-tertiary); padding: 8px 16px 10px; background: var(--surface); border-top: var(--rule-light); font-style: italic; }
+table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
+.n-table thead th.num { text-align: right; }
+.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+.n-table tbody td.num { text-align: right; font-weight: 500; }
+.n-table tbody td.bold { font-weight: 600; color: var(--navy); }
+.n-table tbody tr:last-child td { border-bottom: none; }
+.n-table tbody tr:hover td { background: var(--blue-pale); }
+.dep-high { color: #C0392B; font-weight: 700; }
+.dep-mid  { color: #B87333; font-weight: 600; }
+.dep-low  { color: var(--text-secondary); font-weight: 400; }
+
+.callout-verdict { background: var(--navy); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
+.callout-verdict-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 300; }
+.callout-verdict-body strong { color: var(--gold); font-weight: 600; }
+
+.bucket-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+.bucket { border: var(--rule-light); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.bucket-num { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.bucket h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin: 0; }
+.bucket p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+.tracker-card { border: var(--rule-light); border-radius: 8px; overflow: hidden; margin: 28px 0; }
+.tracker-card-header { background: var(--surface); padding: 12px 18px; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: var(--rule-light); display: flex; justify-content: space-between; align-items: center; }
+.tracker-card-header .live-pill { background: rgba(185,28,28,0.12); color: #C0392B; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 12px; display: flex; align-items: center; gap: 5px; }
+.tracker-card-header .live-pill::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #C0392B; display: block; }
+.tracker-rows { display: grid; grid-template-columns: 1fr 1fr; }
+.tracker-row { padding: 18px 20px; border-bottom: var(--rule-light); border-right: var(--rule-light); }
+.tracker-row:nth-child(2n) { border-right: none; }
+.tracker-row:nth-last-child(-n+2) { border-bottom: none; }
+.tracker-commodity { font-size: 11px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+.tracker-change { font-size: 28px; font-weight: 700; color: #C0392B; line-height: 1; margin-bottom: 4px; }
+.tracker-note { font-size: 11px; color: var(--text-tertiary); font-weight: 300; line-height: 1.5; }
+
+.importer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 24px 0; }
+.importer-card { border: var(--rule-light); border-radius: 8px; padding: 18px; }
+.importer-flag { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+.importer-dep { font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.importer-dep.high { color: #C0392B; }
+.importer-dep.mid  { color: #B87333; }
+.importer-dep.mod  { color: var(--navy); }
+.importer-label { font-size: 10px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.importer-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+@media (max-width: 680px) {
+  .bucket-grid { grid-template-columns: 1fr; }
+  .tracker-rows { grid-template-columns: 1fr; }
+  .tracker-row { border-right: none; }
+  .tracker-row:nth-last-child(-n+2) { border-bottom: var(--rule-light); }
+  .tracker-row:last-child { border-bottom: none; }
+  .importer-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+ <div class="stat-bar-inner">
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Hormuz crude flows · vs. pre-closure baseline</div>
+   <div class="stat-bar-value">-95%</div>
+   <div class="stat-bar-unit">WTO / AXSMarine Tracker · July 2026</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Days of closure · as of 1 July 2026</div>
+   <div class="stat-bar-value">123</div>
+   <div class="stat-bar-unit">Active since 28 February 2026</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Hormuz event horizon · TIDE estimate</div>
+   <div class="stat-bar-value">$36.5B</div>
+   <div class="stat-bar-unit">Cargo at risk at peak seasonal accumulation</div>
+  </div>
+ </div>
+</div>
+
+<hr class="section-rule" />
+
+<p>On 28 February 2026, the Strait of Hormuz closed to normal commercial traffic. The WTO and AXSMarine responded within weeks with the <strong>Strait of Hormuz Trade Tracker</strong>, a live dashboard drawing on AIS vessel position data to monitor commodity flows through the strait. It is a serious piece of work. Crude oil flows are down <strong>95 percent</strong> against the pre-closure baseline. LNG is down <strong>99 percent</strong>. Fertilizer exports from Gulf producers are down <strong>94 percent</strong>. Agricultural commodity inflows, which were still drawing on stock built before February, began declining sharply from April as pre-closure inventory was drawn down.</p>
+
+<p>Those numbers are accurate, current, and sobering. They are also, structurally, incomplete. The tracker measures flow change through a geographic point. It does not carry a bilateral layer. It cannot tell you <strong>which countries are absorbing the disruption</strong>, which commodity classes have a diversion option and which do not, or how the structural dependency each importer carried into February is translating into observed import shortfall now. Those are the questions the Narrows Chokepoint Dependency Model was built to answer.</p>
+
+<hr class="section-rule" />
+
+<h2>What the tracker shows</h2>
+
+<div class="tracker-card">
+ <div class="tracker-card-header">
+  WTO / AXSMarine Hormuz Trade Tracker
+  <span class="live-pill">Live · July 2026</span>
+ </div>
+ <div class="tracker-rows">
+  <div class="tracker-row">
+   <div class="tracker-commodity">Crude oil</div>
+   <div class="tracker-change">-95%</div>
+   <div class="tracker-note">Persian Gulf producers captive to Hormuz. No alternative exit for laden VLCCs from inside the strait.</div>
+  </div>
+  <div class="tracker-row">
+   <div class="tracker-commodity">LNG</div>
+   <div class="tracker-change">-99%</div>
+   <div class="tracker-note">Qatar has no pipeline export alternative for LNG. Near-total cessation of flows.</div>
+  </div>
+  <div class="tracker-row">
+   <div class="tracker-commodity">Fertilizers</div>
+   <div class="tracker-change">-94%</div>
+   <div class="tracker-note">Gulf producers supply a significant share of global urea, DAP, and ammonia. Agricultural import nations bearing downstream cost.</div>
+  </div>
+  <div class="tracker-row">
+   <div class="tracker-commodity">Agricultural inflows</div>
+   <div class="tracker-change">-82%</div>
+   <div class="tracker-note">From April, as pre-closure inventory in Gulf states was drawn down. Decline expected to steepen through Q3.</div>
+  </div>
+ </div>
+</div>
+
+<p>One important caveat accompanies the tracker data: the AIS monitoring methodology, by definition, does not capture vessels running dark. The sanctions-evasion fleet operating in the Gulf has a well-documented history of AIS transponder deactivation. Actual through-Hormuz flows are <strong>higher than the tracker figures</strong>, though the directional signal, a near-complete cessation of normal commercial traffic, is unambiguous. The tracker is the best available public measurement. It is a floor, not a ceiling.</p>
+
+<hr class="section-rule" />
+
+<h2>The bilateral question</h2>
+
+<p>The tracker is built around a chokepoint. The CDM is built around importers. That distinction drives a different set of questions.</p>
+
+<p>When crude oil through Hormuz falls 95 percent, the disruption does not distribute evenly across the 52 importing nations the CDM covers. It distributes according to each country's <strong>structural dependency on Hormuz-transiting supply</strong>, their existing stock buffer, their diversion capacity, and the commodity class mix of what they were importing. A country sourcing 85 percent of its crude from inside the Persian Gulf, with limited domestic production and minimal strategic reserve, is in a categorically different position from a country sourcing 40 percent of its crude from the Persian Gulf alongside large volumes from Atlantic-basin and Pacific suppliers with no chokepoint exposure at all.</p>
+
+<p>The tracker cannot distinguish between those two countries. The CDM can, because it was built to do exactly that.</p>
+
+<div class="callout-verdict">
+ <div class="callout-verdict-label">CDM structural position</div>
+ <div class="callout-verdict-body">
+  The Narrows Chokepoint Dependency Model computed bilateral Hormuz structural dependency scores for <strong>52 importing nations</strong> across <strong>14 commodity classes</strong> using 2022 base-year bilateral trade data. Those scores were fixed before the closure. The live tracker data is now a <strong>real-world validation set</strong> for whether pre-computed structural dependency predicts observed import disruption.
+ </div>
+</div>
+
+<hr class="section-rule" />
+
+<h2>Three importer cases</h2>
+
+<p>The CDM bilateral data for crude oil shows significant variation in Hormuz structural dependency across major importing nations. Three cases illustrate the range.</p>
+
+<div class="importer-grid">
+ <div class="importer-card">
+  <div class="importer-flag">Japan</div>
+  <div class="importer-dep high">~90%</div>
+  <div class="importer-label">Crude: Hormuz structural dependency</div>
+  <div class="importer-body">Japan sources the overwhelming majority of its crude from inside the Persian Gulf. Saudi Arabia, UAE, Kuwait, and Qatar collectively account for roughly 90 percent of Japanese crude imports. There is no meaningful Atlantic-basin or Pacific alternative at scale. Japan entered February 2026 as the most Hormuz-captive large economy in the CDM dataset.</div>
+ </div>
+ <div class="importer-card">
+  <div class="importer-flag">South Korea</div>
+  <div class="importer-dep high">~75%</div>
+  <div class="importer-label">Crude: Hormuz structural dependency</div>
+  <div class="importer-body">South Korea imports a slightly more diversified crude mix than Japan, with meaningful volumes from the United States and Russia, but remains heavily Hormuz-captive. Saudi Arabia and Kuwait together represent a structural exposure that cannot be replaced from non-Hormuz origins at short notice. Korean refiners entered the closure with limited buffer.</div>
+ </div>
+ <div class="importer-card">
+  <div class="importer-flag">China</div>
+  <div class="importer-dep mod">44%</div>
+  <div class="importer-label">Crude: Hormuz structural dependency</div>
+  <div class="importer-body">China is materially less Hormuz-captive than the headline figure suggests. <strong>23.6 percent</strong> of Chinese seaborne crude arrives via Russian ESPO from Kozmino on the Pacific coast, transiting no maritime chokepoint at all. A further 20.6 percent rounds the Cape of Good Hope and transits Lombok. The Hormuz-dependent share is <strong>44 percent</strong>, not 80 percent. See the <a href="/analysis/malacca-zombie">Malacca Zombie analysis</a> for the full routing breakdown.</div>
+ </div>
+</div>
+
+<p>These three cases, taken together, show what bilateral resolution adds. The tracker headline is -95 percent. The bilateral layer shows that Japan and South Korea are absorbing that disruption in proportion to structural dependencies of 90 and 75 percent respectively, while China, despite being the world's largest crude importer by volume, entered the closure with a structurally diversified supply base that limits its Hormuz exposure to <strong>roughly 44 percent</strong> of seaborne crude value.</p>
+
+<hr class="section-rule" />
+
+<h2>Commodity classes without diversion</h2>
+
+<p>Crude oil has at least a partial diversion story. VLCCs that would normally load inside the Gulf can, in principle, be substituted with Atlantic-basin, West African, and ESPO volumes, at a cost, over time, and with incomplete coverage. The substitution is slow, expensive, and structurally bounded by refinery configuration. But it exists.</p>
+
+<p>For two commodity classes, there is no diversion story at all.</p>
+
+<p><strong>Qatar LNG</strong> has no pipeline export alternative. Ras Laffan is inside the Persian Gulf. A laden LNG carrier must transit Hormuz or the cargo does not move. Qatar supplies approximately <strong>20 percent of global LNG trade</strong>. The tracker's -99 percent figure for LNG is not a measurement error. It reflects a commodity class where structural dependency and physical constraint are, in this case, the same thing.</p>
+
+<p><strong>Gulf fertilizer exports</strong> face a similar constraint. Saudi Arabia, UAE, and Qatar are among the world's largest exporters of urea, diammonium phosphate, and ammonia. Production is co-located with hydrocarbon feedstocks inside the Gulf. There is no alternative loading terminal. The -94 percent fertilizer figure carries a delayed agricultural consequence: crop cycles run 90 to 180 days behind the planting input supply chain, which means the full downstream impact of the February closure on food commodity markets is still propagating.</p>
+
+<hr class="section-rule" />
+
+<h2>Pre-computed versus observed</h2>
+
+<p>The CDM was built on 2022 base-year bilateral trade data. It was not calibrated to the February 2026 closure. The structural dependency scores it produced were computed before the event.</p>
+
+<p>The tracker data now available allows a direct comparison: <strong>did pre-computed structural Hormuz dependency predict the distribution of observed import disruption?</strong> The directional answer, from the importer cases above, is yes. Countries the CDM identified as highly Hormuz-captive are, five months in, showing the import disruption profile that structural dependency would predict. Countries the CDM identified as structurally diversified are absorbing the closure with measurably less disruption to total crude import volume.</p>
+
+<p>A full bilateral validation, comparing CDM-computed dependency scores against WTO tracker flow data at the importer-commodity level, is in preparation. The methodology and data will be published as a companion piece. The short version: the model held.</p>
+
+<hr class="section-rule" />
+
+<h2>What this means for accumulation underwriting</h2>
+
+<p>The TIDE model computed a Hormuz event horizon of <strong>$36.5 billion</strong>: the value of cargo at risk in the strait at seasonal peak accumulation, including the three-day approach window during which vessels are committed to the transit. That number is now a live figure, not a scenario.</p>
+
+<p>Five months of closure also illustrates the cascade dynamic the TIDE model captures. A Hormuz closure does not remain contained. It redirects available tonnage, distorts freight rates across adjacent corridors, and inflates accumulation at Cape of Good Hope, Lombok, and Suez as vessels seek alternatives. An underwriter with Suez war risk exposure who believes Hormuz is someone else's problem is carrying correlated exposure they may not have priced. The TIDE cascade ratio for a Suez closure driving Cape accumulation is <strong>1.71 times</strong>. The inverse dynamic, Hormuz closure inflating Cape and Lombok accumulation, is playing out now.</p>
+
+<p>The tracker tells you the strait is closed. The CDM tells you who is captive to it. The TIDE model tells you what the aggregate cargo exposure looks like and how it moves. Those are three distinct analytical layers, and the February 2026 closure is the first real-world event at scale that tests all three simultaneously.</p>
+
+<div class="callout-verdict">
+ <div class="callout-verdict-label">Validation status · July 2026</div>
+ <div class="callout-verdict-body">
+  Five months of live WTO / AXSMarine tracker data is consistent with CDM pre-computed structural dependency scores across crude oil, LNG, and fertilizer commodity classes. The bilateral validation paper is in preparation. If you work in marine accumulation underwriting and want an early look, <strong>get in touch</strong>.
+ </div>
+</div>
+
+<hr class="section-rule" />
+
+<p style="font-size:12px; color:var(--text-tertiary); font-style:italic; line-height:1.7;">
+ CDM structural dependency figures derived from HS 2709 bilateral crude trade data, 2022 base year, Comtrade. Importer dependency percentages are approximations pending full bilateral validation publication. WTO / AXSMarine tracker figures as of July 2026. TIDE event horizon and cascade ratio from Narrows accumulation model v1.0. AIS-dark fleet caveat per WTO tracker methodology note.
+</p>
+
+</ArticleLayout>

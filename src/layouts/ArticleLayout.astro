@@ -37,12 +37,34 @@ const {
   author = 'Narrows Research',
   ogImage,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const articleSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "author": {
+    "@type": "Organization",
+    "name": author || "Narrows Research",
+    "url": "https://narrows.io"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Narrows",
+    "url": "https://narrows.io"
+  },
+  "datePublished": publishDate,
+  "url": canonicalURL.toString()
+});
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <BaseHead title={`Narrows — ${title}`} description={description} ogImage={ogImage} />
+  <!-- Schema: Article -->
+  <script type="application/ld+json" set:html={articleSchema} />
   <style>
     /* Article-specific overrides */
     body { font-size: 15px; }
