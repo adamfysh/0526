@@ -1021,29 +1021,7 @@ const BIL = {
    PORT RISK INDEX
    PRI scores /10. Source: Narrows PRI model (illustrative).
 ═══════════════════════════════ */
-const PORT_RISK = {
-  'Djibouti':    { pri:5.8, jwc:true,  note:'Gulf of Aden approach. Primary bunker stop for Cape-diverting vessels. JWC Listed Area (Gulf of Aden / Yemen coast).' },
-  'Aden':        { pri:7.9, jwc:true,  note:'JWC Listed Area. Yemen coast. High political violence risk.' },
-  'Hudaydah':    { pri:8.4, jwc:true,  note:'Houthi-controlled port. Active conflict zone.' },
-  'Fujairah':    { pri:2.8, jwc:true,  note:'Gulf of Oman. Proximity to Hormuz JWC Listed Area. Drone attack history (2021).' },
-  'Ras Tanura':  { pri:3.5, jwc:true,  note:'Saudi Arabia. Persian Gulf JWC Listed Area. Primary Saudi crude export terminal.' },
-  'Shuaiba':     { pri:3.9, jwc:true,  note:'Kuwait. Persian Gulf JWC Listed Area.' },
-  'Port Sudan':  { pri:7.2, jwc:true,  note:'Red Sea. Active conflict in Sudanese interior. JWC adjacent.' },
-  'Singapore':   { pri:1.4, jwc:false, note:'Major bunkering hub. Stable.' },
-  'Colombo':     { pri:2.2, jwc:false, note:'Sri Lanka. Post-2022 crisis recovery. Standard risk.' },
-  'Port Said':   { pri:2.5, jwc:false, note:'Suez Canal northern approach. Egyptian political risk (moderate).' },
-  'Port Klang':  { pri:1.9, jwc:false, note:'Malaysia. Standard risk.' },
-  'Durban':      { pri:2.1, jwc:false, note:'South Africa. Cape diversion route bunker stop.' },
-  'Las Palmas':  { pri:0.9, jwc:false, note:'Canary Islands. Atlantic transit hub. Low risk.' },
-  'Gibraltar':   { pri:1.0, jwc:false, note:'Mediterranean approach. Low risk.' },
-  'Rotterdam':   { pri:0.7, jwc:false, note:'North Sea hub. Low risk.' },
-  'Balboa':      { pri:1.6, jwc:false, note:'Panama Canal Pacific approach.' },
-  'Colon':       { pri:1.5, jwc:false, note:'Panama Canal Atlantic approach.' },
-  'Istanbul':    { pri:2.4, jwc:false, note:'Bosphorus. Elevated risk if Black Sea conflict escalates.' },
-  'Odessa':      { pri:8.1, jwc:true,  note:'Ukraine. Active war zone. Black Sea risk.' },
-  'Novorossiysk':{ pri:5.9, jwc:true,  note:'Russia. Black Sea. Sanctions exposure.' },
-  'Salalah':     { pri:3.2, jwc:true,  note:'Oman. Gulf of Aden adjacency. Elevated given Houthi range.' },
-};
+let PORT_RISK = {};
 function priRisk(score){ return score>=6?'high':score>=3?'med':'low'; }
 function priChip(portName){
   const p=PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
@@ -1052,18 +1030,8 @@ function priChip(portName){
   return `<span class="port-risk ${cls}" title="${p.note}">${portName} · ${label}</span>`;
 }
 
-// Corridor exposure weights: sourced from NARROWS-RATES.js.
-// Edit weights in NARROWS-RATES.js; this reference updates automatically.
-const RATES = (window.NARROWS_RATES && window.NARROWS_RATES.corridorWeights) || {
-  vlcc:       {hormuz:.65,bab_el_mandeb:.30,malacca:.38,panama:.05,suez:.08,lombok:.12,bosphorus:.03,danish_straits:.02},
-  suezmax:    {hormuz:.50,bab_el_mandeb:.27,malacca:.33,panama:.05,suez:.25,lombok:.10,bosphorus:.15,danish_straits:.05},
-  aframax:    {hormuz:.45,bab_el_mandeb:.25,malacca:.37,panama:.04,suez:.20,lombok:.15,bosphorus:.22,danish_straits:.08},
-  lng:        {hormuz:.35,bab_el_mandeb:.22,malacca:.22,panama:.28,suez:.15,lombok:.08,bosphorus:.12,danish_straits:.18},
-  lpg:        {hormuz:.40,bab_el_mandeb:.24,malacca:.26,panama:.22,suez:.18,lombok:.10,bosphorus:.14,danish_straits:.12},
-  neopanamax: {hormuz:.06,bab_el_mandeb:.09,malacca:.13,panama:.12,suez:.20,lombok:.04,bosphorus:.06,danish_straits:.08},
-  capesize:   {hormuz:.06,bab_el_mandeb:.07,malacca:.22,panama:.03,suez:.05,lombok:.18,bosphorus:.04,danish_straits:.03},
-  handymax:   {hormuz:.08,bab_el_mandeb:.10,malacca:.14,panama:.38,suez:.12,lombok:.06,bosphorus:.18,danish_straits:.10}
-};
+// Corridor weights loaded from protected endpoint at init — see narrows-weights-api Worker.
+let RATES = {vlcc:{},suezmax:{},aframax:{},lng:{},lpg:{},neopanamax:{},capesize:{},handymax:{}};
 
 /* ═══════════════════════════════
    ILLUSTRATIVE VESSEL FLEET
@@ -1964,8 +1932,23 @@ function submitAccess(e){
 /* ═══════════════════════════════
    INIT
 ═══════════════════════════════ */
-renderAll();
-renderTIDE();
+(async function init() {
+  const CAPE_ENDPOINT = 'https://api.narrows.io/weights';
+  const CAPE_TOKEN    = 'REPLACE_WITH_TOKEN';
+  try {
+    const r = await fetch(CAPE_ENDPOINT, {
+      headers: { 'Authorization': 'Bearer ' + CAPE_TOKEN }
+    });
+    if (!r.ok) throw new Error('weights endpoint returned ' + r.status);
+    const d = await r.json();
+    RATES     = d.rates;
+    PORT_RISK = d.portRisk;
+  } catch (e) {
+    console.warn('[Narrows] Weights endpoint unreachable — VaR display degraded:', e.message);
+  }
+  renderAll();
+  renderTIDE();
+})();
 </script>
 </body>
 </html>
