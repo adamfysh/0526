@@ -1933,8 +1933,8 @@ function submitAccess(e){
    INIT
 ═══════════════════════════════ */
 (async function init() {
-  const CAPE_ENDPOINT = 'https://api.narrows.io/weights';
-  const CAPE_TOKEN    = 'REPLACE_WITH_TOKEN';
+  const CAPE_ENDPOINT = 'https://narrows-weights-api.fysh.workers.dev';
+  const CAPE_TOKEN    = 'a2c184f13aa8f60a03f33075172f204b';
   try {
     const r = await fetch(CAPE_ENDPOINT, {
       headers: { 'Authorization': 'Bearer ' + CAPE_TOKEN }
