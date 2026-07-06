@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASCADE — Narrows | Fleet Exposure and Diversion Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#F4F7FB;--surface:#fff;--surface2:#EEF2F8;
+      --navy:#0A2540;--navy-mid:#0d304f;
+      --gold:#F0B429;
+      --text:#0A2540;--text-muted:#4A6078;--text-dim:#8FA5BB;
+      --border:#DDE4EF;--border-mid:#C0CEDF;--rule:1px solid #DDE4EF;
+      --red:#B91C1C;--red-soft:rgba(185,28,28,.09);
+      --amber:#92400E;--amber-soft:rgba(240,180,41,.12);
+      --green:#166534;--green-soft:rgba(22,101,52,.09);
+      --r:8px;
+    }
+    html{font-size:15px}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;min-height:100vh}
+
+    /* ── HEADER ── */
+    .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;border-bottom:3px solid var(--gold);background:var(--navy);position:sticky;top:0;z-index:100}
+    .hdr-left{display:flex;align-items:center;gap:12px}
+    .hdr-logo{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:rgba(255,255,255,.38);letter-spacing:.2em}
+    .hdr-sep{color:rgba(255,255,255,.18)}
+    .hdr-title{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:.12em}
+    .btn-sm{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;transition:all .15s}
+    .btn-sm:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* ── CHOKEPOINT TABS ── */
+    .cp-bar{background:var(--navy-mid);padding:0 32px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:0}
+    .cp-tab{display:flex;align-items:center;gap:7px;padding:13px 20px 13px 0;background:transparent;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.38);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;white-space:nowrap}
+    .cp-tab:hover{color:rgba(255,255,255,.7)}
+    .cp-tab.active{color:#fff;border-bottom-color:var(--gold)}
+    .cp-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 5px;border-radius:3px;text-transform:uppercase}
+    .cp-badge.jwc1{background:rgba(185,28,28,.25);color:#fca5a5}
+    .cp-badge.jwc3{background:rgba(240,180,41,.22);color:var(--gold)}
+    .cp-badge.t2{background:rgba(21,101,168,.22);color:#93c5fd}
+    .cp-div{width:1px;background:rgba(255,255,255,.08);height:26px;margin:0 4px}
+
+    /* ── CONTEXT BAR ── */
+    .ctx-bar{background:var(--navy);padding:10px 32px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .ctx-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .ctx-name{font-family:'Instrument Serif',serif;font-style:italic;font-size:19px;color:#fff}
+    .ctx-region{font-size:11px;color:rgba(255,255,255,.35);font-family:'DM Mono',monospace}
+    .ctx-dot{color:rgba(255,255,255,.15)}
+    .ctx-threat{font-size:12px;color:rgba(255,255,255,.48);flex:1;min-width:180px}
+    .ctx-pill{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+    .ctx-pill.listed{background:rgba(185,28,28,.22);color:#fca5a5}
+    .ctx-pill.not{background:rgba(21,101,168,.18);color:#93c5fd}
+
+    /* ── EXPOSURE STRIP ── */
+    .exp-strip{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.05);padding:16px 32px}
+    .exp-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.1fr repeat(3,1fr) 1fr auto;gap:0;align-items:stretch}
+    .exp-cell{padding:0 20px 0 0;border-right:1px solid rgba(255,255,255,.07)}
+    .exp-cell:nth-last-child(2){border-right:none}
+    .exp-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;margin-bottom:2px}
+    .exp-v{font-family:'DM Mono',monospace;font-size:26px;font-weight:500;line-height:1;transition:color .3s}
+    .exp-sub{font-size:10px;color:rgba(255,255,255,.28);margin-top:3px;font-family:'DM Mono',monospace}
+    .c-total{color:var(--gold)}
+    .c-locked{color:#fca5a5}
+    .c-window{color:#fcd34d}
+    .c-pre{color:#86efac}
+    .c-crew{color:#c4b5fd}
+    .exp-action{padding-left:20px;display:flex;flex-direction:column;justify-content:center;gap:5px}
+    .btn-cascade{background:var(--gold);color:var(--navy);border:none;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-family:'DM Mono',monospace;cursor:pointer;transition:all .18s;white-space:nowrap}
+    .btn-cascade:hover{background:#e5aa20;box-shadow:0 3px 10px rgba(240,180,41,.35)}
+    .btn-cascade:disabled{background:rgba(240,180,41,.2);color:rgba(10,37,64,.4);cursor:default;box-shadow:none}
+    .cascade-status{font-size:10px;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;text-align:center}
+
+    /* ── BANNER ── */
+    .banner{display:none;background:linear-gradient(90deg,var(--navy),var(--navy-mid));border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:14px 32px;text-align:center}
+    .banner.show{display:block}
+    .banner-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:24px;color:var(--gold);margin-bottom:2px}
+    .banner-sub{font-size:12px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace}
+
+    /* ── ROUTE SUMMARY ── */
+    .route-wrap{display:none;max-width:1300px;margin:0 auto;padding:0 32px 18px}
+    .route-wrap.show{display:block}
+    .route-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .rcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+    .rcard-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);font-family:'DM Mono',monospace;margin-bottom:5px}
+    .rcard-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--navy)}
+    .rcard-delta{font-size:12px;font-family:'DM Mono',monospace;margin-top:3px}
+    .d-down{color:var(--green)}.d-up{color:#b45309}.d-amber{color:var(--amber)}
+    .rcard-note{font-size:11px;color:var(--text-muted);margin-top:7px;line-height:1.55}
+    .route-sub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+
+    /* ── MAIN ── */
+    .main{max-width:1300px;margin:0 auto;padding:22px 32px 56px}
+    .columns{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+
+    /* ── COLUMN HEADERS ── */
+    .col-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:2px}
+    .col-lbl.locked{color:var(--red)}.col-lbl.window{color:#b45309}.col-lbl.pre{color:var(--green)}.col-lbl.diverted{color:#0e7490}
+    .col-tot{font-family:'DM Mono',monospace;font-size:19px;font-weight:500;line-height:1;margin-bottom:3px}
+    .col-tot.locked{color:var(--red)}.col-tot.window{color:#b45309}.col-tot.pre{color:var(--green)}.col-tot.diverted{color:#0e7490}
+    .col-desc{font-size:11px;color:var(--text-muted);line-height:1.5;margin-bottom:10px}
+    .col-sep{border:none;border-top:2px solid;margin-bottom:10px}
+    .col-sep.locked{border-color:var(--red)}.col-sep.window{border-color:#b45309}.col-sep.pre{border-color:var(--green)}.col-sep.diverted{border-color:#0e7490}
+    .col-empty{font-size:11px;color:var(--text-dim);padding:14px 0;text-align:center;font-style:italic}
+
+    /* ── VESSEL CARDS ── */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 12px;margin-bottom:8px}
+    .card.uk{border-left:3px solid var(--gold)}
+    .card.locked-card{background:#f9fafb;opacity:.88}
+    .card.diverted-card{background:#f0fdff;border-color:#0e7490}
+
+    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:5px;margin-bottom:3px}
+    .card-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.25;flex:1}
+    .card.locked-card .card-name{color:var(--text-muted)}
+    .card-flag{font-size:18px;flex-shrink:0;line-height:1;margin-top:1px}
+
+    .card-meta{display:flex;align-items:center;gap:5px;margin-bottom:7px;flex-wrap:wrap}
+    .card-cls{font-size:10px;color:var(--text-muted);font-family:'DM Mono',monospace}
+    .card-dot{color:var(--border-mid);font-size:10px}
+    .card-cargo{font-size:10px;font-weight:600;padding:1px 5px;border-radius:2px;font-family:'DM Mono',monospace}
+    .cc-crude{background:#fef3c7;color:#92400E}.cc-lng{background:#ede9fe;color:#5B21B6}
+    .cc-container{background:#dbeafe;color:#1e40af}.cc-bulk{background:#f0fdf4;color:#166534}
+    .cc-products{background:#fce7f3;color:#9d174d}
+    .cii{font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px;font-family:'DM Mono',monospace;letter-spacing:.04em}
+    .cii-a{background:#dcfce7;color:#166534}.cii-b{background:#dbeafe;color:#1e40af}
+    .cii-c{background:#fef3c7;color:#92400E}.cii-d{background:#fed7aa;color:#9a3412}
+    .cii-e{background:#fee2e2;color:#991b1b}
+
+    .card-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+    .card-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:600}
+    .card-val.locked{color:var(--red)}.card-val.window{color:#b45309}
+    .card-val.pre{color:var(--green)}.card-val.diverted{color:#0e7490}
+    .card-crew{font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace}
+    .card-crew.uk-crew{color:#b45309;font-weight:600}
+
+    .card-note{font-size:10px;color:var(--text-dim);line-height:1.45;margin-top:2px}
+
+    /* Window urgency bar */
+    .window-bar{display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding-top:6px;border-top:var(--rule)}
+    .window-close-lbl{font-size:10px;color:#b45309;font-family:'DM Mono',monospace;font-weight:600}
+    .window-track{flex:1;height:3px;background:var(--surface2);border-radius:2px;margin:0 8px;overflow:hidden}
+    .window-fill{height:100%;border-radius:2px;background:#fcd34d}
+
+    /* Committed footer (locked cards) */
+    .committed-footer{margin-top:7px;padding-top:6px;border-top:var(--rule);font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace;text-align:center;letter-spacing:.05em;text-transform:uppercase}
+
+    /* Alt route detail (diverted cards) */
+    .alt-route{margin-top:7px;padding-top:6px;border-top:var(--rule)}
+    .alt-route-row{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+    .alt-route-name{font-size:11px;font-weight:600;color:#0e7490}
+    .alt-route-days{font-size:10px;font-family:'DM Mono',monospace;color:var(--text-muted)}
+    .alt-route-cost{font-size:10px;font-family:'DM Mono',monospace;color:#b45309}
+    .alt-cps{font-size:10px;color:var(--text-dim);margin-top:2px}
+    .cii-warn{font-size:10px;color:#991b1b;font-weight:600;margin-top:3px;background:#fee2e2;border-radius:3px;padding:2px 6px;display:inline-block}
+
+    /* Buttons */
+    .btn-divert-pre{width:100%;margin-top:7px;background:transparent;border:1px solid var(--green);border-radius:4px;color:var(--green);padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;transition:all .14s}
+    .btn-divert-pre:hover{background:var(--green);color:#fff}
+    .btn-divert-win{width:100%;margin-top:7px;background:transparent;border:1px solid #b45309;border-radius:4px;color:#b45309;padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;transition:all .14s}
+    .btn-divert-win:hover{background:#b45309;color:#fff}
+
+    .footnote{font-size:11px;color:var(--text-dim);text-align:center;padding:18px 32px 0;border-top:var(--rule);margin-top:14px}
+    @media(max-width:960px){.columns{grid-template-columns:1fr 1fr}.exp-inner{grid-template-columns:repeat(2,1fr);gap:12px}.route-grid,.route-sub-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-left">
+    <span class="hdr-logo">NARROWS</span>
+    <span class="hdr-sep">/</span>
+    <span class="hdr-title">CASCADE</span>
+  </div>
+  <button class="btn-sm" onclick="resetScenario()">Reset</button>
+</header>
+
+<nav class="cp-bar" id="cpBar"></nav>
+
+<div class="ctx-bar">
+  <div class="ctx-inner">
+    <span class="ctx-name" id="ctxName"></span>
+    <span class="ctx-dot">·</span>
+    <span class="ctx-region" id="ctxRegion"></span>
+    <span class="ctx-dot">·</span>
+    <span class="ctx-threat" id="ctxThreat"></span>
+    <span class="ctx-pill" id="ctxJwc"></span>
+  </div>
+</div>
+
+<div class="exp-strip">
+  <div class="exp-inner">
+    <div class="exp-cell">
+      <div class="exp-lbl">Total exposure</div>
+      <div class="exp-v c-total" id="expTotal">--</div>
+      <div class="exp-sub" id="expTotalSub">--</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">Locked</div>
+      <div class="exp-v c-locked" id="expLocked">--</div>
+      <div class="exp-sub" id="expLockedSub">--</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">In-window</div>
+      <div class="exp-v c-window" id="expWindow">--</div>
+      <div class="exp-sub" id="expWindowSub">--</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">Pre-commitment</div>
+      <div class="exp-v c-pre" id="expPre">--</div>
+      <div class="exp-sub" id="expPreSub">--</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">Seafarers exposed</div>
+      <div class="exp-v c-crew" id="expCrew">--</div>
+      <div class="exp-sub" id="expCrewSub">--</div>
+    </div>
+    <div class="exp-action">
+      <button class="btn-cascade" id="btnCascade" onclick="executeCascade()">Execute cascade &rarr;</button>
+      <div class="cascade-status" id="cascadeStatus">Divert all pre-commitment</div>
+    </div>
+  </div>
+</div>
+
+<div class="banner" id="banner">
+  <div class="banner-title">Cascade executed.</div>
+  <div class="banner-sub" id="bannerSub"></div>
+</div>
+
+<div class="route-wrap" id="routeWrap">
+  <div class="route-grid" id="routeGrid"></div>
+</div>
+
+<div class="main">
+  <div class="columns">
+    <div>
+      <div class="col-lbl locked">Locked</div>
+      <div class="col-tot locked" id="colLockedTot">--</div>
+      <div class="col-desc">Loaded and transiting. Bills of lading issued. Physically committed — no diversion window.</div>
+      <hr class="col-sep locked">
+      <div id="colLocked"></div>
+    </div>
+    <div>
+      <div class="col-lbl window">In-window</div>
+      <div class="col-tot window" id="colWindowTot">--</div>
+      <div class="col-desc">Approaching the strait. Diversion possible but costly — each vessel tracks its own closing window.</div>
+      <hr class="col-sep window">
+      <div id="colWindow"></div>
+      <div class="col-empty" id="colWindowEmpty" style="display:none">All diverted or committed</div>
+    </div>
+    <div>
+      <div class="col-lbl pre">Pre-commitment</div>
+      <div class="col-tot pre" id="colPreTot">--</div>
+      <div class="col-desc">Liftings not yet loaded. Full optionality — zero diversion cost.</div>
+      <hr class="col-sep pre">
+      <div id="colPre"></div>
+      <div class="col-empty" id="colPreEmpty" style="display:none">All diverted</div>
+    </div>
+    <div>
+      <div class="col-lbl diverted">Diverted</div>
+      <div class="col-tot diverted" id="colDivertedTot">$0</div>
+      <div class="col-desc">Out of chokepoint risk window. Route detail and CII impact shown per vessel.</div>
+      <hr class="col-sep diverted">
+      <div id="colDiverted"></div>
+      <div class="col-empty" id="colDivertedEmpty">No vessels diverted yet</div>
+    </div>
+  </div>
+  <div class="footnote">
+    Illustrative fleet dataset. Values: cargo at risk (USD). Decision windows based on simulated proximity. CII ratings per IMO MARPOL Annex VI Reg.28. Narrows CDM methodology &copy; 2026
+  </div>
+</div>
+
+<script>
+// ── ALT ROUTE LOOKUP ──────────────────────────────────────────────────────────
+// Returns {route, days, cost, newCps} per chokepoint + vessel class + window type
+function altRoute(cpId, cls, wt) {
+  if (cpId === 'hormuz') {
+    if (wt === 'pre')    return {route:'Atlantic / North Sea re-load',  days:0, cost:'Freight premium only',   newCps:[]};
+    if (wt === 'window') return {route:'Decline inbound transit',        days:0, cost:'+$0.9M freight premium', newCps:[]};
+  }
+  if (cpId === 'bab') {
+    if (wt === 'pre') return {route:'Cape of Good Hope',           days:14,   cost:'+$2.1M bunker',        newCps:[]};
+    return               {route:'Cape of Good Hope',               days:16,   cost:'+$2.4M bunker',        newCps:[]};
+  }
+  // malacca — route depends on vessel class
+  if (cls === 'VLCC' || cls === 'LNG')
+    return {route:'Lombok Strait', days:1.5, cost:'+$0.3M', newCps:['Lombok (T2 · not JWC)']};
+  if (cls === 'Container')
+    return {route:'Philippines passage', days:5, cost:'+$0.8M', newCps:[]};
+  // Suezmax, Aframax, Products
+  return   {route:'Sunda / Lombok', days:2, cost:'+$0.4M', newCps:['Lombok (T2 · not JWC)']};
+}
+
+// CII warning when diverting: Cape adds 14-16 days of extra fuel burn
+function ciiWarn(cii, days) {
+  if (days < 3) return null; // Lombok/Sunda: minimal impact
+  if (cii === 'E') return 'CII E: non-compliant — additional transit worsens port-state exposure';
+  if (cii === 'D') return 'CII D: below threshold — Cape diversion deepens rating pressure';
+  return null;
+}
+
+// ── FLEET DATA ────────────────────────────────────────────────────────────────
+// Fields: id, name, cls, val($M), flag, crew, ukNat, cargo, cii, note
+// In-window only: window_h (hours remaining)
+
+const FLEETS = {
+
+hormuz:{
+  name:'Strait of Hormuz', short:'Hormuz',
+  region:'Persian Gulf / Gulf of Oman',
+  jwc:true, jwcLabel:'JWC Listed — T1',
+  threat:'21M bbl/day. Mandatory exit for all Persian Gulf crude and LNG. Iran interdiction capability. No alternative route for Gulf-loaded vessels.',
+  residualNote:'Locked and remaining in-window vessels stay on standard route. UKMTO Dubai is the reporting authority for vessels in the area.',
+  locked:[
+    {id:'h01',name:'NAIROBI PEARL',  cls:'VLCC',   val:125,flag:'LR',crew:26,ukNat:0,cargo:'Crude',  cii:'B', note:'Loaded at Ras Tanura. Mid-Strait transit. No option.'},
+    {id:'h02',name:'GULF HERCULES',  cls:'VLCC',   val:118,flag:'MH',crew:24,ukNat:0,cargo:'Crude',  cii:'C', note:'Laden inside Gulf. Hormuz transit in 4 days. Cargo documents issued.'},
+    {id:'h03',name:'ARABIAN STAR',   cls:'Suezmax',val:78, flag:'PA',crew:22,ukNat:1,cargo:'Crude',  cii:'C', note:'Gulf of Aden. Bab el-Mandeb passage in 36h.'},
+    {id:'h04',name:'HORMUZ VOYAGER', cls:'Aframax',val:62, flag:'GB',crew:18,ukNat:5,cargo:'Crude',  cii:'D', note:'Oman anchorage. Awaiting convoy slot. Loaded.'},
+    {id:'h05',name:'EASTERN LIGHT',  cls:'Suezmax',val:75, flag:'MT',crew:20,ukNat:1,cargo:'Crude',  cii:'C', note:'Loading Ras Tanura. Departure imminent.'},
+    {id:'h06',name:'GULF NAVIGATOR', cls:'VLCC',   val:122,flag:'LR',crew:25,ukNat:0,cargo:'Crude',  cii:'B', note:'Arabian Sea. Cargo documents issued.'},
+    {id:'h07',name:'BASRA LEGACY',   cls:'Aframax',val:68, flag:'BS',crew:19,ukNat:2,cargo:'Crude',  cii:'D', note:'Indian Ocean. Bills of lading signed at Basra.'},
+    {id:'h08',name:'FALCON UNITY',   cls:'Suezmax',val:80, flag:'CY',crew:21,ukNat:1,cargo:'Crude',  cii:'D', note:'Arabian Sea. Charterer nomination confirmed.'},
+    {id:'h09',name:'MARIB SPIRIT',   cls:'Aframax',val:72, flag:'MH',crew:18,ukNat:0,cargo:'LNG',   cii:'A', note:'Loading Jubail. Departure 6h. Physically locked.'},
+  ],
+  in_window:[
+    {id:'h10',name:'DAWN PIONEER',   cls:'VLCC',   val:110,flag:'LR',crew:26,ukNat:1,cargo:'Crude',  cii:'C', window_h:68, note:'Fujairah approach. Window closes at 0600Z.'},
+    {id:'h11',name:'TIGRIS PRIDE',   cls:'Suezmax',val:82, flag:'GB',crew:22,ukNat:6,cargo:'Crude',  cii:'D', window_h:48, note:'Persian Gulf approach. Berth confirmation pending.'},
+    {id:'h12',name:'DESERT WIND',    cls:'VLCC',   val:115,flag:'PA',crew:25,ukNat:0,cargo:'Crude',  cii:'B', window_h:72, note:'Gulf of Oman, 200nm south of Hormuz. Ras Tanura loading T+3. Declining inbound transit — Atlantic cargo fixture viable.'},
+    {id:'h13',name:'ORYX CARRIER',   cls:'Aframax',val:65, flag:'MT',crew:19,ukNat:2,cargo:'Crude',  cii:'D', window_h:24, note:'Bunkering Fujairah. In JWC Listed Area. Urgent.'},
+    {id:'h14',name:'ZAGROS LIGHT',   cls:'Suezmax',val:88, flag:'MH',crew:21,ukNat:0,cargo:'Crude',  cii:'C', window_h:36, note:'Gulf of Oman. Kharg Island loading fixture T+3. Can decline inbound Hormuz transit before crossing.'},
+    {id:'h15',name:'RUWAIS SPIRIT',  cls:'Aframax',val:70, flag:'BS',crew:18,ukNat:1,cargo:'LNG',   cii:'B', window_h:60, note:'Bunkering Fujairah. Inbound loading fixture at Ruwais T+2. Can decline transit and redirect cargo.'},
+    {id:'h16',name:'GULF CONDOR',    cls:'Suezmax',val:77, flag:'LR',crew:22,ukNat:0,cargo:'Crude',  cii:'E', window_h:18, note:'Strait approach. Final window — divert or transit.'},
+  ],
+  pre:[
+    {id:'h17',name:'AURORA RESOLVE', cls:'VLCC',   val:128,flag:'MH',crew:25,ukNat:0,cargo:'Crude',  cii:'A', note:'Liftings confirmed. Vessel not nominated. Zero diversion cost.'},
+    {id:'h18',name:'CASPIAN DAWN',   cls:'VLCC',   val:122,flag:'LR',crew:26,ukNat:1,cargo:'Crude',  cii:'B', note:'Charter fixture not yet signed. Full optionality.'},
+    {id:'h19',name:'TETHYS CROWN',   cls:'Suezmax',val:96, flag:'GB',crew:22,ukNat:7,cargo:'Crude',  cii:'C', note:'Contract signed. Loading T-21. Redirect to Atlantic.'},
+    {id:'h20',name:'OLYMPIA STAR',   cls:'Suezmax',val:92, flag:'MT',crew:20,ukNat:2,cargo:'Crude',  cii:'D', note:'Loading T-22. West Africa substitution viable.'},
+    {id:'h21',name:'NORTHERN LIGHT', cls:'Aframax',val:78, flag:'PA',crew:18,ukNat:0,cargo:'Crude',  cii:'D', note:'Liftings in negotiation. No commitment made.'},
+    {id:'h22',name:'MERIDIAN ACE',   cls:'Aframax',val:74, flag:'BS',crew:19,ukNat:1,cargo:'Crude',  cii:'E', note:'Liftings in negotiation. Counterparty not yet notified.'},
+    {id:'h23',name:'SOLENT PASSAGE', cls:'VLCC',   val:112,flag:'GB',crew:26,ukNat:9,cargo:'LNG',   cii:'A', note:'Loading programme T-24. Redirect to North Sea or US Gulf.'},
+  ],
+},
+
+bab:{
+  name:'Bab el-Mandeb', short:'Bab el-Mandeb',
+  region:'Red Sea / Gulf of Aden',
+  jwc:true, jwcLabel:'JWC Listed — T3',
+  threat:'Active Houthi anti-ship campaign. 40+ vessel attacks since Oct 2023. MSC, BP, and Maersk have suspended Red Sea routing. JWC war risk premiums elevated.',
+  residualNote:'In-window vessels approaching Red Sea. Active Houthi threat at this range. UKMTO Dubai advisory in effect. Naval escort requests can be made via UKMTO.',
+  locked:[
+    {id:'b01',name:'ADEN RESOLVE',    cls:'Suezmax',  val:88, flag:'LR',crew:22,ukNat:0,cargo:'Crude',    cii:'C', note:'Gulf of Aden. Bab passage in 18h. No option.'},
+    {id:'b02',name:'MEDSTAR PELICAN', cls:'Container', val:105,flag:'PA',crew:21,ukNat:1,cargo:'Container',cii:'B', note:'Red Sea transit. MSC feeder. Committed to Suez slot.'},
+    {id:'b03',name:'RED SEA LADY',    cls:'LNG',       val:118,flag:'BS',crew:32,ukNat:3,cargo:'LNG',      cii:'A', note:'Laden. Escorted segment ends at Bab. Proceeding.'},
+    {id:'b04',name:'ATLAS VENTURE',   cls:'Container', val:92, flag:'PA',crew:21,ukNat:2,cargo:'Container',cii:'C', note:'North-bound. Suez Canal booking confirmed.'},
+    {id:'b05',name:'AQABA PRIDE',     cls:'Aframax',   val:58, flag:'MT',crew:18,ukNat:1,cargo:'Products', cii:'D', note:'Products tanker. Loaded at Yanbu. Bab approach.'},
+    {id:'b06',name:'GULF BRIDGE',     cls:'Suezmax',   val:80, flag:'LR',crew:21,ukNat:0,cargo:'Crude',    cii:'C', note:'Arabian Sea. Bills of lading issued at Jubail.'},
+    {id:'b07',name:'DJIBOUTI STAR',   cls:'Aframax',   val:62, flag:'CY',crew:18,ukNat:0,cargo:'Crude',    cii:'D', note:'Bunkering Djibouti. In JWC Listed Area.'},
+    {id:'b08',name:'ERITREA STAR',    cls:'Bulk',      val:44, flag:'MH',crew:20,ukNat:0,cargo:'Bulk',     cii:'E', note:'Grain cargo, Egypt-bound. Indian Ocean northbound. Gulf of Aden — Bab passage in 6h. No option.'},
+  ],
+  in_window:[
+    {id:'b09',name:'LEVIATHAN',       cls:'LNG',       val:125,flag:'MH',crew:30,ukNat:2,cargo:'LNG',      cii:'A', window_h:70, note:'Gulf of Aden approach. UKMTO advisory flagged.'},
+    {id:'b10',name:'CAIRO TRADER',    cls:'Container', val:88, flag:'PA',crew:22,ukNat:1,cargo:'Container',cii:'B', window_h:52, note:'Indian Ocean. Suez or Cape decision required by 0600Z.'},
+    {id:'b11',name:'ALBANY EXPRESS',  cls:'Container', val:102,flag:'GB',crew:21,ukNat:8,cargo:'Container',cii:'C', window_h:40, note:'UK-flagged. Cape route option open. Window closing.'},
+    {id:'b12',name:'GULF ALBATROSS',  cls:'Suezmax',   val:78, flag:'LR',crew:21,ukNat:0,cargo:'Crude',    cii:'D', window_h:28, note:'Arabian Sea. Red Sea vs Cape: 17-day premium.'},
+    {id:'b13',name:'SOMALI BASIN',    cls:'Aframax',   val:64, flag:'BS',crew:19,ukNat:0,cargo:'Crude',    cii:'C', window_h:48, note:'Indian Ocean. Cape diversion requires charterer approval.'},
+    {id:'b14',name:'ERITREA VOYAGER', cls:'Bulk',      val:48, flag:'MT',crew:20,ukNat:0,cargo:'Bulk',     cii:'E', window_h:22, note:'Coal cargo, Rotterdam-bound. Indian Ocean northbound, approaching Gulf of Aden. Cape alternative adds 16 days.'},
+  ],
+  pre:[
+    {id:'b15',name:'HORIZON SPIRIT',  cls:'LNG',       val:132,flag:'GB',crew:32,ukNat:9,cargo:'LNG',      cii:'A', note:'UK-flagged LNG. Loading T-18. Cape route preferred.'},
+    {id:'b16',name:'NILE EXPLORER',   cls:'Container', val:96, flag:'PA',crew:22,ukNat:0,cargo:'Container',cii:'B', note:'Box ship. T-20 loading. Cape diversion at zero premium.'},
+    {id:'b17',name:'ADEN CROWN',      cls:'Suezmax',   val:88, flag:'LR',crew:22,ukNat:0,cargo:'Crude',    cii:'C', note:'Crude. Loading T-21. Redirect to Cape without penalty.'},
+    {id:'b18',name:'MED ACE',         cls:'Container', val:82, flag:'MT',crew:21,ukNat:2,cargo:'Container',cii:'C', note:'Feeder. T-22. Cape route if instructed.'},
+    {id:'b19',name:'TETHYS VOYAGER',  cls:'Aframax',   val:66, flag:'BS',crew:19,ukNat:1,cargo:'Crude',    cii:'D', note:'Crude. Liftings in negotiation.'},
+    {id:'b20',name:'COMPASS ROSE',    cls:'LNG',       val:120,flag:'GB',crew:30,ukNat:10,cargo:'LNG',     cii:'A', note:'UK-flagged LNG carrier. Charter not yet signed.'},
+  ],
+},
+
+malacca:{
+  name:'Strait of Malacca', short:'Malacca',
+  region:'Southeast Asia / Indian Ocean',
+  jwc:false, jwcLabel:'Not JWC Listed',
+  threat:'World\'s busiest strait. 90,000 vessels/year. Narrows to 2.5nm at Phillips Channel. VLCCs already use Lombok at full draught. Residual piracy risk in Singapore Strait approaches.',
+  residualNote:'In-window vessels approaching the Malacca/Singapore approach zone. Lombok diversion remains available for tankers. MSSP/ReCAAP coordination required for strait closure.',
+  locked:[
+    {id:'m01',name:'EASTBOUND PIONEER',cls:'Container',val:152,flag:'PA',crew:22,ukNat:1,cargo:'Container',cii:'B', note:'Mega-box ship. Malacca transit booked. Fully committed.'},
+    {id:'m02',name:'STRAIT GLORY',     cls:'Suezmax', val:90, flag:'LR',crew:22,ukNat:0,cargo:'Crude',    cii:'C', note:'Crude tanker. Laden, Singapore-bound. Draft within Malacca limits.'},
+    {id:'m03',name:'PACIFIC ENTERPRISE',cls:'LNG',    val:128,flag:'BS',crew:30,ukNat:2,cargo:'LNG',      cii:'A', note:'LNG carrier. Japan delivery. Transit in 12h.'},
+    {id:'m04',name:'ASIA VOYAGER',     cls:'Container',val:102,flag:'MH',crew:20,ukNat:0,cargo:'Container',cii:'C', note:'Container feeder. Port Klang to Shanghai. No alternative port.'},
+    {id:'m05',name:'PENANG SPIRIT',    cls:'LNG',     val:122,flag:'GB',crew:31,ukNat:7,cargo:'LNG',      cii:'A', note:'UK-flagged LNG. Laden, Korea-bound. 8h to Malacca entry.'},
+    {id:'m06',name:'KUALA DAWN',       cls:'Suezmax', val:84, flag:'MT',crew:21,ukNat:0,cargo:'Crude',    cii:'D', note:'Crude. Singapore anchorage. Awaiting pilot.'},
+    {id:'m07',name:'MALACCA STAR',     cls:'Container',val:110,flag:'PA',crew:23,ukNat:1,cargo:'Container',cii:'B', note:'Container ship. Bills of lading issued.'},
+    {id:'m08',name:'JOHOR RESOLVE',    cls:'Aframax', val:70, flag:'LR',crew:19,ukNat:0,cargo:'Products', cii:'D', note:'Refined products. Jurong Island loading complete.'},
+    {id:'m09',name:'ANDAMAN LIGHT',    cls:'Aframax', val:65, flag:'MH',crew:18,ukNat:0,cargo:'Crude',    cii:'C', note:'Crude tanker. Bay of Bengal, inbound.'},
+  ],
+  in_window:[
+    {id:'m10',name:'INDO-PACIFIC',     cls:'Container',val:148,flag:'PA',crew:23,ukNat:2,cargo:'Container',cii:'B', window_h:70, note:'Large box ship. Bay of Bengal. 72h to Malacca approach.'},
+    {id:'m11',name:'LOMBOK WIND',      cls:'Suezmax', val:92, flag:'BS',crew:22,ukNat:0,cargo:'Crude',    cii:'C', window_h:50, note:'Crude. Indian Ocean. Can divert to Lombok at minimal cost.'},
+    {id:'m12',name:'SINGAPORE STAR',   cls:'LNG',     val:130,flag:'MH',crew:30,ukNat:1,cargo:'LNG',      cii:'A', window_h:60, note:'LNG carrier. Japan-bound. Lombok route viable.'},
+    {id:'m13',name:'CANTON BRIDGE',    cls:'Container',val:105,flag:'PA',crew:21,ukNat:0,cargo:'Container',cii:'C', window_h:36, note:'Container ship. Philippines reroute possible.'},
+    {id:'m14',name:'SUNDALAND',        cls:'Aframax', val:68, flag:'LR',crew:19,ukNat:1,cargo:'Products', cii:'D', window_h:24, note:'Products. Sunda Strait alternative feasible.'},
+    {id:'m15',name:'BANGKOK SPIRIT',   cls:'Container',val:92, flag:'MT',crew:20,ukNat:0,cargo:'Container',cii:'C', window_h:18, note:'Box ship. Andaman Sea. Decision window: 18h.'},
+    {id:'m16',name:'BORNEO DAWN',      cls:'Suezmax', val:80, flag:'CY',crew:21,ukNat:0,cargo:'Crude',    cii:'D', window_h:42, note:'Crude. Indian Ocean. Lombok adds 1.5 days.'},
+  ],
+  pre:[
+    {id:'m17',name:'APOLLO NAVIGATOR', cls:'Container',val:162,flag:'GB',crew:24,ukNat:10,cargo:'Container',cii:'B', note:'UK-flagged mega-box. Loading T-20. Philippines routing viable.'},
+    {id:'m18',name:'PEARL RIVER',      cls:'LNG',     val:138,flag:'LR',crew:31,ukNat:0,cargo:'LNG',      cii:'A', note:'LNG carrier. Loading T-22. Lombok route at zero premium.'},
+    {id:'m19',name:'EQUINOX STAR',     cls:'Container',val:122,flag:'PA',crew:22,ukNat:1,cargo:'Container',cii:'C', note:'Container. Loading T-21. Alternative port options open.'},
+    {id:'m20',name:'KALIMANTAN',       cls:'Suezmax', val:88, flag:'MH',crew:21,ukNat:0,cargo:'Crude',    cii:'D', note:'Crude. Liftings in negotiation. Lombok nomination viable.'},
+    {id:'m21',name:'FORMOSA SPIRIT',   cls:'LNG',     val:132,flag:'BS',crew:30,ukNat:2,cargo:'LNG',      cii:'B', note:'LNG carrier. Charter not yet signed.'},
+    {id:'m22',name:'JAVA SEA',         cls:'Aframax', val:72, flag:'MT',crew:19,ukNat:0,cargo:'Products', cii:'D', note:'Products. No commitment. Sunda Strait alternative ready.'},
+  ],
+},
+
+}; // end FLEETS
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let activeCp = 'hormuz';
+// Map: vessel id → { from:'pre'|'window', route: altRoute object }
+const diverted = new Map();
+let cascadeDone = false;
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+function fmt(m){ return m>=1000?'$'+(m/1000).toFixed(2)+'B':'$'+m+'M'; }
+function sum(arr){ return arr.reduce((s,v)=>s+v.val,0); }
+function sumCrew(arr){ return arr.reduce((s,v)=>s+v.crew,0); }
+function sumUk(arr){ return arr.reduce((s,v)=>s+v.ukNat,0); }
+function cargoCls(c){ return {Crude:'cc-crude',LNG:'cc-lng',Container:'cc-container',Bulk:'cc-bulk',Products:'cc-products'}[c]||'cc-crude'; }
+
+function animVal(id, target){
+  const el=document.getElementById(id);
+  let cur=parseFloat(el.textContent.replace(/[$BM,]/g,''));
+  if(el.textContent.includes('B'))cur*=1000;
+  if(isNaN(cur))cur=0;
+  const diff=target-cur;
+  if(Math.abs(diff)<1){el.textContent=fmt(target);return;}
+  const start=performance.now(),dur=500;
+  function step(t){
+    const p=Math.min((t-start)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=fmt(Math.round(cur+diff*e));
+    if(p<1)requestAnimationFrame(step);else el.textContent=fmt(target);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── BUILD TABS ────────────────────────────────────────────────────────────────
+function buildTabs(){
+  const defs=[
+    {id:'hormuz', label:'Hormuz',        badge:'JWC T1', bc:'jwc1'},
+    {id:'bab',    label:'Bab el-Mandeb', badge:'JWC T3', bc:'jwc3'},
+    {id:'malacca',label:'Malacca',       badge:'T2',     bc:'t2'},
+  ];
+  document.getElementById('cpBar').innerHTML=defs.map((d,i)=>
+    `<button class="cp-tab${d.id===activeCp?' active':''}" onclick="selectCp('${d.id}')">
+       <span class="cp-name">${d.label}</span>
+       <span class="cp-badge ${d.bc}">${d.badge}</span>
+     </button>${i<defs.length-1?'<div class="cp-div"></div>':''}`
+  ).join('');
+}
+
+function selectCp(id){
+  activeCp=id; diverted.clear(); cascadeDone=false;
+  document.getElementById('btnCascade').disabled=false;
+  document.getElementById('cascadeStatus').textContent='Divert all pre-commitment';
+  document.getElementById('banner').classList.remove('show');
+  document.getElementById('routeWrap').classList.remove('show');
+  buildTabs(); renderCtx(); renderAll();
+}
+
+// ── CONTEXT ───────────────────────────────────────────────────────────────────
+function renderCtx(){
+  const cp=FLEETS[activeCp];
+  document.getElementById('ctxName').textContent=cp.name;
+  document.getElementById('ctxRegion').textContent=cp.region;
+  document.getElementById('ctxThreat').textContent=cp.threat;
+  const pill=document.getElementById('ctxJwc');
+  pill.textContent=cp.jwcLabel;
+  pill.className='ctx-pill '+(cp.jwc?'listed':'not');
+}
+
+// ── MAKE CARD ─────────────────────────────────────────────────────────────────
+function flagEmoji(code){
+  return [...code.toUpperCase()].map(c=>String.fromCodePoint(0x1F1E6+c.charCodeAt(0)-65)).join('');
+}
+
+function makeCard(v, wt){
+  const div=diverted.has(v.id);
+  const isDiverted=div;
+  const t=isDiverted?'diverted':wt;
+  const ukBorder=v.flag==='GB'?' uk':'';
+  const lockedCls=wt==='locked'&&!isDiverted?' locked-card':'';
+  const divCls=isDiverted?' diverted-card':'';
+
+  let body='';
+
+  if(isDiverted){
+    const d=diverted.get(v.id);
+    const ar=d.route;
+    const warn=ciiWarn(v.cii, ar.days);
+    const cpTxt=ar.newCps.length?ar.newCps.join(' · '):'None';
+    body+=`<div class="alt-route">
+      <div class="alt-route-row">
+        <span class="alt-route-name">${ar.route}</span>
+        <span class="alt-route-days">${ar.days>0?'+'+ar.days+'d':''}</span>
+      </div>
+      <div class="alt-route-row">
+        <span class="alt-cps">New chokepoints: ${cpTxt}</span>
+        <span class="alt-route-cost">${ar.cost}</span>
+      </div>
+      ${warn?`<div class="cii-warn">${warn}</div>`:''}
+    </div>`;
+  } else if(wt==='locked'){
+    body=`<div class="committed-footer">No diversion window &middot; committed</div>`;
+  } else if(wt==='window'){
+    const maxH=72, pct=Math.round((v.window_h/maxH)*100);
+    const urgency=v.window_h<=24?'#ef4444':v.window_h<=48?'#f59e0b':'#86efac';
+    const ar=altRoute(activeCp,v.cls,'window');
+    body=`<div class="window-bar">
+      <span class="window-close-lbl">${v.window_h}h</span>
+      <div class="window-track"><div class="window-fill" style="width:${pct}%;background:${urgency}"></div></div>
+      <span style="font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace">${ar.days>0?'+'+ar.days+'d · ':''}${ar.cost}</span>
+    </div>
+    <button class="btn-divert-win" onclick="divertVessel('${v.id}','window')">Divert &rarr; ${ar.days>0?'+'+ar.days+'d · ':''}${ar.cost}</button>`;
+  } else if(wt==='pre'){
+    const arPre=altRoute(activeCp,v.cls,'pre');
+    body=`<button class="btn-divert-pre" onclick="divertVessel('${v.id}','pre')">Divert &rarr;${arPre.days>0?' +'+arPre.days+'d · ':' '}${arPre.cost}</button>`;
+  }
+
+  return `<div class="card${ukBorder}${lockedCls}${divCls}">
+    <div class="card-top">
+      <div class="card-name">${v.name}</div>
+      <span class="card-flag" title="${v.flag}">${flagEmoji(v.flag)}</span>
+    </div>
+    <div class="card-meta">
+      <span class="card-cls">${v.cls}</span>
+      <span class="card-dot">·</span>
+      <span class="card-cargo ${cargoCls(v.cargo)}">${v.cargo}</span>
+      <span class="card-dot">·</span>
+      <span class="cii cii-${v.cii.toLowerCase()}">CII ${v.cii}</span>
+    </div>
+    <div class="card-row">
+      <div class="card-val ${t}">${fmt(v.val)}</div>
+      <div class="card-crew${v.ukNat>0?' uk-crew':''}">${v.crew} crew${v.ukNat>0?' · '+v.ukNat+' UK':''}</div>
+    </div>
+    <div class="card-note">${v.note}</div>
+    ${body}
+  </div>`;
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────────────────────
+function renderAll(){
+  const cp=FLEETS[activeCp];
+  const winRemaining=cp.in_window.filter(v=>!diverted.has(v.id));
+  const preRemaining=cp.pre.filter(v=>!diverted.has(v.id));
+  const allDiverted=[...cp.in_window,...cp.pre].filter(v=>diverted.has(v.id));
+
+  document.getElementById('colLocked').innerHTML=cp.locked.map(v=>makeCard(v,'locked')).join('');
+  document.getElementById('colWindow').innerHTML=cp.in_window.map(v=>
+    diverted.has(v.id)?makeCard(v,'window'):'<div style="display:none">'+makeCard(v,'window')+'</div>'
+  ).join('')+cp.in_window.filter(v=>!diverted.has(v.id)).map(v=>makeCard(v,'window')).join('');
+  // Simpler: just show undiverted in-window in column, diverted go to diverted column
+  document.getElementById('colWindow').innerHTML=winRemaining.map(v=>makeCard(v,'window')).join('');
+  document.getElementById('colPre').innerHTML=preRemaining.map(v=>makeCard(v,'pre')).join('');
+  document.getElementById('colDiverted').innerHTML=allDiverted.map(v=>makeCard(v,diverted.get(v.id).from)).join('');
+
+  document.getElementById('colWindowEmpty').style.display=winRemaining.length===0?'block':'none';
+  document.getElementById('colPreEmpty').style.display=preRemaining.length===0?'block':'none';
+  document.getElementById('colDivertedEmpty').style.display=allDiverted.length===0?'block':'none';
+
+  const lockedV=sum(cp.locked);
+  const windowV=sum(winRemaining);
+  const preV=sum(preRemaining);
+  const divertedV=sum(allDiverted);
+  const totalV=lockedV+windowV+preV;
+
+  // Seafarers exposed = all crew on vessels still heading for the strait
+  const exposedCrew=sumCrew(cp.locked)+sumCrew(winRemaining)+sumCrew(preRemaining);
+  const exposedUk=sumUk(cp.locked)+sumUk(winRemaining)+sumUk(preRemaining);
+
+  animVal('expTotal',totalV);
+  document.getElementById('expTotalSub').textContent=(cp.locked.length+winRemaining.length+preRemaining.length)+' vessels';
+  document.getElementById('expLocked').textContent=fmt(lockedV);
+  document.getElementById('expLockedSub').textContent=cp.locked.length+' vessels · no option';
+  document.getElementById('expWindow').textContent=fmt(windowV);
+  document.getElementById('expWindowSub').textContent=winRemaining.length+' vessels · window open';
+  document.getElementById('expPre').textContent=fmt(preV);
+  document.getElementById('expPreSub').textContent=preRemaining.length+' vessels · free to move';
+  document.getElementById('expCrew').textContent=exposedCrew;
+  document.getElementById('expCrewSub').textContent=(exposedUk>0?exposedUk+' UK · ':'')+'on standard route';
+
+  document.getElementById('colLockedTot').textContent=fmt(lockedV);
+  document.getElementById('colWindowTot').textContent=fmt(windowV);
+  document.getElementById('colPreTot').textContent=fmt(preV);
+  document.getElementById('colDivertedTot').textContent=fmt(divertedV);
+
+  // Auto-detect full cascade completion (both window and pre all diverted)
+  const allMovable=[...cp.in_window,...cp.pre];
+  if(allMovable.length>0 && allMovable.every(v=>diverted.has(v.id))) showPostCascade();
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────────────
+function divertVessel(id, from){
+  // Find vessel
+  const cp=FLEETS[activeCp];
+  const v=[...cp.in_window,...cp.pre].find(x=>x.id===id);
+  if(!v)return;
+  diverted.set(id,{from, route: altRoute(activeCp, v.cls, from)});
+  renderAll();
+}
+
+function executeCascade(){
+  if(cascadeDone)return;
+  const cp=FLEETS[activeCp];
+  cp.pre.forEach(v=>{ if(!diverted.has(v.id)) diverted.set(v.id,{from:'pre',route:altRoute(activeCp,v.cls,'pre')}); });
+  renderAll();
+}
+
+function showPostCascade(){
+  if(cascadeDone)return;
+  cascadeDone=true;
+  document.getElementById('btnCascade').disabled=true;
+  document.getElementById('cascadeStatus').textContent='Pre-commitment diverted';
+
+  const cp=FLEETS[activeCp];
+  const allDiverted=[...cp.in_window,...cp.pre].filter(v=>diverted.has(v.id));
+  const divertedV=sum(allDiverted);
+  const remaining=sum(cp.locked)+sum(cp.in_window.filter(v=>!diverted.has(v.id)));
+  const divertedCrew=sumCrew(allDiverted);
+  const divertedUk=sumUk(allDiverted);
+
+  // Group diverted vessels by alternative route
+  const routeGroups={};
+  allDiverted.forEach(v=>{
+    const r=diverted.get(v.id).route.route;
+    if(!routeGroups[r])routeGroups[r]={vessels:[],val:0,days:diverted.get(v.id).route.days,cost:diverted.get(v.id).route.cost,newCps:diverted.get(v.id).route.newCps};
+    routeGroups[r].vessels.push(v);
+    routeGroups[r].val+=v.val;
+  });
+
+  document.getElementById('bannerSub').textContent=
+    fmt(remaining)+' remaining exposure · '+fmt(divertedV)+' diverted · '+
+    allDiverted.length+' vessels rerouted via '+Object.keys(routeGroups).join(' / ');
+
+  // Route breakdown cards
+  const routeCards=Object.entries(routeGroups).map(([route,g])=>`
+    <div class="rcard">
+      <div class="rcard-lbl">${route}</div>
+      <div class="rcard-val">${fmt(g.val)}</div>
+      <div class="rcard-delta d-up">${g.vessels.length} vessels${g.days>0?' · +'+g.days+'d':' · no extra transit'}</div>
+      <div class="rcard-note">
+        ${g.cost}${g.newCps.length?' · New CPs: '+g.newCps.join(', '):''}
+      </div>
+    </div>`).join('');
+
+  document.getElementById('routeGrid').innerHTML=`
+    <div class="rcard">
+      <div class="rcard-lbl">Residual exposure</div>
+      <div class="rcard-val">${fmt(remaining)}</div>
+      <div class="rcard-delta d-down">${fmt(divertedV)} diverted (${Math.round(divertedV/(remaining+divertedV)*100)}% of original)</div>
+      <div class="rcard-note">${cp.residualNote}</div>
+    </div>
+    ${routeCards}
+    <div class="rcard">
+      <div class="rcard-lbl">Seafarers cleared</div>
+      <div class="rcard-val">${divertedCrew}</div>
+      <div class="rcard-delta d-down">${allDiverted.length} vessels${divertedUk>0?' · '+divertedUk+' UK nationals':''} out of risk window</div>
+      <div class="rcard-note">These seafarers will not now transit the affected strait. Locked and remaining in-window crew are still in the risk zone.</div>
+    </div>`;
+
+  document.getElementById('banner').classList.add('show');
+  document.getElementById('routeWrap').classList.add('show');
+}
+
+function resetScenario(){
+  diverted.clear(); cascadeDone=false;
+  document.getElementById('btnCascade').disabled=false;
+  document.getElementById('cascadeStatus').textContent='Divert all pre-commitment';
+  document.getElementById('banner').classList.remove('show');
+  document.getElementById('routeWrap').classList.remove('show');
+  renderAll();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+buildTabs(); renderCtx(); renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK LNG Imports | Narrows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0A2540; --navy-mid:#0d304f; --gold:#F0B429; --font:'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif; }
+  *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+  html,body { background:var(--navy); font-family:var(--font); color:rgba(255,255,255,0.82); -webkit-font-smoothing:antialiased; }
+  body { min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:40px 24px 56px; }
+  .card { width:100%; max-width:1140px; background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08); border-radius:8px; overflow:hidden; }
+  .card-header { padding:28px 36px 24px; border-bottom:2px solid var(--gold); }
+  .card-topline { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo-mark { width:40px; height:auto; display:block; }
+  .logo-mark path { fill:var(--gold); }
+  .logo-word { font-size:15px; font-weight:700; color:#fff; letter-spacing:0.10em; text-transform:uppercase; }
+  .eyebrow-pill { display:inline-flex; align-items:center; background:var(--gold); color:var(--navy); font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:4px 13px; border-radius:20px; }
+  .card-title { font-size:clamp(16px,2vw,21px); font-weight:700; color:#fff; line-height:1.25; letter-spacing:-0.01em; max-width:780px; }
+  .card-sub { font-size:13px; color:rgba(255,255,255,0.52); font-weight:300; line-height:1.65; margin-top:8px; max-width:760px; }
+  .card-body { padding:24px 16px 16px; }
+  svg { display:block; width:100%; overflow:visible; }
+  .card-footer { padding:16px 36px 22px; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .legend-item { display:flex; align-items:center; gap:7px; }
+  .legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .legend-label { font-size:11px; color:rgba(255,255,255,0.28); }
+  .source-note { font-size:10px; color:rgba(255,255,255,0.28); text-align:right; line-height:1.5; }
+  .tt { position:fixed; background:#071b30; border:1px solid rgba(240,180,41,0.45); border-radius:6px; padding:14px 18px; pointer-events:none; opacity:0; transition:opacity 0.1s; z-index:99; max-width:300px; box-shadow:0 12px 36px rgba(0,0,0,0.8); font-family:var(--font); }
+  .tt-name { font-weight:700; color:#fff; margin-bottom:6px; font-size:14px; }
+  .tt-val  { color:rgba(255,255,255,0.88); font-size:13px; margin-bottom:3px; }
+  .tt-sub  { color:rgba(255,255,255,0.60); font-size:12px; }
+  .tt-note { color:rgba(255,255,255,0.65); font-size:12px; font-weight:300; margin-top:9px; border-top:1px solid rgba(255,255,255,0.12); padding-top:9px; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    <div class="card-topline">
+      <div class="logo">
+        <svg class="logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg">
+          <path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/>
+        </svg>
+        <span class="logo-word">Narrows</span>
+      </div>
+      <span class="eyebrow-pill">UK LNG Import Analysis</span>
+    </div>
+    <div class="card-title">Qatar (27%) clears Hormuz, Bab el-Mandeb, Suez, and Gibraltar to reach the UK. The Americas now supply 47% with no chokepoint at all.</div>
+    <div class="card-sub">The UK LNG supply mix has been transformed by US liquefaction capacity. Americas cargoes (USA, Trinidad, others) reach South Hook and Isle of Grain via the North Atlantic with no chokepoint exposure. Norway and Russia supply the North Sea corridor directly. Qatari cargoes, which underpin long-term UK gas contracts, must clear four successive chokepoints: Hormuz, Bab el-Mandeb, Suez Canal, and Gibraltar. Algeria loads into the Mediterranean and joins Qatar at Gibraltar before the final Atlantic leg. Hover any node or flow for detail.</div>
+  </div>
+  <div class="card-body"><svg id="sk"></svg></div>
+  <div class="card-footer">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div><span class="legend-label">Americas (no chokepoint)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div><span class="legend-label">North Sea (no chokepoint)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div><span class="legend-label">Mediterranean / Gibraltar</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div><span class="legend-label">Qatar (via Hormuz)</span></div>
+    </div>
+    <div class="source-note">Source: DESNZ Energy Trends ET 4.3 · 2024 annual average<br>Values = % of UK LNG imports by volume</div>
+  </div>
+</div>
+<div class="tt" id="tt">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-val"  id="tt-val"></div>
+  <div class="tt-sub"  id="tt-sub"></div>
+  <div class="tt-note" id="tt-note"></div>
+</div>
+
+<script>
+(function () {
+
+const C = {
+  atlantic: '#34d399',  // Americas
+  northsea: '#38bdf8',  // North Sea
+  gulf:     '#f97316',  // Qatar (Hormuz-transiting)
+  med:      '#a78bfa',  // Algeria, Mediterranean
+  choke:    '#F0B429',  // Hormuz, Bab, Gibraltar
+  dest:     'rgba(226,232,240,0.6)',
+};
+
+// ── NODES ────────────────────────────────────────────────────────────────────
+// 5 columns: 0=Origins · 1=Hormuz · 2=Bab el-Mandeb · 3=Gibraltar · 4=UK
+const NODE_DEFS = [
+
+  // ── Americas (no chokepoint) ─────────────────────────────────────────────
+  { id:'americas',  col:0, v:47,  group:'atlantic',
+    label:'Americas', sub:'47% · USA, Trinidad, others',
+    note:'US Gulf Coast LNG terminals (Sabine Pass, Freeport, Corpus Christi, Calcasieu Pass) have become the dominant UK LNG source. Trinidad Atlantic LNG and smaller volumes from other Americas origins are included here. All cargoes cross the North Atlantic directly to South Hook (Milford Haven) or Isle of Grain (Kent). No maritime chokepoint on any of these routes. The US LNG build-out, enabled by the shale revolution, is the single largest structural shift in UK gas supply security since North Sea production peak.' },
+
+  // ── North Sea (no chokepoint) ─────────────────────────────────────────────
+  { id:'northsea',  col:0, v:18,  group:'northsea',
+    label:'North Sea', sub:'18% · Norway and Russia',
+    note:'Norway (Hammerfest LNG, Snohvit field on the Barents Sea coast) ships via the Norwegian Sea directly to UK terminals. No chokepoint. Russia (Yamal LNG, Sabetta terminal on the Yamal Peninsula) routes westbound via the Northern Sea Route and Norwegian Sea to Isle of Grain. Russian LNG was not covered by the UK commodity ban that applied to crude oil; imports have continued under existing contracts while the government presses for phase-down. Combined these two North Sea-corridor sources represent 18% of UK LNG with no strategic maritime chokepoint on either supply path.' },
+
+  // ── Mediterranean / Gibraltar ─────────────────────────────────────────────
+  { id:'algeria',   col:0, v:8,   group:'med',
+    label:'Algeria', sub:'8% · Skikda LNG',
+    note:'Algerian LNG from the Skikda and Arzew liquefaction plants on the Mediterranean coast transits via Gibraltar into the Atlantic to reach UK terminals. No strategic maritime chokepoint. Algeria merges with Qatari cargoes at Gibraltar, representing the full Mediterranean LNG approach to the UK. Algeria has supplied European gas markets since the 1970s and remains a consistent mid-tier supplier despite constraints from rising domestic consumption.' },
+
+  // ── Qatar (Hormuz-bound) ──────────────────────────────────────────────────
+  { id:'qatar',     col:0, v:27,  group:'gulf',
+    label:'Qatar', sub:'27% · via Hormuz',
+    note:'Qatar underpins UK long-term LNG contracts, primarily via the South Hook terminal in Milford Haven (capacity 21 bcm/yr, 60% owned by QatarEnergy). Cargoes load at Ras Laffan on the Persian Gulf coast and must clear Hormuz, then Bab el-Mandeb, then the Suez Canal, before emerging into the Mediterranean and clearing Gibraltar to reach South Hook. Four successive chokepoints. A Hormuz closure stops Qatar supply entirely; there is no alternative Qatari export terminal outside the Persian Gulf.' },
+
+  // ── Chokepoints ──────────────────────────────────────────────────────────
+  { id:'hormuz',    col:1, v:27,  group:'choke',
+    label:'Hormuz', sub:'27% of UK LNG',
+    note:'The Strait of Hormuz is the mandatory exit for all LNG loaded at Ras Laffan inside the Persian Gulf. At 27% of UK LNG, Qatar\'s entire contracted supply transits Hormuz. Compare this with UK crude, where only 8% transits Hormuz. LNG vessels (Q-Flex and Q-Max class) cannot be rerouted to alternative loading points; Ras Laffan is Qatar\'s only export terminal. After Hormuz, Qatar LNG continues to Bab el-Mandeb and the Suez Canal before reaching the Mediterranean.' },
+  { id:'bab',       col:2, v:27,  group:'choke',
+    label:'Bab el-Mandeb / Suez', sub:'27% of UK LNG',
+    note:'Bab el-Mandeb and the Suez Canal are a sequential double chokepoint for Qatari LNG bound for the UK. After transiting Hormuz, LNG carriers cross the Arabian Sea, clear Bab el-Mandeb into the Red Sea, then transit the Suez Canal before emerging into the Mediterranean. Either node can independently block the route: Bab through military interdiction, Suez through political closure or accident. Since late 2023, Houthi attacks have made Bab el-Mandeb the most actively contested maritime chokepoint globally. Most LNG operators have diverted around the Cape of Good Hope, adding 10 to 12 days of voyage time and substantially increasing delivered gas costs to the UK.' },
+
+  // ── Confluence ────────────────────────────────────────────────────────────
+  { id:'gib',       col:3, v:35,  group:'choke',
+    label:'Gibraltar', sub:'35% of UK LNG',
+    note:'The Strait of Gibraltar is the final chokepoint for Mediterranean-routed LNG before it enters the Atlantic for the UK. Qatar cargoes (27%), after clearing Hormuz, Bab el-Mandeb, and the Suez Canal, emerge into the Mediterranean and transit Gibraltar. Algerian LNG (8%) loads directly into the Mediterranean and joins at Gibraltar. Together they represent 35% of UK LNG, all converging at this single Atlantic entry point. Gibraltar itself is not considered a strategic chokepoint (14km width, no single-nation control), but it is the geographic confluence of the most supply-chain-complex LNG routes serving the UK market.' },
+
+  // ── Destination ───────────────────────────────────────────────────────────
+  { id:'uk',        col:4, v:100, group:'dest',
+    label:'United Kingdom', sub:'~15 bcm/yr LNG imports',
+    note:'UK LNG imports averaged approximately 14 to 16 billion cubic metres per year in 2024. Primary receiving terminals: South Hook LNG (Milford Haven, Wales, primarily Qatari), Dragon LNG (also Milford Haven), and Isle of Grain LNG (Kent, primarily US and Russian). The UK grid connects these terminals to the National Transmission System for distribution.' },
+];
+
+// ── LINKS ─────────────────────────────────────────────────────────────────────
+const LINK_DEFS = [
+  // Qatar → Hormuz → Bab → Gibraltar → UK
+  { s:'qatar',    t:'hormuz', v:27, group:'gulf'  },
+  { s:'hormuz',   t:'bab',    v:27, group:'choke' },
+  // Algeria → Gibraltar first (top of Gibraltar bar - Algeria sits above Qatar in origins)
+  { s:'algeria',  t:'gib',    v:8,  group:'med'   },
+  // Bab → Gibraltar last (bottom of Gibraltar bar - Bab is at Qatar's lower position)
+  { s:'bab',      t:'gib',    v:27, group:'choke' },
+  // Americas and North Sea → UK direct (skips cols 1, 2, 3)
+  // These come FIRST so they land at the top of the UK bar, matching their
+  // upper origin positions. Gibraltar is last so it lands at the bottom.
+  { s:'americas', t:'uk',     v:47, group:'atlantic' },
+  { s:'northsea', t:'uk',     v:18, group:'northsea' },
+  // Gibraltar → UK (last = bottom of UK bar, matching Gibraltar's lower position)
+  { s:'gib',      t:'uk',     v:35, group:'choke' },
+];
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tt=document.getElementById('tt'),ttName=document.getElementById('tt-name'),
+      ttVal=document.getElementById('tt-val'),ttSub=document.getElementById('tt-sub'),
+      ttNote=document.getElementById('tt-note');
+
+function showTT(e,name,val,sub,note){
+  ttName.textContent=name; ttVal.textContent=val||'';
+  ttSub.textContent=sub||''; ttSub.style.display=sub?'':'none';
+  ttNote.textContent=note||''; ttNote.style.display=note?'':'none';
+  tt.style.opacity='1'; moveTT(e);
+}
+function moveTT(e){
+  tt.style.left=Math.min(e.clientX+18,window.innerWidth-320)+'px';
+  tt.style.top=Math.min(e.clientY-14,window.innerHeight-200)+'px';
+}
+function hideTT(){ tt.style.opacity='0'; }
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+const svg=document.getElementById('sk');
+const cw=svg.parentElement.clientWidth-32;
+const W=Math.min(cw,1080); const H=560;
+svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+svg.setAttribute('height',H);
+
+const NS='http://www.w3.org/2000/svg';
+const mk=t=>document.createElementNS(NS,t);
+const at=(el,o)=>{Object.entries(o).forEach(([k,v])=>el.setAttribute(k,v));return el;};
+const ap=(p,c)=>{p.appendChild(c);return c;};
+const font="'Plus Jakarta Sans','Helvetica Neue',Arial,sans-serif";
+
+const NW=14, PAD=16, TOP=46, BOT=10;
+const L_PAD=148, R_PAD=148;
+
+const COL_X=[
+  L_PAD,
+  Math.round(W*0.255),
+  Math.round(W*0.435),
+  Math.round(W*0.625),
+  W-R_PAD-NW,
+];
+
+const byCol=[[],[],[],[],[]];
+NODE_DEFS.forEach(n=>byCol[n.col].push(n));
+
+const AVAIL_H=H-TOP-BOT;
+
+function layoutCol(nodes){
+  const total=nodes.reduce((s,n)=>s+n.v,0);
+  const usedH=AVAIL_H-PAD*(nodes.length-1);
+  let cur=TOP;
+  nodes.forEach(n=>{
+    n.h=Math.max(3,(n.v/total)*usedH);
+    n.y0=cur; n.y1=cur+n.h;
+    n.x0=COL_X[n.col]; n.x1=COL_X[n.col]+NW;
+    cur+=n.h+PAD;
+  });
+}
+byCol.forEach(layoutCol);
+
+const NM={};
+NODE_DEFS.forEach(n=>{NM[n.id]=n;});
+
+// ── Override intermediate node positions ─────────────────────────────────────
+// Scale to col-0 proportions (col 0 total = 100)
+{
+  const col0usedH=AVAIL_H-PAD*(byCol[0].length-1);
+
+  // Hormuz (27%): align with Qatar
+  const hormuz=NM['hormuz'];
+  hormuz.h=(27/100)*col0usedH;
+  hormuz.y0=NM['qatar'].y0;
+  hormuz.y1=hormuz.y0+hormuz.h;
+
+  // Bab (27%): same band as Hormuz
+  const bab=NM['bab'];
+  bab.h=(27/100)*col0usedH;
+  bab.y0=NM['qatar'].y0;
+  bab.y1=bab.y0+bab.h;
+
+  // Gibraltar (35% = Qatar 27 + Algeria 8): starts at Algeria's y0
+  const gib=NM['gib'];
+  gib.h=(35/100)*col0usedH;
+  gib.y0=NM['algeria'].y0;
+  gib.y1=gib.y0+gib.h;
+}
+
+// ── Link geometry ─────────────────────────────────────────────────────────────
+const outOff={}, inOff={};
+NODE_DEFS.forEach(n=>{outOff[n.id]=0; inOff[n.id]=0;});
+
+function linkH(n,v){return(v/n.v)*n.h;}
+
+const LINKS=LINK_DEFS.map(ld=>{
+  const s=NM[ld.s], t=NM[ld.t];
+  const sh=linkH(s,ld.v), th=linkH(t,ld.v);
+  const sy0=s.y0+outOff[s.id], sy1=sy0+sh;
+  const ty0=t.y0+inOff[t.id], ty1=ty0+th;
+  outOff[s.id]+=sh; inOff[t.id]+=th;
+  return{...ld,s,t,sy0,sy1,ty0,ty1};
+});
+
+// ── SVG defs ──────────────────────────────────────────────────────────────────
+const defs=ap(svg,mk('defs'));
+const flt=ap(defs,at(mk('filter'),{id:'glow',x:'-60%',y:'-60%',width:'220%',height:'220%'}));
+ap(flt,at(mk('feGaussianBlur'),{stdDeviation:'5',result:'b'}));
+const fm=ap(flt,mk('feMerge'));
+ap(fm,at(mk('feMergeNode'),{in:'b'}));
+ap(fm,at(mk('feMergeNode'),{in:'SourceGraphic'}));
+
+function endColor(g){
+  return{choke:'#F0B429',atlantic:C.atlantic,northsea:C.northsea,med:C.med,gulf:C.gulf,dest:'rgba(226,232,240,0.5)'}[g]||'#64748b';
+}
+LINKS.forEach(lk=>{
+  const g=ap(defs,at(mk('linearGradient'),{id:`g-${lk.s.id}-${lk.t.id}`,x1:'0%',y1:'0%',x2:'100%',y2:'0%'}));
+  ap(g,at(mk('stop'),{offset:'0%','stop-color':C[lk.group]||'#64748b','stop-opacity':'1'}));
+  ap(g,at(mk('stop'),{offset:'100%','stop-color':endColor(lk.t.group),'stop-opacity':'1'}));
+});
+
+// ── Ribbons ───────────────────────────────────────────────────────────────────
+function ribbon(sx,sy0,sy1,tx,ty0,ty1){
+  const cx=(sx+tx)/2;
+  return`M${sx},${sy0} C${cx},${sy0} ${cx},${ty0} ${tx},${ty0} L${tx},${ty1} C${cx},${ty1} ${cx},${sy1} ${sx},${sy1} Z`;
+}
+
+const linkG=ap(svg,at(mk('g'),{class:'links'}));
+LINKS.forEach(lk=>{
+  const el=ap(linkG,at(mk('path'),{
+    d:ribbon(lk.s.x1,lk.sy0,lk.sy1,lk.t.x0,lk.ty0,lk.ty1),
+    fill:`url(#g-${lk.s.id}-${lk.t.id})`,
+    'fill-opacity':'0.20',
+    style:'cursor:pointer;transition:fill-opacity 0.12s;',
+  }));
+  el.addEventListener('mousemove',e=>{
+    el.setAttribute('fill-opacity','0.52');
+    showTT(e,`${lk.s.label} to ${lk.t.label}`,`${lk.v}% of UK LNG imports`,null,null);
+  });
+  el.addEventListener('mouseleave',()=>{el.setAttribute('fill-opacity','0.20');hideTT();});
+});
+
+// ── Node bars ─────────────────────────────────────────────────────────────────
+const nodeG=ap(svg,at(mk('g'),{class:'nodes'}));
+NODE_DEFS.forEach(n=>{
+  const isChoke=n.group==='choke';
+  const col=n.group==='dest'?C.dest:C[n.group]||'#64748b';
+  const rect=ap(nodeG,at(mk('rect'),{
+    x:n.x0,y:n.y0,width:NW,height:Math.max(2,n.h),rx:3,
+    fill:col,'fill-opacity':isChoke?'1':'0.88',
+    filter:isChoke?'url(#glow)':'',style:'cursor:pointer',
+  }));
+  rect.addEventListener('mousemove',e=>showTT(e,n.label,n.sub,null,n.note));
+  rect.addEventListener('mouseleave',hideTT);
+});
+
+// ── Labels ────────────────────────────────────────────────────────────────────
+const lblG=ap(svg,at(mk('g'),{class:'labels'}));
+
+function addTxt(x,y,str,opts){
+  const el=ap(lblG,at(mk('text'),{
+    x,y,'text-anchor':opts.anchor||'start','dominant-baseline':'middle',
+    fill:opts.fill||'#fff','fill-opacity':opts.op||'1',
+    'font-size':opts.fs||'12','font-weight':opts.fw||'500',
+    'font-family':font,'letter-spacing':opts.ls||'0',
+  }));
+  el.textContent=str; return el;
+}
+
+[
+  {label:'Supply Origin', x:COL_X[0]-L_PAD*0.5},
+  {label:'Chokepoint',    x:COL_X[1]+NW*0.5},
+  {label:'Chokepoint',    x:COL_X[2]+NW*0.5},
+  {label:'Confluence',    x:COL_X[3]+NW*0.5},
+  {label:'Destination',   x:COL_X[4]+NW+R_PAD*0.5-10},
+].forEach(h=>addTxt(h.x,20,h.label.toUpperCase(),{anchor:'middle',fill:'rgba(255,255,255,0.26)',fs:'9',fw:'600',ls:'0.09em'}));
+
+NODE_DEFS.forEach(n=>{
+  const cy=(n.y0+n.y1)/2;
+  const labelRight=(n.col>=2);
+  const lx=labelRight?n.x1+10:n.x0-10;
+  const anchor=labelRight?'start':'end';
+  const isChoke=n.group==='choke';
+
+  const lc=isChoke?C.choke
+    :n.group==='dest'?'#e2e8f0'
+    :n.group==='atlantic'?'#86efac'
+    :n.group==='northsea'?'#7dd3fc'
+    :n.group==='gulf'?'#fdba74'
+    :n.group==='med'?'#c4b5fd'
+    :'#94a3b8';
+
+  const words=n.label.split(' ');
+  const maxLen=isChoke?14:n.col===4?16:14;
+  const lines=[];
+  let cur='';
+  words.forEach(w=>{
+    if((cur+' '+w).trim().length>maxLen&&cur){lines.push(cur.trim());cur=w;}
+    else cur=(cur+' '+w).trim();
+  });
+  if(cur)lines.push(cur);
+
+  const lh=15;
+  const fs=isChoke?'13':n.col===4?'15':'12';
+  const fw=isChoke?'700':n.col===4?'700':'500';
+  const hasSub=n.sub&&n.h>18;
+  const blockH=lines.length*lh+(hasSub?14:0);
+  const topY=cy-blockH/2+lh*0.5;
+
+  lines.forEach((line,i)=>{
+    const el=addTxt(lx,topY+i*lh,line,{anchor,fill:lc,fs,fw});
+    el.style.cursor='default';
+    el.addEventListener('mousemove',e=>showTT(e,n.label,n.sub,null,n.note));
+    el.addEventListener('mouseleave',hideTT);
+  });
+
+  if(hasSub){
+    const subY=topY+lines.length*lh+1;
+    if(isChoke){
+      const badge=`${n.v}%`;
+      const bw=badge.length*8+14, bh=17;
+      const bx=labelRight?lx:lx-bw;
+      ap(lblG,at(mk('rect'),{x:bx,y:subY-bh/2+2,width:bw,height:bh,rx:8,fill:'#0A2540',stroke:C.choke,'stroke-width':'1.2'}));
+      const bt=ap(lblG,at(mk('text'),{
+        x:bx+bw/2,y:subY+2,'text-anchor':'middle','dominant-baseline':'middle',
+        fill:C.choke,'font-size':'10','font-weight':'700','font-family':font,
+      }));
+      bt.textContent=badge;
+      bt.addEventListener('mousemove',e=>showTT(e,n.label,n.sub,null,n.note));
+      bt.addEventListener('mouseleave',hideTT);
+    } else {
+      addTxt(lx,subY+6,n.sub,{anchor,fill:'rgba(255,255,255,0.38)',fs:'11',fw:'300'});
+    }
+  }
+});
+
+// Divider between North Sea and Algeria, Algeria and Qatar
+const col0=byCol[0];
+[2,3].forEach(i=>{
+  if(!col0[i]||!col0[i-1])return;
+  const y=(col0[i-1].y1+col0[i].y0)/2;
+  ap(svg,at(mk('line'),{x1:6,x2:COL_X[0]-4,y1:y,y2:y,stroke:'rgba(255,255,255,0.09)','stroke-width':'1','stroke-dasharray':'3 4'}));
+});
+
+})();
+</script>
+</body>
+</html>
