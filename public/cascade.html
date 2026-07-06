@@ -283,6 +283,8 @@ function altRoute(cpId, cls, wt) {
     if (wt === 'pre') return {route:'Cape of Good Hope',           days:14,   cost:'+$2.1M bunker',        newCps:[]};
     return               {route:'Cape of Good Hope',               days:16,   cost:'+$2.4M bunker',        newCps:[]};
   }
+  // malacca — pre-commitment: full optionality, no diversion cost
+  if (wt === 'pre') return {route:'Re-nominate loading port', days:0, cost:'Freight adjustment only', newCps:[]};
   // malacca — route depends on vessel class
   if (cls === 'VLCC' || cls === 'LNG')
     return {route:'Lombok Strait', days:1.5, cost:'+$0.3M', newCps:['Lombok (T2 · not JWC)']};
