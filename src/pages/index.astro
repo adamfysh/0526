@@ -452,15 +452,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="sim-card-header">
       <div class="sim-card-eyebrow">Model output</div>
       <div class="sim-card-scenario">
-        <strong>Strait of Hormuz: 100% closure, 104 days</strong><br>
-        All commodities · Sensitivity 1.00 · No alternative route · 2023 data
+        <strong>Bab el-Mandeb: sustained disruption, 90 days</strong><br>
+        All commodities · Sensitivity 1.00 · Cape rerouting only · 2024 data
       </div>
     </div>
-    <div class="sim-row"><span class="sim-row-label">Value at risk</span><span class="sim-row-value">$168.7B<span class="unit">USD</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Countries exposed</span><span class="sim-row-value">28<span class="unit">countries</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Japan alone</span><span class="sim-row-value">$20.0B<span class="unit">USD</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Est. VLCCs in-window</span><span class="sim-row-value">97<span class="unit">vessels</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Portfolio rerouting overrun</span><span class="sim-row-value">$97.2M<span class="unit">overrun</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Value at risk</span><span class="sim-row-value">$89.4B<span class="unit">USD</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Countries exposed</span><span class="sim-row-value">24<span class="unit">countries</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">UK LNG exposure</span><span class="sim-row-value">$3.2B<span class="unit">USD</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Cape rerouting premium</span><span class="sim-row-value">+14d<span class="unit">per voyage</span></span></div>
+    <div class="sim-row"><span class="sim-row-label">Portfolio rerouting overrun</span><span class="sim-row-value">$68.3M<span class="unit">overrun</span></span></div>
     <div class="sim-card-footer">All assumptions substitutable · Request a demo to run your scenario</div>
   </div>
 </section>
@@ -489,7 +489,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="aud-role">Glencore · Trafigura · Vitol · Gunvor</div>
         <h3 class="aud-title">Commodity trading desks</h3>
         <p class="aud-body">A crude desk with open positions through Hormuz needs the rerouting cost and delivery delay before pricing the risk. That is not a tail risk, it is a live pricing input. The model runs your vessel class, your rates, your corridor.</p>
-        <span class="aud-num">Malacca closure: +4 days · $800k voyage overrun per Capesize</span>
+        <span class="aud-num">Malacca closure: +4 days · $800k voyage overrun per Suezmax</span>
       </div>
       <div class="aud-card fade-up">
         <div class="aud-role">Banks · ECAs · Infrastructure lenders</div>
@@ -843,16 +843,6 @@ document.getElementById('demo-email')?.addEventListener('keydown', (e: KeyboardE
 });
 </script>
 
-<script>
-  // Hormuz closure day counter — closure began 28 Feb 2026
-  (function () {
-    var start = new Date('2026-02-28T00:00:00Z');
-    var now = new Date();
-    var days = Math.floor((now - start) / 86400000);
-    var el = document.getElementById('hormuz-day-count');
-    if (el) el.textContent = 'day ' + days;
-  })();
-</script>
 
 
 </BaseLayout>
