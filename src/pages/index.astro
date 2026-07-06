@@ -3,601 +3,259 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Narrows | Risk Intelligence"
-  description="Dollar-denominated chokepoint exposure. Which importers pay, by how much, through which corridor. Built for underwriters, traders, and lenders."
+  title="The Narrows | Maritime Trade Risk Intelligence"
+  description="Chokepoint exposure quantified by corridor, commodity, and vessel class. Built on the Chokepoint Dependency Model."
 >
 
 <style>
-/* ─────────────────────────────────────────
-   HERO
-───────────────────────────────────────── */
+/* ─── HERO ─── */
 .hero {
-  padding: 136px var(--s4) var(--s6);
+  background: var(--navy);
+  padding: 140px var(--s4) 96px;
+  border-bottom: 3px solid var(--gold);
+}
+.hero-inner {
   max-width: var(--max-w);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 80px;
-  align-items: center;
 }
 .hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--gold);
   margin-bottom: var(--s3);
+  display: block;
 }
-.hero-kicker-line { width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
 .hero-headline {
-  font-size: clamp(36px, 4.5vw, 56px);
-  font-weight: 700;
-  line-height: 1.08;
-  color: var(--navy);
-  margin-bottom: var(--s3);
-  letter-spacing: -0.025em;
-}
-.hero-headline em { font-style: italic; font-weight: 400; color: var(--blue-light); }
-.hero-tagline {
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--s2);
-  max-width: 480px;
-}
-.hero-tagline strong { color: var(--text-primary); font-weight: 600; }
-.hero-sub {
-  font-size: 15px;
-  color: var(--text-tertiary);
-  max-width: 460px;
-  line-height: 1.7;
-  margin-bottom: var(--s4);
-  font-weight: 300;
-}
-.hero-actions { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; }
-
-/* Simulator preview card */
-.sim-card {
-  background: var(--navy);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 24px 64px rgba(10,37,64,0.2), 0 4px 16px rgba(10,37,64,0.1);
-}
-.sim-card-topbar {
-  background: rgba(255,255,255,0.05);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-}
-.sim-card-dots { display: flex; gap: 5px; }
-.sim-card-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.12); }
-.sim-card-url { font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; font-family: 'SF Mono','Fira Code',monospace; }
-.sim-card-header { padding: 16px 20px; border-bottom: 3px solid var(--gold); }
-.sim-card-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
-.sim-card-scenario { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
-.sim-card-scenario strong { color: var(--gold); font-weight: 600; }
-.sim-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.sim-row:last-child { border-bottom: none; }
-.sim-row-label { font-size: 11px; color: rgba(255,255,255,0.35); font-weight: 400; }
-.sim-row-value { font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; }
-.sim-row-value .unit { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.25); margin-left: 3px; }
-.sim-card-footer { padding: 10px 20px; background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.05); font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 0.04em; }
-
-/* ─────────────────────────────────────────
-   TRUST BAR
-───────────────────────────────────────── */
-.trust-bar { border-top: var(--rule-light); border-bottom: var(--rule-light); background: var(--surface); }
-.trust-bar-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--s4); display: grid; grid-template-columns: repeat(4,1fr); }
-.trust-item { padding: 24px var(--s3); border-right: var(--rule-light); display: flex; flex-direction: column; gap: 4px; }
-.trust-item:last-child { border-right: none; }
-.trust-value { font-size: 30px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1; }
-.trust-label { font-size: 12px; color: var(--text-tertiary); font-weight: 300; line-height: 1.4; }
-
-/* ─────────────────────────────────────────
-   MAP SECTION
-───────────────────────────────────────── */
-.map-section {
-  padding: var(--s6) var(--s4);
-  background: var(--navy);
-  border-top: var(--rule-light);
-  border-bottom: 3px solid var(--gold);
-}
-.map-section-inner { max-width: var(--max-w); margin: 0 auto; }
-.map-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: var(--s4);
-  flex-wrap: wrap;
-  gap: var(--s3);
-}
-.map-title {
-  font-size: clamp(20px, 2.5vw, 28px);
+  font-size: clamp(34px, 4.5vw, 58px);
   font-weight: 700;
   color: var(--white);
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.07;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--s3);
+  max-width: 760px;
 }
-.map-title em { font-style: italic; font-weight: 400; color: var(--gold); }
-.map-legend {
-  display: flex;
-  align-items: center;
-  gap: var(--s3);
-  flex-wrap: wrap;
-}
-.map-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 0.04em;
-}
-.map-legend-dot-primary {
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--gold); flex-shrink: 0;
-}
-.map-legend-dot-secondary {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.3); flex-shrink: 0;
-}
-.map-wrap {
-  position: relative;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.map-source {
-  margin-top: var(--s2);
-  font-size: 10px;
-  color: rgba(255,255,255,0.2);
-  letter-spacing: 0.04em;
+.hero-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 560px;
+  font-weight: 300;
+  margin-bottom: var(--s5);
 }
 
-/* ─────────────────────────────────────────
-   SIMULATOR SECTION
-───────────────────────────────────────── */
-.simulator-section { padding: var(--s6) var(--s4); }
-.simulator-inner {
+/* ─── CDM BAND ─── */
+.cdm-band {
+  border-bottom: var(--rule-light);
+  padding: var(--s5) var(--s4);
+}
+.cdm-inner {
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 220px 1fr;
+  gap: var(--s5);
   align-items: start;
 }
-.simulator-feature-list { list-style: none; display: flex; flex-direction: column; gap: 0; margin-top: var(--s4); margin-bottom: var(--s4); }
-.sim-feature { display: flex; gap: 16px; padding: var(--s2) 0; border-bottom: var(--rule-light); }
-.sim-feature:first-child { border-top: var(--rule-light); }
-.sim-feature-mark {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--gold-pale);
-  border: 1px solid rgba(240,180,41,0.3);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
-.sim-feature-mark::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-.sim-feature-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
-.sim-feature-text strong { color: var(--text-primary); font-weight: 600; display: block; margin-bottom: 2px; font-size: 13px; }
-
-/* App mockup */
-.app-mockup {
-  background: var(--surface);
-  border: var(--rule-light);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(10,37,64,0.1);
-}
-.app-mockup-bar {
-  background: var(--navy);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 2px solid var(--gold);
-}
-.app-mockup-dots { display: flex; gap: 5px; }
-.app-mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
-.app-mockup-dot:nth-child(1) { background: rgba(255,255,255,0.15); }
-.app-mockup-dot:nth-child(2) { background: rgba(255,255,255,0.1); }
-.app-mockup-dot:nth-child(3) { background: rgba(255,255,255,0.07); }
-.app-mockup-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-left: 4px; }
-.app-mockup-body { padding: var(--s3); }
-.app-control { margin-bottom: var(--s3); }
-.app-control-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-tertiary); margin-bottom: 6px; display: block;
-}
-.app-select {
-  width: 100%; background: var(--white); border: var(--rule-light); border-radius: 4px;
-  padding: 9px 12px; font-size: 13px; font-weight: 500; color: var(--navy);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.app-select-arrow { color: var(--text-tertiary); font-size: 10px; }
-.app-slider-row { display: flex; align-items: center; gap: 12px; }
-.app-slider-track {
-  flex: 1; height: 4px; background: var(--border); border-radius: 2px; position: relative;
-}
-.app-slider-fill {
-  position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; background: var(--blue);
-}
-.app-slider-thumb {
-  position: absolute; top: 50%; transform: translate(-50%,-50%);
-  width: 14px; height: 14px; border-radius: 50%; background: var(--white);
-  border: 2px solid var(--blue); box-shadow: 0 1px 4px rgba(10,37,64,0.2);
-}
-.app-slider-val { font-size: 13px; font-weight: 700; color: var(--navy); min-width: 36px; text-align: right; }
-.app-divider { height: 1px; background: var(--border); margin: var(--s2) 0; }
-.app-output-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-tertiary); margin-bottom: var(--s2); display: block;
-}
-.app-output-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 12px;
-  background: var(--white); border: var(--rule-light);
-  border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0;
-  margin-bottom: 6px;
-}
-.app-output-row-label { font-size: 11px; color: var(--text-secondary); }
-.app-output-row-val { font-size: 17px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
-.app-output-row-val span { font-size: 10px; font-weight: 400; color: var(--text-tertiary); margin-left: 2px; }
-.app-cta-row {
-  margin-top: var(--s3); padding: var(--s2) var(--s3);
-  background: var(--navy); border-radius: 4px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.app-cta-text { font-size: 11px; color: rgba(255,255,255,0.4); }
-.app-cta-btn {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--navy); background: var(--gold); padding: 6px 14px; border-radius: 3px;
-}
-
-/* Output cards */
-.output-grid { display: grid; grid-template-columns: 1fr; gap: var(--s2); }
-.output-card {
-  background: var(--white); border: var(--rule-light);
-  border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0;
-  padding: var(--s2) var(--s3);
-  transition: transform 0.18s var(--ease), box-shadow 0.18s;
-}
-.output-card:hover { transform: translateX(3px); box-shadow: 0 4px 20px rgba(10,37,64,0.07); }
-.output-card-num { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-.output-card-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.output-card-body { font-size: 13px; color: var(--text-secondary); line-height: 1.55; font-weight: 300; }
-.output-card-eg { margin-top: 8px; font-size: 11px; color: var(--blue); background: var(--blue-pale); padding: 6px 10px; border-radius: 4px; line-height: 1.5; }
-.output-card-eg strong { color: var(--navy); font-weight: 600; display: block; margin-bottom: 1px; }
-
-/* ─────────────────────────────────────────
-   DIFFERENTIATION
-───────────────────────────────────────── */
-.distinction { background: var(--surface); padding: var(--s6) var(--s4); border-top: var(--rule-light); border-bottom: var(--rule-light); }
-.distinction-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--white); border-radius: 6px; overflow: hidden; border: var(--rule-light); box-shadow: 0 2px 12px rgba(10,37,64,0.05); }
-.compare-table thead { background: var(--navy); }
-.compare-table th { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 16px; text-align: left; }
-.compare-table th:first-child  { color: rgba(255,255,255,0.3); }
-.compare-table th:nth-child(2) { color: rgba(255,255,255,0.45); }
-.compare-table th:nth-child(3) { color: var(--gold); }
-.compare-table td { padding: 11px 16px; border-bottom: var(--rule-light); vertical-align: top; line-height: 1.5; }
-.compare-table td:first-child  { color: var(--text-tertiary); font-size: 12px; }
-.compare-table td:nth-child(2) { color: var(--text-secondary); font-weight: 300; }
-.compare-table td:nth-child(3) { color: var(--navy); font-weight: 500; }
-.compare-table tr:last-child td { border-bottom: none; }
-.compare-table tbody tr:hover td { background: var(--blue-pale); }
-
-/* ─────────────────────────────────────────
-   LIVE CONTEXT
-───────────────────────────────────────── */
-.live-section { padding: var(--s6) var(--s4); border-bottom: var(--rule-light); }
-.live-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.live-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--navy); background: var(--gold-pale); border: 1px solid rgba(240,180,41,0.4);
-  padding: 5px 14px; border-radius: 20px; margin-bottom: var(--s3);
-}
-.live-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);} }
-.live-title { font-size: clamp(22px,2.8vw,32px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: var(--s3); letter-spacing: -0.02em; }
-.live-body { font-size: 15px; color: var(--text-secondary); line-height: 1.75; margin-bottom: var(--s2); font-weight: 300; }
-.live-body strong { color: var(--text-primary); font-weight: 600; }
-.live-stats { display: flex; flex-direction: column; gap: var(--s2); }
-.live-stat { display: flex; align-items: center; gap: 20px; padding: var(--s2) var(--s3); background: var(--surface); border: var(--rule-light); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; }
-.live-stat-value { font-size: 30px; font-weight: 700; color: var(--navy); white-space: nowrap; letter-spacing: -0.02em; min-width: 76px; }
-.live-stat-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-weight: 300; }
-.live-stat-desc strong { color: var(--text-primary); font-weight: 600; display: block; margin-bottom: 1px; font-size: 12px; }
-
-/* ─────────────────────────────────────────
-   ANALYSIS
-───────────────────────────────────────── */
-.analysis-section { padding: var(--s6) var(--s4); background: var(--surface); border-bottom: var(--rule-light); }
-.analysis-section-inner { max-width: var(--max-w); margin: 0 auto; }
-.analysis-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s3); margin-top: var(--s4); }
-.analysis-card {
-  background: var(--white); border: var(--rule-light); border-top: 3px solid var(--gold);
-  border-radius: 0 0 6px 6px; padding: var(--s3); text-decoration: none;
-  display: flex; flex-direction: column; transition: transform 0.2s var(--ease), box-shadow 0.2s;
-}
-.analysis-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,37,64,0.08); }
-.analysis-card-chokepoint { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-.analysis-card-title { font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 10px; flex: 1; }
-.analysis-card-body { font-size: 13px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; margin-bottom: var(--s2); }
-.analysis-card-stat { font-size: 11px; font-weight: 500; color: var(--blue); background: var(--blue-pale); padding: 6px 10px; border-radius: 4px; margin-bottom: var(--s2); line-height: 1.4; }
-.analysis-card-link { font-size: 12px; font-weight: 600; color: var(--blue); display: inline-flex; align-items: center; gap: 4px; margin-top: auto; }
-.analysis-card-link::after { content: '→'; }
-
-/* ─────────────────────────────────────────
-   FOR WHOM
-───────────────────────────────────────── */
-.audience-section { padding: var(--s6) var(--s4); border-bottom: var(--rule-light); }
-
-
-.audience-inner { max-width: var(--max-w); margin: 0 auto; }
-.audience-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--s3); margin-top: var(--s4); }
-.aud-card { background: var(--white); border: var(--rule-light); border-radius: 6px; padding: var(--s3) var(--s4); transition: border-color 0.2s,box-shadow 0.2s; }
-.aud-card:hover { border-color: rgba(240,180,41,0.5); box-shadow: 0 6px 24px rgba(10,37,64,0.06); }
-.aud-role { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: var(--s1); }
-.aud-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: var(--s2); line-height: 1.2; letter-spacing: -0.01em; }
-.aud-body { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: var(--s2); font-weight: 300; }
-.aud-num { font-size: 12px; font-weight: 500; color: var(--blue); background: var(--blue-pale); padding: 7px 12px; border-radius: 4px; display: inline-block; line-height: 1.4; }
-
-/* ─────────────────────────────────────────
-   CTA
-───────────────────────────────────────── */
-.cta-section { padding: var(--s6) var(--s4); background: var(--navy); }
-.cta-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
-.cta-title { font-size: clamp(26px,3vw,40px); font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: var(--s2); letter-spacing: -0.02em; }
-.cta-title em { font-style: italic; font-weight: 400; color: var(--gold); }
-.cta-sub { font-size: 15px; color: rgba(255,255,255,0.45); max-width: 520px; line-height: 1.7; font-weight: 300; }
-.cta-right { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); min-width: 280px; }
-.cta-form { display: flex; flex-direction: column; gap: var(--s1); width: 100%; }
-.cta-input {
-  font-family: var(--font); font-size: 14px; font-weight: 400; color: var(--white);
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 4px; padding: 12px 16px; width: 100%; outline: none;
-  transition: border-color 0.15s, background 0.15s;
-}
-.cta-input::placeholder { color: rgba(255,255,255,0.25); }
-.cta-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
-.cta-submit { width: 100%; }
-.cta-note { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.02em; }
-
-/* ─────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────── */
-@media (max-width: 1000px) {
-  .hero { grid-template-columns: 1fr; }
-  .sim-card { display: none; }
-  .simulator-inner { grid-template-columns: 1fr; gap: var(--s4); }
-  .distinction-inner { grid-template-columns: 1fr; gap: var(--s4); }
-  .live-inner { grid-template-columns: 1fr; gap: var(--s4); }
-  .cta-inner { grid-template-columns: 1fr; gap: var(--s4); }
-  .cta-right { min-width: unset; width: 100%; max-width: 400px; }
-}
-@media (max-width: 800px) {
-  .trust-bar-inner { grid-template-columns: repeat(2,1fr); }
-  .analysis-grid { grid-template-columns: 1fr; }
-  .audience-grid { grid-template-columns: 1fr; }
-}
-
-/* ── Suez photo band ── */
-.suez-band {
-  position: relative;
-  width: 100%;
-  height: 420px;
-  overflow: hidden;
-  display: block;
-}
-.suez-band img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 38%;
-  display: block;
-}
-.suez-band-caption {
-  position: absolute;
-  bottom: 16px;
-  right: 20px;
+.cdm-label {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
+  color: var(--text-tertiary);
+  padding-top: 4px;
+  line-height: 1.6;
+}
+.cdm-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 680px;
+}
+.cdm-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
-</style>
-
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
-<section class="hero">
-  <div>
-    <div class="hero-kicker"><span class="hero-kicker-line"></span> Risk Intelligence</div>
-    <h1 class="hero-headline">
-      Every chokepoint<br>
-      <em>has a number.</em><br>
-      Most desks do not have it.
-    </h1>
-    <p class="hero-tagline">
-      <strong>Dollar-denominated exposure, rerouting cost, and fleet-at-risk data.</strong><br>
-      Built for the underwriters, traders, and lenders who need to put a number on it.
-    </p>
-    <p class="hero-sub">
-      37 corridors modelled. Bilateral dependency to HS-code level. Run it before the disruption, not during it.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-blue">Request a demo</a>
-      <a href="/analysis" class="btn-ghost">Read the analysis</a>
-    </div>
-  </div>
-
-  <div class="sim-card">
-    <div class="sim-card-topbar">
-      <div class="sim-card-dots">
-        <div class="sim-card-dot"></div>
-        <div class="sim-card-dot"></div>
-        <div class="sim-card-dot"></div>
-      </div>
-      <span class="sim-card-url">app.narrows.io</span>
-    </div>
-    <div class="sim-card-header">
-      <div class="sim-card-eyebrow">Model output</div>
-      <div class="sim-card-scenario">
-        <strong>Bab el-Mandeb: sustained disruption, 90 days</strong><br>
-        All commodities · Sensitivity 1.00 · Cape rerouting only · 2024 data
-      </div>
-    </div>
-    <div class="sim-row"><span class="sim-row-label">Value at risk</span><span class="sim-row-value">$89.4B<span class="unit">USD</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Countries exposed</span><span class="sim-row-value">24<span class="unit">countries</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">UK LNG exposure</span><span class="sim-row-value">$3.2B<span class="unit">USD</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Cape rerouting premium</span><span class="sim-row-value">+14d<span class="unit">per voyage</span></span></div>
-    <div class="sim-row"><span class="sim-row-label">Portfolio rerouting overrun</span><span class="sim-row-value">$68.3M<span class="unit">overrun</span></span></div>
-    <div class="sim-card-footer">All assumptions substitutable · Request a demo to run your scenario</div>
-  </div>
-</section>
-
-<div class="suez-band">
-  <img src="/images/suez-n.jpg" alt="Suez Canal — satellite view" loading="eager" fetchpriority="high" />
-  <span class="suez-band-caption">Suez Canal · 193 km · 12% of global trade</span>
-</div>
-
-<!-- ══════════════════════════════
-     FOR WHOM
-══════════════════════════════ -->
-<section class="audience-section">
-  <div class="audience-inner">
-    <div class="eyebrow">Who uses The Narrows</div>
-    <h2 class="section-title">Built for the people whose decisions depend on getting the number right.</h2>
-    <p class="section-lead" style="margin-bottom:0">The model runs your scenario in front of you, with your assumptions, on your corridor of interest.</p>
-    <div class="audience-grid">
-      <div class="aud-card fade-up">
-        <div class="aud-role">P&amp;I clubs · Reinsurers</div>
-        <h3 class="aud-title">Accumulation underwriters</h3>
-        <p class="aud-body">Your accumulation model tracks hull. The Narrows adds the cargo dependency layer. Which commodities, from which origins, through which corridors, at what bilateral dependency percentage? The fleet-at-risk output is your accumulation number.</p>
-        <span class="aud-num">Hormuz: sustained closure · in-Gulf fleet accumulation modelled per vessel class and cargo</span>
-      </div>
-      <div class="aud-card fade-up">
-        <div class="aud-role">Glencore · Trafigura · Vitol · Gunvor</div>
-        <h3 class="aud-title">Commodity trading desks</h3>
-        <p class="aud-body">A crude desk with open positions through Hormuz needs the rerouting cost and delivery delay before pricing the risk. That is not a tail risk, it is a live pricing input. The model runs your vessel class, your rates, your corridor.</p>
-        <span class="aud-num">Malacca closure: +4 days · $800k voyage overrun per Suezmax</span>
-      </div>
-      <div class="aud-card fade-up">
-        <div class="aud-role">Banks · ECAs · Infrastructure lenders</div>
-        <h3 class="aud-title">Project finance teams</h3>
-        <p class="aud-body">Voyage cost overrun and carrying cost outputs map directly to debt service coverage analysis. Model what a corridor disruption does to freight assumptions in a 15-year financing structure.</p>
-        <span class="aud-num">Suez 14d: $1.4M voyage overrun · 5% p.a. carrying cost basis</span>
-      </div>
-      <div class="aud-card fade-up">
-        <div class="aud-role">Industrials · Energy majors · Large importers</div>
-        <h3 class="aud-title">Supply chain risk managers</h3>
-        <p class="aud-body">Understand your raw material dependency on specific trade corridors before the disruption, not during it. The bilateral dependency percentage is the basis for a procurement hedge, not just a risk register entry.</p>
-        <span class="aud-num">South Korea: 81% crude via Malacca · 73% crude via Hormuz</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-/* ─────────────────────────────────────────
-   PORT RISK INDEX
-───────────────────────────────────────── */
-.pri-section {
+/* ─── PRODUCTS ─── */
+.products-section {
   padding: var(--s6) var(--s4);
   background: var(--surface);
-  border-top: var(--rule-light);
-  border-bottom: 3px solid var(--gold);
+  border-bottom: var(--rule-light);
+}
+.products-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.products-header {
+  margin-bottom: var(--s5);
+}
+.products-title {
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: var(--s2);
+}
+.products-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 560px;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s2);
+}
+.product-card {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.product-card:hover {
+  box-shadow: 0 8px 28px rgba(10,37,64,0.08);
+  transform: translateY(-2px);
+}
+.product-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s2);
+  margin-bottom: 4px;
+}
+.product-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge-free {
+  background: var(--green-pale);
+  color: var(--green);
+}
+.badge-paid {
+  background: var(--gold-pale);
+  color: var(--gold-dark);
+  border: 1px solid rgba(240,180,41,0.3);
+}
+.product-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+  flex: 1;
+}
+.product-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--s1);
+  transition: gap 0.15s var(--ease), color 0.15s;
+}
+.product-link::after { content: '→'; }
+.product-link:hover { color: var(--navy); gap: 8px; }
+.product-link-note {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ─── PRI SECTION ─── */
+.pri-section {
+  padding: var(--s6) var(--s4);
+  border-bottom: var(--rule-light);
 }
 .pri-inner { max-width: var(--max-w); margin: 0 auto; }
-
 .pri-header { max-width: 680px; margin-bottom: var(--s5); }
-.pri-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--text-tertiary); margin-bottom: var(--s2);
-}
-.pri-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
 .pri-title {
-  font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; color: var(--navy);
-  line-height: 1.1; letter-spacing: -0.025em; margin-bottom: var(--s2);
+  font-size: clamp(26px, 3.2vw, 40px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s2);
 }
 .pri-title em { font-style: italic; font-weight: 400; color: var(--blue-light); }
 .pri-lead {
-  font-size: 16px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; max-width: 620px;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-weight: 300;
 }
-
-/* ── Browser chrome wrapper ── */
 .pri-preview {
-  border-radius: 10px; overflow: hidden;
-  box-shadow: 0 20px 60px rgba(10,37,64,0.12), 0 4px 16px rgba(10,37,64,0.06);
-  border: 1px solid var(--border);
-  margin-bottom: var(--s5);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(10,37,64,0.1), 0 4px 16px rgba(10,37,64,0.06);
+  border: var(--rule-light);
+  margin-bottom: var(--s4);
   background: var(--white);
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s var(--ease);
 }
 .pri-preview:hover {
-  box-shadow: 0 28px 80px rgba(10,37,64,0.16), 0 6px 24px rgba(10,37,64,0.08);
+  box-shadow: 0 28px 80px rgba(10,37,64,0.14), 0 6px 24px rgba(10,37,64,0.08);
   transform: translateY(-2px);
 }
-.pri-preview-cta {
-  text-align: center; padding: 10px; font-size: 11px; font-weight: 600;
-  letter-spacing: 0.06em; color: var(--blue); background: var(--blue-pale);
-  border-top: var(--rule-light);
-}
-.pri-preview-cta::after { content: ' →'; }
 .pri-chrome-topbar {
-  background: var(--navy); padding: 10px 16px;
-  display: flex; align-items: center; gap: 12px;
+  background: var(--navy);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .pri-chrome-dots { display: flex; gap: 5px; }
 .pri-chrome-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.12); }
 .pri-chrome-url { font-size: 10px; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; font-family: 'SF Mono','Fira Code',monospace; }
-
-/* ── Search bar ── */
 .pri-search-bar {
   display: flex; align-items: center; gap: 10px;
-  padding: 14px 20px; border-bottom: 1px solid var(--border);
-  background: var(--white);
+  padding: 14px 20px; border-bottom: var(--rule-light);
 }
-.pri-search-icon { font-size: 16px; color: var(--text-tertiary); line-height: 1; }
+.pri-search-icon { font-size: 16px; color: var(--text-tertiary); }
 .pri-search-text { font-size: 13px; color: var(--text-tertiary); font-weight: 300; }
 .pri-search-hit { color: var(--navy); font-weight: 600; }
-
-/* ── Port header row ── */
 .pri-port-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 20px 10px; border-bottom: 1px solid var(--border);
-  background: var(--white);
+  padding: 14px 20px 10px; border-bottom: var(--rule-light);
 }
 .pri-port-name { font-size: 17px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
 .pri-port-country { font-size: 13px; color: var(--text-tertiary); font-weight: 300; }
 .pri-port-badge {
   display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
-  background: var(--navy); color: var(--white); border-radius: 6px; padding: 10px 16px;
-  flex-shrink: 0;
+  background: var(--navy); border-radius: 6px; padding: 10px 16px; flex-shrink: 0;
 }
 .pri-port-badge-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); white-space: nowrap; }
 .pri-port-badge-score { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; color: var(--gold); line-height: 1; }
-
-/* ── Dimension cards ── */
-.pri-dim-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0; border-bottom: 1px solid var(--border);
-}
-.pri-dim-card {
-  padding: 16px 18px; border-right: 1px solid var(--border);
-}
+.pri-dim-grid { display: grid; grid-template-columns: repeat(4,1fr); border-bottom: var(--rule-light); }
+.pri-dim-card { padding: 16px 18px; border-right: var(--rule-light); }
 .pri-dim-card:last-child { border-right: none; }
 .pri-dim-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px; }
 .pri-dim-name { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
@@ -605,27 +263,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .pri-dim-score span { font-size: 12px; font-weight: 400; color: var(--text-tertiary); margin-left: 2px; }
 .pri-dim-bar { height: 4px; background: rgba(10,37,64,0.07); border-radius: 2px; overflow: hidden; }
 .pri-dim-fill { height: 100%; border-radius: 2px; }
-
-/* ── Histogram ── */
-.pri-hist-section { padding: 16px 20px 10px; border-bottom: 1px solid var(--border); }
-.pri-hist-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; }
-.pri-hist-svg { width: 100%; height: 90px; display: block; }
-
-/* ── Table preview with blur gate ── */
 .pri-table-wrap { position: relative; overflow: hidden; max-height: 180px; }
-.pri-table {
-  width: 100%; border-collapse: collapse; font-size: 12px;
-}
+.pri-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 .pri-table thead tr { background: var(--navy); }
-.pri-table th {
-  padding: 9px 14px; text-align: left; font-size: 9px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
+.pri-table th { padding: 9px 14px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .pri-table th:first-child { color: rgba(255,255,255,0.3); }
 .pri-table th:nth-child(2), .pri-table th:nth-child(3) { color: rgba(255,255,255,0.5); }
 .pri-table th:nth-child(4) { color: var(--gold); }
 .pri-table th:nth-child(n+5) { color: rgba(255,255,255,0.35); }
-.pri-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.pri-table td { padding: 9px 14px; border-bottom: var(--rule-light); color: var(--text-secondary); }
 .pri-table td:first-child { color: var(--text-tertiary); font-size: 11px; }
 .pri-table td:nth-child(2) { color: var(--navy); font-weight: 600; }
 .pri-table td:nth-child(4) { font-weight: 700; color: var(--navy); }
@@ -636,38 +282,258 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   display: flex; align-items: flex-end; justify-content: center; padding-bottom: 14px;
 }
 .pri-blur-msg { font-size: 11px; font-weight: 600; color: var(--blue); letter-spacing: 0.04em; }
-
-/* ── Open CTA ── */
-.pri-open-cta {
-  display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap;
-  padding: var(--s3) 0 var(--s1);
-}
+.pri-open-cta { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; }
 .pri-open-note { font-size: 12px; color: var(--text-tertiary); }
 
-/* ── Responsive ── */
+/* ─── ANALYSIS ─── */
+.analysis-section {
+  padding: var(--s6) var(--s4);
+  background: var(--surface);
+  border-bottom: var(--rule-light);
+}
+.analysis-inner { max-width: var(--max-w); margin: 0 auto; }
+.analysis-header { margin-bottom: var(--s4); }
+.analysis-title {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: var(--s1);
+}
+.analysis-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: var(--s3);
+}
+.analysis-card {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.analysis-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(10,37,64,0.08);
+}
+.analysis-card-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.analysis-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  flex: 1;
+}
+.analysis-card-body {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: var(--s2);
+}
+.analysis-card-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  transition: gap 0.15s var(--ease), color 0.15s;
+}
+.analysis-card-link::after { content: '→'; }
+.analysis-card-link:hover { color: var(--navy); gap: 8px; }
+
+/* ─── CTA ─── */
+.cta-section {
+  padding: var(--s6) var(--s4);
+  background: var(--navy);
+}
+.cta-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s6);
+  align-items: center;
+}
+.cta-title {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.cta-body {
+  font-size: 15px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 520px;
+}
+.cta-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  align-items: flex-start;
+  min-width: 260px;
+}
+.cta-form { display: flex; flex-direction: column; gap: var(--s1); width: 100%; }
+.cta-input {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.cta-input::placeholder { color: rgba(255,255,255,0.25); }
+.cta-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+.cta-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ─── RESPONSIVE ─── */
 @media (max-width: 1000px) {
-  .pri-dim-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(2,1fr); }
+  .cta-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .cta-right { min-width: unset; width: 100%; max-width: 380px; }
+}
+@media (max-width: 800px) {
+  .cdm-inner { grid-template-columns: 1fr; gap: var(--s2); }
+  .products-grid { grid-template-columns: 1fr; }
+  .analysis-grid { grid-template-columns: 1fr; }
+  .pri-dim-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 600px) {
-  .pri-dim-grid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 110px var(--s2) 64px; }
+  .pri-section, .products-section, .analysis-section, .cta-section { padding: var(--s4) var(--s2); }
+  .cdm-band { padding: var(--s4) var(--s2); }
 }
 </style>
 
-<!-- ══════════════════════════════
-     PORT RISK INDEX
-══════════════════════════════ -->
-<section class="pri-section" id="pri">
-  <div class="pri-inner">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker">The Narrows</span>
+    <h1 class="hero-headline">Maritime trade risk intelligence.</h1>
+    <p class="hero-sub">Chokepoint exposure quantified by corridor, commodity, and vessel class. Available before the disruption.</p>
+    <a href="#briefing" class="btn btn-gold">Request a briefing</a>
+  </div>
+</section>
 
+<!-- CDM BAND -->
+<div class="cdm-band">
+  <div class="cdm-inner">
+    <div class="cdm-label">Chokepoint Dependency Model</div>
+    <p class="cdm-text">
+      Every product in The Narrows is built on the <strong>Chokepoint Dependency Model</strong>.
+      Bilateral trade data at commodity level, supplemented and validated with vessel, port, and market sources.
+      The CDM is available directly to institutional and analytical clients.
+    </p>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="products-inner">
+    <div class="products-header fade-up">
+      <h2 class="products-title">The product catalogue.</h2>
+      <p class="products-lead">The Narrows products are connected and built on a common data foundation. Different clients will need some, all, or none of them.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">Port Risk Index</div>
+          <span class="badge badge-free">Free</span>
+        </div>
+        <p class="product-desc">3,778 ports scored across four risk dimensions: accessibility, reliability, trade concentration, and political stability. The entry point to The Narrows data layer.</p>
+        <a href="/pri" class="product-link">Open the Port Risk Index</a>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">Analysis</div>
+          <span class="badge badge-free">Free</span>
+        </div>
+        <p class="product-desc">Corridor and scenario analysis demonstrating the method against live events. Published outputs proving the model and quantifying disruption.</p>
+        <a href="/analysis" class="product-link">Read the analysis</a>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">Chokepoint Dependency Model</div>
+          <span class="badge badge-paid">Paid</span>
+        </div>
+        <p class="product-desc">Bilateral trade dependency at commodity level across the world's principal maritime corridors. The data foundation. Available to institutional and analytical clients.</p>
+        <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="product-link">Enquire</a>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">CAPE</div>
+          <span class="badge badge-paid">Paid</span>
+        </div>
+        <p class="product-desc">The CDM applied to a specific cargo portfolio. Locked positions, divertible positions, and rerouting cost by vessel class. A demonstration version is available.</p>
+        <a href="/cape" class="product-link">View demonstration</a>
+        <span class="product-link-note">Full version runs against a live portfolio.</span>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">CASCADE</div>
+          <span class="badge badge-paid">Paid</span>
+        </div>
+        <p class="product-desc">Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.</p>
+        <a href="/cascade" class="product-link">View demonstration</a>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-card-top">
+          <div class="product-name">Bespoke Analysis</div>
+          <span class="badge badge-paid">Paid</span>
+        </div>
+        <p class="product-desc">The Narrows methodology applied to a specific event, portfolio, or research question. Commissioned scenario and corridor analysis delivered as a report.</p>
+        <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="product-link">Enquire</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRI PREVIEW -->
+<section class="pri-section">
+  <div class="pri-inner">
     <div class="pri-header fade-up">
-      <div class="pri-eyebrow">Port Risk Index</div>
       <h2 class="pri-title">3,778 ports scored.<br><em>Across four dimensions of risk.</em></h2>
       <p class="pri-lead">The Narrows Port Risk Index applies an INFORM-style composite methodology to every major port in the World Port Index. Physical accessibility, operational reliability, trade concentration, and political stability: each scored, each decomposable, one composite number per port.</p>
     </div>
 
-    <!-- Static preview of the PRI explorer -->
-    <div class="pri-preview fade-up">
-      <!-- Browser chrome -->
+    <div class="pri-preview fade-up" onclick="window.location='/pri'" role="link" tabindex="0" aria-label="Open Port Risk Index">
       <div class="pri-chrome-topbar">
         <div class="pri-chrome-dots">
           <div class="pri-chrome-dot"></div>
@@ -676,14 +542,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <span class="pri-chrome-url">narrows.io/pri · Port Risk Index · 3,778 ports</span>
       </div>
-
-      <!-- Search bar -->
       <div class="pri-search-bar">
         <span class="pri-search-icon">⌕</span>
         <span class="pri-search-text"><span class="pri-search-hit">Durban</span>, South Africa · Rank #1,885 of 3,778</span>
       </div>
-
-      <!-- Port header -->
       <div class="pri-port-header">
         <div>
           <div class="pri-port-name">Durban</div>
@@ -694,8 +556,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="pri-port-badge-score">1.52</span>
         </div>
       </div>
-
-      <!-- 4 dimension score cards -->
       <div class="pri-dim-grid">
         <div class="pri-dim-card">
           <div class="pri-dim-label">Dimension 1</div>
@@ -722,94 +582,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="pri-dim-bar"><div class="pri-dim-fill" style="width:7%;background:#D85A30"></div></div>
         </div>
       </div>
-
-      <!-- Distribution histogram -->
-      <div class="pri-hist-section">
-        <div class="pri-hist-label">Global PRI distribution · 3,778 ports · geometric mean composite</div>
-        <svg class="pri-hist-svg" viewBox="0 0 960 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-          <!-- 20 bins spanning PRI 0.65 → 3.65, bin width 0.15, each bar 46px wide, 2px gap — v1.2 -->
-          <!-- Heights normalized: peak bin (1.05-1.2) ≈ 750 ports → 80px -->
-          <rect x="0"   y="84" width="46" height="6"  fill="rgba(55,138,221,0.28)"/>
-          <rect x="48"  y="69" width="46" height="21" fill="rgba(55,138,221,0.38)"/>
-          <rect x="96"  y="21" width="46" height="69" fill="rgba(55,138,221,0.48)"/>
-          <rect x="144" y="14" width="46" height="76" fill="rgba(55,138,221,0.44)"/>
-          <rect x="192" y="0"  width="46" height="90" fill="rgba(55,138,221,0.48)"/>
-          <rect x="240" y="31" width="46" height="59" fill="rgba(55,138,221,0.40)"/>
-          <rect x="288" y="61" width="46" height="29" fill="rgba(55,138,221,0.34)"/>
-          <rect x="336" y="76" width="46" height="14" fill="rgba(55,138,221,0.28)"/>
-          <rect x="384" y="80" width="46" height="10" fill="rgba(100,130,180,0.28)"/>
-          <rect x="432" y="81" width="46" height="9"  fill="rgba(150,120,150,0.32)"/>
-          <rect x="480" y="85" width="46" height="5"  fill="rgba(180,110,120,0.36)"/>
-          <rect x="528" y="87" width="46" height="3"  fill="rgba(200,100,80,0.40)"/>
-          <rect x="576" y="88" width="46" height="2"  fill="rgba(216,90,48,0.48)"/>
-          <rect x="624" y="89" width="46" height="1"  fill="rgba(216,90,48,0.56)"/>
-          <rect x="672" y="88" width="46" height="2"  fill="rgba(216,90,48,0.64)"/>
-          <!-- Critical tier (PRI>=3.0): bins 16-19 highlighted -->
-          <rect x="720" y="89" width="46" height="1"  fill="rgba(216,90,48,0.70)"/>
-          <rect x="768" y="90" width="46" height="0"  fill="rgba(216,90,48,0.75)"/>
-          <rect x="816" y="90" width="46" height="0"  fill="rgba(216,90,48,0.82)"/>
-          <rect x="864" y="90" width="46" height="0"  fill="rgba(216,90,48,0.88)"/>
-          <rect x="912" y="89" width="46" height="1"  fill="rgba(216,90,48,0.95)"/>
-          <!-- Selected port marker: Durban PRI 1.29 → x ≈ 216 -->
-          <line x1="216" y1="0" x2="216" y2="90" stroke="#378ADD" stroke-width="1.5" stroke-dasharray="4,3"/>
-          <circle cx="216" cy="84" r="4" fill="#378ADD"/>
-          <text x="226" y="14" font-size="10" fill="#378ADD" font-family="system-ui,sans-serif" font-weight="600">Durban · 1.29</text>
-          <!-- Axis labels -->
-          <text x="2"   y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">0.65</text>
-          <text x="432" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">2.0</text>
-          <text x="916" y="88" font-size="9" fill="rgba(10,37,64,0.35)" font-family="system-ui,sans-serif">3.65</text>
-        </svg>
-      </div>
-
-      <!-- Table preview, blurred below fold -->
       <div class="pri-table-wrap">
         <table class="pri-table">
           <thead>
-            <tr>
-              <th>Rank ↕</th><th>Port</th><th>Country</th>
-              <th>PRI ↓</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th>
-            </tr>
+            <tr><th>Rank</th><th>Port</th><th>Country</th><th>PRI</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th></tr>
           </thead>
           <tbody>
             <tr><td>3,778</td><td>Aden</td><td>Yemen</td><td>3.64</td><td>1.5</td><td>6.7</td><td>2.6</td><td>6.6</td></tr>
             <tr><td>3,803</td><td>Nueva Gerona</td><td>Cuba</td><td>3.12</td><td>5.9</td><td>5.9</td><td>1.5</td><td>1.8</td></tr>
-            <tr><td>3,802</td><td>Puerto Cabezas</td><td>Nicaragua</td><td>2.94</td><td>6.3</td><td>5.0</td><td>2.0</td><td>1.2</td></tr>
             <tr style="background:rgba(240,180,41,0.07)"><td>2,515</td><td>Durban</td><td>South Africa</td><td>1.29</td><td>0.5</td><td>4.3</td><td>3.4</td><td>0.4</td></tr>
-            <tr><td>…</td><td colspan="7"></td></tr>
-            <tr><td>1</td><td>Jurong Island</td><td>Singapore</td><td>0.71</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>1</td><td>Jurong Island</td><td>Singapore</td><td>0.71</td><td></td><td></td><td></td><td></td></tr>
           </tbody>
         </table>
         <div class="pri-blur-overlay">
-          <span class="pri-blur-msg">↓ 3,772 more ports · open the full index free</span>
+          <span class="pri-blur-msg">3,772 more ports · open the full index free</span>
         </div>
       </div>
     </div>
 
-    <!-- Open CTA -->
     <div class="pri-open-cta fade-up">
-      <a href="/pri" class="btn btn-gold">Open the Port Risk Index →</a>
-      <span class="pri-open-note">3,778 ports · free · no login after first visit</span>
+      <a href="/pri" class="btn btn-gold">Open the Port Risk Index</a>
+      <span class="pri-open-note">3,778 ports · free · no login required</span>
     </div>
-
   </div>
 </section>
 
-<hr class="div" />
+<!-- ANALYSIS -->
+<section class="analysis-section">
+  <div class="analysis-inner">
+    <div class="analysis-header fade-up">
+      <h2 class="analysis-title">The method, demonstrated.</h2>
+      <p class="analysis-sub">Published analysis applying The Narrows model to live events and corridors. Free to read.</p>
+    </div>
+    <div class="analysis-grid">
+      <a href="/analysis/model-validation-2024" class="analysis-card fade-up">
+        <div class="analysis-card-tag">Model Validation</div>
+        <div class="analysis-card-title">What the model predicted before the 2024 disruptions.</div>
+        <p class="analysis-card-body">The Chokepoint Dependency Model was built on 2022 data and locked before the Houthi Red Sea campaign and Panama Canal drought. Here is what it got right.</p>
+        <span class="analysis-card-link">Read</span>
+      </a>
+      <a href="/analysis/malacca" class="analysis-card fade-up">
+        <div class="analysis-card-tag">Strait of Malacca</div>
+        <div class="analysis-card-title">The Malacca toll question has a number. Here it is.</div>
+        <p class="analysis-card-body">Indonesia floated transit fees on the Strait of Malacca. The question did not go away. Bilateral trade dependency data quantifies who pays and by how much.</p>
+        <span class="analysis-card-link">Read</span>
+      </a>
+      <a href="/analysis/hormuz" class="analysis-card fade-up">
+        <div class="analysis-card-tag">Strait of Hormuz</div>
+        <div class="analysis-card-title">Hormuz and the limits of the index.</div>
+        <p class="analysis-card-body">The most modelled chokepoint in the world is also the most misunderstood. What the bilateral dependency data reveals about captivity, substitution, and who actually pays.</p>
+        <span class="analysis-card-link">Read</span>
+      </a>
+    </div>
+    <div style="margin-top:var(--s4)">
+      <a href="/analysis" class="btn-ghost">All analysis</a>
+    </div>
+  </div>
+</section>
 
-<!-- ══════════════════════════════
-     CTA
-══════════════════════════════ -->
-<section class="cta-section" id="contact">
+<!-- CTA -->
+<section class="cta-section" id="briefing">
   <div class="cta-inner">
     <div>
-      <h2 class="cta-title">Every assumption is a <em>conversation</em>,<br>not a constraint.</h2>
-      <p class="cta-sub">If your view of bypass capacity, vessel rates, or corridor sensitivity differs from our defaults, that is a one-parameter change. The demo runs your scenario, in front of you, with an analyst present. No sales funnel. A person will reply.</p>
+      <h2 class="cta-title">Request a briefing.</h2>
+      <p class="cta-body">The Narrows runs scenarios in front of the client, with the client's assumptions, on the corridor of interest. A person will respond.</p>
     </div>
     <div class="cta-right">
       <div class="cta-form">
         <input type="text" id="demo-honey" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;pointer-events:none" />
         <input type="email" class="cta-input" placeholder="your@organisation.com" id="demo-email" autocomplete="email" />
-        <button class="btn btn-gold cta-submit" id="demo-btn">Request a demo</button>
+        <button class="btn btn-gold" id="demo-btn" style="width:100%">Send</button>
       </div>
       <span class="cta-note">fysh@narrows.io · A person will reply.</span>
     </div>
@@ -817,32 +659,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </section>
 
 <script>
-function isValidEmailDemo(email: string): boolean {
+function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]{2,}\.[^\s@]{2,}$/.test(email);
 }
-function handleDemoRequest() {
+function handleRequest() {
   const input = document.getElementById('demo-email') as HTMLInputElement;
   const honey = document.getElementById('demo-honey') as HTMLInputElement;
   const email = input.value.trim();
   if (honey?.value) return;
-  if (!isValidEmailDemo(email)) {
+  if (!isValidEmail(email)) {
     input.style.borderColor = 'rgba(192,57,43,0.8)';
-    input.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.15)';
-    input.placeholder = 'Please enter a valid email address';
-    setTimeout(() => {
-      input.style.borderColor = ''; input.style.boxShadow = '';
-      input.placeholder = 'your@organisation.com';
-    }, 2000);
+    setTimeout(() => { input.style.borderColor = ''; }, 2000);
     return;
   }
-  window.location.href = `mailto:fysh@narrows.io?subject=Demo request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):`;
+  window.location.href = `mailto:fysh@narrows.io?subject=Briefing request: The Narrows&body=From: ${email}%0A%0AOrganisation:%0ARole:%0AProduct interest:%0A%0AContext (optional):`;
 }
-document.getElementById('demo-btn')?.addEventListener('click', handleDemoRequest);
+document.getElementById('demo-btn')?.addEventListener('click', handleRequest);
 document.getElementById('demo-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
-  if (e.key === 'Enter') handleDemoRequest();
+  if (e.key === 'Enter') handleRequest();
 });
 </script>
-
-
 
 </BaseLayout>
