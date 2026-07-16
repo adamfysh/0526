@@ -176,7 +176,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="meth-meta">
     <span class="meth-meta-item">Version 1.2</span>
     <span class="meth-meta-item">June 2026</span>
-    <span class="meth-meta-item">3778 ports · 28 fields</span>
+    <span class="meth-meta-item">3774 ports · 28 fields</span>
     <span class="meth-meta-item">Data vintage 2023/24</span>
   </div>
 </div>
@@ -232,7 +232,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         systematically understate concentrated risk.
       </p>
       <p class="meth-p">
-        <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3778-port
+        <strong>Lower PRI score = lower risk.</strong> The empirical range across the 3774-port
         universe is approximately 0.69 to 3.65. Score distributions are right-skewed: the median
         port falls below 1.3, and the large majority of ports fall below 2.0.
       </p>
@@ -245,7 +245,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         The PRI covers all ports in the <strong>National Geospatial-Intelligence Agency World Port
         Index (WPI), Publication 150</strong>, the standard global port registry used by the
-        maritime industry. The WPI lists 3778 ports across 195 countries, from major transshipment
+        maritime industry. The WPI lists 3774 ports across 195 countries, from major transshipment
         hubs to small coastal facilities.
       </p>
       <p class="meth-p">
@@ -388,11 +388,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         D2 is the most operationally variable dimension. Dwell time is the primary signal:
         the hours a vessel sits idle at berth represent charter cost bleeding away in real time.
-        Port-level differentiation is introduced via dwell time and port state control inspection
-        records where port-specific data is available. The World Bank LPI is retained as a stored
-        reference field but is not included in the v1.2 composite, as dwell time is derived from
-        LPI for non-CPPI ports (Spearman rho = -0.94), creating a near-identical collinear signal
-        that would violate the OECD Handbook double-counting rule.
+        Dwell time is populated from three tiers of decreasing precision, applied in order of
+        availability. Where a port has direct, individually reported dwell data, that value is
+        used. Where it does not but its country was covered by UNCTAD's 2021 median time-in-port
+        study, that country median is used as a real (if dated and country-level, not port-level)
+        measurement. For all remaining ports, dwell is estimated from the World Bank Logistics
+        Performance Index (LPI) via a calibrated proxy formula &mdash; the least precise tier, used
+        only where no measured alternative exists. The LPI score itself is retained as a stored
+        reference field but is not included in the v1.2 composite, since dwell time is derived
+        from LPI for proxy-tier ports (Spearman rho = -0.94), and including both would violate the
+        OECD Handbook double-counting rule.
       </p>
 
       <div class="meth-table-wrap">
@@ -408,8 +413,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <tbody>
             <tr>
               <td><code>dwell_hours</code></td>
-              <td>Estimated average container dwell time in hours. For ports in the World Bank Container Port Performance Index (CPPI), direct port-level dwell data is used. For all other ports, dwell is estimated from the World Bank LPI via a calibrated proxy. Longer dwell time represents charter cost accruing without productive use of the vessel.</td>
-              <td>World Bank PPPI / CPPI, industry sources</td>
+              <td>Estimated average container dwell time in hours, populated from three tiers in order of precision: (1) direct reported port-level dwell data where available; (2) UNCTAD Review of Maritime Transport 2022 country-median time-in-port, converted from days to hours, for ports in 25 countries not covered by tier 1 &mdash; this data reflects 2021 conditions and is applied at country, not port, granularity, and is the most recent by-country breakdown UNCTAD has published (later editions switched to a world/vessel-type format); (3) for all remaining ports, a calibrated proxy derived from the World Bank LPI. Longer dwell time represents charter cost accruing without productive use of the vessel.</td>
+              <td>Industry-reported port data; UNCTAD RMT 2022 (2021 data); World Bank LPI</td>
               <td>Longer dwell = higher risk</td>
             </tr>
             <tr>
@@ -562,7 +567,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         The PRI is a relative risk measure, not an absolute probability of disruption. It supports
         comparison within and across port populations. The following bands reflect the empirical
-        distribution of the 3778-port universe.
+        distribution of the 3774-port universe.
       </p>
 
       <div class="meth-bands">
@@ -791,9 +796,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="meth-p">
         <strong>Illustrative example.</strong> A VLCC with a charterPerDay of USD 84,000 sitting
         at a port with average 72-hour dwell incurs a charter bleed of 3 days &times; USD 84,000
-        = USD 252,000 per call. An equivalent vessel at Rotterdam (average dwell 18 hours) incurs
-        USD 63,000 per call. The 54-hour dwell gap costs USD 189,000 per call in pure charter
-        terms, before bunker and port fees.
+        = USD 252,000 per call. An equivalent vessel at Rotterdam (average dwell 20 hours) incurs
+        roughly USD 70,000 per call. The 52-hour dwell gap costs roughly USD 182,000 per call in
+        pure charter terms, before bunker and port fees. Figures update as the underlying dwell
+        and rate data refresh; treat the port-specific number as indicative rather than a live
+        quote &mdash; use the interactive calculator for a current figure.
       </p>
       <p class="meth-p">
         Charter bleed is available as an interactive calculator within the Narrows CDM and CAPE
@@ -830,19 +837,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         cannot distinguish a slow port from a risky one. The PRI is designed around that
         distinction. Scope differs as well: the CPPI covers container operations only, and its
         Fuel Consumption Index weighting is appropriate for container logistics optimisation but
-        not for a risk index used across vessel types. The PRI covers 3,778 ports across all
+        not for a risk index used across vessel types. The PRI covers 3,774 ports across all
         vessel classes, including bulk, tanker, general cargo, and RoRo facilities for which no
         CPPI equivalent exists.
       </p>
       <p class="meth-p">
-        The two indices are complementary rather than competitive. The CPPI mean-centered port
-        time data, adjusted for call size and vessel class, is a more precise dwell time signal
-        than raw dwell figures, and where CPPI coverage overlaps with the PRI universe it is a
-        candidate calibration input for the D2 reliability dimension. Users who need to benchmark
-        container port efficiency for logistics planning should consult the CPPI directly. Users
-        assessing port risk across a mixed cargo or vessel book: for underwriting, supply chain
-        stress testing, or trade finance, are working a question the CPPI is not designed to
-        answer.
+        The two indices are complementary rather than competitive, but they are not
+        interchangeable, and we tested this directly rather than assuming it. Because the CPPI
+        score is mean-centered and adjusted for call size and vessel class by design, we found no
+        usable statistical relationship between a port's CPPI score and its actual measured dwell
+        hours (R&sup2; &asymp; 0.02 against ports with independently known dwell data). The CPPI
+        is not, in other words, a valid proxy for raw dwell time, and we do not use it as one.
+        Where a port has a CPPI 2024 score it is stored on the PRI record for reference and
+        cross-benchmarking only; it does not feed the D2 dwell calculation. Users who need to
+        benchmark container port efficiency for logistics planning should consult the CPPI
+        directly. Users assessing port risk across a mixed cargo or vessel book: for
+        underwriting, supply chain stress testing, or trade finance, are working a question the
+        CPPI is not designed to answer.
       </p>
     </div>
 
