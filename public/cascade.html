@@ -61,6 +61,15 @@
     .ctx-pill.listed{background:rgba(185,28,28,.22);color:#fca5a5}
     .ctx-pill.not{background:rgba(21,101,168,.18);color:#93c5fd}
 
+    /* ── SPILLOVER BANNER ── */
+    .spillover-banner{display:none;background:linear-gradient(90deg,rgba(240,180,41,.14),rgba(240,180,41,.04));border-top:1px solid rgba(240,180,41,.35);border-bottom:1px solid rgba(240,180,41,.35);padding:9px 32px}
+    .spillover-banner.show{display:block}
+    .spillover-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:10px}
+    .spillover-icon{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;background:rgba(240,180,41,.18);padding:2px 7px;border-radius:3px;flex-shrink:0}
+    .spillover-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.4}
+    .spillover-text b{color:var(--gold);font-weight:600}
+    .spillover-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-decoration:underline;cursor:pointer;flex-shrink:0;white-space:nowrap}
+
     /* ── EXPOSURE STRIP ── */
     .exp-strip{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.05);padding:16px 32px}
     .exp-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.1fr repeat(3,1fr) 1fr auto;gap:0;align-items:stretch}
@@ -199,6 +208,14 @@
   </div>
 </div>
 
+<div class="spillover-banner" id="spilloverBanner">
+  <div class="spillover-inner">
+    <span class="spillover-icon">Cascade link</span>
+    <span class="spillover-text" id="spilloverText"></span>
+    <span class="spillover-link" id="spilloverLink"></span>
+  </div>
+</div>
+
 <div class="exp-strip">
   <div class="exp-inner">
     <div class="exp-cell">
@@ -293,6 +310,10 @@ function altRoute(cpId, cls, wt) {
     if (wt === 'pre') return {route:'Cape of Good Hope',           days:14,   cost:'+$2.1M bunker',        newCps:[]};
     return               {route:'Cape of Good Hope',               days:16,   cost:'+$2.4M bunker',        newCps:[]};
   }
+  if (cpId === 'blacksea') {
+    if (wt === 'pre') return {route:'Re-nominate to non-CPC Black Sea terminal', days:0, cost:'Freight adjustment only', newCps:[]};
+    return {route:'Await naval-escorted convoy slot', days:3, cost:'+$1.1M war-risk premium', newCps:[]};
+  }
   // malacca — pre-commitment: full optionality, no diversion cost
   if (wt === 'pre') return {route:'Re-nominate loading port', days:0, cost:'Freight adjustment only', newCps:[]};
   // malacca — route depends on vessel class
@@ -361,6 +382,7 @@ bab:{
   jwc:true, jwcLabel:'JWC Listed — T3',
   threat:'Active Houthi anti-ship campaign. 40+ vessel attacks since Oct 2023. MSC, BP, and Maersk have suspended Red Sea routing. JWC war risk premiums elevated.',
   residualNote:'In-window vessels approaching Red Sea. Active Houthi threat at this range. UKMTO Dubai advisory in effect. Naval escort requests can be made via UKMTO.',
+  spillover:{corridor:'blacksea', note:'Cape-diverted cargo is competing for Suezmax tonnage that would otherwise serve the Black Sea \u2014 this corridor is not isolated from that one.'},
   locked:[
     {id:'b01',name:'ADEN RESOLVE',    cls:'Suezmax',  val:88, flag:'LR',crew:22,ukNat:0,cargo:'Crude',    cii:'C', note:'Gulf of Aden. Bab passage in 18h. No option.'},
     {id:'b02',name:'MEDSTAR PELICAN', cls:'Container', val:105,flag:'PA',crew:21,ukNat:1,cargo:'Container',cii:'B', note:'Red Sea transit. MSC feeder. Committed to Suez slot.'},
@@ -386,6 +408,32 @@ bab:{
     {id:'b18',name:'MED ACE',         cls:'Container', val:82, flag:'MT',crew:21,ukNat:2,cargo:'Container',cii:'C', note:'Feeder. T-22. Cape route if instructed.'},
     {id:'b19',name:'TETHYS VOYAGER',  cls:'Aframax',   val:66, flag:'BS',crew:19,ukNat:1,cargo:'Crude',    cii:'D', note:'Crude. Liftings in negotiation.'},
     {id:'b20',name:'COMPASS ROSE',    cls:'LNG',       val:120,flag:'GB',crew:30,ukNat:10,cargo:'LNG',     cii:'A', note:'UK-flagged LNG carrier. Charter not yet signed.'},
+  ],
+},
+
+blacksea:{
+  name:'Black Sea / CPC Terminal', short:'Black Sea',
+  region:'Novorossiysk / Kerch Strait / CPC Marine Terminal',
+  jwc:true, jwcLabel:'JWC Listed \u2014 T1',
+  threat:'Ukrainian long-range strikes on tankers loading Russian and Kazakh crude at the CPC pipeline terminus. Two vessels hit at CPC in the past week alone. Suezmax rates on this route have spiked toward all-time highs \u2014 not purely a local shock: Red Sea-avoiding cargo is competing for the same Suezmax tonnage pool, on top of the direct Ukraine risk.',
+  residualNote:'In-window vessels approaching Novorossiysk / CPC anchorage. Elevated strike risk at berth and at anchor. War-risk premiums moving faster than the underlying incident rate would suggest on its own.',
+  spillover:{corridor:'bab', note:'Part of this corridor\u2019s rate spike traces back to Bab el-Mandeb \u2014 vessels avoiding the Red Sea are bidding up the same Suezmax pool that serves this route.'},
+  locked:[
+    {id:'k01',name:'NOVOROSSIYSK PRIDE', cls:'Suezmax', val:84, flag:'LR',crew:22,ukNat:0,cargo:'Crude', cii:'C', note:'Loaded at CPC Marine Terminal. Departure imminent. No option.'},
+    {id:'k02',name:'KERCH VOYAGER',      cls:'Suezmax', val:80, flag:'MH',crew:21,ukNat:0,cargo:'Crude', cii:'D', note:'Laden, Kerch Strait approach. Bills of lading issued.'},
+    {id:'k03',name:'AZOV STAR',          cls:'Aframax', val:60, flag:'PA',crew:18,ukNat:0,cargo:'Crude', cii:'D', note:'Loaded at Novorossiysk. Bosphorus transit booked.'},
+    {id:'k04',name:'TAMAN LEGACY',       cls:'Suezmax', val:82, flag:'BS',crew:21,ukNat:1,cargo:'Crude', cii:'C', note:'CPC Marine Terminal, single-point mooring. Loading complete.'},
+    {id:'k05',name:'STEPPE MARINER',     cls:'Aframax', val:58, flag:'MT',crew:18,ukNat:0,cargo:'Crude', cii:'E', note:'Anchorage off Novorossiysk. Cargo documents issued.'},
+  ],
+  in_window:[
+    {id:'k06',name:'PONTIC HORIZON',     cls:'Suezmax', val:86, flag:'LR',crew:21,ukNat:0,cargo:'Crude', cii:'C', window_h:44, note:'Approaching CPC anchorage. Charterer reviewing after this week\u2019s strikes.'},
+    {id:'k07',name:'KUBAN SPIRIT',       cls:'Suezmax', val:78, flag:'CY',crew:20,ukNat:0,cargo:'Crude', cii:'D', window_h:30, note:'Black Sea approach. Convoy slot pending.'},
+    {id:'k08',name:'CAUCASUS DAWN',      cls:'Aframax', val:62, flag:'MH',crew:18,ukNat:0,cargo:'Crude', cii:'D', window_h:20, note:'Final approach. Divert or hold for escort.'},
+  ],
+  pre:[
+    {id:'k09',name:'SARMATIAN TIDE',     cls:'Suezmax', val:90, flag:'GB',crew:22,ukNat:6,cargo:'Crude', cii:'C', note:'Liftings not yet confirmed. Re-nomination to a non-CPC terminal viable.'},
+    {id:'k10',name:'MAEOTIAN GRACE',     cls:'Suezmax', val:85, flag:'MT',crew:21,ukNat:0,cargo:'Crude', cii:'D', note:'Charter fixture in negotiation. Full optionality.'},
+    {id:'k11',name:'DON ESTUARY',        cls:'Aframax', val:64, flag:'PA',crew:19,ukNat:0,cargo:'Crude', cii:'D', note:'No commitment made. Alternate Black Sea terminal available.'},
   ],
 },
 
@@ -459,9 +507,10 @@ function animVal(id, target){
 // ── BUILD TABS ────────────────────────────────────────────────────────────────
 function buildTabs(){
   const defs=[
-    {id:'hormuz', label:'Hormuz',        badge:'JWC T1', bc:'jwc1'},
-    {id:'bab',    label:'Bab el-Mandeb', badge:'JWC T3', bc:'jwc3'},
-    {id:'malacca',label:'Malacca',       badge:'T2',     bc:'t2'},
+    {id:'hormuz',  label:'Hormuz',          badge:'JWC T1', bc:'jwc1'},
+    {id:'bab',     label:'Bab el-Mandeb',   badge:'JWC T3', bc:'jwc3'},
+    {id:'blacksea',label:'Black Sea / CPC', badge:'JWC T1', bc:'jwc1'},
+    {id:'malacca', label:'Malacca',         badge:'T2',     bc:'t2'},
   ];
   document.getElementById('cpBar').innerHTML=defs.map((d,i)=>
     `<button class="cp-tab${d.id===activeCp?' active':''}" onclick="selectCp('${d.id}')">
@@ -489,6 +538,18 @@ function renderCtx(){
   const pill=document.getElementById('ctxJwc');
   pill.textContent=cp.jwcLabel;
   pill.className='ctx-pill '+(cp.jwc?'listed':'not');
+
+  const banner=document.getElementById('spilloverBanner');
+  if(cp.spillover){
+    document.getElementById('spilloverText').innerHTML=cp.spillover.note;
+    const linkedName=FLEETS[cp.spillover.corridor].short;
+    const link=document.getElementById('spilloverLink');
+    link.textContent='View '+linkedName+' \u2192';
+    link.onclick=()=>selectCp(cp.spillover.corridor);
+    banner.classList.add('show');
+  } else {
+    banner.classList.remove('show');
+  }
 }
 
 // ── MAKE CARD ─────────────────────────────────────────────────────────────────
