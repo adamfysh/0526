@@ -607,26 +607,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="meth-section-num">Section 9</div>
       <h2>Data Tiers</h2>
       <p class="meth-p">
-        The <code>data_tier</code> field (A, B, or C) reflects overall data coverage quality for
-        each port. It is a summary signal, not an additional risk score.
+        The <code>data_tier</code> field reflects overall data coverage quality for each port. It
+        is a summary signal, not an additional risk score. As of the current build, the tier
+        system has two active values, not three — the definitions below describe the full
+        intended three-tier system, with the current coverage numbers stated honestly against it.
       </p>
       <p class="meth-p">
         <strong>Tier A:</strong> Full primary data across all four dimensions. The composite PRI
-        is based entirely on directly sourced indicators. Approximately 60% of the WPI universe.
+        is based entirely on directly sourced indicators. Currently approximately 2% of the WPI
+        universe (79 ports) — almost all of them ports with real CDM-derived catchment data (D3).
+        This is a smaller share than earlier drafts of this page stated; expanding it is active,
+        tracked work, not a static target.
       </p>
       <p class="meth-p">
-        <strong>Tier B:</strong> Partial gaps in one or two dimensions, filled with country-level
-        or imputed estimates. The composite is reliable but carries additional uncertainty in the
-        affected dimensions.
+        <strong>Tier B:</strong> Gaps in one or more dimensions, filled with country-level or
+        imputed estimates. The composite is directionally reliable but carries additional
+        uncertainty in the affected dimensions. Currently approximately 98% of the WPI universe
+        (3,695 ports) sit in this tier — in practice, most ports today are Tier B specifically
+        because D2 (dwell/port safety) and D3 (catchment) still rely on country-level or proxy
+        data for the large majority of ports; see Section 10.
       </p>
       <p class="meth-p">
-        <strong>Tier C:</strong> Significant gaps in three or more dimensions. The composite
-        should be treated as an indicative estimate. Tier C ports are typically very small
-        facilities for which public source data is sparse.
+        <strong>Tier C</strong> (significant gaps in three or more dimensions, composite treated
+        as indicative only) is defined but not currently populated — no port in the current build
+        falls below the Tier B threshold. This tier exists for completeness and may see ports
+        assigned to it as the underlying per-dimension confidence tracking (see <code>n_dims</code>
+        below) is built out further.
       </p>
       <p class="meth-p">
-        The <code>n_dims</code> field records how many of the four dimension scores are based on
-        complete primary data (0–4), providing more granular coverage information than the tier alone.
+        The <code>n_dims</code> field is intended to record how many of the four dimension scores
+        are based on complete primary data (0–4) for a given port, providing more granular
+        coverage information than the tier alone. In the current build this field is not yet
+        differentiated per port and should not be relied on until that work is complete — the
+        <code>data_tier</code> field above is the only currently-meaningful coverage signal.
       </p>
     </div>
 
