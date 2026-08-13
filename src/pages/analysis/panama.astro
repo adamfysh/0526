@@ -5,7 +5,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <ArticleLayout
   title="El Niño will throttle the Panama Canal. <em>This is a quantification challenge</em>"
   description="A full closure is dramatic and unlikely. A sustained partial disruption as El Niño events typically produce, is highly consequential for food supply chains, prices and hedges."
-  eyebrow="Scenario analysis · Panama Canal · May 2026"
+  eyebrow="Scenario analysis · Panama Canal · May 2026, updated Aug 2026"
   publishDate="May 2026"
   readTime="14 min read"
   author="Narrows Research"
@@ -15,8 +15,8 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="stat-bar-inner">
     <div class="stat-bar-item">
       <div class="stat-bar-label">Grain trade at risk: 50% severity, 90 days</div>
-      <div class="stat-bar-value">$46.5B</div>
-      <div class="stat-bar-unit">Corn, soy, wheat combined · model output</div>
+      <div class="stat-bar-value">$14.0B</div>
+      <div class="stat-bar-unit">Corn, soy, wheat combined · CDM v3, updated Aug 2026</div>
     </div>
     <div class="stat-bar-item">
       <div class="stat-bar-label">Aggregate VaR: Feb 2024 equivalent severity</div>
@@ -409,13 +409,21 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <hr class="section-rule" />
 
+<div class="callout">
+  <div class="callout-label">Updated August 2026: corn added as a full commodity, and a routing-engine bug fixed</div>
+  <div class="callout-body">
+    <p>Two changes since the May 2026 version of this article, both material to the tables below. First, corn (HS 1005) is now a real, independently-pulled UN Comtrade commodity in the model rather than a placeholder — wheat, soybean, and corn are tracked as three separate lines throughout, not merged into a single "grain" bucket, on the view that food-security analysis will eventually need to know which grain is exposed, not just that "grain" is.</p>
+    <p>Second, and more consequential: the routing engine that assigns bilateral trade flows to chokepoints was found to be taking only each country's <em>dominant</em> port basin and silently discarding the rest, even where a country had genuine port capacity on both the Atlantic and Pacific sides. US grain exports, for example, really do split roughly 83/17 between Gulf/Atlantic ports (Houston, New Orleans) and Pacific Northwest ports (Seattle) — but the routing engine was crediting Panama with 100% of that trade regardless, because Seattle's real Pacific-direct routing was never being consulted. The same issue affected import-side countries that lacked any grain port in the routing database at all: Japan, South Korea, Colombia, and Mexico among them, all now added. Fixing this drops this page's aggregate grain-trade-at-risk figure from the previously-published $31B–$93B range to $9.3B–$28.0B — a real correction, not a change in underlying risk, and one that removes some genuinely mistaken country-level claims (Mexico's corn exposure was never really 53%; Brazil's wheat exposure was never really 99.5%) while leaving Japan and South Korea's real, structural exposure intact or, in Japan's case, properly recognised for the first time.</p>
+  </div>
+</div>
+
 <div class="section-eyebrow">Agricultural exposure</div>
 <h2 class="article-section-title">The energy story dominates coverage. The agricultural story is where the binary constraints are.</h2>
 
 <p class="prose">Panama Canal analysis in commercial shipping focuses disproportionately on container trade. The agricultural commodity exposure is structurally different and, for a subset of importers, considerably more acute. The canal carries a significant fraction of US corn and soybean exports destined for Asia, Southern Cone grain flows, and wheat imports for several Latin American economies with limited overland alternatives.</p>
 
 <div class="n-table-wrap" style="margin:28px 0;">
-  <div class="n-table-title">Panama Canal bilateral dependency: corn (HS 1005), 2023</div>
+  <div class="n-table-title">Panama Canal bilateral dependency: corn (HS 1005), 2024 (CDM v3, updated Aug 2026)</div>
   <table class="n-table">
     <thead>
       <tr>
@@ -427,18 +435,20 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
       </tr>
     </thead>
     <tbody>
-      <tr><td class="bold">Mexico</td><td class="num dep-high">53.2%</td><td class="num">$5.76B</td><td class="num bold">$2.59B</td><td><span class="verdict-caution">Partial: Pacific ports and land border available. See note.</span></td></tr>
-      <tr><td class="bold">Vietnam</td><td class="num dep-mid">17.1%</td><td class="num">$2.19B</td><td class="num bold">$0.98B</td><td><span class="verdict-no">No viable alternative at scale within a single season</span></td></tr>
-      <tr><td class="bold">Japan</td><td class="num dep-low">6.3%</td><td class="num">$4.65B</td><td class="num bold">$2.09B</td><td><span class="verdict-caution">Partial: PNW and Ukraine routes exist but are volume-constrained. See note.</span></td></tr>
-      <tr><td class="bold">South Korea</td><td class="num dep-low">5.8%</td><td class="num">$2.27B</td><td class="num bold">$1.02B</td><td><span class="verdict-caution">Partial: same constraints as Japan</span></td></tr>
-      <tr><td class="bold">Taiwan</td><td class="num dep-low">6.8%</td><td class="num">$1.08B</td><td class="num bold">$0.49B</td><td><span class="verdict-no">No land alternative · island economy · PNW volumes insufficient</span></td></tr>
-      <tr><td class="bold">China</td><td class="num dep-low">1.1%</td><td class="num">$6.66B</td><td class="num bold">$3.00B</td><td><span class="verdict-caution">Brazilian and Argentine origin viable substitute but faces same Canal constraint</span></td></tr>
+      <tr><td class="bold">China</td><td class="num dep-mid">62.7%</td><td class="num">$2.36B</td><td class="num bold">$1.06B</td><td><span class="verdict-caution">Brazilian and Argentine origin viable substitute but faces same Canal constraint</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-mid">47.1%</td><td class="num">$1.85B</td><td class="num bold">$0.83B</td><td><span class="verdict-caution">Partial: PNW and Ukraine routes exist but are volume-constrained. See note.</span></td></tr>
+      <tr><td class="bold">South Korea</td><td class="num dep-mid">39.8%</td><td class="num">$1.16B</td><td class="num bold">$0.52B</td><td><span class="verdict-caution">Partial: same constraints as Japan</span></td></tr>
+      <tr><td class="bold">Colombia</td><td class="num dep-high">64.5%</td><td class="num">$1.02B</td><td class="num bold">$0.46B</td><td><span class="verdict-no">Atlantic side only for this trade: Panama routing required</span></td></tr>
+      <tr><td class="bold">Peru</td><td class="num dep-high">95.1%</td><td class="num">$0.98B</td><td class="num bold">$0.44B</td><td><span class="verdict-no">No viable alternative at scale within a single season</span></td></tr>
+      <tr><td class="bold">El Salvador</td><td class="num dep-high">83.8%</td><td class="num">$0.17B</td><td class="num bold">$0.07B</td><td><span class="verdict-no">No land alternative at comparable freight economics</span></td></tr>
     </tbody>
   </table>
 </div>
 
+<p class="prose">This table changed shape substantially in the August 2026 model update, and the change is itself the finding. The May 2026 version of this table led with Mexico at 53.2% Panama dependency ($5.76B) and included Vietnam (17.1%) and Taiwan (6.8%). All three have been removed. Mexico's US corn imports move by rail and short-sea Gulf routing that never approaches the isthmus — a routing-engine limitation was crediting Panama with Mexico's land-border trade, and correcting it takes Mexico's real Panama corn exposure to effectively zero, not a large partial number. Vietnam's corn (mostly South American and Black Sea origin) was already correctly reaching Vietnam via Malacca, Suez, and Bab el-Mandeb without ever touching Panama; the old table's Panama attribution for Vietnam did not hold up. Taiwan currently has no corn coverage in the model at all — a genuine data gap, not a verified zero, and it is dropped from this table rather than asserted either way. Japan and South Korea, the two importers the "why substitution is slower than it looks" callout below is built around, remain genuinely and materially exposed once the routing is corrected — that part of the original analysis holds.</p>
+
 <div class="n-table-wrap" style="margin:28px 0;">
-  <div class="n-table-title">Panama Canal bilateral dependency: soybean (HS 1201), 2023</div>
+  <div class="n-table-title">Panama Canal bilateral dependency: soybean (HS 1201), 2024 (CDM v3, updated Aug 2026)</div>
   <table class="n-table">
     <thead>
       <tr>
@@ -450,19 +460,21 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
       </tr>
     </thead>
     <tbody>
-      <tr><td class="bold">China</td><td class="num dep-mid">34.8%</td><td class="num">$58.42B</td><td class="num bold">$26.29B</td><td><span class="verdict-caution">Brazilian origin via Atlantic viable but ships through Canal or Cape Horn</span></td></tr>
-      <tr><td class="bold">Thailand</td><td class="num dep-mid">32.9%</td><td class="num">$1.95B</td><td class="num bold">$0.88B</td><td><span class="verdict-no">No alternative soy source at comparable scale</span></td></tr>
-      <tr><td class="bold">Mexico</td><td class="num dep-mid">18.4%</td><td class="num">$2.00B</td><td class="num bold">$0.90B</td><td><span class="verdict-caution">Partial: Pacific-side import infrastructure available</span></td></tr>
-      <tr><td class="bold">Colombia</td><td class="num dep-high">100.0%</td><td class="num">$0.57B</td><td class="num bold">$0.26B</td><td><span class="verdict-no">Atlantic side only: Panama routing required for Pacific-origin soy</span></td></tr>
-      <tr><td class="bold">Japan</td><td class="num dep-low">3.0%</td><td class="num">$2.18B</td><td class="num bold">$0.98B</td><td><span class="verdict-no">No alternative soy source that bypasses Panama at scale</span></td></tr>
+      <tr><td class="bold">China</td><td class="num dep-mid">33.2%</td><td class="num">$17.52B</td><td class="num bold">$7.88B</td><td><span class="verdict-caution">Brazilian origin via Atlantic viable but ships through Canal or Cape Horn</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-mid">48.3%</td><td class="num">$0.92B</td><td class="num bold">$0.41B</td><td><span class="verdict-no">No alternative soy source that bypasses Panama at scale</span></td></tr>
+      <tr><td class="bold">South Korea</td><td class="num dep-mid">49.3%</td><td class="num">$0.35B</td><td class="num bold">$0.16B</td><td><span class="verdict-no">Same constraint as Japan</span></td></tr>
+      <tr><td class="bold">Colombia</td><td class="num dep-high">64.2%</td><td class="num">$0.14B</td><td class="num bold">$0.06B</td><td><span class="verdict-caution">Partial: Pacific-side import infrastructure (Buenaventura) now reflected</span></td></tr>
+      <tr><td class="bold">Mexico</td><td class="num dep-low">3.0%</td><td class="num">$0.05B</td><td class="num bold">$0.02B</td><td><span class="verdict-caution">Mostly land-border/short-sea; residual is non-US-origin soy</span></td></tr>
     </tbody>
   </table>
 </div>
+
+<p class="prose">China's figure moved the most in absolute terms: $58.42B down to $17.52B. This is not a routing correction so much as a stale-data correction — the May 2026 article's underlying bilateral figure predates the CDM v3 multi-vintage rebuild (5 August 2026), which blends 2022 and 2024 UN Comtrade pulls and replaced a number that, on reflection, implied a larger share of China's total soybean import book than independent trade data supports. Thailand (32.9% in the earlier table) is gone for the same reason Vietnam is gone from the corn table: its soy imports route to Southeast Asia without a Panama transit. Japan's dependency moved the other way, from a implausibly low 3.0% up to 48.3%, once its Kashima grain-import terminal was added to the routing model and the US Gulf/Pacific Northwest export split (roughly 83/17) could actually be applied on the Japan side instead of collapsing to a single default. Colombia's number came down from a mechanically-forced 100.0% to 64.2% once Buenaventura, Colombia's real Pacific-coast grain gateway, was added — the remaining Atlantic-side share genuinely does need Panama.</p>
 
 <div class="callout">
   <div class="callout-label">On sourcing alternatives: why substitution is slower than it looks</div>
   <div class="callout-body">
-    <p>The obvious question is why Japan, South Korea, and Vietnam cannot simply source corn from US Pacific Northwest ports or alternative origins. The answer is structural, not theoretical.</p>
+    <p>The obvious question is why Japan and South Korea cannot simply source corn from US Pacific Northwest ports or alternative origins. The answer is structural, not theoretical. (Vietnam and Mexico no longer belong in this question — the corrected routing shows both already sourcing corn in ways that don't touch Panama at meaningful scale, which is precisely why they've dropped out of the table above.)</p>
     <p><strong>US Pacific Northwest corn:</strong> The Columbia River grain terminals, primarily Portland and Longview, do export corn directly to Asian buyers. This route requires no Panama transit. But PNW corn export capacity is a fraction of Gulf capacity, constrained by rail throughput from the Midwest and fixed terminal infrastructure. Japan imports approximately 15–16 million tonnes of corn per year. PNW corn export volumes cannot compensate for Gulf displacement within a single season, and terminal capacity cannot be rapidly scaled.</p>
     <p><strong>Brazilian and Argentine corn:</strong> Both countries are now among the world's largest corn exporters, but they ship from Atlantic ports, principally Santos and Rosario. A vessel carrying Brazilian corn to Japan must either transit the Panama Canal (also affected under this scenario) or reroute via Cape Horn, adding 38 days and approximately $1.14M in voyage cost per Handymax. Substituting South American origin does not eliminate the Panama constraint for Asian buyers. It replaces one exposure with another.</p>
     <p><strong>Ukrainian and Black Sea corn:</strong> Ukraine ships from Black Sea ports through the Bosphorus and Suez Canal to Asia. This route does not touch Panama and represents a genuine sourcing alternative that bypasses the Canal constraint entirely. Japan and South Korea do import Ukrainian corn. The limitation is war-related supply uncertainty and elevated Black Sea insurance costs, which constrain available volumes and add their own freight premium.</p>
@@ -471,7 +483,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </div>
 </div>
 
-<p class="prose">The wheat picture adds a further dimension. Ecuador carries 100% canal dependency for wheat imports in the model, a structural exposure reflecting the absence of a viable Atlantic-side sourcing alternative at comparable freight economics. Colombia at 98.2% and Brazil at 99.5% round out the Latin American wheat exposure. These are not large absolute numbers, but they represent commodity flows with limited substitution flexibility and import-dependent domestic food systems.</p>
+<p class="prose">The wheat picture adds a further dimension, and it is where the basin/elasticity correction matters most directly. The May 2026 version of this paragraph put Ecuador at 100% canal dependency, Colombia at 98.2%, and Brazil at 99.5%. Brazil should never have been in that list at all: Brazil is an Atlantic-facing wheat importer for US-origin supply and does not route through Panama for it, and Brazil does not appear in the corrected Panama wheat table at all now — its absence is the correct answer, not a gap. Ecuador (70.6%, $0.35B) and Colombia (54.0%, $0.32B) remain genuinely exposed but well below the earlier near-total figures, for the same reason as the corn and soybean corrections above: both had real, mechanically-forced 100%-style attribution before either country had a Pacific-side import port in the routing model. Peru (60.3%), Chile (65.6%), Japan (51.8%), and South Korea (34.4%) are the other importers with material modeled wheat exposure through Panama; Japan in particular moved up from an unmodeled near-zero to a genuine structural figure once its own import-side routing was corrected, mirroring the soybean story.</p>
 
 <hr class="section-rule" />
 
@@ -500,7 +512,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
         <td class="bold">Low</td>
         <td class="num">24/day</td>
         <td class="num">33.3%</td>
-        <td class="num bold">$31.0B</td>
+        <td class="num bold">$9.3B</td>
         <td class="num">$1.14M</td>
         <td>Nov 2023: initial ACP intervention</td>
       </tr>
@@ -508,7 +520,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
         <td class="bold">Mid</td>
         <td class="num">18/day</td>
         <td class="num">50.0%</td>
-        <td class="num bold">$46.5B</td>
+        <td class="num bold">$14.0B</td>
         <td class="num">$1.14M</td>
         <td>Feb 2024: peak drought severity</td>
       </tr>
@@ -516,7 +528,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
         <td class="bold">High (ceiling)</td>
         <td class="num">0/day</td>
         <td class="num">100%</td>
-        <td class="num bold">$93.1B</td>
+        <td class="num bold">$28.0B</td>
         <td class="num">$1.14M</td>
         <td>Analytical ceiling: no historical precedent</td>
       </tr>
@@ -591,25 +603,27 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose"><strong>Commodity trading desks.</strong> The immediate price signal in a throttle event is basis widening: the freight differential between US Gulf delivery and Pacific Asian destination blows out as displaced vessels seek the Cape Horn alternative. At $1.14 million additional voyage cost on a Handymax carrying approximately 50,000 tonnes of corn, that is $22.80 per tonne in additional freight, roughly 11% of the delivered corn price at current levels. Trading houses with contractual optionality on origin, the ability to shift purchasing toward US Pacific Northwest, Ukrainian, or Australian origins, capture the basis differential as margin. Those without that optionality pass the cost to buyers or take it as a loss on open positions. The model identifies which bilateral trade flows are most exposed and by what magnitude, giving a cargo desk the information needed to restructure origin mix before a disruption rather than during it.</p>
 
-<p class="prose"><strong>Commodity derivatives and freight markets.</strong> A Panama throttle is structurally bullish CBOT corn: reduced export capacity tightens US domestic stocks while simultaneously reducing supply to the most import-dependent Asian buyers. The basis trade is straightforward in principle, long CBOT corn versus short Pacific freight, but the freight derivatives market for Panamax and Handymax routes is thin and illiquid compared to the Capesize market. The model does not generate a derivatives position directly, but it produces the position size, the bilateral exposure in dollars by commodity, that a trader would need to justify a futures or options structure. The gap between the model's $46.5B mid-severity grain VaR and the typical open interest in grain freight derivatives indicates the extent to which this risk is unhedged at an industry level.</p>
+<p class="prose"><strong>Commodity derivatives and freight markets.</strong> A Panama throttle is structurally bullish CBOT corn: reduced export capacity tightens US domestic stocks while simultaneously reducing supply to the most import-dependent Asian buyers. The basis trade is straightforward in principle, long CBOT corn versus short Pacific freight, but the freight derivatives market for Panamax and Handymax routes is thin and illiquid compared to the Capesize market. The model does not generate a derivatives position directly, but it produces the position size, the bilateral exposure in dollars by commodity, that a trader would need to justify a futures or options structure. The gap between the model's $14.0B mid-severity grain VaR and the typical open interest in grain freight derivatives indicates the extent to which this risk is unhedged at an industry level.</p>
 
 <p class="prose"><strong>Food security and policy.</strong> The financial desks absorb cost through freight premiums and basis adjustments. The food security question is different: who cannot absorb the cost at all. Japan and South Korea have the foreign exchange reserves and import flexibility to pay higher delivered grain prices for a season without a domestic supply crisis. Vietnam, Colombia, and Ecuador operate at tighter margins. A sustained six-month throttle that adds $22 to $30 per tonne to delivered corn and wheat costs passes through to domestic feed prices, then to livestock production costs, then to retail food prices, in economies where food expenditure is a higher share of household income. The 2023–24 event contributed to elevated agricultural commodity prices across Canal-dependent economies in Q4 2023 and Q1 2024. A repeat event with a moderate-to-strong El Niño driver would produce the same transmission. The policy question, for institutions such as ERIA, ADB, and the ASEAN Secretariat, is whether regional food security frameworks account for a recurring, hydrologically-driven supply chain shock that bilateral trade dependency analysis can now quantify in advance.</p>
 
 <hr class="section-rule" />
 
 <div class="section-eyebrow">What the model shows</div>
-<h2 class="article-section-title">The probable range is $31B to $93B in grain trade at risk. The mid-point is $46.5B. Neither figure is in most risk models.</h2>
+<h2 class="article-section-title">The probable range is $9.3B to $28.0B in grain trade at risk. The mid-point is $14.0B. Neither figure is in most risk models.</h2>
 
-<p class="prose">The Narrows Chokepoint Dependency Model produces three outputs for Panama Canal throttling scenarios: value at risk, rerouting penalty, and the commodity and country breakdown of exposure. The grain trade at risk range, $31B at 33% severity, $46.5B at 50% severity, and $93B at full closure, is derived from bilateral 2023 UN Comtrade data applied to a corridor dependency matrix for corn, soybean, and wheat. All grain data is Tier 3 and should be read as directionally correct rather than Tier 1 bilateral precision.</p>
+<p class="prose">The Narrows Chokepoint Dependency Model produces three outputs for Panama Canal throttling scenarios: value at risk, rerouting penalty, and the commodity and country breakdown of exposure. The grain trade at risk range, $9.3B at 33% severity, $14.0B at 50% severity, and $28.0B at full closure, is derived from a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data (CDM v3, rebuilt August 2026) applied to a basin-aware corridor dependency matrix for corn, soybean, and wheat, tracked as three separate commodity lines rather than a merged grain bucket. Wheat and corn are Tier 3 (Estimated); soybean is Tier 2 (Corroborated, ~50% bilateral-match coverage). This range is roughly a third of the $31B–$93B figures published in the May 2026 version of this article — the reduction is a routing and data-vintage correction, documented below, not a change in the underlying risk.</p>
 
-<p class="prose">The figures that are most analytically stable are those for the East Asian importers: Japan corn and soybean exposure at the mid-point severity runs to approximately $3B combined; South Korea approximately $1.4B. These are not the largest absolute numbers in the matrix. China's soybean exposure at 50% severity is $26.3B. But Japan and South Korea carry a structural constraint that China does not: no viable domestic production substitute at scale, and Pacific routing that is physically dependent on canal access or Cape Horn. For an underwriter assessing accumulation risk or a project finance team stress-testing a food import facility, those are the figures that belong in a scenario model.</p>
+<p class="prose">The figures that are most analytically stable are those for the East Asian importers: Japan corn and soybean exposure at the mid-point severity runs to approximately $1.2B combined; South Korea approximately $0.7B. These are not the largest absolute numbers in the matrix. China's soybean exposure at 50% severity is $7.9B. But Japan and South Korea carry a structural constraint that China does not: no viable domestic production substitute at scale, and Pacific routing that is physically dependent on canal access or Cape Horn. For an underwriter assessing accumulation risk or a project finance team stress-testing a food import facility, those are the figures that belong in a scenario model.</p>
 
 <p class="prose">The throttle problem, in the end, is a pricing problem. A full closure is dramatic, discussable, and precisely because it is dramatic, already present in most scenario frameworks. A sustained six-month reduction to 50% throughput is less dramatic, harder to communicate, and almost entirely absent from the risk models of the counterparties most exposed to it. The 2023–24 event established an empirical baseline. The forward ENSO outlook indicates the relevant risk horizon. The bilateral dependency data identifies who is on the hook. Running those inputs through a parametric model before the disruption begins is the step that most desks have not taken.</p>
 
 <div class="method-note">
   <div class="method-note-label">Data and methodology</div>
   <div class="method-note-body">
-    Bilateral dependency figures: Narrows Chokepoint Dependency Model v0.3 (May 2026). Source data: WITS UN Comtrade 2023 bilateral import data. All grain commodity figures (HS 1001, 1005, 1201) are Tier 3: aggregate routing. Aggregate and coal figures include Tier 1 bilateral data where available. Dep% = Panama-routed exposed value divided by total commodity imports. Panama sensitivity factor: 0.90. Value at risk = exposed trade value × severity × sensitivity. Rerouting penalty: Handymax all-in rate $30,000/day × 38-day Cape Horn detour = $1.14M/voyage. Neopanamax capacity loss: 44ft draft vs 50ft standard yields approximately 7,500 TEU vs 12,500 TEU per transit (Port Economics, Management and Policy, 2024). Monthly throughput data: ACP operational notices and BTS (2024). Rainfall and attribution data: World Weather Attribution (2024). Climate projections: Muñoz, Lawrence and Wang (2025). ENSO forecast and strength outlook: NOAA CPC, April 2026. Forward ENSO risk pattern: ACP (2026); Riviera Maritime Media (2026).
+    Bilateral dependency figures: Narrows Chokepoint Dependency Model v3 (rebuilt August 2026; corn/soybean/wheat tables and grain VaR scenarios updated from the May 2026 v0.3 baseline — see changelog note above the agricultural exposure section). Source data: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. Wheat (HS 1001) and corn (HS 1005) are Tier 3 (Estimated); soybean (HS 1201) is Tier 2 (Corroborated). Corn is a full independent Comtrade pull as of August 2026, not a placeholder — see changelog. Aggregate and coal figures include Tier 1 bilateral data where available. Dep% = Panama-routed exposed value divided by total commodity imports, computed via basin-aware routing (export-basin × import-basin weighted split, not a single dominant-basin assignment). Panama sensitivity factor: 0.90. Value at risk = exposed trade value × severity × sensitivity. Rerouting penalty: Handymax all-in rate $30,000/day × 38-day Cape Horn detour = $1.14M/voyage. Neopanamax capacity loss: 44ft draft vs 50ft standard yields approximately 7,500 TEU vs 12,500 TEU per transit (Port Economics, Management and Policy, 2024). Monthly throughput data: ACP operational notices and BTS (2024). Rainfall and attribution data: World Weather Attribution (2024). Climate projections: Muñoz, Lawrence and Wang (2025). ENSO forecast and strength outlook: NOAA CPC, April 2026. Forward ENSO risk pattern: ACP (2026); Riviera Maritime Media (2026).
+    <br /><br />
+    <strong>The all-commodity aggregate figures on this page (the second stat-bar item, and the "Monthly model progression" table's Aggregate VaR column) have not been re-verified against the CDM v3 rebuild and should be treated as pending re-verification.</strong> They combine a bulk-severity and a container-severity track using a blended methodology that predates this update; the underlying Panama container-trade base value has since changed substantially (broader HS 8703/8471/6109 coverage, 2024-vintage data), in a different direction and for different reasons than the grain-specific corrections above. The grain-specific figures throughout this page (stat bar, corn/soybean/wheat tables, and the Low/Mid/High grain VaR scenario table) are current as of the August 2026 rebuild; the all-commodity container/bulk blend is not, pending a separate methodology pass.
     <br /><br />
     <strong>References</strong><br />
     ACP (2026). The Panama Canal responds to the risk of El Niño with foresight. Autoridad del Canal de Panamá.<br />

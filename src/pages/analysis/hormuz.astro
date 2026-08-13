@@ -5,7 +5,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <ArticleLayout
  title="Hormuz and the <em>limits of the index.</em>"
  description="The Baltic Dirty Tanker Index has risen 156% since the disruption began. These numbers confirm that the market has priced in severe disruption. They cannot tell you which specific bilateral supply chains carry the exposure, at what percentage of total supply, or what each alternative pathway costs for each vessel class."
- eyebrow="Scenario analysis · Strait of Hormuz · May 2026"
+ eyebrow="Scenario analysis · Strait of Hormuz · May 2026, updated Aug 2026"
  publishDate="May 2026"
  readTime="14 min read"
  author="Narrows Research"
@@ -69,10 +69,15 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <div class="section-eyebrow">The bilateral dependency matrix</div>
 <h2 class="article-section-title">Who is exposed, for what commodity, and at what percentage of supply.</h2>
 
-<p class="prose">The Narrows model produces bilateral dependency figures at the (importer, chokepoint, commodity) level. The table below shows Hormuz dependency for the commodity classes that account for the majority of the Strait's commercial traffic volume. These are not estimates of aggregate throughput. They are specific bilateral percentages: the share of each importer's total seaborne supply of each commodity that transits Hormuz, drawn from 2023 UN Comtrade bilateral data.</p>
+<p class="prose">The Narrows model produces bilateral dependency figures at the (importer, chokepoint, commodity) level. The table below shows Hormuz dependency for the commodity classes that account for the majority of the Strait's commercial traffic volume. These are not estimates of aggregate throughput. They are specific bilateral percentages: the share of each importer's total seaborne supply of each commodity that transits Hormuz, drawn from a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data (CDM v3, rebuilt August 2026).</p>
+
+<div class="callout">
+ <div class="callout-label">Updated August 2026: Hormuz-bypass pipeline routing now modeled</div>
+ <div class="callout-body">The routing engine previously assigned every barrel of Saudi and UAE crude to a Hormuz transit regardless of loading terminal. Saudi Arabia's East-West Pipeline (Yanbu, Red Sea) and the UAE's Abu Dhabi Crude Oil Pipeline (Fujairah, Gulf of Oman) are both real, decades-old infrastructure specifically built to bypass the Strait — see the companion piece on pipeline rebalancing for the mechanics. The model now applies a weighted split across each exporter's real export-basin ports rather than defaulting every Gulf producer's crude to a single Hormuz-transiting basin. This brings Japan's and South Korea's crude dependency down from previous published figures and is corroborated against independent reporting on both pipelines' normal-time utilisation (see method note).</div>
+</div>
 
 <div class="n-table-wrap">
- <div class="n-table-title">Bilateral Hormuz dependency matrix selected importers and commodities, 2023</div>
+ <div class="n-table-title">Bilateral Hormuz dependency matrix selected importers and commodities, 2024 (CDM v3, updated Aug 2026)</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -86,16 +91,16 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </thead>
   <tbody>
    <tr><td class="subhead" colspan="6">LNG liquefied natural gas (HS 271111)</td></tr>
-   <tr><td class="bold">Japan</td><td>LNG (LNG carrier)</td><td class="num dep-high">23.6%</td><td class="num bold">$20.2B</td><td class="num bold">$1.7B</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
-   <tr><td class="bold">South Korea</td><td>LNG (LNG carrier)</td><td class="num dep-high">23.9%</td><td class="num bold">$10.9B</td><td class="num bold">$897M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
-   <tr><td class="bold">India</td><td>LNG (LNG carrier)</td><td class="num dep-low">2.5%</td><td class="num bold">$8.6B</td><td class="num bold">$707M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
-   <tr><td class="bold">China</td><td>LNG (LNG carrier)</td><td class="num dep-high">25.3%</td><td class="num bold">$9.1B</td><td class="num bold">$748M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
-   <tr><td class="bold">United Kingdom</td><td>LNG (LNG carrier)</td><td class="num dep-high">26.9%</td><td class="num bold">$4.6B</td><td class="num bold">$378M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">China</td><td>LNG (LNG carrier)</td><td class="num dep-high">24.7%</td><td class="num bold">$11.0B</td><td class="num bold">$905M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">South Korea</td><td>LNG (LNG carrier)</td><td class="num dep-high">23.4%</td><td class="num bold">$6.9B</td><td class="num bold">$564M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">Japan</td><td>LNG (LNG carrier)</td><td class="num dep-low">6.5%</td><td class="num bold">$3.0B</td><td class="num bold">$247M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">Thailand</td><td>LNG (LNG carrier)</td><td class="num dep-mid">22.9%</td><td class="num bold">$1.5B</td><td class="num bold">$126M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
+   <tr><td class="bold">India</td><td>LNG (LNG carrier)</td><td class="num dep-low">2.5%</td><td class="num bold">$0.4B</td><td class="num bold">$34M</td><td><span class="verdict-no">No: no Cape option for LNG</span></td></tr>
    <tr><td class="subhead" colspan="6">Crude petroleum (HS 2709)</td></tr>
-   <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">83.0%</td><td class="num bold">$67.1B</td><td class="num bold">$5.6B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · IEA 2023 T1 bilateral</span></td></tr>
-   <tr><td class="bold">India</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">72.7%</td><td class="num bold">$69.6B</td><td class="num bold">$5.7B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · IEA 2023 T1 bilateral</span></td></tr>
-   <tr><td class="bold">China</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">46.3%</td><td class="num bold">$167.4B</td><td class="num bold">$14.0B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage (future voyages)</span></td></tr>
-   <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">73.0%</td><td class="num bold">$62.9B</td><td class="num bold">$5.2B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · IEA 2023 T1 bilateral</span></td></tr>
+   <tr><td class="bold">Japan</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">79.1%</td><td class="num bold">$56.8B</td><td class="num bold">$4.7B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · CDM v3 T1 bilateral</span></td></tr>
+   <tr><td class="bold">South Korea</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">63.9%</td><td class="num bold">$54.6B</td><td class="num bold">$4.5B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · CDM v3 T1 bilateral</span></td></tr>
+   <tr><td class="bold">India</td><td>Crude petroleum (VLCC)</td><td class="num dep-high">42.3%</td><td class="num bold">$59.8B</td><td class="num bold">$4.9B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage · CDM v3 T1 bilateral</span></td></tr>
+   <tr><td class="bold">China</td><td>Crude petroleum (VLCC)</td><td class="num dep-mid">34.6%</td><td class="num bold">$113.2B</td><td class="num bold">$9.4B</td><td><span class="verdict-caution">Supply sub.: +$3.5M/voyage (future voyages)</span></td></tr>
   </tbody>
  </table>
 </div>
@@ -118,7 +123,7 @@ The second question is forward-looking: can an importer substitute supply over a
 <p class="prose">All rerouting costs are recalculated at current market rates: VLSFO at $1,076 per tonne and tanker charter rates consistent with the BDTI at 2,795. These are approximately 1.9x and 2.5x their respective 2024 baselines. <strong>The cost of disruption at current market conditions is materially higher than any pre-crisis model assumption.</strong></p>
 
 <div class="n-table-wrap">
- <div class="n-table-title">Scenario matrix Japan combined Hormuz exposure (LNG + crude petroleum), 2023 bilateral data</div>
+ <div class="n-table-title">Scenario matrix Japan combined Hormuz exposure (LNG + crude petroleum), 2024 bilateral data (CDM v3, updated Aug 2026)</div>
  <table class="n-table">
   <thead>
    <tr>
@@ -130,10 +135,10 @@ The second question is forward-looking: can an importer substitute supply over a
    </tr>
   </thead>
   <tbody>
-   <tr class="row-mild"><td class="bold">14-day disruption</td><td>2 weeks</td><td class="num bold">$3.6B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Storage buffers hold; LNG terminal inventories stressed</td></tr>
-   <tr class="row-moderate"><td class="bold">30-day disruption</td><td>1 month</td><td class="num bold">$7.7B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">LNG inventory exhaustion begins; crude spot demand spikes</td></tr>
-   <tr class="row-severe"><td class="bold">60-day disruption</td><td>2 months</td><td class="num bold">$15.5B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Supply substitution required; no LNG substitute available at scale</td></tr>
-   <tr class="row-critical"><td class="bold">90-day disruption</td><td>3 months</td><td class="num bold">$23.2B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Structural supply gap; no market mechanism closes the LNG shortfall</td></tr>
+   <tr class="row-mild"><td class="bold">14-day disruption</td><td>2 weeks</td><td class="num bold">$2.5B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Storage buffers hold; LNG terminal inventories stressed</td></tr>
+   <tr class="row-moderate"><td class="bold">30-day disruption</td><td>1 month</td><td class="num bold">$5.3B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">LNG inventory exhaustion begins; crude spot demand spikes</td></tr>
+   <tr class="row-severe"><td class="bold">60-day disruption</td><td>2 months</td><td class="num bold">$10.6B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Supply substitution required; no LNG substitute available at scale</td></tr>
+   <tr class="row-critical"><td class="bold">90-day disruption</td><td>3 months</td><td class="num bold">$15.9B</td><td class="num">$3.5M per VLCC voyage</td><td style="font-size:11px;color:var(--text-secondary);">Structural supply gap; no market mechanism closes the LNG shortfall</td></tr>
    <tr><td class="subhead" colspan="5">Toll scenarios ongoing annual cost burden (Japan, all Hormuz-transiting vessel classes)</td></tr>
    <tr><td class="bold">$500k toll per vessel</td><td>Ongoing</td><td class="num bold">$400M/yr</td><td class="num" style="color:var(--green);font-weight:600;">Cape costs 7x more</td><td style="font-size:11px;color:var(--text-secondary);">Compliance rational; operators pay rather than reroute</td></tr>
    <tr><td class="bold">$1M toll per vessel</td><td>Ongoing</td><td class="num bold">$800M/yr</td><td class="num" style="color:var(--green);font-weight:600;">Cape costs 3.5x more</td><td style="font-size:11px;color:var(--text-secondary);">Compliance rational at current VLSFO; a structural freight cost addition</td></tr>
@@ -237,7 +242,7 @@ The second question is forward-looking: can an importer substitute supply over a
 
 <div class="method-note">
  <div class="method-note-label">Methodology and data sources</div>
- <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Simulation Model v0.3 (June 2026). Data source: UN Comtrade 2023 bilateral import data. 13 commodity classes, 43 importing nations, 12 data chokepoints. Model coverage: 87.2% of trade value ($2.15T of $2.47T database). Tier 1 bilateral data for all major importers (Japan, China, South Korea, India, United Kingdom, and others). Tier 3 flows use IEA/BP-anchored bilateral estimates. Route inference assigns chokepoints to bilateral trade flows based on origin port, destination port, and vessel class. Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative exit for vessels already inside the Persian Gulf: this applies to all vessel classes regardless of cargo. The 'reroute viable' designation for crude petroleum in the dependency matrix refers to supply-chain sourcing alternatives (non-Gulf crude origins routed via Cape) available to importers over a multi-week horizon; it does not imply in-place vessel diversion from inside the Gulf. LNG rerouting assessment is categorical: Cape of Good Hope is not commercially viable for laden LNG carriers at any realistic voyage duration due to boil-off gas loss rates and long-term contract constraints. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, May 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period; they do not include secondary economic impacts, inventory drawdown costs, or demand destruction effects. 12 data chokepoints (23 chokepoint entries in the simulation interface). All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario with your counterparty's specific inputs.</div>
+ <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026). Data source: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. 14 commodity classes, 47+ importing nations, 14 chokepoints. Tier 1 bilateral data for crude petroleum and LNG. Route inference assigns chokepoints to bilateral trade flows using a basin-aware model: each exporter's and importer's real port geography is weighted across all its matched basins (not just the dominant one), so a producer with genuine multi-basin export capacity — Saudi Arabia via Ras Tanura (Gulf) and Yanbu (Red Sea); the UAE via Jebel Dhanna (Gulf) and Fujairah (Gulf of Oman, outside Hormuz) — has that split actually applied rather than defaulting 100% of its crude to a Hormuz transit. This is a routing-engine correction made in August 2026; it lowered Japan's and South Korea's modelled Hormuz crude dependency from previously published figures and is corroborated against independent reporting on Fujairah and Yanbu pipeline utilisation (Fujairah: ~71% of 1.5 mbd nameplate capacity in normal conditions; Saudi East-West Pipeline/Yanbu: ~800,000 b/d pre-2026-crisis baseline against ~7 mbd nameplate capacity). Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative exit for vessels already inside the Persian Gulf: this applies to all vessel classes regardless of cargo. The 'reroute viable' designation for crude petroleum in the dependency matrix refers to supply-chain sourcing alternatives (non-Gulf crude origins routed via Cape) available to importers over a multi-week horizon; it does not imply in-place vessel diversion from inside the Gulf. LNG rerouting assessment is categorical: Cape of Good Hope is not commercially viable for laden LNG carriers at any realistic voyage duration due to boil-off gas loss rates and long-term contract constraints. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, May 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period; they do not include secondary economic impacts, inventory drawdown costs, or demand destruction effects. These figures describe structural, normal-year exposure — not a live tracker of the Strait's actual closure since March 2026, which is covered separately (see the live-tracker piece on this site). All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario with your counterparty's specific inputs.</div>
 </div>
 
 <!-- CTA -->

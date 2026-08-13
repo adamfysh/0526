@@ -5,7 +5,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <ArticleLayout
   title="Iran can hold out. <em>Here is who pays.</em>"
   description="A three-to-four month Hormuz closure is no longer a spike scenario. The bilateral trade data shows exactly which importers absorb what costs, through which commodity, and for how long."
-  eyebrow="Scenario analysis · Strait of Hormuz · May 2026"
+  eyebrow="Scenario analysis · Strait of Hormuz · May 2026, updated Aug 2026"
   publishDate="May 2026"
   readTime="11 min read"
   author="Narrows Research"
@@ -15,18 +15,18 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="stat-bar-inner">
     <div class="stat-bar-item">
       <div class="stat-bar-label">30-day crude baseline exposure · Hormuz 100%</div>
-      <div class="stat-bar-value">$31.8B</div>
-      <div class="stat-bar-unit">11 importing nations, 2023 bilateral base</div>
+      <div class="stat-bar-value">$25.9B</div>
+      <div class="stat-bar-unit">10 importing nations, 2024 bilateral base (CDM v3)</div>
     </div>
     <div class="stat-bar-item">
       <div class="stat-bar-label">Japan: Hormuz crude dependency</div>
-      <div class="stat-bar-value">83.0%</div>
-      <div class="stat-bar-unit">$67.1B annual exposed · Tier 1 bilateral</div>
+      <div class="stat-bar-value">79.1%</div>
+      <div class="stat-bar-unit">$56.8B annual exposed · CDM v3, updated Aug 2026</div>
     </div>
     <div class="stat-bar-item">
-      <div class="stat-bar-label">Philippines: LPG Hormuz dependency</div>
-      <div class="stat-bar-value">83.2%</div>
-      <div class="stat-bar-unit">Cooking fuel dependency · no viable substitute</div>
+      <div class="stat-bar-label">India: LPG Hormuz dependency</div>
+      <div class="stat-bar-value">91.2%</div>
+      <div class="stat-bar-unit">$14.7B annual exposed · CDM v3, real Comtrade pull, Aug 2026</div>
     </div>
     <div class="stat-bar-item">
       <div class="stat-bar-label">Fleet rerouting overrun · 90-day window</div>
@@ -50,8 +50,13 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">Hormuz carries a disproportionate share of global crude petroleum and LPG flows. Among the nations with meaningful dependency, two broad categories of risk emerge: importers who can reroute via Cape of Good Hope (at cost) and those who face a supply gap with no viable maritime alternative.</p>
 
+<div class="callout" style="margin:0 0 24px;">
+  <div class="callout-label">Updated August 2026</div>
+  <div class="callout-body">Two changes since May 2026. First, a routing-engine correction now properly applies Saudi Arabia's and the UAE's real multi-basin export capacity (Yanbu on the Red Sea; Fujairah on the Gulf of Oman, both real pipeline bypass infrastructure) instead of defaulting all Gulf crude to a Hormuz transit — this brings Japan and South Korea's dependency down materially, corroborated against independent reporting on both pipelines' normal-time utilisation. Second, Canada has been dropped from this table: it no longer shows any material Hormuz-routed crude in the current model, and the earlier 14.5%/$2.8B figure does not hold up against the current bilateral data. Third, LPG (HS 271112/271113/271119, aggregated into a single commodity class) has now been pulled from Comtrade as a genuine CDM data series — it was previously scoped but never completed. The LPG table further down has been rebuilt from that real bilateral data, and it changes the picture materially: the largest LPG exposure by dollar value is not in Southeast Asia at all, it is India.</div>
+</div>
+
 <div class="n-table-wrap" style="margin:28px 0;">
-  <div class="n-table-title">Bilateral Hormuz dependency matrix: crude petroleum, 2023</div>
+  <div class="n-table-title">Bilateral Hormuz dependency matrix: crude petroleum, 2024 (CDM v3, updated Aug 2026)</div>
   <table class="n-table">
     <thead>
       <tr>
@@ -64,33 +69,32 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     </thead>
     <tbody>
       <tr><td class="subhead" colspan="5">Highest percentage dependency</td></tr>
-      <tr><td class="bold">Japan</td><td class="num dep-high">83.0%</td><td class="num bold">$67.1B</td><td class="num bold">$5.6B</td><td><span class="verdict-caution">Cape viable · +12d · no supply substitute at scale</span></td></tr>
-      <tr><td class="bold">South Korea</td><td class="num dep-high">73.0%</td><td class="num bold">$62.9B</td><td class="num bold">$5.2B</td><td><span class="verdict-caution">Cape viable · +12d · limited strategic reserve depth</span></td></tr>
-      <tr><td class="bold">Greece</td><td class="num dep-high">54.6%</td><td class="num bold">$8.5B</td><td class="num bold">$0.7B</td><td><span class="verdict-no">Grade-configured refiners · low substitution flexibility</span></td></tr>
-      <tr><td class="bold">India</td><td class="num dep-high">72.7%</td><td class="num bold">$69.6B</td><td class="num bold">$5.7B</td><td><span class="verdict-caution">Cape viable · grade flexibility limited · volume large</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-high">79.1%</td><td class="num bold">$56.8B</td><td class="num bold">$4.7B</td><td><span class="verdict-caution">Cape viable · +12d · no supply substitute at scale</span></td></tr>
+      <tr><td class="bold">South Korea</td><td class="num dep-high">63.9%</td><td class="num bold">$54.6B</td><td class="num bold">$4.5B</td><td><span class="verdict-caution">Cape viable · +12d · limited strategic reserve depth</span></td></tr>
+      <tr><td class="bold">India</td><td class="num dep-high">42.3%</td><td class="num bold">$59.8B</td><td class="num bold">$4.9B</td><td><span class="verdict-caution">Cape viable · grade flexibility limited · volume large</span></td></tr>
+      <tr><td class="bold">Greece</td><td class="num dep-mid">38.3%</td><td class="num bold">$5.8B</td><td class="num bold">$0.5B</td><td><span class="verdict-no">Grade-configured refiners · low substitution flexibility</span></td></tr>
       <tr><td class="subhead" colspan="5">Significant volume exposure</td></tr>
-      <tr><td class="bold">China</td><td class="num dep-high">46.3%</td><td class="num bold">$167.4B</td><td class="num bold">$14.0B</td><td><span class="verdict-caution">Atlantic/ESPO partial substitution · Cape +13d · months to execute at scale</span></td></tr>
-      <tr><td class="bold">United States</td><td class="num dep-low">9.3%</td><td class="num bold">$18.1B</td><td class="num bold">$1.5B</td><td><span class="verdict-ok">Atlantic Basin alternatives · SPR buffer</span></td></tr>
+      <tr><td class="bold">China</td><td class="num dep-mid">34.6%</td><td class="num bold">$113.2B</td><td class="num bold">$9.3B</td><td><span class="verdict-caution">Atlantic/ESPO partial substitution · Cape +13d · months to execute at scale</span></td></tr>
+      <tr><td class="bold">United States</td><td class="num dep-low">7.8%</td><td class="num bold">$15.0B</td><td class="num bold">$1.2B</td><td><span class="verdict-ok">Atlantic Basin alternatives · SPR buffer</span></td></tr>
       <tr><td class="subhead" colspan="5">Moderate percentage, structural exposure</td></tr>
-      <tr><td class="bold">Indonesia</td><td class="num dep-mid">28.6%</td><td class="num bold">$3.1B</td><td class="num bold">$0.3B</td><td><span class="verdict-caution">Dual exposure: +47.8% LPG dependency compounds 28.6% crude risk</span></td></tr>
-      <tr><td class="bold">Brazil</td><td class="num dep-mid">48.1%</td><td class="num bold">$3.3B</td><td class="num bold">$0.3B</td><td><span class="verdict-no">Non-reroutable: grade substitution path, not vessel diversion</span></td></tr>
-      <tr><td class="bold">France</td><td class="num dep-low">13.4%</td><td class="num bold">$4.6B</td><td class="num bold">$0.4B</td><td><span class="verdict-ok">Atlantic alternatives close · SPR buffer · cost exposure not supply gap</span></td></tr>
-      <tr><td class="bold">Germany</td><td class="num dep-low">6.6%</td><td class="num bold">$4.0B</td><td class="num bold">$0.3B</td><td><span class="verdict-ok">Low base dependency · SPR buffer · well covered</span></td></tr>
-      <tr><td class="bold">Canada</td><td class="num dep-low">14.5%</td><td class="num bold">$2.8B</td><td class="num bold">$0.2B</td><td><span class="verdict-no">Non-reroutable: domestic production ramp-up path</span></td></tr>
+      <tr><td class="bold">Brazil</td><td class="num dep-low">20.1%</td><td class="num bold">$1.8B</td><td class="num bold">$0.1B</td><td><span class="verdict-no">Non-reroutable: grade substitution path, not vessel diversion</span></td></tr>
+      <tr><td class="bold">Indonesia</td><td class="num dep-low">20.1%</td><td class="num bold">$2.1B</td><td class="num bold">$0.2B</td><td><span class="verdict-caution">Compound: +28.4% LPG dependency ($1.1B), see LPG table below</span></td></tr>
+      <tr><td class="bold">France</td><td class="num dep-low">9.6%</td><td class="num bold">$3.0B</td><td class="num bold">$0.2B</td><td><span class="verdict-ok">Atlantic alternatives close · SPR buffer · cost exposure not supply gap</span></td></tr>
+      <tr><td class="bold">Germany</td><td class="num dep-low">8.0%</td><td class="num bold">$3.9B</td><td class="num bold">$0.3B</td><td><span class="verdict-ok">Low base dependency · SPR buffer · well covered</span></td></tr>
     </tbody>
   </table>
 </div>
 
-<p class="prose" style="font-size:12px;color:var(--text-tertiary);">Source: Narrows Chokepoint Model v0.3, WITS UN Comtrade 2023 bilateral data. Dep% = Gulf-origin exposed value ÷ total commodity imports. Oman excluded from Gulf-exposed set (terminals on Gulf of Oman side, outside Strait). 30d VaR = exposed value × 30/365. Tier 1 bilateral data for all rows.</p>
+<p class="prose" style="font-size:12px;color:var(--text-tertiary);">Source: Narrows Chokepoint Dependency Model v3 (rebuilt August 2026), multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data. Dep% = Gulf-origin exposed value ÷ total commodity imports, computed via basin-aware routing (Yanbu/Fujairah bypass capacity now applied). Oman excluded from Gulf-exposed set (terminals on Gulf of Oman side, outside Strait). 30d VaR = exposed value × 30/365. Tier 1 bilateral data for all rows.</p>
 
 <div class="callout" style="margin:32px 0;">
   <div class="callout-label">The China number in context</div>
-  <div class="callout-body">China's $167.4B annual Hormuz exposure is the largest volume in the matrix, but 46.3% leaves meaningful headroom for substitution: Russian ESPO at approximately 18% of Chinese crude imports, West African and Brazilian grades can partially substitute Gulf crude. The constraint is execution speed: a meaningful substitution exercise at this volume takes months, not weeks. A three-to-four month disruption is precisely the timeframe in which China's substitution flexibility is tested most severely.</div>
+  <div class="callout-body">China's $113.2B annual Hormuz exposure is the largest volume in the matrix, and 34.6% is itself down from a previously-published 46.3% for the same reason as Japan and Korea's larger corrections: the routing engine now properly credits non-Hormuz Saudi and UAE supply. Russian ESPO at approximately 18% of Chinese crude imports, West African and Brazilian grades can partially substitute Gulf crude. The constraint is execution speed: a meaningful substitution exercise at this volume takes months, not weeks. A three-to-four month disruption is precisely the timeframe in which China's substitution flexibility is tested most severely.</div>
 </div>
 
-<p class="prose">Greece carries the highest percentage exposure among the European importers at 54.6%, but the structural risk is different from Japan or Korea. Greek independent refiners are configured around specific Gulf crude grades and have limited flexibility to substitute quickly. The dollar volume is smaller ($8.5B), but for P&I underwriters with Greek refinery or tanker clients, this is an acute concentration risk rather than a manageable cost event.</p>
+<p class="prose">Greece carries meaningful exposure among the European importers at 38.3%, though the structural risk is different from Japan or Korea. Greek independent refiners are configured around specific Gulf crude grades and have limited flexibility to substitute quickly. The dollar volume is smaller ($5.8B), but for P&I underwriters with Greek refinery or tanker clients, this is an acute concentration risk rather than a manageable cost event.</p>
 
-<p class="prose">Brazil and Canada show meaningful crude dependency (48.1% and 14.5% respectively) but are flagged as non-reroutable, meaning the mitigation path runs through domestic production ramp-up and grade substitution, not vessel diversion. The exposure is real; the cost structure is different.</p>
+<p class="prose">Brazil shows moderate crude dependency (20.1%) and is flagged as non-reroutable, meaning the mitigation path runs through domestic production ramp-up and grade substitution, not vessel diversion. Canada's earlier entry in this table (14.5%/$2.8B) does not hold up against the current bilateral data and has been dropped rather than left in place.</p>
 
 <div class="section-eyebrow">Rerouting economics</div>
 <h2 class="article-section-title">For those who can reroute, the Cape of Good Hope is the only option. Here is what it costs.</h2>
@@ -131,10 +135,10 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <div class="section-eyebrow">The LPG dimension</div>
 <h2 class="article-section-title">The exposure that is absent from almost every current analysis.</h2>
 
-<p class="prose">The crude petroleum story dominates coverage. On the bilateral data, the LPG exposure in Southeast Asia is sharper than almost anything in the crude picture, and has received almost no analytical attention.</p>
+<p class="prose">The crude petroleum story dominates coverage. On the bilateral data, LPG exposure across South and Southeast Asia is sharper than almost anything in the crude picture, and has received almost no analytical attention. This table was not previously backed by real trade data; as of August 2026 it is, following a dedicated Comtrade pull for HS 271112/271113/271119.</p>
 
 <div class="n-table-wrap" style="margin:28px 0;">
-  <div class="n-table-title">Bilateral Hormuz LPG dependency: Southeast Asia, 2023</div>
+  <div class="n-table-title">Bilateral Hormuz LPG dependency: South &amp; Southeast Asia, 2024 (CDM v3, real Comtrade pull, Aug 2026)</div>
   <table class="n-table">
     <thead>
       <tr>
@@ -145,36 +149,45 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
       </tr>
     </thead>
     <tbody>
-      <tr><td class="bold">India</td><td class="num dep-high">97.6%</td><td class="num bold">$11.3B</td><td><span class="verdict-no">No viable alternative at scale</span></td></tr>
-      <tr><td class="bold">Philippines</td><td class="num dep-high">83.2%</td><td class="num bold">$0.5B</td><td><span class="verdict-no">No alternative · cooking fuel dependency</span></td></tr>
-      <tr><td class="bold">Vietnam</td><td class="num dep-high">77.6%</td><td class="num bold">$0.9B</td><td><span class="verdict-no">No alternative at scale</span></td></tr>
-      <tr><td class="bold">Thailand</td><td class="num dep-high">76.0%</td><td class="num bold">$0.8B</td><td><span class="verdict-no">No alternative · petrochemical feedstock</span></td></tr>
-      <tr><td class="bold">Malaysia</td><td class="num dep-mid">68.6%</td><td class="num bold">$0.2B</td><td><span class="verdict-no">No large-scale alternative</span></td></tr>
-      <tr><td class="bold">Indonesia</td><td class="num dep-mid">47.8%</td><td class="num bold">$1.7B</td><td><span class="verdict-no">Compound: +28.6% crude exposure</span></td></tr>
-      <tr><td class="bold">China</td><td class="num dep-mid">50.5%</td><td class="num bold">$10.0B</td><td><span class="verdict-caution">US propane partial, contractually committed</span></td></tr>
+      <tr><td class="subhead" colspan="4">Highest percentage dependency</td></tr>
+      <tr><td class="bold">Pakistan</td><td class="num dep-high">99.8%</td><td class="num bold">$1.0B</td><td><span class="verdict-no">No viable alternative at scale</span></td></tr>
+      <tr><td class="bold">Sri Lanka</td><td class="num dep-high">91.9%</td><td class="num bold">$0.4B</td><td><span class="verdict-no">No alternative · cooking fuel dependency</span></td></tr>
+      <tr><td class="bold">India</td><td class="num dep-high">91.2%</td><td class="num bold">$14.7B</td><td><span class="verdict-no">No viable alternative at scale · largest absolute exposure</span></td></tr>
+      <tr><td class="bold">Thailand</td><td class="num dep-high">75.6%</td><td class="num bold">$0.8B</td><td><span class="verdict-no">No alternative · petrochemical feedstock</span></td></tr>
+      <tr><td class="subhead" colspan="4">Significant exposure</td></tr>
+      <tr><td class="bold">Singapore</td><td class="num dep-mid">69.5%</td><td class="num bold">$0.2B</td><td><span class="verdict-caution">Re-export/trading hub · partial re-sourcing flexibility</span></td></tr>
+      <tr><td class="bold">Malaysia</td><td class="num dep-mid">52.0%</td><td class="num bold">$0.3B</td><td><span class="verdict-no">No large-scale alternative</span></td></tr>
+      <tr><td class="bold">Vietnam</td><td class="num dep-mid">42.8%</td><td class="num bold">$0.7B</td><td><span class="verdict-no">No alternative at scale</span></td></tr>
+      <tr><td class="subhead" colspan="4">Moderate percentage, compound exposure</td></tr>
+      <tr><td class="bold">Philippines</td><td class="num dep-mid">33.2%</td><td class="num bold">$0.4B</td><td><span class="verdict-no">No alternative · cooking fuel dependency</span></td></tr>
+      <tr><td class="bold">China</td><td class="num dep-mid">32.7%</td><td class="num bold">$7.5B</td><td><span class="verdict-caution">US propane partial, contractually committed</span></td></tr>
+      <tr><td class="bold">Indonesia</td><td class="num dep-low">28.4%</td><td class="num bold">$1.1B</td><td><span class="verdict-caution">Compound: +20.1% crude exposure</span></td></tr>
+      <tr><td class="subhead" colspan="4">Low dependency</td></tr>
+      <tr><td class="bold">Korea</td><td class="num dep-low">5.1%</td><td class="num bold">$0.3B</td><td><span class="verdict-ok">Largely alternative-sourced already</span></td></tr>
+      <tr><td class="bold">Japan</td><td class="num dep-low">3.7%</td><td class="num bold">$0.2B</td><td><span class="verdict-ok">Largely alternative-sourced already</span></td></tr>
     </tbody>
   </table>
 </div>
 
-<p class="prose">To calibrate these figures: Japan's crude dependency on Hormuz, which has driven Japanese government reserve policy for decades and prompted the largest strategic reserve release in history in March 2026, is 83.0%. The LPG figures for Southeast Asia sit in the same range. The difference is that no equivalent strategic reserve infrastructure exists for LPG, and the commodity market is structurally distinct.</p>
+<p class="prose">To calibrate these figures: Japan's crude dependency on Hormuz, which has driven Japanese government reserve policy for decades and prompted the largest strategic reserve release in history in March 2026, is 79.1% in the current model (see the August 2026 correction note above). The LPG table above is now a like-for-like comparison — both are 2024-vintage CDM v3 bilateral data. On that basis, India's LPG dependency (91.2%, $14.7B) is both higher in percentage terms and larger in absolute value than Japan's crude dependency, and Pakistan and Sri Lanka show near-total LPG dependency on volumes too small to attract the attention crude gets.</p>
 
 <div class="callout" style="margin:32px 0;">
   <div class="callout-label">Why LPG is not the same risk as crude</div>
-  <div class="callout-body">Gulf LPG, primarily from Qatar and the UAE, moves to Southeast Asian importers aboard purpose-built pressurised LPG carriers. If Hormuz closes, that cargo is physically trapped at the loading terminal. An empty carrier can in principle seek alternative supply, but no alternative source at comparable scale exists: US propane is largely committed to existing contracts, and an Alaskan or US Gulf Coast voyage to Southeast Asia is economically extreme. Australian LPG associated with LNG production is available but not at Qatari scale. <strong>In Thailand and the Philippines, a supply shortfall is a domestic energy access event.</strong></div>
+  <div class="callout-body">Gulf LPG, primarily from Qatar and the UAE, moves to South and Southeast Asian importers aboard purpose-built pressurised LPG carriers. If Hormuz closes, that cargo is physically trapped at the loading terminal. An empty carrier can in principle seek alternative supply, but no alternative source at comparable scale exists: US propane is largely committed to existing contracts, and an Alaskan or US Gulf Coast voyage to Asia is economically extreme. Australian LPG associated with LNG production is available but not at Qatari scale. The PCI's Gulf LPG export ports (Ras Laffan, Jebel Dhanna, Ras Tanura) deliberately carry no Fujairah/Yanbu-style bypass routing in the model — unlike crude, LPG has no equivalent pipeline workaround. <strong>In Pakistan, Sri Lanka, India, Thailand, and the Philippines, a supply shortfall is a domestic energy access event, not just a cost event.</strong></div>
 </div>
 
 <div class="section-eyebrow">The bottom line</div>
 <h2 class="article-section-title">Three to four months is long enough to exhaust reserves, restructure spot markets, and begin affecting refinery configurations.</h2>
 
-<p class="prose">The importer exposure is not uniformly distributed. Japan and South Korea sit at 83.0% and 73.0% crude dependency with limited short-term substitution options. China at 46.3% has the largest absolute volume exposed but some substitution flexibility, at the cost of months of execution time and a Cape rerouting premium. Greece has high percentage exposure with low refinery flexibility. Southeast Asian LPG importers carry dependency figures in the 75–85% range for a commodity with no viable alternative supply source.</p>
+<p class="prose">The importer exposure is not uniformly distributed. Japan and South Korea sit at 79.1% and 63.9% crude dependency with limited short-term substitution options. China at 34.6% has the largest absolute volume exposed but some substitution flexibility, at the cost of months of execution time and a Cape rerouting premium. Greece has meaningful percentage exposure with low refinery flexibility. Add the LPG picture and India moves to the top of the exposure list by absolute value across both commodities combined, and Pakistan and Sri Lanka join the near-total-dependency tier despite near-zero presence in the crude conversation.</p>
 
-<p class="prose">A three-to-four month disruption is also long enough for the rerouting cost to move from an insurance event to a macroeconomic one. The $480M 90-day fleet overrun is a direct operating cost. The carrying cost on $31.8B of trade value held at sea for additional weeks is a separate and larger number.</p>
+<p class="prose">A three-to-four month disruption is also long enough for the rerouting cost to move from an insurance event to a macroeconomic one. The $480M 90-day fleet overrun is a direct operating cost. The carrying cost on $25.9B of crude trade value (the current 30-day baseline exposure across the ten importers above) held at sea for additional weeks is a separate and larger number.</p>
 
 <p class="prose">What the geopolitical coverage cannot tell you is which specific importers are on the hook, by how much, and through which commodity. That is what the bilateral trade data shows, and what sustained disruption planning requires.</p>
 
 <div class="method-note">
   <div class="method-note-label">Data and methodology</div>
-  <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Simulation Model v0.3 (May 2026). Data source: WITS UN Comtrade 2023 bilateral import data. Dep% = Gulf-origin exposed value ÷ total commodity imports of that commodity. Oman excluded from Hormuz-captive supplier set: loading terminals (Mina al-Fahal, OQ Fertilizers Sur) are on the Gulf of Oman side of the Strait and do not transit Hormuz. All crude petroleum and LPG figures are Tier 1 bilateral data: real country-pair flows validated against WITS and cross-corroborated against IEA, METI, and S&P Global where available. Japan 83.0% (CDM v2 2023 bilateral; vs METI-reported 95.9% FY2024 Middle East dependency (S&P Global, August 2025); difference attributable to Oman exclusion, year, and updated bilateral flow data). Rerouting cost estimates: VLCC bunker $55k/day, charter $45k/day; Aframax $28k/$22k; Capesize $32k/$18k; Handymax $18k/$12k; Container $28k/$17k. CIA assessment sourced from reporting by The Washington Post, 7 May 2026. All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario against your specific inputs.</div>
+  <div class="method-note-body">Crude petroleum bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026), a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data. Dep% = Gulf-origin exposed value ÷ total commodity imports of that commodity, computed via basin-aware routing that weights each exporter's real port geography across all matched basins rather than a single dominant basin — this is what brought Japan, South Korea, and China's Hormuz crude dependency down from the May 2026 baseline, corroborated against independent reporting on Fujairah and Yanbu pipeline utilisation (see hormuz.astro method note for detail). Oman excluded from Hormuz-captive supplier set: loading terminals (Mina al-Fahal, OQ Fertilizers Sur) are on the Gulf of Oman side of the Strait and do not transit Hormuz. Crude petroleum figures are Tier 1 bilateral data. <strong>LPG figures in this piece were rebuilt in August 2026 from a dedicated authenticated Comtrade pull covering HS 271112 (propane), 271113 (butane), and 271119 (other petroleum gases), aggregated into a single synthetic LPG commodity class and blended across 2022/2024 vintages using the same multi-vintage methodology as every other CDM v3 commodity. This series was previously scoped (see narrows_config.json's long-standing 'lpg' entry) but never completed; it now is.</strong> Japan 79.1% (CDM v3 2024-vintage bilateral; vs METI-reported 95.9% FY2024 Middle East dependency (S&P Global, August 2025) and vs. Japan METI-sourced reporting of ~73.7% actually transiting Hormuz; the CDM figure is consistent with the latter once Oman exclusion and vintage differences are accounted for). Rerouting cost estimates: VLCC bunker $55k/day, charter $45k/day; Aframax $28k/$22k; Capesize $32k/$18k; Handymax $18k/$12k; Container $28k/$17k. CIA assessment sourced from reporting by The Washington Post, 7 May 2026. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since March 2026. All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario against your specific inputs.</div>
 </div>
 
 
