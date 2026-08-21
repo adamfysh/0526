@@ -416,6 +416,14 @@
 
     /* ── SEVERITY SLIDER ── */
     .sev-wrap{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .scn-preset{font-size:11.5px;font-weight:600;padding:6px 12px;border:1px solid var(--gold);
+      border-radius:14px;background:#fff;color:var(--navy);cursor:pointer;white-space:nowrap}
+    .scn-preset:hover{background:rgba(240,180,41,.12)}
+    .scn-preset.on{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .scn-note{display:none;padding:10px 36px;background:rgba(240,180,41,.08);
+      border-bottom:var(--rule);font-size:12px;line-height:1.6;color:var(--text-secondary,#374151)}
+    .scn-note.show{display:block}
+    .scn-note strong{color:var(--navy)}
     .sev-preset{
       background:transparent;border:1px solid var(--border-mid);border-radius:5px;
       padding:4px 10px;font-size:11px;font-weight:500;font-family:'DM Sans',sans-serif;
@@ -561,6 +569,20 @@
 <div class="strip" id="strip">
 
   <div class="sg">
+    <span class="sl">Named scenario</span>
+    <div class="chips" id="scnChips">
+      <button class="scn-preset" data-key="red_sea_2024" title="Historical, calibration use. Bab-el-Mandeb, 180+ days, 70% restriction. Ongoing since Dec 2023 Houthi attacks on commercial shipping. T1.">Red Sea 2024</button>
+      <button class="scn-preset" data-key="panama_drought" title="Historical, calibration use. Panama, 90 days, 50% restriction. Gatun Lake water levels; canal daily transits cut from 36 to 18. T1.">Panama drought 2023-24</button>
+      <button class="scn-preset" data-key="ever_given" title="Historical, calibration use. Suez, 6 days, full blockage. Single vessel grounding, 369 vessels queued. T1.">Ever Given 2021</button>
+      <button class="scn-preset" data-key="hormuz_closure" title="Stress test, hypothetical. Hormuz, 30-90 days, full to auction. Prediction-market-derived 15-25% annual. Most cited tail risk in marine war market.">Iran full Hormuz closure</button>
+      <button class="scn-preset" data-key="taiwan_strait" title="Stress test, hypothetical. Modelled via Malacca (our proxy for Malacca/SCS trade), 60-180 days, variable severity. Prediction-market-derived 10-20% over 2 years. See note below for why this maps to Malacca rather than a standalone corridor.">Taiwan Strait crisis</button>
+      <button class="scn-preset" data-key="cascade" title="Stress test, hypothetical. Hormuz shown; pair with Bab-el-Mandeb manually to see the full compound picture, both corridors share the Iran-Houthi driver. Multi-corridor cascade, worst case for accumulation.">Multi-corridor cascade</button>
+    </div>
+  </div>
+
+  <div class="ssep"></div>
+
+  <div class="sg">
     <span class="sl">Corridor</span>
     <div class="chips" id="corrChips">
       <button class="chip on" data-c="hormuz">Hormuz</button>
@@ -610,6 +632,8 @@
   </div>
 
 </div><!-- /strip -->
+
+<div class="scn-note" id="scnNote"></div>
 
 <!-- ASSUMPTIONS DRAWER -->
 <div class="assm-bar" id="assmBar">
@@ -1375,13 +1399,19 @@ function renderP1() {
   const vals=corrOrder.map(k=>Math.round((bc[k]||0)/1e6*10)/10);
   const colors=corrOrder.map(k=>k===S.corridor?'#0A2540':'rgba(10,37,64,0.10)');
   const ctx=document.getElementById('cChart');
-  if(ctx){
-    chartInst=new Chart(ctx.getContext('2d'),{
-      type:'bar',
-      data:{labels,datasets:[{data:vals,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
-      options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.raw.toFixed(1)+'M'},backgroundColor:'#0A2540',borderColor:'rgba(10,37,64,0.12)',borderWidth:1,titleColor:'#ffffff',bodyColor:'rgba(255,255,255,0.65)',titleFont:{family:'DM Mono',size:11},bodyFont:{family:'DM Mono',size:10}}},
-        scales:{x:{grid:{color:'#DDE4EF'},ticks:{color:'#4A6078',font:{family:'DM Mono',size:10},callback:v=>'$'+v+'M'}},y:{grid:{display:false},ticks:{color:'#0A2540',font:{family:'DM Mono',size:11}}}}}
-    });
+  if(ctx && typeof Chart !== 'undefined'){
+    try {
+      chartInst=new Chart(ctx.getContext('2d'),{
+        type:'bar',
+        data:{labels,datasets:[{data:vals,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
+        options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.raw.toFixed(1)+'M'},backgroundColor:'#0A2540',borderColor:'rgba(10,37,64,0.12)',borderWidth:1,titleColor:'#ffffff',bodyColor:'rgba(255,255,255,0.65)',titleFont:{family:'DM Mono',size:11},bodyFont:{family:'DM Mono',size:10}}},
+          scales:{x:{grid:{color:'#DDE4EF'},ticks:{color:'#4A6078',font:{family:'DM Mono',size:10},callback:v=>'$'+v+'M'}},y:{grid:{display:false},ticks:{color:'#0A2540',font:{family:'DM Mono',size:11}}}}}
+      });
+    } catch(chartErr) {
+      console.warn('[Narrows] Chart render failed -- continuing without the corridor chart.', chartErr);
+    }
+  } else if (ctx) {
+    console.warn('[Narrows] Chart.js did not load (CDN blocked or slow) -- skipping corridor chart. Rest of the panel is unaffected.');
   }
 }
 
@@ -1591,16 +1621,20 @@ function tog(id) {
    RENDER ALL
 ═══════════════════════════════ */
 function renderAll() {
-  renderHeader();
-  renderStrip();
-  renderHero();
-  renderCards();
-  renderP1();
-  renderP2();
-  renderP3();
-  renderP4();
-  const ct=document.getElementById('portCount');
-  if(ct&&S.mode==='custom') ct.textContent=customVessels.length+' vessel'+(customVessels.length!==1?'s':'');
+  try {
+    renderHeader();
+    renderStrip();
+    renderHero();
+    renderCards();
+    renderP1();
+    renderP2();
+    renderP3();
+    renderP4();
+    const ct=document.getElementById('portCount');
+    if(ct&&S.mode==='custom') ct.textContent=customVessels.length+' vessel'+(customVessels.length!==1?'s':'');
+  } catch (err) {
+    console.error('[Narrows] renderAll() failed partway through -- some panels may be stale or incomplete.', err);
+  }
 }
 
 /* ═══════════════════════════════
@@ -1612,6 +1646,7 @@ document.getElementById('corrChips').addEventListener('click',e=>{
   document.querySelectorAll('#corrChips .chip').forEach(c=>c.classList.remove('on'));
   ch.classList.add('on');
   S.corridor=ch.dataset.c;
+  document.querySelectorAll('.scn-preset').forEach(b=>b.classList.remove('on'));
   renderAll();
   renderTIDE();
 });
@@ -1660,6 +1695,59 @@ document.querySelectorAll('.sev-preset').forEach(b=>{
     document.getElementById('sevSlider').value = S.severity;
     syncSev(S.severity);
     renderAll();
+  });
+});
+
+/* Named scenarios: sets corridor + duration + severity together.
+   Parameters and probabilities sourced from CAPE-METHODOLOGY.md Sections 10.3, 11.1, 11.2.
+   Durations/severities use the midpoint of any stated range; the sliders remain live afterward
+   so a range can be explored, not just the single representative point. */
+const SCENARIOS = {
+  red_sea_2024:     { corridor:'bab_el_mandeb', duration:180, severity:70,
+    note:'<strong>Red Sea 2024 (historical, T1).</strong> Ongoing since December 2023. Houthi attacks on commercial shipping in the Red Sea and Gulf of Aden. Used for calibration: this is what the model would have shown in real time.' },
+  panama_drought:   { corridor:'panama', duration:90, severity:50,
+    note:'<strong>Panama drought 2023-24 (historical, T1).</strong> Gatun Lake water levels forced a cut in daily canal transits from 36 to 18. Used for calibration.' },
+  ever_given:       { corridor:'suez', duration:6, severity:100,
+    note:'<strong>Ever Given 2021 (historical, T1).</strong> Single vessel grounding blocked the Suez Canal for six days; 369 vessels queued. Shortest, sharpest scenario in the set.' },
+  hormuz_closure:   { corridor:'hormuz', duration:60, severity:100,
+    note:'<strong>Iran full Hormuz closure (stress test, hypothetical).</strong> Prediction-market-derived at 15-25% annual (CAPE-METHODOLOGY.md Section 10.3). The most cited tail risk in the marine war risk market. Duration shown is the midpoint of a 30-90 day range; severity ranges from full closure to auction-only depending on scenario.' },
+  taiwan_strait:    { corridor:'malacca', duration:120, severity:50,
+    note:'<strong>Taiwan Strait crisis (stress test, hypothetical).</strong> Modelled through Malacca, our proxy for the broader Malacca/South China Sea trade a Taiwan Strait crisis would actually disrupt, not as its own corridor. Reason: the strait itself has a real but partial reroute option, vessels not calling at a Chinese or Taiwanese port can pass east of Taiwan via the Luzon Strait at minimal added distance. What cannot reroute cheaply is the roughly $1.3 trillion a year in Chinese port-bound trade itself, since the destination is the affected region, not a corridor you can sail around. That is the trade this Malacca-mapped figure represents. Prediction-market-derived at 10-20% over 2 years (Section 10.3); severity is genuinely variable and the 50% shown here is a starting point, not a claim, adjust the slider to explore the range.' },
+  cascade:          { corridor:'hormuz', duration:45, severity:100,
+    note:'<strong>Multi-corridor cascade (stress test, hypothetical).</strong> Shown here on Hormuz. Select Bab-el-Mandeb next to see the second leg, both corridors share the same underlying Iran-Houthi driver in our signal model, so a book exposed to both is not carrying two independent risks, it is carrying one correlated one, twice. CAPE does not yet sum multiple corridors automatically; note each VaR and add them for the compound figure.' }
+};
+
+function applyScenario(key){
+  const s = SCENARIOS[key];
+  if(!s) return;
+  S.corridor = s.corridor;
+  S.duration = s.duration;
+  S.severity = s.severity;
+
+  document.querySelectorAll('#corrChips .chip').forEach(c=>c.classList.toggle('on', c.dataset.c===s.corridor));
+  document.getElementById('durSlider').value = s.duration;
+  document.getElementById('durNum').value = s.duration;
+  document.getElementById('sevSlider').value = s.severity;
+  syncSev(s.severity);
+
+  document.querySelectorAll('.scn-preset').forEach(b=>b.classList.toggle('on', b.dataset.key===key));
+  const noteEl = document.getElementById('scnNote');
+  noteEl.innerHTML = s.note;
+  noteEl.classList.add('show');
+
+  renderAll();
+  renderTIDE();
+}
+document.getElementById('scnChips').addEventListener('click', e=>{
+  const b = e.target.closest('.scn-preset');
+  if(!b || !b.dataset.key) return;
+  applyScenario(b.dataset.key);
+});
+/* Manually changing corridor/duration/severity after a scenario is selected should not keep
+   claiming that exact named scenario is still active. */
+['durSlider','durNum','sevSlider','sevNum'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', ()=>{
+    document.querySelectorAll('.scn-preset').forEach(b=>b.classList.remove('on'));
   });
 });
 

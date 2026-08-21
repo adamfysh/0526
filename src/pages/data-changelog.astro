@@ -286,11 +286,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="hero-coverage">
       <div class="hero-cov-item">
         <span class="hero-cov-label">Corrections logged, 2026</span>
-        <span class="hero-cov-value">11<span>entries</span></span>
+        <span class="hero-cov-value">12<span>entries</span></span>
       </div>
       <div class="hero-cov-item">
         <span class="hero-cov-label">Most recent</span>
-        <span class="hero-cov-value">18 Aug<span>2026</span></span>
+        <span class="hero-cov-value">21 Aug<span>2026</span></span>
       </div>
       <div class="hero-cov-item">
         <span class="hero-cov-label">Reported-tier exposure</span>
@@ -326,6 +326,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="content-section">
     <div class="section-eyebrow">Corrections</div>
     <h2 class="section-heading">The record, most recent first.</h2>
+
+    <div class="correction-date">21 August 2026 — one correction found during a routine data refresh</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Country names displayed as three letter codes for a small set of European figures.</strong> For eleven European countries, including Greece, Turkey, and the Netherlands, a specific data view was displaying the three letter country code instead of the full country name, for example GRC instead of Greece. This affected only the displayed name. The underlying dependency and value figures for these countries were correct throughout and did not change. Traced to a formatting issue in one upstream data file, corrected at the source, with a standing check added that will catch the same class of formatting issue automatically before any future rebuild. Verified directly against the corrected output.</div>
+      </div>
+    </div>
 
     <div class="correction-date">18 August 2026 — three corrections following a scheduled internal audit</div>
     <div class="limitation-list">

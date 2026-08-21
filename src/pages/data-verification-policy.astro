@@ -1,0 +1,424 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Narrows | Data Verification Policy"
+  description="How Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index."
+>
+
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s5);
+  border-bottom: 3px solid var(--gold);
+}
+.page-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: end;
+}
+.page-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s3);
+}
+.page-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.page-hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+.hero-coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.hero-cov-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.hero-cov-item:last-child { border-bottom: none; }
+.hero-cov-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.hero-cov-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.hero-cov-value span {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  margin-left: 3px;
+}
+
+/* ── CONTENT ── */
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+}
+.content-section {
+  padding-top: var(--s5);
+  border-top: var(--rule-light);
+  margin-top: var(--s5);
+}
+.content-section:first-child { border-top: none; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.section-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.section-heading {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.text-body {
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-bottom: var(--s3);
+}
+.text-body p { margin-bottom: var(--s2); }
+.text-body p:last-child { margin-bottom: 0; }
+.text-body strong { color: var(--text-primary); font-weight: 500; }
+
+.pullquote {
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--navy);
+  padding: var(--s3) 0 var(--s3) var(--s3);
+  border-left: 2px solid var(--gold);
+  margin: var(--s4) 0;
+  max-width: 580px;
+}
+
+/* ── TIER CARDS ── */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin: var(--s3) 0;
+}
+.tier-card {
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+}
+.tier-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: var(--s2);
+  line-height: 1.2;
+}
+.tier-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ── TIER COVERAGE BARS ── */
+.country-table { margin: var(--s3) 0; }
+.country-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 70px 70px;
+  align-items: center;
+  padding: 10px var(--s3);
+  border-bottom: var(--rule-light);
+  background: var(--white);
+  gap: var(--s2);
+}
+.country-row:first-child { border-top: var(--rule-light); }
+.country-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.country-bar-wrap { background: var(--surface); border-radius: 2px; height: 5px; }
+.country-bar { height: 5px; background: var(--gold); border-radius: 2px; }
+.country-val { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; }
+.country-val-label { font-size: 10px; font-weight: 400; color: var(--text-tertiary); text-align: right; }
+.country-note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 300;
+  margin-top: var(--s2);
+  font-style: italic;
+}
+
+/* ── ACCESS / NDA ── */
+.access-section {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+  margin-top: var(--s6);
+}
+.access-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+.access-title {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.access-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.access-body {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 520px;
+}
+.access-body strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+.access-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  min-width: 260px;
+}
+.access-form { display: flex; flex-direction: column; gap: var(--s1); }
+.access-input {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.access-input::placeholder { color: rgba(255,255,255,0.25); }
+.access-input:focus { border-color: var(--gold); }
+.access-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-coverage { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .access-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .access-right { min-width: unset; }
+}
+@media (max-width: 700px) {
+  .tier-grid { grid-template-columns: 1fr; }
+  .country-row { grid-template-columns: 100px 1fr 50px; }
+  .country-val-label { display: none; }
+  .hero-coverage { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="eyebrow">Data Verification Policy</div>
+      <h1 class="page-hero-title">
+        How confident to be in any figure,<br>
+        <em>and how to ask for more.</em>
+      </h1>
+      <p class="page-hero-sub">
+        How Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. Written for a buyer relying on this data, whether pricing a portfolio, feeding an ESG score, or financing a port asset.
+      </p>
+    </div>
+    <div class="hero-coverage">
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Data tiers</span>
+        <span class="hero-cov-value">3<span>tiers</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Reported-tier exposure</span>
+        <span class="hero-cov-value">48.0<span>% of value</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Dependency matrix rows</span>
+        <span class="hero-cov-value">1,812<span>rows</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Corrections logged</span>
+        <span class="hero-cov-value">11<span>as of Aug 2026</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <section class="content-section" style="border-top:none;padding-top:var(--s5);">
+    <div class="section-eyebrow">Purpose</div>
+    <h2 class="section-heading">Every figure carries a tier. The tier is never hidden.</h2>
+    <div class="text-body">
+      <p>This page explains how Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. It exists so that a buyer relying on this data can see how confident to be in any given figure, and how to ask for more.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Data tiers</div>
+    <h2 class="section-heading">Three tiers. Shown on every row, in the tool and in every export.</h2>
+    <div class="text-body">
+      <p>Every figure in the model carries one of three tiers. The tier reflects how the underlying value was sourced, not how important or how large it is.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-name">Reported</div>
+        <div class="tier-desc">The figure comes from a direct bilateral trade record, either an official government statistics agency or a targeted primary source pull for that specific commodity and country pair. The strongest tier available.</div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-name">Corroborated</div>
+        <div class="tier-desc">The figure is derived from exporter-side statistics rather than a matched bilateral pair, but the routing has been checked against independent verification and holds up. Common where bilateral reporting is thinner than for crude oil or LNG.</div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-name">Estimated</div>
+        <div class="tier-desc">The figure is a national total allocated across corridors using routing logic, applied where a direct or exporter-side bilateral figure is not available. Disclosed on every row where it applies.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Coverage</div>
+    <h2 class="section-heading">Where each tier sits, by row and by value.</h2>
+    <div class="text-body">
+      <p>Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, the picture reverses: Reported-tier rows carry the largest share of total modelled exposure. The flows with the most money behind them are disproportionately the ones with the strongest sourcing. We publish this breakdown both ways rather than a single confidence claim, so a buyer can judge how their own specific exposure sits, not take our word for the average.</p>
+    </div>
+    <div class="country-table">
+      <div class="country-row">
+        <div class="country-name">Reported</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:48%"></div></div>
+        <div class="country-val">48.0%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+      <div class="country-row">
+        <div class="country-name">Estimated</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:40.8%"></div></div>
+        <div class="country-val">40.8%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+      <div class="country-row">
+        <div class="country-name">Corroborated</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:11.2%"></div></div>
+        <div class="country-val">11.2%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+    </div>
+    <div class="country-note">By row count instead of value: Estimated 61.6%, Corroborated 22.7%, Reported 15.6%, across 1,812 rows in the current dependency matrix.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Process</div>
+    <h2 class="section-heading">Two checks run continuously, not only when something looks wrong.</h2>
+    <div class="text-body">
+      <p><strong>Structured spot audits.</strong> A sample of country, commodity, and chokepoint combinations is checked against independent public sources on a fixed schedule, not only when an anomaly is reported. Each audit is logged internally: what was checked, what was found, and what was corrected.</p>
+      <p><strong>Benchmark regression.</strong> A fixed set of known reference figures is checked after every model rebuild, so that a change made for one reason cannot silently move an unrelated figure without being caught.</p>
+      <p>Every correction, however small, is logged with a date, a description of what changed, the scope of countries or commodities affected, and the value impact. A public summary of this log is published as our <a href="/data-changelog" style="color:var(--blue);">data changelog</a>, updated as corrections happen. The full internal log, including root cause detail and code level verification steps, is not published in full, for the same reason a pricing model's full workings are not published: the audit trail is the demonstration of rigor, not the underlying method. That fuller record is available to serious prospects under a non disclosure agreement, on request.</p>
+    </div>
+    <div class="pullquote">
+      A model with a visible history of catching and fixing its own errors is more trustworthy than one that claims never to have had any.
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Requests</div>
+    <h2 class="section-heading">Any figure can be independently checked on request.</h2>
+    <div class="text-body">
+      <p>A specific country, commodity, or chokepoint figure can be independently checked on request. This produces a short verification note covering: the source of the figure, the tier it carries, the date it was last checked, and the result of a fresh spot check against an independent source if one has not been run recently for that combination.</p>
+      <p>This is offered rather than full access to the internal log because most of the value in a verification request is the answer, not the archive. A buyer who needs the full audit history for a specific regulatory or diligence purpose should raise that directly, and it will be considered case by case.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Track record</div>
+    <h2 class="section-heading">The current record lives on the changelog, not restated here.</h2>
+    <div class="text-body">
+      <p>As of end of August 2026, our <a href="/data-changelog" style="color:var(--blue);">data changelog</a> is the current, dated record of every correction made to this model, updated as corrections happen. Recent activity includes four corrections closed between 13 and 18 August 2026, following seven made in early July.</p>
+    </div>
+  </section>
+
+</div><!-- end content-wrap -->
+
+<!-- ACCESS / NDA SECTION -->
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">The full audit log is available<br><em>under NDA</em> for serious counterparties.</h2>
+      <p class="access-body">This page describes our process at a level sufficient to judge its rigor. <strong>The full internal audit log</strong>, including every check that found nothing wrong and the complete pre-July correction history, is available on request to qualified counterparties under a standard NDA.</p>
+    </div>
+    <div class="access-right">
+      <div class="access-form">
+        <input type="email" class="access-input" placeholder="your@organisation.com" id="verify-email" />
+        <button class="btn btn-gold" id="verify-btn" style="width:100%">Request the audit log</button>
+      </div>
+      <span class="access-note">fysh@narrows.io · A person will reply.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function handleVerifyRequest() {
+  const input = document.getElementById('verify-email') as HTMLInputElement;
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(192,57,43,0.8)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1600);
+    return;
+  }
+  window.location.href = `mailto:fysh@narrows.io?subject=Full audit log request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
+}
+document.getElementById('verify-btn')?.addEventListener('click', handleVerifyRequest);
+document.getElementById('verify-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (e.key === 'Enter') handleVerifyRequest();
+});
+</script>
+
+</BaseLayout>
