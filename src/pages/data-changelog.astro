@@ -1,0 +1,443 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Narrows | Data Changelog"
+  description="A dated, public record of every correction made to the data behind Narrows' chokepoint and port risk models."
+>
+
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s5);
+  border-bottom: 3px solid var(--gold);
+}
+.page-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: end;
+}
+.page-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s3);
+}
+.page-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.page-hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+.hero-coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.hero-cov-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.hero-cov-item:last-child { border-bottom: none; }
+.hero-cov-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.hero-cov-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.hero-cov-value span {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  margin-left: 3px;
+}
+
+/* ── CONTENT ── */
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+}
+.content-section {
+  padding-top: var(--s5);
+  border-top: var(--rule-light);
+  margin-top: var(--s5);
+}
+.content-section:first-child { border-top: none; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.section-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.section-heading {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.text-body {
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-bottom: var(--s3);
+}
+.text-body p { margin-bottom: var(--s2); }
+.text-body p:last-child { margin-bottom: 0; }
+.text-body strong { color: var(--text-primary); font-weight: 500; }
+
+.pullquote {
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--navy);
+  padding: var(--s3) 0 var(--s3) var(--s3);
+  border-left: 2px solid var(--gold);
+  margin: var(--s4) 0;
+  max-width: 580px;
+}
+
+/* ── DATED CORRECTION GROUPS ── */
+.correction-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: var(--s4) 0 var(--s2);
+}
+.correction-date:first-child { margin-top: 0; }
+
+/* Reuses the site's limitation-item pattern for individual correction entries */
+.limitation-list { margin: var(--s3) 0; }
+.limitation-item {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: var(--s2);
+  padding: 14px 0;
+  border-bottom: var(--rule-light);
+  align-items: baseline;
+}
+.limitation-item:first-child { border-top: var(--rule-light); }
+.limitation-bullet {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 1px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+.limitation-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+.limitation-text strong { font-weight: 600; color: var(--text-primary); }
+
+/* ── TIER COVERAGE BARS ── */
+.country-table { margin: var(--s3) 0; }
+.country-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 70px 70px;
+  align-items: center;
+  padding: 10px var(--s3);
+  border-bottom: var(--rule-light);
+  background: var(--white);
+  gap: var(--s2);
+}
+.country-row:first-child { border-top: var(--rule-light); }
+.country-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.country-bar-wrap { background: var(--surface); border-radius: 2px; height: 5px; }
+.country-bar { height: 5px; background: var(--gold); border-radius: 2px; }
+.country-val { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; }
+.country-val-label { font-size: 10px; font-weight: 400; color: var(--text-tertiary); text-align: right; }
+.country-note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 300;
+  margin-top: var(--s2);
+  font-style: italic;
+}
+
+/* ── ACCESS / NDA ── */
+.access-section {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+  margin-top: var(--s6);
+}
+.access-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+.access-title {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.access-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.access-body {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 520px;
+}
+.access-body strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+.access-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  min-width: 260px;
+}
+.access-form { display: flex; flex-direction: column; gap: var(--s1); }
+.access-input {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.access-input::placeholder { color: rgba(255,255,255,0.25); }
+.access-input:focus { border-color: var(--gold); }
+.access-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-coverage { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .access-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .access-right { min-width: unset; }
+}
+@media (max-width: 700px) {
+  .country-row { grid-template-columns: 100px 1fr 50px; }
+  .country-val-label { display: none; }
+  .hero-coverage { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="eyebrow">Data Changelog</div>
+      <h1 class="page-hero-title">
+        Every correction we have made,<br>
+        <em>dated, in one place.</em>
+      </h1>
+      <p class="page-hero-sub">
+        A running record of corrections to the data behind the Chokepoint Dependency Model and the Port Risk Index. Updated as corrections happen, not on a schedule. A model with a visible history of catching and fixing its own errors is more trustworthy than one that claims never to have had any.
+      </p>
+    </div>
+    <div class="hero-coverage">
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Corrections logged, 2026</span>
+        <span class="hero-cov-value">11<span>entries</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Most recent</span>
+        <span class="hero-cov-value">18 Aug<span>2026</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Reported-tier exposure</span>
+        <span class="hero-cov-value">48.0<span>% of value</span></span>
+      </div>
+      <div class="hero-cov-item">
+        <span class="hero-cov-label">Dependency matrix rows</span>
+        <span class="hero-cov-value">1,812<span>rows</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <section class="content-section" style="border-top:none;padding-top:var(--s5);">
+    <div class="section-eyebrow">About this page</div>
+    <h2 class="section-heading">The public summary. The full technical record is available under NDA.</h2>
+    <div class="text-body">
+      <p>This is a running, dated record of corrections made to the data behind the Chokepoint Dependency Model and the Port Risk Index. Every entry below is real and complete in its own right: what changed, when, and what it affected.</p>
+      <p>A fuller technical writeup for each correction, including root cause detail and verification methodology, is available to serious prospects under a non disclosure agreement. See the request form at the bottom of this page.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Process</div>
+    <h2 class="section-heading">Two checks run continuously, not only when something looks wrong.</h2>
+    <div class="text-body">
+      <p>A structured spot audit checks a sample of country, commodity, and chokepoint combinations against independent public sources on a fixed schedule. A benchmark regression checks a fixed set of known reference figures after every model rebuild, so that a change made for one reason cannot silently move an unrelated figure without being caught. Full detail on both processes, including tier definitions and how to request an independent verification, is in our <a href="/data-verification-policy" style="color:var(--blue);">data verification policy</a>.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Corrections</div>
+    <h2 class="section-heading">The record, most recent first.</h2>
+
+    <div class="correction-date">18 August 2026 — three corrections following a scheduled internal audit</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>European crude oil duplicate figures.</strong> A data merge edge case caused certain European countries, including Greece, Germany, France, and Belgium, to have their crude oil dependency figures on the Strait of Hormuz counted twice under specific conditions. Found and corrected. Affected figures across our published analysis were updated the same day.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Missing Cape of Good Hope routing option.</strong> Grain exports from a set of Atlantic basin countries, including Brazil and Argentina, were being modelled as routing through the Suez Canal toward Asian markets. In reality, this trade typically routes around the Cape of Good Hope instead. We added a corrected routing rule covering the affected exporters and verified it against known trade patterns, while confirming that unaffected countries on the same trade lane, including the United States, the Netherlands, and Germany, correctly retained their existing routing.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>A data formatting inconsistency affecting a small number of figures.</strong> Found while verifying the correction above: a data type inconsistency in how commodity codes were read from different source files, which had been slightly overstating a handful of figures. Clearest example: China's crude oil dependency on the Strait of Malacca had been reading 46.3 percent, and is now confirmed at 46.2 percent, matching the figure independently published elsewhere. Fixed at the source and verified by rerunning the full pipeline twice, confirming identical results both times.</div>
+      </div>
+    </div>
+
+    <div class="correction-date">13 August 2026 — one correction found during a routine pipeline update</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text">While adding new commodity coverage, a routine internal check found that under certain conditions our pipeline could select conflicting versions of the same underlying trade record, which affected a small number of dependency figures. Clearest symptom: two countries' iron ore dependency briefly read above 100 percent, a mathematically impossible value that our own benchmark check flagged before anything was published externally. We rebuilt the affected calculation so that it always produces the same result from the same input data, and verified this by rerunning the pipeline twice and confirming byte for byte identical output.</div>
+      </div>
+    </div>
+
+    <div class="correction-date">10 July 2026 — seven corrections over two days, plus a naming correction</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text">Across a two day period, seven corrections were made to the model, ranging from a data confidence reclassification affecting five commodities to a larger routing correction affecting over sixty billion dollars of surfaced trade value across sixteen countries. A further, separate change corrected the naming of our own confidence tier system.</div>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      "Earlier corrections" is not a euphemism for hidden. It means reviewed to a lower publication standard than the entries above, not withheld.
+    </div>
+    <div class="text-body">
+      <p>The entries above are not where our correction record begins. The model has an internal engineering history reaching back through its initial build, with well over one hundred individually numbered corrections made during that period, covering routing logic, coverage gaps, and data quality issues found in the ordinary course of extending and hardening the model. That earlier record exists and is retained in full internally. We are working through it to bring it up to the same publication standard as the entries above, rather than publish a rough summary of periods we have not yet reviewed to that standard. Until that work is complete, the full internal history for any period is available to serious prospects under a non disclosure agreement, on the same terms as the technical detail behind the entries above.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Coverage</div>
+    <h2 class="section-heading">Where each data tier sits, by row and by value.</h2>
+    <div class="text-body">
+      <p>Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, the picture reverses: Reported-tier rows carry the largest share of total modelled exposure. The flows with the most money behind them are disproportionately the ones with the strongest sourcing.</p>
+    </div>
+    <div class="country-table">
+      <div class="country-row">
+        <div class="country-name">Reported</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:48%"></div></div>
+        <div class="country-val">48.0%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+      <div class="country-row">
+        <div class="country-name">Estimated</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:40.8%"></div></div>
+        <div class="country-val">40.8%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+      <div class="country-row">
+        <div class="country-name">Corroborated</div>
+        <div class="country-bar-wrap"><div class="country-bar" style="width:11.2%"></div></div>
+        <div class="country-val">11.2%</div>
+        <div class="country-val-label">of value</div>
+      </div>
+    </div>
+    <div class="country-note">By row count instead of value: Estimated 61.6%, Corroborated 22.7%, Reported 15.6%, across 1,812 rows in the current dependency matrix. Full tier definitions are in our data verification policy.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">Scope</div>
+    <h2 class="section-heading">What this record intentionally does not include.</h2>
+    <div class="text-body">
+      <p>This page does not include every internal check that found nothing wrong. Those checks happen on a fixed schedule regardless of whether an anomaly is suspected, and their results are logged internally. It also does not include the full technical mechanics behind each correction. That level of detail, including exact root cause and code level verification steps, is available under non disclosure agreement on request, and is the kind of material we expect a data as liability buyer, an ESG platform, a reinsurer, or a port financier, to reasonably want before relying on our figures in their own work.</p>
+    </div>
+  </section>
+
+</div><!-- end content-wrap -->
+
+<!-- ACCESS / NDA SECTION -->
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">The full correction record is available<br><em>under NDA</em> for serious counterparties.</h2>
+      <p class="access-body">This page describes every correction at a level sufficient to judge our process. <strong>The full technical record</strong>, including root cause detail, exact verification steps, and our complete pre-July engineering history, is available on request to qualified counterparties under a standard NDA. Request it and we will send the record before the call.</p>
+    </div>
+    <div class="access-right">
+      <div class="access-form">
+        <input type="email" class="access-input" placeholder="your@organisation.com" id="changelog-email" />
+        <button class="btn btn-gold" id="changelog-btn" style="width:100%">Request the full record</button>
+      </div>
+      <span class="access-note">fysh@narrows.io · A person will reply.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function handleChangelogRequest() {
+  const input = document.getElementById('changelog-email') as HTMLInputElement;
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(192,57,43,0.8)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1600);
+    return;
+  }
+  window.location.href = `mailto:fysh@narrows.io?subject=Full correction record request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
+}
+document.getElementById('changelog-btn')?.addEventListener('click', handleChangelogRequest);
+document.getElementById('changelog-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
+  if (e.key === 'Enter') handleChangelogRequest();
+});
+</script>
+
+</BaseLayout>
