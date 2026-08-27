@@ -5,6 +5,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 // Tags drive the filter system. Use lowercase, hyphenated.
 const papers = [
   {
+    slug: '/analysis/panama',
+    title: 'El Nino Will Throttle the Panama Canal',
+    eyebrow: 'Panama Canal · May 2026, updated Aug 2026',
+    body: 'A full closure is dramatic and unlikely. A sustained partial disruption, as El Nino events typically produce, is highly consequential for food supply chains, prices, and hedges. Live update: the throttle has already started, a year ahead of the model\'s own prior projection.',
+    stat: 'Grain VaR 50% severity: $14.0B · Draft: 48.0ft · Slots cut to 34 from 3 Sep',
+    tags: ['panama', 'corn', 'soybean', 'wheat', 'bulk', 'handymax', 'japan', 'china', 'south-korea', 'rerouting'],
+    date: 'Aug 2026',
+    featured: true,
+  },
+  {
+    slug: '/analysis/hormuz-dry-cargo',
+    title: 'Hormuz Has a Fertiliser Problem Too',
+    eyebrow: 'Strait of Hormuz, dry cargo · August 2026',
+    body: 'Urea and sulphur from the Gulf are a live, underdiscussed piece of the Hormuz disruption. The country-level dependency figures overstate it, because part of the Gulf\'s fertiliser trade, Oman\'s, never crosses the strait at all.',
+    stat: 'India urea, Gulf-wide: 85% · Corrected, Hormuz-specific: ~36%',
+    tags: ['hormuz', 'fertiliser', 'urea', 'india', 'sri-lanka', 'thailand', 'oman'],
+    date: 'Aug 2026',
+    featured: true,
+  },
+  {
     slug: '/analysis/hormuz',
     title: 'Hormuz and the Limits of the Index',
     eyebrow: 'Strait of Hormuz · May 2026',
@@ -57,6 +77,16 @@ const tagLabels: Record<string, string> = {
   'rerouting':   'Rerouting',
   'cii':         'CII / IMO',
   'infrastructure': 'Infrastructure',
+  'panama':      'Panama',
+  'corn':        'Corn',
+  'soybean':     'Soybean',
+  'handymax':    'Handymax',
+  'fertiliser':  'Fertiliser',
+  'urea':        'Urea',
+  'india':       'India',
+  'sri-lanka':   'Sri Lanka',
+  'thailand':    'Thailand',
+  'oman':        'Oman',
 };
 ---
 

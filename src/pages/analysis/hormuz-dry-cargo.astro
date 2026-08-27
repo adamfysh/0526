@@ -1,0 +1,112 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="Hormuz has a fertiliser problem too. <em>Not just oil.</em>"
+ description="Urea and sulphur from the Gulf are a live, underdiscussed piece of the Hormuz disruption. But the country-level dependency figures overstate it, because part of the Gulf's fertiliser trade never crosses the strait at all."
+ eyebrow="Scenario analysis · Strait of Hormuz, dry cargo · August 2026"
+ publishDate="August 2026"
+ readTime="8 min read"
+ author="Narrows Research"
+>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+ <div class="stat-bar-inner">
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">India urea, Gulf-wide dependency</div>
+   <div class="stat-bar-value">85%</div>
+   <div class="stat-bar-unit">Before correcting for Oman</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">India urea, Hormuz-specific dependency</div>
+   <div class="stat-bar-value" style="color:var(--gold);">~36%</div>
+   <div class="stat-bar-unit">After removing Oman, which does not transit the strait</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Oman's share of India's Gulf urea</div>
+   <div class="stat-bar-value">57.8%</div>
+   <div class="stat-bar-unit">Comtrade 2024, OMIFCO offtake at Sur</div>
+  </div>
+  <div class="stat-bar-item">
+   <div class="stat-bar-label">Oman's JWC war risk status</div>
+   <div class="stat-bar-value" style="color:var(--red);">Listed</div>
+   <div class="stat-bar-unit">Covered despite sitting outside the strait</div>
+  </div>
+ </div>
+</div>
+
+<!-- PHOTO BAND -->
+<div slot="photo-band" class="article-photo-band">
+ <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz — satellite view" loading="eager" />
+ <span class="article-photo-caption">Strait of Hormuz · Gulf of Oman sits seaward of it, not inside it</span>
+</div>
+
+<div class="section-eyebrow">The framing problem</div>
+<h2 class="article-section-title">Every Hormuz headline is about oil. The fertiliser story is real and it is not the same shape.</h2>
+
+<p class="prose">Six months into the closure, the oil numbers are well covered: transit down to a few percent of normal, war risk premiums at multiples of the pre-crisis rate, Brent up more than twenty percent. What gets less attention is that the Gulf is also a major global source of urea and sulphur, both direct output and a byproduct of the region's oil and gas refining, and that trade has been disrupted alongside the oil story since the closure began on 28 February. India, Sri Lanka, and Thailand are the most exposed importers. This matters for food security in a direct way that the oil headlines do not: urea is fertiliser, and a fertiliser supply shock reaches a farmer's input costs the next planting season, not the next fill-up.</p>
+
+<p class="prose">This piece was put together for a live segment on the Granular podcast with Holly Birkett, recorded 27 August 2026. The number that came out of preparing for it is more interesting than the one that went in.</p>
+
+<div class="section-eyebrow">The correction</div>
+<h2 class="article-section-title">Oman does not transit the strait. Most Gulf dependency figures do not know that.</h2>
+
+<p class="prose">The standard way to state Gulf fertiliser exposure is a single country-level number: India's urea imports are roughly 85% dependent on the Gulf. That number is not wrong as a description of where the cargo comes from. It is wrong as a description of what actually requires the Strait of Hormuz to stay open, because it silently includes Oman, and Oman's main fertiliser export terminal, Sur, sits on the Gulf of Oman coast, seaward of the strait. A vessel loading at Sur never enters the Persian Gulf and never needs Hormuz to reopen.</p>
+
+<p class="prose">Oman is not a small share of that trade. India's OMIFCO joint venture, a dedicated bilateral supply arrangement between the two countries, makes Oman 57.8% of India's Gulf-sourced urea, by value, on 2024 Comtrade data, more than every other Gulf exporter combined. Correcting for that, India's actual Hormuz-specific urea dependency is closer to 36%, not 85%. Sri Lanka and Thailand have smaller Oman shares, 15.3% and 20.9% respectively, so the correction is smaller but still real: Sri Lanka moves from roughly 78% to roughly 66%, Thailand from roughly 67% to roughly 53%.</p>
+
+<div class="callout">
+  <div class="callout-label">Why this kind of correction matters, and why it generalises</div>
+  <div class="callout-body">This is the same class of error the Narrows model has already caught and fixed for crude oil and LNG specifically, both of which had an explicit routing correction removing Oman's Hormuz attribution once it was noticed that Oman's loading terminals, Mina al-Fahal for crude and Qalhat for LNG, are also seaward of the strait. That fix was never extended to fertiliser, or to refined petroleum, LPG, and ammonia, all of which carry the same Gulf-wide dependency figure without the Oman correction applied. This page corrects fertiliser. The other three commodities carry the same open question and are flagged here rather than asserted either way until the same check has been run against them.</div>
+</div>
+
+<div class="section-eyebrow">The number the market and the physical geography disagree on</div>
+<h2 class="article-section-title">Oman is outside the strait. It is not outside the war risk zone.</h2>
+
+<p class="prose">The physical correction above does not mean Oman-sourced cargo is priced as safe. The Joint War Committee's Listed Areas circular, JWLA-033, issued 3 March 2026, explicitly names Oman as a listed country, and by the circular's own definition, a listed country's ports and coastal waters out to 12 nautical miles are covered unless specifically varied. Oman has no variation. Sur, Sohar, Duqm, Salalah, and Muscat are all inside the current war risk boundary, which is drawn around the whole theatre, the Persian Gulf, Gulf of Oman, Arabian Sea, Gulf of Aden and Southern Red Sea, on regional threat exposure, not on which vessels physically transit a specific strait.</p>
+
+<p class="prose">So the honest version of this holds two facts at once, and they point in different directions. Physically, Omani urea does not need Hormuz to reopen, the dependency correction above is real. Commercially, the market has not priced Oman as a safe alternative, because the war risk boundary was drawn on the region's overall threat exposure, missile and drone range, general Gulf of Oman risk, rather than on strait transit specifically. A cargo book that assumes Oman-sourced fertiliser is both physically and commercially insulated from the Hormuz crisis would be wrong on the second count even where it is right on the first.</p>
+
+<table style="width:100%; border-collapse:collapse; margin: var(--s3) 0; font-size:14px;">
+  <thead>
+    <tr style="border-bottom:1px solid var(--border);">
+      <th style="text-align:left; padding:8px 12px 8px 0; color:var(--text-secondary); font-weight:600;">Importer</th>
+      <th style="text-align:right; padding:8px 12px; color:var(--text-secondary); font-weight:600;">Gulf-wide dependency</th>
+      <th style="text-align:right; padding:8px 12px; color:var(--text-secondary); font-weight:600;">Oman share of Gulf trade</th>
+      <th style="text-align:right; padding:8px 0 8px 12px; color:var(--text-secondary); font-weight:600;">Corrected Hormuz-specific dependency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:var(--rule-light);">
+      <td style="padding:10px 12px 10px 0;">India</td>
+      <td style="text-align:right; padding:10px 12px;">84.8%</td>
+      <td style="text-align:right; padding:10px 12px;">57.8%</td>
+      <td style="text-align:right; padding:10px 0 10px 12px; font-weight:600; color:var(--gold);">~36%</td>
+    </tr>
+    <tr style="border-bottom:var(--rule-light);">
+      <td style="padding:10px 12px 10px 0;">Sri Lanka</td>
+      <td style="text-align:right; padding:10px 12px;">77.7%</td>
+      <td style="text-align:right; padding:10px 12px;">15.3%</td>
+      <td style="text-align:right; padding:10px 0 10px 12px; font-weight:600; color:var(--gold);">~66%</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 12px 10px 0;">Thailand</td>
+      <td style="text-align:right; padding:10px 12px;">67.0%</td>
+      <td style="text-align:right; padding:10px 12px;">20.9%</td>
+      <td style="text-align:right; padding:10px 0 10px 12px; font-weight:600; color:var(--gold);">~53%</td>
+    </tr>
+  </tbody>
+</table>
+<p class="prose" style="font-size:13px; color:var(--text-secondary);">Corrected figures are computed by removing Oman's share of each importer's Gulf-sourced nitrogenous fertiliser trade from the Hormuz-specific dependency total. Rounded to the nearest percentage point given the underlying commodity tier, see limitations below.</p>
+
+<div class="callout">
+  <div class="callout-label">Model limitations</div>
+  <div class="callout-body">Nitrogenous fertiliser (HS 3102) is Tier 2, Corroborated, in the Narrows model, not Tier 1, Reported. Unlike crude oil and LNG, which have dedicated primary-source feeds behind them, this commodity is built from UN Comtrade bilateral pulls without an independent corroborating source layer. The dependency figures above should be read as directionally solid, not to the decimal point. The Oman correction itself is a routing fact, not a modelling assumption, Sur's geography relative to the strait is not in dispute, but the underlying trade values it is applied to carry the same estimation uncertainty as the rest of the model's fertiliser coverage.</div>
+</div>
+
+<div class="section-eyebrow">Sources</div>
+<p class="prose" style="font-size:13px; color:var(--text-secondary);">Bilateral fertiliser trade values: UN Comtrade, HS 3102, 2024 authenticated pulls. Oman routing correction: consistent with the existing Narrows CDM v3 crude and LNG Oman fixes, Mina al-Fahal and Qalhat terminal geography. Joint War Committee Listed Areas: JWLA-033, 3 March 2026, Lloyd's Market Association. Hormuz crisis background: 2026 Strait of Hormuz crisis timeline; Panama Canal Authority advisory, 20 August 2026. Discussed live on the Granular podcast with Holly Birkett, 27 August 2026. See also: <a href="/analysis/panama" style="text-decoration:underline;">El Niño will throttle the Panama Canal</a>, the companion piece from the same podcast appearance.</p>
+
+</ArticleLayout>
