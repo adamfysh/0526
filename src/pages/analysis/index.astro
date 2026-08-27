@@ -4,6 +4,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 // Paper registry — add new papers here as they are published
 // Tags drive the filter system. Use lowercase, hyphenated.
 const papers = [
+  {
+    slug: '/analysis/hormuz-dry-cargo',
+    title: 'Hormuz Has a Fertiliser Problem Too',
+    eyebrow: 'Strait of Hormuz, dry cargo · August 2026',
+    body: 'Urea and sulphur from the Gulf are a live, underdiscussed piece of the Hormuz disruption. The country-level dependency figures overstate it, because part of the Gulf\'s fertiliser trade, Oman\'s, never crosses the strait at all.',
+    stat: 'India urea, Gulf-wide: 85% · Corrected, Hormuz-specific: ~36%',
+    tags: ['hormuz', 'fertiliser', 'urea', 'india', 'sri-lanka', 'thailand', 'oman'],
+    date: 'Aug 2026',
+    featured: true,
+  },
   ,
   {
     slug: '/analysis/malacca-zombie',
@@ -73,12 +83,12 @@ const papers = [
   {
     slug: '/analysis/panama',
     title: 'El Niño Does Not Close the Panama Canal. It Throttles It. That Is the Harder Problem.',
-    eyebrow: 'Panama Canal · May 2026',
-    body: 'A drought scenario is not binary. The 2023 El Niño cut transits by 36% over nine months, shifted 100M tonnes of grain to longer routes, and imposed a freight cost penalty that fell hardest on importers with no land alternative. The model quantifies grain VaR across three severity bands and names the countries for whom rerouting is not a serious option.',
-    stat: '$46.5B grain VaR (50% severity) · +38 days via Cape Horn · Mexico corn: land-route alternative exists',
-    tags: ['panama', 'grain', 'corn', 'soybean', 'bulk', 'capesize', 'japan', 'south-korea', 'rerouting', 'el-nino'],
-    date: 'May 2026',
-    featured: false,
+    eyebrow: 'Panama Canal · May 2026, updated Aug 2026',
+    body: 'A drought scenario is not binary. The 2023 El Niño cut transits by 36% over nine months, shifted 100M tonnes of grain to longer routes, and imposed a freight cost penalty that fell hardest on importers with no land alternative. Live update: the throttle has already started, a year ahead of the model\'s own prior projection.',
+    stat: 'Grain VaR 50% severity: $14.0B · Draft: 48.0ft · Slots cut to 34 from 3 Sep',
+    tags: ['panama', 'el-nino', 'grain', 'corn', 'soybean', 'wheat', 'bulk', 'handymax', 'capesize', 'japan', 'china', 'south-korea', 'rerouting'],
+    date: 'Aug 2026',
+    featured: true,
   },
   ,
   {
@@ -122,6 +132,17 @@ const tagLabels: Record<string, string> = {
   'infrastructure': 'Infrastructure',
   'validation':     'Validation',
   'bab-el-mandeb':  'Bab-el-Mandeb',
+  'grain':          'Grain',
+  'corn':           'Corn',
+  'soybean':        'Soybean',
+  'wheat':          'Wheat',
+  'handymax':       'Handymax',
+  'fertiliser':     'Fertiliser',
+  'urea':           'Urea',
+  'india':          'India',
+  'sri-lanka':      'Sri Lanka',
+  'thailand':       'Thailand',
+  'oman':           'Oman',
 };
 ---
 
