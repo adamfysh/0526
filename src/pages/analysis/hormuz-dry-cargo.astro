@@ -39,14 +39,14 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <!-- PHOTO BAND -->
 <div slot="photo-band" class="article-photo-band">
- <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz — satellite view" loading="eager" />
+ <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz, satellite view" loading="eager" />
  <span class="article-photo-caption">Strait of Hormuz · Gulf of Oman sits seaward of it, not inside it</span>
 </div>
 
 <div class="section-eyebrow">The framing problem</div>
 <h2 class="article-section-title">Almost everything we hear about Hormuz is about oil.</h2>
 
-<p class="prose">Six months into the closure, the oil numbers are well covered: transit down to a few percentage points of normal, war risk premiums at multiples of the pre-crisis rate, Brent up more than twenty percent. But the Middle East Gulf is also a major global source of urea and sulphur which are both byproducts of the region's oil and gas refining, and that trade has been disrupted alongside oil since the closure began on 28 February. India, Sri Lanka, and Thailand are the most exposed importers. This also has knock-on food security implications: urea is fertilizer, and a fertilzer supply shock reaches a farmer's input costs the next planting season.</p>
+<p class="prose">Six months into the closure, the oil numbers are well covered: transit down to a few percentage points of normal, war risk premiums at multiples of the pre-crisis rate, Brent up more than twenty percent. But the Middle East Gulf is also a major global source of urea and sulphur which are both byproducts of the region's oil and gas refining, and that trade has been disrupted alongside oil since the closure began on 28 February. India, Sri Lanka, and Thailand are the most exposed importers. This also has knock-on food security implications: urea is fertilizer, and a fertilizer supply shock reaches a farmer's input costs the next planting season.</p>
 
 <p class="prose">This piece was put together for a live segment on the Granular podcast with Holly Birkett, recorded 27 August 2026.</p>
 
@@ -95,12 +95,77 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </tbody>
 </table>
 
+<p class="prose" style="font-size:13px; color:var(--text-secondary); font-weight:600; margin: var(--s3) 0 var(--s2);">The same numbers, as a picture. Each bar is one country's total urea imports, set to 100%, so length compares composition rather than market size:</p>
+
+<div style="border:1px solid var(--border); border-radius:8px; padding:24px 26px; margin-bottom: var(--s3); background:#fff;">
+  <div style="display:flex; flex-wrap:wrap; gap:18px; margin-bottom:20px; padding-bottom:16px; border-bottom:var(--rule-light); font-size:12.5px; font-weight:500;">
+    <span style="display:flex; align-items:center; gap:7px;"><span style="width:11px;height:11px;border-radius:3px;background:var(--red);display:inline-block;"></span>Transits Hormuz <span style="color:var(--text-secondary); font-weight:400;">(blockade risk)</span></span>
+    <span style="display:flex; align-items:center; gap:7px;"><span style="width:11px;height:11px;border-radius:3px;background:var(--gold);display:inline-block;"></span>Via Oman <span style="color:var(--text-secondary); font-weight:400;">(war risk premium, not blockaded)</span></span>
+    <span style="display:flex; align-items:center; gap:7px;"><span style="width:11px;height:11px;border-radius:3px;background:#C3D2E0;display:inline-block;"></span>Non-Gulf <span style="color:var(--text-secondary); font-weight:400;">(outside this risk picture)</span></span>
+  </div>
+
+  <div style="padding:16px 0;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:9px; flex-wrap:wrap;">
+      <span style="font-size:15px; font-weight:700; color:var(--navy);">India</span>
+      <span style="font-variant-numeric:tabular-nums; font-size:15px; font-weight:700; color:var(--navy);">$1,832.8M <span style="font-size:11.5px; font-weight:500; color:var(--text-secondary);">total urea imports</span></span>
+    </div>
+    <div style="height:24px; width:100%; display:flex;">
+      <div style="height:100%; width:35.8%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div style="height:100%; width:49.0%; background:var(--gold); margin-left:2px;"></div>
+      <div style="height:100%; width:15.2%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:4px 18px; margin-top:9px; font-size:12px; font-variant-numeric:tabular-nums; color:var(--text-secondary);">
+      <span>Hormuz <b style="color:var(--navy);">$656.4M</b> (35.8%)</span>
+      <span>Oman <b style="color:var(--navy);">$897.8M</b> (49.0%)</span>
+      <span>Non-Gulf <b style="color:var(--navy);">$278.6M</b> (15.2%)</span>
+    </div>
+  </div>
+
+  <div style="padding:16px 0; border-top:1px dashed var(--border);">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:9px; flex-wrap:wrap;">
+      <span style="font-size:15px; font-weight:700; color:var(--navy);">Sri Lanka</span>
+      <span style="font-variant-numeric:tabular-nums; font-size:15px; font-weight:700; color:var(--navy);">$122.9M <span style="font-size:11.5px; font-weight:500; color:var(--text-secondary);">total urea imports</span></span>
+    </div>
+    <div style="height:24px; width:100%; display:flex;">
+      <div style="height:100%; width:65.8%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div style="height:100%; width:11.9%; background:var(--gold); margin-left:2px;"></div>
+      <div style="height:100%; width:22.3%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:4px 18px; margin-top:9px; font-size:12px; font-variant-numeric:tabular-nums; color:var(--text-secondary);">
+      <span>Hormuz <b style="color:var(--navy);">$80.9M</b> (65.8%)</span>
+      <span>Oman <b style="color:var(--navy);">$14.6M</b> (11.9%)</span>
+      <span>Non-Gulf <b style="color:var(--navy);">$27.4M</b> (22.3%)</span>
+    </div>
+  </div>
+
+  <div style="padding:16px 0 4px; border-top:1px dashed var(--border);">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:9px; flex-wrap:wrap;">
+      <span style="font-size:15px; font-weight:700; color:var(--navy);">Thailand</span>
+      <span style="font-variant-numeric:tabular-nums; font-size:15px; font-weight:700; color:var(--navy);">$1,073.9M <span style="font-size:11.5px; font-weight:500; color:var(--text-secondary);">total urea imports</span></span>
+    </div>
+    <div style="height:24px; width:100%; display:flex;">
+      <div style="height:100%; width:53.0%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div style="height:100%; width:14.0%; background:var(--gold); margin-left:2px;"></div>
+      <div style="height:100%; width:33.0%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:4px 18px; margin-top:9px; font-size:12px; font-variant-numeric:tabular-nums; color:var(--text-secondary);">
+      <span>Hormuz <b style="color:var(--navy);">$569.2M</b> (53.0%)</span>
+      <span>Oman <b style="color:var(--navy);">$150.3M</b> (14.0%)</span>
+      <span>Non-Gulf <b style="color:var(--navy);">$354.4M</b> (33.0%)</span>
+    </div>
+  </div>
+</div>
+
+<p class="prose" style="font-size:12px; color:var(--text-secondary); margin-top:calc(-1 * var(--s2)); margin-bottom: var(--s3);">Total imports and the non-Gulf share are calculated from each country's Gulf-sourced value divided by its Gulf-wide dependency percentage above, not an independent Comtrade total-imports pull. Recomputed this way, the Hormuz-specific share lands at 35.8%, 65.8%, and 53.0% for India, Sri Lanka, and Thailand, matching the corrected dependency figures above by a different route.</p>
+
 <div class="callout">
   <div class="callout-label">Model limitations</div>
-  <div class="callout-body">Nitrogenous fertiliser (HS 3102) is Tier 2, Corroborated, in the Narrows model. Unlike crude oil and LNG, which have dedicated primary-source feeds behind them, this commodity is built from UN Comtrade bilateral pulls without an independent corroborating source layer. The dependency figures above should be read as directionally solid, not to the decimal point. The Oman correction itself is a routing fact, not a modelling assumption. Sur's geography relative to the strait is not in dispute, but the underlying trade values it is applied to carry the same estimation uncertainty as the rest of the model's fertilizer coverage.</div>
+  <div class="callout-body">Nitrogenous fertilizer (HS 3102) is Tier 2, Corroborated, in the Narrows model. Unlike crude oil and LNG, which have dedicated primary-source feeds behind them, this commodity is built from UN Comtrade bilateral pulls without an independent corroborating source layer. The dependency figures above should be read as directionally solid, not to the decimal point. The Oman correction itself is a routing fact, not a modelling assumption. Sur's geography relative to the strait is not in dispute, but the underlying trade values it is applied to carry the same estimation uncertainty as the rest of the model's fertilizer coverage.</div>
 </div>
 
 <div class="section-eyebrow">Sources</div>
-<p class="prose" style="font-size:13px; color:var(--text-secondary);">Bilateral fertiliser trade values: UN Comtrade, HS 3102, 2024 authenticated pulls. Oman routing correction: consistent with the existing Narrows CDM v3 crude and LNG Oman fixes, Mina al-Fahal and Qalhat terminal geography. Joint War Committee Listed Areas: JWLA-033, 3 March 2026, Lloyd's Market Association. Hormuz crisis background: 2026 Strait of Hormuz crisis timeline; Panama Canal Authority advisory, 20 August 2026. Discussed live on the Granular podcast with Holly Birkett, 27 August 2026. See also: <a href="/analysis/panama" style="text-decoration:underline;">El Niño will throttle the Panama Canal</a>, the companion piece from the same podcast appearance.</p>
+<p class="prose" style="font-size:13px; color:var(--text-secondary);">Bilateral fertilizer trade values: UN Comtrade, HS 3102, 2024 authenticated pulls. Oman routing correction: consistent with the existing Narrows CDM v3 crude and LNG Oman fixes, Mina al-Fahal and Qalhat terminal geography. Joint War Committee Listed Areas: JWLA-033, 3 March 2026, Lloyd's Market Association. Hormuz crisis background: 2026 Strait of Hormuz crisis timeline; Panama Canal Authority advisory, 20 August 2026. Discussed live on the Granular podcast with Holly Birkett, 27 August 2026. See also: <a href="/analysis/panama" style="text-decoration:underline;">El Niño will throttle the Panama Canal</a>, the companion piece from the same podcast appearance. For weekly shipping news context: <a href="https://www.tradewindsnews.com/tag/wavelength_podcast" style="text-decoration:underline;">TradeWinds' Wavelength podcast</a>.</p>
+
+<p class="prose" style="font-size:13px; color:var(--text-secondary);">Related coverage, also referenced on the podcast: <a href="https://www.ifpri.org/blog/the-iran-war-farmers-in-brazil-and-argentina-face-rising-fertilizer-and-energy-prices/" style="text-decoration:underline;">IFPRI, on rising fertilizer and energy costs for farmers in Brazil and Argentina</a>, and <a href="https://www.cnbcafrica.com/2026/farmers-in-biggest-cocoa-producer-are-very-short-of-fertilizer-survey-says" style="text-decoration:underline;">CNBC Africa, on Ivory Coast cocoa farmers going into the season short of fertilizer</a>.</p>
 
 </ArticleLayout>
