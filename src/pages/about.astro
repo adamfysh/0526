@@ -209,6 +209,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 @media (max-width: 700px) {
   .about-cta-inner { flex-direction: column; align-items: flex-start; }
 }
+
+/* Product tiles */
+.tile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+.tile {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tile-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.tile-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.tile-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tile-badge-free { background: var(--green-pale); color: var(--green); }
+.tile-badge-paid { background: var(--gold-pale); color: var(--gold-dark); border: 1px solid rgba(240,180,41,0.3); }
+.tile-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+  flex: 1;
+}
+.tile-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+.tile-link:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  .tile-grid { grid-template-columns: 1fr; }
+}
 </style>
 
 <!-- HERO -->
@@ -219,11 +279,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       About The Narrows
     </div>
     <h1 class="about-hero-title">
-      The threats to global shipping require analysis approaches<br>
-      <em>that start with understanding what is at risk.</em>
+      Global trade runs through a small number of physical points.<br>
+      <em>What threatens them is not always the same kind of risk.</em>
     </h1>
     <p class="about-hero-body">
-      The Narrows is a trade risk intelligence resource. <strong>It exists to be run before a deal closes, a policy locks in, or a facility is underwritten.</strong> It is not a monitoring tool or a dashboard. The Narrows answers the structural questions about risk accumulation and the cost of alternatives.
+      The Narrows measures what a specific importer, cargo, or institution has riding on a specific chokepoint, and what a credible alternative would cost. <strong>That number holds whether the disruption turns out to be a drought, a blockade, or a decision made by a government with its own reasons.</strong> Exposure is a structural fact. It does not wait on a probability to become real.
     </p>
   </div>
 </div>
@@ -233,11 +293,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="about-section">
     <div class="about-eyebrow">The premise</div>
-    <h2 class="about-section-title">Risk pricing should not be based on probabilities for drivers that are not modelable.</h2>
+    <h2 class="about-section-title">Some risk can be modelled from a stable distribution. Some risk is a decision someone else gets to make.</h2>
     <div class="about-body">
-      <p>AIS tracks vessels. PortWatch tracks throughput. Index providers track live rates. These are monitoring tools. They tell you what is happening to traffic. They do not tell you which bilateral supply chains depend on which corridors, at what percentage of total supply, or what a credible alternative looks like and what it costs.</p>
-      <p>The Narrows models the structural exposure of importing countries to specific trade corridors, denominated in dollars, at the (em)importer, corridor, commodity(/em) level. The output is not a signal that requires a reaction; it is a number that belongs in a risk model, a credit facility, or an underwriting decision.</p>
-      <p>The world is generating new constraint points. Chokepoints, ports, borders, shipping lanes that once functioned as frictionless infrastructure are becoming risk variables. As the globalized order fragments and national interests assert themselves, the geography of trade is becoming a risk factor for economies, cargo owners, underwriters and communities. <strong>The Narrows is built to measure that.</strong></p>
+      <p>A small number of points carry an outsized share of global trade: straits, canals, ports with no real substitute. Everyone can see them on a map. The harder question is what runs through them, and what kind of threat that actually is.</p>
+      <p>Weather, congestion, and infrastructure failure are physical processes. They have real statistical structure, and the industry has genuinely good tools for pricing that structure. A government's decision to close a strait, sanction a supplier, or reroute a pipeline is a different kind of event, made by an actor with its own incentives, not drawn from a distribution. Treating the two the same, assigning a strait closure the same kind of annual probability as a storm making landfall, is a category error, not a modelling refinement.</p>
+      <p>The Narrows does not try to predict which kind of threat materialises, or when. It measures what is exposed either way: which importer depends on which corridor, for which commodity, at what percentage of total supply, and what a credible alternative costs. <strong>That number is the same whether the disruption turns out to be a drought or a decision. Exposure is a structural fact. It does not need a probability attached to be real, or to be priced.</strong></p>
     </div>
   </div>
 
@@ -252,11 +312,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="about-section">
     <div class="about-eyebrow">What The Narrows is building</div>
-    <h2 class="about-section-title">Two tools are live. More are in development.</h2>
+    <h2 class="about-section-title">Six products. One data foundation.</h2>
     <div class="about-body">
-      <p>The <strong>Port Risk Index</strong> scores 3,778 ports across four dimensions of risk: accessibility, reliability, concentration, and political stability. It is free to access at <a href="/pri">narrows.io/pri</a>. The full dataset is downloadable with no login required after the first visit.</p>
-      <p>The <strong>Chokepoint Dependency Model</strong> is the commercial layer on top. It covers 37 maritime risk corridors, $2.15 trillion in matched trade value, 44 importing countries, and 17 commodity classes. It produces three outputs: value at risk, rerouting penalty, and fleet at risk. Every assumption is substitutable.</p>
-      <p>The analytical framework is not limited to maritime trade. The same approach applies wherever hard constraints concentrate risk and data has real-world implications.</p>
+      <p>Every product is built on the same underlying Chokepoint Dependency Model, 37 maritime risk corridors, $2.15 trillion in matched trade value, 44 importing countries, and 17 commodity classes. Different clients need some, all, or none of them.</p>
+    </div>
+    <div class="tile-grid">
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">Port Risk Index</div>
+          <span class="tile-badge tile-badge-free">Free</span>
+        </div>
+        <p class="tile-desc">3,778 ports scored across four risk dimensions: accessibility, reliability, trade concentration, and political stability. The entry point to The Narrows data layer.</p>
+        <a href="/pri" class="tile-link">Open the Port Risk Index &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">Analysis</div>
+          <span class="tile-badge tile-badge-free">Free</span>
+        </div>
+        <p class="tile-desc">Corridor and scenario analysis demonstrating the method against live events. Published outputs proving the model and quantifying disruption.</p>
+        <a href="/analysis" class="tile-link">Read the analysis &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">Chokepoint Dependency Model</div>
+          <span class="tile-badge tile-badge-paid">Paid</span>
+        </div>
+        <p class="tile-desc">Bilateral trade dependency at commodity level across the world's principal maritime corridors. The data foundation. Available to institutional and analytical clients.</p>
+        <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="tile-link">Enquire &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">CAPE</div>
+          <span class="tile-badge tile-badge-paid">Paid</span>
+        </div>
+        <p class="tile-desc">The CDM applied to a specific cargo portfolio. Locked positions, divertible positions, and rerouting cost by vessel class, charter and bunker included, tanker to dry bulk.</p>
+        <a href="/cape" class="tile-link">View demonstration &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">CASCADE</div>
+          <span class="tile-badge tile-badge-paid">Paid</span>
+        </div>
+        <p class="tile-desc">Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.</p>
+        <a href="mailto:fysh@narrows.io?subject=CASCADE enquiry" class="tile-link">Enquire &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">Bespoke Analysis</div>
+          <span class="tile-badge tile-badge-paid">Paid</span>
+        </div>
+        <p class="tile-desc">The Narrows methodology applied to a specific event, portfolio, or research question. Commissioned scenario and corridor analysis delivered as a report.</p>
+        <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="tile-link">Enquire &rarr;</a>
+      </div>
+    </div>
+    <div class="about-body" style="margin-top: var(--s3);">
+      <p style="font-size:14px;">For a look at how the model has held up against real disruption, not just a forward claim, read <a href="/analysis/model-validation-2024">We Built the Model on 2023 Data. Then 2024 Happened.</a>, a systematic account of what the model predicted against what actually occurred through the Red Sea and Panama disruptions.</p>
     </div>
   </div>
 
@@ -321,8 +432,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <div class="about-cta">
   <div class="about-cta-inner">
     <div class="about-cta-text">
-      The news tells you what happened.<br>
-      <em>The Narrows tells you what it costs.</em>
+      You cannot always know what will happen at a chokepoint.<br>
+      <em>You can always know what you have riding on it.</em>
     </div>
     <a href="mailto:fysh@narrows.io?subject=Demo request: The Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>
   </div>
