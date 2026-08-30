@@ -107,9 +107,10 @@ const articleSchema = JSON.stringify({
       font-size: 16px;
       color: rgba(255,255,255,0.6);
       max-width: 620px;
-      line-height: 1.7;
+      line-height: 1.5;
       margin-bottom: 32px;
-      font-weight: 300;
+      font-weight: 400;
+      font-family: var(--font-body);
     }
     .article-meta {
       display: flex;
@@ -153,12 +154,14 @@ const articleSchema = JSON.stringify({
       color: var(--navy);
       letter-spacing: -0.01em;
       line-height: 1;
+      font-family: var(--font-mono);
     }
     .stat-bar-unit {
       font-size: 11px;
       color: var(--text-secondary);
       margin-top: 2px;
-      font-weight: 300;
+      font-weight: 400;
+      font-family: var(--font-body);
     }
 
     /* Article body */
@@ -172,9 +175,10 @@ const articleSchema = JSON.stringify({
     .prose {
       font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.8;
+      line-height: 1.5;
       margin-bottom: 20px;
-      font-weight: 300;
+      font-weight: 400;
+      font-family: var(--font-body);
     }
     .prose strong { color: var(--text-primary); font-weight: 600; }
     .prose a { color: var(--blue); }
@@ -227,7 +231,7 @@ const articleSchema = JSON.stringify({
       color: var(--blue);
       margin-bottom: 8px;
     }
-    .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+    .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); }
     .callout-body strong { color: var(--text-primary); font-weight: 600; }
 
     .method-note {
@@ -245,7 +249,7 @@ const articleSchema = JSON.stringify({
       color: var(--text-tertiary);
       margin-bottom: 8px;
     }
-    .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.7; }
+    .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.5; font-family: var(--font-body); }
 
     /* CTA strip at bottom of articles */
     .cta-strip {

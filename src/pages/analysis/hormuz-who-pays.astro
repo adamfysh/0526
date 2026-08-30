@@ -198,7 +198,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
   .n-table thead th.num { text-align: right; }
-  .n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+  .n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 400; font-family: var(--font-body); }
   .n-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
   .n-table tbody td.bold { font-weight: 600; color: var(--navy); }
   .n-table tbody td.subhead { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); background: var(--surface); padding: 6px 14px; }
@@ -216,10 +216,10 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   /* Callout / method-note (inherited from global but repeated for safety) */
   .callout { background: var(--surface); border-left: 3px solid var(--gold); border-radius: 4px; padding: 16px 20px; }
   .callout-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); }
   .method-note { border-top: var(--rule-light); padding-top: 20px; margin-top: 32px; }
   .method-note-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
-  .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.7; }
+  .method-note-body { font-size: 12px; color: var(--text-tertiary); line-height: 1.5; font-family: var(--font-body); }
 </style>
 
 </ArticleLayout>

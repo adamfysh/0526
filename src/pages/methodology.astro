@@ -34,8 +34,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .page-hero-sub {
   font-size: 16px;
   color: rgba(255,255,255,0.5);
-  line-height: 1.75;
-  font-weight: 300;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
   max-width: 560px;
 }
 
@@ -118,8 +119,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .text-body {
   font-size: 15px;
-  line-height: 1.8;
-  font-weight: 300;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
   color: var(--text-secondary);
   max-width: 680px;
   margin-bottom: var(--s3);
@@ -171,9 +173,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .pipeline-desc {
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.5;
   color: var(--text-secondary);
-  font-weight: 300;
+  font-weight: 400;
+  font-family: var(--font-body);
 }
 
 /* ── OUTPUTS ── */
@@ -207,8 +210,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .output-desc {
   font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.65;
-  font-weight: 300;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
   margin-bottom: var(--s2);
 }
 .output-eg {
@@ -296,7 +300,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .result-note {
   font-size: 11px;
   color: var(--text-tertiary);
-  font-weight: 300;
+  font-weight: 400;
+  font-family: var(--font-body);
   margin-top: 6px;
   line-height: 1.5;
 }
@@ -314,14 +319,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .country-row:first-child { border-top: var(--rule-light); }
 .country-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-.country-dep { font-size: 12px; color: var(--text-secondary); font-weight: 300; }
+.country-dep { font-size: 12px; color: var(--text-secondary); font-weight: 400; font-family: var(--font-body); }
 .country-bar-wrap { background: var(--surface); border-radius: 2px; height: 5px; }
 .country-bar { height: 5px; background: var(--gold); border-radius: 2px; }
 .country-val { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; }
 .country-note {
   font-size: 12px;
   color: var(--text-tertiary);
-  font-weight: 300;
+  font-weight: 400;
+  font-family: var(--font-body);
   margin-top: var(--s2);
   font-style: italic;
 }
@@ -347,9 +353,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .limitation-text {
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.5;
   color: var(--text-secondary);
-  font-weight: 300;
+  font-weight: 400;
+  font-family: var(--font-body);
 }
 .limitation-text strong { font-weight: 600; color: var(--text-primary); }
 
@@ -380,8 +387,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .access-body {
   font-size: 14px;
   color: rgba(255,255,255,0.45);
-  line-height: 1.75;
-  font-weight: 300;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
   max-width: 520px;
 }
 .access-body strong { color: rgba(255,255,255,0.7); font-weight: 500; }
@@ -599,7 +607,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:var(--s2);letter-spacing:-0.01em;">Country-level exposure: crude petroleum</h3>
-    <p style="font-size:13px;color:var(--text-secondary);font-weight:300;margin-bottom:var(--s2);line-height:1.65;">Dependency percentage is a fixed output of the dependency matrix. Duration and severity are the variables you control in the simulator.</p>
+    <p style="font-size:13px;color:var(--text-secondary);font-weight:400;font-family:var(--font-body);margin-bottom:var(--s2);line-height:1.5;">Dependency percentage is a fixed output of the dependency matrix. Duration and severity are the variables you control in the simulator.</p>
     <div class="country-table">
       <div class="country-row">
         <div class="country-name">China</div>

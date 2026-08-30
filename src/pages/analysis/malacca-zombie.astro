@@ -22,7 +22,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 .compare-card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
 .compare-card:not(.featured) .compare-card-title { color: var(--navy); }
 .compare-card.featured .compare-card-title { color: var(--white); }
-.compare-card-body { font-size: 13px; line-height: 1.6; font-weight: 300; }
+.compare-card-body { font-size: 13px; line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .compare-card:not(.featured) .compare-card-body { color: var(--text-secondary); }
 .compare-card.featured .compare-card-body { color: rgba(255,255,255,0.6); }
 
@@ -32,7 +32,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
 .n-table thead th.num { text-align: right; }
-.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 400; font-family: var(--font-body); }
 .n-table tbody td.num { text-align: right; font-weight: 500; }
 .n-table tbody td.bold { font-weight: 600; color: var(--navy); }
 .n-table tbody tr:last-child td { border-bottom: none; }
@@ -46,7 +46,7 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 .callout-verdict { background: var(--navy); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
 .callout-verdict-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 300; }
+.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .callout-verdict-body strong { color: var(--gold); font-weight: 600; }
 
 @media (max-width: 680px) { .compare-grid { grid-template-columns: 1fr; } }
@@ -237,37 +237,37 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   </thead>
   <tbody>
    <tr>
-    <td class="bold">Middle East Gulf<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Saudi Arabia, Iraq, UAE, Kuwait</span></td>
+    <td class="bold">Middle East Gulf<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">Saudi Arabia, Iraq, UAE, Kuwait</span></td>
     <td class="num">~42%</td>
     <td style="font-size:12px;">Hormuz → Indian Ocean → Malacca or Lombok</td>
     <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
-    <td class="bold">Russia: ESPO<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Kozmino terminal, Pacific coast</span></td>
+    <td class="bold">Russia: ESPO<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">Kozmino terminal, Pacific coast</span></td>
     <td class="num">~20%</td>
     <td style="font-size:12px;">Pacific direct to Chinese ports</td>
     <td><span class="verdict-ok">No</span></td>
    </tr>
    <tr>
-    <td class="bold">Russia: Ural seaborne<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Black Sea export, small volume</span></td>
+    <td class="bold">Russia: Ural seaborne<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">Black Sea export, small volume</span></td>
     <td class="num">~5%</td>
     <td style="font-size:12px;">Bosphorus → Suez or Cape → Indian Ocean → Malacca or Lombok</td>
     <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
-    <td class="bold">West Africa<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Angola, Nigeria, Congo</span></td>
+    <td class="bold">West Africa<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">Angola, Nigeria, Congo</span></td>
     <td class="num">~18%</td>
     <td style="font-size:12px;">Cape of Good Hope → Indian Ocean → Malacca or Lombok</td>
     <td><span class="verdict-caution">Alternatives exist</span></td>
    </tr>
    <tr>
-    <td class="bold">Americas via Panama<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">US, some Colombia</span></td>
+    <td class="bold">Americas via Panama<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">US, some Colombia</span></td>
     <td class="num">~8%</td>
     <td style="font-size:12px;">Panama Canal → Pacific direct</td>
     <td><span class="verdict-ok">No</span></td>
    </tr>
    <tr>
-    <td class="bold">Americas via Cape<br><span style="font-size:11px;font-weight:300;color:var(--text-tertiary)">Brazil, others southbound</span></td>
+    <td class="bold">Americas via Cape<br><span style="font-size:11px;font-weight:400;font-family:var(--font-body);color:var(--text-tertiary)">Brazil, others southbound</span></td>
     <td class="num">~7%</td>
     <td style="font-size:12px;">Cape of Good Hope → Indian Ocean → Malacca or Lombok</td>
     <td><span class="verdict-caution">Alternatives exist</span></td>

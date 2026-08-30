@@ -343,9 +343,9 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <style>
 .pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0; }
 .pillar-card { border: var(--rule-light); border-radius: 8px; padding: 22px; border-top: 3px solid var(--navy); background: var(--white); }
-.pillar-number { font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+.pillar-number { font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 8px; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
 .pillar-name { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
-.pillar-desc { font-size: 12px; line-height: 1.65; color: var(--text-secondary); font-weight: 300; margin-bottom: 16px; }
+.pillar-desc { font-size: 12px; line-height: 1.5; color: var(--text-secondary); font-weight: 400; font-family: var(--font-body); margin-bottom: 16px; }
 .pillar-reach { display: flex; flex-direction: column; gap: 4px; padding-top: 12px; border-top: 1px solid var(--border); }
 .pillar-reach-label { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); }
 .pillar-reach-val { font-size: 11px; font-weight: 600; }
@@ -361,7 +361,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 .compare-card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.2; }
 .compare-card:not(.featured) .compare-card-title { color: var(--navy); }
 .compare-card.featured .compare-card-title { color: var(--white); }
-.compare-card-body { font-size: 13px; line-height: 1.6; font-weight: 300; }
+.compare-card-body { font-size: 13px; line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .compare-card:not(.featured) .compare-card-body { color: var(--text-secondary); }
 .compare-card.featured .compare-card-body { color: rgba(255,255,255,0.6); }
 
@@ -370,7 +370,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .n-table thead th { background: var(--surface); color: var(--text-tertiary); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 14px; text-align: left; border-bottom: var(--rule-light); }
 .n-table thead th.num { text-align: right; }
-.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 300; }
+.n-table tbody td { padding: 10px 14px; color: var(--text-primary); border-bottom: var(--rule-light); vertical-align: middle; font-weight: 400; font-family: var(--font-body); }
 .n-table tbody td.num { text-align: right; font-weight: 500; }
 .n-table tbody td.bold { font-weight: 600; color: var(--navy); }
 .n-table tbody td.subhead { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tertiary); background: var(--surface); padding: 6px 14px; }
@@ -392,17 +392,17 @@ table.n-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 .callout-verdict { background: var(--navy); border-radius: 8px; padding: 28px 32px; margin: 32px 0; }
 .callout-verdict-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.7; font-weight: 300; }
+.callout-verdict-body { font-size: 16px; color: var(--white); line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .callout-verdict-body strong { color: var(--gold); font-weight: 600; }
 
 .callout-blue { background: var(--blue-pale); border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; padding: 20px 24px; margin: 28px 0; }
 .callout-blue .callout-label { color: var(--blue); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
-.callout-blue .callout-body { color: var(--text-primary); font-size: 13px; line-height: 1.6; font-weight: 300; }
+.callout-blue .callout-body { color: var(--text-primary); font-size: 13px; line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .callout-blue .callout-body strong { font-weight: 600; }
 
 .callout-red { background: var(--red-pale); border-left: 3px solid var(--red); border-radius: 0 6px 6px 0; padding: 20px 24px; margin: 28px 0; }
 .callout-red .callout-label { color: var(--red); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
-.callout-red .callout-body { color: var(--text-primary); font-size: 13px; line-height: 1.6; font-weight: 300; }
+.callout-red .callout-body { color: var(--text-primary); font-size: 13px; line-height: 1.5; font-weight: 400; font-family: var(--font-body); }
 .callout-red .callout-body strong { font-weight: 600; }
 
 @media (max-width: 680px) {

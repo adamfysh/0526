@@ -39,8 +39,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 }
 .pri-hero h1 em { font-style: italic; font-weight: 400; color: var(--blue-light); }
 .pri-hero-lead {
-  font-size: 17px; color: var(--text-secondary); line-height: 1.7;
-  font-weight: 300; max-width: 620px; margin-bottom: var(--s4);
+  font-size: 17px; color: var(--text-secondary); line-height: 1.5;
+  font-weight: 400; font-family: var(--font-body); max-width: 620px; margin-bottom: var(--s4);
 }
 
 /* Stats strip */
@@ -162,8 +162,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 .pri-dim-card:last-child { border-right: none; }
 .pri-dc-lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px; }
 .pri-dc-name { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; }
-.pri-dc-score { font-size: 32px; font-weight: 700; color: var(--navy); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
-.pri-dc-score span { font-size: 13px; font-weight: 300; color: var(--text-tertiary); margin-left: 2px; }
+.pri-dc-score { font-size: 32px; font-weight: 700; color: var(--navy); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; font-family: var(--font-mono); }
+.pri-dc-score span { font-size: 13px; font-weight: 400; font-family: var(--font-mono); color: var(--text-tertiary); margin-left: 2px; }
 .pri-dc-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
 .pri-dc-fill { height: 100%; border-radius: 2px; transition: width 0.4s var(--ease); }
 .pri-dc-subs {
@@ -171,7 +171,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   border-top: var(--rule-light); padding-top: 10px;
 }
 .pri-dc-sub-row { display: flex; justify-content: space-between; align-items: center; }
-.pri-dc-sub-lbl { font-size: 9px; color: var(--text-tertiary); font-weight: 300; }
+.pri-dc-sub-lbl { font-size: 9px; color: var(--text-tertiary); font-weight: 400; font-family: var(--font-body); }
 .pri-dc-sub-val { font-size: 10px; font-weight: 600; color: var(--text-secondary); }
 
 /* Histogram */
@@ -203,7 +203,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--s3) 0 var(--s2); flex-wrap: wrap; gap: var(--s2);
 }
-.pri-table-count { font-size: 13px; color: var(--text-tertiary); font-weight: 300; }
+.pri-table-count { font-size: 13px; color: var(--text-tertiary); font-weight: 400; font-family: var(--font-body); }
 .pri-table-count strong { color: var(--text-primary); font-weight: 600; }
 .pri-table-wrap {
   background: var(--white); border: var(--rule-light); border-radius: 8px;
@@ -236,7 +236,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 .pri-table tbody tr.selected td:nth-child(4) { font-weight: 700; }
 .td-rank { color: var(--text-tertiary); font-size: 12px; min-width: 50px; }
 .td-port { font-weight: 600; color: var(--navy); }
-.td-country { color: var(--text-secondary); font-weight: 300; font-size: 12px; }
+.td-country { color: var(--text-secondary); font-weight: 400; font-family: var(--font-body); font-size: 12px; }
 .td-score { font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; }
 .td-dim { font-size: 12px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
@@ -274,7 +274,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   animation: spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.pri-loading-txt { font-size: 13px; font-weight: 300; }
+.pri-loading-txt { font-size: 13px; font-weight: 400; font-family: var(--font-body); }
 
 /* Method note */
 .pri-method {
@@ -287,13 +287,13 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
 }
 .pri-method-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: var(--s2); letter-spacing: -0.015em; }
-.pri-method-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; margin-bottom: var(--s2); }
+.pri-method-body { font-size: 14px; color: var(--text-secondary); line-height: 1.5; font-weight: 400; font-family: var(--font-body); margin-bottom: var(--s2); }
 .pri-method-body strong { color: var(--text-primary); font-weight: 600; }
 .pri-dim-legend { display: flex; flex-direction: column; gap: var(--s3); }
 .pri-dim-legend-item { display: flex; align-items: flex-start; gap: 16px; }
 .pri-dim-legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
 .pri-dim-legend-text h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; letter-spacing: -0.01em; }
-.pri-dim-legend-text p { font-size: 13px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+.pri-dim-legend-text p { font-size: 13px; color: var(--text-secondary); font-weight: 400; font-family: var(--font-body); line-height: 1.5; }
 
 /* ── MAP SECTION ── */
 .pri-map-section {
@@ -409,8 +409,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 }
 .pri-gate-h em { font-style: italic; font-weight: 400; color: var(--blue); }
 .pri-gate-lead {
-  font-size: 14px; color: var(--text-secondary); line-height: 1.65;
-  font-weight: 300; margin-bottom: 28px;
+  font-size: 14px; color: var(--text-secondary); line-height: 1.5;
+  font-weight: 400; font-family: var(--font-body); margin-bottom: 28px;
 }
 .pri-gate-pills {
   display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px;
@@ -443,7 +443,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 .pri-gate-btn:active:not(:disabled) { transform: scale(0.99); }
 .pri-gate-btn:disabled { opacity: 0.55; cursor: wait; }
 .pri-gate-fine {
-  font-size: 11px; color: var(--text-tertiary); font-weight: 300; line-height: 1.5;
+  font-size: 11px; color: var(--text-tertiary); font-weight: 400; font-family: var(--font-body); line-height: 1.5;
   text-align: center; margin-top: 14px;
 }
 .pri-gate-error {

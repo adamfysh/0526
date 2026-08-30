@@ -13,8 +13,8 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
 <style>
   /* ── Lede ───────────────────────────────────────────────────────────────── */
   .lede {
-    font-size: 16px; color: var(--text-secondary); line-height: 1.75;
-    font-weight: 300; margin-bottom: 28px; max-width: 680px;
+    font-size: 16px; color: var(--text-secondary); line-height: 1.5;
+    font-weight: 400; font-family: var(--font-body); margin-bottom: 28px; max-width: 680px;
   }
   .lede strong { color: var(--text-primary); font-weight: 600; }
 
@@ -99,8 +99,8 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
     color: var(--navy); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px;
   }
   .prose {
-    font-size: 15px; color: var(--text-secondary); line-height: 1.8;
-    font-weight: 300; margin-bottom: 20px;
+    font-size: 15px; color: var(--text-secondary); line-height: 1.5;
+    font-weight: 400; font-family: var(--font-body); margin-bottom: 20px;
   }
   .prose strong { color: var(--text-primary); font-weight: 600; }
 
@@ -112,8 +112,8 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
   }
   .stat-cell { background: #fff; padding: 16px 20px; }
   .stat-lbl  { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 6px; }
-  .stat-val  { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1; }
-  .stat-unit { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-weight: 300; }
+  .stat-val  { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -0.02em; line-height: 1; font-family: var(--font-mono); }
+  .stat-unit { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-weight: 400; font-family: var(--font-body); }
 
   /* ── Callout ─────────────────────────────────────────────────────────────── */
   .callout {
@@ -124,7 +124,7 @@ import ArticleLayout from '../layouts/ArticleLayout.astro';
     font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--navy); margin-bottom: 6px;
   }
-  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .callout-body { font-size: 14px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); }
   .callout-body strong { color: var(--text-primary); font-weight: 600; }
 
   @media (max-width: 600px) {
