@@ -271,24 +271,24 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">When available transit slots fall below demand, the ACP runs a daily priority auction for one or more additional slots. Any vessel that has been waiting in the anchorage queue for at least ten days may participate, with an opening bid of $55,000. During normal operations, super booking fees run $135,000 to $140,000. During the 2023–24 drought, winning bids reached $3.975 million: the documented record, paid in November 2023 by Japan's Eneos Group for an LPG carrier named Sunny Bright.</p>
 
-<p class="prose">The price escalation was not arbitrary. It was the market revealing each vessel class's walk-away price: the maximum a rational operator would pay for a canal slot before finding the Cape Horn alternative cheaper. That walk-away price is a function of three variables: cargo value, scheduling constraint, and whether a Cape Horn detour is physically or commercially feasible.</p>
+<p class="prose">The price escalation was not arbitrary. It was the market revealing each vessel class's walk-away price: the maximum a rational operator would pay for a canal slot before finding the long way around cheaper, east via Suez and the Red Sea rather than west around South America, a route that carries almost no commercial grain traffic at all. That walk-away price is a function of three variables: cargo value, scheduling constraint, and whether a Suez or Cape of Good Hope detour is physically or commercially feasible.</p>
 
-<p class="prose">For an LPG or LNG carrier, the Cape Horn alternative is not viable at scale. The transit adds weeks, LNG boil-off losses accumulate, and the cargo value justifies almost any slot price. For a Neopanamax container ship, the locks themselves are the constraint: the vessel's beam exceeds the original Panamax lock dimensions, so the Neopanamax locks are the only available passage regardless of price. Both vessel types bid to the top. For a Handymax bulk carrier with 50,000 tonnes of grain, the arithmetic is different. The Cape Horn detour costs $1.14 million in additional voyage expense. When auction bids exceeded that threshold, which they did throughout November 2023, the rational choice was to leave the queue and go around. That is precisely what happened: documented grain vessel transits through the canal fell 85% in the four weeks ending 31 October 2023, at a point when auction prices had already moved well above the Cape Horn walk-away price for bulk operators.</p>
+<p class="prose">For an LPG or LNG carrier, the long way around is not viable at scale either. Suez adds weeks, LNG boil-off losses accumulate, and the cargo value justifies almost any slot price. For a Neopanamax container ship, the locks themselves are the constraint: the vessel's beam exceeds the original Panamax lock dimensions, so the Neopanamax locks are the only available passage regardless of price. Both vessel types bid to the top. For a Handymax bulk carrier with 50,000 tonnes of grain, the arithmetic is different, and the direction matters. The real alternative to Panama for US Gulf grain bound for Asia was never Cape Horn, a route modern cargo ships essentially do not use. It was Suez and the Red Sea, sailing the long way east rather than the short way west. The Suez detour adds approximately 18 days at sea, roughly $540,000 in additional charter time at a $30,000-a-day Handymax rate, well below the auction prices bulk operators were facing. That is precisely what happened: US Gulf grain shipments to East Asia that ran 80% via Panama in October 2022 had flipped to 91% via the Red Sea by late October 2023, and by late November, 15 of 16 tracked vessels were routing that way, essentially none through the canal.</p>
 
 <p class="prose">The auction, in other words, is not merely a pricing mechanism. It is a sorting instrument. It systematically displaces low-value bulk cargo, grain, coal, and fertiliser, while preserving transit access for high-value cargo that can afford to bid. For an underwriter or a commodity desk, the relevant number is not the transit count reduction alone, but the price at which their cargo class exits the queue.</p>
 
 <div class="n-auction-wrap">
   <div class="n-chart-eyebrow">Panama Canal · Priority slot auction · November 2023 peak</div>
   <div class="n-chart-title">At $3.97M, the auction sorted vessel classes by cargo value</div>
-  <div class="n-chart-sub">Estimated maximum rational bid per vessel class vs. documented Nov 2023 peak auction price. Vessels left of the red line diverted to Cape Horn.</div>
+  <div class="n-chart-sub">Estimated maximum rational bid per vessel class vs. documented Nov 2023 peak auction price. Vessels left of the red line diverted east via Suez and the Red Sea, not west around South America.</div>
   <div class="n-auction-axis" id="auctionAxis"></div>
   <div class="n-auction-rows" id="auctionRows"></div>
   <div class="n-auction-legend">
-    <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(10,37,64,0.12);height:14px;border-radius:2px;"></div>Diverts to Cape Horn</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(10,37,64,0.12);height:14px;border-radius:2px;"></div>Diverts via Suez / Red Sea</div>
     <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(201,168,76,0.4);height:14px;border-radius:2px;"></div>Marginal</div>
     <div class="n-legend-item"><div class="n-legend-swatch" style="background:rgba(26,94,191,0.22);height:14px;border-radius:2px;"></div>Transits: bids and wins</div>
     <div class="n-legend-item"><div class="n-legend-swatch" style="border-top:2px solid #C0392B;height:0;"></div>Peak auction $3.97M (documented)</div>
-    <div class="n-legend-item"><div class="n-legend-swatch" style="border-top:2px dashed #C9A84C;height:0;"></div>Cape Horn cost, Handymax ($1.14M)</div>
+    <div class="n-legend-item"><div class="n-legend-swatch" style="border-top:2px dashed #C9A84C;height:0;"></div>Red Sea cost, Handymax (~$540K)</div>
   </div>
   <div class="n-auction-callout">
     <div class="n-auction-callout-title">What this meant for a Handymax grain carrier</div>
@@ -304,17 +304,17 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
         <div class="n-scenario-desc">Peak Nov 2023 price. Freight cost up approximately 50% per tonne. Uneconomic for bulk grain.</div>
       </div>
       <div class="n-scenario">
-        <div class="n-scenario-label">Divert via Cape Horn</div>
-        <div class="n-scenario-cost" style="color:#C9A84C;">+$1.14M</div>
-        <div class="n-scenario-desc">38 extra days. Cheaper than bidding. The rational choice for grain at peak drought.</div>
+        <div class="n-scenario-label">Divert via Red Sea</div>
+        <div class="n-scenario-cost" style="color:#C9A84C;">+$540K</div>
+        <div class="n-scenario-desc">18 extra days. Cheaper than bidding. What most grain vessels actually did, not Cape Horn.</div>
       </div>
     </div>
   </div>
-  <div class="n-chart-source">Documented: Eneos Group (Sunny Bright LPG carrier) paid $3.975M, Nov 2023 record (Splash247; Maritime Executive). Chemical tanker documented at $1.1M. Grain ships documented in $2–4M+ range (Grain Journal, 2023). Normal super booking pre-drought: $135–140K. Max rational bid figures are Narrows estimates based on cargo value, Cape Horn feasibility by vessel class, and lock-type constraint. Not ACP data.</div>
+  <div class="n-chart-source">Documented: Eneos Group (Sunny Bright LPG carrier) paid $3.975M, Nov 2023 record (Splash247; Maritime Executive). Chemical tanker documented at $1.1M. Grain ships documented in $2–4M+ range (Grain Journal, 2023). Normal super booking pre-drought: $135–140K. Max rational bid figures are Narrows estimates based on cargo value, Suez/Cape of Good Hope feasibility by vessel class, and lock-type constraint, not ACP data. Grain routing-shift figures (80% to 91% to 69%): American Farm Bureau Federation Market Intel, citing USDA Grain Transportation Report and CHS Inc. shipment data.</div>
 </div>
 <script is:inline>
 (function() {
-  var MAX = 5000000, PEAK = 3975000, CAPE = 1140000;
+  var MAX = 5000000, PEAK = 3975000, CAPE = 540000;
   var vessels = [
     { name:'Handymax bulk',        sub:'Grain, coal · 25–60k DWT',      bid:1000000, cls:'diverts'  },
     { name:'Supramax bulk',        sub:'Grain, fertiliser · 50–65k DWT', bid:1100000, cls:'diverts'  },
@@ -387,7 +387,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     if (i===vessels.length-1) {
       var cl = document.createElement('div');
       cl.style.cssText = 'position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:#C9A84C;white-space:nowrap;';
-      cl.textContent = 'Cape Horn $1.14M';
+      cl.textContent = 'Red Sea ~$540K';
       capeLine.appendChild(cl);
     }
     outer.appendChild(capeLine);
@@ -411,6 +411,8 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 
 <p class="prose">A further constraint applies to the largest dry bulk vessels. Capesize bulk carriers, with beam widths exceeding the Panamax lock constraint, cannot transit the Panama Canal under any conditions. Iron ore and coal flows on Capesize vessels, notably Australian coal to East Asia, are already routed via the Cape of Good Hope as standard operations. The Panama Canal throttle does not affect these flows at all. The commodity classes that depend on Handymax and Supramax bulk carriers for Pacific Basin routing, principally grain, bear the concentrated operational risk of both transit reduction and priority displacement.</p>
+
+<p class="prose">The diversion did not stay pointed toward Suez for long. Once Houthi attacks on Red Sea shipping escalated in December 2023, that route stopped being safe either, and the same fleet had to move again: by late December, US Gulf to East Asia grain routing had shifted to approximately 69% via the Cape of Good Hope, 19% still risking the Red Sea, and 13% back on Panama. A fleet displaced from a short Pacific crossing by drought ended up circling the Atlantic twice in the opposite direction within about ten weeks, first east around Africa's northern route, then further east around its southern one, chasing whichever ocean was safest and cheapest at that moment.</p>
 
 <hr class="section-rule" />
 
