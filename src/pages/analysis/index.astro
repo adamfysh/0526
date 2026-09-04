@@ -114,6 +114,17 @@ const papers = [
   },
 ];
 
+// Sort papers by actual publish date, most recent first — do not rely on array order.
+// date strings are free text like 'Aug 2026' / 'Sept 2026' / 'June 2026'.
+function parsePaperDate(d: string): number {
+  const m = d.match(/([A-Za-z]+)\s+(\d{4})/);
+  if (!m) return 0;
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  const idx = months.indexOf(m[1].toLowerCase().slice(0, 3));
+  return parseInt(m[2], 10) * 12 + (idx >= 0 ? idx : 0);
+}
+papers.sort((a, b) => parsePaperDate(b.date) - parsePaperDate(a.date));
+
 // All tags for filter bar — collected from all papers
 const allTags = [...new Set(papers.flatMap(p => p.tags))].sort();
 
@@ -526,7 +537,7 @@ const tagLabels: Record<string, string> = {
             <div>
               <div class="paper-featured-tag">
                 {paper.eyebrow}
-                <span class="paper-featured-badge">Latest</span>
+                {i === 0 && <span class="paper-featured-badge">Latest</span>}
               </div>
               <div class="paper-featured-title">{paper.title}</div>
               <p class="paper-featured-body">{paper.body}</p>
