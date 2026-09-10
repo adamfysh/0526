@@ -1,7 +1,7 @@
 # check-cdm-freshness.yml
 # Same freshness monitor as app/.github/workflows/check-cdm-freshness.yml,
-# checking this repo's public/simulator_data.json copy instead. See that file
-# for the full rationale (foundation audit, 2026-07-08).
+# checking this repo's public/ copies instead. See that file for the full
+# rationale (foundation audit 2026-07-08; Fix-113/114/115, 2026-09-10).
 
 name: Check CDM data freshness
 
@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Check simulator_data.json freshness
+      - name: Check data freshness (simulator_data.json, cape_tide_feed.json, cape_corridor_feed.json, NARROWS-SIGNALS.js)
         env:
-          MAX_AGE_DAYS: 21
+          FRESHNESS_PATH_PREFIX: 'public/'
         run: python3 .github/workflows/check_cdm_freshness.py
