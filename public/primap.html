@@ -231,7 +231,13 @@
     height: 28px !important;
   }
   .leaflet-control-zoom a:hover { color: var(--white) !important; background: var(--navy-mid) !important; }
-  .leaflet-control-attribution { display: none; }
+  .leaflet-control-attribution {
+    background: rgba(10,37,64,0.55) !important;
+    color: rgba(255,255,255,0.45) !important;
+    font-size: 10px !important;
+    padding: 1px 6px !important;
+  }
+  .leaflet-control-attribution a { color: rgba(255,255,255,0.55) !important; }
 </style>
 </head>
 <body>
@@ -314,7 +320,7 @@ const map = L.map('map', {
 });
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
-  attribution: '',
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
   subdomains: 'abcd',
   maxZoom: 19,
 }).addTo(map);

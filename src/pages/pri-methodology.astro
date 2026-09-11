@@ -297,6 +297,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         the indicator sections below.
       </p>
       <p class="meth-p">
+        <strong>Outlier handling.</strong> A small number of ports have raw indicator values far
+        outside the typical range for the WPI population, which can otherwise compress the
+        effective scale for every other port under min-max normalisation. Four indicators show
+        this pattern: <code>ctrl_depth_final</code>, <code>terminal_count</code>,
+        <code>catchment_share_pct</code>, and <code>alt_distance_km</code>. Two are corrected as
+        of this version &mdash; <code>ctrl_depth_final</code> is capped at a fixed maximum (24m,
+        removing a small number of implausible offshore-terminal depth values) and
+        <code>terminal_count</code>'s contribution to D1 is capped so a handful of unusually large
+        ports don't set the scale for the rest of the population. <code>catchment_share_pct</code>
+        and <code>alt_distance_km</code> are not yet corrected: a small number of ports, including
+        some in remote or unusual locations, currently anchor the high end of these two
+        indicators' ranges. This is a tracked, open item, not yet resolved in this version.
+      </p>
+      <p class="meth-p">
         The composite PRI is not rescaled back to 0–10. Because the structural moderation of D1
         Most ports have serviceable physical infrastructure, and the empirical maximum is 3.71
         rather than 10. This is intentional: the score preserves the absolute signal from
