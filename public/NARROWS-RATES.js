@@ -7,11 +7,24 @@
  * Author:      Fysh, fysh@narrows.io
  *
  * Update protocol:
- *   - vesselRates: update in sync with narrows_config.json when Baltic Exchange / broker
- *     quotes shift materially (>10%). Increment version and last_updated.
- *   - corridorWeights: derived from AIS annual transit analysis. Review quarterly.
- *   - capeDefaults: only change if the baseline market reference period changes.
- *   - Never auto-generate this file. Human review required for every edit.
+ *   - Fix-120 (2026-09-10): this "never auto-generate" line used to contradict
+ *     reality -- the update-rates.yml GitHub Action has auto-committed vesselRates,
+ *     version, last_updated and source to THIS file, unattended, every day since
+ *     it was built. Corrected below to describe what actually happens.
+ *   - vesselRates, version, last_updated, source: auto-updated daily by
+ *     update-rates.yml (fetch_rates.py), which pulls Brent crude (BZ=F) and the
+ *     Baltic Dry Index (^BDI) from Yahoo Finance and commits the result with no
+ *     human in the loop. It fails the Action loudly (triggering GitHub's
+ *     workflow-failure notification) rather than silently going stale if a
+ *     ticker fetch fails -- see fetch_rates.py's Fix-1 comment. A `source`
+ *     string ending "[DEGRADED]" means one or both tickers failed that run and
+ *     the affected rates held their prior value rather than refreshing --
+ *     currently true here: BDI has been failing since at least 2026-09-09, see
+ *     the Harmonization Register for the open diagnosis.
+ *   - corridorWeights: derived from AIS annual transit analysis. Reviewed
+ *     quarterly, by hand -- the bot never touches this block.
+ *   - capeDefaults: only changed if the baseline market reference period
+ *     changes, by hand -- the bot never touches this block either.
  *   - This file must load synchronously before any dependent script block.
  *
  * Relationship to narrows_config.json:
@@ -26,8 +39,8 @@
 window.NARROWS_RATES = Object.freeze({
 
   version:      '1.1',
-  last_updated: '2026-06-28',
-  source:       'Synced to narrows_config.json (May 2026 baseline). June-02 auto-update voided: BDI n/a caused understated bunker. Brent ref: 93.9 USD/bbl (Jun-02).',
+  last_updated: '2026-09-11',
+  source:       'Yahoo Finance auto-update 2026-09-11 (Brent 103.9 USD/bbl, BDI n/a) [DEGRADED]',
 
   // ---------------------------------------------------------------------------
   // Vessel day rates
@@ -35,22 +48,23 @@ window.NARROWS_RATES = Object.freeze({
   // fallback before narrows_config.json resolves.
   // Authoritative source at runtime: narrows_config.json vesselRates.
   // ---------------------------------------------------------------------------
-  // Synced to narrows_config.json (authoritative) 2026-06-28.
-  // June 2 auto-update had BDI n/a which caused systematically understated bunker costs.
-  // Suezmax / LPG / Neopanamax bunker costs also corrected proportionally; charter unchanged.
-  // Human review still required before next CAPE deployment.
+  // Auto-updated daily by update-rates.yml -- see the Update protocol note
+  // above. Historical note, resolved: the 2026-06-02 auto-update had BDI n/a,
+  // which caused systematically understated bunker costs; corrected 2026-06-28
+  // and the bot's Fix-1 safeguard now fails loudly instead of repeating that
+  // silently. Current run is [DEGRADED] again (see `source` above) -- a live,
+  // separate incident, not this historical one.
   vesselRates: Object.freeze({
-    VLCC:        Object.freeze({ bunkerPerDay: 55000, charterPerDay:  65000, cargoValueM: 120 }),
-    Aframax:     Object.freeze({ bunkerPerDay: 28000, charterPerDay:  22000, cargoValueM:  65 }),
-    Capesize:    Object.freeze({ bunkerPerDay: 32000, charterPerDay:  35000, cargoValueM:  40 }),
-    Handymax:    Object.freeze({ bunkerPerDay: 18000, charterPerDay:  16000, cargoValueM:  18 }),
-    RoRo:        Object.freeze({ bunkerPerDay: 22000, charterPerDay:  20000, cargoValueM:  55 }),
-    LNG_Carrier: Object.freeze({ bunkerPerDay: 38000, charterPerDay:  60000, cargoValueM: 180 }),
-    Container:   Object.freeze({ bunkerPerDay: 30000, charterPerDay:  25000, cargoValueM:  80 }),
-    // CDM-adjacent types — not in narrows_config.json; bunker corrected proportionally
-    Suezmax:     Object.freeze({ bunkerPerDay: 32000, charterPerDay:  41548, cargoValueM:  90 }),
-    LPG:         Object.freeze({ bunkerPerDay: 21000, charterPerDay:  20000, cargoValueM:  55 }),
-    Neopanamax:  Object.freeze({ bunkerPerDay: 28000, charterPerDay:  20000, cargoValueM: 100 }),
+    VLCC:       Object.freeze({ bunkerPerDay: 30000, charterPerDay: 93315, cargoValueM: 120 }),
+    Aframax:    Object.freeze({ bunkerPerDay: 15000, charterPerDay: 36248, cargoValueM: 65 }),
+    Capesize:   Object.freeze({ bunkerPerDay: 15000, charterPerDay: 35000, cargoValueM: 40 }),
+    Handymax:  Object.freeze({ bunkerPerDay: 10000, charterPerDay: 16000, cargoValueM: 18 }),
+    RoRo:        Object.freeze({ bunkerPerDay: 12000, charterPerDay: 20000, cargoValueM: 55 }),
+    LNG_Carrier:Object.freeze({ bunkerPerDay: 25000, charterPerDay: 60000, cargoValueM: 180 }),
+    Container:  Object.freeze({ bunkerPerDay: 18000, charterPerDay: 25000, cargoValueM: 80 }),
+    Suezmax:Object.freeze({ bunkerPerDay: 18000, charterPerDay: 45560, cargoValueM: 90 }),
+    LPG:Object.freeze({ bunkerPerDay: 12000, charterPerDay: 20000, cargoValueM: 55 }),
+    Neopanamax:Object.freeze({ bunkerPerDay: 22000, charterPerDay: 20000, cargoValueM: 100 })
   }),
 
   // ---------------------------------------------------------------------------
