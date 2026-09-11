@@ -313,14 +313,14 @@ const map = L.map('map', {
   minZoom: 2,
 });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
   attribution: '',
   subdomains: 'abcd',
   maxZoom: 19,
 }).addTo(map);
 
 // Subtle label layer on top
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
   attribution: '',
   subdomains: 'abcd',
   maxZoom: 19,
