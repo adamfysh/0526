@@ -413,6 +413,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         from LPI for proxy-tier ports (Spearman rho = -0.94), and including both would violate the
         OECD Handbook double-counting rule.
       </p>
+      <p class="meth-p">
+        <strong>This tier's known limitation.</strong> The LPI-formula estimate is a national
+        indicator doing all of the differentiation: every port in the same country currently
+        receives an identical dwell estimate, regardless of that port's own size, infrastructure,
+        or traffic. An internal attempt to replace it with a model trained on genuinely port-level
+        features (vessel classes, terminal count, depth, catchment share) was tested honestly
+        against real measured dwell data using leave-one-country-out cross-validation &mdash; the
+        correct test, since every port this tier estimates for is, by construction, in a country
+        with no measured data to train on. The model performed worse than simply predicting the
+        population average once tested that way, and was not shipped. This remains a genuine open
+        limitation rather than a solved problem, and it is worth reading with extra caution for
+        ports where the score is already elevated, since data availability itself correlates with
+        the same governance and logistics quality this index is trying to measure. Closing it
+        properly would require real AIS-derived port-call data, which Narrows does not currently
+        license.
+      </p>
 
       <div class="meth-table-wrap">
         <table class="meth-table">
