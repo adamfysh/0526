@@ -281,7 +281,9 @@ const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom
 // CARTO Positron — light, minimal, muted labels, no bathymetric clutter.
 // Chosen over the Esri Ocean Basemap specifically so route lines (gold/red)
 // have somewhere to actually stand out against.
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+// CARTO tiles need an API key now — reusing the same key primap.html/cape.html
+// already use live on the site rather than provisioning a new one.
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd', maxZoom: 19, noWrap: true,
 }).addTo(map);
