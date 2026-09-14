@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Map Printer | The Narrows (internal)</title>
+<meta name="description" content="Internal tool — parameterized maritime route/closure/zone maps for posts and analysis. Not linked from site navigation.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+<script src="https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#F4F7FB;--surface:#fff;--surface2:#EEF2F8;
+    --navy:#0A2540;--navy-mid:#0d304f;
+    --gold:#F0B429;--gold-dark:#dea020;
+    --text:#0A2540;--text-muted:#4A6078;--text-dim:#8FA5BB;
+    --border:#DDE4EF;--border-mid:#C0CEDF;
+    --red:#B91C1C;--red-soft:rgba(185,28,28,.09);
+    --amber:#92400E;--amber-soft:rgba(240,180,41,.12);
+    --green:#166534;--green-soft:rgba(22,101,52,.09);
+    --r:8px;
+  }
+  html{font-size:15px}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+  /* ── HEADER ── */
+  .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;border-bottom:3px solid var(--gold);background:var(--navy);flex-shrink:0;z-index:1000}
+  .hdr-left{display:flex;align-items:center;gap:12px}
+  .hdr-home{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit}
+  .hdr-home:hover .hdr-logo-word{color:rgba(255,255,255,.7)}
+  .hdr-logo-word{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.01em}
+  .hdr-sep{color:rgba(255,255,255,.18)}
+  .hdr-title{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--gold);letter-spacing:.1em}
+  .hdr-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(185,28,28,.18);color:#fca5a5;border:1px solid rgba(185,28,28,.35)}
+
+  /* ── LAYOUT ── */
+  .main{flex:1;display:flex;min-height:0}
+  .map-wrap{flex:1;position:relative;min-width:0}
+  #map{position:absolute;inset:0;background:#0A2540}
+
+  /* ── SIDE PANEL ── */
+  .panel{width:360px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+  .panel-section{padding:16px 20px;border-bottom:1px solid var(--border)}
+  .panel-h{display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+  .panel-h-action{font-size:10px;font-weight:600;color:var(--navy);cursor:pointer;text-decoration:underline;text-transform:none;letter-spacing:0}
+  .field{margin-bottom:12px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;letter-spacing:.02em}
+  .field input[list], .field select, .field input[type="text"]{
+    width:100%;padding:8px 10px;border:1px solid var(--border-mid);border-radius:6px;
+    font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:#fff;
+  }
+  .field input:focus, .field select:focus{outline:none;border-color:var(--navy)}
+  .swap-btn{
+    display:flex;align-items:center;justify-content:center;gap:6px;width:100%;
+    background:transparent;border:1px dashed var(--border-mid);border-radius:6px;
+    color:var(--text-muted);font-size:11px;font-family:'DM Mono',monospace;
+    padding:5px;cursor:pointer;margin:2px 0 10px;transition:all .15s;
+  }
+  .swap-btn:hover{border-color:var(--navy);color:var(--navy)}
+
+  .closure-grid{display:flex;flex-direction:column;gap:2px}
+  .closure-item{
+    display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:5px;cursor:pointer;
+    font-size:12.5px;color:var(--text);transition:background .12s;user-select:none;
+  }
+  .closure-item:hover{background:var(--surface2)}
+  .closure-item input{accent-color:var(--red);width:15px;height:15px;flex-shrink:0}
+  .closure-item.blocked{background:var(--red-soft);color:var(--red)}
+  .closure-note{font-size:10.5px;color:var(--text-dim);margin-top:8px;line-height:1.5}
+
+  .btn-compute{
+    width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;
+    padding:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+    cursor:pointer;transition:background .15s;letter-spacing:.01em;
+  }
+  .btn-compute:hover{background:var(--navy-mid)}
+  .btn-compute:disabled{background:var(--border-mid);cursor:wait}
+  .btn-secondary{
+    width:100%;background:transparent;color:var(--navy);border:1px solid var(--border-mid);
+    border-radius:7px;padding:9px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;
+    cursor:pointer;transition:all .15s;margin-top:8px;
+  }
+  .btn-secondary:hover{border-color:var(--navy);background:var(--surface2)}
+
+  .result{padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border)}
+  .result-empty{color:var(--text-dim);font-size:12px;font-style:italic}
+  .result-block{margin-bottom:12px}
+  .result-block:last-child{margin-bottom:0}
+  .result-block-h{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+  .result-block-h.original{color:var(--gold-dark)}
+  .result-block-h.reroute{color:var(--red)}
+  .result-stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0}
+  .result-stat-lbl{font-size:11.5px;color:var(--text-muted)}
+  .result-stat-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--navy)}
+  .result-delta{font-family:'DM Mono',monospace;font-size:11px;color:var(--red);margin-top:2px}
+  .result-passages{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+  .passage-chip{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:rgba(10,37,64,.08);color:var(--navy);text-transform:capitalize}
+  .result-error{color:var(--red);font-size:12.5px;background:var(--red-soft);padding:8px 10px;border-radius:6px}
+
+  .panel-footer{padding:14px 20px;margin-top:auto;font-size:10.5px;color:var(--text-dim);line-height:1.5}
+
+  /* ── ZONES LIST ── */
+  .zones-hint{font-size:10.5px;color:var(--text-dim);line-height:1.5;margin-bottom:8px}
+  .zone-row{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:5px;font-size:12.5px}
+  .zone-row:hover{background:var(--surface2)}
+  .zone-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+  .zone-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .zone-del{color:var(--text-dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0}
+  .zone-del:hover{color:var(--red)}
+  .zones-empty{font-size:11.5px;color:var(--text-dim);font-style:italic;padding:4px 0}
+  .zones-io{display:flex;gap:8px;margin-top:10px}
+  .zones-io button{flex:1;background:transparent;border:1px solid var(--border-mid);border-radius:6px;padding:6px;font-size:10.5px;font-family:'DM Mono',monospace;color:var(--text-muted);cursor:pointer}
+  .zones-io button:hover{border-color:var(--navy);color:var(--navy)}
+
+  /* ── MAP LEGEND ── */
+  .map-legend{
+    position:absolute;bottom:20px;left:20px;z-index:500;background:rgba(10,37,64,.85);
+    backdrop-filter:blur(4px);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.75);
+    display:flex;flex-direction:column;gap:5px;font-family:'DM Mono',monospace;
+  }
+  .legend-row{display:flex;align-items:center;gap:7px}
+  .legend-swatch{width:16px;height:3px;border-radius:2px;flex-shrink:0;background:var(--gold)}
+  .legend-swatch.dashed{background:none;border-top:3px dashed var(--gold);height:0}
+  .legend-swatch.solid-red{background:#B91C1C}
+
+  /* ── ZONE NAME MODAL ── */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(10,37,64,.55);z-index:2000;display:flex;align-items:center;justify-content:center}
+  .modal-backdrop[hidden]{display:none}
+  .modal-box{background:#fff;border-radius:10px;padding:20px;width:280px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .modal-box h3{font-size:14px;margin-bottom:12px;color:var(--navy)}
+  .modal-box label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin:10px 0 4px}
+  .modal-box input[type="text"]{width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px}
+  .modal-box input[type="color"]{width:100%;height:34px;border:1px solid var(--border-mid);border-radius:6px;padding:2px;cursor:pointer}
+  .modal-actions{display:flex;gap:8px;margin-top:16px}
+  .modal-actions button{flex:1;padding:8px;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer;border:none}
+  .modal-save{background:var(--navy);color:#fff}
+  .modal-cancel{background:var(--surface2);color:var(--text-muted)}
+
+  @media(max-width:760px){
+    .panel{position:absolute;top:56px;left:0;bottom:0;z-index:900;width:88vw;max-width:360px;box-shadow:4px 0 20px rgba(0,0,0,.25)}
+  }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <a href="/" class="hdr-home">
+      <span class="hdr-logo-word">THE NARROWS</span>
+    </a>
+    <span class="hdr-sep">/</span>
+    <span class="hdr-title">MAP PRINTER</span>
+  </div>
+  <span class="hdr-badge">Internal — Not Linked</span>
+</div>
+
+<div class="main">
+  <div class="panel">
+
+    <div class="panel-section">
+      <div class="panel-h">Route</div>
+      <div class="field">
+        <label for="origin">Origin port</label>
+        <input list="port-list" id="origin" placeholder="e.g. Rotterdam" value="Rotterdam">
+      </div>
+      <button class="swap-btn" id="swap-btn">⇅ swap origin / destination</button>
+      <div class="field">
+        <label for="dest">Destination port</label>
+        <input list="port-list" id="dest" placeholder="e.g. Shanghai" value="Shanghai">
+      </div>
+      <datalist id="port-list"></datalist>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">Simulate closures</div>
+      <div class="closure-grid" id="closure-grid"></div>
+      <div class="closure-note">
+        Checking a closure computes both the original route and the re-route, and draws the original ghosted behind the re-route so the detour is visible at a glance. Northwest Passage and Bering are always excluded as non-commercial. Danish Straits / Dover aren't offered yet — the routing graph doesn't tag them as distinct passages.
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">
+        Custom zones
+        <span class="panel-h-action" id="import-zones-trigger">import</span>
+      </div>
+      <div class="zones-hint">Use the polygon tool in the map's top-right corner to draw a zone (cyclone season, ice extent, anything with no clean API). Saved zones persist in this browser and reload every time you open this page.</div>
+      <div id="zones-list"></div>
+      <div class="zones-io">
+        <button id="export-zones-btn">Export zones (.json)</button>
+        <button id="clear-zones-btn">Clear all</button>
+      </div>
+      <input type="file" id="import-zones-file" accept="application/json" hidden>
+    </div>
+
+    <div class="panel-section" style="border-bottom:none">
+      <button class="btn-compute" id="compute-btn">Compute route</button>
+      <button class="btn-secondary" id="export-png-btn">⬇ Export map as PNG</button>
+    </div>
+
+    <div class="result" id="result">
+      <div class="result-empty">Set an origin, destination, and any closures, then compute a route.</div>
+    </div>
+
+    <div class="panel-footer">
+      Routes are computed live against a real global maritime routing graph (9,708 nodes / ~16,000 edges) — the same network <code>searoute-py</code> uses internally. Distances/durations are estimates for exploration, not voyage planning. PNG export rasterizes the map div in your browser (html2canvas) — if the basemap tiles come out blank, that's a cross-origin canvas restriction on the tile provider, not a bug in the routes/zones themselves.
+    </div>
+  </div>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-legend" id="map-legend">
+      <div class="legend-row"><div class="legend-swatch"></div> Original route</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="zone-modal" hidden>
+  <div class="modal-box">
+    <h3>Name this zone</h3>
+    <label for="zone-name-input">Name</label>
+    <input type="text" id="zone-name-input" placeholder="e.g. NW Pacific cyclone season">
+    <label for="zone-color-input">Color</label>
+    <input type="color" id="zone-color-input" value="#F0B429">
+    <div class="modal-actions">
+      <button class="modal-cancel" id="zone-modal-cancel">Discard</button>
+      <button class="modal-save" id="zone-modal-save">Save zone</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
+const ZONES_STORAGE_KEY = 'narrows_map_printer_zones_v1';
+
+const CLOSURES = [
+  { key: 'panama',      label: 'Panama Canal' },
+  { key: 'suez',        label: 'Suez Canal' },
+  { key: 'gibraltar',   label: 'Strait of Gibraltar' },
+  { key: 'bosporus',    label: 'Bosphorus' },
+  { key: 'dardanelles', label: 'Dardanelles' },
+  { key: 'babalmandab', label: 'Bab-el-Mandeb' },
+  { key: 'ormuz',       label: 'Strait of Hormuz' },
+  { key: 'malacca',     label: 'Strait of Malacca' },
+  { key: 'sunda',       label: 'Sunda Strait' },
+  { key: 'south_africa',label: 'Cape of Good Hope route' },
+  { key: 'chili',       label: 'Cape Horn / Magellan route' },
+];
+
+// ── MAP INIT (Esri Ocean Basemap) ──
+const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 10, minZoom: 2, worldCopyJump: true });
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+  maxZoom: 10,
+}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '', maxZoom: 10,
+}).addTo(map);
+
+let originalLayer = null;
+let rerouteLayer = null;
+let markerLayer = L.layerGroup().addTo(map);
+
+// ── PORT LOOKUP ── (paths relative — this page now lives in /tools/)
+let portIndex = {};
+Promise.all([
+  fetch('route_sim_ports.json').then(r => r.json()),
+  fetch('route_sim_chokepoints.json').then(r => r.json()).catch(() => []),
+]).then(([ports, chokepoints]) => {
+  const dl = document.getElementById('port-list');
+  ports.forEach(p => {
+    portIndex[p.name] = { lon: p.lon, lat: p.lat };
+    const opt = document.createElement('option');
+    opt.value = p.name;
+    opt.label = `${p.name}, ${p.country}`;
+    dl.appendChild(opt);
+  });
+  chokepoints.forEach(c => {
+    if (!(c.name in portIndex)) {
+      portIndex[c.name] = { lon: c.lon, lat: c.lat };
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      dl.appendChild(opt);
+    }
+  });
+});
+
+// ── CLOSURE CHECKBOXES ──
+const closureGrid = document.getElementById('closure-grid');
+CLOSURES.forEach(c => {
+  const row = document.createElement('label');
+  row.className = 'closure-item';
+  row.dataset.key = c.key;
+  row.innerHTML = `<input type="checkbox" value="${c.key}"><span>${c.label}</span>`;
+  row.querySelector('input').addEventListener('change', (e) => {
+    row.classList.toggle('blocked', e.target.checked);
+  });
+  closureGrid.appendChild(row);
+});
+
+function getBlockedPassages() {
+  return Array.from(closureGrid.querySelectorAll('input:checked')).map(i => i.value);
+}
+
+// ── SWAP ──
+document.getElementById('swap-btn').addEventListener('click', () => {
+  const o = document.getElementById('origin');
+  const d = document.getElementById('dest');
+  [o.value, d.value] = [d.value, o.value];
+});
+
+// ── ROUTE COMPUTE (original + optional re-route, ghosted comparison) ──
+const resultEl = document.getElementById('result');
+const computeBtn = document.getElementById('compute-btn');
+const legendEl = document.getElementById('map-legend');
+
+function resolvePort(name) {
+  name = name.trim();
+  if (portIndex[name]) return portIndex[name];
+  const match = Object.keys(portIndex).find(k => k.toLowerCase() === name.toLowerCase());
+  return match ? portIndex[match] : null;
+}
+
+function fetchRoute(origin, dest, restrictions) {
+  const params = new URLSearchParams({ from: `${origin.lon},${origin.lat}`, to: `${dest.lon},${dest.lat}`, units: 'naut' });
+  if (restrictions.length) params.set('restrictions', restrictions.join(','));
+  return fetch(`${ROUTE_API}?${params.toString()}`).then(r => r.json());
+}
+
+function renderResult(originalData, rerouteData, blocked) {
+  if (originalData.error) {
+    resultEl.innerHTML = `<div class="result-error">${originalData.error}</div>`;
+    return;
+  }
+  const passageChips = (d) => (d.passagesUsed || [])
+    .map(p => `<span class="passage-chip">${p.replace(/_/g, ' ')}</span>`).join('')
+    || '<span class="passage-chip" style="opacity:.5">open water</span>';
+
+  let html = `
+    <div class="result-block">
+      <div class="result-block-h original">Original route</div>
+      <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${originalData.distance.toLocaleString()} nm</span></div>
+      <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${originalData.durationDays} days</span></div>
+      <div class="result-passages">${passageChips(originalData)}</div>
+    </div>`;
+
+  if (rerouteData && !rerouteData.error) {
+    const delta = rerouteData.distance - originalData.distance;
+    const pct = ((delta / originalData.distance) * 100).toFixed(1);
+    html += `
+    <div class="result-block">
+      <div class="result-block-h reroute">Re-route (${blocked.length} closure${blocked.length === 1 ? '' : 's'})</div>
+      <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${rerouteData.distance.toLocaleString()} nm</span></div>
+      <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${rerouteData.durationDays} days</span></div>
+      <div class="result-delta">+${delta.toLocaleString()} nm (+${pct}%) vs. original</div>
+      <div class="result-passages">${passageChips(rerouteData)}</div>
+    </div>`;
+  } else if (rerouteData && rerouteData.error) {
+    html += `<div class="result-error">${rerouteData.error}</div>`;
+  }
+
+  resultEl.innerHTML = html;
+}
+
+function updateLegend(hasReroute) {
+  legendEl.innerHTML = hasReroute
+    ? `<div class="legend-row"><div class="legend-swatch dashed"></div> Original route</div>
+       <div class="legend-row"><div class="legend-swatch solid-red"></div> Re-route (closures active)</div>`
+    : `<div class="legend-row"><div class="legend-swatch"></div> Original route</div>`;
+}
+
+async function computeRoute() {
+  const originName = document.getElementById('origin').value;
+  const destName = document.getElementById('dest').value;
+  const origin = resolvePort(originName);
+  const dest = resolvePort(destName);
+
+  if (!origin || !dest) {
+    resultEl.innerHTML = `<div class="result-error">Couldn't find "${!origin ? originName : destName}" in the port list. Pick from the suggestions.</div>`;
+    return;
+  }
+
+  const blocked = getBlockedPassages();
+  computeBtn.disabled = true;
+  computeBtn.textContent = 'Computing…';
+
+  try {
+    const originalData = await fetchRoute(origin, dest, []);
+    const rerouteData = blocked.length ? await fetchRoute(origin, dest, blocked) : null;
+
+    renderResult(originalData, rerouteData, blocked);
+    updateLegend(!!blocked.length);
+    if (!originalData.error) {
+      drawRoutes(originalData, rerouteData);
+    }
+  } catch (err) {
+    resultEl.innerHTML = `<div class="result-error">Couldn't reach the routing engine. ${err.message}</div>`;
+  } finally {
+    computeBtn.disabled = false;
+    computeBtn.textContent = 'Compute route';
+  }
+}
+
+// Longitude unwrapping so date-line-crossing routes draw as one continuous
+// line instead of a spurious gap across the map (see prior session notes).
+function unwrapLongitudes(coordinates) {
+  const out = [[coordinates[0][1], coordinates[0][0]]]; // [lat, lon]
+  for (let i = 1; i < coordinates.length; i++) {
+    let lon = coordinates[i][0];
+    const lat = coordinates[i][1];
+    const prevLon = out[out.length - 1][1];
+    while (lon - prevLon > 180) lon -= 360;
+    while (lon - prevLon < -180) lon += 360;
+    out.push([lat, lon]);
+  }
+  return out;
+}
+
+function drawRoutes(originalData, rerouteData) {
+  if (originalLayer) map.removeLayer(originalLayer);
+  if (rerouteLayer) map.removeLayer(rerouteLayer);
+  markerLayer.clearLayers();
+
+  const originalLatLngs = unwrapLongitudes(originalData.coordinates);
+  originalLayer = L.polyline(originalLatLngs, {
+    color: '#F0B429',
+    weight: rerouteData ? 2.5 : 3,
+    opacity: rerouteData ? 0.55 : 0.9,
+    dashArray: rerouteData ? '7,7' : null,
+  }).addTo(map);
+
+  let allLatLngs = originalLatLngs;
+
+  if (rerouteData && !rerouteData.error) {
+    const rerouteLatLngs = unwrapLongitudes(rerouteData.coordinates);
+    rerouteLayer = L.polyline(rerouteLatLngs, { color: '#B91C1C', weight: 3, opacity: 0.9 }).addTo(map);
+    allLatLngs = originalLatLngs.concat(rerouteLatLngs);
+  }
+
+  const start = originalLatLngs[0], end = originalLatLngs[originalLatLngs.length - 1];
+  L.circleMarker(start, { radius: 6, fillColor: '#FFFFFF', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
+  L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
+
+  map.fitBounds(L.latLngBounds(allLatLngs), { padding: [60, 60] });
+}
+
+computeBtn.addEventListener('click', computeRoute);
+
+// ── CUSTOM ZONES (draw, persist to localStorage, reload every visit) ──
+// This page is a personal tool, not an Artifact rendered in a Claude
+// conversation — it's a real static file deployed to your own site, so
+// ordinary browser localStorage is fine here (it isn't for in-conversation
+// previews, but that restriction doesn't apply to a deployed page like this).
+const zonesLayerGroup = L.layerGroup().addTo(map);
+const drawnItems = new L.FeatureGroup().addTo(map);
+let zones = loadZones();
+let pendingLayer = null;
+
+const drawControl = new L.Control.Draw({
+  draw: {
+    polygon: { shapeOptions: { color: '#F0B429' } },
+    polyline: false, rectangle: false, circle: false, marker: false, circlemarker: false,
+  },
+  edit: false,
+});
+map.addControl(drawControl);
+
+map.on(L.Draw.Event.CREATED, (e) => {
+  pendingLayer = e.layer;
+  drawnItems.addLayer(pendingLayer);
+  openZoneModal();
+});
+
+function loadZones() {
+  try {
+    const raw = localStorage.getItem(ZONES_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (err) {
+    console.warn('Zone storage unavailable:', err);
+    return [];
+  }
+}
+
+function saveZones() {
+  try {
+    localStorage.setItem(ZONES_STORAGE_KEY, JSON.stringify(zones));
+  } catch (err) {
+    console.warn('Could not persist zones:', err);
+  }
+}
+
+function renderZone(zone) {
+  const layer = L.polygon(zone.latlngs, {
+    color: zone.color, weight: 2, fillColor: zone.color, fillOpacity: 0.15,
+  }).bindTooltip(zone.name, { sticky: true, className: 'zone-tooltip' });
+  zone._layer = layer;
+  if (zone.visible !== false) layer.addTo(zonesLayerGroup);
+  return layer;
+}
+
+function renderZonesList() {
+  const listEl = document.getElementById('zones-list');
+  if (!zones.length) {
+    listEl.innerHTML = '<div class="zones-empty">No saved zones yet.</div>';
+    return;
+  }
+  listEl.innerHTML = '';
+  zones.forEach((zone) => {
+    const row = document.createElement('div');
+    row.className = 'zone-row';
+    row.innerHTML = `
+      <input type="checkbox" ${zone.visible !== false ? 'checked' : ''}>
+      <div class="zone-swatch" style="background:${zone.color}"></div>
+      <div class="zone-name">${zone.name}</div>
+      <span class="zone-del">×</span>
+    `;
+    row.querySelector('input').addEventListener('change', (e) => {
+      zone.visible = e.target.checked;
+      if (zone._layer) {
+        if (zone.visible) zonesLayerGroup.addLayer(zone._layer);
+        else zonesLayerGroup.removeLayer(zone._layer);
+      }
+      saveZones();
+    });
+    row.querySelector('.zone-del').addEventListener('click', () => {
+      if (zone._layer) zonesLayerGroup.removeLayer(zone._layer);
+      zones = zones.filter((z) => z.id !== zone.id);
+      saveZones();
+      renderZonesList();
+    });
+    listEl.appendChild(row);
+  });
+}
+
+function initZones() {
+  zonesLayerGroup.clearLayers();
+  zones.forEach((zone) => renderZone(zone));
+  renderZonesList();
+}
+initZones();
+
+// ── ZONE NAMING MODAL ──
+const zoneModal = document.getElementById('zone-modal');
+function openZoneModal() {
+  document.getElementById('zone-name-input').value = '';
+  document.getElementById('zone-color-input').value = '#F0B429';
+  zoneModal.hidden = false;
+  document.getElementById('zone-name-input').focus();
+}
+function closeZoneModal() {
+  zoneModal.hidden = true;
+}
+document.getElementById('zone-modal-cancel').addEventListener('click', () => {
+  if (pendingLayer) drawnItems.removeLayer(pendingLayer);
+  pendingLayer = null;
+  closeZoneModal();
+});
+document.getElementById('zone-modal-save').addEventListener('click', () => {
+  const name = document.getElementById('zone-name-input').value.trim() || 'Untitled zone';
+  const color = document.getElementById('zone-color-input').value;
+  if (pendingLayer) {
+    const latlngs = pendingLayer.getLatLngs()[0].map((ll) => [ll.lat, ll.lng]);
+    const zone = { id: `z_${Date.now()}`, name, color, latlngs, visible: true };
+    zones.push(zone);
+    saveZones();
+    drawnItems.removeLayer(pendingLayer);
+    pendingLayer = null;
+    renderZone(zone);
+    renderZonesList();
+  }
+  closeZoneModal();
+});
+
+// ── ZONE EXPORT / IMPORT (JSON backup/portability across browsers) ──
+document.getElementById('export-zones-btn').addEventListener('click', () => {
+  const exportable = zones.map(({ id, name, color, latlngs }) => ({ id, name, color, latlngs }));
+  const blob = new Blob([JSON.stringify(exportable, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `narrows-zones-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('clear-zones-btn').addEventListener('click', () => {
+  if (!zones.length) return;
+  if (!confirm(`Remove all ${zones.length} saved zone(s)? This can't be undone (export first if unsure).`)) return;
+  zonesLayerGroup.clearLayers();
+  zones = [];
+  saveZones();
+  renderZonesList();
+});
+
+document.getElementById('import-zones-trigger').addEventListener('click', () => {
+  document.getElementById('import-zones-file').click();
+});
+document.getElementById('import-zones-file').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const imported = JSON.parse(reader.result);
+      const existingIds = new Set(zones.map((z) => z.id));
+      let added = 0;
+      imported.forEach((zone) => {
+        if (!existingIds.has(zone.id)) {
+          zones.push({ ...zone, visible: true });
+          added++;
+        }
+      });
+      saveZones();
+      initZones();
+      alert(`Imported ${added} new zone(s). ${imported.length - added} already existed and were skipped.`);
+    } catch (err) {
+      alert('Could not read that file as zone JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+// ── PNG EXPORT ──
+// Rasterizes the map div via html2canvas. Known caveat: cross-origin tile
+// images (the Esri basemap) only capture correctly if the tile server sends
+// CORS headers permitting canvas reads. If the exported PNG shows a blank
+// basemap under correct routes/zones, that's this restriction, not a bug in
+// the route or zone rendering — the fix is confirming Esri's CORS policy or
+// switching tile providers; not solved in this first pass.
+document.getElementById('export-png-btn').addEventListener('click', () => {
+  const btn = document.getElementById('export-png-btn');
+  btn.disabled = true;
+  btn.textContent = 'Rendering…';
+  html2canvas(document.getElementById('map'), { useCORS: true, allowTaint: false })
+    .then((canvas) => {
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `narrows-map-${Date.now()}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    })
+    .catch((err) => {
+      alert('PNG export failed: ' + err.message + '\n\nThis is usually the basemap tile CORS restriction noted in the footer.');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.textContent = '⬇ Export map as PNG';
+    });
+});
+</script>
+
+</body>
+</html>
