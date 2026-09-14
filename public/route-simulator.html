@@ -162,8 +162,8 @@
   <div class="map-wrap">
     <div id="map"></div>
     <div class="map-legend">
-      <div class="legend-row"><div class="legend-swatch" style="background:#2E86D4"></div> Baseline route</div>
-      <div class="legend-row"><div class="legend-swatch" style="background:#F0B429"></div> Rerouted (closures active)</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#F0B429"></div> Baseline route</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#B91C1C"></div> Rerouted (closures active)</div>
     </div>
   </div>
 </div>
@@ -187,13 +187,14 @@ const CLOSURES = [
   { key: 'sunda',      label: 'Sunda Strait' },
 ];
 
-// ── MAP INIT (matches primap.html's dark basemap) ──
-const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 12, minZoom: 2, worldCopyJump: true });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
-  attribution: '&copy; OpenStreetMap, &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
+// ── MAP INIT (Esri Ocean Basemap — bathymetric blue, nautical-chart feel) ──
+const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 10, minZoom: 2, worldCopyJump: true });
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+  maxZoom: 10,
 }).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
-  attribution: '', subdomains: 'abcd', maxZoom: 19, pane: 'shadowPane',
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '', maxZoom: 10,
 }).addTo(map);
 
 let routeLayer = null;
@@ -313,22 +314,48 @@ async function computeRoute() {
   }
 }
 
+// searoute-py output can jump straight from ~180 to ~-180 longitude when a
+// route crosses the international date line (Bering/Pacific tracks mainly).
+// Leaflet draws polylines in raw lon/lat space, so an unsplit line at that
+// jump renders as one long spurious segment straight across the map. Split
+// the coordinate list into separate segments wherever the longitude jumps
+// by more than 180° between consecutive points, and draw each as its own
+// polyline instead of one continuous one.
+function splitAtAntimeridian(latlngs) {
+  const segments = [];
+  let current = [latlngs[0]];
+  for (let i = 1; i < latlngs.length; i++) {
+    const prevLon = current[current.length - 1][1];
+    const lon = latlngs[i][1];
+    if (Math.abs(lon - prevLon) > 180) {
+      segments.push(current);
+      current = [latlngs[i]];
+    } else {
+      current.push(latlngs[i]);
+    }
+  }
+  segments.push(current);
+  return segments;
+}
+
 function drawRoute(coordinates, isRerouted) {
   if (routeLayer) map.removeLayer(routeLayer);
   markerLayer.clearLayers();
 
   const latlngs = coordinates.map(([lon, lat]) => [lat, lon]);
-  routeLayer = L.polyline(latlngs, {
-    color: isRerouted ? '#F0B429' : '#2E86D4',
-    weight: 3,
-    opacity: 0.85,
-  }).addTo(map);
+  const segments = splitAtAntimeridian(latlngs);
+  const color = isRerouted ? '#B91C1C' : '#F0B429';
+
+  routeLayer = L.layerGroup(
+    segments.map((seg) => L.polyline(seg, { color, weight: 3, opacity: 0.85 }))
+  ).addTo(map);
 
   const start = latlngs[0], end = latlngs[latlngs.length - 1];
-  L.circleMarker(start, { radius: 6, fillColor: '#2E86D4', fillOpacity: 1, color: '#fff', weight: 2 }).addTo(markerLayer);
-  L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#fff', weight: 2 }).addTo(markerLayer);
+  L.circleMarker(start, { radius: 6, fillColor: '#FFFFFF', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
+  L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
 
-  map.fitBounds(routeLayer.getBounds(), { padding: [60, 60] });
+  const bounds = L.latLngBounds(segments.flat());
+  map.fitBounds(bounds, { padding: [60, 60] });
 }
 
 computeBtn.addEventListener('click', computeRoute);
