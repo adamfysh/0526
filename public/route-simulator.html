@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Route Simulator | The Narrows</title>
+<meta name="description" content="Real-time maritime routing simulator. Compute shortest sea routes between any two ports and simulate chokepoint closures.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#F4F7FB;--surface:#fff;--surface2:#EEF2F8;
+    --navy:#0A2540;--navy-mid:#0d304f;
+    --gold:#F0B429;--gold-dark:#dea020;
+    --text:#0A2540;--text-muted:#4A6078;--text-dim:#8FA5BB;
+    --border:#DDE4EF;--border-mid:#C0CEDF;
+    --red:#B91C1C;--red-soft:rgba(185,28,28,.09);
+    --amber:#92400E;--amber-soft:rgba(240,180,41,.12);
+    --green:#166534;--green-soft:rgba(22,101,52,.09);
+    --r:8px;
+  }
+  html{font-size:15px}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+  /* ── HEADER ── */
+  .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;border-bottom:3px solid var(--gold);background:var(--navy);flex-shrink:0;z-index:1000}
+  .hdr-left{display:flex;align-items:center;gap:12px}
+  .hdr-home{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit}
+  .hdr-home:hover .hdr-logo-word{color:rgba(255,255,255,.7)}
+  .hdr-logo-word{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.55);letter-spacing:.01em}
+  .hdr-sep{color:rgba(255,255,255,.18)}
+  .hdr-title{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--gold);letter-spacing:.1em}
+  .hdr-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:rgba(240,180,41,.15);color:var(--gold);border:1px solid rgba(240,180,41,.3)}
+
+  /* ── LAYOUT ── */
+  .main{flex:1;display:flex;min-height:0}
+  #map{flex:1;background:#0A2540}
+
+  /* ── SIDE PANEL ── */
+  .panel{width:340px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
+  .panel-section{padding:16px 20px;border-bottom:1px solid var(--border)}
+  .panel-h{font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px}
+  .field{margin-bottom:12px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;letter-spacing:.02em}
+  .field input[list], .field select{
+    width:100%;padding:8px 10px;border:1px solid var(--border-mid);border-radius:6px;
+    font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:#fff;
+  }
+  .field input[list]:focus, .field select:focus{outline:none;border-color:var(--navy)}
+  .swap-btn{
+    display:flex;align-items:center;justify-content:center;gap:6px;width:100%;
+    background:transparent;border:1px dashed var(--border-mid);border-radius:6px;
+    color:var(--text-muted);font-size:11px;font-family:'DM Mono',monospace;
+    padding:5px;cursor:pointer;margin:2px 0 10px;transition:all .15s;
+  }
+  .swap-btn:hover{border-color:var(--navy);color:var(--navy)}
+
+  .closure-grid{display:flex;flex-direction:column;gap:2px}
+  .closure-item{
+    display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:5px;cursor:pointer;
+    font-size:12.5px;color:var(--text);transition:background .12s;user-select:none;
+  }
+  .closure-item:hover{background:var(--surface2)}
+  .closure-item input{accent-color:var(--red);width:15px;height:15px;flex-shrink:0}
+  .closure-item.blocked{background:var(--red-soft);color:var(--red)}
+  .closure-note{font-size:10.5px;color:var(--text-dim);margin-top:8px;line-height:1.5}
+
+  .btn-compute{
+    width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;
+    padding:11px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+    cursor:pointer;transition:background .15s;letter-spacing:.01em;
+  }
+  .btn-compute:hover{background:var(--navy-mid)}
+  .btn-compute:disabled{background:var(--border-mid);cursor:wait}
+
+  .result{padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border)}
+  .result-empty{color:var(--text-dim);font-size:12px;font-style:italic}
+  .result-stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0}
+  .result-stat-lbl{font-size:11.5px;color:var(--text-muted)}
+  .result-stat-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--navy)}
+  .result-delta{color:var(--amber);font-weight:600}
+  .result-passages{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .passage-chip{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:rgba(10,37,64,.08);color:var(--navy);text-transform:capitalize}
+  .result-error{color:var(--red);font-size:12.5px;background:var(--red-soft);padding:8px 10px;border-radius:6px}
+
+  .panel-footer{padding:14px 20px;margin-top:auto;font-size:10.5px;color:var(--text-dim);line-height:1.5}
+  .panel-footer a{color:var(--text-muted)}
+
+  /* ── MAP LEGEND ── */
+  .map-legend{
+    position:absolute;bottom:20px;left:20px;z-index:500;background:rgba(10,37,64,.85);
+    backdrop-filter:blur(4px);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.75);
+    display:flex;flex-direction:column;gap:5px;font-family:'DM Mono',monospace;
+  }
+  .legend-row{display:flex;align-items:center;gap:7px}
+  .legend-swatch{width:16px;height:3px;border-radius:2px;flex-shrink:0}
+
+  @media(max-width:760px){
+    .panel{position:absolute;top:56px;left:0;bottom:0;z-index:900;width:88vw;max-width:340px;box-shadow:4px 0 20px rgba(0,0,0,.25)}
+  }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <a href="/" class="hdr-home">
+      <span class="hdr-logo-word">THE NARROWS</span>
+    </a>
+    <span class="hdr-sep">/</span>
+    <span class="hdr-title">LIVE ROUTE SIMULATOR</span>
+  </div>
+  <span class="hdr-badge">Real-Time Compute</span>
+</div>
+
+<div class="main">
+  <div class="panel">
+
+    <div class="panel-section">
+      <div class="panel-h">Route</div>
+      <div class="field">
+        <label for="origin">Origin port</label>
+        <input list="port-list" id="origin" placeholder="e.g. Rotterdam" value="Rotterdam">
+      </div>
+      <button class="swap-btn" id="swap-btn">⇅ swap origin / destination</button>
+      <div class="field">
+        <label for="dest">Destination port</label>
+        <input list="port-list" id="dest" placeholder="e.g. Shanghai" value="Shanghai">
+      </div>
+      <datalist id="port-list"></datalist>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">Simulate closures</div>
+      <div class="closure-grid" id="closure-grid"></div>
+      <div class="closure-note">
+        Northwest Passage and the Bering route are always excluded as non-commercial — not offered as toggles. Closing a chokepoint here removes it entirely from the routing graph and recomputes the shortest remaining path.
+      </div>
+    </div>
+
+    <div class="panel-section" style="border-bottom:none">
+      <button class="btn-compute" id="compute-btn">Compute route</button>
+    </div>
+
+    <div class="result" id="result">
+      <div class="result-empty">Set an origin, destination, and any closures, then compute a route.</div>
+    </div>
+
+    <div class="panel-footer">
+      Routes are computed live against a real global maritime routing graph (9,708 nodes / ~16,000 edges) — the same network <code>searoute-py</code> uses internally, not a simplified approximation. Distances and durations are estimates for exploration, not for voyage planning.
+    </div>
+  </div>
+
+  <div style="flex:1;position:relative">
+    <div id="map"></div>
+    <div class="map-legend">
+      <div class="legend-row"><div class="legend-swatch" style="background:#2E86D4"></div> Baseline route</div>
+      <div class="legend-row"><div class="legend-swatch" style="background:#F0B429"></div> Rerouted (closures active)</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+// Update this once the narrows-routing-api Worker is deployed (name it
+// "narrows-routing-api" when creating it in the Cloudflare dashboard to
+// match this URL without edits; otherwise update the subdomain here).
+const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
+
+const CLOSURES = [
+  { key: 'panama',     label: 'Panama Canal' },
+  { key: 'suez',       label: 'Suez Canal' },
+  { key: 'gibraltar',  label: 'Strait of Gibraltar' },
+  { key: 'bosporus',   label: 'Bosphorus' },
+  { key: 'dardanelles',label: 'Dardanelles' },
+  { key: 'babalmandab',label: 'Bab-el-Mandeb' },
+  { key: 'ormuz',      label: 'Strait of Hormuz' },
+  { key: 'malacca',    label: 'Strait of Malacca' },
+  { key: 'sunda',      label: 'Sunda Strait' },
+];
+
+// ── MAP INIT (matches primap.html's dark basemap) ──
+const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 12, minZoom: 2, worldCopyJump: true });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
+  attribution: '&copy; OpenStreetMap, &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
+}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
+  attribution: '', subdomains: 'abcd', maxZoom: 19, pane: 'shadowPane',
+}).addTo(map);
+
+let routeLayer = null;
+let markerLayer = L.layerGroup().addTo(map);
+
+// ── PORT LOOKUP ──
+let portIndex = {}; // name -> {lon,lat}
+Promise.all([
+  fetch('/route_sim_ports.json').then(r => r.json()),
+  fetch('/route_sim_chokepoints.json').then(r => r.json()).catch(() => []),
+]).then(([ports, chokepoints]) => {
+  const dl = document.getElementById('port-list');
+  ports.forEach(p => {
+    portIndex[p.name] = { lon: p.lon, lat: p.lat };
+    const opt = document.createElement('option');
+    opt.value = p.name;
+    opt.label = `${p.name}, ${p.country}`;
+    dl.appendChild(opt);
+  });
+  // Chokepoints are useful lookup targets too (e.g. "Strait of Hormuz" as an endpoint)
+  chokepoints.forEach(c => {
+    if (!(c.name in portIndex)) {
+      portIndex[c.name] = { lon: c.lon, lat: c.lat };
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      dl.appendChild(opt);
+    }
+  });
+});
+
+// ── CLOSURE CHECKBOXES ──
+const closureGrid = document.getElementById('closure-grid');
+CLOSURES.forEach(c => {
+  const row = document.createElement('label');
+  row.className = 'closure-item';
+  row.dataset.key = c.key;
+  row.innerHTML = `<input type="checkbox" value="${c.key}"><span>${c.label}</span>`;
+  row.querySelector('input').addEventListener('change', (e) => {
+    row.classList.toggle('blocked', e.target.checked);
+  });
+  closureGrid.appendChild(row);
+});
+
+function getBlockedPassages() {
+  return Array.from(closureGrid.querySelectorAll('input:checked')).map(i => i.value);
+}
+
+// ── SWAP ──
+document.getElementById('swap-btn').addEventListener('click', () => {
+  const o = document.getElementById('origin');
+  const d = document.getElementById('dest');
+  [o.value, d.value] = [d.value, o.value];
+});
+
+// ── COMPUTE ──
+const resultEl = document.getElementById('result');
+const computeBtn = document.getElementById('compute-btn');
+
+function resolvePort(name) {
+  name = name.trim();
+  if (portIndex[name]) return portIndex[name];
+  // case-insensitive fallback
+  const match = Object.keys(portIndex).find(k => k.toLowerCase() === name.toLowerCase());
+  return match ? portIndex[match] : null;
+}
+
+function renderResult(data, blocked) {
+  if (data.error) {
+    resultEl.innerHTML = `<div class="result-error">${data.error}</div>`;
+    return;
+  }
+  const passageChips = (data.passagesUsed || [])
+    .map(p => `<span class="passage-chip">${p.replace(/_/g, ' ')}</span>`).join('');
+  resultEl.innerHTML = `
+    <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${data.distance.toLocaleString()} ${data.units === 'naut' ? 'nm' : 'km'}</span></div>
+    <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${data.durationDays} days</span></div>
+    <div class="result-stat-row"><span class="result-stat-lbl">Closures active</span><span class="result-stat-val">${blocked.length ? blocked.length : '0'}</span></div>
+    <div class="result-passages">${passageChips || '<span class="passage-chip" style="opacity:.5">open water</span>'}</div>
+  `;
+}
+
+async function computeRoute() {
+  const originName = document.getElementById('origin').value;
+  const destName = document.getElementById('dest').value;
+  const origin = resolvePort(originName);
+  const dest = resolvePort(destName);
+
+  if (!origin || !dest) {
+    resultEl.innerHTML = `<div class="result-error">Couldn't find "${!origin ? originName : destName}" in the port list. Pick from the suggestions.</div>`;
+    return;
+  }
+
+  const blocked = getBlockedPassages();
+  computeBtn.disabled = true;
+  computeBtn.textContent = 'Computing…';
+
+  try {
+    const params = new URLSearchParams({
+      from: `${origin.lon},${origin.lat}`,
+      to: `${dest.lon},${dest.lat}`,
+      units: 'naut',
+    });
+    if (blocked.length) params.set('restrictions', blocked.join(','));
+
+    const res = await fetch(`${ROUTE_API}?${params.toString()}`);
+    const data = await res.json();
+
+    renderResult(data, blocked);
+    if (!data.error && data.coordinates) {
+      drawRoute(data.coordinates, blocked.length > 0);
+    }
+  } catch (err) {
+    resultEl.innerHTML = `<div class="result-error">Couldn't reach the routing engine. ${err.message}</div>`;
+  } finally {
+    computeBtn.disabled = false;
+    computeBtn.textContent = 'Compute route';
+  }
+}
+
+function drawRoute(coordinates, isRerouted) {
+  if (routeLayer) map.removeLayer(routeLayer);
+  markerLayer.clearLayers();
+
+  const latlngs = coordinates.map(([lon, lat]) => [lat, lon]);
+  routeLayer = L.polyline(latlngs, {
+    color: isRerouted ? '#F0B429' : '#2E86D4',
+    weight: 3,
+    opacity: 0.85,
+  }).addTo(map);
+
+  const start = latlngs[0], end = latlngs[latlngs.length - 1];
+  L.circleMarker(start, { radius: 6, fillColor: '#2E86D4', fillOpacity: 1, color: '#fff', weight: 2 }).addTo(markerLayer);
+  L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#fff', weight: 2 }).addTo(markerLayer);
+
+  map.fitBounds(routeLayer.getBounds(), { padding: [60, 60] });
+}
+
+computeBtn.addEventListener('click', computeRoute);
+</script>
+
+</body>
+</html>
