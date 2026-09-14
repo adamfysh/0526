@@ -40,7 +40,8 @@
 
   /* ── LAYOUT ── */
   .main{flex:1;display:flex;min-height:0}
-  #map{flex:1;background:#0A2540}
+  .map-wrap{flex:1;position:relative;min-width:0}
+  #map{position:absolute;inset:0;background:#0A2540}
 
   /* ── SIDE PANEL ── */
   .panel{width:340px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}
@@ -158,7 +159,7 @@
     </div>
   </div>
 
-  <div style="flex:1;position:relative">
+  <div class="map-wrap">
     <div id="map"></div>
     <div class="map-legend">
       <div class="legend-row"><div class="legend-swatch" style="background:#2E86D4"></div> Baseline route</div>
