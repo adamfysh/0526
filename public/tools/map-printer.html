@@ -122,16 +122,21 @@
   .zones-io button{flex:1;background:transparent;border:1px solid var(--border-mid);border-radius:6px;padding:6px;font-size:10.5px;font-family:'DM Mono',monospace;color:var(--text-muted);cursor:pointer}
   .zones-io button:hover{border-color:var(--navy);color:var(--navy)}
 
-  /* ── MAP LEGEND ── */
+  /* ── MAP LEGEND (a real Leaflet control, so it's inside #map and gets
+     captured by html2canvas on export — a plain sibling div was not) ── */
   .map-legend{
-    position:absolute;bottom:20px;left:20px;z-index:500;background:rgba(10,37,64,.85);
-    backdrop-filter:blur(4px);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(255,255,255,.75);
+    background:rgba(10,37,64,.88);backdrop-filter:blur(4px);border-radius:8px;
+    padding:10px 14px;font-size:11px;color:rgba(255,255,255,.8);
     display:flex;flex-direction:column;gap:5px;font-family:'DM Mono',monospace;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);
   }
   .legend-row{display:flex;align-items:center;gap:7px}
   .legend-swatch{width:16px;height:3px;border-radius:2px;flex-shrink:0;background:var(--gold)}
   .legend-swatch.dashed{background:none;border-top:3px dashed var(--gold);height:0}
   .legend-swatch.solid-red{background:#B91C1C}
+
+  /* Branded pin markers */
+  .narrows-pin{background:transparent;border:none}
 
   /* ── ZONE NAME MODAL ── */
   .modal-backdrop{position:fixed;inset:0;background:rgba(10,37,64,.55);z-index:2000;display:flex;align-items:center;justify-content:center}
@@ -205,6 +210,9 @@
 
     <div class="panel-section" style="border-bottom:none">
       <button class="btn-compute" id="compute-btn">Compute route</button>
+      <label class="closure-item" style="padding:8px 0 0 0;font-size:11.5px">
+        <input type="checkbox" id="export-stats-toggle" checked><span>Include route stats panel in export</span>
+      </label>
       <button class="btn-secondary" id="export-png-btn">⬇ Export map as PNG</button>
     </div>
 
@@ -219,9 +227,6 @@
 
   <div class="map-wrap">
     <div id="map"></div>
-    <div class="map-legend" id="map-legend">
-      <div class="legend-row"><div class="legend-swatch"></div> Original route</div>
-    </div>
   </div>
 </div>
 
@@ -258,19 +263,47 @@ const CLOSURES = [
   { key: 'chili',       label: 'Cape Horn / Magellan route' },
 ];
 
-// ── MAP INIT (Esri Ocean Basemap) ──
-const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 10, minZoom: 2, worldCopyJump: true });
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
-  maxZoom: 10,
-}).addTo(map);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}', {
-  attribution: '', maxZoom: 10,
+// ── MAP INIT ──
+// worldCopyJump + repeating tiles is what caused the Rotterdam→Shanghai bug:
+// once fitBounds zoomed out far enough, Leaflet drew multiple horizontally
+// repeated copies of the whole world (tiles repeat by default). The route
+// line and end marker are vector layers, not tiles — they only ever exist
+// at ONE true unwrapped coordinate — so when the visible viewport showed a
+// *different* repeated copy of the destination landmass than the one the
+// line/marker were actually drawn over, the line looked like it ended in
+// the wrong place, and the same mismatch got baked into PNG exports since
+// html2canvas just rasterizes whatever's on screen. Fix: turn off world
+// repetition entirely (noWrap on both tile layers, no worldCopyJump) so
+// there is only ever one copy of the map. A route that legitimately crosses
+// the date line will pan into the blank area past ±180° rather than snap to
+// a repeated copy — a much smaller cosmetic tradeoff than the mismatch bug.
+const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 18, minZoom: 2, worldCopyJump: false });
+// CARTO Positron — light, minimal, muted labels, no bathymetric clutter.
+// Chosen over the Esri Ocean Basemap specifically so route lines (gold/red)
+// have somewhere to actually stand out against.
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19, noWrap: true,
 }).addTo(map);
 
 let originalLayer = null;
 let rerouteLayer = null;
 let markerLayer = L.layerGroup().addTo(map);
+let lastCompute = null; // most recent {originalData, rerouteData, blocked, originName, destName}, used by PNG export
+
+// Legend as a real Leaflet control (lives inside #map's own DOM) rather than
+// a plain sibling <div> — the sibling version wasn't inside the element
+// html2canvas captures for PNG export, so it never showed up in exports.
+const LegendControl = L.Control.extend({
+  options: { position: 'bottomleft' },
+  onAdd: function () {
+    const div = L.DomUtil.create('div', 'map-legend');
+    div.innerHTML = '<div class="legend-row"><div class="legend-swatch"></div> Original route</div>';
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  },
+});
+const legendControl = new LegendControl().addTo(map);
 
 // ── PORT LOOKUP ── (paths relative — this page now lives in /tools/)
 let portIndex = {};
@@ -323,7 +356,6 @@ document.getElementById('swap-btn').addEventListener('click', () => {
 // ── ROUTE COMPUTE (original + optional re-route, ghosted comparison) ──
 const resultEl = document.getElementById('result');
 const computeBtn = document.getElementById('compute-btn');
-const legendEl = document.getElementById('map-legend');
 
 function resolvePort(name) {
   name = name.trim();
@@ -374,7 +406,7 @@ function renderResult(originalData, rerouteData, blocked) {
 }
 
 function updateLegend(hasReroute) {
-  legendEl.innerHTML = hasReroute
+  legendControl.getContainer().innerHTML = hasReroute
     ? `<div class="legend-row"><div class="legend-swatch dashed"></div> Original route</div>
        <div class="legend-row"><div class="legend-swatch solid-red"></div> Re-route (closures active)</div>`
     : `<div class="legend-row"><div class="legend-swatch"></div> Original route</div>`;
@@ -402,7 +434,8 @@ async function computeRoute() {
     renderResult(originalData, rerouteData, blocked);
     updateLegend(!!blocked.length);
     if (!originalData.error) {
-      drawRoutes(originalData, rerouteData);
+      lastCompute = { originalData, rerouteData, blocked, originName, destName };
+      drawRoutes(originalData, rerouteData, originName, destName);
     }
   } catch (err) {
     resultEl.innerHTML = `<div class="result-error">Couldn't reach the routing engine. ${err.message}</div>`;
@@ -427,32 +460,60 @@ function unwrapLongitudes(coordinates) {
   return out;
 }
 
-function drawRoutes(originalData, rerouteData) {
+// Small branded pin (teardrop) instead of a plain circle — navy stroke,
+// filled in the given color, used for both endpoints with different fills
+// so origin/destination read clearly at a glance and hold up in print.
+function pinIcon(fill, inner) {
+  const svg = `
+    <svg width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 0C5.82 0 0 5.82 0 13c0 9.75 13 21 13 21s13-11.25 13-21C26 5.82 20.18 0 13 0z"
+            fill="${fill}" stroke="#0A2540" stroke-width="1.75"/>
+      <circle cx="13" cy="13" r="5" fill="${inner}"/>
+    </svg>`;
+  return L.divIcon({
+    html: svg, className: 'narrows-pin', iconSize: [26, 34], iconAnchor: [13, 32],
+    tooltipAnchor: [0, -30],
+  });
+}
+// Navy/gold instead of white/gold — white nearly disappeared against the
+// light Positron basemap (it was tuned for the earlier dark ocean tiles).
+const originIcon = pinIcon('#0A2540', '#FFFFFF');
+const destIcon = pinIcon('#F0B429', '#0A2540');
+
+function drawRoutes(originalData, rerouteData, originName, destName) {
   if (originalLayer) map.removeLayer(originalLayer);
   if (rerouteLayer) map.removeLayer(rerouteLayer);
   markerLayer.clearLayers();
 
   const originalLatLngs = unwrapLongitudes(originalData.coordinates);
+
+  // A dark "casing" line drawn underneath each route gives it a printed-map
+  // pop against the busy basemap instead of a single flat stroke competing
+  // with the tile texture — the same trick transit/wayfinding maps use.
+  const lineCaps = { lineCap: 'round', lineJoin: 'round' };
+  L.polyline(originalLatLngs, { ...lineCaps, color: '#0A2540', weight: rerouteData ? 5.5 : 6, opacity: rerouteData ? 0.35 : 0.45 }).addTo(map);
   originalLayer = L.polyline(originalLatLngs, {
+    ...lineCaps,
     color: '#F0B429',
-    weight: rerouteData ? 2.5 : 3,
-    opacity: rerouteData ? 0.55 : 0.9,
-    dashArray: rerouteData ? '7,7' : null,
+    weight: rerouteData ? 3 : 3.5,
+    opacity: rerouteData ? 0.7 : 1,
+    dashArray: rerouteData ? '2,9' : null,
   }).addTo(map);
 
   let allLatLngs = originalLatLngs;
 
   if (rerouteData && !rerouteData.error) {
     const rerouteLatLngs = unwrapLongitudes(rerouteData.coordinates);
-    rerouteLayer = L.polyline(rerouteLatLngs, { color: '#B91C1C', weight: 3, opacity: 0.9 }).addTo(map);
+    L.polyline(rerouteLatLngs, { ...lineCaps, color: '#0A2540', weight: 5.5, opacity: 0.35 }).addTo(map);
+    rerouteLayer = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#B91C1C', weight: 3, opacity: 1 }).addTo(map);
     allLatLngs = originalLatLngs.concat(rerouteLatLngs);
   }
 
   const start = originalLatLngs[0], end = originalLatLngs[originalLatLngs.length - 1];
-  L.circleMarker(start, { radius: 6, fillColor: '#FFFFFF', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
-  L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
+  L.marker(start, { icon: originIcon }).bindTooltip(originName || 'Origin', { direction: 'top', offset: [0, -30] }).addTo(markerLayer);
+  L.marker(end, { icon: destIcon }).bindTooltip(destName || 'Destination', { direction: 'top', offset: [0, -30] }).addTo(markerLayer);
 
-  map.fitBounds(L.latLngBounds(allLatLngs), { padding: [60, 60] });
+  map.fitBounds(L.latLngBounds(allLatLngs), { padding: [70, 70] });
 }
 
 computeBtn.addEventListener('click', computeRoute);
@@ -633,35 +694,124 @@ document.getElementById('import-zones-file').addEventListener('change', (e) => {
 });
 
 // ── PNG EXPORT ──
-// Rasterizes the map div via html2canvas. Known caveat: cross-origin tile
-// images (the Esri basemap) only capture correctly if the tile server sends
-// CORS headers permitting canvas reads. If the exported PNG shows a blank
-// basemap under correct routes/zones, that's this restriction, not a bug in
-// the route or zone rendering — the fix is confirming Esri's CORS policy or
-// switching tile providers; not solved in this first pass.
-document.getElementById('export-png-btn').addEventListener('click', () => {
+// Rasterizes the map div via html2canvas, then composites it onto a taller
+// canvas with a branded navy/gold header band (title = route + closures)
+// and, optionally, a stats band mirroring the side panel's Original/
+// Re-route figures — so the exported file is a self-contained figure, not
+// just a screenshot of the map widget. The legend is now a real Leaflet
+// control living inside #map (see LegendControl above), so it's captured
+// automatically as part of the map raster.
+//
+// Known caveat: cross-origin tile images (the Esri basemap) only capture
+// correctly if the tile server sends CORS headers permitting canvas reads.
+// If the exported PNG shows a blank basemap under correct routes/zones,
+// that's this restriction, not a bug in the route/zone/branding rendering —
+// the fix is confirming Esri's CORS policy or switching tile providers; not
+// solved in this first pass.
+function formatPassageList(list) {
+  return (list && list.length) ? list.map((p) => p.replace(/_/g, ' ')).join(', ') : 'open water';
+}
+
+async function exportBrandedPNG() {
   const btn = document.getElementById('export-png-btn');
   btn.disabled = true;
   btn.textContent = 'Rendering…';
-  html2canvas(document.getElementById('map'), { useCORS: true, allowTaint: false })
-    .then((canvas) => {
-      canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `narrows-map-${Date.now()}.png`;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    })
-    .catch((err) => {
-      alert('PNG export failed: ' + err.message + '\n\nThis is usually the basemap tile CORS restriction noted in the footer.');
-    })
-    .finally(() => {
-      btn.disabled = false;
-      btn.textContent = '⬇ Export map as PNG';
+  try {
+    await document.fonts.ready; // make sure DM Sans/DM Mono are loaded before canvas text uses them
+    const mapCanvas = await html2canvas(document.getElementById('map'), { useCORS: true, allowTaint: false });
+
+    const includeStats = document.getElementById('export-stats-toggle').checked && lastCompute && !lastCompute.originalData.error;
+    const scale = mapCanvas.width / 900; // proportion basis vs. a nominal 900px-wide export
+    const headerH = Math.round(112 * scale);
+    const hasReroute = includeStats && lastCompute.rerouteData && !lastCompute.rerouteData.error;
+    const statsH = includeStats ? Math.round((hasReroute ? 168 : 108) * scale) : 0;
+
+    const out = document.createElement('canvas');
+    out.width = mapCanvas.width;
+    out.height = mapCanvas.height + headerH + statsH;
+    const ctx = out.getContext('2d');
+    const pad = Math.round(24 * scale);
+
+    // ── header band ──
+    ctx.fillStyle = '#0A2540';
+    ctx.fillRect(0, 0, out.width, headerH);
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#F0B429';
+    ctx.font = `700 ${Math.round(12 * scale)}px "DM Mono", monospace`;
+    ctx.fillText('THE NARROWS  ·  MAP PRINTER', pad, Math.round(34 * scale));
+
+    let title = 'Route';
+    let closureNote = '';
+    if (lastCompute) {
+      title = `${lastCompute.originName}  →  ${lastCompute.destName}`;
+      if (lastCompute.blocked && lastCompute.blocked.length) {
+        closureNote = `${lastCompute.blocked.length} closure${lastCompute.blocked.length === 1 ? '' : 's'} simulated: ${lastCompute.blocked.join(', ').replace(/_/g, ' ')}`;
+      }
+    }
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `600 ${Math.round(24 * scale)}px "DM Sans", sans-serif`;
+    ctx.fillText(title, pad, Math.round(68 * scale));
+    if (closureNote) {
+      ctx.fillStyle = 'rgba(255,255,255,.6)';
+      ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
+      ctx.fillText(closureNote, pad, Math.round(92 * scale));
+    }
+
+    // ── map raster ──
+    ctx.drawImage(mapCanvas, 0, headerH);
+
+    // ── optional stats band ──
+    if (includeStats) {
+      const top = headerH + mapCanvas.height;
+      ctx.fillStyle = '#EEF2F8';
+      ctx.fillRect(0, top, out.width, statsH);
+      ctx.strokeStyle = '#DDE4EF';
+      ctx.beginPath(); ctx.moveTo(0, top); ctx.lineTo(out.width, top); ctx.stroke();
+
+      const colW = hasReroute ? out.width / 2 : out.width;
+      const drawBlock = (data, x, label, labelColor) => {
+        let y = top + Math.round(28 * scale);
+        ctx.fillStyle = labelColor;
+        ctx.font = `700 ${Math.round(11 * scale)}px "DM Mono", monospace`;
+        ctx.fillText(label.toUpperCase(), x, y);
+        y += Math.round(26 * scale);
+        ctx.fillStyle = '#0A2540';
+        ctx.font = `500 ${Math.round(20 * scale)}px "DM Mono", monospace`;
+        ctx.fillText(`${data.distance.toLocaleString()} nm`, x, y);
+        y += Math.round(22 * scale);
+        ctx.fillStyle = '#4A6078';
+        ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
+        ctx.fillText(`${data.durationDays} days · via ${formatPassageList(data.passagesUsed)}`, x, y);
+        return y;
+      };
+
+      drawBlock(lastCompute.originalData, pad, 'Original route', '#dea020');
+      if (hasReroute) {
+        const y2 = drawBlock(lastCompute.rerouteData, colW + pad, 'Re-route', '#B91C1C');
+        const delta = lastCompute.rerouteData.distance - lastCompute.originalData.distance;
+        const pct = ((delta / lastCompute.originalData.distance) * 100).toFixed(1);
+        ctx.fillStyle = '#B91C1C';
+        ctx.font = `600 ${Math.round(12 * scale)}px "DM Mono", monospace`;
+        ctx.fillText(`+${delta.toLocaleString()} nm (+${pct}%) vs. original`, colW + pad, y2 + Math.round(20 * scale));
+      }
+    }
+
+    out.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `narrows-map-${Date.now()}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
     });
-});
+  } catch (err) {
+    alert('PNG export failed: ' + err.message + '\n\nA blank basemap under otherwise-correct routes is usually the tile-provider CORS restriction noted in the footer.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '⬇ Export map as PNG';
+  }
+}
+document.getElementById('export-png-btn').addEventListener('click', exportBrandedPNG);
 </script>
 
 </body>
