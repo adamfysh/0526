@@ -142,7 +142,7 @@
       <div class="panel-h">Simulate closures</div>
       <div class="closure-grid" id="closure-grid"></div>
       <div class="closure-note">
-        Northwest Passage and the Bering route are always excluded as non-commercial — not offered as toggles. Closing a chokepoint here removes it entirely from the routing graph and recomputes the shortest remaining path.
+        Northwest Passage and the Bering route are always excluded as non-commercial — not offered as toggles. Closing a chokepoint here removes it entirely from the routing graph and recomputes the shortest remaining path. Cape of Good Hope / Cape Horn are the two around-the-continent detour routes rather than fixed infrastructure — closing one simulates that detour also being unavailable (e.g. weather, piracy), stacking with the canal/strait closures above. Danish Straits and Dover/the English Channel aren't offered yet — the underlying routing graph doesn't tag them as distinct passages, only as open water, so there's nothing there to block until that's built.
       </div>
     </div>
 
@@ -176,15 +176,17 @@
 const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
 
 const CLOSURES = [
-  { key: 'panama',     label: 'Panama Canal' },
-  { key: 'suez',       label: 'Suez Canal' },
-  { key: 'gibraltar',  label: 'Strait of Gibraltar' },
-  { key: 'bosporus',   label: 'Bosphorus' },
-  { key: 'dardanelles',label: 'Dardanelles' },
-  { key: 'babalmandab',label: 'Bab-el-Mandeb' },
-  { key: 'ormuz',      label: 'Strait of Hormuz' },
-  { key: 'malacca',    label: 'Strait of Malacca' },
-  { key: 'sunda',      label: 'Sunda Strait' },
+  { key: 'panama',      label: 'Panama Canal' },
+  { key: 'suez',        label: 'Suez Canal' },
+  { key: 'gibraltar',   label: 'Strait of Gibraltar' },
+  { key: 'bosporus',    label: 'Bosphorus' },
+  { key: 'dardanelles', label: 'Dardanelles' },
+  { key: 'babalmandab', label: 'Bab-el-Mandeb' },
+  { key: 'ormuz',       label: 'Strait of Hormuz' },
+  { key: 'malacca',     label: 'Strait of Malacca' },
+  { key: 'sunda',       label: 'Sunda Strait' },
+  { key: 'south_africa',label: 'Cape of Good Hope route' },
+  { key: 'chili',       label: 'Cape Horn / Magellan route' },
 ];
 
 // ── MAP INIT (Esri Ocean Basemap — bathymetric blue, nautical-chart feel) ──
@@ -315,47 +317,44 @@ async function computeRoute() {
 }
 
 // searoute-py output can jump straight from ~180 to ~-180 longitude when a
-// route crosses the international date line (Bering/Pacific tracks mainly).
-// Leaflet draws polylines in raw lon/lat space, so an unsplit line at that
-// jump renders as one long spurious segment straight across the map. Split
-// the coordinate list into separate segments wherever the longitude jumps
-// by more than 180° between consecutive points, and draw each as its own
-// polyline instead of one continuous one.
-function splitAtAntimeridian(latlngs) {
-  const segments = [];
-  let current = [latlngs[0]];
-  for (let i = 1; i < latlngs.length; i++) {
-    const prevLon = current[current.length - 1][1];
-    const lon = latlngs[i][1];
-    if (Math.abs(lon - prevLon) > 180) {
-      segments.push(current);
-      current = [latlngs[i]];
-    } else {
-      current.push(latlngs[i]);
-    }
+// route crosses the international date line (Bering/far-Pacific tracks
+// mainly). Splitting into two disconnected segments (the first attempt at
+// this fix) drew each half correctly on its own but left a visual gap
+// across the whole width of the map between them, since each half was left
+// in raw -180..180 space and the map zoomed out to fit both. The cleaner
+// fix — what most mapping libraries do — is to NOT wrap back into -180..180
+// at all: keep unwrapping the longitude past 180 (or before -180) so the
+// path stays numerically continuous. Leaflet's projection has no problem
+// drawing coordinates outside ±180; it just draws them in the adjacent
+// repeated copy of the world, which (with worldCopyJump enabled) lines up
+// seamlessly with the real map underneath. One continuous polyline, no gap.
+function unwrapLongitudes(coordinates) {
+  const out = [[coordinates[0][1], coordinates[0][0]]]; // [lat, lon]
+  for (let i = 1; i < coordinates.length; i++) {
+    let lon = coordinates[i][0];
+    const lat = coordinates[i][1];
+    const prevLon = out[out.length - 1][1];
+    while (lon - prevLon > 180) lon -= 360;
+    while (lon - prevLon < -180) lon += 360;
+    out.push([lat, lon]);
   }
-  segments.push(current);
-  return segments;
+  return out;
 }
 
 function drawRoute(coordinates, isRerouted) {
   if (routeLayer) map.removeLayer(routeLayer);
   markerLayer.clearLayers();
 
-  const latlngs = coordinates.map(([lon, lat]) => [lat, lon]);
-  const segments = splitAtAntimeridian(latlngs);
+  const latlngs = unwrapLongitudes(coordinates);
   const color = isRerouted ? '#B91C1C' : '#F0B429';
 
-  routeLayer = L.layerGroup(
-    segments.map((seg) => L.polyline(seg, { color, weight: 3, opacity: 0.85 }))
-  ).addTo(map);
+  routeLayer = L.polyline(latlngs, { color, weight: 3, opacity: 0.85 }).addTo(map);
 
   const start = latlngs[0], end = latlngs[latlngs.length - 1];
   L.circleMarker(start, { radius: 6, fillColor: '#FFFFFF', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
   L.circleMarker(end, { radius: 6, fillColor: '#F0B429', fillOpacity: 1, color: '#0A2540', weight: 2 }).addTo(markerLayer);
 
-  const bounds = L.latLngBounds(segments.flat());
-  map.fitBounds(bounds, { padding: [60, 60] });
+  map.fitBounds(routeLayer.getBounds(), { padding: [60, 60] });
 }
 
 computeBtn.addEventListener('click', computeRoute);
