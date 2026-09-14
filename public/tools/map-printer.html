@@ -115,6 +115,9 @@
   .zone-row:hover{background:var(--surface2)}
   .zone-swatch{width:12px;height:12px;border-radius:3px;flex-shrink:0}
   .zone-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .zone-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.04em;padding:1px 6px;border-radius:9px;flex-shrink:0}
+  .zone-badge.avoid{background:var(--red-soft);color:var(--red)}
+  .zone-badge.premium{background:var(--amber-soft);color:var(--amber)}
   .zone-del{color:var(--text-dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0}
   .zone-del:hover{color:var(--red)}
   .zones-empty{font-size:11.5px;color:var(--text-dim);font-style:italic;padding:4px 0}
@@ -237,6 +240,16 @@
     <input type="text" id="zone-name-input" placeholder="e.g. NW Pacific cyclone season">
     <label for="zone-color-input">Color</label>
     <input type="color" id="zone-color-input" value="#F0B429">
+    <label for="zone-behavior-input">Behavior (label only — doesn't change routing yet)</label>
+    <select id="zone-behavior-input" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
+      <option value="info">Informational only</option>
+      <option value="avoid">Avoid — hard exclusion</option>
+      <option value="premium">Risk premium — % cost</option>
+    </select>
+    <div id="zone-premium-field" hidden>
+      <label for="zone-premium-input">Premium (% of hull value)</label>
+      <input type="text" id="zone-premium-input" placeholder="e.g. 1.5">
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" id="zone-modal-cancel">Discard</button>
       <button class="modal-save" id="zone-modal-save">Save zone</button>
@@ -273,11 +286,24 @@ const CLOSURES = [
 // line/marker were actually drawn over, the line looked like it ended in
 // the wrong place, and the same mismatch got baked into PNG exports since
 // html2canvas just rasterizes whatever's on screen. Fix: turn off world
-// repetition entirely (noWrap on both tile layers, no worldCopyJump) so
-// there is only ever one copy of the map. A route that legitimately crosses
-// the date line will pan into the blank area past ±180° rather than snap to
-// a repeated copy — a much smaller cosmetic tradeoff than the mismatch bug.
-const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 18, minZoom: 2, worldCopyJump: false });
+// repetition (noWrap:true) fixed that but killed continuous panning — pan
+// west far enough and you hit blank gray with no tiles, since the layer was
+// told never to wrap. The actual conflict was worldCopyJump (which silently
+// RE-CENTERS the viewport when panning across a world-copy boundary) fighting
+// with routes drawn at deliberately-unwrapped (sometimes >180°/<-180°)
+// coordinates. Tiles and vector layers share the same continuous pixel-space
+// projection — a tile layer with wrap ENABLED (the default) just fetches the
+// correctly-wrapped tile image for any raw coordinate, matching up correctly
+// with a vector layer at that same raw coordinate. So: tiles wrap normally
+// again (removed noWrap) for continuous panning, worldCopyJump stays off so
+// the viewport never auto-jumps out from under the drawn route/markers.
+// renderer: L.canvas() — Leaflet draws polylines/polygons as SVG by default,
+// which html2canvas (used for PNG export) is known to drop or misplace when
+// combined with Leaflet's CSS-transform-based pane positioning. Routes were
+// showing up correctly on screen but vanishing from the exported PNG for
+// exactly this reason. Canvas-rendered vector layers are plain pixel data by
+// the time html2canvas gets to them, which it captures reliably.
+const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom: 18, minZoom: 2, worldCopyJump: false, renderer: L.canvas() });
 // CARTO Positron — light, minimal, muted labels, no bathymetric clutter.
 // Chosen over the Esri Ocean Basemap specifically so route lines (gold/red)
 // have somewhere to actually stand out against.
@@ -285,7 +311,7 @@ const map = L.map('map', { center: [20, 10], zoom: 2, zoomControl: true, maxZoom
 // already use live on the site rather than provisioning a new one.
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd', maxZoom: 19, noWrap: true,
+  subdomains: 'abcd', maxZoom: 19,
 }).addTo(map);
 
 let originalLayer = null;
@@ -563,10 +589,16 @@ function saveZones() {
   }
 }
 
+function zoneTooltipText(zone) {
+  if (zone.behavior === 'avoid') return `${zone.name} — AVOID (label only, not yet enforced in routing)`;
+  if (zone.behavior === 'premium') return `${zone.name} — +${zone.premiumPct ?? '?'}% risk premium (label only, not yet enforced in routing)`;
+  return zone.name;
+}
+
 function renderZone(zone) {
   const layer = L.polygon(zone.latlngs, {
     color: zone.color, weight: 2, fillColor: zone.color, fillOpacity: 0.15,
-  }).bindTooltip(zone.name, { sticky: true, className: 'zone-tooltip' });
+  }).bindTooltip(zoneTooltipText(zone), { sticky: true, className: 'zone-tooltip' });
   zone._layer = layer;
   if (zone.visible !== false) layer.addTo(zonesLayerGroup);
   return layer;
@@ -582,10 +614,16 @@ function renderZonesList() {
   zones.forEach((zone) => {
     const row = document.createElement('div');
     row.className = 'zone-row';
+    const badge = zone.behavior === 'avoid'
+      ? '<span class="zone-badge avoid">AVOID</span>'
+      : zone.behavior === 'premium'
+        ? `<span class="zone-badge premium">+${zone.premiumPct ?? '?'}%</span>`
+        : '';
     row.innerHTML = `
       <input type="checkbox" ${zone.visible !== false ? 'checked' : ''}>
       <div class="zone-swatch" style="background:${zone.color}"></div>
       <div class="zone-name">${zone.name}</div>
+      ${badge}
       <span class="zone-del">×</span>
     `;
     row.querySelector('input').addEventListener('change', (e) => {
@@ -618,12 +656,18 @@ const zoneModal = document.getElementById('zone-modal');
 function openZoneModal() {
   document.getElementById('zone-name-input').value = '';
   document.getElementById('zone-color-input').value = '#F0B429';
+  document.getElementById('zone-behavior-input').value = 'info';
+  document.getElementById('zone-premium-input').value = '';
+  document.getElementById('zone-premium-field').hidden = true;
   zoneModal.hidden = false;
   document.getElementById('zone-name-input').focus();
 }
 function closeZoneModal() {
   zoneModal.hidden = true;
 }
+document.getElementById('zone-behavior-input').addEventListener('change', (e) => {
+  document.getElementById('zone-premium-field').hidden = e.target.value !== 'premium';
+});
 document.getElementById('zone-modal-cancel').addEventListener('click', () => {
   if (pendingLayer) drawnItems.removeLayer(pendingLayer);
   pendingLayer = null;
@@ -632,9 +676,18 @@ document.getElementById('zone-modal-cancel').addEventListener('click', () => {
 document.getElementById('zone-modal-save').addEventListener('click', () => {
   const name = document.getElementById('zone-name-input').value.trim() || 'Untitled zone';
   const color = document.getElementById('zone-color-input').value;
+  const behavior = document.getElementById('zone-behavior-input').value; // 'info' | 'avoid' | 'premium' — label only for now, see note below
+  const premiumPct = behavior === 'premium' ? (parseFloat(document.getElementById('zone-premium-input').value) || 0) : null;
   if (pendingLayer) {
     const latlngs = pendingLayer.getLatLngs()[0].map((ll) => [ll.lat, ll.lng]);
-    const zone = { id: `z_${Date.now()}`, name, color, latlngs, visible: true };
+    // NOTE: behavior/premiumPct are captured as data on the zone so they're
+    // ready for when the JWC-influence-on-routing work happens (per the
+    // scope doc's avoidance-vs-cost-weighted modes) — this does NOT yet
+    // change what fetchRoute()/the Worker computes. A polygon-aware routing
+    // constraint (mask graph edges that cross an "avoid" zone, or add a
+    // cost term for a "premium" zone) is a real backend change, not done
+    // here — this is just the data model + UI to record intent now.
+    const zone = { id: `z_${Date.now()}`, name, color, behavior, premiumPct, latlngs, visible: true };
     zones.push(zone);
     saveZones();
     drawnItems.removeLayer(pendingLayer);
@@ -647,7 +700,7 @@ document.getElementById('zone-modal-save').addEventListener('click', () => {
 
 // ── ZONE EXPORT / IMPORT (JSON backup/portability across browsers) ──
 document.getElementById('export-zones-btn').addEventListener('click', () => {
-  const exportable = zones.map(({ id, name, color, latlngs }) => ({ id, name, color, latlngs }));
+  const exportable = zones.map(({ id, name, color, behavior, premiumPct, latlngs }) => ({ id, name, color, behavior, premiumPct, latlngs }));
   const blob = new Blob([JSON.stringify(exportable, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
