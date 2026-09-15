@@ -255,15 +255,15 @@
         Trade flow ensemble
         <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="flows-toggle" style="vertical-align:middle;margin-right:4px">show on map</label>
       </div>
-      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane — precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. The one thing still approximate: endpoints are each country's largest port by throughput, not the actual load/discharge port for any one voyage — a real limitation for multi-port countries (Russia, Spain, Australia...), see the tooltip's note when it applies. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
+      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane, precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. Endpoints come from the CDM's own Port-Commodity Index where it covers that trade (76%/320 corridors here — a country's real export/import port for that specific commodity, split and weighted across ports when a country trades from more than one basin, e.g. Russian crude properly separates Black Sea/Baltic/Pacific loadings instead of one wrong line); the rest fall back to that country's largest port overall, and are labeled as such in the tooltip. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
       <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
         <div class="field" style="flex:1">
           <label for="flows-topn-select">Show top corridors</label>
           <select id="flows-topn-select" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
             <option value="50">50 (largest only)</option>
             <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="250" selected>250 (all loaded)</option>
+            <option value="200">200</option>
+            <option value="320" selected>320 (all loaded)</option>
           </select>
         </div>
       </div>
@@ -574,7 +574,7 @@ function drawFlowEnsemble() {
   flowsLayerGroup.clearLayers();
   const toggle = document.getElementById('flows-toggle');
   if (!toggle || !toggle.checked || !flowEnsembleData) return;
-  const topN = parseInt(document.getElementById('flows-topn-select').value, 10) || 250;
+  const topN = parseInt(document.getElementById('flows-topn-select').value, 10) || 320;
   const flows = flowEnsembleData.flows.slice(0, topN);
   if (!flows.length) return;
   const values = flows.map((f) => f.trade_value_usd);
@@ -594,11 +594,12 @@ function drawFlowEnsemble() {
     });
     const valueStr = `$${(f.trade_value_usd / 1e9).toFixed(1)}B/yr`;
     const viaStr = routedPassages.length ? routedPassages.join(', ') : 'open ocean, no named passage';
-    const tagNote = f.chokepoints.length && f.chokepoints.join(',').toUpperCase() !== routedPassages.join(',').toUpperCase()
-      ? `<br><span style="opacity:.7">pipeline's own tag for this trade: ${f.chokepoints.join(', ')} (likely a different real load port — see the port-approximation note above)</span>`
-      : '';
+    const isPciResolved = f.from_source === 'pci' && f.to_source === 'pci';
+    const portLine = isPciResolved
+      ? `${f.from_port} → ${f.to_port}`
+      : `${f.from_port} → ${f.to_port} <span style="opacity:.7">(largest-port proxy, not PCI-resolved)</span>`;
     line.bindTooltip(
-      `${f.exporter} → ${f.importer}<br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr · ${f.routed_distance_nm ? f.routed_distance_nm.toLocaleString() + ' nm' : ''}<br>via ${viaStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}${tagNote}`,
+      `${f.exporter} → ${f.importer}<br><span style="opacity:.85">${portLine}</span><br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr · ${f.routed_distance_nm ? f.routed_distance_nm.toLocaleString() + ' nm' : ''}<br>via ${viaStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}`,
       { sticky: true }
     );
     line.addTo(flowsLayerGroup);
