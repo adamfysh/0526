@@ -1641,6 +1641,39 @@ async function renderMapCanvas() {
     ctx.setLineDash([]);
   });
 
+  // ── trade flow ensemble (drawn under the highlighted route lines below,
+  // same as it's under the main route on the live Leaflet map) — this was
+  // missing from the export entirely; mirrors drawFlowEnsemble()'s own
+  // logic (log-scaled weight by trade value, red + full opacity for any
+  // flow whose real routed path crosses a currently-checked closure) so the
+  // export matches whatever's actually on screen when you hit export. ──
+  const flowsVisible = document.getElementById('flows-toggle').checked && flowEnsembleData;
+  const shownFlows = flowsVisible
+    ? flowEnsembleData.flows.slice(0, parseInt(document.getElementById('flows-topn-select').value, 10) || 320)
+    : [];
+  if (shownFlows.length) {
+    const flowValues = shownFlows.map((f) => f.trade_value_usd);
+    const logMin = Math.log(Math.min(...flowValues));
+    const logMax = Math.log(Math.max(...flowValues));
+    const blockedKeys = new Set(getBlockedPassages());
+    shownFlows.forEach((f) => {
+      const routedPassages = f.routed_passages || [];
+      const isExposed = routedPassages.some((p) => blockedKeys.has(p));
+      const color = isExposed ? '#B91C1C' : (VESSEL_TYPE_COLORS[f.top_vessel_type] || VESSEL_TYPE_FALLBACK);
+      const t = logMax > logMin ? (Math.log(f.trade_value_usd) - logMin) / (logMax - logMin) : 0.5;
+      const weight = 0.6 + t * 3.2;
+      const mls = routeToMultiLineString(f.coordinates || [f.from, f.to]);
+      ctx.beginPath(); path(mls);
+      ctx.strokeStyle = color;
+      ctx.globalAlpha = isExposed ? 0.9 : 0.32;
+      ctx.lineWidth = weight;
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.setLineDash([]);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+  }
+
   // ── routes: casing (navy, wide) then the colored line on top, refined
   // thinner/more editorial than the on-screen Leaflet styling per the
   // "too primary" feedback ──
@@ -1786,6 +1819,13 @@ async function renderMapCanvas() {
     if (blockedForLegend.length) {
       legendRows.push({ swatch: '#B91C1C', dash: false, label: `Closed chokepoint (red gate ✕)`, box: true });
     }
+  }
+  if (shownFlows.length) {
+    const shownTypes = Array.from(new Set(shownFlows.map((f) => f.top_vessel_type))).sort();
+    shownTypes.forEach((t) => {
+      legendRows.push({ swatch: VESSEL_TYPE_COLORS[t] || VESSEL_TYPE_FALLBACK, dash: false, label: t.replace(/_/g, ' ') });
+    });
+    legendRows.push({ swatch: '#B91C1C', dash: false, label: 'Trade flow via a closed chokepoint' });
   }
 
   if (legendRows.length) {
