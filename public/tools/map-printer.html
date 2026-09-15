@@ -1554,26 +1554,31 @@ async function renderMapCanvas() {
   // Fit to the LIVE map's current viewport (whatever's actually panned/
   // zoomed into on screen), not the whole world — a full-world fit was
   // wasting a quarter of the export on empty Southern Ocean/Antarctica no
-  // matter what the user was actually looking at. map.getBounds() gives the
-  // visible lon/lat box; fitExtent to that box instead of {type:'Sphere'}.
+  // matter what the user was actually looking at.
+  //
+  // Deliberately NOT using d3.geoMercator().fitExtent(extent, someGeoJSON):
+  // fitExtent measures its target via d3-geo's spherical polygon stream,
+  // which is winding-sensitive (a backwards ring fits to the polygon's
+  // COMPLEMENT — basically the whole globe). A first attempt at that
+  // approach got the ring order right for a moderate test box but broke
+  // worse than before for very wide viewports (routes spanning most of the
+  // globe put west/east/near-polar corners into territory where the
+  // "correct" winding stops being a fixed, guessable rule). Rather than
+  // keep guessing windings, this computes the fit directly: project the
+  // viewport's NW/SE corners through a bare, unscaled Mercator, and derive
+  // scale/translate from those two points by hand — exactly what fitExtent
+  // does internally, minus the polygon/winding machinery entirely.
   const b = map.getBounds();
-  // Winding matters here exactly like it does for zoneToPolygon() below: get
-  // it backwards and d3-geo's fitExtent computes bounds off the polygon's
-  // spherical COMPLEMENT (basically the whole globe), which is why an earlier
-  // version of this "viewport fit" silently fell back to a full-world fit no
-  // matter what box was passed in. This ordering (W,S -> W,N -> E,N -> E,S)
-  // is the one that measures out negative by ringSignedArea, which — per the
-  // same empirical d3-geo testing as zoneToPolygon() — is the winding that
-  // actually fits to the box instead of its complement.
-  const viewportBox = {
-    type: 'Polygon',
-    coordinates: [[
-      [b.getWest(), b.getSouth()], [b.getWest(), b.getNorth()],
-      [b.getEast(), b.getNorth()], [b.getEast(), b.getSouth()],
-      [b.getWest(), b.getSouth()],
-    ]],
-  };
-  const projection = d3.geoMercator().fitExtent([[pad, pad], [width - pad, height - pad]], viewportBox);
+  const rawProjection = d3.geoMercator().scale(1).translate([0, 0]);
+  const nw = rawProjection([b.getWest(), b.getNorth()]);
+  const se = rawProjection([b.getEast(), b.getSouth()]);
+  const boxW = Math.abs(se[0] - nw[0]) || 1e-6;
+  const boxH = Math.abs(se[1] - nw[1]) || 1e-6;
+  const fitScale = Math.min((width - pad * 2) / boxW, (height - pad * 2) / boxH);
+  const boxCenter = [(nw[0] + se[0]) / 2, (nw[1] + se[1]) / 2];
+  const projection = d3.geoMercator()
+    .scale(fitScale)
+    .translate([width / 2 - fitScale * boxCenter[0], height / 2 - fitScale * boxCenter[1]]);
   const path = d3.geoPath(projection, ctx);
 
   // ── ocean ── (fills the whole canvas directly rather than the "Sphere"
@@ -1810,15 +1815,22 @@ async function exportBrandedPNG() {
     ctx.fillStyle = '#F0B429';
     ctx.fillRect(0, headerH - ruleH, out.width, ruleH);
 
-    const logoH = Math.round(headerH * 0.46);
+    // Masthead first, route label second: the brand mark + "THE NARROWS"
+    // wordmark is the dominant element (this is a masthead, like a
+    // publication's own name), and the route title underneath it reads as
+    // a caption — the previous pass had that backwards (huge serif route
+    // name, tiny wordmark).
+    const logoH = Math.round(headerH * 0.58);
     const logoAspect = 1698 / 948;
     const logoW = logoH * logoAspect;
-    const logoTop = Math.round(16 * scale);
-    drawNarrowsLogo(ctx, out.width - pad - logoW, logoTop, logoH, '#F0B429');
-    ctx.fillStyle = 'rgba(255,255,255,.9)';
-    ctx.font = `700 ${Math.round(11 * scale)}px "DM Mono", monospace`;
+    const logoTop = Math.round(14 * scale);
+    drawNarrowsLogo(ctx, pad, logoTop, logoH, '#F0B429');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `800 ${Math.round(20 * scale)}px "DM Mono", monospace`;
+    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = `${Math.max(1, Math.round(1.5 * scale))}px`;
     const wordmark = 'THE NARROWS';
-    ctx.fillText(wordmark, out.width - pad - ctx.measureText(wordmark).width, logoTop + logoH + Math.round(16 * scale));
+    ctx.fillText(wordmark, pad + logoW + Math.round(14 * scale), logoTop + logoH * 0.66);
+    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = '0px';
 
     let title = 'Route';
     let closureNote = '';
@@ -1832,14 +1844,17 @@ async function exportBrandedPNG() {
         : `${exportLayers.length} routes compared`;
       closureNote = exportLayers.length > 3 ? exportLayers.map((l) => l.label).join(', ') : '';
     }
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = `italic ${Math.round(30 * scale)}px "Instrument Serif", serif`;
-    ctx.fillText(title, pad, Math.round(64 * scale));
+    ctx.fillStyle = 'rgba(255,255,255,.62)';
+    ctx.font = `italic ${Math.round(17 * scale)}px "Instrument Serif", serif`;
+    const titleY = closureNote ? Math.round(headerH - 28 * scale) : Math.round(headerH - 20 * scale);
+    ctx.textAlign = 'right';
+    ctx.fillText(title, out.width - pad, titleY);
     if (closureNote) {
-      ctx.fillStyle = 'rgba(255,255,255,.55)';
-      ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
-      ctx.fillText(closureNote, pad, Math.round(86 * scale));
+      ctx.fillStyle = 'rgba(255,255,255,.4)';
+      ctx.font = `${Math.round(10.5 * scale)}px "DM Sans", sans-serif`;
+      ctx.fillText(closureNote, out.width - pad, Math.round(headerH - 12 * scale));
     }
+    ctx.textAlign = 'left';
 
     // ── map raster ──
     ctx.drawImage(mapCanvas, 0, headerH);
