@@ -1458,7 +1458,9 @@ function drawNarrowsLogo(ctx, x, y, heightPx, fill) {
   ctx.restore();
 }
 function formatPassageList(list) {
-  return (list && list.length) ? list.map((p) => p.replace(/_/g, ' ')).join(', ') : 'open water';
+  return (list && list.length)
+    ? list.map((p) => p.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()))
+    : [];
 }
 
 // Splits a raw [lon,lat] coordinate sequence into a GeoJSON MultiLineString,
@@ -1490,13 +1492,41 @@ function routeToMultiLineString(coordinates) {
   return { type: 'MultiLineString', coordinates: lines };
 }
 
+// Signed planar area of a [lon,lat] ring (shoelace formula) — used only to
+// fix winding direction below, so the small-polygon planar approximation is
+// fine even though it's technically a spherical ring.
+function ringSignedArea(ring) {
+  let sum = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x1, y1] = ring[i];
+    const [x2, y2] = ring[i + 1];
+    sum += x1 * y2 - x2 * y1;
+  }
+  return sum / 2;
+}
+
 // Zones are stored as Leaflet [lat,lng] rings (see loadZones()/renderZone());
 // GeoJSON wants [lon,lat] rings, closed (first point repeated at the end).
+// Leaflet.draw doesn't enforce a winding direction — a user can draw a zone
+// clockwise or counterclockwise and Leaflet's own flat-canvas fill doesn't
+// care either way. d3-geo's SPHERICAL polygon fill very much does care
+// (RFC 7946: exterior rings must be counterclockwise) — get it backwards and
+// d3 fills the polygon's complement, i.e. the entire globe MINUS the zone,
+// instead of the zone itself. That is almost certainly what was reported as
+// "a yellow mask over the whole map": a gold-colored zone (the default zone
+// color) with inverted winding, filling everything except itself. Fixed by
+// checking the ring's signed planar area and reversing it if it comes out
+// clockwise.
 function zoneToPolygon(zone) {
   const ring = zone.latlngs.map(([lat, lng]) => [wrapLon(lng), lat]);
   if (ring.length && (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1])) {
     ring.push(ring[0]);
   }
+  // Empirically (tested against d3-geo directly, not just RFC 7946's stated
+  // convention — the two disagree in practice for this axis orientation):
+  // d3-geo fills the ring correctly here when its signed planar area in
+  // [lon,lat] terms is NEGATIVE. Reverse when it comes out positive.
+  if (ringSignedArea(ring) > 0) ring.reverse();
   return { type: 'Polygon', coordinates: [ring] };
 }
 
@@ -1521,22 +1551,45 @@ async function renderMapCanvas() {
   canvas.height = height;
   const ctx = canvas.getContext('2d');
 
-  // d3.geoMercator's fitExtent+Sphere combination clips at the standard Web
-  // Mercator latitude bound (~85.05°) automatically — no Infinity-at-the-
-  // poles issue to work around, same reason Leaflet/every tile provider
-  // already stops there.
-  const projection = d3.geoMercator().fitExtent([[pad, pad], [width - pad, height - pad]], { type: 'Sphere' });
+  // Fit to the LIVE map's current viewport (whatever's actually panned/
+  // zoomed into on screen), not the whole world — a full-world fit was
+  // wasting a quarter of the export on empty Southern Ocean/Antarctica no
+  // matter what the user was actually looking at. map.getBounds() gives the
+  // visible lon/lat box; fitExtent to that box instead of {type:'Sphere'}.
+  const b = map.getBounds();
+  // Winding matters here exactly like it does for zoneToPolygon() below: get
+  // it backwards and d3-geo's fitExtent computes bounds off the polygon's
+  // spherical COMPLEMENT (basically the whole globe), which is why an earlier
+  // version of this "viewport fit" silently fell back to a full-world fit no
+  // matter what box was passed in. This ordering (W,S -> W,N -> E,N -> E,S)
+  // is the one that measures out negative by ringSignedArea, which — per the
+  // same empirical d3-geo testing as zoneToPolygon() — is the winding that
+  // actually fits to the box instead of its complement.
+  const viewportBox = {
+    type: 'Polygon',
+    coordinates: [[
+      [b.getWest(), b.getSouth()], [b.getWest(), b.getNorth()],
+      [b.getEast(), b.getNorth()], [b.getEast(), b.getSouth()],
+      [b.getWest(), b.getSouth()],
+    ]],
+  };
+  const projection = d3.geoMercator().fitExtent([[pad, pad], [width - pad, height - pad]], viewportBox);
   const path = d3.geoPath(projection, ctx);
 
-  // ── ocean + sphere outline ──
-  ctx.fillStyle = '#EAF1F5';
-  ctx.fillRect(0, 0, width, height);
-  ctx.beginPath(); path({ type: 'Sphere' });
+  // ── ocean ── (fills the whole canvas directly rather than the "Sphere"
+  // shape — with a viewport fit instead of a whole-world fit, the sphere
+  // outline is now usually many times larger than the canvas anyway, so
+  // filling it is redundant; a plain fillRect is simpler and correct either
+  // way)
   ctx.fillStyle = '#DCE9EF';
-  ctx.fill();
+  ctx.fillRect(0, 0, width, height);
 
-  // ── graticule (light reference grid — gives it a cartographic feel) ──
-  ctx.beginPath(); path(d3.geoGraticule().step([20, 20])());
+  // ── graticule (light reference grid — gives it a cartographic feel).
+  // Step adapts to how zoomed-in the viewport is — a 20° grid is too coarse
+  // once the export is cropped to a regional view instead of the whole world.
+  const spanLon = Math.abs(b.getEast() - b.getWest());
+  const graticuleStep = spanLon > 90 ? 20 : spanLon > 40 ? 10 : spanLon > 15 ? 5 : spanLon > 5 ? 2 : 1;
+  ctx.beginPath(); path(d3.geoGraticule().step([graticuleStep, graticuleStep])());
   ctx.strokeStyle = 'rgba(10,37,64,.08)';
   ctx.lineWidth = 0.6;
   ctx.stroke();
@@ -1550,10 +1603,12 @@ async function renderMapCanvas() {
   ctx.lineWidth = 0.7;
   ctx.stroke();
 
-  ctx.beginPath(); path({ type: 'Sphere' });
+  // A crisp rectangular frame around the crop (the old "Sphere" outline
+  // stroke drew a nice border when fit to the whole world, but is off-canvas
+  // and invisible now that the export is fit to a zoomed-in viewport).
   ctx.strokeStyle = '#0A2540';
   ctx.lineWidth = 1.2;
-  ctx.stroke();
+  ctx.strokeRect(0.6, 0.6, width - 1.2, height - 1.2);
 
   // ── active zones (drawn under routes, above land/ocean) ──
   const activeZones = zones.filter((z) => z.visible !== false);
@@ -1727,10 +1782,14 @@ async function exportBrandedPNG() {
     const exportLayers = routeLayers.filter((l) => l.visible !== false && l.data && !l.data.error);
     const includeStats = document.getElementById('export-stats-toggle').checked && exportLayers.length > 0;
     const scale = mapCanvas.width / 900; // proportion basis vs. a nominal 900px-wide export
-    const headerH = Math.round(112 * scale);
-    // One stat row per layer, plus an extra row for any layer with a re-route.
-    const statRowCount = exportLayers.reduce((n, l) => n + (l.data.reroute && !l.data.reroute.error ? 2 : 1), 0);
-    const statsH = includeStats ? Math.round((30 * statRowCount + 24) * scale) : 0;
+    const headerH = Math.round(104 * scale);
+    // One tile per layer — taller when it has a re-route sub-row.
+    const tileGap = Math.round(10 * scale);
+    const tileH = Math.round(56 * scale);
+    const tileHWithReroute = Math.round(80 * scale);
+    const statsPadY = Math.round(18 * scale);
+    const statsInnerH = exportLayers.reduce((h, l) => h + (l.data.reroute && !l.data.reroute.error ? tileHWithReroute : tileH) + tileGap, 0);
+    const statsH = includeStats ? statsInnerH + statsPadY * 2 - tileGap : 0;
 
     const out = document.createElement('canvas');
     out.width = mapCanvas.width;
@@ -1738,19 +1797,28 @@ async function exportBrandedPNG() {
     const ctx = out.getContext('2d');
     const pad = Math.round(24 * scale);
 
-    // ── header band ──
+    // ── header band — a masthead, not a slab: thin gold rule along the
+    // bottom edge instead of relying on flat navy alone to carry it, an
+    // italic serif headline (the site imports Instrument Serif but wasn't
+    // using it anywhere — a serif headline against DM Sans/DM Mono body
+    // text is what actually reads as "editorial", not just bigger/bolder
+    // sans) and the Narrows mark WITH its wordmark, not the mark alone. ──
     ctx.fillStyle = '#0A2540';
     ctx.fillRect(0, 0, out.width, headerH);
     ctx.textBaseline = 'alphabetic';
+    const ruleH = Math.max(2, Math.round(2 * scale));
+    ctx.fillStyle = '#F0B429';
+    ctx.fillRect(0, headerH - ruleH, out.width, ruleH);
 
-    // Big Narrows "N" mark, right-aligned and vertically centered in the
-    // header — the brand identity on the export, no "Map Printer" tool-name
-    // label needed (this is a Narrows output, not a credit to the tool that
-    // made it).
-    const logoH = Math.round(headerH * 0.62);
+    const logoH = Math.round(headerH * 0.46);
     const logoAspect = 1698 / 948;
     const logoW = logoH * logoAspect;
-    drawNarrowsLogo(ctx, out.width - pad - logoW, (headerH - logoH) / 2, logoH, '#F0B429');
+    const logoTop = Math.round(16 * scale);
+    drawNarrowsLogo(ctx, out.width - pad - logoW, logoTop, logoH, '#F0B429');
+    ctx.fillStyle = 'rgba(255,255,255,.9)';
+    ctx.font = `700 ${Math.round(11 * scale)}px "DM Mono", monospace`;
+    const wordmark = 'THE NARROWS';
+    ctx.fillText(wordmark, out.width - pad - ctx.measureText(wordmark).width, logoTop + logoH + Math.round(16 * scale));
 
     let title = 'Route';
     let closureNote = '';
@@ -1765,48 +1833,105 @@ async function exportBrandedPNG() {
       closureNote = exportLayers.length > 3 ? exportLayers.map((l) => l.label).join(', ') : '';
     }
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = `600 ${Math.round(24 * scale)}px "DM Sans", sans-serif`;
-    ctx.fillText(title, pad, Math.round(68 * scale));
+    ctx.font = `italic ${Math.round(30 * scale)}px "Instrument Serif", serif`;
+    ctx.fillText(title, pad, Math.round(64 * scale));
     if (closureNote) {
-      ctx.fillStyle = 'rgba(255,255,255,.6)';
+      ctx.fillStyle = 'rgba(255,255,255,.55)';
       ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
-      ctx.fillText(closureNote, pad, Math.round(92 * scale));
+      ctx.fillText(closureNote, pad, Math.round(86 * scale));
     }
 
     // ── map raster ──
     ctx.drawImage(mapCanvas, 0, headerH);
 
-    // ── optional stats band ──
+    // ── optional stats band — one real tile per layer (rounded card, left
+    // color bar, its own border) instead of plain stacked text rows on a
+    // flat gray strip, plus a bit more structure per stat (small caption
+    // above each value) so there's actually something to look at. ──
     if (includeStats) {
       const top = headerH + mapCanvas.height;
-      ctx.fillStyle = '#EEF2F8';
+      ctx.fillStyle = '#F7F9FC';
       ctx.fillRect(0, top, out.width, statsH);
       ctx.strokeStyle = '#DDE4EF';
       ctx.beginPath(); ctx.moveTo(0, top); ctx.lineTo(out.width, top); ctx.stroke();
 
-      // One row per layer (label + swatch + distance/duration/passages),
-      // plus an indented follow-up row for any layer with a re-route.
-      let y = top + Math.round(22 * scale);
-      const rowStep = Math.round(30 * scale);
+      let y = top + statsPadY;
+      const tileX = pad;
+      const tileW = out.width - pad * 2;
+      const accentW = Math.round(4 * scale);
+      const innerPad = Math.round(14 * scale);
+
       exportLayers.forEach((layer) => {
         const { original, reroute } = layer.data;
+        const hasReroute = reroute && !reroute.error;
+        const thisTileH = hasReroute ? tileHWithReroute : tileH;
+
+        // card
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = '#E2E8F0';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(tileX, y, tileW, thisTileH, Math.round(6 * scale));
+        else ctx.rect(tileX, y, tileW, thisTileH);
+        ctx.fill(); ctx.stroke();
+        // left accent bar (clipped to the card's rounded left edge — close
+        // enough at this radius to just draw a full-height bar and let the
+        // card's own top/bottom edges crop it)
         ctx.fillStyle = layer.color;
-        ctx.fillRect(pad, y - Math.round(9 * scale), Math.round(9 * scale), Math.round(9 * scale));
+        ctx.fillRect(tileX, y, accentW, thisTileH);
+
+        const labelX = tileX + accentW + innerPad;
         ctx.fillStyle = '#0A2540';
-        ctx.font = `600 ${Math.round(13 * scale)}px "DM Mono", monospace`;
-        ctx.fillText(layer.label, pad + Math.round(16 * scale), y);
-        ctx.fillStyle = '#4A6078';
-        ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
-        ctx.fillText(`${original.distance.toLocaleString()} nm · ${original.durationDays} days · via ${formatPassageList(original.passagesUsed)}`, pad + Math.round(16 * scale), y + Math.round(16 * scale));
-        y += rowStep;
-        if (reroute && !reroute.error) {
+        ctx.font = `700 ${Math.round(13 * scale)}px "DM Mono", monospace`;
+        ctx.fillText(layer.label, labelX, y + Math.round(20 * scale));
+
+        // Three stat columns: caption (small, muted) above value (bold).
+        // DISTANCE/DURATION are short and fixed-width; VIA is a variable-length
+        // passage list so it gets whatever room is left out to the card's right
+        // edge, and is truncated whole-word (never mid-word) with a "+N" tail.
+        const compactColW = Math.round(tileW * 0.16);
+        const colStartX = tileX + tileW * 0.34;
+        const viaColX = colStartX + compactColW * 2 + Math.round(14 * scale);
+        const viaColW = tileX + tileW - Math.round(14 * scale) - viaColX;
+
+        [['DISTANCE', `${original.distance.toLocaleString()} nm`], ['DURATION', `${original.durationDays} days`]]
+          .forEach(([caption, value], i) => {
+            const cx = colStartX + i * compactColW;
+            ctx.fillStyle = '#8A9BAE';
+            ctx.font = `600 ${Math.round(9 * scale)}px "DM Mono", monospace`;
+            ctx.fillText(caption, cx, y + Math.round(19 * scale));
+            ctx.fillStyle = '#1A3352';
+            ctx.font = `${Math.round(13 * scale)}px "DM Sans", sans-serif`;
+            ctx.fillText(value, cx, y + Math.round(34 * scale));
+          });
+
+        ctx.fillStyle = '#8A9BAE';
+        ctx.font = `600 ${Math.round(9 * scale)}px "DM Mono", monospace`;
+        ctx.fillText('VIA', viaColX, y + Math.round(19 * scale));
+        ctx.fillStyle = '#1A3352';
+        ctx.font = `${Math.round(13 * scale)}px "DM Sans", sans-serif`;
+        const passages = formatPassageList(original.passagesUsed);
+        let viaText = passages.length ? passages.join(' · ') : 'Open water';
+        if (passages.length && ctx.measureText(viaText).width > viaColW) {
+          let shown = passages.slice();
+          while (shown.length > 1 && ctx.measureText(shown.join(' · ') + ` +${passages.length - shown.length + 1}`).width > viaColW) {
+            shown = shown.slice(0, -1);
+          }
+          const dropped = passages.length - shown.length;
+          viaText = shown.join(' · ') + (dropped > 0 ? ` +${dropped}` : '');
+        }
+        ctx.fillText(viaText, viaColX, y + Math.round(34 * scale));
+
+        if (hasReroute) {
           const delta = reroute.distance - original.distance;
           const pct = ((delta / original.distance) * 100).toFixed(1);
+          const ry = y + Math.round(48 * scale);
           ctx.fillStyle = '#B91C1C';
-          ctx.font = `600 ${Math.round(12 * scale)}px "DM Mono", monospace`;
-          ctx.fillText(`↳ re-route: ${reroute.distance.toLocaleString()} nm (+${delta.toLocaleString()} nm, +${pct}%) · ${reroute.durationDays} days`, pad + Math.round(16 * scale), y);
-          y += rowStep;
+          ctx.font = `700 ${Math.round(11.5 * scale)}px "DM Mono", monospace`;
+          ctx.fillText(`↳ re-route: ${reroute.distance.toLocaleString()} nm (+${delta.toLocaleString()} nm, +${pct}%) · ${reroute.durationDays} days`, labelX, ry);
         }
+
+        y += thisTileH + tileGap;
       });
     }
 
