@@ -132,6 +132,12 @@
   .zone-del:hover{color:var(--red)}
   .zone-edit{color:var(--text-dim);cursor:pointer;font-size:12px;padding:0 2px;flex-shrink:0}
   .zone-edit:hover{color:var(--navy)}
+
+  /* ── WAYPOINTS EDITOR ── */
+  .waypoint-row{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+  .waypoint-row .waypoint-input{flex:1;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px}
+  .waypoint-del{color:var(--text-dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0}
+  .waypoint-del:hover{color:var(--red)}
   .zones-empty{font-size:11.5px;color:var(--text-dim);font-style:italic;padding:4px 0}
   .zones-io{display:flex;gap:8px;margin-top:10px}
   .zones-io button{flex:1;background:transparent;border:1px solid var(--border-mid);border-radius:6px;padding:6px;font-size:10.5px;font-family:'DM Mono',monospace;color:var(--text-muted);cursor:pointer}
@@ -189,15 +195,12 @@
 
     <div class="panel-section">
       <div class="panel-h">Route</div>
-      <div class="field">
-        <label for="origin">Origin port</label>
-        <input list="port-list" id="origin" placeholder="e.g. Rotterdam" value="Rotterdam">
+      <div id="waypoints-list"></div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <button class="swap-btn" id="add-waypoint-btn" style="flex:1">+ add waypoint</button>
+        <button class="swap-btn" id="reverse-waypoints-btn" style="flex:1">⇅ reverse</button>
       </div>
-      <button class="swap-btn" id="swap-btn">⇅ swap origin / destination</button>
-      <div class="field">
-        <label for="dest">Destination port</label>
-        <input list="port-list" id="dest" placeholder="e.g. Shanghai" value="Shanghai">
-      </div>
+      <div class="closure-note" style="margin-top:8px">2 waypoints = a normal origin→destination route. 3+ = a multi-leg chain (like a real reroute around several chokepoints in sequence) — each leg is computed and stitched into one path.</div>
       <datalist id="port-list"></datalist>
     </div>
 
@@ -244,16 +247,28 @@
       <input type="file" id="import-zones-file" accept="application/json" hidden>
     </div>
 
+    <div class="panel-section">
+      <div class="field">
+        <label for="layer-label-input">Layer label (optional)</label>
+        <input type="text" id="layer-label-input" placeholder="auto: Rotterdam → Shanghai">
+      </div>
+      <button class="btn-compute" id="add-layer-btn">+ Add route to map</button>
+      <div class="result" id="result" style="padding:0;margin-top:8px"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">
+        Routes on map
+        <span class="panel-h-action" id="clear-routes-btn">clear all</span>
+      </div>
+      <div id="routes-list"></div>
+    </div>
+
     <div class="panel-section" style="border-bottom:none">
-      <button class="btn-compute" id="compute-btn">Compute route</button>
-      <label class="closure-item" style="padding:8px 0 0 0;font-size:11.5px">
+      <label class="closure-item" style="padding:0 0 8px 0;font-size:11.5px">
         <input type="checkbox" id="export-stats-toggle" checked><span>Include route stats panel in export</span>
       </label>
       <button class="btn-secondary" id="export-png-btn">⬇ Export map as PNG</button>
-    </div>
-
-    <div class="result" id="result">
-      <div class="result-empty">Set an origin, destination, and any closures, then compute a route.</div>
     </div>
 
     <div class="panel-footer">
@@ -351,19 +366,33 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=
   subdomains: 'abcd', maxZoom: 19,
 }).addTo(map);
 
-let originalLayer = null;
-let rerouteLayer = null;
-let markerLayer = L.layerGroup().addTo(map);
-let lastCompute = null; // most recent {originalData, rerouteData, blocked, originName, destName}, used by PNG export
+// Multiple simultaneous routes ("route layers") instead of one computed
+// route — each is {id, waypointNames, restrictions, label, color, visible,
+// data:{original,reroute}|{error}, waypointLatLngs, _mapLayers}. A 2-waypoint
+// layer behaves like the old single origin→destination route (with an
+// optional ghosted reroute comparison); 3+ waypoints is a genuine multi-leg
+// chain, each consecutive pair computed as its own leg and stitched into one
+// path — this is what lets the tool reproduce a real multi-chokepoint
+// reroute like the "Panama, long way around" analysis piece.
+let routeLayers = [];
+const ROUTE_COLOR_PALETTE = ['#F0B429', '#2B6CB0', '#6B46C1', '#0F766E', '#C2410C', '#9D174D', '#4B5563', '#B45309'];
+let routeColorCursor = 0;
+function nextRouteColor() {
+  const c = ROUTE_COLOR_PALETTE[routeColorCursor % ROUTE_COLOR_PALETTE.length];
+  routeColorCursor++;
+  return c;
+}
 
 // Legend as a real Leaflet control (lives inside #map's own DOM) rather than
 // a plain sibling <div> — the sibling version wasn't inside the element
 // html2canvas captures for PNG export, so it never showed up in exports.
+// (The Equal Earth PNG export builds its own separate legend, baked into
+// the canvas — see renderEqualEarthMapCanvas().)
 const LegendControl = L.Control.extend({
   options: { position: 'bottomleft' },
   onAdd: function () {
     const div = L.DomUtil.create('div', 'map-legend');
-    div.innerHTML = '<div class="legend-row"><div class="legend-swatch"></div> Original route</div>';
+    div.innerHTML = '<div class="legend-row" style="opacity:.6">No routes yet</div>';
     L.DomEvent.disableClickPropagation(div);
     return div;
   },
@@ -392,6 +421,10 @@ Promise.all([
       dl.appendChild(opt);
     }
   });
+  // Ports must be loaded before any saved route layers can resolve their
+  // waypoint names — initRouteLayers() (defined below, hoisted) recomputes
+  // and redraws whatever was saved from last time.
+  initRouteLayers();
 });
 
 // ── CLOSURE CHECKBOXES ──
@@ -443,16 +476,44 @@ document.getElementById('vessel-class-select').addEventListener('change', (e) =>
   });
 });
 
-// ── SWAP ──
-document.getElementById('swap-btn').addEventListener('click', () => {
-  const o = document.getElementById('origin');
-  const d = document.getElementById('dest');
-  [o.value, d.value] = [d.value, o.value];
+// ── WAYPOINTS EDITOR (2 = normal route, 3+ = multi-leg chain) ──
+const waypointsList = document.getElementById('waypoints-list');
+function addWaypointRow(value) {
+  const row = document.createElement('div');
+  row.className = 'waypoint-row';
+  row.innerHTML = `<input list="port-list" class="waypoint-input" placeholder="Port or chokepoint" value="${value || ''}">
+    <span class="waypoint-del" title="Remove">×</span>`;
+  row.querySelector('.waypoint-del').addEventListener('click', () => {
+    if (waypointsList.querySelectorAll('.waypoint-row').length > 2) {
+      row.remove();
+      updateWaypointDelVisibility();
+    }
+  });
+  waypointsList.appendChild(row);
+  updateWaypointDelVisibility();
+}
+function updateWaypointDelVisibility() {
+  const rows = waypointsList.querySelectorAll('.waypoint-row');
+  rows.forEach((r) => { r.querySelector('.waypoint-del').style.visibility = rows.length > 2 ? 'visible' : 'hidden'; });
+}
+function getWaypointNames() {
+  return Array.from(waypointsList.querySelectorAll('.waypoint-input')).map((i) => i.value.trim()).filter(Boolean);
+}
+addWaypointRow('Rotterdam');
+addWaypointRow('Shanghai');
+document.getElementById('add-waypoint-btn').addEventListener('click', () => addWaypointRow(''));
+document.getElementById('reverse-waypoints-btn').addEventListener('click', () => {
+  const inputs = Array.from(waypointsList.querySelectorAll('.waypoint-input'));
+  const vals = inputs.map((i) => i.value).reverse();
+  inputs.forEach((input, i) => { input.value = vals[i]; });
 });
 
-// ── ROUTE COMPUTE (original + optional re-route, ghosted comparison) ──
+// ── ROUTE LAYERS (each an independently computed, independently visible
+// route — 2 waypoints = origin→destination with an optional ghosted
+// re-route comparison; 3+ = a multi-leg chain) ──
 const resultEl = document.getElementById('result');
-const computeBtn = document.getElementById('compute-btn');
+const addLayerBtn = document.getElementById('add-layer-btn');
+const ROUTES_STORAGE_KEY = 'narrows_map_printer_routes_v1';
 
 function resolvePort(name) {
   name = name.trim();
@@ -483,89 +544,59 @@ function fetchRoute(origin, dest, restrictions, zonesForRouting) {
   return fetch(`${ROUTE_API}?${params.toString()}`).then(r => r.json());
 }
 
-function renderResult(originalData, rerouteData, blocked) {
-  if (originalData.error) {
-    resultEl.innerHTML = `<div class="result-error">${originalData.error}</div>`;
-    return;
-  }
-  const passageChips = (d) => (d.passagesUsed || [])
-    .map(p => `<span class="passage-chip">${p.replace(/_/g, ' ')}</span>`).join('')
-    || '<span class="passage-chip" style="opacity:.5">open water</span>';
-
-  const zoneNote = (d) => (d.premiumZonesTraversed && d.premiumZonesTraversed.length)
-    ? `<div class="result-zone-note">Crosses ${d.premiumZonesTraversed.map(z => `${z.name} (+${z.pct}%)`).join(', ')}</div>`
-    : '';
-
-  let html = `
-    <div class="result-block">
-      <div class="result-block-h original">Original route</div>
-      <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${originalData.distance.toLocaleString()} nm</span></div>
-      <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${originalData.durationDays} days</span></div>
-      <div class="result-passages">${passageChips(originalData)}</div>
-      ${zoneNote(originalData)}
-    </div>`;
-
-  if (rerouteData && !rerouteData.error) {
-    const delta = rerouteData.distance - originalData.distance;
-    const pct = ((delta / originalData.distance) * 100).toFixed(1);
-    html += `
-    <div class="result-block">
-      <div class="result-block-h reroute">Re-route (${blocked.length} closure${blocked.length === 1 ? '' : 's'})</div>
-      <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${rerouteData.distance.toLocaleString()} nm</span></div>
-      <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${rerouteData.durationDays} days</span></div>
-      <div class="result-delta">+${delta.toLocaleString()} nm (+${pct}%) vs. original</div>
-      <div class="result-passages">${passageChips(rerouteData)}</div>
-      ${zoneNote(rerouteData)}
-    </div>`;
-  } else if (rerouteData && rerouteData.error) {
-    html += `<div class="result-error">${rerouteData.error}</div>`;
-  }
-
-  resultEl.innerHTML = html;
+function showRouteStatus(message) {
+  resultEl.innerHTML = message ? `<div class="result-error">${message}</div>` : '';
 }
 
-function updateLegend(hasReroute) {
-  legendControl.getContainer().innerHTML = hasReroute
-    ? `<div class="legend-row"><div class="legend-swatch dashed"></div> Original route</div>
-       <div class="legend-row"><div class="legend-swatch solid-red"></div> Re-route (closures active)</div>`
-    : `<div class="legend-row"><div class="legend-swatch"></div> Original route</div>`;
-}
-
-async function computeRoute() {
-  const originName = document.getElementById('origin').value;
-  const destName = document.getElementById('dest').value;
-  const origin = resolvePort(originName);
-  const dest = resolvePort(destName);
-
-  if (!origin || !dest) {
-    resultEl.innerHTML = `<div class="result-error">Couldn't find "${!origin ? originName : destName}" in the port list. Pick from the suggestions.</div>`;
-    return;
-  }
-
-  const blocked = getBlockedPassages();
+// Computes a layer's route(s). 2 waypoints + restrictions → {original,
+// reroute} (the classic ghosted comparison). Anything else (2 waypoints, no
+// restrictions; or 3+ waypoints, a genuine multi-leg chain) → each
+// consecutive waypoint pair is computed as its own leg and stitched into one
+// {original} path, with per-leg distance/duration summed and passages/zone-
+// crossings unioned. Also stashes layer.waypointLatLngs (resolved [lat,lon]
+// per waypoint) for drawing interior dots on a chain.
+async function computeLayerData(layer) {
   const zonesForRouting = activeZonesForRouting();
-  computeBtn.disabled = true;
-  computeBtn.textContent = 'Computing…';
+  const points = layer.waypointNames.map(resolvePort);
+  const badIdx = points.findIndex((p) => !p);
+  if (badIdx !== -1) return { error: `Couldn't find "${layer.waypointNames[badIdx]}" in the port list. Pick from the suggestions.` };
+  if (points.length < 2) return { error: 'Need at least an origin and a destination.' };
 
-  try {
-    // Active avoid/premium zones (cyclone season, JWC-style areas, etc.)
-    // apply to BOTH the original and re-route legs — they're real-world
+  layer.waypointLatLngs = points.map((p) => [p.lat, p.lon]);
+
+  if (points.length === 2 && layer.restrictions.length) {
+    // Active avoid/premium zones apply to BOTH legs — they're real-world
     // constraints independent of which named chokepoints are closed.
-    const originalData = await fetchRoute(origin, dest, [], zonesForRouting);
-    const rerouteData = blocked.length ? await fetchRoute(origin, dest, blocked, zonesForRouting) : null;
-
-    renderResult(originalData, rerouteData, blocked);
-    updateLegend(!!blocked.length);
-    if (!originalData.error) {
-      lastCompute = { originalData, rerouteData, blocked, originName, destName };
-      drawRoutes(originalData, rerouteData, originName, destName);
-    }
-  } catch (err) {
-    resultEl.innerHTML = `<div class="result-error">Couldn't reach the routing engine. ${err.message}</div>`;
-  } finally {
-    computeBtn.disabled = false;
-    computeBtn.textContent = 'Compute route';
+    const original = await fetchRoute(points[0], points[1], [], zonesForRouting);
+    if (original.error) return { error: original.error };
+    const reroute = await fetchRoute(points[0], points[1], layer.restrictions, zonesForRouting);
+    return { original, reroute };
   }
+
+  let totalDistance = 0, totalDays = 0;
+  const passagesUsed = new Set();
+  const zonesTraversed = new Map();
+  const coordinates = [];
+  for (let i = 0; i < points.length - 1; i++) {
+    const leg = await fetchRoute(points[i], points[i + 1], layer.restrictions, zonesForRouting);
+    if (leg.error) return { error: `Leg ${i + 1} (${layer.waypointNames[i]} → ${layer.waypointNames[i + 1]}): ${leg.error}` };
+    totalDistance += leg.distance;
+    totalDays += leg.durationDays;
+    (leg.passagesUsed || []).forEach((p) => passagesUsed.add(p));
+    (leg.premiumZonesTraversed || []).forEach((z) => zonesTraversed.set(z.name, z.pct));
+    coordinates.push(...(i === 0 ? leg.coordinates : leg.coordinates.slice(1)));
+  }
+  return {
+    original: {
+      distance: Math.round(totalDistance * 10) / 10,
+      durationDays: Math.round(totalDays * 10) / 10,
+      units: 'naut',
+      passagesUsed: Array.from(passagesUsed),
+      premiumZonesTraversed: Array.from(zonesTraversed, ([name, pct]) => ({ name, pct })),
+      coordinates,
+    },
+    reroute: null,
+  };
 }
 
 // Longitude unwrapping so date-line-crossing routes draw as one continuous
@@ -601,52 +632,212 @@ function pinIcon(fill, inner) {
     tooltipAnchor: [0, -14],
   });
 }
-// Navy/gold instead of white/gold — white nearly disappeared against the
-// light Positron basemap (it was tuned for the earlier dark ocean tiles).
+// A smaller unlabeled dot for interior waypoints on a multi-leg chain — same
+// halo/ring convention as pinIcon, scaled down so it reads as a via-point,
+// not another origin/destination.
+function waypointDotIcon(color) {
+  const svg = `
+    <svg width="13" height="13" viewBox="0 0 13 13" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="6.5" cy="6.5" r="5.5" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="6.5" cy="6.5" r="3.5" fill="${color}" stroke="#0A2540" stroke-width="1"/>
+    </svg>`;
+  return L.divIcon({ html: svg, className: 'narrows-pin', iconSize: [13, 13], iconAnchor: [6.5, 6.5], tooltipAnchor: [0, -9] });
+}
+// Navy origin fill stays consistent across every layer so "start" always
+// reads the same way; the destination pin uses the layer's own color so
+// it's visually tied back to its line.
 const originIcon = pinIcon('#0A2540', '#FFFFFF');
-const destIcon = pinIcon('#F0B429', '#0A2540');
 
-function drawRoutes(originalData, rerouteData, originName, destName) {
-  if (originalLayer) map.removeLayer(originalLayer);
-  if (rerouteLayer) map.removeLayer(rerouteLayer);
-  markerLayer.clearLayers();
+function drawLayer(layer) {
+  if (layer._mapLayers) layer._mapLayers.forEach((l) => map.removeLayer(l));
+  layer._mapLayers = [];
+  if (!layer.data || layer.data.error) return;
 
-  const originalLatLngs = unwrapLongitudes(originalData.coordinates);
-
-  // A dark "casing" line drawn underneath each route gives it definition
-  // against the basemap — kept thin and low-opacity (vs. the earlier thick
-  // 5.5-6px/opacity-.35-.45 version) so it reads as a subtle shadow, not a
-  // second bold stroke; the colored line on top is thinner too, with a
-  // tighter dash rhythm on the "original" line — the combined effect is a
-  // lighter, more editorial line weight instead of the earlier "primary
-  // marker" look.
+  const { original, reroute } = layer.data;
+  const originalLatLngs = unwrapLongitudes(original.coordinates);
   const lineCaps = { lineCap: 'round', lineJoin: 'round' };
-  L.polyline(originalLatLngs, { ...lineCaps, color: '#0A2540', weight: rerouteData ? 3.25 : 3.75, opacity: 0.2 }).addTo(map);
-  originalLayer = L.polyline(originalLatLngs, {
-    ...lineCaps,
-    color: '#F0B429',
-    weight: rerouteData ? 1.75 : 2.25,
-    opacity: rerouteData ? 0.85 : 1,
-    dashArray: rerouteData ? '1,6' : null,
-  }).addTo(map);
+
+  const casing1 = L.polyline(originalLatLngs, { ...lineCaps, color: '#0A2540', weight: reroute ? 3.25 : 3.75, opacity: 0.2 });
+  const line1 = L.polyline(originalLatLngs, {
+    ...lineCaps, color: layer.color, weight: reroute ? 1.75 : 2.25, opacity: reroute ? 0.85 : 1,
+    dashArray: reroute ? '1,6' : null,
+  });
+  layer._mapLayers.push(casing1, line1);
 
   let allLatLngs = originalLatLngs;
-
-  if (rerouteData && !rerouteData.error) {
-    const rerouteLatLngs = unwrapLongitudes(rerouteData.coordinates);
-    L.polyline(rerouteLatLngs, { ...lineCaps, color: '#0A2540', weight: 3.25, opacity: 0.2 }).addTo(map);
-    rerouteLayer = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#B91C1C', weight: 2, opacity: 1 }).addTo(map);
+  if (reroute && !reroute.error) {
+    const rerouteLatLngs = unwrapLongitudes(reroute.coordinates);
+    const casing2 = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#0A2540', weight: 3.25, opacity: 0.2 });
+    const line2 = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#B91C1C', weight: 2, opacity: 1 });
+    layer._mapLayers.push(casing2, line2);
     allLatLngs = originalLatLngs.concat(rerouteLatLngs);
   }
 
-  const start = originalLatLngs[0], end = originalLatLngs[originalLatLngs.length - 1];
-  L.marker(start, { icon: originIcon }).bindTooltip(originName || 'Origin', { direction: 'top', offset: [0, -12] }).addTo(markerLayer);
-  L.marker(end, { icon: destIcon }).bindTooltip(destName || 'Destination', { direction: 'top', offset: [0, -12] }).addTo(markerLayer);
+  const start = originalLatLngs[0], end = allLatLngs[allLatLngs.length - 1];
+  const destIcon = pinIcon(layer.color, '#0A2540');
+  const startMarker = L.marker(start, { icon: originIcon }).bindTooltip(layer.waypointNames[0], { direction: 'top', offset: [0, -12] });
+  const endMarker = L.marker(end, { icon: destIcon }).bindTooltip(layer.waypointNames[layer.waypointNames.length - 1], { direction: 'top', offset: [0, -12] });
+  layer._mapLayers.push(startMarker, endMarker);
 
-  map.fitBounds(L.latLngBounds(allLatLngs), { padding: [70, 70] });
+  if (layer.waypointLatLngs && layer.waypointLatLngs.length > 2) {
+    const dotIcon = waypointDotIcon(layer.color);
+    for (let i = 1; i < layer.waypointLatLngs.length - 1; i++) {
+      layer._mapLayers.push(L.marker(layer.waypointLatLngs[i], { icon: dotIcon }).bindTooltip(layer.waypointNames[i], { direction: 'top', offset: [0, -9] }));
+    }
+  }
+
+  if (layer.visible !== false) layer._mapLayers.forEach((l) => l.addTo(map));
 }
 
-computeBtn.addEventListener('click', computeRoute);
+function fitAllRoutes() {
+  const all = [];
+  routeLayers.forEach((layer) => {
+    if (layer.visible === false || !layer.data || layer.data.error) return;
+    all.push(...unwrapLongitudes(layer.data.original.coordinates));
+    if (layer.data.reroute && !layer.data.reroute.error) all.push(...unwrapLongitudes(layer.data.reroute.coordinates));
+  });
+  if (all.length) map.fitBounds(L.latLngBounds(all), { padding: [70, 70] });
+}
+
+function refreshLiveLegend() {
+  const rows = [];
+  routeLayers.forEach((layer) => {
+    if (layer.visible === false || !layer.data || layer.data.error) return;
+    const hasReroute = layer.data.reroute && !layer.data.reroute.error;
+    rows.push(`<div class="legend-row"><div class="legend-swatch" style="background:${layer.color}"></div> ${layer.label}</div>`);
+    if (hasReroute) rows.push(`<div class="legend-row"><div class="legend-swatch solid-red"></div> ${layer.label} — re-route</div>`);
+  });
+  legendControl.getContainer().innerHTML = rows.length ? rows.join('') : '<div class="legend-row" style="opacity:.6">No routes yet</div>';
+}
+
+function loadLayerIntoEditor(layer) {
+  waypointsList.innerHTML = '';
+  layer.waypointNames.forEach((name) => addWaypointRow(name));
+  document.getElementById('layer-label-input').value = layer.label;
+  closureGrid.querySelectorAll('input').forEach((cb) => {
+    cb.checked = layer.restrictions.includes(cb.value);
+    cb.closest('.closure-item').classList.toggle('blocked', cb.checked);
+  });
+  showRouteStatus('');
+}
+
+function renderRoutesList() {
+  const listEl = document.getElementById('routes-list');
+  if (!routeLayers.length) {
+    listEl.innerHTML = '<div class="zones-empty">No routes added yet.</div>';
+    return;
+  }
+  listEl.innerHTML = '';
+  routeLayers.forEach((layer) => {
+    const row = document.createElement('div');
+    row.className = 'zone-row';
+    const stat = (layer.data && !layer.data.error)
+      ? `${layer.data.original.distance.toLocaleString()} nm${layer.data.reroute && !layer.data.reroute.error ? ` → ${layer.data.reroute.distance.toLocaleString()} nm` : ''}`
+      : 'error — click ✎ to fix';
+    row.innerHTML = `
+      <input type="checkbox" ${layer.visible !== false ? 'checked' : ''}>
+      <div class="zone-swatch" style="background:${layer.color}"></div>
+      <div class="zone-name">${layer.label}<div style="font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace">${stat}</div></div>
+      <span class="zone-edit" title="Load into editor">↻</span>
+      <span class="zone-del">×</span>
+    `;
+    row.querySelector('input').addEventListener('change', (e) => {
+      layer.visible = e.target.checked;
+      if (layer._mapLayers) layer._mapLayers.forEach((l) => { layer.visible ? l.addTo(map) : map.removeLayer(l); });
+      saveRouteLayers();
+      refreshLiveLegend();
+    });
+    row.querySelector('.zone-edit').addEventListener('click', () => loadLayerIntoEditor(layer));
+    row.querySelector('.zone-del').addEventListener('click', () => {
+      if (layer._mapLayers) layer._mapLayers.forEach((l) => map.removeLayer(l));
+      routeLayers = routeLayers.filter((l) => l.id !== layer.id);
+      saveRouteLayers();
+      renderRoutesList();
+      refreshLiveLegend();
+    });
+    listEl.appendChild(row);
+  });
+}
+
+document.getElementById('clear-routes-btn').addEventListener('click', () => {
+  if (!routeLayers.length) return;
+  if (!confirm(`Remove all ${routeLayers.length} route(s) from the map?`)) return;
+  routeLayers.forEach((layer) => { if (layer._mapLayers) layer._mapLayers.forEach((l) => map.removeLayer(l)); });
+  routeLayers = [];
+  saveRouteLayers();
+  renderRoutesList();
+  refreshLiveLegend();
+});
+
+function saveRouteLayers() {
+  try {
+    const serializable = routeLayers.map(({ id, waypointNames, restrictions, label, color, visible }) => ({ id, waypointNames, restrictions, label, color, visible }));
+    localStorage.setItem(ROUTES_STORAGE_KEY, JSON.stringify(serializable));
+  } catch (err) {
+    console.warn('Could not persist route layers:', err);
+  }
+}
+function loadRouteLayersConfig() {
+  try {
+    const raw = localStorage.getItem(ROUTES_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (err) {
+    console.warn('Route layer storage unavailable:', err);
+    return [];
+  }
+}
+// Called once, after ports have loaded (see the Promise.all().then() above)
+// — recomputes and redraws whatever route layers were saved from last time.
+async function initRouteLayers() {
+  const configs = loadRouteLayersConfig();
+  for (const cfg of configs) {
+    const layer = { ...cfg, data: null };
+    routeColorCursor = Math.max(routeColorCursor, ROUTE_COLOR_PALETTE.indexOf(cfg.color) + 1);
+    try {
+      layer.data = await computeLayerData(layer);
+    } catch (err) {
+      layer.data = { error: `Couldn't reach the routing engine. ${err.message}` };
+    }
+    routeLayers.push(layer);
+    if (!layer.data.error) drawLayer(layer);
+  }
+  renderRoutesList();
+  refreshLiveLegend();
+  if (routeLayers.length) fitAllRoutes();
+}
+
+addLayerBtn.addEventListener('click', async () => {
+  const waypointNames = getWaypointNames();
+  if (waypointNames.length < 2) { showRouteStatus('Need at least an origin and a destination.'); return; }
+
+  const restrictions = getBlockedPassages();
+  const labelInput = document.getElementById('layer-label-input');
+  const label = labelInput.value.trim() || waypointNames.join(' → ');
+  const layer = { id: `r_${Date.now()}`, waypointNames, restrictions, label, color: nextRouteColor(), visible: true, data: null };
+
+  addLayerBtn.disabled = true;
+  addLayerBtn.textContent = 'Computing…';
+  try {
+    layer.data = await computeLayerData(layer);
+    if (layer.data.error) {
+      showRouteStatus(layer.data.error);
+    } else {
+      routeLayers.push(layer);
+      saveRouteLayers();
+      drawLayer(layer);
+      renderRoutesList();
+      refreshLiveLegend();
+      fitAllRoutes();
+      labelInput.value = '';
+      showRouteStatus('');
+    }
+  } catch (err) {
+    showRouteStatus(`Couldn't reach the routing engine. ${err.message}`);
+  } finally {
+    addLayerBtn.disabled = false;
+    addLayerBtn.textContent = '+ Add route to map';
+  }
+});
 
 // ── CUSTOM ZONES (draw, persist to localStorage, reload every visit) ──
 // This page is a personal tool, not an Artifact rendered in a Claude
@@ -1210,25 +1401,36 @@ async function renderEqualEarthMapCanvas() {
     ctx.fillStyle = inner; ctx.fill();
   }
 
-  if (lastCompute && !lastCompute.originalData.error) {
-    const { originalData, rerouteData } = lastCompute;
-    drawRouteLine(originalData.coordinates, { color: '#F0B429', dash: rerouteData ? [2, 6] : [], width: rerouteData ? 1.75 : 2.1 });
-    if (rerouteData && !rerouteData.error) {
-      drawRouteLine(rerouteData.coordinates, { color: '#B91C1C', dash: [], width: 2 });
+  // Every visible route layer gets its own line(s)/markers/legend entry —
+  // the export can now show several routes (and multi-leg chains) at once,
+  // not just one "original vs. re-route" pair.
+  const visibleLayers = routeLayers.filter((l) => l.visible !== false && l.data && !l.data.error);
+  visibleLayers.forEach((layer) => {
+    const { original, reroute } = layer.data;
+    drawRouteLine(original.coordinates, { color: layer.color, dash: reroute ? [2, 6] : [], width: reroute ? 1.75 : 2.1 });
+    if (reroute && !reroute.error) {
+      drawRouteLine(reroute.coordinates, { color: '#B91C1C', dash: [], width: 2 });
     }
-    drawEndpointMarker(originalData.coordinates[0], '#0A2540', '#FFFFFF');
-    const destCoords = originalData.coordinates[originalData.coordinates.length - 1];
-    drawEndpointMarker(destCoords, '#F0B429', '#0A2540');
-  }
+    const finalCoords = (reroute && !reroute.error) ? reroute.coordinates : original.coordinates;
+    drawEndpointMarker(original.coordinates[0], '#0A2540', '#FFFFFF');
+    drawEndpointMarker(finalCoords[finalCoords.length - 1], layer.color, '#0A2540');
+    // interior waypoint dots for a multi-leg chain (3+ waypoints)
+    if (layer.waypointLatLngs && layer.waypointLatLngs.length > 2) {
+      for (let i = 1; i < layer.waypointLatLngs.length - 1; i++) {
+        const [wlat, wlon] = layer.waypointLatLngs[i];
+        drawEndpointMarker([wlon, wlat], '#FFFFFF', layer.color);
+      }
+    }
+  });
 
   // ── legend (baked into the image — no live Leaflet control on this
   // offscreen canvas) ──
   const legendRows = [];
-  if (lastCompute && !lastCompute.originalData.error) {
-    const hasReroute = lastCompute.rerouteData && !lastCompute.rerouteData.error;
-    legendRows.push({ swatch: '#F0B429', dash: hasReroute, label: 'Original route' });
-    if (hasReroute) legendRows.push({ swatch: '#B91C1C', dash: false, label: 'Re-route (closures active)' });
-  }
+  visibleLayers.forEach((layer) => {
+    const hasReroute = layer.data.reroute && !layer.data.reroute.error;
+    legendRows.push({ swatch: layer.color, dash: hasReroute, label: layer.label });
+    if (hasReroute) legendRows.push({ swatch: '#B91C1C', dash: false, label: `${layer.label} — re-route` });
+  });
   activeZones.forEach((zone) => {
     const badge = zone.behavior === 'avoid' ? 'avoid'
       : zone.behavior === 'premium' ? `+${zone.premiumPct ?? '?'}%`
@@ -1280,11 +1482,13 @@ async function exportBrandedPNG() {
     await document.fonts.ready; // make sure DM Sans/DM Mono are loaded before canvas text uses them
     const mapCanvas = await renderEqualEarthMapCanvas();
 
-    const includeStats = document.getElementById('export-stats-toggle').checked && lastCompute && !lastCompute.originalData.error;
+    const exportLayers = routeLayers.filter((l) => l.visible !== false && l.data && !l.data.error);
+    const includeStats = document.getElementById('export-stats-toggle').checked && exportLayers.length > 0;
     const scale = mapCanvas.width / 900; // proportion basis vs. a nominal 900px-wide export
     const headerH = Math.round(112 * scale);
-    const hasReroute = includeStats && lastCompute.rerouteData && !lastCompute.rerouteData.error;
-    const statsH = includeStats ? Math.round((hasReroute ? 168 : 108) * scale) : 0;
+    // One stat row per layer, plus an extra row for any layer with a re-route.
+    const statRowCount = exportLayers.reduce((n, l) => n + (l.data.reroute && !l.data.reroute.error ? 2 : 1), 0);
+    const statsH = includeStats ? Math.round((30 * statRowCount + 24) * scale) : 0;
 
     const out = document.createElement('canvas');
     out.width = mapCanvas.width;
@@ -1302,11 +1506,15 @@ async function exportBrandedPNG() {
 
     let title = 'Route';
     let closureNote = '';
-    if (lastCompute) {
-      title = `${lastCompute.originName}  →  ${lastCompute.destName}`;
-      if (lastCompute.blocked && lastCompute.blocked.length) {
-        closureNote = `${lastCompute.blocked.length} closure${lastCompute.blocked.length === 1 ? '' : 's'} simulated: ${lastCompute.blocked.join(', ').replace(/_/g, ' ')}`;
-      }
+    if (exportLayers.length === 1) {
+      title = exportLayers[0].label;
+      const r = exportLayers[0].restrictions;
+      if (r && r.length) closureNote = `${r.length} closure${r.length === 1 ? '' : 's'} simulated: ${r.join(', ').replace(/_/g, ' ')}`;
+    } else if (exportLayers.length > 1) {
+      title = exportLayers.length <= 3
+        ? exportLayers.map((l) => l.label).join('  ·  ')
+        : `${exportLayers.length} routes compared`;
+      closureNote = exportLayers.length > 3 ? exportLayers.map((l) => l.label).join(', ') : '';
     }
     ctx.fillStyle = '#FFFFFF';
     ctx.font = `600 ${Math.round(24 * scale)}px "DM Sans", sans-serif`;
@@ -1328,32 +1536,30 @@ async function exportBrandedPNG() {
       ctx.strokeStyle = '#DDE4EF';
       ctx.beginPath(); ctx.moveTo(0, top); ctx.lineTo(out.width, top); ctx.stroke();
 
-      const colW = hasReroute ? out.width / 2 : out.width;
-      const drawBlock = (data, x, label, labelColor) => {
-        let y = top + Math.round(28 * scale);
-        ctx.fillStyle = labelColor;
-        ctx.font = `700 ${Math.round(11 * scale)}px "DM Mono", monospace`;
-        ctx.fillText(label.toUpperCase(), x, y);
-        y += Math.round(26 * scale);
+      // One row per layer (label + swatch + distance/duration/passages),
+      // plus an indented follow-up row for any layer with a re-route.
+      let y = top + Math.round(22 * scale);
+      const rowStep = Math.round(30 * scale);
+      exportLayers.forEach((layer) => {
+        const { original, reroute } = layer.data;
+        ctx.fillStyle = layer.color;
+        ctx.fillRect(pad, y - Math.round(9 * scale), Math.round(9 * scale), Math.round(9 * scale));
         ctx.fillStyle = '#0A2540';
-        ctx.font = `500 ${Math.round(20 * scale)}px "DM Mono", monospace`;
-        ctx.fillText(`${data.distance.toLocaleString()} nm`, x, y);
-        y += Math.round(22 * scale);
+        ctx.font = `600 ${Math.round(13 * scale)}px "DM Mono", monospace`;
+        ctx.fillText(layer.label, pad + Math.round(16 * scale), y);
         ctx.fillStyle = '#4A6078';
         ctx.font = `${Math.round(12 * scale)}px "DM Sans", sans-serif`;
-        ctx.fillText(`${data.durationDays} days · via ${formatPassageList(data.passagesUsed)}`, x, y);
-        return y;
-      };
-
-      drawBlock(lastCompute.originalData, pad, 'Original route', '#dea020');
-      if (hasReroute) {
-        const y2 = drawBlock(lastCompute.rerouteData, colW + pad, 'Re-route', '#B91C1C');
-        const delta = lastCompute.rerouteData.distance - lastCompute.originalData.distance;
-        const pct = ((delta / lastCompute.originalData.distance) * 100).toFixed(1);
-        ctx.fillStyle = '#B91C1C';
-        ctx.font = `600 ${Math.round(12 * scale)}px "DM Mono", monospace`;
-        ctx.fillText(`+${delta.toLocaleString()} nm (+${pct}%) vs. original`, colW + pad, y2 + Math.round(20 * scale));
-      }
+        ctx.fillText(`${original.distance.toLocaleString()} nm · ${original.durationDays} days · via ${formatPassageList(original.passagesUsed)}`, pad + Math.round(16 * scale), y + Math.round(16 * scale));
+        y += rowStep;
+        if (reroute && !reroute.error) {
+          const delta = reroute.distance - original.distance;
+          const pct = ((delta / original.distance) * 100).toFixed(1);
+          ctx.fillStyle = '#B91C1C';
+          ctx.font = `600 ${Math.round(12 * scale)}px "DM Mono", monospace`;
+          ctx.fillText(`↳ re-route: ${reroute.distance.toLocaleString()} nm (+${delta.toLocaleString()} nm, +${pct}%) · ${reroute.durationDays} days`, pad + Math.round(16 * scale), y);
+          y += rowStep;
+        }
+      });
     }
 
     out.toBlob((blob) => {
