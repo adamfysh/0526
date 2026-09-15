@@ -255,7 +255,7 @@
         Trade flow ensemble
         <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="flows-toggle" style="vertical-align:middle;margin-right:4px">show on map</label>
       </div>
-      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), each drawn as a great-circle line weighted by $/yr — the broader context around whatever single route you're arguing about. Endpoints are each country's largest port by throughput, not the actual load/discharge port for any one voyage, and lines are geometric great circles, not routed around chokepoints — illustrative corridor weight and rough geography, not a precise track. A flow is drawn in red when it's tagged as transiting a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
+      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane — precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. The one thing still approximate: endpoints are each country's largest port by throughput, not the actual load/discharge port for any one voyage — a real limitation for multi-port countries (Russia, Spain, Australia...), see the tooltip's note when it applies. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
       <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
         <div class="field" style="flex:1">
           <label for="flows-topn-select">Show top corridors</label>
@@ -530,51 +530,32 @@ function getBlockedPassages() {
 // The "many weighted corridor lines at once" mode, distinct from the
 // route-builder above: draws the top bilateral trade corridors (from
 // route_flows_ensemble.json, aggregated off narrows-pipeline's shipping.db
-// voyages table) as great-circle lines weighted by annual trade value, so a
-// specific reroute argument can be shown against the broader trade context
-// it sits inside. Off by default (250 overlapping lines is a lot to look at
-// when you're just building one route) — the "show on map" toggle opts in.
+// voyages table) weighted by annual trade value, so a specific reroute
+// argument can be shown against the broader trade context it sits inside.
+// Off by default (250 overlapping lines is a lot to look at when you're
+// just building one route) — the "show on map" toggle opts in.
 //
-// The route_flows_ensemble.json chokepoint codes (from the pipeline's own
-// per-voyage routing) don't share the CLOSURES keys' naming (a few, like
-// DOVER/DANISH_STRAITS/LUZON/MOZAMBIQUE/LOMBOK/ST_LAWRENCE, aren't modeled
-// as CLOSURES at all) — this maps the ones that do overlap, so checking a
-// closure above can highlight exposed flows here.
-const FLOW_CHOKEPOINT_TO_CLOSURE_KEY = {
-  PANAMA: 'panama', SUEZ: 'suez', GIBRALTAR: 'gibraltar', BOSPORUS: 'bosporus',
-  BABELMANDEB: 'babalmandab', HORMUZ: 'ormuz', MALACCA: 'malacca',
-};
+// Each flow's `coordinates` are PRECOMPUTED (not drawn live) by actually
+// routing that flow's origin→destination through the same marnet-router.js
+// graph the live simulator uses — a real sea lane hugging the actual
+// straits/capes, not a great-circle arc cutting across land. This was a
+// deliberate fix: the first version of this feature drew raw great circles
+// and it showed (e.g. a "Fremantle→Shanghai" arc reading as a straight line
+// over the Indonesian archipelago instead of threading Lombok/Malacca).
+// route_flows_ensemble.json also carries `routed_passages` — the named
+// passages the PRECOMPUTED path actually crosses, in the exact same key
+// vocabulary as CLOSURES/getBlockedPassages() (both come from the same
+// router) — so exposure highlighting below needs no separate name-mapping
+// table, unlike the pipeline's own `chokepoints` tag (kept in the data for
+// reference — it can legitimately differ from `routed_passages`, since it
+// reflects the *actual* load port for that trade, while this flow's drawn
+// endpoint is only an approximation — see the port-logic discussion).
 
 const VESSEL_TYPE_COLORS = {
   Container: '#2B6CB0', VLCC: '#7C2D12', Aframax: '#C2410C', Capesize: '#78716C',
   LNG_Carrier: '#0F766E', Handymax: '#A16207', VLGC: '#6B46C1', Panamax: '#92400E',
 };
 const VESSEL_TYPE_FALLBACK = '#64748B';
-
-/** Spherical slerp between two [lon,lat] points, `steps` intermediate points. */
-function greatCircleInterpolate(from, to, steps) {
-  const toRad = (d) => (d * Math.PI) / 180;
-  const toDeg = (r) => (r * 180) / Math.PI;
-  const [lon1, lat1] = from.map(toRad);
-  const [lon2, lat2] = to.map(toRad);
-  const d = 2 * Math.asin(Math.sqrt(
-    Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2
-  ));
-  const points = [];
-  if (d === 0) return [[toDeg(lat1), toDeg(lon1)]];
-  for (let i = 0; i <= steps; i++) {
-    const f = i / steps;
-    const A = Math.sin((1 - f) * d) / Math.sin(d);
-    const B = Math.sin(f * d) / Math.sin(d);
-    const x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
-    const y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
-    const z = A * Math.sin(lat1) + B * Math.sin(lat2);
-    const lat = Math.atan2(z, Math.sqrt(x * x + y * y));
-    const lon = Math.atan2(y, x);
-    points.push([toDeg(lon), toDeg(lat)]); // [lon, lat], same convention unwrapLongitudes() expects
-  }
-  return points;
-}
 
 const flowsLayerGroup = L.layerGroup();
 function renderFlowsLegend() {
@@ -602,18 +583,22 @@ function drawFlowEnsemble() {
   const blockedKeys = new Set(getBlockedPassages());
 
   flows.forEach((f) => {
-    const isExposed = f.chokepoints.some((ck) => blockedKeys.has(FLOW_CHOKEPOINT_TO_CLOSURE_KEY[ck]));
+    const routedPassages = f.routed_passages || [];
+    const isExposed = routedPassages.some((p) => blockedKeys.has(p));
     const color = isExposed ? '#B91C1C' : (VESSEL_TYPE_COLORS[f.top_vessel_type] || VESSEL_TYPE_FALLBACK);
     const t = logMax > logMin ? (Math.log(f.trade_value_usd) - logMin) / (logMax - logMin) : 0.5;
     const weight = 0.6 + t * 3.2;
-    const latlngs = unwrapLongitudes(greatCircleInterpolate(f.from, f.to, 40));
+    const latlngs = unwrapLongitudes(f.coordinates || [f.from, f.to]);
     const line = L.polyline(latlngs, {
       color, weight, opacity: isExposed ? 0.9 : 0.32, lineCap: 'round', lineJoin: 'round',
     });
     const valueStr = `$${(f.trade_value_usd / 1e9).toFixed(1)}B/yr`;
-    const chokStr = f.chokepoints.length ? f.chokepoints.join(', ') : 'no named chokepoint';
+    const viaStr = routedPassages.length ? routedPassages.join(', ') : 'open ocean, no named passage';
+    const tagNote = f.chokepoints.length && f.chokepoints.join(',').toUpperCase() !== routedPassages.join(',').toUpperCase()
+      ? `<br><span style="opacity:.7">pipeline's own tag for this trade: ${f.chokepoints.join(', ')} (likely a different real load port — see the port-approximation note above)</span>`
+      : '';
     line.bindTooltip(
-      `${f.exporter} → ${f.importer}<br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr<br>via ${chokStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}`,
+      `${f.exporter} → ${f.importer}<br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr · ${f.routed_distance_nm ? f.routed_distance_nm.toLocaleString() + ' nm' : ''}<br>via ${viaStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}${tagNote}`,
       { sticky: true }
     );
     line.addTo(flowsLayerGroup);
