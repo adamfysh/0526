@@ -103,6 +103,7 @@
   .result-stat-lbl{font-size:11.5px;color:var(--text-muted)}
   .result-stat-val{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--navy)}
   .result-delta{font-family:'DM Mono',monospace;font-size:11px;color:var(--red);margin-top:2px}
+  .result-zone-note{font-size:10.5px;color:var(--gold);margin-top:4px;font-style:italic}
   .result-passages{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
   .passage-chip{font-family:'DM Mono',monospace;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:rgba(10,37,64,.08);color:var(--navy);text-transform:capitalize}
   .result-error{color:var(--red);font-size:12.5px;background:var(--red-soft);padding:8px 10px;border-radius:6px}
@@ -200,9 +201,10 @@
     <div class="panel-section">
       <div class="panel-h">
         Custom zones
+        <span class="panel-h-action" id="paste-coords-trigger" style="margin-right:10px">paste coords</span>
         <span class="panel-h-action" id="import-zones-trigger">import</span>
       </div>
-      <div class="zones-hint">Use the polygon tool in the map's top-right corner to draw a zone (cyclone season, ice extent, anything with no clean API). Saved zones persist in this browser and reload every time you open this page.</div>
+      <div class="zones-hint">Draw a zone with the polygon tool in the map's top-right corner, or click "paste coords" to type/paste a list of GPS points instead (cyclone season, ice extent, anything with no clean API or a shape you already have coordinates for). Saved zones persist in this browser and reload every time you open this page.</div>
       <div id="zones-list"></div>
       <div class="zones-io">
         <button id="export-zones-btn">Export zones (.json)</button>
@@ -240,15 +242,19 @@
     <input type="text" id="zone-name-input" placeholder="e.g. NW Pacific cyclone season">
     <label for="zone-color-input">Color</label>
     <input type="color" id="zone-color-input" value="#F0B429">
-    <label for="zone-behavior-input">Behavior (label only — doesn't change routing yet)</label>
+    <label for="zone-behavior-input">Behavior</label>
     <select id="zone-behavior-input" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
-      <option value="info">Informational only</option>
-      <option value="avoid">Avoid — hard exclusion</option>
-      <option value="premium">Risk premium — % cost</option>
+      <option value="info">Informational only — shown on map, no routing effect</option>
+      <option value="avoid">Avoid — hard exclusion from routes</option>
+      <option value="premium">Risk premium — biases routing by % cost</option>
     </select>
     <div id="zone-premium-field" hidden>
       <label for="zone-premium-input">Premium (% of hull value)</label>
       <input type="text" id="zone-premium-input" placeholder="e.g. 1.5">
+    </div>
+    <div id="zone-coords-field" hidden>
+      <label for="zone-coords-input">GPS coordinates — one "lat, lon" pair per line, 3+ points</label>
+      <textarea id="zone-coords-input" rows="5" placeholder="51.9, 4.05&#10;40.6, -73.9&#10;36.1, -5.3" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:12.5px;font-family:'DM Mono',monospace;resize:vertical;box-sizing:border-box"></textarea>
     </div>
     <div class="modal-actions">
       <button class="modal-cancel" id="zone-modal-cancel">Discard</button>
@@ -392,9 +398,25 @@ function resolvePort(name) {
   return match ? portIndex[match] : null;
 }
 
-function fetchRoute(origin, dest, restrictions) {
+// Converts visible avoid/premium zones (stored as Leaflet [lat,lng] rings)
+// into the engine's [lon,lat] convention and the {behavior,polygon,pct,name}
+// shape the Worker's parseZones() expects. 'info' zones and hidden zones are
+// left out entirely — they have no routing effect.
+function activeZonesForRouting() {
+  return zones
+    .filter((z) => z.visible !== false && (z.behavior === 'avoid' || z.behavior === 'premium'))
+    .map((z) => ({
+      behavior: z.behavior,
+      pct: z.behavior === 'premium' ? (z.premiumPct ?? 0) : undefined,
+      name: z.name,
+      polygon: z.latlngs.map(([lat, lng]) => [lng, lat]),
+    }));
+}
+
+function fetchRoute(origin, dest, restrictions, zonesForRouting) {
   const params = new URLSearchParams({ from: `${origin.lon},${origin.lat}`, to: `${dest.lon},${dest.lat}`, units: 'naut' });
   if (restrictions.length) params.set('restrictions', restrictions.join(','));
+  if (zonesForRouting && zonesForRouting.length) params.set('zones', JSON.stringify(zonesForRouting));
   return fetch(`${ROUTE_API}?${params.toString()}`).then(r => r.json());
 }
 
@@ -407,12 +429,17 @@ function renderResult(originalData, rerouteData, blocked) {
     .map(p => `<span class="passage-chip">${p.replace(/_/g, ' ')}</span>`).join('')
     || '<span class="passage-chip" style="opacity:.5">open water</span>';
 
+  const zoneNote = (d) => (d.premiumZonesTraversed && d.premiumZonesTraversed.length)
+    ? `<div class="result-zone-note">Crosses ${d.premiumZonesTraversed.map(z => `${z.name} (+${z.pct}%)`).join(', ')}</div>`
+    : '';
+
   let html = `
     <div class="result-block">
       <div class="result-block-h original">Original route</div>
       <div class="result-stat-row"><span class="result-stat-lbl">Distance</span><span class="result-stat-val">${originalData.distance.toLocaleString()} nm</span></div>
       <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${originalData.durationDays} days</span></div>
       <div class="result-passages">${passageChips(originalData)}</div>
+      ${zoneNote(originalData)}
     </div>`;
 
   if (rerouteData && !rerouteData.error) {
@@ -425,6 +452,7 @@ function renderResult(originalData, rerouteData, blocked) {
       <div class="result-stat-row"><span class="result-stat-lbl">Est. duration</span><span class="result-stat-val">${rerouteData.durationDays} days</span></div>
       <div class="result-delta">+${delta.toLocaleString()} nm (+${pct}%) vs. original</div>
       <div class="result-passages">${passageChips(rerouteData)}</div>
+      ${zoneNote(rerouteData)}
     </div>`;
   } else if (rerouteData && rerouteData.error) {
     html += `<div class="result-error">${rerouteData.error}</div>`;
@@ -452,12 +480,16 @@ async function computeRoute() {
   }
 
   const blocked = getBlockedPassages();
+  const zonesForRouting = activeZonesForRouting();
   computeBtn.disabled = true;
   computeBtn.textContent = 'Computing…';
 
   try {
-    const originalData = await fetchRoute(origin, dest, []);
-    const rerouteData = blocked.length ? await fetchRoute(origin, dest, blocked) : null;
+    // Active avoid/premium zones (cyclone season, JWC-style areas, etc.)
+    // apply to BOTH the original and re-route legs — they're real-world
+    // constraints independent of which named chokepoints are closed.
+    const originalData = await fetchRoute(origin, dest, [], zonesForRouting);
+    const rerouteData = blocked.length ? await fetchRoute(origin, dest, blocked, zonesForRouting) : null;
 
     renderResult(originalData, rerouteData, blocked);
     updateLegend(!!blocked.length);
@@ -590,8 +622,8 @@ function saveZones() {
 }
 
 function zoneTooltipText(zone) {
-  if (zone.behavior === 'avoid') return `${zone.name} — AVOID (label only, not yet enforced in routing)`;
-  if (zone.behavior === 'premium') return `${zone.name} — +${zone.premiumPct ?? '?'}% risk premium (label only, not yet enforced in routing)`;
+  if (zone.behavior === 'avoid') return `${zone.name} — AVOID (excluded from route computation while visible)`;
+  if (zone.behavior === 'premium') return `${zone.name} — +${zone.premiumPct ?? '?'}% risk premium (biases routing while visible)`;
   return zone.name;
 }
 
@@ -653,15 +685,37 @@ initZones();
 
 // ── ZONE NAMING MODAL ──
 const zoneModal = document.getElementById('zone-modal');
-function openZoneModal() {
+let zoneEntryMode = 'draw'; // 'draw' (pendingLayer already exists) or 'paste' (parse from textarea)
+
+// Accepts one "lat, lon" (or "lat lon") pair per line (blank lines/semicolons
+// also split entries), ignores anything that doesn't parse to two finite
+// numbers. Returns an array of [lat, lon] pairs — same convention the
+// drawn-polygon path already stores zones in.
+function parseCoordsText(text) {
+  const points = [];
+  const lines = text.split(/[\n;]+/).map((s) => s.trim()).filter(Boolean);
+  for (const line of lines) {
+    const parts = line.split(/[,\s]+/).map((s) => parseFloat(s.trim()));
+    if (parts.length === 2 && parts.every((n) => Number.isFinite(n))) {
+      points.push(parts);
+    }
+  }
+  return points;
+}
+
+function openZoneModal(mode = 'draw') {
+  zoneEntryMode = mode;
   document.getElementById('zone-name-input').value = '';
   document.getElementById('zone-color-input').value = '#F0B429';
   document.getElementById('zone-behavior-input').value = 'info';
   document.getElementById('zone-premium-input').value = '';
   document.getElementById('zone-premium-field').hidden = true;
+  document.getElementById('zone-coords-field').hidden = mode !== 'paste';
+  document.getElementById('zone-coords-input').value = '';
   zoneModal.hidden = false;
   document.getElementById('zone-name-input').focus();
 }
+document.getElementById('paste-coords-trigger').addEventListener('click', () => openZoneModal('paste'));
 function closeZoneModal() {
   zoneModal.hidden = true;
 }
@@ -678,20 +732,33 @@ document.getElementById('zone-modal-save').addEventListener('click', () => {
   const color = document.getElementById('zone-color-input').value;
   const behavior = document.getElementById('zone-behavior-input').value; // 'info' | 'avoid' | 'premium' — label only for now, see note below
   const premiumPct = behavior === 'premium' ? (parseFloat(document.getElementById('zone-premium-input').value) || 0) : null;
-  if (pendingLayer) {
-    const latlngs = pendingLayer.getLatLngs()[0].map((ll) => [ll.lat, ll.lng]);
-    // NOTE: behavior/premiumPct are captured as data on the zone so they're
-    // ready for when the JWC-influence-on-routing work happens (per the
-    // scope doc's avoidance-vs-cost-weighted modes) — this does NOT yet
-    // change what fetchRoute()/the Worker computes. A polygon-aware routing
-    // constraint (mask graph edges that cross an "avoid" zone, or add a
-    // cost term for a "premium" zone) is a real backend change, not done
-    // here — this is just the data model + UI to record intent now.
+
+  // behavior/premiumPct are sent to the routing Worker on every compute
+  // (see activeZonesForRouting()/fetchRoute()): 'avoid' hard-excludes any
+  // route edge whose midpoint falls inside the polygon, 'premium' inflates
+  // that edge's cost by premiumPct% so Dijkstra only detours around it
+  // when the detour is actually cheaper. Toggling a zone's visibility
+  // checkbox also toggles whether it's applied to routing.
+  let latlngs = null;
+  if (zoneEntryMode === 'paste') {
+    const points = parseCoordsText(document.getElementById('zone-coords-input').value);
+    if (points.length < 3) {
+      alert('Need at least 3 valid "lat, lon" points (one per line) to make a polygon.');
+      return;
+    }
+    latlngs = points;
+  } else if (pendingLayer) {
+    latlngs = pendingLayer.getLatLngs()[0].map((ll) => [ll.lat, ll.lng]);
+  }
+
+  if (latlngs) {
     const zone = { id: `z_${Date.now()}`, name, color, behavior, premiumPct, latlngs, visible: true };
     zones.push(zone);
     saveZones();
-    drawnItems.removeLayer(pendingLayer);
-    pendingLayer = null;
+    if (pendingLayer) {
+      drawnItems.removeLayer(pendingLayer);
+      pendingLayer = null;
+    }
     renderZone(zone);
     renderZonesList();
   }
