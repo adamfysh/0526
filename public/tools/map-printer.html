@@ -1586,25 +1586,35 @@ async function renderMapCanvas() {
   // outline is now usually many times larger than the canvas anyway, so
   // filling it is redundant; a plain fillRect is simpler and correct either
   // way)
-  ctx.fillStyle = '#DCE9EF';
+  //
+  // Colors matched to the live CARTO "light_all" basemap tiles behind the
+  // on-screen Leaflet map (a cool, near-neutral light grey/blue — not the
+  // warmer cream/tan "vintage parchment" palette this used before), so the
+  // export reads as the same map, not a different-looking one. This sandbox
+  // can't fetch the actual tile PNGs to sample exact pixel values (CDN is
+  // outside the allowed egress list here), so these are a close hand-matched
+  // approximation of Positron/light_all's known look rather than a pixel
+  // sample — nudge them further if you can eyeball a mismatch against the
+  // live map.
+  ctx.fillStyle = '#CFDDE3';
   ctx.fillRect(0, 0, width, height);
 
-  // ── graticule (light reference grid — gives it a cartographic feel).
-  // Step adapts to how zoomed-in the viewport is — a 20° grid is too coarse
-  // once the export is cropped to a regional view instead of the whole world.
+  // ── graticule (very faint reference grid — Positron itself doesn't show
+  // one, so this stays subtle enough to read as a light cartographic touch
+  // rather than a mismatched overlay). Step adapts to zoom level.
   const spanLon = Math.abs(b.getEast() - b.getWest());
   const graticuleStep = spanLon > 90 ? 20 : spanLon > 40 ? 10 : spanLon > 15 ? 5 : spanLon > 5 ? 2 : 1;
   ctx.beginPath(); path(d3.geoGraticule().step([graticuleStep, graticuleStep])());
-  ctx.strokeStyle = 'rgba(10,37,64,.08)';
+  ctx.strokeStyle = 'rgba(10,37,64,.05)';
   ctx.lineWidth = 0.6;
   ctx.stroke();
 
   // ── land ──
   const land = await loadWorldLand();
   ctx.beginPath(); path(land);
-  ctx.fillStyle = '#F4EFE4';
+  ctx.fillStyle = '#F5F3EE';
   ctx.fill();
-  ctx.strokeStyle = '#C9BFA5';
+  ctx.strokeStyle = '#D8D3C7';
   ctx.lineWidth = 0.7;
   ctx.stroke();
 
@@ -1667,6 +1677,27 @@ async function renderMapCanvas() {
     ctx.fillStyle = inner; ctx.fill();
   }
 
+  // Small map labels (port names, chokepoint names) styled like a real
+  // basemap's place labels — white halo behind dark text so they stay
+  // legible over both the pale land and the water fill. Skips anything
+  // projected well outside the canvas so labels for off-screen geometry
+  // don't get drawn into empty margin. Always leaves ctx.textAlign/
+  // textBaseline back at the defaults the legend code below assumes.
+  function drawMapLabel(x, y, text, { dx = 0, dy = 0, font = '600 11px "DM Sans", sans-serif', color = '#1A3352', align = 'left', baseline = 'middle' } = {}) {
+    if (x < -40 || x > width + 40 || y < -40 || y > height + 40) return;
+    ctx.font = font;
+    ctx.textAlign = align;
+    ctx.textBaseline = baseline;
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(245,243,238,.9)';
+    ctx.strokeText(text, x + dx, y + dy);
+    ctx.fillStyle = color;
+    ctx.fillText(text, x + dx, y + dy);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+  }
+
   // Every visible route layer gets its own line(s)/markers/legend entry —
   // the export can now show several routes (and multi-leg chains) at once,
   // not just one "original vs. re-route" pair.
@@ -1680,6 +1711,18 @@ async function renderMapCanvas() {
     const finalCoords = (reroute && !reroute.error) ? reroute.coordinates : original.coordinates;
     drawEndpointMarker(original.coordinates[0], '#0A2540', '#FFFFFF');
     drawEndpointMarker(finalCoords[finalCoords.length - 1], layer.color, '#0A2540');
+    // Departure/arrival port name labels — parsed from the layer's own
+    // "PortA → PortB" label rather than a separate lookup, so it always
+    // matches what's shown in the legend/tiles for this layer.
+    const [depName, arrName] = layer.label.split('→').map((s) => s && s.trim());
+    if (depName) {
+      const dp = projection(original.coordinates[0]);
+      if (dp) drawMapLabel(dp[0], dp[1], depName, { dy: -13, align: 'center', font: '600 11px "DM Sans", sans-serif' });
+    }
+    if (arrName) {
+      const ap = projection(finalCoords[finalCoords.length - 1]);
+      if (ap) drawMapLabel(ap[0], ap[1], arrName, { dy: -13, align: 'center', font: '600 11px "DM Sans", sans-serif' });
+    }
     // interior waypoint dots for a multi-leg chain (3+ waypoints)
     if (layer.waypointLatLngs && layer.waypointLatLngs.length > 2) {
       for (let i = 1; i < layer.waypointLatLngs.length - 1; i++) {
@@ -1716,6 +1759,11 @@ async function renderMapCanvas() {
         ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1;
         ctx.stroke();
       }
+      drawMapLabel(x, y, c.label, {
+        dx: 9, align: 'left', baseline: 'middle',
+        font: closed ? '700 10px "DM Mono", monospace' : '10px "DM Mono", monospace',
+        color: closed ? '#B91C1C' : '#5A6B7E',
+      });
     });
   }
 
@@ -1826,10 +1874,10 @@ async function exportBrandedPNG() {
     const logoTop = Math.round(14 * scale);
     drawNarrowsLogo(ctx, pad, logoTop, logoH, '#F0B429');
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = `800 ${Math.round(20 * scale)}px "DM Mono", monospace`;
-    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = `${Math.max(1, Math.round(1.5 * scale))}px`;
+    ctx.font = `800 ${Math.round(28 * scale)}px "DM Mono", monospace`;
+    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = `${Math.max(1, Math.round(2 * scale))}px`;
     const wordmark = 'THE NARROWS';
-    ctx.fillText(wordmark, pad + logoW + Math.round(14 * scale), logoTop + logoH * 0.66);
+    ctx.fillText(wordmark, pad + logoW + Math.round(14 * scale), logoTop + logoH * 0.7);
     if (ctx.letterSpacing !== undefined) ctx.letterSpacing = '0px';
 
     let title = 'Route';
