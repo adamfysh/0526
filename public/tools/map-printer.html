@@ -252,6 +252,26 @@
 
     <div class="panel-section">
       <div class="panel-h">
+        Trade flow ensemble
+        <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="flows-toggle" style="vertical-align:middle;margin-right:4px">show on map</label>
+      </div>
+      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), each drawn as a great-circle line weighted by $/yr — the broader context around whatever single route you're arguing about. Endpoints are each country's largest port by throughput, not the actual load/discharge port for any one voyage, and lines are geometric great circles, not routed around chokepoints — illustrative corridor weight and rough geography, not a precise track. A flow is drawn in red when it's tagged as transiting a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
+      <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
+        <div class="field" style="flex:1">
+          <label for="flows-topn-select">Show top corridors</label>
+          <select id="flows-topn-select" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
+            <option value="50">50 (largest only)</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="250" selected>250 (all loaded)</option>
+          </select>
+        </div>
+      </div>
+      <div id="flows-legend" class="closure-note" style="line-height:1.9"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">
         Custom zones
         <span class="panel-h-action" id="paste-coords-trigger" style="margin-right:10px">paste coords</span>
         <span class="panel-h-action" id="import-zones-trigger">import</span>
@@ -424,10 +444,12 @@ const legendControl = new LegendControl().addTo(map);
 
 // ── PORT LOOKUP ── (paths relative — this page now lives in /tools/)
 let portIndex = {};
+let flowEnsembleData = null;
 Promise.all([
   fetch('route_sim_ports.json').then(r => r.json()),
   fetch('route_sim_chokepoints.json').then(r => r.json()).catch(() => []),
-]).then(([ports, chokepoints]) => {
+  fetch('route_flows_ensemble.json').then(r => r.json()).catch(() => null),
+]).then(([ports, chokepoints, flows]) => {
   const dl = document.getElementById('port-list');
   ports.forEach(p => {
     portIndex[p.name] = { lon: p.lon, lat: p.lat };
@@ -444,6 +466,8 @@ Promise.all([
       dl.appendChild(opt);
     }
   });
+  flowEnsembleData = flows;
+  renderFlowsLegend();
   // Ports must be loaded before any saved route layers can resolve their
   // waypoint names — initRouteLayers() (defined below, hoisted) recomputes
   // and redraws whatever was saved from last time.
@@ -493,6 +517,7 @@ CLOSURES.forEach(c => {
     row.classList.toggle('blocked', e.target.checked);
     const marker = gateMarkers[c.key];
     if (marker) marker.setIcon(gateIcon(e.target.checked));
+    drawFlowEnsemble(); // re-highlight any flow ensemble lines exposed by this closure
   });
   closureGrid.appendChild(row);
 });
@@ -500,6 +525,105 @@ CLOSURES.forEach(c => {
 function getBlockedPassages() {
   return Array.from(closureGrid.querySelectorAll('input:checked')).map(i => i.value);
 }
+
+// ── TRADE FLOW ENSEMBLE ──
+// The "many weighted corridor lines at once" mode, distinct from the
+// route-builder above: draws the top bilateral trade corridors (from
+// route_flows_ensemble.json, aggregated off narrows-pipeline's shipping.db
+// voyages table) as great-circle lines weighted by annual trade value, so a
+// specific reroute argument can be shown against the broader trade context
+// it sits inside. Off by default (250 overlapping lines is a lot to look at
+// when you're just building one route) — the "show on map" toggle opts in.
+//
+// The route_flows_ensemble.json chokepoint codes (from the pipeline's own
+// per-voyage routing) don't share the CLOSURES keys' naming (a few, like
+// DOVER/DANISH_STRAITS/LUZON/MOZAMBIQUE/LOMBOK/ST_LAWRENCE, aren't modeled
+// as CLOSURES at all) — this maps the ones that do overlap, so checking a
+// closure above can highlight exposed flows here.
+const FLOW_CHOKEPOINT_TO_CLOSURE_KEY = {
+  PANAMA: 'panama', SUEZ: 'suez', GIBRALTAR: 'gibraltar', BOSPORUS: 'bosporus',
+  BABELMANDEB: 'babalmandab', HORMUZ: 'ormuz', MALACCA: 'malacca',
+};
+
+const VESSEL_TYPE_COLORS = {
+  Container: '#2B6CB0', VLCC: '#7C2D12', Aframax: '#C2410C', Capesize: '#78716C',
+  LNG_Carrier: '#0F766E', Handymax: '#A16207', VLGC: '#6B46C1', Panamax: '#92400E',
+};
+const VESSEL_TYPE_FALLBACK = '#64748B';
+
+/** Spherical slerp between two [lon,lat] points, `steps` intermediate points. */
+function greatCircleInterpolate(from, to, steps) {
+  const toRad = (d) => (d * Math.PI) / 180;
+  const toDeg = (r) => (r * 180) / Math.PI;
+  const [lon1, lat1] = from.map(toRad);
+  const [lon2, lat2] = to.map(toRad);
+  const d = 2 * Math.asin(Math.sqrt(
+    Math.sin((lat2 - lat1) / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin((lon2 - lon1) / 2) ** 2
+  ));
+  const points = [];
+  if (d === 0) return [[toDeg(lat1), toDeg(lon1)]];
+  for (let i = 0; i <= steps; i++) {
+    const f = i / steps;
+    const A = Math.sin((1 - f) * d) / Math.sin(d);
+    const B = Math.sin(f * d) / Math.sin(d);
+    const x = A * Math.cos(lat1) * Math.cos(lon1) + B * Math.cos(lat2) * Math.cos(lon2);
+    const y = A * Math.cos(lat1) * Math.sin(lon1) + B * Math.cos(lat2) * Math.sin(lon2);
+    const z = A * Math.sin(lat1) + B * Math.sin(lat2);
+    const lat = Math.atan2(z, Math.sqrt(x * x + y * y));
+    const lon = Math.atan2(y, x);
+    points.push([toDeg(lon), toDeg(lat)]); // [lon, lat], same convention unwrapLongitudes() expects
+  }
+  return points;
+}
+
+const flowsLayerGroup = L.layerGroup();
+function renderFlowsLegend() {
+  const el = document.getElementById('flows-legend');
+  if (!el) return;
+  if (!flowEnsembleData) { el.innerHTML = 'Flow data not available.'; return; }
+  const types = Array.from(new Set(flowEnsembleData.flows.map((f) => f.top_vessel_type))).sort();
+  const swatches = types.map((t) => {
+    const color = VESSEL_TYPE_COLORS[t] || VESSEL_TYPE_FALLBACK;
+    return `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:10px"><span style="width:10px;height:10px;border-radius:2px;background:${color};display:inline-block"></span>${t.replace('_', ' ')}</span>`;
+  }).join('');
+  el.innerHTML = `${swatches}<br><span style="display:inline-flex;align-items:center;gap:4px;margin-top:4px"><span style="width:10px;height:10px;border-radius:2px;background:#B91C1C;display:inline-block"></span>via a closed chokepoint</span> · line weight ∝ trade value/yr (log scale)`;
+}
+
+function drawFlowEnsemble() {
+  flowsLayerGroup.clearLayers();
+  const toggle = document.getElementById('flows-toggle');
+  if (!toggle || !toggle.checked || !flowEnsembleData) return;
+  const topN = parseInt(document.getElementById('flows-topn-select').value, 10) || 250;
+  const flows = flowEnsembleData.flows.slice(0, topN);
+  if (!flows.length) return;
+  const values = flows.map((f) => f.trade_value_usd);
+  const logMin = Math.log(Math.min(...values));
+  const logMax = Math.log(Math.max(...values));
+  const blockedKeys = new Set(getBlockedPassages());
+
+  flows.forEach((f) => {
+    const isExposed = f.chokepoints.some((ck) => blockedKeys.has(FLOW_CHOKEPOINT_TO_CLOSURE_KEY[ck]));
+    const color = isExposed ? '#B91C1C' : (VESSEL_TYPE_COLORS[f.top_vessel_type] || VESSEL_TYPE_FALLBACK);
+    const t = logMax > logMin ? (Math.log(f.trade_value_usd) - logMin) / (logMax - logMin) : 0.5;
+    const weight = 0.6 + t * 3.2;
+    const latlngs = unwrapLongitudes(greatCircleInterpolate(f.from, f.to, 40));
+    const line = L.polyline(latlngs, {
+      color, weight, opacity: isExposed ? 0.9 : 0.32, lineCap: 'round', lineJoin: 'round',
+    });
+    const valueStr = `$${(f.trade_value_usd / 1e9).toFixed(1)}B/yr`;
+    const chokStr = f.chokepoints.length ? f.chokepoints.join(', ') : 'no named chokepoint';
+    line.bindTooltip(
+      `${f.exporter} → ${f.importer}<br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr<br>via ${chokStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}`,
+      { sticky: true }
+    );
+    line.addTo(flowsLayerGroup);
+  });
+}
+document.getElementById('flows-toggle').addEventListener('change', (e) => {
+  if (e.target.checked) { drawFlowEnsemble(); flowsLayerGroup.addTo(map); }
+  else map.removeLayer(flowsLayerGroup);
+});
+document.getElementById('flows-topn-select').addEventListener('change', drawFlowEnsemble);
 
 // ── VESSEL CLASS → AUTO-CLOSURES ──
 // Grounded in real physical limits, not preference: Suez Canal draft limits

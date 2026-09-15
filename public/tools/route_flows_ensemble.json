@@ -1,0 +1,5467 @@
+{
+ "generated": "2026-09-15",
+ "source": "narrows-pipeline/data/shipping.db, voyages table (maritime only: excludes Pipeline/Rail-Road-Short-sea)",
+ "note": "Aggregated exporter->importer bilateral pairs, ranked by annual trade value (USD). Endpoints are each country's largest port by throughput in route_sim_ports.json, NOT actual load/discharge ports for any specific voyage -- illustrative corridor weight and rough geography, not a precise route.",
+ "count": 250,
+ "flows": [
+  {
+   "exporter": "Australia",
+   "importer": "China",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Shanghai",
+   "trade_value_usd": 109548344589,
+   "voyages_per_year": 12275,
+   "top_commodity": "Iron ores and concentrates; including roasted iron",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "China",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Shanghai",
+   "trade_value_usd": 90323052224,
+   "voyages_per_year": 10501,
+   "top_commodity": "Soya beans, whether or not broken",
+   "top_vessel_type": "Panamax",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "China",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Shanghai",
+   "trade_value_usd": 89066915263,
+   "voyages_per_year": 2927,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "BOSPORUS",
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "India",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 59993162979,
+   "voyages_per_year": 1395,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "BOSPORUS",
+    "HORMUZ",
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "China",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Shanghai",
+   "trade_value_usd": 55158840895,
+   "voyages_per_year": 901,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "China",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Shanghai",
+   "trade_value_usd": 49692004517,
+   "voyages_per_year": 750,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "China",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Shanghai",
+   "trade_value_usd": 45116470156,
+   "voyages_per_year": 3357,
+   "top_commodity": "Soya beans, whether or not broken",
+   "top_vessel_type": "Panamax",
+   "chokepoints": [
+    "PANAMA",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "Japan",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 44730441678,
+   "voyages_per_year": 4028,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "MALACCA",
+    "LUZON"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "United States",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 41174990936,
+   "voyages_per_year": 836,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "China",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Shanghai",
+   "trade_value_usd": 38231347365,
+   "voyages_per_year": 493,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "Japan",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 35540121536,
+   "voyages_per_year": 479,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "South Korea",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Busan",
+   "trade_value_usd": 30570578108,
+   "voyages_per_year": 432,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "China",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Shanghai",
+   "trade_value_usd": 29592825055,
+   "voyages_per_year": 497,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Mexico",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -96.133,
+    19.2
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Veracruz",
+   "trade_value_usd": 29479463786,
+   "voyages_per_year": 657,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Japan",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 29146472572,
+   "voyages_per_year": 379,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "India",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 29114459013,
+   "voyages_per_year": 375,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Oman",
+   "importer": "China",
+   "from": [
+    57.717,
+    19.673
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Duqm",
+   "to_port": "Shanghai",
+   "trade_value_usd": 28812874982,
+   "voyages_per_year": 518,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "South Korea",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Busan",
+   "trade_value_usd": 27335499172,
+   "voyages_per_year": 790,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "United States",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 26383161185,
+   "voyages_per_year": 529,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "India",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 22840101818,
+   "voyages_per_year": 428,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "India",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 22504669233,
+   "voyages_per_year": 448,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Germany",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Hamburg",
+   "trade_value_usd": 22386200880,
+   "voyages_per_year": 773,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "South Korea",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Busan",
+   "trade_value_usd": 22087276771,
+   "voyages_per_year": 1822,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "MALACCA",
+    "LUZON"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Japan",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 21241761783,
+   "voyages_per_year": 1602,
+   "top_commodity": "LPG -- propane, butane, other (HS 271112+271113+27",
+   "top_vessel_type": "Handymax",
+   "chokepoints": [
+    "PANAMA",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Netherlands",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 20187870132,
+   "voyages_per_year": 409,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "United Kingdom",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Southampton",
+   "trade_value_usd": 19734151864,
+   "voyages_per_year": 337,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Germany",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Hamburg",
+   "trade_value_usd": 19714520322,
+   "voyages_per_year": 402,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "China",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Shanghai",
+   "trade_value_usd": 18980988258,
+   "voyages_per_year": 195,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Mexico",
+   "importer": "United States",
+   "from": [
+    -96.133,
+    19.2
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Veracruz",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 17658139410,
+   "voyages_per_year": 264,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "South Korea",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Busan",
+   "trade_value_usd": 17379218380,
+   "voyages_per_year": 300,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "United Kingdom",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Southampton",
+   "trade_value_usd": 16253375939,
+   "voyages_per_year": 404,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "Thailand",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 15938716067,
+   "voyages_per_year": 219,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "France",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Toulon",
+   "trade_value_usd": 15419717191,
+   "voyages_per_year": 302,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "Germany",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Hamburg",
+   "trade_value_usd": 15257409839,
+   "voyages_per_year": 443,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Japan",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 14898469244,
+   "voyages_per_year": 338,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "United Kingdom",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Southampton",
+   "trade_value_usd": 14114213429,
+   "voyages_per_year": 287,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "South Korea",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Busan",
+   "trade_value_usd": 13778312486,
+   "voyages_per_year": 156,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "China",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Shanghai",
+   "trade_value_usd": 13736958795,
+   "voyages_per_year": 1529,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LUZON",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Singapore",
+   "importer": "Indonesia",
+   "from": [
+    103.85,
+    1.283
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Keppel - (East Singapore)",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 12415688124,
+   "voyages_per_year": 287,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "Belgium",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 12273523310,
+   "voyages_per_year": 344,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Italy",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Napoli",
+   "trade_value_usd": 12255492136,
+   "voyages_per_year": 276,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "France",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Toulon",
+   "trade_value_usd": 12136928507,
+   "voyages_per_year": 285,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Spain",
+   "importer": "France",
+   "from": [
+    1.233,
+    41.1
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Tarragona",
+   "to_port": "Toulon",
+   "trade_value_usd": 11999454548,
+   "voyages_per_year": 273,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "United States",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Southampton",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 11973096522,
+   "voyages_per_year": 245,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Belgium",
+   "importer": "Netherlands",
+   "from": [
+    4.4,
+    51.217
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Antwerpen",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 11759921117,
+   "voyages_per_year": 320,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "India",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 11596464958,
+   "voyages_per_year": 221,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Canada",
+   "importer": "China",
+   "from": [
+    -63.583,
+    44.65
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Halifax",
+   "to_port": "Shanghai",
+   "trade_value_usd": 11548390593,
+   "voyages_per_year": 1082,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "Singapore",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 11538438086,
+   "voyages_per_year": 268,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "India",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 11333712544,
+   "voyages_per_year": 628,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "Singapore",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 11317600873,
+   "voyages_per_year": 181,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Netherlands",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 11275907352,
+   "voyages_per_year": 358,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "China",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Shanghai",
+   "trade_value_usd": 11255081142,
+   "voyages_per_year": 226,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "China",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Shanghai",
+   "trade_value_usd": 10764732761,
+   "voyages_per_year": 154,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Singapore",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 10754958478,
+   "voyages_per_year": 171,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Spain",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Tarragona",
+   "trade_value_usd": 10474294173,
+   "voyages_per_year": 335,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Brazil",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -43.167,
+    -22.9
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Rio De Janeiro",
+   "trade_value_usd": 10438621261,
+   "voyages_per_year": 409,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "United States",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 10401726730,
+   "voyages_per_year": 185,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Singapore",
+   "importer": "Malaysia",
+   "from": [
+    103.85,
+    1.283
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Keppel - (East Singapore)",
+   "to_port": "Port Klang",
+   "trade_value_usd": 10123444141,
+   "voyages_per_year": 241,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Germany",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Oslo",
+   "to_port": "Hamburg",
+   "trade_value_usd": 9898319550,
+   "voyages_per_year": 142,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "India",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 9789851149,
+   "voyages_per_year": 1387,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "Turkey",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    36.35,
+    41.3
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Samsun",
+   "trade_value_usd": 9777762064,
+   "voyages_per_year": 123,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "BOSPORUS",
+    "GIBRALTAR",
+    "DANISH_STRAITS",
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Spain",
+   "importer": "Germany",
+   "from": [
+    1.233,
+    41.1
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Tarragona",
+   "to_port": "Hamburg",
+   "trade_value_usd": 9770710682,
+   "voyages_per_year": 207,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Singapore",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 9421631888,
+   "voyages_per_year": 212,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "United Kingdom",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Oslo",
+   "to_port": "Southampton",
+   "trade_value_usd": 9121094806,
+   "voyages_per_year": 137,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Japan",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 9069985292,
+   "voyages_per_year": 1043,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "United States",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 8938256973,
+   "voyages_per_year": 203,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "South Korea",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Busan",
+   "trade_value_usd": 8917682559,
+   "voyages_per_year": 125,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "South Korea",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Busan",
+   "trade_value_usd": 8748773579,
+   "voyages_per_year": 132,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "India",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 8673269951,
+   "voyages_per_year": 1236,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Japan",
+   "importer": "China",
+   "from": [
+    139.767,
+    35.5
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Kawasaki Ko",
+   "to_port": "Shanghai",
+   "trade_value_usd": 8497713183,
+   "voyages_per_year": 180,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "France",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Toulon",
+   "trade_value_usd": 8168596533,
+   "voyages_per_year": 168,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "Germany",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Southampton",
+   "to_port": "Hamburg",
+   "trade_value_usd": 8163759876,
+   "voyages_per_year": 142,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DOVER",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Poland",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    18.55,
+    54.533
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Gdynia",
+   "trade_value_usd": 7982375840,
+   "voyages_per_year": 207,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Poland",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    18.55,
+    54.533
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Gdynia",
+   "trade_value_usd": 7873166237,
+   "voyages_per_year": 102,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Belgium",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 7859982807,
+   "voyages_per_year": 216,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Colombia",
+   "importer": "United States",
+   "from": [
+    -75.533,
+    10.417
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Cartagena",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 7831877813,
+   "voyages_per_year": 134,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "United States",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 7544944968,
+   "voyages_per_year": 114,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Thailand",
+   "importer": "United States",
+   "from": [
+    100.883,
+    13.083
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Laem Chabang",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 7464942933,
+   "voyages_per_year": 150,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "LUZON"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Chile",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -70.417,
+    -23.65
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Antofagasta",
+   "trade_value_usd": 7441766399,
+   "voyages_per_year": 227,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "Japan",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 7440126314,
+   "voyages_per_year": 104,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "Japan",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 7381653063,
+   "voyages_per_year": 119,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "South Korea",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Busan",
+   "trade_value_usd": 7251157033,
+   "voyages_per_year": 201,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Malaysia",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Port Klang",
+   "trade_value_usd": 7160378500,
+   "voyages_per_year": 109,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Colombia",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -75.533,
+    10.417
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Cartagena",
+   "trade_value_usd": 7079423678,
+   "voyages_per_year": 446,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Belgium",
+   "importer": "Germany",
+   "from": [
+    4.4,
+    51.217
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Antwerpen",
+   "to_port": "Hamburg",
+   "trade_value_usd": 7050887378,
+   "voyages_per_year": 195,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Spain",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Tarragona",
+   "trade_value_usd": 7027350391,
+   "voyages_per_year": 358,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Libya",
+   "importer": "Italy",
+   "from": [
+    20.05,
+    32.117
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Banghazi",
+   "to_port": "Napoli",
+   "trade_value_usd": 7003144410,
+   "voyages_per_year": 92,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "Japan",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 6807332257,
+   "voyages_per_year": 94,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "India",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 6796253289,
+   "voyages_per_year": 136,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Malaysia",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Port Klang",
+   "trade_value_usd": 6739884283,
+   "voyages_per_year": 182,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "Japan",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Busan",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 6643366998,
+   "voyages_per_year": 155,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Venezuela",
+   "importer": "United States",
+   "from": [
+    -64.633,
+    10.25
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Puerto La Cruz",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 6608907525,
+   "voyages_per_year": 86,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Sweden",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    11.955,
+    57.71
+   ],
+   "from_port": "Oslo",
+   "to_port": "Goteborg",
+   "trade_value_usd": 6464013470,
+   "voyages_per_year": 106,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Canada",
+   "importer": "Japan",
+   "from": [
+    -63.583,
+    44.65
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Halifax",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 6365541229,
+   "voyages_per_year": 819,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Belgium",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 6364984895,
+   "voyages_per_year": 148,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "South Korea",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Busan",
+   "trade_value_usd": 6342206905,
+   "voyages_per_year": 643,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LUZON",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Spain",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Tarragona",
+   "trade_value_usd": 6314505825,
+   "voyages_per_year": 154,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Canada",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    -63.583,
+    44.65
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Halifax",
+   "trade_value_usd": 6219936456,
+   "voyages_per_year": 128,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "United States",
+   "importer": "Italy",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Napoli",
+   "trade_value_usd": 6207861733,
+   "voyages_per_year": 219,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Philippines",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    123.9,
+    10.3
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Cebu",
+   "trade_value_usd": 6200178693,
+   "voyages_per_year": 647,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Spain",
+   "importer": "Italy",
+   "from": [
+    1.233,
+    41.1
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Tarragona",
+   "to_port": "Napoli",
+   "trade_value_usd": 6119224158,
+   "voyages_per_year": 155,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Algeria",
+   "importer": "France",
+   "from": [
+    -0.633,
+    35.7
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Oran",
+   "to_port": "Toulon",
+   "trade_value_usd": 6091626234,
+   "voyages_per_year": 109,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "Belgium",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Toulon",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 5903250287,
+   "voyages_per_year": 286,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Japan",
+   "importer": "Canada",
+   "from": [
+    139.767,
+    35.5
+   ],
+   "to": [
+    -63.583,
+    44.65
+   ],
+   "from_port": "Kawasaki Ko",
+   "to_port": "Halifax",
+   "trade_value_usd": 5860898924,
+   "voyages_per_year": 118,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "Netherlands",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Southampton",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 5844944354,
+   "voyages_per_year": 116,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Spain",
+   "importer": "United Kingdom",
+   "from": [
+    1.233,
+    41.1
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Tarragona",
+   "to_port": "Southampton",
+   "trade_value_usd": 5822406414,
+   "voyages_per_year": 139,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Belgium",
+   "importer": "France",
+   "from": [
+    4.4,
+    51.217
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Antwerpen",
+   "to_port": "Toulon",
+   "trade_value_usd": 5814597962,
+   "voyages_per_year": 201,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "France",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Toulon",
+   "trade_value_usd": 5774858455,
+   "voyages_per_year": 191,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "South Korea",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Busan",
+   "trade_value_usd": 5699052539,
+   "voyages_per_year": 102,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Thailand",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 5670129222,
+   "voyages_per_year": 148,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "GIBRALTAR",
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA",
+    "LUZON",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "India",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 5624298155,
+   "voyages_per_year": 123,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "China",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Southampton",
+   "to_port": "Shanghai",
+   "trade_value_usd": 5612851292,
+   "voyages_per_year": 113,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Egypt",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    32.55,
+    29.967
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "As Suways",
+   "trade_value_usd": 5553193878,
+   "voyages_per_year": 124,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "BABELMANDEB",
+    "SUEZ",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Netherlands",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Oslo",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 5551713154,
+   "voyages_per_year": 98,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Oman",
+   "importer": "South Korea",
+   "from": [
+    57.717,
+    19.673
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Duqm",
+   "to_port": "Busan",
+   "trade_value_usd": 5484690830,
+   "voyages_per_year": 61,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "Canada",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    -63.583,
+    44.65
+   ],
+   "from_port": "Busan",
+   "to_port": "Halifax",
+   "trade_value_usd": 5433899699,
+   "voyages_per_year": 110,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "Greece",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    23.65,
+    37.933
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Piraievs",
+   "trade_value_usd": 5390286270,
+   "voyages_per_year": 75,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Thailand",
+   "importer": "China",
+   "from": [
+    100.883,
+    13.083
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Laem Chabang",
+   "to_port": "Shanghai",
+   "trade_value_usd": 5376073075,
+   "voyages_per_year": 113,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Japan",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 5327523551,
+   "voyages_per_year": 731,
+   "top_commodity": "Iron ores and concentrates; including roasted iron",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "Singapore",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 5285312249,
+   "voyages_per_year": 72,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Colombia",
+   "importer": "China",
+   "from": [
+    -75.533,
+    10.417
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Cartagena",
+   "to_port": "Shanghai",
+   "trade_value_usd": 5224462893,
+   "voyages_per_year": 193,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "Singapore",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Busan",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 5215282095,
+   "voyages_per_year": 125,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Peru",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -77.15,
+    -12.05
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Puerto Del Callao",
+   "trade_value_usd": 5204287643,
+   "voyages_per_year": 139,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Mexico",
+   "importer": "Germany",
+   "from": [
+    -96.133,
+    19.2
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Veracruz",
+   "to_port": "Hamburg",
+   "trade_value_usd": 5169356855,
+   "voyages_per_year": 121,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Italy",
+   "importer": "United States",
+   "from": [
+    14.275,
+    40.833
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Napoli",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 5159041335,
+   "voyages_per_year": 107,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "United Kingdom",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Southampton",
+   "trade_value_usd": 5122904864,
+   "voyages_per_year": 158,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Mexico",
+   "importer": "Spain",
+   "from": [
+    -96.133,
+    19.2
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Veracruz",
+   "to_port": "Tarragona",
+   "trade_value_usd": 5116133937,
+   "voyages_per_year": 85,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "Sweden",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    11.955,
+    57.71
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Goteborg",
+   "trade_value_usd": 5087464761,
+   "voyages_per_year": 116,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "Spain",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Tarragona",
+   "trade_value_usd": 5058710162,
+   "voyages_per_year": 61,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Thailand",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 5004207534,
+   "voyages_per_year": 125,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "LUZON",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Italy",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Napoli",
+   "trade_value_usd": 4968027806,
+   "voyages_per_year": 91,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "BABELMANDEB",
+    "SUEZ",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "India",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 4966526733,
+   "voyages_per_year": 63,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MOZAMBIQUE"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "Indonesia",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 4940230413,
+   "voyages_per_year": 119,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "China",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Busan",
+   "to_port": "Shanghai",
+   "trade_value_usd": 4866382192,
+   "voyages_per_year": 112,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "United States",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 4865579606,
+   "voyages_per_year": 107,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "South Africa",
+   "importer": "Germany",
+   "from": [
+    31.067,
+    -29.867
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Durban",
+   "to_port": "Hamburg",
+   "trade_value_usd": 4781929054,
+   "voyages_per_year": 221,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "Indonesia",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 4756442428,
+   "voyages_per_year": 614,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Mexico",
+   "importer": "China",
+   "from": [
+    -96.133,
+    19.2
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Veracruz",
+   "to_port": "Shanghai",
+   "trade_value_usd": 4715796809,
+   "voyages_per_year": 605,
+   "top_commodity": "Copper ores and concentrates",
+   "top_vessel_type": "Handymax",
+   "chokepoints": [
+    "PANAMA",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "United States",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Busan",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 4714070759,
+   "voyages_per_year": 105,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Poland",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    18.55,
+    54.533
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Gdynia",
+   "trade_value_usd": 4712337130,
+   "voyages_per_year": 119,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Denmark",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    12.617,
+    55.7
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Kobenhavn",
+   "trade_value_usd": 4689213794,
+   "voyages_per_year": 131,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "South Africa",
+   "importer": "China",
+   "from": [
+    31.067,
+    -29.867
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Durban",
+   "to_port": "Shanghai",
+   "trade_value_usd": 4670670715,
+   "voyages_per_year": 596,
+   "top_commodity": "Iron ores and concentrates; including roasted iron",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "MALACCA",
+    "MOZAMBIQUE"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Finland",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    21.8,
+    61.483
+   ],
+   "from_port": "Oslo",
+   "to_port": "Pori",
+   "trade_value_usd": 4654744130,
+   "voyages_per_year": 62,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Libya",
+   "importer": "Germany",
+   "from": [
+    20.05,
+    32.117
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Banghazi",
+   "to_port": "Hamburg",
+   "trade_value_usd": 4639743911,
+   "voyages_per_year": 63,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Singapore",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 4635124866,
+   "voyages_per_year": 87,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Sweden",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    11.955,
+    57.71
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Goteborg",
+   "trade_value_usd": 4631435087,
+   "voyages_per_year": 142,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "Pakistan",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    62.3,
+    25.133
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Gwadar",
+   "trade_value_usd": 4614364904,
+   "voyages_per_year": 88,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Argentina",
+   "importer": "Brazil",
+   "from": [
+    -58.367,
+    -34.6
+   ],
+   "to": [
+    -43.167,
+    -22.9
+   ],
+   "from_port": "Buenos Aires",
+   "to_port": "Rio De Janeiro",
+   "trade_value_usd": 4592949439,
+   "voyages_per_year": 310,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "United States",
+   "importer": "Indonesia",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 4566399948,
+   "voyages_per_year": 398,
+   "top_commodity": "LPG -- propane, butane, other (HS 271112+271113+27",
+   "top_vessel_type": "VLGC",
+   "chokepoints": [
+    "SUEZ",
+    "BABELMANDEB",
+    "LOMBOK",
+    "MALACCA",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Philippines",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    123.9,
+    10.3
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Cebu",
+   "trade_value_usd": 4564004759,
+   "voyages_per_year": 127,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA",
+    "LUZON"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Egypt",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    32.55,
+    29.967
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "As Suways",
+   "trade_value_usd": 4530958340,
+   "voyages_per_year": 316,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "GIBRALTAR",
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "Thailand",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 4496962011,
+   "voyages_per_year": 105,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Indonesia",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 4493821827,
+   "voyages_per_year": 183,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "United States",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 4436186750,
+   "voyages_per_year": 55,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Spain",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Tarragona",
+   "trade_value_usd": 4401577601,
+   "voyages_per_year": 92,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "South Korea",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Busan",
+   "trade_value_usd": 4400152848,
+   "voyages_per_year": 389,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Thailand",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 4398917099,
+   "voyages_per_year": 142,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Poland",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    18.55,
+    54.533
+   ],
+   "from_port": "Oslo",
+   "to_port": "Gdynia",
+   "trade_value_usd": 4387280737,
+   "voyages_per_year": 64,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Singapore",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 4382990854,
+   "voyages_per_year": 86,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "PANAMA",
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Sweden",
+   "importer": "United States",
+   "from": [
+    11.955,
+    57.71
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Goteborg",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 4327879678,
+   "voyages_per_year": 88,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Netherlands",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 4195495323,
+   "voyages_per_year": 87,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "France",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Toulon",
+   "trade_value_usd": 4173646262,
+   "voyages_per_year": 100,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Spain",
+   "importer": "Portugal",
+   "from": [
+    1.233,
+    41.1
+   ],
+   "to": [
+    -9.167,
+    38.7
+   ],
+   "from_port": "Tarragona",
+   "to_port": "Lisboa",
+   "trade_value_usd": 4127140614,
+   "voyages_per_year": 128,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "Singapore",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 4092087661,
+   "voyages_per_year": 94,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA",
+    "BOSPORUS",
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "Germany",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Toulon",
+   "to_port": "Hamburg",
+   "trade_value_usd": 4055001232,
+   "voyages_per_year": 161,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER",
+    "GIBRALTAR",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Malaysia",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Port Klang",
+   "trade_value_usd": 4043338107,
+   "voyages_per_year": 443,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "Malaysia",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Port Klang",
+   "trade_value_usd": 4041014385,
+   "voyages_per_year": 72,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "Philippines",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    123.9,
+    10.3
+   ],
+   "from_port": "Busan",
+   "to_port": "Cebu",
+   "trade_value_usd": 3994136018,
+   "voyages_per_year": 96,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Brazil",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    -43.167,
+    -22.9
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Rio De Janeiro",
+   "trade_value_usd": 3950635664,
+   "voyages_per_year": 79,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "Japan",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 3812933799,
+   "voyages_per_year": 45,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA",
+    "BOSPORUS",
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Canada",
+   "importer": "South Korea",
+   "from": [
+    -63.583,
+    44.65
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Halifax",
+   "to_port": "Busan",
+   "trade_value_usd": 3811664979,
+   "voyages_per_year": 510,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "Belgium",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Oslo",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 3792386041,
+   "voyages_per_year": 60,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Malaysia",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Port Klang",
+   "trade_value_usd": 3756515214,
+   "voyages_per_year": 138,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA",
+    "LOMBOK",
+    "PANAMA",
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "France",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Toulon",
+   "trade_value_usd": 3750558038,
+   "voyages_per_year": 88,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "United Kingdom",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Toulon",
+   "to_port": "Southampton",
+   "trade_value_usd": 3705910981,
+   "voyages_per_year": 128,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "Malaysia",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Port Klang",
+   "trade_value_usd": 3680317927,
+   "voyages_per_year": 248,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Algeria",
+   "importer": "South Korea",
+   "from": [
+    -0.633,
+    35.7
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Oran",
+   "to_port": "Busan",
+   "trade_value_usd": 3667769770,
+   "voyages_per_year": 73,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Thailand",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 3652992787,
+   "voyages_per_year": 213,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "South Korea",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Busan",
+   "trade_value_usd": 3640969116,
+   "voyages_per_year": 355,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "MALACCA",
+    "BOSPORUS",
+    "SUEZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "Bulgaria",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    27.967,
+    43.183
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Varna",
+   "trade_value_usd": 3638335658,
+   "voyages_per_year": 58,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "BOSPORUS",
+    "SUEZ",
+    "MALACCA",
+    "BABELMANDEB",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "United States",
+   "importer": "Morocco",
+   "from": [
+    -118.25,
+    33.75
+   ],
+   "to": [
+    -5.517,
+    35.9
+   ],
+   "from_port": "Los Angeles",
+   "to_port": "Tangier-Mediterranean",
+   "trade_value_usd": 3580649788,
+   "voyages_per_year": 269,
+   "top_commodity": "LPG -- propane, butane, other (HS 271112+271113+27",
+   "top_vessel_type": "VLGC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Russia",
+   "importer": "France",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "Toulon",
+   "trade_value_usd": 3546278198,
+   "voyages_per_year": 59,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "GIBRALTAR",
+    "BOSPORUS",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Kuwait",
+   "importer": "United Kingdom",
+   "from": [
+    48.167,
+    29.033
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Mina Ash Shuaybah",
+   "to_port": "Southampton",
+   "trade_value_usd": 3539637092,
+   "voyages_per_year": 82,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "Pakistan",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    62.3,
+    25.133
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Gwadar",
+   "trade_value_usd": 3531988853,
+   "voyages_per_year": 22,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "South Africa",
+   "importer": "India",
+   "from": [
+    31.067,
+    -29.867
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Durban",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 3528018650,
+   "voyages_per_year": 506,
+   "top_commodity": "Coal; briquettes, ovoids and similar solid fuels m",
+   "top_vessel_type": "Capesize",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "France",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Toulon",
+   "trade_value_usd": 3490554402,
+   "voyages_per_year": 51,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Poland",
+   "importer": "Germany",
+   "from": [
+    18.55,
+    54.533
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Gdynia",
+   "to_port": "Hamburg",
+   "trade_value_usd": 3469234658,
+   "voyages_per_year": 213,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Qatar",
+   "importer": "Thailand",
+   "from": [
+    51.583,
+    25.917
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Ras Laffan",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 3466209554,
+   "voyages_per_year": 70,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "Belgium",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    4.4,
+    51.217
+   ],
+   "from_port": "Southampton",
+   "to_port": "Antwerpen",
+   "trade_value_usd": 3399579063,
+   "voyages_per_year": 74,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Netherlands",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 3320182463,
+   "voyages_per_year": 181,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Russia",
+   "importer": "Egypt",
+   "from": [
+    30.3,
+    59.933
+   ],
+   "to": [
+    32.55,
+    29.967
+   ],
+   "from_port": "Sankt-Peterburg",
+   "to_port": "As Suways",
+   "trade_value_usd": 3284315925,
+   "voyages_per_year": 633,
+   "top_commodity": "Wheat and meslin",
+   "top_vessel_type": "Handymax",
+   "chokepoints": [
+    "BOSPORUS",
+    "GIBRALTAR",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "New Zealand",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    174.767,
+    -36.85
+   ],
+   "from_port": "Busan",
+   "to_port": "Auckland",
+   "trade_value_usd": 3274802517,
+   "voyages_per_year": 73,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "Italy",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Napoli",
+   "trade_value_usd": 3267557444,
+   "voyages_per_year": 84,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Indonesia",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 3259951219,
+   "voyages_per_year": 62,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "Italy",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Napoli",
+   "trade_value_usd": 3259262501,
+   "voyages_per_year": 43,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Pakistan",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    62.3,
+    25.133
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Gwadar",
+   "trade_value_usd": 3242393721,
+   "voyages_per_year": 44,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Canada",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    -63.583,
+    44.65
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Halifax",
+   "trade_value_usd": 3163852918,
+   "voyages_per_year": 79,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "ST_LAWRENCE"
+   ]
+  },
+  {
+   "exporter": "South Korea",
+   "importer": "Malaysia",
+   "from": [
+    129.033,
+    35.1
+   ],
+   "to": [
+    101.4,
+    3.0
+   ],
+   "from_port": "Busan",
+   "to_port": "Port Klang",
+   "trade_value_usd": 3133689765,
+   "voyages_per_year": 79,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Belgium",
+   "importer": "Sweden",
+   "from": [
+    4.4,
+    51.217
+   ],
+   "to": [
+    11.955,
+    57.71
+   ],
+   "from_port": "Antwerpen",
+   "to_port": "Goteborg",
+   "trade_value_usd": 3130152586,
+   "voyages_per_year": 73,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Italy",
+   "importer": "Spain",
+   "from": [
+    14.275,
+    40.833
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Napoli",
+   "to_port": "Tarragona",
+   "trade_value_usd": 3116214683,
+   "voyages_per_year": 78,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Belgium",
+   "importer": "United Kingdom",
+   "from": [
+    4.4,
+    51.217
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Antwerpen",
+   "to_port": "Southampton",
+   "trade_value_usd": 3110606946,
+   "voyages_per_year": 82,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Argentina",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    -58.367,
+    -34.6
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Buenos Aires",
+   "trade_value_usd": 3099496544,
+   "voyages_per_year": 147,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Argentina",
+   "importer": "Chile",
+   "from": [
+    -58.367,
+    -34.6
+   ],
+   "to": [
+    -70.417,
+    -23.65
+   ],
+   "from_port": "Buenos Aires",
+   "to_port": "Antofagasta",
+   "trade_value_usd": 3035556892,
+   "voyages_per_year": 149,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Peru",
+   "importer": "China",
+   "from": [
+    -77.15,
+    -12.05
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Puerto Del Callao",
+   "to_port": "Shanghai",
+   "trade_value_usd": 3035300840,
+   "voyages_per_year": 357,
+   "top_commodity": "Iron ores and concentrates; including roasted iron",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "LOMBOK"
+   ]
+  },
+  {
+   "exporter": "Algeria",
+   "importer": "Spain",
+   "from": [
+    -0.633,
+    35.7
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Oran",
+   "to_port": "Tarragona",
+   "trade_value_usd": 3024451636,
+   "voyages_per_year": 39,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Oman",
+   "importer": "India",
+   "from": [
+    57.717,
+    19.673
+   ],
+   "to": [
+    80.3,
+    13.1
+   ],
+   "from_port": "Duqm",
+   "to_port": "Chennai (Madras)",
+   "trade_value_usd": 3022448549,
+   "voyages_per_year": 273,
+   "top_commodity": "Fertilizers; mineral or chemical, nitrogenous",
+   "top_vessel_type": "Handymax",
+   "chokepoints": [
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Portugal",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    -9.167,
+    38.7
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Lisboa",
+   "trade_value_usd": 3020190838,
+   "voyages_per_year": 96,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "United Arab Emirates",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    55.05,
+    25.017
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Mina Jabal Ali",
+   "trade_value_usd": 3004518591,
+   "voyages_per_year": 66,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Italy",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Napoli",
+   "trade_value_usd": 2920814637,
+   "voyages_per_year": 60,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "Singapore",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 2914908090,
+   "voyages_per_year": 50,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "Indonesia",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    131.017,
+    -1.3
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Kasim Terminal",
+   "trade_value_usd": 2896902141,
+   "voyages_per_year": 38,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "MOZAMBIQUE",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "Italy",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Toulon",
+   "to_port": "Napoli",
+   "trade_value_usd": 2874297781,
+   "voyages_per_year": 127,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Australia",
+   "importer": "Thailand",
+   "from": [
+    115.75,
+    -32.05
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Fremantle",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 2862367870,
+   "voyages_per_year": 120,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA",
+    "LUZON"
+   ]
+  },
+  {
+   "exporter": "Singapore",
+   "importer": "China",
+   "from": [
+    103.85,
+    1.283
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Keppel - (East Singapore)",
+   "to_port": "Shanghai",
+   "trade_value_usd": 2840689625,
+   "voyages_per_year": 61,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Italy",
+   "importer": "Germany",
+   "from": [
+    14.275,
+    40.833
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Napoli",
+   "to_port": "Hamburg",
+   "trade_value_usd": 2832818524,
+   "voyages_per_year": 76,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Thailand",
+   "importer": "Singapore",
+   "from": [
+    100.883,
+    13.083
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Laem Chabang",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 2830381129,
+   "voyages_per_year": 66,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Netherlands",
+   "importer": "Spain",
+   "from": [
+    4.483,
+    51.9
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Rotterdam",
+   "to_port": "Tarragona",
+   "trade_value_usd": 2789723142,
+   "voyages_per_year": 81,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "United Kingdom",
+   "importer": "France",
+   "from": [
+    -1.4,
+    50.9
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Southampton",
+   "to_port": "Toulon",
+   "trade_value_usd": 2773154845,
+   "voyages_per_year": 66,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "China",
+   "importer": "Norway",
+   "from": [
+    121.5,
+    31.217
+   ],
+   "to": [
+    10.746,
+    59.898
+   ],
+   "from_port": "Shanghai",
+   "to_port": "Oslo",
+   "trade_value_usd": 2753639543,
+   "voyages_per_year": 56,
+   "top_commodity": "Automatic data processing machines and units there",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "Netherlands",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Toulon",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 2742173585,
+   "voyages_per_year": 177,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DOVER",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Pakistan",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    62.3,
+    25.133
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Gwadar",
+   "trade_value_usd": 2740243655,
+   "voyages_per_year": 227,
+   "top_commodity": "Palm oil and its fractions; whether or not refined",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "Turkey",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    36.35,
+    41.3
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Samsun",
+   "trade_value_usd": 2733132155,
+   "voyages_per_year": 34,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Ukraine",
+   "importer": "China",
+   "from": [
+    33.533,
+    44.617
+   ],
+   "to": [
+    121.5,
+    31.217
+   ],
+   "from_port": "Sevastopol",
+   "to_port": "Shanghai",
+   "trade_value_usd": 2728879004,
+   "voyages_per_year": 409,
+   "top_commodity": "Iron ores and concentrates; including roasted iron",
+   "top_vessel_type": "Capesize",
+   "chokepoints": [
+    "BOSPORUS",
+    "SUEZ",
+    "BABELMANDEB",
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Sweden",
+   "importer": "Germany",
+   "from": [
+    11.955,
+    57.71
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Goteborg",
+   "to_port": "Hamburg",
+   "trade_value_usd": 2724163516,
+   "voyages_per_year": 120,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "United Arab Emirates",
+   "importer": "France",
+   "from": [
+    55.05,
+    25.017
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Mina Jabal Ali",
+   "to_port": "Toulon",
+   "trade_value_usd": 2717807134,
+   "voyages_per_year": 71,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "BABELMANDEB",
+    "SUEZ",
+    "HORMUZ",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Chile",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    -70.417,
+    -23.65
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Antofagasta",
+   "trade_value_usd": 2672665927,
+   "voyages_per_year": 54,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "France",
+   "importer": "Spain",
+   "from": [
+    5.917,
+    43.1
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Toulon",
+   "to_port": "Tarragona",
+   "trade_value_usd": 2658474280,
+   "voyages_per_year": 181,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Sweden",
+   "importer": "Finland",
+   "from": [
+    11.955,
+    57.71
+   ],
+   "to": [
+    21.8,
+    61.483
+   ],
+   "from_port": "Goteborg",
+   "to_port": "Pori",
+   "trade_value_usd": 2623195380,
+   "voyages_per_year": 107,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Spain",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Tarragona",
+   "trade_value_usd": 2579905112,
+   "voyages_per_year": 41,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "BABELMANDEB",
+    "SUEZ",
+    "HORMUZ",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Algeria",
+   "importer": "Italy",
+   "from": [
+    -0.633,
+    35.7
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Oran",
+   "to_port": "Napoli",
+   "trade_value_usd": 2556735390,
+   "voyages_per_year": 61,
+   "top_commodity": "LPG -- propane, butane, other (HS 271112+271113+27",
+   "top_vessel_type": "VLGC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Poland",
+   "importer": "Italy",
+   "from": [
+    18.55,
+    54.533
+   ],
+   "to": [
+    14.275,
+    40.833
+   ],
+   "from_port": "Gdynia",
+   "to_port": "Napoli",
+   "trade_value_usd": 2533228396,
+   "voyages_per_year": 65,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Indonesia",
+   "importer": "Singapore",
+   "from": [
+    131.017,
+    -1.3
+   ],
+   "to": [
+    103.85,
+    1.283
+   ],
+   "from_port": "Kasim Terminal",
+   "to_port": "Keppel - (East Singapore)",
+   "trade_value_usd": 2515506985,
+   "voyages_per_year": 65,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Saudi Arabia",
+   "importer": "Philippines",
+   "from": [
+    50.167,
+    26.633
+   ],
+   "to": [
+    123.9,
+    10.3
+   ],
+   "from_port": "Ras  Tannurah",
+   "to_port": "Cebu",
+   "trade_value_usd": 2512936802,
+   "voyages_per_year": 48,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ"
+   ]
+  },
+  {
+   "exporter": "Germany",
+   "importer": "Norway",
+   "from": [
+    9.933,
+    53.55
+   ],
+   "to": [
+    10.746,
+    59.898
+   ],
+   "from_port": "Hamburg",
+   "to_port": "Oslo",
+   "trade_value_usd": 2509482601,
+   "voyages_per_year": 76,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Norway",
+   "importer": "France",
+   "from": [
+    10.746,
+    59.898
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Oslo",
+   "to_port": "Toulon",
+   "trade_value_usd": 2487985796,
+   "voyages_per_year": 40,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Nigeria",
+   "importer": "South Africa",
+   "from": [
+    5.617,
+    4.25
+   ],
+   "to": [
+    31.067,
+    -29.867
+   ],
+   "from_port": "Pennington Oil Terminal",
+   "to_port": "Durban",
+   "trade_value_usd": 2464448511,
+   "voyages_per_year": 30,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Sweden",
+   "importer": "Denmark",
+   "from": [
+    11.955,
+    57.71
+   ],
+   "to": [
+    12.617,
+    55.7
+   ],
+   "from_port": "Goteborg",
+   "to_port": "Kobenhavn",
+   "trade_value_usd": 2457202724,
+   "voyages_per_year": 64,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "DANISH_STRAITS",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "Germany",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    9.933,
+    53.55
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Hamburg",
+   "trade_value_usd": 2444778174,
+   "voyages_per_year": 35,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR",
+    "DANISH_STRAITS"
+   ]
+  },
+  {
+   "exporter": "Papua New Guinea",
+   "importer": "Japan",
+   "from": [
+    149.967,
+    -1.633
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Hamburg Harbor",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 2430075377,
+   "voyages_per_year": 11,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": []
+  },
+  {
+   "exporter": "Iraq",
+   "importer": "Netherlands",
+   "from": [
+    47.833,
+    30.517
+   ],
+   "to": [
+    4.483,
+    51.9
+   ],
+   "from_port": "Al Basrah",
+   "to_port": "Rotterdam",
+   "trade_value_usd": 2428347666,
+   "voyages_per_year": 33,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "HORMUZ",
+    "BABELMANDEB",
+    "SUEZ",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Italy",
+   "importer": "France",
+   "from": [
+    14.275,
+    40.833
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Napoli",
+   "to_port": "Toulon",
+   "trade_value_usd": 2426544848,
+   "voyages_per_year": 69,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "GIBRALTAR",
+    "DOVER"
+   ]
+  },
+  {
+   "exporter": "Libya",
+   "importer": "United Kingdom",
+   "from": [
+    20.05,
+    32.117
+   ],
+   "to": [
+    -1.4,
+    50.9
+   ],
+   "from_port": "Banghazi",
+   "to_port": "Southampton",
+   "trade_value_usd": 2417371353,
+   "voyages_per_year": 34,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Brazil",
+   "importer": "Thailand",
+   "from": [
+    -43.167,
+    -22.9
+   ],
+   "to": [
+    100.883,
+    13.083
+   ],
+   "from_port": "Rio De Janeiro",
+   "to_port": "Laem Chabang",
+   "trade_value_usd": 2404639084,
+   "voyages_per_year": 303,
+   "top_commodity": "Soya beans, whether or not broken",
+   "top_vessel_type": "Panamax",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Romania",
+   "importer": "France",
+   "from": [
+    28.65,
+    44.167
+   ],
+   "to": [
+    5.917,
+    43.1
+   ],
+   "from_port": "Constanta",
+   "to_port": "Toulon",
+   "trade_value_usd": 2394318688,
+   "voyages_per_year": 65,
+   "top_commodity": "Motor cars and other motor vehicles; principally d",
+   "top_vessel_type": "Container",
+   "chokepoints": [
+    "BOSPORUS",
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Malaysia",
+   "importer": "Philippines",
+   "from": [
+    101.4,
+    3.0
+   ],
+   "to": [
+    123.9,
+    10.3
+   ],
+   "from_port": "Port Klang",
+   "to_port": "Cebu",
+   "trade_value_usd": 2388959955,
+   "voyages_per_year": 114,
+   "top_commodity": "Petroleum oils and oils from bituminous minerals, ",
+   "top_vessel_type": "Aframax",
+   "chokepoints": [
+    "MALACCA"
+   ]
+  },
+  {
+   "exporter": "Mexico",
+   "importer": "South Korea",
+   "from": [
+    -96.133,
+    19.2
+   ],
+   "to": [
+    129.033,
+    35.1
+   ],
+   "from_port": "Veracruz",
+   "to_port": "Busan",
+   "trade_value_usd": 2381807906,
+   "voyages_per_year": 44,
+   "top_commodity": "Petroleum oils and oils obtained from bituminous m",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "LOMBOK",
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Oman",
+   "importer": "Japan",
+   "from": [
+    57.717,
+    19.673
+   ],
+   "to": [
+    139.767,
+    35.5
+   ],
+   "from_port": "Duqm",
+   "to_port": "Kawasaki Ko",
+   "trade_value_usd": 2381114297,
+   "voyages_per_year": 17,
+   "top_commodity": "Petroleum gases and other gaseous hydrocarbons; li",
+   "top_vessel_type": "LNG_Carrier",
+   "chokepoints": [
+    "MALACCA",
+    "HORMUZ"
+   ]
+  },
+  {
+   "exporter": "Argentina",
+   "importer": "United States",
+   "from": [
+    -58.367,
+    -34.6
+   ],
+   "to": [
+    -118.25,
+    33.75
+   ],
+   "from_port": "Buenos Aires",
+   "to_port": "Los Angeles",
+   "trade_value_usd": 2370497199,
+   "voyages_per_year": 56,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "PANAMA"
+   ]
+  },
+  {
+   "exporter": "Libya",
+   "importer": "Spain",
+   "from": [
+    20.05,
+    32.117
+   ],
+   "to": [
+    1.233,
+    41.1
+   ],
+   "from_port": "Banghazi",
+   "to_port": "Tarragona",
+   "trade_value_usd": 2359055142,
+   "voyages_per_year": 34,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  },
+  {
+   "exporter": "Libya",
+   "importer": "Greece",
+   "from": [
+    20.05,
+    32.117
+   ],
+   "to": [
+    23.65,
+    37.933
+   ],
+   "from_port": "Banghazi",
+   "to_port": "Piraievs",
+   "trade_value_usd": 2352860591,
+   "voyages_per_year": 31,
+   "top_commodity": "Crude petroleum",
+   "top_vessel_type": "VLCC",
+   "chokepoints": [
+    "GIBRALTAR"
+   ]
+  }
+ ]
+}
