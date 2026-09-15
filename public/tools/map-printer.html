@@ -224,11 +224,30 @@
     </div>
 
     <div class="panel-section">
-      <div class="panel-h">Simulate closures</div>
+      <div class="panel-h">
+        Simulate closures
+        <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="gates-toggle" checked style="vertical-align:middle;margin-right:4px">show gates on map</label>
+      </div>
       <div class="closure-grid" id="closure-grid"></div>
       <div class="closure-note">
         Checking a closure computes both the original route and the re-route, and draws the original ghosted behind the re-route so the detour is visible at a glance. Northwest Passage and Bering are always excluded as non-commercial. Danish Straits / Dover aren't offered yet — the routing graph doesn't tag them as distinct passages.
       </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-h">Canal transit cost</div>
+      <div class="closure-note" style="margin-bottom:8px">Always applied — not a per-route toggle. Panama and Suez tolls plus average dwell/wait are converted to an nm-equivalent cost and added to any route that uses them, so the engine only routes through a toll canal when it's still cheaper net of that cost, the same way it already weighs risk-premium zones. Set either to 0 to treat that canal as toll-free.</div>
+      <div style="display:flex;gap:10px">
+        <div class="field" style="flex:1">
+          <label for="toll-panama-input">Panama (nm-equiv.)</label>
+          <input type="number" id="toll-panama-input" min="0" step="50" value="1000">
+        </div>
+        <div class="field" style="flex:1">
+          <label for="toll-suez-input">Suez (nm-equiv.)</label>
+          <input type="number" id="toll-suez-input" min="0" step="50" value="800">
+        </div>
+      </div>
+      <div class="closure-note" style="margin-top:6px">Illustrative defaults (~$450k Panama toll + ~1 day dwell, ~$350k Suez toll, converted at ~$450/nm all-in vessel cost) — edit with a real figure for your vessel/voyage if you have one. Vessels that physically can't fit a canal at any price (VLCC/Capesize/ULCC — see Vessel class above) are hard-excluded instead, since a toll number is meaningless there.</div>
     </div>
 
     <div class="panel-section">
@@ -314,18 +333,22 @@
 const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
 const ZONES_STORAGE_KEY = 'narrows_map_printer_zones_v1';
 
+// Coordinates sourced from route_sim_chokepoints.json where it has an entry
+// (Suez, Hormuz, Malacca, Bab-el-Mandeb, Gibraltar, Bosphorus, Panama,
+// Sunda); Dardanelles, Cape of Good Hope, and Cape Horn aren't in that file
+// so their [lat,lon] are hand-placed at the real strait/cape.
 const CLOSURES = [
-  { key: 'panama',      label: 'Panama Canal' },
-  { key: 'suez',        label: 'Suez Canal' },
-  { key: 'gibraltar',   label: 'Strait of Gibraltar' },
-  { key: 'bosporus',    label: 'Bosphorus' },
-  { key: 'dardanelles', label: 'Dardanelles' },
-  { key: 'babalmandab', label: 'Bab-el-Mandeb' },
-  { key: 'ormuz',       label: 'Strait of Hormuz' },
-  { key: 'malacca',     label: 'Strait of Malacca' },
-  { key: 'sunda',       label: 'Sunda Strait' },
-  { key: 'south_africa',label: 'Cape of Good Hope route' },
-  { key: 'chili',       label: 'Cape Horn / Magellan route' },
+  { key: 'panama',      label: 'Panama Canal',            lat: 9.08,   lon: -79.68 },
+  { key: 'suez',        label: 'Suez Canal',              lat: 30.42,  lon: 32.35 },
+  { key: 'gibraltar',   label: 'Strait of Gibraltar',      lat: 35.97,  lon: -5.6 },
+  { key: 'bosporus',    label: 'Bosphorus',                lat: 41.12,  lon: 29.08 },
+  { key: 'dardanelles', label: 'Dardanelles',              lat: 40.13,  lon: 26.4 },
+  { key: 'babalmandab', label: 'Bab-el-Mandeb',            lat: 12.58,  lon: 43.38 },
+  { key: 'ormuz',       label: 'Strait of Hormuz',         lat: 26.56,  lon: 56.25 },
+  { key: 'malacca',     label: 'Strait of Malacca',        lat: 1.26,   lon: 103.82 },
+  { key: 'sunda',       label: 'Sunda Strait',             lat: -6.0,   lon: 105.87 },
+  { key: 'south_africa',label: 'Cape of Good Hope route',  lat: -34.35, lon: 18.47 },
+  { key: 'chili',       label: 'Cape Horn / Magellan route', lat: -55.98, lon: -67.28 },
 ];
 
 // ── MAP INIT ──
@@ -428,6 +451,38 @@ Promise.all([
 });
 
 // ── CLOSURE CHECKBOXES ──
+// A small diamond "gate" glyph at each named chokepoint — always on the map
+// (independent of whether a route currently uses it), so the chokepoints
+// themselves are a visible reference layer. Neutral/open by default; turns
+// red with an X the moment its closure checkbox is checked, so "where we've
+// added risk" is visible on the map itself, not just in the side panel.
+function gateIcon(closed) {
+  const stroke = closed ? '#B91C1C' : '#0A2540';
+  const fill = closed ? '#B91C1C' : '#FFFFFF';
+  const cross = closed
+    ? '<line x1="5.5" y1="5.5" x2="10.5" y2="10.5" stroke="#FFFFFF" stroke-width="1.3"/><line x1="10.5" y1="5.5" x2="5.5" y2="10.5" stroke="#FFFFFF" stroke-width="1.3"/>'
+    : '';
+  const svg = `
+    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3.2" y="3.2" width="9.6" height="9.6" rx="1.5" transform="rotate(45 8 8)"
+            fill="${fill}" stroke="${stroke}" stroke-width="1.3" opacity="${closed ? 1 : 0.9}"/>
+      ${cross}
+    </svg>`;
+  return L.divIcon({ html: svg, className: 'narrows-gate', iconSize: [16, 16], iconAnchor: [8, 8], tooltipAnchor: [0, -10] });
+}
+const gatesLayerGroup = L.layerGroup().addTo(map);
+const gateMarkers = {};
+CLOSURES.forEach((c) => {
+  const marker = L.marker([c.lat, c.lon], { icon: gateIcon(false) })
+    .bindTooltip(c.label, { direction: 'top', offset: [0, -10] })
+    .addTo(gatesLayerGroup);
+  gateMarkers[c.key] = marker;
+});
+document.getElementById('gates-toggle').addEventListener('change', (e) => {
+  if (e.target.checked) gatesLayerGroup.addTo(map);
+  else map.removeLayer(gatesLayerGroup);
+});
+
 const closureGrid = document.getElementById('closure-grid');
 CLOSURES.forEach(c => {
   const row = document.createElement('label');
@@ -436,6 +491,8 @@ CLOSURES.forEach(c => {
   row.innerHTML = `<input type="checkbox" value="${c.key}"><span>${c.label}</span>`;
   row.querySelector('input').addEventListener('change', (e) => {
     row.classList.toggle('blocked', e.target.checked);
+    const marker = gateMarkers[c.key];
+    if (marker) marker.setIcon(gateIcon(e.target.checked));
   });
   closureGrid.appendChild(row);
 });
@@ -537,10 +594,29 @@ function activeZonesForRouting() {
     }));
 }
 
+// Canal toll/dwell cost — read on every call, not opt-in per route. This is
+// deliberately NOT a "Europe-Asia only" exception: it's a flat nm-equivalent
+// cost the Worker adds to Panama/Suez transit on every route computation
+// (see marnet-router.js's DEFAULT_PASSAGE_TOLLS_NM for the derivation), so
+// Dijkstra only picks a toll canal when it's still cheaper net of that cost
+// — the same "throttle, not a switch" behavior requested. The two number
+// inputs let the illustrative default be overridden with a real figure, the
+// same pattern already used for JWC zone premiums.
+function getPassageTolls() {
+  const tolls = {};
+  const panamaEl = document.getElementById('toll-panama-input');
+  const suezEl = document.getElementById('toll-suez-input');
+  if (panamaEl && panamaEl.value !== '') tolls.panama = Math.max(0, parseFloat(panamaEl.value) || 0);
+  if (suezEl && suezEl.value !== '') tolls.suez = Math.max(0, parseFloat(suezEl.value) || 0);
+  return tolls;
+}
+
 function fetchRoute(origin, dest, restrictions, zonesForRouting) {
   const params = new URLSearchParams({ from: `${origin.lon},${origin.lat}`, to: `${dest.lon},${dest.lat}`, units: 'naut' });
   if (restrictions.length) params.set('restrictions', restrictions.join(','));
   if (zonesForRouting && zonesForRouting.length) params.set('zones', JSON.stringify(zonesForRouting));
+  const tolls = getPassageTolls();
+  if (Object.keys(tolls).length) params.set('tolls', JSON.stringify(tolls));
   return fetch(`${ROUTE_API}?${params.toString()}`).then(r => r.json());
 }
 
@@ -1423,6 +1499,36 @@ async function renderEqualEarthMapCanvas() {
     }
   });
 
+  // ── chokepoint gates — small diamonds at every named passage, red+X where
+  // that closure is currently checked, matching the live map's gate layer ──
+  if (document.getElementById('gates-toggle').checked) {
+    const blockedSet = new Set(getBlockedPassages());
+    CLOSURES.forEach((c) => {
+      const p = projection([c.lon, c.lat]);
+      if (!p) return;
+      const [x, y] = p;
+      const closed = blockedSet.has(c.key);
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(Math.PI / 4);
+      ctx.beginPath();
+      ctx.rect(-4.3, -4.3, 8.6, 8.6);
+      ctx.fillStyle = closed ? '#B91C1C' : '#FFFFFF';
+      ctx.fill();
+      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = closed ? '#B91C1C' : '#0A2540';
+      ctx.stroke();
+      ctx.restore();
+      if (closed) {
+        ctx.beginPath();
+        ctx.moveTo(x - 2.6, y - 2.6); ctx.lineTo(x + 2.6, y + 2.6);
+        ctx.moveTo(x + 2.6, y - 2.6); ctx.lineTo(x - 2.6, y + 2.6);
+        ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    });
+  }
+
   // ── legend (baked into the image — no live Leaflet control on this
   // offscreen canvas) ──
   const legendRows = [];
@@ -1437,6 +1543,12 @@ async function renderEqualEarthMapCanvas() {
       : null;
     legendRows.push({ swatch: zone.color, dash: false, label: badge ? `${zone.name} (${badge})` : zone.name, box: true });
   });
+  if (document.getElementById('gates-toggle').checked) {
+    const blockedForLegend = getBlockedPassages();
+    if (blockedForLegend.length) {
+      legendRows.push({ swatch: '#B91C1C', dash: false, label: `Closed chokepoint (red gate ✕)`, box: true });
+    }
+  }
 
   if (legendRows.length) {
     const boxW = 300;
