@@ -130,6 +130,8 @@
   .zone-badge.premium{background:var(--amber-soft);color:var(--amber)}
   .zone-del{color:var(--text-dim);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0}
   .zone-del:hover{color:var(--red)}
+  .zone-edit{color:var(--text-dim);cursor:pointer;font-size:12px;padding:0 2px;flex-shrink:0}
+  .zone-edit:hover{color:var(--navy)}
   .zones-empty{font-size:11.5px;color:var(--text-dim);font-style:italic;padding:4px 0}
   .zones-io{display:flex;gap:8px;margin-top:10px}
   .zones-io button{flex:1;background:transparent;border:1px solid var(--border-mid);border-radius:6px;padding:6px;font-size:10.5px;font-family:'DM Mono',monospace;color:var(--text-muted);cursor:pointer}
@@ -200,6 +202,25 @@
     </div>
 
     <div class="panel-section">
+      <div class="panel-h">Vessel class</div>
+      <select id="vessel-class-select" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
+        <option value="">Any / unspecified</option>
+        <option value="suezmax">Suezmax</option>
+        <option value="aframax">Aframax</option>
+        <option value="neopanamax">Neopanamax</option>
+        <option value="handymax">Handymax</option>
+        <option value="container">Container</option>
+        <option value="roro">RoRo</option>
+        <option value="lng">LNG carrier</option>
+        <option value="lpg">LPG carrier</option>
+        <option value="vlcc">VLCC (laden)</option>
+        <option value="capesize">Capesize</option>
+        <option value="ulcc">ULCC / Chinamax (300k+ DWT)</option>
+      </select>
+      <div class="closure-note" id="vessel-class-note">Auto-checks the closures below where a class physically can't fit through (draft/beam/LOA limits at Suez, Panama, Malacca) — not a preference, and not the geopolitical closures (Hormuz, Bab-el-Mandeb, etc.), which any class can transit. You can still check/uncheck anything manually afterward.</div>
+    </div>
+
+    <div class="panel-section">
       <div class="panel-h">Simulate closures</div>
       <div class="closure-grid" id="closure-grid"></div>
       <div class="closure-note">
@@ -247,7 +268,7 @@
 
 <div class="modal-backdrop" id="zone-modal" hidden>
   <div class="modal-box">
-    <h3>Name this zone</h3>
+    <h3 id="zone-modal-title">Name this zone</h3>
     <label for="zone-name-input">Name</label>
     <input type="text" id="zone-name-input" placeholder="e.g. NW Pacific cyclone season">
     <label for="zone-color-input">Color</label>
@@ -390,6 +411,38 @@ function getBlockedPassages() {
   return Array.from(closureGrid.querySelectorAll('input:checked')).map(i => i.value);
 }
 
+// ── VESSEL CLASS → AUTO-CLOSURES ──
+// Grounded in real physical limits, not preference: Suez Canal draft limits
+// mean a fully-laden VLCC generally can't transit (Wikipedia "Suezmax");
+// Panama's lock beam/LOA limits are the defining trait of "Capesize" (a
+// vessel too big for Panama, by definition — adimarships.com); the Strait
+// of Malacca's "Malaccamax" draft/beam/DWT limit excludes most Capesize and
+// VLCC-class ships (Wikipedia "Malaccamax"). Suezmax/Aframax/Neopanamax/
+// Handymax/Container/RoRo/LNG/LPG all fit within all three limits, so they
+// get no auto-closures. Geopolitical chokepoints (Hormuz, Bab-el-Mandeb,
+// Gibraltar, Bosphorus, Dardanelles) are NOT size-restricted for any class —
+// that's what the manual closure checkboxes and JWC zones are for instead.
+const VESSEL_CLASS_AUTO_CLOSURES = {
+  vlcc: ['suez', 'malacca'],
+  capesize: ['panama', 'malacca'],
+  ulcc: ['panama', 'suez', 'malacca'],
+};
+let vesselAutoApplied = new Set();
+document.getElementById('vessel-class-select').addEventListener('change', (e) => {
+  // Clear whatever the PREVIOUS selection auto-checked (only those boxes —
+  // anything the user checked manually is left alone), then apply the new
+  // selection's rule. Switching back and forth is safe/idempotent.
+  vesselAutoApplied.forEach((key) => {
+    const cb = closureGrid.querySelector(`input[value="${key}"]`);
+    if (cb && cb.checked) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
+  });
+  vesselAutoApplied = new Set(VESSEL_CLASS_AUTO_CLOSURES[e.target.value] || []);
+  vesselAutoApplied.forEach((key) => {
+    const cb = closureGrid.querySelector(`input[value="${key}"]`);
+    if (cb && !cb.checked) { cb.checked = true; cb.dispatchEvent(new Event('change')); }
+  });
+});
+
 // ── SWAP ──
 document.getElementById('swap-btn').addEventListener('click', () => {
   const o = document.getElementById('origin');
@@ -530,19 +583,22 @@ function unwrapLongitudes(coordinates) {
   return out;
 }
 
-// Small branded pin (teardrop) instead of a plain circle — navy stroke,
-// filled in the given color, used for both endpoints with different fills
-// so origin/destination read clearly at a glance and hold up in print.
+// A small editorial "point marker" — soft white halo, thin navy ring, a
+// contrasting core dot — replacing the earlier teardrop/balloon pin, which
+// read as too primary/cartoonish against a refined basemap (feedback:
+// "line colours/weights and start end logos are a bit blunt"). This is the
+// same dot-with-halo convention wayfinding/editorial maps use for point
+// features — legible at small size, doesn't compete with the route lines.
 function pinIcon(fill, inner) {
   const svg = `
-    <svg width="26" height="34" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 0C5.82 0 0 5.82 0 13c0 9.75 13 21 13 21s13-11.25 13-21C26 5.82 20.18 0 13 0z"
-            fill="${fill}" stroke="#0A2540" stroke-width="1.75"/>
-      <circle cx="13" cy="13" r="5" fill="${inner}"/>
+    <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="8.5" fill="#FFFFFF" opacity="0.55"/>
+      <circle cx="10" cy="10" r="6" fill="${fill}" stroke="#0A2540" stroke-width="1.25"/>
+      <circle cx="10" cy="10" r="2.1" fill="${inner}"/>
     </svg>`;
   return L.divIcon({
-    html: svg, className: 'narrows-pin', iconSize: [26, 34], iconAnchor: [13, 32],
-    tooltipAnchor: [0, -30],
+    html: svg, className: 'narrows-pin', iconSize: [20, 20], iconAnchor: [10, 10],
+    tooltipAnchor: [0, -14],
   });
 }
 // Navy/gold instead of white/gold — white nearly disappeared against the
@@ -557,31 +613,35 @@ function drawRoutes(originalData, rerouteData, originName, destName) {
 
   const originalLatLngs = unwrapLongitudes(originalData.coordinates);
 
-  // A dark "casing" line drawn underneath each route gives it a printed-map
-  // pop against the busy basemap instead of a single flat stroke competing
-  // with the tile texture — the same trick transit/wayfinding maps use.
+  // A dark "casing" line drawn underneath each route gives it definition
+  // against the basemap — kept thin and low-opacity (vs. the earlier thick
+  // 5.5-6px/opacity-.35-.45 version) so it reads as a subtle shadow, not a
+  // second bold stroke; the colored line on top is thinner too, with a
+  // tighter dash rhythm on the "original" line — the combined effect is a
+  // lighter, more editorial line weight instead of the earlier "primary
+  // marker" look.
   const lineCaps = { lineCap: 'round', lineJoin: 'round' };
-  L.polyline(originalLatLngs, { ...lineCaps, color: '#0A2540', weight: rerouteData ? 5.5 : 6, opacity: rerouteData ? 0.35 : 0.45 }).addTo(map);
+  L.polyline(originalLatLngs, { ...lineCaps, color: '#0A2540', weight: rerouteData ? 3.25 : 3.75, opacity: 0.2 }).addTo(map);
   originalLayer = L.polyline(originalLatLngs, {
     ...lineCaps,
     color: '#F0B429',
-    weight: rerouteData ? 3 : 3.5,
-    opacity: rerouteData ? 0.7 : 1,
-    dashArray: rerouteData ? '2,9' : null,
+    weight: rerouteData ? 1.75 : 2.25,
+    opacity: rerouteData ? 0.85 : 1,
+    dashArray: rerouteData ? '1,6' : null,
   }).addTo(map);
 
   let allLatLngs = originalLatLngs;
 
   if (rerouteData && !rerouteData.error) {
     const rerouteLatLngs = unwrapLongitudes(rerouteData.coordinates);
-    L.polyline(rerouteLatLngs, { ...lineCaps, color: '#0A2540', weight: 5.5, opacity: 0.35 }).addTo(map);
-    rerouteLayer = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#B91C1C', weight: 3, opacity: 1 }).addTo(map);
+    L.polyline(rerouteLatLngs, { ...lineCaps, color: '#0A2540', weight: 3.25, opacity: 0.2 }).addTo(map);
+    rerouteLayer = L.polyline(rerouteLatLngs, { ...lineCaps, color: '#B91C1C', weight: 2, opacity: 1 }).addTo(map);
     allLatLngs = originalLatLngs.concat(rerouteLatLngs);
   }
 
   const start = originalLatLngs[0], end = originalLatLngs[originalLatLngs.length - 1];
-  L.marker(start, { icon: originIcon }).bindTooltip(originName || 'Origin', { direction: 'top', offset: [0, -30] }).addTo(markerLayer);
-  L.marker(end, { icon: destIcon }).bindTooltip(destName || 'Destination', { direction: 'top', offset: [0, -30] }).addTo(markerLayer);
+  L.marker(start, { icon: originIcon }).bindTooltip(originName || 'Origin', { direction: 'top', offset: [0, -12] }).addTo(markerLayer);
+  L.marker(end, { icon: destIcon }).bindTooltip(destName || 'Destination', { direction: 'top', offset: [0, -12] }).addTo(markerLayer);
 
   map.fitBounds(L.latLngBounds(allLatLngs), { padding: [70, 70] });
 }
@@ -666,6 +726,7 @@ function renderZonesList() {
       <div class="zone-swatch" style="background:${zone.color}"></div>
       <div class="zone-name">${zone.name}</div>
       ${badge}
+      <span class="zone-edit" title="Edit name/behavior/%">✎</span>
       <span class="zone-del">×</span>
     `;
     row.querySelector('input').addEventListener('change', (e) => {
@@ -676,6 +737,7 @@ function renderZonesList() {
       }
       saveZones();
     });
+    row.querySelector('.zone-edit').addEventListener('click', () => openZoneModal('edit', zone));
     row.querySelector('.zone-del').addEventListener('click', () => {
       if (zone._layer) zonesLayerGroup.removeLayer(zone._layer);
       zones = zones.filter((z) => z.id !== zone.id);
@@ -713,15 +775,25 @@ function parseCoordsText(text) {
   return points;
 }
 
-function openZoneModal(mode = 'draw') {
+let editingZone = null; // set only in 'edit' mode — the zone object being edited in place
+
+// mode: 'draw' (pendingLayer already exists), 'paste' (parse coords
+// textarea), or 'edit' (editZone passed — change name/color/behavior/%
+// on an existing zone, geometry untouched). Editing is how you change a
+// loaded JWC zone's premium % to a number you've actually sourced, or
+// flip any zone between avoid/premium/info after the fact.
+function openZoneModal(mode = 'draw', editZone = null) {
   zoneEntryMode = mode;
-  document.getElementById('zone-name-input').value = '';
-  document.getElementById('zone-color-input').value = '#F0B429';
-  document.getElementById('zone-behavior-input').value = 'info';
-  document.getElementById('zone-premium-input').value = '';
-  document.getElementById('zone-premium-field').hidden = true;
-  document.getElementById('zone-coords-field').hidden = mode !== 'paste';
+  editingZone = editZone;
+  document.getElementById('zone-modal-title').textContent = mode === 'edit' ? 'Edit zone' : 'Name this zone';
+  document.getElementById('zone-name-input').value = editZone ? editZone.name : '';
+  document.getElementById('zone-color-input').value = editZone ? editZone.color : '#F0B429';
+  document.getElementById('zone-behavior-input').value = editZone ? editZone.behavior : 'info';
+  document.getElementById('zone-premium-input').value = editZone && editZone.premiumPct != null ? editZone.premiumPct : '';
+  document.getElementById('zone-premium-field').hidden = !(editZone && editZone.behavior === 'premium');
+  document.getElementById('zone-coords-field').hidden = true;
   document.getElementById('zone-coords-input').value = '';
+  document.getElementById('zone-modal-save').textContent = mode === 'edit' ? 'Save changes' : 'Save zone';
   zoneModal.hidden = false;
   document.getElementById('zone-name-input').focus();
 }
@@ -735,13 +807,31 @@ document.getElementById('zone-behavior-input').addEventListener('change', (e) =>
 document.getElementById('zone-modal-cancel').addEventListener('click', () => {
   if (pendingLayer) drawnItems.removeLayer(pendingLayer);
   pendingLayer = null;
+  editingZone = null;
   closeZoneModal();
 });
 document.getElementById('zone-modal-save').addEventListener('click', () => {
   const name = document.getElementById('zone-name-input').value.trim() || 'Untitled zone';
   const color = document.getElementById('zone-color-input').value;
-  const behavior = document.getElementById('zone-behavior-input').value; // 'info' | 'avoid' | 'premium' — label only for now, see note below
+  const behavior = document.getElementById('zone-behavior-input').value; // 'info' | 'avoid' | 'premium'
   const premiumPct = behavior === 'premium' ? (parseFloat(document.getElementById('zone-premium-input').value) || 0) : null;
+
+  // Editing an existing zone (including a loaded JWC zone) — same name/
+  // color/behavior/% fields, geometry untouched. This is how you overwrite
+  // an illustrative JWC premium % with a number you've actually sourced.
+  if (zoneEntryMode === 'edit' && editingZone) {
+    editingZone.name = name;
+    editingZone.color = color;
+    editingZone.behavior = behavior;
+    editingZone.premiumPct = premiumPct;
+    saveZones();
+    if (editingZone._layer) zonesLayerGroup.removeLayer(editingZone._layer);
+    renderZone(editingZone);
+    renderZonesList();
+    editingZone = null;
+    closeZoneModal();
+    return;
+  }
 
   // behavior/premiumPct are sent to the routing Worker on every compute
   // (see activeZonesForRouting()/fetchRoute()): 'avoid' hard-excludes any
@@ -908,7 +998,7 @@ document.getElementById('load-jwc-btn').addEventListener('click', () => {
   }
   saveZones();
   initZones();
-  alert(`Loaded ${added} JWC listed area(s). Boundaries are from the current JWC circular (JWLA-034); premium % on the two "premium" zones is an illustrative midpoint of researched rate ranges, not a quoted rate — Gulf of Guinea and Cabo Delgado have no published rate, so they're loaded as hard "avoid" zones instead.`);
+  alert(`Loaded ${added} JWC listed area(s). Boundaries are from the current JWC circular (JWLA-034); premium % on the two "premium" zones is an illustrative midpoint of researched rate ranges, not a quoted rate — Gulf of Guinea and Cabo Delgado have no published rate, so they're loaded as hard "avoid" zones instead. Click the ✎ next to any zone to edit its name, behavior, or % if you have a real number to use instead.`);
 });
 
 // ── ZONE EXPORT / IMPORT (JSON backup/portability across browsers) ──
@@ -1089,10 +1179,10 @@ async function renderEqualEarthMapCanvas() {
   // "too primary" feedback ──
   function drawRouteLine(coordinates, { color, dash, width: w }) {
     const mls = routeToMultiLineString(coordinates);
-    // casing
+    // casing — thin, low-opacity shadow rather than a second bold stroke
     ctx.beginPath(); path(mls);
-    ctx.strokeStyle = 'rgba(10,37,64,.55)';
-    ctx.lineWidth = w + 2;
+    ctx.strokeStyle = 'rgba(10,37,64,.22)';
+    ctx.lineWidth = w + 1.3;
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.setLineDash([]);
     ctx.stroke();
@@ -1105,23 +1195,26 @@ async function renderEqualEarthMapCanvas() {
     ctx.setLineDash([]);
   }
 
+  // Matches the live map's refined dot-with-halo marker style (see pinIcon()
+  // above) — soft white halo, thin navy ring, contrasting core.
   function drawEndpointMarker(lonLat, fill, inner) {
     const p = projection(lonLat);
     if (!p) return;
     const [x, y] = p;
-    ctx.beginPath(); ctx.arc(x, y, 6.5, 0, 2 * Math.PI);
-    ctx.fillStyle = '#0A2540'; ctx.fill();
-    ctx.beginPath(); ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.beginPath(); ctx.arc(x, y, 8, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 5.5, 0, 2 * Math.PI);
     ctx.fillStyle = fill; ctx.fill();
+    ctx.lineWidth = 1.25; ctx.strokeStyle = '#0A2540'; ctx.stroke();
     ctx.beginPath(); ctx.arc(x, y, 2, 0, 2 * Math.PI);
     ctx.fillStyle = inner; ctx.fill();
   }
 
   if (lastCompute && !lastCompute.originalData.error) {
     const { originalData, rerouteData } = lastCompute;
-    drawRouteLine(originalData.coordinates, { color: '#F0B429', dash: rerouteData ? [7, 5] : [], width: 2.25 });
+    drawRouteLine(originalData.coordinates, { color: '#F0B429', dash: rerouteData ? [2, 6] : [], width: rerouteData ? 1.75 : 2.1 });
     if (rerouteData && !rerouteData.error) {
-      drawRouteLine(rerouteData.coordinates, { color: '#B91C1C', dash: [], width: 2.5 });
+      drawRouteLine(rerouteData.coordinates, { color: '#B91C1C', dash: [], width: 2 });
     }
     drawEndpointMarker(originalData.coordinates[0], '#0A2540', '#FFFFFF');
     const destCoords = originalData.coordinates[originalData.coordinates.length - 1];
