@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="NARROWS-RATES.js"></script>
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -119,6 +121,14 @@
     .alt-route-name{font-size:11px;font-weight:600;color:#0e7490}
     .alt-route-days{font-size:10px;font-family:'DM Mono',monospace;color:var(--text-muted)}
     .alt-route-cost{font-size:10px;font-family:'DM Mono',monospace;color:#b45309}
+
+    /* ── route map (map-printer.html's canvas renderer, trimmed: no
+       Leaflet, no zone editing — just land + std/alt lines + endpoints,
+       baked to a PNG once per corridor and reused across every vessel
+       row that shares it) ── */
+    .route-map-wrap{margin-top:8px;border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#CFDDE3;line-height:0}
+    .route-map-img{display:block;width:100%;height:auto}
+    .rmap-loading{padding:28px 0;text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;line-height:1.5}
     .alt-source{font-size:9px;color:var(--text-dim);margin-top:3px;font-style:italic}
     .btn-divert-pre{width:100%;margin-top:8px;background:transparent;border:1px solid var(--green);border-radius:4px;color:var(--green);padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
     .btn-divert-pre:hover{background:var(--green);color:#fff}
@@ -509,7 +519,10 @@ async function loadRoutes(){
       const viaLabel = describeRoute(alt.passagesUsed);
       // No single extraDays here anymore — that's now per-vessel (class +
       // CII grade change effective speed), computed in computeDivertCost.
-      return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed, viaLabel }];
+      // standardCoords/altCoords: the actual route geometry (real, from the
+      // same routing engine — not decorative), kept alongside the distances
+      // so the map below can draw exactly what the numbers describe.
+      return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed, viaLabel, standardCoords: std.coordinates, altCoords: alt.coordinates }];
     }));
     results.forEach(([id, data])=>{ routeData[id] = data; });
     const summary = results.map(([id,d])=>`${CORRIDORS[id].label}: +${Math.round(d.altNm-d.standardNm).toLocaleString()}nm`).join(' · ');
@@ -527,8 +540,21 @@ function detailsHtml(v, corridorId){
   const ep = c.real ? REAL_ROUTES[corridorId] : TERMINAL_ENDPOINTS[corridorId];
   const cargo = CARGO_DETAIL[v.cls] || v.cls;
   let routeLine = '';
-  if(c.real && routeData[corridorId]){
-    routeLine = `<div class="dl-row"><span class="dl-k">Standard route</span><span class="dl-v">${Math.round(routeData[corridorId].standardNm).toLocaleString()}nm via ${describeRoute(routeData[corridorId].standardPassages)}</span></div>`;
+  let mapHtml = '';
+  const rd = c.real ? routeData[corridorId] : null;
+  if(rd){
+    routeLine = `<div class="dl-row"><span class="dl-k">Standard route</span><span class="dl-v">${Math.round(rd.standardNm).toLocaleString()}nm via ${describeRoute(rd.standardPassages)}</span></div>`;
+    if(rd.altNm != null){
+      routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">${Math.round(rd.altNm).toLocaleString()}nm via ${describeRoute(rd.altPassages)} (+${Math.round(rd.altNm-rd.standardNm).toLocaleString()}nm)</span></div>`;
+    }
+    // Map-printer's own canvas renderer (land + route lines + endpoint
+    // markers), trimmed down and pointed at this corridor's real coordinates
+    // instead of the Leaflet editor's current layer set. One placeholder per
+    // vessel row, filled/cached per corridor by attachRouteMaps() after the
+    // HTML lands in the DOM — a canvas can't be drawn from a template string.
+    if(rd.standardCoords){
+      mapHtml = `<div class="route-map-wrap" data-corridor="${corridorId}"><div class="rmap-loading">Loading route map&hellip;</div></div>`;
+    }
   }
   return `<div class="detail-box" id="details-${v.id}">
     <div class="dl-row"><span class="dl-k">IMO</span><span class="dl-v">${v.imo}</span></div>
@@ -538,7 +564,7 @@ function detailsHtml(v, corridorId){
     <div class="dl-row"><span class="dl-k">Value at risk</span><span class="dl-v">${fmtM(v.val)}</span></div>
     <div class="dl-row"><span class="dl-k">Strait ETA</span><span class="dl-v">${fmtEta(v.eta)}</span></div>
     ${routeLine}
-  </div>`;
+  </div>${mapHtml}`;
 }
 
 function corrCell(c){
@@ -674,6 +700,197 @@ function executeCascade(){
 }
 
 function resetScenario(){ diverted.clear(); renderAll(); }
+
+// ---- Route map (ported from map-printer.html) -----------------------------
+// Same offscreen-canvas technique as the map printer's exporter — a D3
+// Mercator projection, world land as a topojson feature, route lines drawn
+// with a navy casing + colored stroke on top, dot-with-halo endpoint markers.
+// What's cut: the Leaflet editor, zone drawing, the trade-flow ensemble and
+// the export/PNG-download chrome — none of that applies to a read-only inline
+// map keyed off a fixed corridor's real coordinates.
+//
+// One addition map-printer.html doesn't need: d3.geoMercator's default
+// antimeridian clipping cuts any line that crosses true lon=180, which the
+// Panama corridor's standard route (Houston → Shanghai, straight across the
+// Pacific) does. Rather than split the route into two disconnected on-screen
+// segments (map-printer's routeToMultiLineString approach, built for a
+// Leaflet viewport that's never centered anywhere near the date line),
+// this rotates the whole projection so the corridor's own midpoint sits at
+// its center — the antimeridian seam lands somewhere on the far side of the
+// globe, nowhere near this route, so the line just draws as one continuous
+// curve with no special-casing needed downstream.
+let _worldLandCache = null;
+async function loadWorldLand(){
+  if(_worldLandCache) return _worldLandCache;
+  const topo = await d3.json('https://unpkg.com/world-atlas@2/land-110m.json');
+  _worldLandCache = topojson.feature(topo, topo.objects.land);
+  return _worldLandCache;
+}
+
+const routeMapCache = {}; // corridorId -> data URL (canvas pixels don't survive cloneNode, so cache the PNG, not the element)
+
+async function buildCorridorMapCanvas(corridorId){
+  const rd = routeData[corridorId];
+  if(!rd || !rd.standardCoords) return null;
+  const width = 640, height = 320, pad = 30;
+  const canvas = document.createElement('canvas');
+  canvas.width = width; canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  const stdCoords = rd.standardCoords;
+  const altCoords = rd.altCoords || [];
+  const allCoords = stdCoords.concat(altCoords);
+
+  // Unwrap longitudes across the combined route so a date-line-crossing
+  // corridor averages to a sane center instead of canceling out near 0.
+  const unwrapped = [allCoords[0][0]];
+  for(let i=1;i<allCoords.length;i++){
+    let lon = allCoords[i][0];
+    while(lon - unwrapped[i-1] > 180) lon -= 360;
+    while(lon - unwrapped[i-1] < -180) lon += 360;
+    unwrapped.push(lon);
+  }
+  const rawCenter = unwrapped.reduce((a,b)=>a+b,0) / unwrapped.length;
+  const centerLon = ((rawCenter % 360) + 540) % 360 - 180; // normalize to [-180,180]
+
+  const rawProjection = d3.geoMercator().rotate([-centerLon,0]).scale(1).translate([0,0]);
+  const projectedPts = allCoords.map(c=>rawProjection(c)).filter(Boolean);
+  const xs = projectedPts.map(p=>p[0]), ys = projectedPts.map(p=>p[1]);
+  const boxW = (Math.max(...xs) - Math.min(...xs)) || 1e-6;
+  const boxH = (Math.max(...ys) - Math.min(...ys)) || 1e-6;
+  const fitScale = Math.min((width-pad*2)/boxW, (height-pad*2)/boxH) * 0.94;
+  const boxCenter = [(Math.min(...xs)+Math.max(...xs))/2, (Math.min(...ys)+Math.max(...ys))/2];
+  const projection = d3.geoMercator().rotate([-centerLon,0]).scale(fitScale)
+    .translate([width/2 - fitScale*boxCenter[0], height/2 - fitScale*boxCenter[1]]);
+  const path = d3.geoPath(projection, ctx);
+
+  ctx.fillStyle = '#CFDDE3';
+  ctx.fillRect(0,0,width,height);
+
+  const land = await loadWorldLand();
+  ctx.beginPath(); path(land);
+  ctx.fillStyle = '#F5F3EE';
+  ctx.fill();
+  ctx.strokeStyle = '#D8D3C7';
+  ctx.lineWidth = 0.6;
+  ctx.stroke();
+
+  ctx.strokeStyle = '#DDE4EF';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(0.5,0.5,width-1,height-1);
+
+  function drawLine(coords, color, dash, w){
+    const feature = { type:'LineString', coordinates: coords };
+    ctx.beginPath(); path(feature);
+    ctx.strokeStyle = 'rgba(10,37,64,.2)';
+    ctx.lineWidth = w+1.1;
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.setLineDash([]);
+    ctx.stroke();
+    ctx.beginPath(); path(feature);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = w;
+    ctx.setLineDash(dash||[]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  function drawMarker(lonlat, fill, inner){
+    const p = projection(lonlat);
+    if(!p) return;
+    const [x,y] = p;
+    ctx.beginPath(); ctx.arc(x,y,6.5,0,2*Math.PI);
+    ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y,4.5,0,2*Math.PI);
+    ctx.fillStyle = fill; ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = '#0A2540'; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,y,1.6,0,2*Math.PI);
+    ctx.fillStyle = inner; ctx.fill();
+  }
+  function drawLabel(lonlat, text, dy){
+    const p = projection(lonlat);
+    if(!p) return;
+    const [x,y] = p;
+    ctx.font = '600 10px "DM Sans", sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.lineJoin = 'round'; ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(245,243,238,.9)';
+    ctx.strokeText(text, x, y+dy);
+    ctx.fillStyle = '#1A3352';
+    ctx.fillText(text, x, y+dy);
+  }
+
+  drawLine(stdCoords, '#0A2540', [], 2.1);
+  if(altCoords.length) drawLine(altCoords, '#B91C1C', [2,5], 1.8);
+
+  const ep = REAL_ROUTES[corridorId];
+  drawMarker(stdCoords[0], '#0A2540', '#FFFFFF');
+  drawMarker(stdCoords[stdCoords.length-1], '#F0B429', '#0A2540');
+  drawLabel(stdCoords[0], ep.fromLabel, -12);
+  drawLabel(stdCoords[stdCoords.length-1], ep.toLabel, -12);
+
+  const legendRows = [{ swatch:'#0A2540', dash:false, label:'Standard route' }];
+  if(altCoords.length) legendRows.push({ swatch:'#B91C1C', dash:true, label:`Alternate — ${CORRIDORS[corridorId].label} closed` });
+  const lbW = 220, rowH = 16, lbH = rowH*legendRows.length + 10;
+  const lbX = width-lbW-8, lbY = height-lbH-8;
+  ctx.fillStyle = 'rgba(255,255,255,.92)';
+  ctx.strokeStyle = '#DDE4EF';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect ? ctx.roundRect(lbX,lbY,lbW,lbH,5) : ctx.rect(lbX,lbY,lbW,lbH);
+  ctx.fill(); ctx.stroke();
+  legendRows.forEach((row,i)=>{
+    const ry = lbY+8+i*rowH+5;
+    ctx.beginPath();
+    ctx.moveTo(lbX+10, ry); ctx.lineTo(lbX+24, ry);
+    ctx.strokeStyle = row.swatch; ctx.lineWidth = 2.2;
+    ctx.setLineDash(row.dash ? [4,3] : []);
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#0A2540';
+    ctx.font = '10px "DM Sans", sans-serif';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText(row.label, lbX+30, ry+3);
+  });
+
+  return canvas;
+}
+
+// Fills every .route-map-wrap placeholder currently in the DOM, grouped by
+// corridor so a corridor shared by several expanded vessel rows only gets
+// drawn once. Runs after renderAll() rewrites the table innerHTML — a
+// template string can't hold a live canvas, so the placeholder gets filled
+// in as a second pass, same as any other async-after-paint widget.
+async function attachRouteMaps(){
+  const placeholders = Array.from(document.querySelectorAll('.route-map-wrap[data-corridor]'));
+  const byCorridor = {};
+  placeholders.forEach(el=>{
+    const cid = el.getAttribute('data-corridor');
+    (byCorridor[cid] = byCorridor[cid] || []).push(el);
+  });
+  for(const cid of Object.keys(byCorridor)){
+    if(routeMapCache[cid]){
+      fillRouteMapEls(cid, routeMapCache[cid]);
+      continue;
+    }
+    try{
+      const canvas = await buildCorridorMapCanvas(cid);
+      if(!canvas) continue;
+      const dataUrl = canvas.toDataURL('image/png');
+      routeMapCache[cid] = dataUrl;
+      fillRouteMapEls(cid, dataUrl);
+    }catch(err){
+      document.querySelectorAll(`.route-map-wrap[data-corridor="${cid}"] .rmap-loading`).forEach(el=>{
+        el.textContent = 'Route map unavailable';
+      });
+    }
+  }
+}
+function fillRouteMapEls(cid, dataUrl){
+  document.querySelectorAll(`.route-map-wrap[data-corridor="${cid}"]`).forEach(el=>{
+    if(el.querySelector('img')) return;
+    el.innerHTML = `<img class="route-map-img" src="${dataUrl}" alt="Route map — ${CORRIDORS[cid].label}">`;
+  });
+}
+
 // Displaced vessels can appear as more than one row (one per chokepoint their
 // new route actually passes through) — that's deliberate, it's the point of
 // showing the cascade. But a single cargo's value-at-risk must only count
@@ -761,6 +978,8 @@ function renderAll(){
   document.getElementById('colWindowTot').textContent = fmtM(winV);
   document.getElementById('colPreTot').textContent = fmtM(preV);
   document.getElementById('colDivertedTot').textContent = fmtUsd(divertedCostTotal);
+
+  attachRouteMaps();
 }
 
 buildFilterBar();
