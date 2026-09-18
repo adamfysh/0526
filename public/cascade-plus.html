@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASCADE+ | The Narrows</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="NARROWS-RATES.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#F4F7FB;--surface:#fff;--surface2:#EEF2F8;
+      --navy:#0A2540;--navy-mid:#0d304f;
+      --gold:#F0B429;
+      --text:#0A2540;--text-muted:#4A6078;--text-dim:#8FA5BB;
+      --border:#DDE4EF;--border-mid:#C0CEDF;--rule:1px solid #DDE4EF;
+      --red:#B91C1C;--red-soft:rgba(185,28,28,.09);
+      --amber:#92400E;--amber-soft:rgba(240,180,41,.12);
+      --green:#166534;--green-soft:rgba(22,101,52,.09);
+      --r:8px;
+    }
+    html{font-size:15px}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;min-height:100vh}
+
+    .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;border-bottom:3px solid var(--gold);background:var(--navy);position:sticky;top:0;z-index:100}
+    .hdr-left{display:flex;align-items:center;gap:12px}
+    .hdr-title{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:.12em}
+    .hdr-sub{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.4)}
+    .btn-sm{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;transition:all .15s}
+    .btn-sm:hover{border-color:var(--gold);color:var(--gold)}
+
+    .status-line{background:var(--navy-mid);padding:8px 32px;font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.07)}
+    .status-line.err{color:#fca5a5}
+    .status-line.ok{color:#86efac}
+
+    .clock-bar{background:var(--navy-mid);padding:9px 32px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .clock-lbl{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
+    .clock-val{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);font-weight:500}
+    .clock-btn{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.6);border-radius:4px;padding:3px 9px;font-size:10px;font-weight:600;letter-spacing:.03em;cursor:pointer;font-family:'DM Mono',monospace}
+    .clock-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .clock-date-input{background:#fff;border:1px solid rgba(255,255,255,.4);color:var(--navy);border-radius:4px;padding:3px 8px;font-size:11px;font-family:'DM Mono',monospace;color-scheme:light}
+    .clock-note{font-size:10px;color:rgba(255,255,255,.3);margin-left:auto}
+    .filter-bar{background:var(--navy-mid);padding:12px 32px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .filter-lbl{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+    .chip{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 13px;border-radius:20px;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;display:flex;align-items:center;gap:6px}
+    .chip.active{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
+    .chip-jwc{width:6px;height:6px;border-radius:50%;background:#fca5a5}
+    .chip-all{border-color:rgba(255,255,255,.3)}
+
+    .exp-strip{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.05);padding:16px 32px}
+    .exp-inner{max-width:1760px;margin:0 auto;display:grid;grid-template-columns:1.1fr repeat(3,1fr) 1fr auto;gap:0;align-items:stretch}
+    .exp-cell{padding:0 20px 0 0;border-right:1px solid rgba(255,255,255,.07)}
+    .exp-cell:nth-last-child(2){border-right:none}
+    .exp-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;margin-bottom:2px}
+    .exp-v{font-family:'DM Mono',monospace;font-size:26px;font-weight:500;line-height:1}
+    .exp-sub{font-size:10px;color:rgba(255,255,255,.28);margin-top:3px;font-family:'DM Mono',monospace}
+    .c-total{color:var(--gold)}.c-locked{color:#fca5a5}.c-window{color:#fcd34d}.c-pre{color:#86efac}.c-div{color:#67e8f9}
+    .exp-action{padding-left:20px;display:flex;flex-direction:column;justify-content:center;gap:5px}
+    .btn-cascade{background:var(--gold);color:var(--navy);border:none;border-radius:6px;padding:10px 20px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-family:'DM Mono',monospace;cursor:pointer}
+    .btn-cascade:hover{background:#e5aa20}
+    .btn-cascade:disabled{background:rgba(240,180,41,.2);color:rgba(10,37,64,.4);cursor:default}
+    .cascade-status{font-size:10px;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;text-align:center}
+
+    .main{max-width:1760px;margin:0 auto;padding:22px 32px 56px}
+    .columns{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
+    .col-lbl{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:2px}
+    .col-lbl.locked{color:var(--red)}.col-lbl.window{color:#b45309}.col-lbl.pre{color:var(--green)}.col-lbl.diverted{color:#0e7490}
+    .col-tot{font-family:'DM Mono',monospace;font-size:19px;font-weight:500;line-height:1;margin-bottom:3px}
+    .col-tot.locked{color:var(--red)}.col-tot.window{color:#b45309}.col-tot.pre{color:var(--green)}.col-tot.diverted{color:#0e7490}
+    .col-desc{font-size:11px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;min-height:33px}
+    .col-sep{border:none;border-top:2px solid;margin-bottom:10px}
+    .col-sep.locked{border-color:var(--red)}.col-sep.window{border-color:#b45309}.col-sep.pre{border-color:var(--green)}.col-sep.diverted{border-color:#0e7490}
+    .col-empty{font-size:11px;color:var(--text-dim);padding:14px 0;text-align:center;font-style:italic}
+
+    .vtable{width:100%;border-collapse:collapse}
+    .vtable thead th{text-align:left;font-size:8.5px;font-weight:700;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;padding:0 6px 5px;font-family:'DM Mono',monospace;border-bottom:1px solid var(--border-mid)}
+    .vtable thead th.num{text-align:right}
+    .vrow{cursor:pointer;border-bottom:1px solid var(--border);border-left:2px solid transparent}
+    .vrow:hover{background:var(--surface2)}
+    .vrow.locked-row{opacity:.82}
+    .vrow.locked-row .v-name{color:var(--text-muted)}
+    .vrow.diverted-row{background:#f0fdff;border-left-color:#0e7490}
+    .vrow.diverted-row:hover{background:#e3f9fc}
+    .vrow.displaced-row{background:#fffbeb;border-left-color:#b45309}
+    .vrow.displaced-row:hover{background:#fef3c7}
+    .displaced-badge{font-size:9px;color:#b45309;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-family:'DM Mono',monospace}
+    .vrow td{padding:6px 6px;vertical-align:top}
+    .v-vessel{max-width:0;width:32%}
+    .v-name{font-size:11.5px;font-weight:700;color:var(--text);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .v-note{font-size:9.5px;color:var(--text-dim);line-height:1.35;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .v-imo{font-size:9.5px;color:var(--text-dim);font-family:'DM Mono',monospace;white-space:nowrap}
+    .v-eta{font-size:10px;color:var(--text-muted);font-family:'DM Mono',monospace;white-space:nowrap}
+    .v-corr{font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--text-muted);font-family:'DM Mono',monospace;white-space:nowrap}
+    .v-corr .jwc-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--red);margin-right:3px;vertical-align:middle}
+    .cii{font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap}
+    .cii-a{background:#dcfce7;color:#166534}.cii-b{background:#dbeafe;color:#1e40af}
+    .cii-c{background:#fef3c7;color:#92400E}.cii-d{background:#fed7aa;color:#9a3412}.cii-e{background:#fee2e2;color:#991b1b}
+    .v-val{font-family:'DM Mono',monospace;font-size:12px;font-weight:600;text-align:right;white-space:nowrap}
+    .v-val.locked{color:var(--red)}.v-val.window{color:#b45309}.v-val.pre{color:var(--green)}.v-val.diverted{color:#0e7490}
+    .v-expand{font-size:9px;color:var(--text-dim);font-family:'DM Mono',monospace;text-align:right;user-select:none;width:14px}
+    .detail-row td{padding:0 6px 10px}
+    .detail-box{font-size:10.5px;color:var(--text-muted);line-height:1.6;background:var(--surface2);border-radius:6px;padding:9px 10px}
+    .detail-box .dl-row{display:flex;justify-content:space-between;gap:8px;margin-bottom:3px}
+    .detail-box .dl-k{color:var(--text-dim);font-family:'DM Mono',monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+    .detail-box .dl-v{text-align:right}
+    .committed-footer{margin-top:6px;padding-top:6px;border-top:var(--rule);font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace;text-align:center;letter-spacing:.05em;text-transform:uppercase}
+    .alt-route{margin-top:6px;padding-top:6px;border-top:var(--rule)}
+    .alt-route-row{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+    .alt-route-name{font-size:11px;font-weight:600;color:#0e7490}
+    .alt-route-days{font-size:10px;font-family:'DM Mono',monospace;color:var(--text-muted)}
+    .alt-route-cost{font-size:10px;font-family:'DM Mono',monospace;color:#b45309}
+    .alt-source{font-size:9px;color:var(--text-dim);margin-top:3px;font-style:italic}
+    .btn-divert-pre{width:100%;margin-top:8px;background:transparent;border:1px solid var(--green);border-radius:4px;color:var(--green);padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
+    .btn-divert-pre:hover{background:var(--green);color:#fff}
+    .btn-divert-pre:disabled{opacity:.4;cursor:default}
+    .btn-divert-win{width:100%;margin-top:8px;background:transparent;border:1px solid #b45309;border-radius:4px;color:#b45309;padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
+    .btn-divert-win:hover{background:#b45309;color:#fff}
+    .btn-divert-win:disabled{opacity:.4;cursor:default}
+    .footnote{font-size:11px;color:var(--text-dim);padding:18px 32px 40px;border-top:var(--rule);margin-top:14px;max-width:1760px;margin-left:auto;margin-right:auto;line-height:1.6}
+    @media(max-width:1400px){.columns{grid-template-columns:1fr 1fr}.exp-inner{grid-template-columns:repeat(2,1fr);gap:12px}}
+    @media(max-width:680px){.columns{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-left">
+    <span class="hdr-title">CASCADE+</span>
+    <span class="hdr-sub">One book, every chokepoint it touches &middot; click a vessel for details</span>
+  </div>
+  <button class="btn-sm" onclick="resetScenario()">Reset</button>
+</header>
+
+<div class="status-line" id="status">Computing real routes via narrows-routing-api&hellip;</div>
+
+<div class="clock-bar">
+  <span class="clock-lbl">Scenario clock</span>
+  <span class="clock-val" id="clockVal">--</span>
+  <button class="clock-btn" onclick="advanceTime(6)">+6h</button>
+  <button class="clock-btn" onclick="advanceTime(24)">+1d</button>
+  <button class="clock-btn" onclick="advanceTime(72)">+3d</button>
+  <input type="date" class="clock-date-input" id="clockJump" onchange="jumpToDate(this.value)">
+  <button class="clock-btn" onclick="resetClock()">Reset to today</button>
+  <span class="clock-note">Locked/window/pre are computed from each vessel's ETA against this clock, not hand-assigned</span>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <span class="filter-lbl">Corridors in this book</span>
+</div>
+
+<div class="exp-strip">
+  <div class="exp-inner">
+    <div class="exp-cell">
+      <div class="exp-lbl">Total exposure</div>
+      <div class="exp-v c-total" id="expTotal">--</div>
+      <div class="exp-sub" id="expTotalSub">--</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">Locked</div>
+      <div class="exp-v c-locked" id="expLocked">--</div>
+      <div class="exp-sub" id="expLockedSub">no option</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">In-window</div>
+      <div class="exp-v c-window" id="expWindow">--</div>
+      <div class="exp-sub" id="expWindowSub">window open</div>
+    </div>
+    <div class="exp-cell">
+      <div class="exp-lbl">Pre-commitment</div>
+      <div class="exp-v c-pre" id="expPre">--</div>
+      <div class="exp-sub" id="expPreSub">free to move</div>
+    </div>
+    <div class="exp-cell" style="border-right:none">
+      <div class="exp-lbl">Diverted &middot; real+est. cost</div>
+      <div class="exp-v c-div" id="expDiv">$0</div>
+      <div class="exp-sub" id="expDivSub">0 vessels</div>
+    </div>
+    <div class="exp-action">
+      <button class="btn-cascade" id="btnCascade" onclick="executeCascade()">Divert all pre-commitment</button>
+      <div class="cascade-status" id="cascadeStatus">across the whole book</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="columns">
+    <div>
+      <div class="col-lbl locked">Locked</div>
+      <div class="col-tot locked" id="colLockedTot">--</div>
+      <div class="col-desc">Loaded and transiting. No diversion window, whichever corridor they're in.</div>
+      <hr class="col-sep locked">
+      <div id="colLocked"></div>
+    </div>
+    <div>
+      <div class="col-lbl window">In-window</div>
+      <div class="col-tot window" id="colWindowTot">--</div>
+      <div class="col-desc">Approaching a strait. Diversion possible at the cost shown, computed per vessel's own corridor.</div>
+      <hr class="col-sep window">
+      <div id="colWindow"></div>
+      <div class="col-empty" id="colWindowEmpty" style="display:none">All diverted or committed</div>
+    </div>
+    <div>
+      <div class="col-lbl pre">Pre-commitment</div>
+      <div class="col-tot pre" id="colPreTot">--</div>
+      <div class="col-desc">Not yet loaded. Same cost basis, zero sunk cost.</div>
+      <hr class="col-sep pre">
+      <div id="colPre"></div>
+      <div class="col-empty" id="colPreEmpty" style="display:none">All diverted</div>
+    </div>
+    <div>
+      <div class="col-lbl diverted">Diverted</div>
+      <div class="col-tot diverted" id="colDivertedTot">$0</div>
+      <div class="col-desc">Rerouted. Cost is real where a real alternate route exists, flagged as an estimate where it doesn't.</div>
+      <hr class="col-sep diverted">
+      <div id="colDiverted"></div>
+      <div class="col-empty" id="colDivertedEmpty">No vessels diverted yet</div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <b>Eight corridors now, click any vessel for its route/cargo/ETA.</b> Five real-routing corridors, each computed live by <code>narrows-routing-api</code> against a real representative voyage: <b>Bab el-Mandeb</b> (&rarr; Cape of Good Hope), <b>Suez</b> (its own scenario &mdash; a Suez-specific closure with Bab still open, not the same trigger as Bab's own row above, computed separately), <b>Malacca</b> (&rarr; Sunda Strait, the graph has no separate Lombok tag), <b>Panama</b> (&rarr; whichever the engine finds shorter for that voyage), and <b>Gibraltar</b> (&rarr; the only way into the Mediterranean from the Atlantic; closing it forces the full way around via the Cape, Bab, and Suez). Three terminal-strait corridors have no alternate route to compute and are costed as flat, labeled estimates: <b>Hormuz</b>, <b>Bosphorus</b>, and <b>Danish Straits</b>.<br><br>
+    <b>Stopped at 8, not 15-20, for an honest reason.</b> Several more chokepoints Narrows already tracks elsewhere (Dover/English Channel, Kiel Canal, Mozambique Channel, Luzon Strait, St. Lawrence) do have real alternatives in the physical world, but <code>narrows-routing-api</code>'s graph has no passage tag for any of them yet, so I can't compute a real number for them the way I can for the five above. Labeling them "terminal, no alternative" the way Hormuz is would be wrong, since they're not terminal, the data just isn't there yet. Adding those tags to the graph is real engineering on the routing side, not something to fake on this page. Dardanelles was deliberately left out of the terminal set too, since it's the same physical exit as Bosphorus (a Black Sea vessel needs both to leave), not a second independent chokepoint.<br><br>
+    <b>Origins are real ports, not basins.</b> Every corridor's from/to endpoint is a named port with real coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports), not a basin-level approximation — Al Fujayrah, Jiddah, Singapore (Keppel), Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Genova. This is the same data a future map layer would need, so fixing it here first means the route math, the labels, and any eventual map all agree on where these voyages actually start and end.<br><br>
+    <b>Status is computed, not authored.</b> Locked/window/pre used to be assigned by hand per vessel. They're now derived every render from each vessel's ETA against the scenario clock in the header — move the clock forward and vessels migrate buckets on their own, the way real risk would. Diversion days are now per-vessel too: class and CII grade set an effective speed (the same "CII-adjusted effective days" idea Narrows' own Malacca/Lombok analysis already publishes), not one flat speed for every ship.<br><br>
+    <b>Diverting doesn't mean safe.</b> When a vessel diverts out of a real corridor, its actual computed alt-route is checked against every other tracked corridor's own passage signature — Panama's alt-route already runs through Suez and Bab el-Mandeb; Gibraltar's through the Cape, Bab, and Suez. If it matches, the vessel gets a second, linked row in that corridor tagged "displaced from X," with its value-at-risk moved there, not duplicated. This is the actual mechanism the name CASCADE+ refers to.<br><br>
+    <b>Built to receive shared assumptions later, not fake them now.</b> Corridors, JWC flags, and per-class speed live in one clearly marked block in this file, the same shape NARROWS-RATES.js already uses as a real shared file across CAPE and CASCADE+ — the next step is making corridors/JWC/speed a shared file the same way, so this page and CAPE/CDM stop hand-copying each other. Separately: JWC war-risk polygons newly enclosing a port should move that port's PRI score, but that's a geospatial join that belongs in the pipeline, not this page — there's a named, empty <code>PRI_JWC_OVERLAY</code> object in the code marking exactly where that feed plugs in once it exists.
+  </div>
+</div>
+
+<script>
+const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
+
+// ============================================================================
+// ASSUMPTIONS — corridors, rates, speed, JWC/PRI. Everything in this block is
+// the same kind of thing NARROWS-RATES.js already is: a single named source
+// other Narrows tools should read instead of hand-copying. Rates already work
+// this way (loaded live from NARROWS-RATES.js). Corridors, speed and JWC/PRI
+// don't yet — they're still local consts below, copied by hand from CAPE the
+// same way this page's own footnote already admits. Fixing that (pulling
+// this whole block into its own shared file CDM/CAPE/CASCADE+ all read) is
+// the next real step, not a CASCADE+-only concern.
+// ============================================================================
+
+// Corridor metadata — jwc straight from app/cape.html's canonical CORRIDORS
+// object (CAPE/CDM's own source of truth). No shared file exports this yet
+// — copied by hand, flagged as a follow-up.
+const CORRIDORS = {
+  bab:            { label:'Bab el-Mandeb',  jwc:true,  real:true  },
+  suez:           { label:'Suez',           jwc:false, real:true  },
+  malacca:        { label:'Malacca',        jwc:false, real:true  },
+  panama:         { label:'Panama',         jwc:false, real:true  },
+  gibraltar:      { label:'Gibraltar',      jwc:false, real:true  },
+  hormuz:         { label:'Hormuz',         jwc:true,  real:false },
+  bosphorus:      { label:'Bosphorus',      jwc:false, real:false },
+  danish_straits: { label:'Danish Straits', jwc:false, real:false },
+};
+
+// Real-routing corridors: one representative voyage each, standard vs.
+// blocked, plus a human label for the endpoints (shown in vessel details).
+// Coordinates are real WPI port positions (narrows-pipeline port-index,
+// wpi_cleaned.csv), lon/lat, matching what the routing API and the future
+// map integration both need. Vessels themselves remain demo-fictional —
+// only the geography and route math are real.
+const REAL_ROUTES = {
+  bab:       { from:[56.369167,25.173056], to:[4.483333,51.9],   block:['suez','babalmandab'], fromLabel:'Al Fujayrah, UAE',   toLabel:'Rotterdam, NL' },
+  suez:      { from:[39.183333,21.483333], to:[4.483333,51.9],   block:['suez'],               fromLabel:'Jiddah, SA',          toLabel:'Rotterdam, NL' },
+  malacca:   { from:[103.85,1.283333],     to:[121.5,31.216667], block:['malacca'],            fromLabel:'Singapore (Keppel)',  toLabel:'Shanghai, CN' },
+  panama:    { from:[-95.283333,29.75],    to:[121.5,31.216667], block:['panama'],             fromLabel:'Houston, US',         toLabel:'Shanghai, CN' },
+  gibraltar: { from:[-74.016667,40.7],     to:[8.922,44.398],    block:['gibraltar'],          fromLabel:'New York, US',        toLabel:'Genova, IT' },
+};
+
+// Terminal corridors: illustrative origin/destination for the details panel
+// only — no route is computed, since none exists. Coordinates are real WPI
+// port positions; only the vessel calling at them is fictional.
+const TERMINAL_ENDPOINTS = {
+  hormuz:         { fromLabel:'Ras Tannurah, SA',   from:[50.166667,26.633333], toLabel:'Asia or Europe — lost if declined' },
+  bosphorus:      { fromLabel:'Novorossiysk, RU',   from:[37.783333,44.716667], toLabel:'Mediterranean export markets' },
+  danish_straits: { fromLabel:'Primorsk, RU',       from:[28.633333,60.366667], toLabel:'North Sea / Atlantic export markets' },
+};
+
+const RATE_KEY = { Suezmax:'Suezmax', Container:'Container', LNG:'LNG_Carrier', Aframax:'Aframax', Bulk:'Handymax', VLCC:'VLCC', Neopanamax:'Neopanamax', LPG:'LPG' };
+const CARGO_DETAIL = { Suezmax:'Crude oil, ~1M bbl', VLCC:'Crude oil, ~2M bbl', Aframax:'Crude/products, ~600k bbl', Container:'Mixed containers, 4,000-8,000 TEU', LNG:'LNG, ~170,000m³', Bulk:'Grain or coal, 40-60k dwt', Neopanamax:'Mixed containers, ~13,000 TEU', LPG:'LPG, ~40,000m³' };
+
+const TERMINAL_DECLINE_COST = { VLCC:900000, Aframax:550000, Suezmax:700000, LNG:750000 };
+
+// Per-class service speed + a CII-adjusted slow-steaming penalty. This is the
+// same "CII amplifier" concept the Malacca analysis on the public site
+// already names and uses for Capesizes under Lombok diversion (~11kn vs
+// 12-13kn standard) — CASCADE+ was previously using one flat 14kn for every
+// vessel regardless of class or CII grade, which understated diversion time
+// (and therefore cost) for anything that isn't a mid-size tanker, and didn't
+// penalize low-CII vessels at all. Every vessel already carries a CII grade,
+// so this reuses data already on hand rather than inventing a new field.
+const CLASS_SPEED_KN = { VLCC:13, Suezmax:14, Aframax:13, Container:20, LNG:19, Bulk:13, Neopanamax:19, LPG:15 };
+const CII_SPEED_FACTOR = { A:1.00, B:0.97, C:0.93, D:0.88, E:0.82 };
+function effectiveSpeedKn(cls, cii){
+  const base = CLASS_SPEED_KN[cls] || 14;
+  const factor = CII_SPEED_FACTOR[cii] || 1.0;
+  return base * factor;
+}
+
+// Corridor id -> the routing-graph passage tag that means "a vessel is
+// actually transiting this corridor." Used two ways: describing a computed
+// route in plain English (below), and — new — detecting when a vessel that
+// diverted OUT of one tracked corridor has, per the real route the engine
+// gave it, been routed INTO another tracked corridor. That's the cascade:
+// Panama's real alternate route already passes through Suez and Bab
+// el-Mandeb; Gibraltar's passes through the Cape, Bab, and Suez. A vessel
+// that diverts is not risk-free, it has new, different, real exposure.
+const CORRIDOR_SIGNATURE = { bab:'babalmandab', suez:'suez', malacca:'malacca', panama:'panama', gibraltar:'gibraltar' };
+
+// JWC (war-risk listed areas) × PRI (Port Risk Index, live on the Narrows
+// site, ~3,800 ports on 4 composite dimensions) is a real relationship that
+// doesn't exist as a pipeline step yet: when a JWC polygon newly encloses a
+// port, that port's PRI score should move, and CDM/CAPE/CASCADE+ should all
+// see the update. That geospatial join belongs in narrows-pipeline, not in
+// this page. This object is the intended plug-in point for when it exists —
+// keyed by corridor id, populated by a future pipeline feed. Until then it
+// stays empty and every corridor just reads its static jwc boolean above,
+// same as CAPE does today.
+const PRI_JWC_OVERLAY = {}; // corridorId -> { pri: 0-10, jwcElevated: bool }
+
+const PASSAGE_NAMES = { south_africa:'Cape of Good Hope', gibraltar:'Suez (via Gibraltar/Med)', suez:'Suez Canal', babalmandab:'Bab el-Mandeb', sunda:'Sunda Strait', malacca:'Malacca Strait', panama:'Panama Canal', ormuz:'Strait of Hormuz', chili:'Cape Horn / Chile Strait', bosporus:'Bosphorus', dardanelles:'Dardanelles' };
+function describeRoute(passages){
+  if(!passages || !passages.length) return 'alternate route';
+  const names = passages.map(p=>PASSAGE_NAMES[p]||p);
+  const filtered = passages.includes('suez') ? names.filter(n=>n!=='Suez (via Gibraltar/Med)') : names;
+  return filtered.join(' + ');
+}
+
+// Flat per-corridor vessel lists. Locked/window/pre used to be authored here
+// directly (three separate arrays) — now they're a computed property of each
+// vessel's own `eta` against the scenario clock (see statusOf() below), so
+// there's exactly one list per corridor and no bucket to keep in sync by
+// hand. IMO and ETA are placeholders for a demo fleet; the shape is real.
+const FLEET = {
+  bab: [
+    {id:'b01',imo:'9284001',name:'ADEN RESOLVE',    cls:'Suezmax',  val:88, cii:'C', eta:'2026-09-18', note:'Gulf of Aden. Bab passage in 18h. No option.'},
+    {id:'b02',imo:'9284002',name:'MEDSTAR PELICAN', cls:'Container',val:105,cii:'B', eta:'2026-09-19', note:'Red Sea transit. MSC feeder. Committed to Suez slot.'},
+    {id:'b09',imo:'9284003',name:'LEVIATHAN',       cls:'LNG',      val:125,cii:'A', eta:'2026-09-20', note:'Gulf of Aden approach. UKMTO advisory flagged.'},
+    {id:'b12',imo:'9284004',name:'GULF ALBATROSS',  cls:'Suezmax',  val:78, cii:'D', eta:'2026-09-18', note:'Arabian Sea. Red Sea vs Cape decision.'},
+    {id:'b15',imo:'9284005',name:'HORIZON SPIRIT',  cls:'LNG',      val:132,cii:'A', eta:'2026-10-09', note:'UK-flagged LNG. Loading T-18. Cape route preferred.'},
+    {id:'b17',imo:'9284006',name:'ADEN CROWN',      cls:'Suezmax',  val:88, cii:'C', eta:'2026-10-12', note:'Crude. Loading T-21. Redirect to Cape without penalty.'},
+  ],
+  suez: [
+    {id:'s01',imo:'9284007',name:'PORT SAID GLORY', cls:'Container',val:96, cii:'B', eta:'2026-09-17', note:'Northbound in the canal itself. No option.'},
+    {id:'s02',imo:'9284008',name:'RED SEA MARINER', cls:'Suezmax',  val:80, cii:'C', eta:'2026-09-18', note:'Red Sea, Suez-bound. Grounding advisory issued.'},
+    {id:'s03',imo:'9284009',name:'JEDDAH TRADER',   cls:'Aframax',  val:60, cii:'D', eta:'2026-10-09', note:'Products. Loading T-19. Full routing optionality.'},
+  ],
+  malacca: [
+    {id:'m01',imo:'9284010',name:'EASTBOUND PIONEER',cls:'Container',val:152,cii:'B', eta:'2026-09-19', note:'Mega-box ship. Malacca transit booked. Fully committed.'},
+    {id:'m11',imo:'9284011',name:'SUNDA WIND',       cls:'Suezmax',  val:92, cii:'C', eta:'2026-09-19', note:'Indian Ocean. Malacca vs Sunda decision.'},
+    {id:'m17',imo:'9284012',name:'APOLLO NAVIGATOR', cls:'Container',val:162,cii:'B', eta:'2026-10-16', note:'Mega-box. Loading T-20. Sunda routing viable.'},
+    {id:'m18',imo:'9284013',name:'PEARL RIVER',      cls:'LNG',      val:138,cii:'A', eta:'2026-10-18', note:'LNG carrier. Loading T-22. Sunda route at zero premium.'},
+  ],
+  panama: [
+    {id:'p01',imo:'9284014',name:'PACIFIC BRIDGE',   cls:'Neopanamax',val:100,cii:'B', eta:'2026-09-17', note:'Neopanamax container. Mid-canal transit. No option.'},
+    {id:'p03',imo:'9284015',name:'ISTHMUS TRADER',   cls:'Neopanamax',val:96, cii:'C', eta:'2026-09-18', note:'Pacific approach. Canal slot vs reroute decision.'},
+    {id:'p05',imo:'9284016',name:'GATUN VOYAGER',    cls:'Suezmax',   val:88, cii:'C', eta:'2026-10-10', note:'Crude. Loading not yet confirmed. Full routing optionality.'},
+  ],
+  gibraltar: [
+    {id:'g01',imo:'9284017',name:'ATLANTIC GATEWAY', cls:'Container', val:110,cii:'B', eta:'2026-09-18', note:'Approaching the Strait. No option.'},
+    {id:'g02',imo:'9284018',name:'IBERIA STAR',      cls:'Aframax',   val:68, cii:'D', eta:'2026-09-18', note:'Mid-Atlantic. Gibraltar closure advisory issued.'},
+    {id:'g03',imo:'9284019',name:'LIGURIAN DAWN',    cls:'Suezmax',   val:84, cii:'C', eta:'2026-10-05', note:'Crude. Loading not yet confirmed.'},
+  ],
+  hormuz: [
+    {id:'h01',imo:'9284020',name:'NAIROBI PEARL',  cls:'VLCC',   val:125,cii:'B', eta:'2026-09-17', note:'Loaded at Ras Tannurah. Mid-Strait transit. No option.'},
+    {id:'h10',imo:'9284021',name:'DAWN PIONEER',   cls:'VLCC',   val:110,cii:'C', eta:'2026-09-20', note:'Fujairah approach. Window closes at 0600Z.'},
+    {id:'h17',imo:'9284022',name:'AURORA RESOLVE', cls:'VLCC',   val:128,cii:'A', eta:'2026-10-12', note:'Liftings confirmed. Vessel not nominated. Zero diversion cost.'},
+  ],
+  bosphorus: [
+    {id:'k01',imo:'9284023',name:'BLACK SEA PRIDE',  cls:'Suezmax', val:84, cii:'C', eta:'2026-09-18', note:'Loaded Novorossiysk. Bosphorus transit booked. No option.'},
+    {id:'k02',imo:'9284024',name:'PONTUS STAR',      cls:'Aframax', val:60, cii:'D', eta:'2026-09-18', note:'Black Sea approach. Convoy slot pending.'},
+    {id:'k03',imo:'9284025',name:'MARMARA LIGHT',    cls:'Suezmax', val:80, cii:'D', eta:'2026-10-06', note:'Liftings not yet confirmed. Re-nomination possible.'},
+  ],
+  danish_straits: [
+    {id:'d01',imo:'9284026',name:'BALTIC CARRIER',   cls:'Aframax', val:58, cii:'D', eta:'2026-09-18', note:'Loaded Primorsk. Danish Straits transit booked. No option.'},
+    {id:'d02',imo:'9284027',name:'KATTEGAT TRADER',  cls:'Suezmax', val:76, cii:'C', eta:'2026-09-18', note:'Baltic approach. Ice-season routing review pending.'},
+    {id:'d03',imo:'9284028',name:'OERESUND STAR',    cls:'LNG',     val:110,cii:'A', eta:'2026-10-08', note:'Liftings not yet confirmed. Full routing optionality.'},
+  ],
+};
+
+// ---- Scenario clock -------------------------------------------------------
+// Two clocks, on purpose (per discussion): a settable/scrubbable "as-of" for
+// demoing and testing inaction ("it's the 19th now, nothing was done"), and
+// a real wall clock for eventual live use. Everything else reads time only
+// through getNow() — swapping demo mode for live mode later is a one-line
+// change to that function, not a rewrite.
+const TODAY_ISO = '2026-09-17';
+let scenarioNow = new Date(TODAY_ISO+'T08:00:00Z');
+function getNow(){ return scenarioNow; }
+function setNow(d){ scenarioNow = d; renderAll(); updateClockUI(); }
+function advanceTime(hours){ setNow(new Date(scenarioNow.getTime() + hours*3600*1000)); }
+function jumpToDate(iso){ if(iso) setNow(new Date(iso+'T08:00:00Z')); }
+function resetClock(){ setNow(new Date(TODAY_ISO+'T08:00:00Z')); document.getElementById('clockJump').value = TODAY_ISO; }
+function updateClockUI(){
+  document.getElementById('clockVal').textContent = scenarioNow.toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit', timeZone:'UTC' }) + ' UTC';
+}
+
+// Locked/window/pre are now computed from each vessel's ETA against the
+// scenario clock, not authored per-vessel. LOCK_THRESHOLD_H is roughly "at
+// or inside the strait, no real option left"; WINDOW_THRESHOLD_H is roughly
+// "the diversion decision is live." Past that, a vessel is pre-commitment —
+// full optionality, nothing urgent yet.
+const LOCK_THRESHOLD_H = 30;
+const WINDOW_THRESHOLD_H = 96;
+function hoursToEta(v){ return (new Date(v.eta+'T00:00:00Z').getTime() - getNow().getTime()) / 3600000; }
+function statusOf(v){
+  const h = hoursToEta(v);
+  if(h <= LOCK_THRESHOLD_H) return 'locked';
+  if(h <= WINDOW_THRESHOLD_H) return 'window';
+  return 'pre';
+}
+
+const routeData = {};
+const diverted = new Map();
+const expanded = new Set();
+const activeFilters = new Set(Object.keys(CORRIDORS));
+
+function fmtM(m){ return '$'+m+'M'; }
+function fmtUsd(n){ return n>=1e6 ? '$'+(n/1e6).toFixed(2)+'M' : '$'+Math.round(n/1e3)+'K'; }
+function dayRate(cls){
+  const key = RATE_KEY[cls];
+  const r = window.NARROWS_RATES && window.NARROWS_RATES.vesselRates && window.NARROWS_RATES.vesselRates[key];
+  return r ? r.bunkerPerDay + r.charterPerDay : null;
+}
+function computeDivertCost(v, corridorId){
+  const c = CORRIDORS[corridorId];
+  if(c.real){
+    const rd = routeData[corridorId];
+    if(!rd) return null;
+    const rate = dayRate(v.cls);
+    if(rate == null) return null;
+    // Per-vessel, not per-corridor: two vessels diverting the same corridor
+    // take a different number of days depending on class and CII grade, since
+    // speed differs. This is the CII-adjusted-effective-days idea already
+    // used elsewhere in Narrows' own published work, applied here.
+    const speedKn = effectiveSpeedKn(v.cls, v.cii);
+    const extraDays = (rd.altNm - rd.standardNm) / (speedKn * 24);
+    return { cost: extraDays * rate, real:true, label:'via '+rd.viaLabel, days:extraDays, speedKn, altPassages: rd.altPassages };
+  }
+  const flat = TERMINAL_DECLINE_COST[v.cls];
+  if(flat == null) return null;
+  return { cost: flat, real:false, label:'Decline transit, re-source elsewhere', days:0 };
+}
+
+// After a vessel diverts out of a real corridor, check whether the actual
+// computed alt-route passes through any OTHER tracked real corridor's own
+// signature passage. If it does, the vessel isn't risk-free — it now has
+// new, real exposure in that corridor too. Panama's alt route already goes
+// through Suez + Bab el-Mandeb; Gibraltar's goes through the Cape, Bab, and
+// Suez. This is the cascade the tool is named for, not a UI flourish.
+function computeDisplacement(corridorId){
+  const rd = routeData[corridorId];
+  if(!rd || !rd.altPassages) return [];
+  return Object.keys(CORRIDOR_SIGNATURE).filter(cid=>
+    cid !== corridorId && rd.altPassages.includes(CORRIDOR_SIGNATURE[cid])
+  );
+}
+
+function buildFilterBar(){
+  const bar = document.getElementById('filterBar');
+  const allChip = document.createElement('button');
+  allChip.className = 'chip chip-all active';
+  allChip.id = 'chip-all';
+  allChip.textContent = 'All';
+  allChip.onclick = ()=>{ Object.keys(CORRIDORS).forEach(id=>activeFilters.add(id)); syncChips(); renderAll(); };
+  bar.appendChild(allChip);
+  Object.entries(CORRIDORS).forEach(([id, c])=>{
+    const chip = document.createElement('button');
+    chip.className = 'chip active';
+    chip.id = 'chip-'+id;
+    chip.innerHTML = (c.jwc ? '<span class="chip-jwc"></span>' : '') + c.label;
+    chip.onclick = ()=>toggleFilter(id);
+    bar.appendChild(chip);
+  });
+}
+function syncChips(){ Object.keys(CORRIDORS).forEach(id=>document.getElementById('chip-'+id).classList.toggle('active', activeFilters.has(id))); }
+function toggleFilter(id){ if(activeFilters.has(id)) activeFilters.delete(id); else activeFilters.add(id); syncChips(); renderAll(); }
+function toggleExpand(id){ if(expanded.has(id)) expanded.delete(id); else expanded.add(id); renderAll(); }
+
+async function loadRoutes(){
+  const statusEl = document.getElementById('status');
+  const entries = Object.entries(REAL_ROUTES);
+  try{
+    const results = await Promise.all(entries.map(async ([id, r])=>{
+      const stdUrl = `${ROUTE_API}?from=${r.from.join(',')}&to=${r.to.join(',')}&units=naut`;
+      const altUrl = `${ROUTE_API}?from=${r.from.join(',')}&to=${r.to.join(',')}&units=naut&restrictions=${r.block.join(',')}`;
+      const [stdRes, altRes] = await Promise.all([fetch(stdUrl), fetch(altUrl)]);
+      if(!stdRes.ok || !altRes.ok) throw new Error(id+': routing API returned non-200');
+      const std = await stdRes.json();
+      const alt = await altRes.json();
+      if(std.error || alt.error) throw new Error(id+': '+(std.error||alt.error));
+      const viaLabel = describeRoute(alt.passagesUsed);
+      // No single extraDays here anymore — that's now per-vessel (class +
+      // CII grade change effective speed), computed in computeDivertCost.
+      return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed, viaLabel }];
+    }));
+    results.forEach(([id, data])=>{ routeData[id] = data; });
+    const summary = results.map(([id,d])=>`${CORRIDORS[id].label}: +${Math.round(d.altNm-d.standardNm).toLocaleString()}nm`).join(' · ');
+    statusEl.textContent = `Live routes: ${summary}. Diversion days now depend on each vessel's class + CII grade, not one flat speed. Hormuz/Bosphorus/Danish Straits have no reroute — flat estimates, not routed.`;
+    statusEl.className = 'status-line ok';
+  }catch(err){
+    statusEl.textContent = `Could not reach narrows-routing-api (${err.message}). Real-routing corridors' diversion costs are unavailable until this loads — the three terminal-strait corridors still work.`;
+    statusEl.className = 'status-line err';
+  }
+  renderAll();
+}
+
+function detailsHtml(v, corridorId){
+  const c = CORRIDORS[corridorId];
+  const ep = c.real ? REAL_ROUTES[corridorId] : TERMINAL_ENDPOINTS[corridorId];
+  const cargo = CARGO_DETAIL[v.cls] || v.cls;
+  let routeLine = '';
+  if(c.real && routeData[corridorId]){
+    routeLine = `<div class="dl-row"><span class="dl-k">Standard route</span><span class="dl-v">${Math.round(routeData[corridorId].standardNm).toLocaleString()}nm via ${describeRoute(routeData[corridorId].standardPassages)}</span></div>`;
+  }
+  return `<div class="detail-box" id="details-${v.id}">
+    <div class="dl-row"><span class="dl-k">IMO</span><span class="dl-v">${v.imo}</span></div>
+    <div class="dl-row"><span class="dl-k">Origin</span><span class="dl-v">${ep.fromLabel}</span></div>
+    <div class="dl-row"><span class="dl-k">Destination</span><span class="dl-v">${ep.toLabel}</span></div>
+    <div class="dl-row"><span class="dl-k">Cargo</span><span class="dl-v">${cargo}</span></div>
+    <div class="dl-row"><span class="dl-k">Value at risk</span><span class="dl-v">${fmtM(v.val)}</span></div>
+    <div class="dl-row"><span class="dl-k">Strait ETA</span><span class="dl-v">${fmtEta(v.eta)}</span></div>
+    ${routeLine}
+  </div>`;
+}
+
+function corrCell(c){
+  return `${c.jwc?'<span class="jwc-dot"></span>':''}${c.label}`;
+}
+
+function fmtEta(iso){
+  if(!iso) return '—';
+  const d = new Date(iso+'T00:00:00Z');
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'UTC' });
+}
+
+function makeLockedRow(v, corridorId){
+  const c = CORRIDORS[corridorId];
+  const isOpen = expanded.has(v.id);
+  let html = `<tr class="vrow locked-row" onclick="toggleExpand('${v.id}')">
+    <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls} &middot; ${v.note}</div></td>
+    <td class="v-imo">${v.imo}</td>
+    <td class="v-corr">${corrCell(c)}</td>
+    <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
+    <td class="v-eta">${fmtEta(v.eta)}</td>
+    <td class="v-val locked">${fmtM(v.val)}</td>
+    <td class="v-expand">${isOpen?'▴':'▾'}</td>
+  </tr>`;
+  if(isOpen){
+    html += `<tr class="detail-row"><td colspan="7">${detailsHtml(v, corridorId)}<div class="committed-footer">No diversion window</div></td></tr>`;
+  }
+  return html;
+}
+
+function makeDivertableRow(v, corridorId, wt){
+  const c = CORRIDORS[corridorId];
+  const isOpen = expanded.has(v.id);
+  const d = computeDivertCost(v, corridorId);
+  const disabled = d == null;
+  const btnCls = wt==='window' ? 'btn-divert-win' : 'btn-divert-pre';
+  const label = disabled ? 'Route not loaded' : `${d.label} → ${fmtUsd(d.cost)}${d.real ? ' (+'+d.days.toFixed(1)+'d)' : ' (est.)'}`;
+  const h = hoursToEta(v);
+  const winTag = wt==='window' ? ` &middot; window closes in ${Math.max(0,Math.round(h))}h` : '';
+  let html = `<tr class="vrow" onclick="toggleExpand('${v.id}')">
+    <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls}${winTag} &middot; ${v.note}</div></td>
+    <td class="v-imo">${v.imo}</td>
+    <td class="v-corr">${corrCell(c)}</td>
+    <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
+    <td class="v-eta">${fmtEta(v.eta)}</td>
+    <td class="v-val ${wt}">${fmtM(v.val)}</td>
+    <td class="v-expand">${isOpen?'▴':'▾'}</td>
+  </tr>`;
+  if(isOpen){
+    html += `<tr class="detail-row"><td colspan="7">${detailsHtml(v, corridorId)}<button class="${btnCls}" ${disabled?'disabled':''} onclick="event.stopPropagation();divertVessel('${v.id}','${corridorId}','${wt}')">Divert &rarr; ${label}</button></td></tr>`;
+  }
+  return html;
+}
+
+function makeDivertedRow(v, info){
+  const c = CORRIDORS[info.corridor];
+  const isOpen = expanded.has(v.id);
+  let html = `<tr class="vrow diverted-row" onclick="toggleExpand('${v.id}')">
+    <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls} &middot; ${info.detail.label}</div></td>
+    <td class="v-imo">${v.imo}</td>
+    <td class="v-corr">${corrCell(c)}</td>
+    <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
+    <td class="v-eta">${fmtEta(v.eta)}</td>
+    <td class="v-val diverted">${fmtUsd(info.detail.cost)}</td>
+    <td class="v-expand">${isOpen?'▴':'▾'}</td>
+  </tr>`;
+  if(isOpen){
+    html += `<tr class="detail-row"><td colspan="7">${detailsHtml(v, info.corridor)}
+      <div class="alt-route">
+        <div class="alt-route-row"><span class="alt-route-name">${info.detail.label}</span><span class="alt-route-days">${info.detail.real?'+'+info.detail.days.toFixed(1)+'d':''}</span></div>
+        <div class="alt-route-row"><span></span><span class="alt-route-cost">${fmtUsd(info.detail.cost)}</span></div>
+        <div class="alt-source">${info.detail.real ? 'Computed: narrows-routing-api × NARROWS-RATES.js day-rate' : 'Flat estimate — terminal strait, no route to compute'}</div>
+      </div></td></tr>`;
+  }
+  return html;
+}
+
+function makeDisplacedRow(v, intoCorridorId, fromCorridorId){
+  const c = CORRIDORS[intoCorridorId];
+  const fromC = CORRIDORS[fromCorridorId];
+  const isOpen = expanded.has(v.id+'-disp-'+intoCorridorId);
+  const rowId = v.id+'-disp-'+intoCorridorId;
+  let html = `<tr class="vrow displaced-row" onclick="toggleExpand('${rowId}')">
+    <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note"><span class="displaced-badge">↳ displaced from ${fromC.label}</span></div></td>
+    <td class="v-imo">${v.imo}</td>
+    <td class="v-corr">${corrCell(c)}</td>
+    <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
+    <td class="v-eta">—</td>
+    <td class="v-val pre">${fmtM(v.val)}</td>
+    <td class="v-expand">${isOpen?'▴':'▾'}</td>
+  </tr>`;
+  if(isOpen){
+    html += `<tr class="detail-row"><td colspan="7"><div class="detail-box">
+      <div class="dl-row"><span class="dl-k">New exposure</span><span class="dl-v">Real alt-route out of ${fromC.label} transits ${c.label}</span></div>
+      <div class="dl-row"><span class="dl-k">Cargo</span><span class="dl-v">${CARGO_DETAIL[v.cls]||v.cls}</span></div>
+      <div class="dl-row"><span class="dl-k">Value at risk</span><span class="dl-v">${fmtM(v.val)}</span></div>
+      <div class="dl-row"><span class="dl-k">Timing</span><span class="dl-v">Not yet modeled — needs per-leg transit time, not just total distance</span></div>
+    </div></td></tr>`;
+  }
+  return html;
+}
+
+function wrapTable(headVal, rowsHtml){
+  return `<table class="vtable"><thead><tr><th>Vessel</th><th>IMO</th><th>Corridor</th><th>CII</th><th>ETA</th><th class="num">${headVal}</th><th></th></tr></thead><tbody>${rowsHtml}</tbody></table>`;
+}
+
+function findVessel(corridorId, id){ return (FLEET[corridorId]||[]).find(x=>x.id===id); }
+
+function divertVessel(id, corridorId, wt){
+  const v = findVessel(corridorId, id);
+  if(!v) return;
+  const detail = computeDivertCost(v, corridorId);
+  if(!detail) return;
+  const displacedInto = CORRIDORS[corridorId].real ? computeDisplacement(corridorId) : [];
+  diverted.set(id, { corridor: corridorId, from: wt, detail, displacedInto });
+  renderAll();
+}
+
+function executeCascade(){
+  Object.keys(FLEET).forEach(corridorId=>{
+    if(!activeFilters.has(corridorId)) return;
+    FLEET[corridorId].forEach(v=>{
+      if(diverted.has(v.id)) return;
+      if(statusOf(v) !== 'pre') return;
+      const detail = computeDivertCost(v, corridorId);
+      if(detail){
+        const displacedInto = CORRIDORS[corridorId].real ? computeDisplacement(corridorId) : [];
+        diverted.set(v.id, { corridor: corridorId, from:'pre', detail, displacedInto });
+      }
+    });
+  });
+  renderAll();
+}
+
+function resetScenario(){ diverted.clear(); renderAll(); }
+// Displaced vessels can appear as more than one row (one per chokepoint their
+// new route actually passes through) — that's deliberate, it's the point of
+// showing the cascade. But a single cargo's value-at-risk must only count
+// once toward any total, or the book total inflates every time a vessel
+// diverts through two corridors instead of one. Dedupe by vessel id for any
+// aggregate; row rendering elsewhere is untouched.
+function sumVal(arr){
+  const seen = new Set(); let s = 0;
+  arr.forEach(v=>{ if(!seen.has(v.id)){ seen.add(v.id); s += v.val; } });
+  return s;
+}
+function uniqueCount(arr){ return new Set(arr.map(v=>v.id)).size; }
+
+function renderAll(){
+  const corridorIds = Object.keys(FLEET).filter(id=>activeFilters.has(id));
+
+  let lockedAll = [], windowAll = [], preAll = [], divertedAll = [];
+  let lockedHtml = '', windowHtml = '', preHtml = '', divertedHtml = '';
+  let divertedCostTotal = 0;
+
+  // Pass 1: normal locked/window/pre/diverted, status computed from ETA vs
+  // the scenario clock instead of authored per-vessel.
+  corridorIds.forEach(corridorId=>{
+    FLEET[corridorId].forEach(v=>{
+      if(diverted.has(v.id)){
+        const info = diverted.get(v.id);
+        if(info.corridor !== corridorId) return;
+        divertedAll.push(v);
+        divertedHtml += makeDivertedRow(v, info);
+        divertedCostTotal += info.detail.cost;
+        return;
+      }
+      const st = statusOf(v);
+      if(st === 'locked'){ lockedAll.push(v); lockedHtml += makeLockedRow(v, corridorId); }
+      else if(st === 'window'){ windowAll.push(v); windowHtml += makeDivertableRow(v, corridorId, 'window'); }
+      else { preAll.push(v); preHtml += makeDivertableRow(v, corridorId, 'pre'); }
+    });
+  });
+
+  // Pass 2: displaced-risk re-entry. A vessel that diverted out of one
+  // tracked corridor but whose real alt-route passes through another tracked
+  // corridor gets a linked row there too — its value at risk now lives in
+  // the corridor it's actually exposed to, not the one it left. It is not
+  // double-counted: it already left its original corridor's own locked/
+  // window/pre lists (pass 1, via the diverted.has check above).
+  diverted.forEach((info, id)=>{
+    (info.displacedInto||[]).forEach(intoId=>{
+      if(!corridorIds.includes(intoId)) return;
+      const v = findVessel(info.corridor, id);
+      if(!v) return;
+      preAll.push(v);
+      preHtml += makeDisplacedRow(v, intoId, info.corridor);
+    });
+  });
+
+  document.getElementById('colLocked').innerHTML = lockedAll.length ? wrapTable('Value', lockedHtml) : '';
+  document.getElementById('colWindow').innerHTML = windowAll.length ? wrapTable('Value', windowHtml) : '';
+  document.getElementById('colPre').innerHTML = preAll.length ? wrapTable('Value', preHtml) : '';
+  document.getElementById('colDiverted').innerHTML = divertedAll.length ? wrapTable('Cost', divertedHtml) : '';
+
+  document.getElementById('colWindowEmpty').style.display = windowAll.length===0 ? 'block':'none';
+  document.getElementById('colPreEmpty').style.display = preAll.length===0 ? 'block':'none';
+  document.getElementById('colDivertedEmpty').style.display = divertedAll.length===0 ? 'block':'none';
+
+  const lockedV = sumVal(lockedAll), winV = sumVal(windowAll), preV = sumVal(preAll);
+  const totalUniqueVessels = uniqueCount(lockedAll.concat(windowAll, preAll));
+  // totalV is the sum of already-deduped bucket totals, so a vessel showing
+  // up as two displaced rows in two corridors still only contributes its
+  // value once here — same cargo, one VaR number, however many chokepoints
+  // it now happens to cross.
+  const totalV = lockedV + winV + preV;
+
+  document.getElementById('expTotal').textContent = fmtM(totalV);
+  document.getElementById('expTotalSub').textContent = totalUniqueVessels+' vessels, '+corridorIds.length+' corridor'+(corridorIds.length===1?'':'s');
+  document.getElementById('expLocked').textContent = fmtM(lockedV);
+  document.getElementById('expLockedSub').textContent = lockedAll.length+' vessels';
+  document.getElementById('expWindow').textContent = fmtM(winV);
+  document.getElementById('expWindowSub').textContent = windowAll.length+' vessels';
+  document.getElementById('expPre').textContent = fmtM(preV);
+  document.getElementById('expPreSub').textContent = uniqueCount(preAll)+' vessels'+(preAll.length>uniqueCount(preAll) ? ' ('+(preAll.length-uniqueCount(preAll))+' shown twice — displaced into 2 corridors)' : '');
+  document.getElementById('expDiv').textContent = fmtUsd(divertedCostTotal);
+  document.getElementById('expDivSub').textContent = divertedAll.length+' vessels, real+estimated cost combined';
+
+  document.getElementById('colLockedTot').textContent = fmtM(lockedV);
+  document.getElementById('colWindowTot').textContent = fmtM(winV);
+  document.getElementById('colPreTot').textContent = fmtM(preV);
+  document.getElementById('colDivertedTot').textContent = fmtUsd(divertedCostTotal);
+}
+
+buildFilterBar();
+document.getElementById('clockJump').value = TODAY_ISO;
+updateClockUI();
+loadRoutes();
+</script>
+</body>
+</html>
