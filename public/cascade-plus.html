@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="NARROWS-RATES.js"></script>
+  <script src="NARROWS-CORRIDORS.js"></script>
   <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
   <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
   <style>
@@ -72,6 +73,8 @@
     .btn-cascade:hover{background:#e5aa20}
     .btn-cascade:disabled{background:rgba(240,180,41,.2);color:rgba(10,37,64,.4);cursor:default}
     .cascade-status{font-size:10px;color:rgba(255,255,255,.3);font-family:'DM Mono',monospace;text-align:center}
+    .cascade-status a{color:rgba(240,180,41,.75);cursor:pointer;text-decoration:none}
+    .cascade-status a:hover{color:var(--gold);text-decoration:underline}
 
     .main{max-width:1760px;margin:0 auto;padding:22px 32px 56px}
     .columns{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:start}
@@ -134,6 +137,13 @@
        PORT_RISK + priChip — same idea, same three-tier coloring) ── */
     .wp-row{align-items:flex-start!important}
     .wp-row .dl-v{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+    .dl-remove-row{margin-top:8px;padding-top:8px;border-top:1px dashed var(--border-mid);text-align:right}
+    .btn-remove-link{background:transparent;border:none;color:var(--text-dim);font-size:10px;font-family:'DM Mono',monospace;text-decoration:underline;cursor:pointer;padding:0}
+    .btn-remove-link:hover{color:var(--red)}
+    .advisory-actions{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border-mid);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .advisory-lbl{font-size:10px;color:var(--text-dim);font-family:'DM Mono',monospace}
+    .btn-advisory{background:transparent;border:1px solid var(--border-mid);color:var(--text-muted);border-radius:4px;padding:4px 10px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
+    .btn-advisory:hover{border-color:var(--navy);color:var(--navy)}
     .port-risk{display:inline-block;font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.02em;padding:2px 6px;border-radius:4px;white-space:nowrap;cursor:default}
     .port-risk.low{background:var(--green-soft);color:var(--green)}
     .port-risk.med{background:var(--amber-soft);color:var(--amber)}
@@ -275,7 +285,11 @@
     </div>
     <div class="exp-action">
       <button class="btn-cascade" id="btnCascade" onclick="executeCascade()">Divert all pre-commitment</button>
-      <div class="cascade-status" id="cascadeStatus">across the whole book</div>
+      <div class="cascade-status" id="cascadeStatus">
+        across the whole book &middot;
+        <a href="#" onclick="downloadAllAdvisories();return false">export all diverted advisories</a> &middot;
+        <a href="#" onclick="openRemovalLedgerModal();return false" id="removedLedgerLink">removed (0)</a>
+      </div>
     </div>
   </div>
 </div>
@@ -402,19 +416,92 @@
   </div>
 </div>
 
+<!-- REMOVE VESSEL MODAL (2026-09-18, decision D10). A vessel that's actually
+     transited, been diverted and completed, or fallen through shouldn't just
+     vanish from the book with no trace — it needs a reason and a timestamp,
+     accumulating in an exportable ledger, even though the ledger itself
+     doesn't need to be shown in the main view day to day. -->
+<div class="modal-overlay" id="removeModalOverlay" onclick="if(event.target===this)closeRemoveModal()">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-head">
+      <div class="modal-title">Remove vessel</div>
+      <button class="modal-close" onclick="closeRemoveModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="import-note" id="removeVesselSummary"></div>
+      <div class="form-grid full">
+        <div class="field">
+          <label class="field-label">Reason</label>
+          <select id="rm-reason">
+            <option value="diverted_completed">Diverted &amp; completed</option>
+            <option value="transited_as_planned">Transited as planned</option>
+            <option value="fixture_fell_through">Fixture fell through / re-nominated</option>
+            <option value="manual">Manually removed</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Note (optional)</label>
+          <textarea id="rm-note" placeholder="Anything worth keeping on the record..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span></span>
+      <div class="modal-foot-actions">
+        <button class="btn-ghost-modal" onclick="closeRemoveModal()">Cancel</button>
+        <button class="btn-primary" onclick="confirmRemoveVessel()">Remove from book</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REMOVAL LEDGER MODAL — every removal, not shown in the main view, but
+     never unfindable (decision D10). Exportable to .csv on demand. -->
+<div class="modal-overlay" id="ledgerModalOverlay" onclick="if(event.target===this)closeRemovalLedgerModal()">
+  <div class="modal" style="max-width:820px">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Removed vessels</div>
+        <div class="modal-sub">Every removal this session, with a reason and a timestamp</div>
+      </div>
+      <button class="modal-close" onclick="closeRemovalLedgerModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="ledgerEmptyNote" class="import-note">No vessels removed yet this session.</div>
+      <table class="vtable" id="ledgerTable" style="display:none">
+        <thead><tr><th>Vessel</th><th>Corridor</th><th>Reason</th><th>Removed</th><th class="num">Value</th></tr></thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </div>
+    <div class="modal-foot">
+      <span></span>
+      <div class="modal-foot-actions">
+        <button class="btn-ghost-modal" onclick="closeRemovalLedgerModal()">Close</button>
+        <button class="btn-primary" onclick="downloadRemovalLedgerCsv()">Export .csv</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
 
 // ============================================================================
-// ASSUMPTIONS — corridors, rates, speed, JWC/PRI. Everything in this block is
-// the same kind of thing NARROWS-RATES.js already is: a single named source
-// other Narrows tools should read instead of hand-copying. Rates already work
-// this way (loaded live from NARROWS-RATES.js). Corridors, speed and JWC/PRI
-// don't yet — they're still local consts below, copied by hand from CAPE the
-// same way this page's own footnote already admits. Fixing that (pulling
-// this whole block into its own shared file CDM/CAPE/CASCADE+ all read) is
-// the next real step, not a CASCADE+-only concern.
+// ASSUMPTIONS — corridors, rates, speed, JWC/PRI. Extracted 2026-09-18 into
+// NARROWS-CORRIDORS.js (decision D14) — the same treatment NARROWS-RATES.js
+// already got for bunker/charter day rates: one real shared file, loaded
+// live via the blocking <script> tag in <head>, instead of a local copy
+// this page could quietly drift out of sync with. This page has no local
+// fallback for this data any more — if NARROWS-CORRIDORS.js 404s, CASCADE+
+// will not load, same failure mode NARROWS-RATES.js already has. CAPE has
+// NOT yet been switched over to read from the same file — see that file's
+// own header comment before attempting that merge.
 // ============================================================================
+const {
+  PASSAGES, CORRIDORS, REAL_ROUTES, TERMINAL_ENDPOINTS,
+  RATE_KEY, CARGO_DETAIL, TERMINAL_DECLINE_COST,
+  CLASS_SPEED_KN, CII_SPEED_FACTOR, PORT_RISK,
+} = window.NARROWS_CORRIDORS;
 
 // ============================================================================
 // 2026-09-18 audit rebuild. Everything from here through FLEET was rewritten
@@ -453,91 +540,12 @@ const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
 //     something this page can compute around — it stays flat/estimated,
 //     honestly, until the graph gets a tag for it.
 //
-// PASSAGES replaces the old CORRIDORS' role as the label/JWC source — it's
-// every real passage tag the graph supports (12, minus the two permanent
-// northwest/bering defaults), not the 5 this page used to know about.
-// `voyage:true` marks the 7 that also have their own FLEET bucket below;
-// the rest (sunda, dardanelles, south_africa, chili) are real places a
-// diverted vessel can land — confirmed: Panama-blocked lands a Houston-
-// Shanghai vessel in FOUR other tracked corridors at once (gibraltar, suez,
-// babalmandab, malacca); Gibraltar-blocked lands a NY-Genova vessel in
-// south_africa AND babalmandab AND suez — even though nothing is "based"
-// at Cape of Good Hope the way a vessel is based at Fujayrah.
-const PASSAGES = {
-  babalmandab:  { label:'Bab el-Mandeb',           jwc:true,  voyage:true  },
-  suez:         { label:'Suez Canal',              jwc:false, voyage:true  },
-  gibraltar:    { label:'Gibraltar',               jwc:false, voyage:true  },
-  malacca:      { label:'Malacca Strait',          jwc:false, voyage:true  },
-  panama:       { label:'Panama Canal',            jwc:false, voyage:true  },
-  ormuz:        { label:'Strait of Hormuz',        jwc:true,  voyage:true  },
-  bosporus:     { label:'Bosphorus',               jwc:false, voyage:true  },
-  sunda:        { label:'Sunda Strait',            jwc:false, voyage:false },
-  dardanelles:  { label:'Dardanelles',             jwc:false, voyage:false },
-  south_africa: { label:'Cape of Good Hope',       jwc:false, voyage:false },
-  chili:        { label:'Cape Horn / Chile Strait',jwc:false, voyage:false },
-};
-
-// CORRIDORS: the 8 vessel-bucket/filter-chip ids this page has always used,
-// now just a thin index into PASSAGES (or, for danish_straits, the one
-// remaining honest non-real gap). `primary` is the passage tag that voyage
-// is keyed to for displacement matching (see computeDisplacement) — it's
-// informational; the REAL exposure list is whatever routeData ends up
-// holding once loadRoutes() actually asks the graph.
-const CORRIDORS = {
-  bab:            { label:'Bab el-Mandeb',  jwc:true,  real:true, primary:'babalmandab' },
-  suez:           { label:'Suez',           jwc:false, real:true, primary:'suez'        },
-  malacca:        { label:'Malacca',        jwc:false, real:true, primary:'malacca'     },
-  panama:         { label:'Panama',         jwc:false, real:true, primary:'panama'      },
-  gibraltar:      { label:'Gibraltar',      jwc:false, real:true, primary:'gibraltar'   },
-  hormuz:         { label:'Hormuz',         jwc:true,  real:true, primary:'ormuz'       },
-  bosphorus:      { label:'Bosphorus',      jwc:false, real:true, primary:'bosporus'    },
-  danish_straits: { label:'Danish Straits', jwc:false, real:false },
-};
-
-// One representative voyage per real corridor. `block` is now just "the
-// corridor's own name-tag" — the OLD hand list (e.g. bab's block:['suez',
-// 'babalmandab'], missing gibraltar entirely) is gone; loadRoutes() below
-// blocks the corridor's real, full standard-passage list once it knows it,
-// not a guess made in advance.
-const REAL_ROUTES = {
-  bab:       { from:[56.369167,25.173056], to:[4.483333,51.9],    fromLabel:'Al Fujayrah, UAE',  toLabel:'Rotterdam, NL' },
-  suez:      { from:[39.183333,21.483333], to:[4.483333,51.9],    fromLabel:'Jiddah, SA',         toLabel:'Rotterdam, NL' },
-  // Was Singapore (103.85,1.283333) — the strait's own eastern mouth, which
-  // is why blocking Malacca used to change nothing. Colombo genuinely has
-  // to cross it (or Sunda) to reach Shanghai; confirmed against the graph.
-  malacca:   { from:[79.85,6.95],          to:[121.5,31.216667],  fromLabel:'Colombo, LK',        toLabel:'Shanghai, CN' },
-  panama:    { from:[-95.283333,29.75],    to:[121.5,31.216667],  fromLabel:'Houston, US',        toLabel:'Shanghai, CN' },
-  gibraltar: { from:[-74.016667,40.7],     to:[8.922,44.398],     fromLabel:'New York, US',       toLabel:'Genova, IT' },
-  // Newly real — see finding #3 above. Ras Tannurah->Singapore genuinely
-  // crosses BOTH Hormuz and Malacca on the same voyage, confirmed against
-  // the graph; a nice real-world case of the multi-passage point on its own.
-  hormuz:    { from:[50.166667,26.633333],to:[103.85,1.283333],   fromLabel:'Ras Tannurah, SA',   toLabel:'Singapore (Keppel)' },
-  bosphorus: { from:[37.783333,44.716667],to:[8.922,44.398],      fromLabel:'Novorossiysk, RU',   toLabel:'Genova, IT' },
-};
-
-// Terminal corridors: illustrative origin/destination for the details panel
-// only — no route is computed, since none exists IN THE GRAPH (see finding
-// #4 — this is the one corridor left in this state, and it's a real
-// narrows-pipeline data gap, not a CASCADE+ shortcut).
-const TERMINAL_ENDPOINTS = {
-  danish_straits: { fromLabel:'Primorsk, RU', from:[28.633333,60.366667], toLabel:'North Sea / Atlantic export markets' },
-};
-
-const RATE_KEY = { Suezmax:'Suezmax', Container:'Container', LNG:'LNG_Carrier', Aframax:'Aframax', Bulk:'Handymax', VLCC:'VLCC', Neopanamax:'Neopanamax', LPG:'LPG' };
-const CARGO_DETAIL = { Suezmax:'Crude oil, ~1M bbl', VLCC:'Crude oil, ~2M bbl', Aframax:'Crude/products, ~600k bbl', Container:'Mixed containers, 4,000-8,000 TEU', LNG:'LNG, ~170,000m³', Bulk:'Grain or coal, 40-60k dwt', Neopanamax:'Mixed containers, ~13,000 TEU', LPG:'LPG, ~40,000m³' };
-
-const TERMINAL_DECLINE_COST = { VLCC:900000, Aframax:550000, Suezmax:700000, LNG:750000 };
-
-// Per-class service speed + a CII-adjusted slow-steaming penalty. This is the
-// same "CII amplifier" concept the Malacca analysis on the public site
-// already names and uses for Capesizes under Lombok diversion (~11kn vs
-// 12-13kn standard) — CASCADE+ was previously using one flat 14kn for every
-// vessel regardless of class or CII grade, which understated diversion time
-// (and therefore cost) for anything that isn't a mid-size tanker, and didn't
-// penalize low-CII vessels at all. Every vessel already carries a CII grade,
-// so this reuses data already on hand rather than inventing a new field.
-const CLASS_SPEED_KN = { VLCC:13, Suezmax:14, Aframax:13, Container:20, LNG:19, Bulk:13, Neopanamax:19, LPG:15 };
-const CII_SPEED_FACTOR = { A:1.00, B:0.97, C:0.93, D:0.88, E:0.82 };
+// PASSAGES, CORRIDORS, REAL_ROUTES, TERMINAL_ENDPOINTS, RATE_KEY,
+// CARGO_DETAIL, TERMINAL_DECLINE_COST, CLASS_SPEED_KN, and CII_SPEED_FACTOR
+// all now live in NARROWS-CORRIDORS.js (destructured above) — see that
+// file's own comments for what each one means and the reasoning behind the
+// values (the audit findings 1-4 above are what drove PASSAGES/CORRIDORS/
+// REAL_ROUTES specifically). This page only keeps the logic that reads them.
 function effectiveSpeedKn(cls, cii){
   const base = CLASS_SPEED_KN[cls] || 14;
   const factor = CII_SPEED_FACTOR[cii] || 1.0;
@@ -558,9 +566,9 @@ function effectiveSpeedKn(cls, cii){
 const VOYAGE_PASSAGES = {};
 Object.entries(PASSAGES).forEach(([tag, p])=>{ if(!p.voyage) VOYAGE_PASSAGES['_landing_'+tag] = [tag]; });
 
-// PRI (Port Risk Index) × bunker/waypoint risk — ported from app/cape.html's
-// own PORT_RISK table (its canonical source, same "copied by hand, flagged
-// as a follow-up" caveat as the rest of this block). This is the concept
+// PRI (Port Risk Index) × bunker/waypoint risk. PORT_RISK itself now lives
+// in NARROWS-CORRIDORS.js (destructured above) — CAPE's own canonical
+// table, ported into that shared file on 2026-09-18. This is the concept
 // CAPE calls "waypoints": a vessel can list the ports it actually calls at
 // or bunkers at en route, separate from the strait it transits, because a
 // diversion route can be JWC-clean at the STRAIT and still bunker at a port
@@ -570,29 +578,6 @@ Object.entries(PASSAGES).forEach(([tag, p])=>{ if(!p.voyage) VOYAGE_PASSAGES['_l
 // hull itself avoided). Same mechanism as chokepoint displacement, one
 // level down: diverting doesn't zero out risk, it relocates it, and a
 // bunker call is one more place for that relocation to land.
-const PORT_RISK = {
-  'Djibouti':    { pri:5.8, jwc:true,  note:'Gulf of Aden approach. Primary bunker stop for Cape-diverting vessels. JWC Listed Area (Gulf of Aden / Yemen coast).' },
-  'Aden':        { pri:7.9, jwc:true,  note:'JWC Listed Area. Yemen coast. High political violence risk.' },
-  'Hudaydah':    { pri:8.4, jwc:true,  note:'Houthi-controlled port. Active conflict zone.' },
-  'Fujairah':    { pri:2.8, jwc:true,  note:'Gulf of Oman. Proximity to Hormuz JWC Listed Area. Drone attack history (2021).' },
-  'Ras Tanura':  { pri:3.5, jwc:true,  note:'Saudi Arabia. Persian Gulf JWC Listed Area. Primary Saudi crude export terminal.' },
-  'Shuaiba':     { pri:3.9, jwc:true,  note:'Kuwait. Persian Gulf JWC Listed Area.' },
-  'Port Sudan':  { pri:7.2, jwc:true,  note:'Red Sea. Active conflict in Sudanese interior. JWC adjacent.' },
-  'Singapore':   { pri:1.4, jwc:false, note:'Major bunkering hub. Stable.' },
-  'Colombo':     { pri:2.2, jwc:false, note:'Sri Lanka. Post-2022 crisis recovery. Standard risk.' },
-  'Port Said':   { pri:2.5, jwc:false, note:'Suez Canal northern approach. Egyptian political risk (moderate).' },
-  'Port Klang':  { pri:1.9, jwc:false, note:'Malaysia. Standard risk.' },
-  'Durban':      { pri:2.1, jwc:false, note:'South Africa. Cape diversion route bunker stop.' },
-  'Las Palmas':  { pri:0.9, jwc:false, note:'Canary Islands. Atlantic transit hub. Low risk.' },
-  'Gibraltar':   { pri:1.0, jwc:false, note:'Mediterranean approach. Low risk.' },
-  'Rotterdam':   { pri:0.7, jwc:false, note:'North Sea hub. Low risk.' },
-  'Balboa':      { pri:1.6, jwc:false, note:'Panama Canal Pacific approach.' },
-  'Colon':       { pri:1.5, jwc:false, note:'Panama Canal Atlantic approach.' },
-  'Istanbul':    { pri:2.4, jwc:false, note:'Bosphorus. Elevated risk if Black Sea conflict escalates.' },
-  'Odessa':      { pri:8.1, jwc:true,  note:'Ukraine. Active war zone. Black Sea risk.' },
-  'Novorossiysk':{ pri:5.9, jwc:true,  note:'Russia. Black Sea. Sanctions exposure.' },
-  'Salalah':     { pri:3.2, jwc:true,  note:'Oman. Gulf of Aden adjacency. Elevated given Houthi range.' },
-};
 function priRisk(score){ return score>=6?'high':score>=3?'med':'low'; }
 function priChip(portName){
   const p = PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
@@ -857,6 +842,7 @@ function detailsHtml(v, corridorId){
     <div class="dl-row"><span class="dl-k">Strait ETA</span><span class="dl-v">${fmtEta(v.eta)}</span></div>
     ${routeLine}
     ${waypointLine}
+    <div class="dl-remove-row"><button class="btn-remove-link" onclick="event.stopPropagation();openRemoveModal('${corridorId}','${v.id}')">Remove vessel from book&hellip;</button></div>
   </div>${mapHtml}`;
 }
 
@@ -939,7 +925,13 @@ function makeDivertedRow(v, info){
         <div class="alt-route-row"><span class="alt-route-name">${info.detail.label}</span><span class="alt-route-days">${info.detail.real?'+'+info.detail.days.toFixed(1)+'d':''}</span></div>
         <div class="alt-route-row"><span></span><span class="alt-route-cost">${fmtUsd(info.detail.cost)}</span></div>
         <div class="alt-source">${info.detail.real ? 'Computed: narrows-routing-api × NARROWS-RATES.js day-rate' : 'Flat estimate — no water route exists (confirmed) or no passage tag for this corridor yet'}</div>
-      </div></td></tr>`;
+      </div>
+      <div class="advisory-actions">
+        <span class="advisory-lbl">Divert &rarr; forward to whoever has authority to act:</span>
+        <button class="btn-advisory" onclick="event.stopPropagation();copyAdvisory('${v.id}')">Copy advisory</button>
+        <button class="btn-advisory" onclick="event.stopPropagation();downloadAdvisory('${v.id}')">Download .txt</button>
+      </div>
+      </td></tr>`;
   }
   return html;
 }
@@ -1444,6 +1436,190 @@ function downloadCascadeTemplate(){
   const blob = new Blob([note+hdr+ex1+ex2], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'CASCADE-PLUS_vessel_template.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ---- Divert advisory export (2026-09-18, decision D8) ---------------------
+// CASCADE+ is a simulator for whoever is evaluating a diversion decision,
+// not the person with authority to act on it (a master, an owner, a
+// charterer). A "Divert" click here was always meant to produce a
+// forwardable advisory, not an executed order — this is that advisory:
+// vessel, deadline, recommended action, cost and its basis, and — since the
+// whole point of this tool is that diverting relocates risk rather than
+// removing it — the new exposure that diversion itself creates.
+function corrCellText(corridorId){
+  const passages = VOYAGE_PASSAGES[corridorId];
+  if(passages && passages.length) return describeRoute(passages);
+  const meta = corridorMeta(corridorId);
+  return meta.label;
+}
+
+function buildAdvisoryText(v, info){
+  const corridorId = info.corridor;
+  const lines = [
+    'DIVERSION ADVISORY — CASCADE+ / The Narrows',
+    '(a recommendation for evaluation, not an order given — forward to whoever has authority to act on the vessel)',
+    '='.repeat(70),
+    '',
+    'VESSEL',
+    `  ${v.name}  (IMO ${v.imo})`,
+    `  Class ${v.cls} · CII ${v.cii} · Value at risk ${fmtM(v.val)}`,
+    `  Standing corridor: ${corrCellText(corridorId)}`,
+    `  Strait ETA (pre-diversion): ${fmtEta(v.eta)}`,
+    '',
+    'RECOMMENDATION',
+    `  Divert ${info.detail.label}${info.detail.real ? ' (+'+info.detail.days.toFixed(1)+' days transit)' : ''}`,
+    `  Estimated cost: ${fmtUsd(info.detail.cost)}`,
+    `  Basis: ${info.detail.real ? "Computed — real route distance from narrows-routing-api × this vessel's class/CII-adjusted day-rate from NARROWS-RATES.js" : 'Flat per-class estimate — no real alternate water route exists for this corridor, or no passage tag for it yet'}`,
+  ];
+  if(info.displacedInto && info.displacedInto.length){
+    lines.push('', 'NEW EXPOSURE FROM THIS DIVERSION (risk displaced, not removed)');
+    info.displacedInto.forEach(id=>{ lines.push(`  - ${corridorMeta(id).label}`); });
+  }
+  if(v.waypoints && v.waypoints.length){
+    lines.push('', 'BUNKER / PORT-CALL RISK (standing, independent of this diversion)');
+    v.waypoints.forEach(p=>{
+      const risk = (window.NARROWS_CORRIDORS.PORT_RISK||{})[p];
+      lines.push(`  - ${p}${risk ? (risk.jwc ? ' (JWC Listed Area)' : ' (PRI '+risk.pri.toFixed(1)+')') : ''}`);
+    });
+  }
+  lines.push('', `Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation — it is not routing instructions transmitted to the vessel.`);
+  return lines.join('\n');
+}
+
+function copyToClipboardWithFallback(text, onDone){
+  const fallback = ()=>{
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); onDone(true); } catch(e){ onDone(false); }
+    document.body.removeChild(ta);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>onDone(true)).catch(fallback);
+  } else fallback();
+}
+
+function copyAdvisory(id){
+  const info = diverted.get(id); if(!info) return;
+  const v = findVessel(info.corridor, id); if(!v) return;
+  copyToClipboardWithFallback(buildAdvisoryText(v, info), ok=>{
+    alert(ok ? 'Advisory copied to clipboard.' : 'Could not copy automatically — use Download .txt instead.');
+  });
+}
+
+function downloadAdvisory(id){
+  const info = diverted.get(id); if(!info) return;
+  const v = findVessel(info.corridor, id); if(!v) return;
+  const blob = new Blob([buildAdvisoryText(v, info)], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = v.name.replace(/[^A-Za-z0-9]+/g,'_')+'_advisory.txt'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function downloadAllAdvisories(){
+  if(diverted.size === 0){ alert('No vessels diverted yet.'); return; }
+  const parts = [];
+  diverted.forEach((info, id)=>{
+    const v = findVessel(info.corridor, id);
+    if(v) parts.push(buildAdvisoryText(v, info));
+  });
+  const blob = new Blob([parts.join('\n\n'+'='.repeat(70)+'\n\n')], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'CASCADE-PLUS_advisories_'+new Date().toISOString().slice(0,10)+'.txt'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ---- Removal ledger (2026-09-18, decision D10) -----------------------------
+// A vessel that's actually transited, been diverted and completed, or had
+// its fixture fall through needs to come off the live book — but "come off"
+// should never mean "vanish with no trace." Every removal gets a reason and
+// a timestamp in this session's ledger, exportable on demand, even though
+// the ledger itself stays out of the main view day to day.
+const REMOVAL_REASONS = {
+  diverted_completed: 'Diverted & completed',
+  transited_as_planned: 'Transited as planned',
+  fixture_fell_through: 'Fixture fell through / re-nominated',
+  manual: 'Manually removed',
+};
+const removalLedger = [];
+let _removeTarget = null;
+
+function openRemoveModal(corridorId, id){
+  const v = findVessel(corridorId, id); if(!v) return;
+  _removeTarget = { corridorId, id };
+  document.getElementById('removeVesselSummary').innerHTML =
+    `<b>${v.name}</b> (IMO ${v.imo}) &middot; ${v.cls} &middot; ${corrCellText(corridorId)} &middot; ${fmtM(v.val)}`;
+  document.getElementById('rm-reason').value = 'manual';
+  document.getElementById('rm-note').value = '';
+  document.getElementById('removeModalOverlay').classList.add('open');
+}
+function closeRemoveModal(){ document.getElementById('removeModalOverlay').classList.remove('open'); _removeTarget = null; }
+
+function confirmRemoveVessel(){
+  if(!_removeTarget) return;
+  const reasonKey = document.getElementById('rm-reason').value;
+  const note = document.getElementById('rm-note').value.trim();
+  removeVessel(_removeTarget.corridorId, _removeTarget.id, reasonKey, note);
+  closeRemoveModal();
+}
+
+function removeVessel(corridorId, id, reasonKey, note){
+  const v = findVessel(corridorId, id); if(!v) return;
+  const wasDiverted = diverted.has(id);
+  const divertInfo = wasDiverted ? diverted.get(id) : null;
+  FLEET[corridorId] = (FLEET[corridorId]||[]).filter(x=>x.id !== id);
+  diverted.delete(id);
+  expanded.delete(id);
+  removalLedger.push({
+    removedAt: new Date().toISOString(),
+    id: v.id, imo: v.imo, name: v.name, cls: v.cls, cii: v.cii, val: v.val,
+    corridorId, corridorLabel: corridorMeta(corridorId).label,
+    reasonKey, reasonLabel: REMOVAL_REASONS[reasonKey] || reasonKey,
+    note,
+    wasDiverted,
+    divertedCost: divertInfo ? divertInfo.detail.cost : null,
+  });
+  updateRemovedCountUI();
+  renderAll();
+}
+
+function updateRemovedCountUI(){
+  const el = document.getElementById('removedLedgerLink');
+  if(el) el.textContent = 'removed ('+removalLedger.length+')';
+}
+
+function openRemovalLedgerModal(){
+  const body = document.getElementById('ledgerBody');
+  const table = document.getElementById('ledgerTable');
+  const empty = document.getElementById('ledgerEmptyNote');
+  if(!removalLedger.length){
+    table.style.display = 'none'; empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none'; table.style.display = 'table';
+    body.innerHTML = removalLedger.slice().reverse().map(r=>`<tr>
+      <td><div class="v-name">${r.name}</div><div class="v-note">IMO ${r.imo}</div></td>
+      <td>${r.corridorLabel}</td>
+      <td>${r.reasonLabel}${r.note ? '<div class="v-note">'+r.note+'</div>' : ''}</td>
+      <td>${new Date(r.removedAt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
+      <td class="num">${fmtM(r.val)}</td>
+    </tr>`).join('');
+  }
+  document.getElementById('ledgerModalOverlay').classList.add('open');
+}
+function closeRemovalLedgerModal(){ document.getElementById('ledgerModalOverlay').classList.remove('open'); }
+
+function downloadRemovalLedgerCsv(){
+  if(!removalLedger.length){ alert('No vessels removed yet this session.'); return; }
+  const esc = s => '"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const hdr = 'removed_at,vessel,imo,class,cii,corridor,value_usd_m,reason,was_diverted,diverted_cost_usd,note\n';
+  const rows = removalLedger.map(r=>[
+    r.removedAt, esc(r.name), r.imo, r.cls, r.cii, esc(r.corridorLabel), r.val,
+    esc(r.reasonLabel), r.wasDiverted, r.divertedCost||'', esc(r.note)
+  ].join(',')).join('\n');
+  const blob = new Blob([hdr+rows], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'CASCADE-PLUS_removal_ledger.csv'; a.click();
   URL.revokeObjectURL(url);
 }
 
