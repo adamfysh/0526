@@ -38,6 +38,11 @@
     .hdr-title{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;color:var(--gold);letter-spacing:.12em}
     .btn-sm{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;transition:all .15s}
     .btn-sm:hover{border-color:var(--gold);color:var(--gold)}
+    .hdr-right{display:flex;align-items:center;gap:10px}
+    .btn-more{display:flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(240,180,41,.45);color:var(--gold);border-radius:5px;padding:5px 13px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace;text-decoration:none;transition:all .15s}
+    .btn-more:hover{background:rgba(240,180,41,.1);border-color:var(--gold)}
+    .btn-more .bm-arrow{font-size:12px;transition:transform .15s}
+    .btn-more:hover .bm-arrow{transform:translateX(2px)}
 
     /* ── CHOKEPOINT TABS ── */
     .cp-bar{background:var(--navy-mid);padding:0 32px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:0}
@@ -193,7 +198,12 @@
     <span class="hdr-sep">/</span>
     <span class="hdr-title">CASCADE</span>
   </div>
-  <button class="btn-sm" onclick="resetScenario()">Reset</button>
+  <div class="hdr-right">
+    <a class="btn-more" href="/cascade-plus.html" title="CASCADE+ — the live risk simulator, for customers">
+      Explore CASCADE+ <span class="bm-arrow">&rarr;</span>
+    </a>
+    <button class="btn-sm" onclick="resetScenario()">Reset</button>
+  </div>
 </header>
 
 <nav class="cp-bar" id="cpBar"></nav>
