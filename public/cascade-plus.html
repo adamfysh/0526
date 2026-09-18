@@ -129,6 +129,15 @@
     .route-map-wrap{margin-top:8px;border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#CFDDE3;line-height:0}
     .route-map-img{display:block;width:100%;height:auto}
     .rmap-loading{padding:28px 0;text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;line-height:1.5}
+
+    /* ── bunker/waypoint port-risk chips (ported from app/cape.html's
+       PORT_RISK + priChip — same idea, same three-tier coloring) ── */
+    .wp-row{align-items:flex-start!important}
+    .wp-row .dl-v{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+    .port-risk{display:inline-block;font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.02em;padding:2px 6px;border-radius:4px;white-space:nowrap;cursor:default}
+    .port-risk.low{background:var(--green-soft);color:var(--green)}
+    .port-risk.med{background:var(--amber-soft);color:var(--amber)}
+    .port-risk.high,.port-risk.jwc{background:var(--red-soft);color:var(--red)}
     .alt-source{font-size:9px;color:var(--text-dim);margin-top:3px;font-style:italic}
     .btn-divert-pre{width:100%;margin-top:8px;background:transparent;border:1px solid var(--green);border-radius:4px;color:var(--green);padding:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'DM Mono',monospace}
     .btn-divert-pre:hover{background:var(--green);color:#fff}
@@ -243,12 +252,12 @@
   </div>
 
   <div class="footnote">
-    <b>Eight corridors now, click any vessel for its route/cargo/ETA.</b> Five real-routing corridors, each computed live by <code>narrows-routing-api</code> against a real representative voyage: <b>Bab el-Mandeb</b> (&rarr; Cape of Good Hope), <b>Suez</b> (its own scenario &mdash; a Suez-specific closure with Bab still open, not the same trigger as Bab's own row above, computed separately), <b>Malacca</b> (&rarr; Sunda Strait, the graph has no separate Lombok tag), <b>Panama</b> (&rarr; whichever the engine finds shorter for that voyage), and <b>Gibraltar</b> (&rarr; the only way into the Mediterranean from the Atlantic; closing it forces the full way around via the Cape, Bab, and Suez). Three terminal-strait corridors have no alternate route to compute and are costed as flat, labeled estimates: <b>Hormuz</b>, <b>Bosphorus</b>, and <b>Danish Straits</b>.<br><br>
-    <b>Stopped at 8, not 15-20, for an honest reason.</b> Several more chokepoints Narrows already tracks elsewhere (Dover/English Channel, Kiel Canal, Mozambique Channel, Luzon Strait, St. Lawrence) do have real alternatives in the physical world, but <code>narrows-routing-api</code>'s graph has no passage tag for any of them yet, so I can't compute a real number for them the way I can for the five above. Labeling them "terminal, no alternative" the way Hormuz is would be wrong, since they're not terminal, the data just isn't there yet. Adding those tags to the graph is real engineering on the routing side, not something to fake on this page. Dardanelles was deliberately left out of the terminal set too, since it's the same physical exit as Bosphorus (a Black Sea vessel needs both to leave), not a second independent chokepoint.<br><br>
-    <b>Origins are real ports, not basins.</b> Every corridor's from/to endpoint is a named port with real coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports), not a basin-level approximation — Al Fujayrah, Jiddah, Singapore (Keppel), Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Genova. This is the same data a future map layer would need, so fixing it here first means the route math, the labels, and any eventual map all agree on where these voyages actually start and end.<br><br>
-    <b>Status is computed, not authored.</b> Locked/window/pre used to be assigned by hand per vessel. They're now derived every render from each vessel's ETA against the scenario clock in the header — move the clock forward and vessels migrate buckets on their own, the way real risk would. Diversion days are now per-vessel too: class and CII grade set an effective speed (the same "CII-adjusted effective days" idea Narrows' own Malacca/Lombok analysis already publishes), not one flat speed for every ship.<br><br>
-    <b>Diverting doesn't mean safe.</b> When a vessel diverts out of a real corridor, its actual computed alt-route is checked against every other tracked corridor's own passage signature — Panama's alt-route already runs through Suez and Bab el-Mandeb; Gibraltar's through the Cape, Bab, and Suez. If it matches, the vessel gets a second, linked row in that corridor tagged "displaced from X," with its value-at-risk moved there, not duplicated. This is the actual mechanism the name CASCADE+ refers to.<br><br>
-    <b>Built to receive shared assumptions later, not fake them now.</b> Corridors, JWC flags, and per-class speed live in one clearly marked block in this file, the same shape NARROWS-RATES.js already uses as a real shared file across CAPE and CASCADE+ — the next step is making corridors/JWC/speed a shared file the same way, so this page and CAPE/CDM stop hand-copying each other. Separately: JWC war-risk polygons newly enclosing a port should move that port's PRI score, but that's a geospatial join that belongs in the pipeline, not this page — there's a named, empty <code>PRI_JWC_OVERLAY</code> object in the code marking exactly where that feed plugs in once it exists.
+    <b>Eight corridors, seven of them real-routing now — rebuilt 2026-09-18 against direct queries of the live routing graph, not assumptions.</b> <b>Bab el-Mandeb</b> (a Fujayrah&rarr;Rotterdam voyage that, confirmed against the graph, actually crosses THREE named passages in sequence &mdash; Bab el-Mandeb, Suez, and Gibraltar &mdash; not just the one it's filed under; blocking Bab el-Mandeb alone already forces the same full Cape reroute as blocking it and Suez together), <b>Suez</b> (Jiddah&rarr;Rotterdam, its own scenario &mdash; Jiddah sits north of Bab, so this voyage only ever crosses Suez + Gibraltar), <b>Malacca</b> (Colombo&rarr;Shanghai &mdash; moved off Singapore, which sits at the strait's own eastern mouth and so never actually crossed a Malacca-tagged edge; blocking it now produces a real, engine-confirmed +625nm detour via Sunda), <b>Panama</b> (Houston&rarr;Shanghai; blocking it sends this voyage the full way around through FOUR other tracked corridors at once &mdash; Gibraltar, Suez, Bab el-Mandeb, and Malacca, all confirmed), <b>Gibraltar</b> (New York&rarr;Genova; blocking it sends the vessel around the Cape of Good Hope and through Bab el-Mandeb and Suez), <b>Hormuz</b> (newly real &mdash; Ras Tannurah&rarr;Singapore genuinely crosses both Hormuz and Malacca on the same voyage, confirmed), and <b>Bosphorus</b> (newly real &mdash; Novorossiysk&rarr;Genova, confirmed via Bosphorus + Dardanelles in sequence). Hormuz and the Bosphorus both come back "no route found" when blocked &mdash; a real, engine-confirmed dead end (there is genuinely no water alternate out of the Persian Gulf or the Black Sea), shown as one, not guessed as one. Only <b>Danish Straits</b> is still a flat, labeled estimate, because the routing graph has no passage tag for it at all yet &mdash; confirmed by querying it directly, not assumed.<br><br>
+    <b>Corridors now show their real full passage list, not one label.</b> The Corridor column and each vessel's detail panel read directly off what the graph actually returned (e.g. "Bab el-Mandeb + Suez + Gibraltar"), not the single bucket a vessel happens to be filed under. A vessel that diverts out of ANY tracked corridor is checked against every OTHER corridor's own real passage list, plus four passages that have no FLEET bucket of their own but are confirmed real landings &mdash; Sunda, Dardanelles, Cape of Good Hope, and Cape Horn/Chile Strait — so a Gibraltar closure correctly shows a vessel now exposed off the Cape of Good Hope even though no vessel is ever "based" there. Nothing here is hand-mapped per corridor anymore; it's whatever the engine says a voyage actually crosses.<br><br>
+    <b>Bunker/port-call risk, ported from CAPE.</b> A handful of vessels list the ports they actually call at or bunker at (Djibouti, Las Palmas, Istanbul), scored against the same <code>PORT_RISK</code> table CAPE's own "waypoints" feature uses — because a diversion can be clean at the strait and still bunker somewhere JWC-listed on its own (Djibouti sits inside the Gulf of Aden listed area regardless of which strait the hull avoided). This is a risk overlay, the same as CAPE's, not a routed leg — it doesn't change distance or cost, only what shows as exposed.<br><br>
+    <b>Origins are real ports, not basins.</b> Every corridor's from/to endpoint is a named port with real coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports) — Al Fujayrah, Jiddah, Colombo, Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Singapore, Genova.<br><br>
+    <b>Status is computed, not authored.</b> Locked/window/pre are derived every render from each vessel's ETA against the scenario clock in the header. Diversion days are per-vessel: class and CII grade set an effective speed (the same "CII-adjusted effective days" idea Narrows' own Malacca/Lombok analysis already publishes), not one flat speed for every ship.<br><br>
+    <b>Built to receive shared assumptions later, not fake them now.</b> Corridors, passages, JWC flags, port risk, and per-class speed all live in one clearly marked block in this file, the same shape NARROWS-RATES.js already uses as a real shared file across CAPE and CASCADE+ — the next step is making that block a shared file the same way, so this page and CAPE/CDM stop hand-copying each other.
   </div>
 </div>
 
@@ -266,41 +275,111 @@ const ROUTE_API = 'https://narrows-routing-api.fysh.workers.dev/route';
 // the next real step, not a CASCADE+-only concern.
 // ============================================================================
 
-// Corridor metadata — jwc straight from app/cape.html's canonical CORRIDORS
-// object (CAPE/CDM's own source of truth). No shared file exports this yet
-// — copied by hand, flagged as a follow-up.
+// ============================================================================
+// 2026-09-18 audit rebuild. Everything from here through FLEET was rewritten
+// after directly querying the live routing graph (narrows-routing-api's
+// MarnetRouter, run standalone against its own embedded 9,708-node/15,970-
+// edge graph — not guessed) to answer four real findings:
+//
+//  1. A corridor is not one chokepoint — it's whatever sequence of named
+//     passages that voyage's real route actually crosses. Fujayrah->
+//     Rotterdam (the "bab" voyage) transits babalmandab, suez, AND
+//     gibraltar, confirmed directly against the graph. The old code only
+//     ever blocked/displayed 2 of those 3, and had a hand-written filter
+//     that actively hid Gibraltar whenever Suez was also present — treating
+//     it as a redundant way of saying "Suez" rather than the third, real,
+//     independent chokepoint it is. That filter is gone.
+//  2. Malacca's old "standard vs blocked" test used Singapore as the origin
+//     — which sits at the strait's own eastern mouth, so a Singapore->
+//     Shanghai query never crosses a malacca-tagged edge at all (confirmed:
+//     0.0nm difference blocked vs. not). The origin is now Colombo — an
+//     Indian-Ocean-side port that has to cross Malacca (or divert via
+//     Sunda) to reach Shanghai, confirmed for real against the graph
+//     (3,808nm via malacca; blocked, 4,433nm via sunda instead).
+//  3. Hormuz and the Bosphorus are NOT routing dead ends the graph can't
+//     compute — they're real, confirmed routes (Ras Tannurah->Singapore:
+//     3,765nm via ormuz+malacca; Novorossiysk->Genova: 1,713nm via
+//     bosporus+dardanelles). Both are promoted from a flat guessed
+//     "decline transit" estimate to the same real routing math as every
+//     other corridor. Blocking either does correctly return "no route
+//     found" — there is genuinely no water alternate out of the Persian
+//     Gulf or the Black Sea — so that's now a real, engine-confirmed dead
+//     end shown as one, not a guess dressed up as one.
+//  4. Danish Straits has NO tag anywhere in the routing graph's own passage
+//     vocabulary (confirmed: even routing Primorsk->Rotterdam unrestricted
+//     returns passagesUsed:[]; the leg exists in the graph as untagged open
+//     water). That's a real gap in narrows-pipeline's graph data, not
+//     something this page can compute around — it stays flat/estimated,
+//     honestly, until the graph gets a tag for it.
+//
+// PASSAGES replaces the old CORRIDORS' role as the label/JWC source — it's
+// every real passage tag the graph supports (12, minus the two permanent
+// northwest/bering defaults), not the 5 this page used to know about.
+// `voyage:true` marks the 7 that also have their own FLEET bucket below;
+// the rest (sunda, dardanelles, south_africa, chili) are real places a
+// diverted vessel can land — confirmed: Panama-blocked lands a Houston-
+// Shanghai vessel in FOUR other tracked corridors at once (gibraltar, suez,
+// babalmandab, malacca); Gibraltar-blocked lands a NY-Genova vessel in
+// south_africa AND babalmandab AND suez — even though nothing is "based"
+// at Cape of Good Hope the way a vessel is based at Fujayrah.
+const PASSAGES = {
+  babalmandab:  { label:'Bab el-Mandeb',           jwc:true,  voyage:true  },
+  suez:         { label:'Suez Canal',              jwc:false, voyage:true  },
+  gibraltar:    { label:'Gibraltar',               jwc:false, voyage:true  },
+  malacca:      { label:'Malacca Strait',          jwc:false, voyage:true  },
+  panama:       { label:'Panama Canal',            jwc:false, voyage:true  },
+  ormuz:        { label:'Strait of Hormuz',        jwc:true,  voyage:true  },
+  bosporus:     { label:'Bosphorus',               jwc:false, voyage:true  },
+  sunda:        { label:'Sunda Strait',            jwc:false, voyage:false },
+  dardanelles:  { label:'Dardanelles',             jwc:false, voyage:false },
+  south_africa: { label:'Cape of Good Hope',       jwc:false, voyage:false },
+  chili:        { label:'Cape Horn / Chile Strait',jwc:false, voyage:false },
+};
+
+// CORRIDORS: the 8 vessel-bucket/filter-chip ids this page has always used,
+// now just a thin index into PASSAGES (or, for danish_straits, the one
+// remaining honest non-real gap). `primary` is the passage tag that voyage
+// is keyed to for displacement matching (see computeDisplacement) — it's
+// informational; the REAL exposure list is whatever routeData ends up
+// holding once loadRoutes() actually asks the graph.
 const CORRIDORS = {
-  bab:            { label:'Bab el-Mandeb',  jwc:true,  real:true  },
-  suez:           { label:'Suez',           jwc:false, real:true  },
-  malacca:        { label:'Malacca',        jwc:false, real:true  },
-  panama:         { label:'Panama',         jwc:false, real:true  },
-  gibraltar:      { label:'Gibraltar',      jwc:false, real:true  },
-  hormuz:         { label:'Hormuz',         jwc:true,  real:false },
-  bosphorus:      { label:'Bosphorus',      jwc:false, real:false },
+  bab:            { label:'Bab el-Mandeb',  jwc:true,  real:true, primary:'babalmandab' },
+  suez:           { label:'Suez',           jwc:false, real:true, primary:'suez'        },
+  malacca:        { label:'Malacca',        jwc:false, real:true, primary:'malacca'     },
+  panama:         { label:'Panama',         jwc:false, real:true, primary:'panama'      },
+  gibraltar:      { label:'Gibraltar',      jwc:false, real:true, primary:'gibraltar'   },
+  hormuz:         { label:'Hormuz',         jwc:true,  real:true, primary:'ormuz'       },
+  bosphorus:      { label:'Bosphorus',      jwc:false, real:true, primary:'bosporus'    },
   danish_straits: { label:'Danish Straits', jwc:false, real:false },
 };
 
-// Real-routing corridors: one representative voyage each, standard vs.
-// blocked, plus a human label for the endpoints (shown in vessel details).
-// Coordinates are real WPI port positions (narrows-pipeline port-index,
-// wpi_cleaned.csv), lon/lat, matching what the routing API and the future
-// map integration both need. Vessels themselves remain demo-fictional —
-// only the geography and route math are real.
+// One representative voyage per real corridor. `block` is now just "the
+// corridor's own name-tag" — the OLD hand list (e.g. bab's block:['suez',
+// 'babalmandab'], missing gibraltar entirely) is gone; loadRoutes() below
+// blocks the corridor's real, full standard-passage list once it knows it,
+// not a guess made in advance.
 const REAL_ROUTES = {
-  bab:       { from:[56.369167,25.173056], to:[4.483333,51.9],   block:['suez','babalmandab'], fromLabel:'Al Fujayrah, UAE',   toLabel:'Rotterdam, NL' },
-  suez:      { from:[39.183333,21.483333], to:[4.483333,51.9],   block:['suez'],               fromLabel:'Jiddah, SA',          toLabel:'Rotterdam, NL' },
-  malacca:   { from:[103.85,1.283333],     to:[121.5,31.216667], block:['malacca'],            fromLabel:'Singapore (Keppel)',  toLabel:'Shanghai, CN' },
-  panama:    { from:[-95.283333,29.75],    to:[121.5,31.216667], block:['panama'],             fromLabel:'Houston, US',         toLabel:'Shanghai, CN' },
-  gibraltar: { from:[-74.016667,40.7],     to:[8.922,44.398],    block:['gibraltar'],          fromLabel:'New York, US',        toLabel:'Genova, IT' },
+  bab:       { from:[56.369167,25.173056], to:[4.483333,51.9],    fromLabel:'Al Fujayrah, UAE',  toLabel:'Rotterdam, NL' },
+  suez:      { from:[39.183333,21.483333], to:[4.483333,51.9],    fromLabel:'Jiddah, SA',         toLabel:'Rotterdam, NL' },
+  // Was Singapore (103.85,1.283333) — the strait's own eastern mouth, which
+  // is why blocking Malacca used to change nothing. Colombo genuinely has
+  // to cross it (or Sunda) to reach Shanghai; confirmed against the graph.
+  malacca:   { from:[79.85,6.95],          to:[121.5,31.216667],  fromLabel:'Colombo, LK',        toLabel:'Shanghai, CN' },
+  panama:    { from:[-95.283333,29.75],    to:[121.5,31.216667],  fromLabel:'Houston, US',        toLabel:'Shanghai, CN' },
+  gibraltar: { from:[-74.016667,40.7],     to:[8.922,44.398],     fromLabel:'New York, US',       toLabel:'Genova, IT' },
+  // Newly real — see finding #3 above. Ras Tannurah->Singapore genuinely
+  // crosses BOTH Hormuz and Malacca on the same voyage, confirmed against
+  // the graph; a nice real-world case of the multi-passage point on its own.
+  hormuz:    { from:[50.166667,26.633333],to:[103.85,1.283333],   fromLabel:'Ras Tannurah, SA',   toLabel:'Singapore (Keppel)' },
+  bosphorus: { from:[37.783333,44.716667],to:[8.922,44.398],      fromLabel:'Novorossiysk, RU',   toLabel:'Genova, IT' },
 };
 
 // Terminal corridors: illustrative origin/destination for the details panel
-// only — no route is computed, since none exists. Coordinates are real WPI
-// port positions; only the vessel calling at them is fictional.
+// only — no route is computed, since none exists IN THE GRAPH (see finding
+// #4 — this is the one corridor left in this state, and it's a real
+// narrows-pipeline data gap, not a CASCADE+ shortcut).
 const TERMINAL_ENDPOINTS = {
-  hormuz:         { fromLabel:'Ras Tannurah, SA',   from:[50.166667,26.633333], toLabel:'Asia or Europe — lost if declined' },
-  bosphorus:      { fromLabel:'Novorossiysk, RU',   from:[37.783333,44.716667], toLabel:'Mediterranean export markets' },
-  danish_straits: { fromLabel:'Primorsk, RU',       from:[28.633333,60.366667], toLabel:'North Sea / Atlantic export markets' },
+  danish_straits: { fromLabel:'Primorsk, RU', from:[28.633333,60.366667], toLabel:'North Sea / Atlantic export markets' },
 };
 
 const RATE_KEY = { Suezmax:'Suezmax', Container:'Container', LNG:'LNG_Carrier', Aframax:'Aframax', Bulk:'Handymax', VLCC:'VLCC', Neopanamax:'Neopanamax', LPG:'LPG' };
@@ -324,33 +403,69 @@ function effectiveSpeedKn(cls, cii){
   return base * factor;
 }
 
-// Corridor id -> the routing-graph passage tag that means "a vessel is
-// actually transiting this corridor." Used two ways: describing a computed
-// route in plain English (below), and — new — detecting when a vessel that
-// diverted OUT of one tracked corridor has, per the real route the engine
-// gave it, been routed INTO another tracked corridor. That's the cascade:
-// Panama's real alternate route already passes through Suez and Bab
-// el-Mandeb; Gibraltar's passes through the Cape, Bab, and Suez. A vessel
-// that diverts is not risk-free, it has new, different, real exposure.
-const CORRIDOR_SIGNATURE = { bab:'babalmandab', suez:'suez', malacca:'malacca', panama:'panama', gibraltar:'gibraltar' };
+// Displacement is now driven by REAL data, not a hand list: once loadRoutes()
+// runs, VOYAGE_PASSAGES[corridorId] holds that corridor's own real standard-
+// route passage tags (e.g. bab -> ['babalmandab','suez','gibraltar']). A
+// vessel diverted OUT of one corridor lands in every OTHER corridor whose own
+// real passages intersect its alt route's passages — this is what caught
+// Panama's alt route crossing FOUR other tracked corridors at once
+// (gibraltar, suez, babalmandab, malacca), not just the one it was hand-
+// mapped to before. Landing-only passages (south_africa, sunda, dardanelles,
+// chili — confirmed real landings with no FLEET bucket of their own, e.g. a
+// Gibraltar closure sending a vessel around the Cape) get a synthetic
+// single-tag entry so they still show up as a labeled displaced-row.
+const VOYAGE_PASSAGES = {};
+Object.entries(PASSAGES).forEach(([tag, p])=>{ if(!p.voyage) VOYAGE_PASSAGES['_landing_'+tag] = [tag]; });
 
-// JWC (war-risk listed areas) × PRI (Port Risk Index, live on the Narrows
-// site, ~3,800 ports on 4 composite dimensions) is a real relationship that
-// doesn't exist as a pipeline step yet: when a JWC polygon newly encloses a
-// port, that port's PRI score should move, and CDM/CAPE/CASCADE+ should all
-// see the update. That geospatial join belongs in narrows-pipeline, not in
-// this page. This object is the intended plug-in point for when it exists —
-// keyed by corridor id, populated by a future pipeline feed. Until then it
-// stays empty and every corridor just reads its static jwc boolean above,
-// same as CAPE does today.
-const PRI_JWC_OVERLAY = {}; // corridorId -> { pri: 0-10, jwcElevated: bool }
+// PRI (Port Risk Index) × bunker/waypoint risk — ported from app/cape.html's
+// own PORT_RISK table (its canonical source, same "copied by hand, flagged
+// as a follow-up" caveat as the rest of this block). This is the concept
+// CAPE calls "waypoints": a vessel can list the ports it actually calls at
+// or bunkers at en route, separate from the strait it transits, because a
+// diversion route can be JWC-clean at the STRAIT and still bunker at a port
+// that's JWC-listed on its own (Djibouti is the standing example — it's the
+// natural bunker stop for a Cape-diverting Red Sea vessel, and it sits
+// inside the Gulf of Aden JWC listed area regardless of which strait the
+// hull itself avoided). Same mechanism as chokepoint displacement, one
+// level down: diverting doesn't zero out risk, it relocates it, and a
+// bunker call is one more place for that relocation to land.
+const PORT_RISK = {
+  'Djibouti':    { pri:5.8, jwc:true,  note:'Gulf of Aden approach. Primary bunker stop for Cape-diverting vessels. JWC Listed Area (Gulf of Aden / Yemen coast).' },
+  'Aden':        { pri:7.9, jwc:true,  note:'JWC Listed Area. Yemen coast. High political violence risk.' },
+  'Hudaydah':    { pri:8.4, jwc:true,  note:'Houthi-controlled port. Active conflict zone.' },
+  'Fujairah':    { pri:2.8, jwc:true,  note:'Gulf of Oman. Proximity to Hormuz JWC Listed Area. Drone attack history (2021).' },
+  'Ras Tanura':  { pri:3.5, jwc:true,  note:'Saudi Arabia. Persian Gulf JWC Listed Area. Primary Saudi crude export terminal.' },
+  'Shuaiba':     { pri:3.9, jwc:true,  note:'Kuwait. Persian Gulf JWC Listed Area.' },
+  'Port Sudan':  { pri:7.2, jwc:true,  note:'Red Sea. Active conflict in Sudanese interior. JWC adjacent.' },
+  'Singapore':   { pri:1.4, jwc:false, note:'Major bunkering hub. Stable.' },
+  'Colombo':     { pri:2.2, jwc:false, note:'Sri Lanka. Post-2022 crisis recovery. Standard risk.' },
+  'Port Said':   { pri:2.5, jwc:false, note:'Suez Canal northern approach. Egyptian political risk (moderate).' },
+  'Port Klang':  { pri:1.9, jwc:false, note:'Malaysia. Standard risk.' },
+  'Durban':      { pri:2.1, jwc:false, note:'South Africa. Cape diversion route bunker stop.' },
+  'Las Palmas':  { pri:0.9, jwc:false, note:'Canary Islands. Atlantic transit hub. Low risk.' },
+  'Gibraltar':   { pri:1.0, jwc:false, note:'Mediterranean approach. Low risk.' },
+  'Rotterdam':   { pri:0.7, jwc:false, note:'North Sea hub. Low risk.' },
+  'Balboa':      { pri:1.6, jwc:false, note:'Panama Canal Pacific approach.' },
+  'Colon':       { pri:1.5, jwc:false, note:'Panama Canal Atlantic approach.' },
+  'Istanbul':    { pri:2.4, jwc:false, note:'Bosphorus. Elevated risk if Black Sea conflict escalates.' },
+  'Odessa':      { pri:8.1, jwc:true,  note:'Ukraine. Active war zone. Black Sea risk.' },
+  'Novorossiysk':{ pri:5.9, jwc:true,  note:'Russia. Black Sea. Sanctions exposure.' },
+  'Salalah':     { pri:3.2, jwc:true,  note:'Oman. Gulf of Aden adjacency. Elevated given Houthi range.' },
+};
+function priRisk(score){ return score>=6?'high':score>=3?'med':'low'; }
+function priChip(portName){
+  const p = PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
+  const cls = p.jwc ? 'jwc' : priRisk(p.pri);
+  const label = p.jwc ? 'JWC' : 'PRI '+p.pri.toFixed(1);
+  return `<span class="port-risk ${cls}" title="${p.note}">${portName} &middot; ${label}</span>`;
+}
+function hasJwcWaypoint(v){ return !!(v.waypoints && v.waypoints.some(p=>PORT_RISK[p]?.jwc)); }
 
-const PASSAGE_NAMES = { south_africa:'Cape of Good Hope', gibraltar:'Suez (via Gibraltar/Med)', suez:'Suez Canal', babalmandab:'Bab el-Mandeb', sunda:'Sunda Strait', malacca:'Malacca Strait', panama:'Panama Canal', ormuz:'Strait of Hormuz', chili:'Cape Horn / Chile Strait', bosporus:'Bosphorus', dardanelles:'Dardanelles' };
+const PASSAGE_NAMES = Object.fromEntries(Object.entries(PASSAGES).map(([tag,p])=>[tag,p.label]));
+function passageLabel(tag){ return PASSAGE_NAMES[tag] || tag; }
 function describeRoute(passages){
   if(!passages || !passages.length) return 'alternate route';
-  const names = passages.map(p=>PASSAGE_NAMES[p]||p);
-  const filtered = passages.includes('suez') ? names.filter(n=>n!=='Suez (via Gibraltar/Med)') : names;
-  return filtered.join(' + ');
+  return passages.map(passageLabel).join(' + ');
 }
 
 // Flat per-corridor vessel lists. Locked/window/pre used to be authored here
@@ -363,7 +478,7 @@ const FLEET = {
     {id:'b01',imo:'9284001',name:'ADEN RESOLVE',    cls:'Suezmax',  val:88, cii:'C', eta:'2026-09-18', note:'Gulf of Aden. Bab passage in 18h. No option.'},
     {id:'b02',imo:'9284002',name:'MEDSTAR PELICAN', cls:'Container',val:105,cii:'B', eta:'2026-09-19', note:'Red Sea transit. MSC feeder. Committed to Suez slot.'},
     {id:'b09',imo:'9284003',name:'LEVIATHAN',       cls:'LNG',      val:125,cii:'A', eta:'2026-09-20', note:'Gulf of Aden approach. UKMTO advisory flagged.'},
-    {id:'b12',imo:'9284004',name:'GULF ALBATROSS',  cls:'Suezmax',  val:78, cii:'D', eta:'2026-09-18', note:'Arabian Sea. Red Sea vs Cape decision.'},
+    {id:'b12',imo:'9284004',name:'GULF ALBATROSS',  cls:'Suezmax',  val:78, cii:'D', eta:'2026-09-18', note:'Arabian Sea. Red Sea vs Cape decision.', waypoints:['Djibouti']},
     {id:'b15',imo:'9284005',name:'HORIZON SPIRIT',  cls:'LNG',      val:132,cii:'A', eta:'2026-10-09', note:'UK-flagged LNG. Loading T-18. Cape route preferred.'},
     {id:'b17',imo:'9284006',name:'ADEN CROWN',      cls:'Suezmax',  val:88, cii:'C', eta:'2026-10-12', note:'Crude. Loading T-21. Redirect to Cape without penalty.'},
   ],
@@ -386,7 +501,7 @@ const FLEET = {
   gibraltar: [
     {id:'g01',imo:'9284017',name:'ATLANTIC GATEWAY', cls:'Container', val:110,cii:'B', eta:'2026-09-18', note:'Approaching the Strait. No option.'},
     {id:'g02',imo:'9284018',name:'IBERIA STAR',      cls:'Aframax',   val:68, cii:'D', eta:'2026-09-18', note:'Mid-Atlantic. Gibraltar closure advisory issued.'},
-    {id:'g03',imo:'9284019',name:'LIGURIAN DAWN',    cls:'Suezmax',   val:84, cii:'C', eta:'2026-10-05', note:'Crude. Loading not yet confirmed.'},
+    {id:'g03',imo:'9284019',name:'LIGURIAN DAWN',    cls:'Suezmax',   val:84, cii:'C', eta:'2026-10-05', note:'Crude. Loading not yet confirmed.', waypoints:['Las Palmas']},
   ],
   hormuz: [
     {id:'h01',imo:'9284020',name:'NAIROBI PEARL',  cls:'VLCC',   val:125,cii:'B', eta:'2026-09-17', note:'Loaded at Ras Tannurah. Mid-Strait transit. No option.'},
@@ -394,7 +509,7 @@ const FLEET = {
     {id:'h17',imo:'9284022',name:'AURORA RESOLVE', cls:'VLCC',   val:128,cii:'A', eta:'2026-10-12', note:'Liftings confirmed. Vessel not nominated. Zero diversion cost.'},
   ],
   bosphorus: [
-    {id:'k01',imo:'9284023',name:'BLACK SEA PRIDE',  cls:'Suezmax', val:84, cii:'C', eta:'2026-09-18', note:'Loaded Novorossiysk. Bosphorus transit booked. No option.'},
+    {id:'k01',imo:'9284023',name:'BLACK SEA PRIDE',  cls:'Suezmax', val:84, cii:'C', eta:'2026-09-18', note:'Loaded Novorossiysk. Bosphorus transit booked. No option.', waypoints:['Istanbul']},
     {id:'k02',imo:'9284024',name:'PONTUS STAR',      cls:'Aframax', val:60, cii:'D', eta:'2026-09-18', note:'Black Sea approach. Convoy slot pending.'},
     {id:'k03',imo:'9284025',name:'MARMARA LIGHT',    cls:'Suezmax', val:80, cii:'D', eta:'2026-10-06', note:'Liftings not yet confirmed. Re-nomination possible.'},
   ],
@@ -451,9 +566,8 @@ function dayRate(cls){
 }
 function computeDivertCost(v, corridorId){
   const c = CORRIDORS[corridorId];
-  if(c.real){
-    const rd = routeData[corridorId];
-    if(!rd) return null;
+  const rd = c.real ? routeData[corridorId] : null;
+  if(rd && rd.altNm != null){
     const rate = dayRate(v.cls);
     if(rate == null) return null;
     // Per-vessel, not per-corridor: two vessels diverting the same corridor
@@ -464,22 +578,33 @@ function computeDivertCost(v, corridorId){
     const extraDays = (rd.altNm - rd.standardNm) / (speedKn * 24);
     return { cost: extraDays * rate, real:true, label:'via '+rd.viaLabel, days:extraDays, speedKn, altPassages: rd.altPassages };
   }
+  // Either a corridor with no graph tag at all (danish_straits — a real
+  // narrows-pipeline gap, not a guess), or a real corridor where the engine
+  // itself reports no water alternate exists (Hormuz, Bosphorus — confirmed:
+  // blocking either returns "no route found," an actual dead end, not an
+  // assumption). Same fallback either way: decline the transit and re-source,
+  // at a flat estimated cost — but the label now says which case it is.
   const flat = TERMINAL_DECLINE_COST[v.cls];
   if(flat == null) return null;
-  return { cost: flat, real:false, label:'Decline transit, re-source elsewhere', days:0 };
+  const noAlt = c.real && rd && rd.noRoute;
+  return { cost: flat, real:false, label: noAlt ? 'No water route out — decline transit, re-source elsewhere' : 'Decline transit, re-source elsewhere', days:0 };
 }
 
-// After a vessel diverts out of a real corridor, check whether the actual
-// computed alt-route passes through any OTHER tracked real corridor's own
-// signature passage. If it does, the vessel isn't risk-free — it now has
-// new, real exposure in that corridor too. Panama's alt route already goes
-// through Suez + Bab el-Mandeb; Gibraltar's goes through the Cape, Bab, and
-// Suez. This is the cascade the tool is named for, not a UI flourish.
+// After a vessel diverts out of a corridor, check whether the actual
+// computed alt-route passes through any OTHER tracked corridor's own REAL
+// standard-route passages (VOYAGE_PASSAGES — built from what loadRoutes()
+// actually found, not a hand-typed single tag per corridor). If it does, the
+// vessel isn't risk-free — it now has new, real exposure there too. This is
+// the cascade the tool is named for, not a UI flourish: confirmed against
+// the graph, Panama's alt route alone crosses FOUR other tracked corridors
+// at once (gibraltar, suez, babalmandab, malacca), and Gibraltar's crosses
+// south_africa (a landing-only passage — see VOYAGE_PASSAGES above) plus
+// babalmandab and suez.
 function computeDisplacement(corridorId){
   const rd = routeData[corridorId];
   if(!rd || !rd.altPassages) return [];
-  return Object.keys(CORRIDOR_SIGNATURE).filter(cid=>
-    cid !== corridorId && rd.altPassages.includes(CORRIDOR_SIGNATURE[cid])
+  return Object.keys(VOYAGE_PASSAGES).filter(cid=>
+    cid !== corridorId && VOYAGE_PASSAGES[cid].some(tag=>rd.altPassages.includes(tag))
   );
 }
 
@@ -509,27 +634,43 @@ async function loadRoutes(){
   const entries = Object.entries(REAL_ROUTES);
   try{
     const results = await Promise.all(entries.map(async ([id, r])=>{
+      // Block just this corridor's own passage tag, not its whole standard-
+      // route passage list — confirmed against the graph that blocking Bab
+      // el-Mandeb ALONE already forces the same full Cape reroute as
+      // blocking it together with Suez (they're both mandatory hops on the
+      // same Red Sea corridor either way), so there's no need to over-block,
+      // and over-blocking Gibraltar too would be wrong: it's on the standard
+      // route but confirmed NOT on the Cape alternate, so a vessel worried
+      // specifically about Bab el-Mandeb has no reason to also avoid it.
+      const primary = CORRIDORS[id].primary;
       const stdUrl = `${ROUTE_API}?from=${r.from.join(',')}&to=${r.to.join(',')}&units=naut`;
-      const altUrl = `${ROUTE_API}?from=${r.from.join(',')}&to=${r.to.join(',')}&units=naut&restrictions=${r.block.join(',')}`;
+      const altUrl = `${ROUTE_API}?from=${r.from.join(',')}&to=${r.to.join(',')}&units=naut&restrictions=${primary}`;
       const [stdRes, altRes] = await Promise.all([fetch(stdUrl), fetch(altUrl)]);
-      if(!stdRes.ok || !altRes.ok) throw new Error(id+': routing API returned non-200');
+      if(!stdRes.ok) throw new Error(id+': routing API returned non-200');
       const std = await stdRes.json();
-      const alt = await altRes.json();
-      if(std.error || alt.error) throw new Error(id+': '+(std.error||alt.error));
-      const viaLabel = describeRoute(alt.passagesUsed);
-      // No single extraDays here anymore — that's now per-vessel (class +
-      // CII grade change effective speed), computed in computeDivertCost.
+      if(std.error) throw new Error(id+': '+std.error);
+      const alt = altRes.ok ? await altRes.json() : { error:'non-200' };
       // standardCoords/altCoords: the actual route geometry (real, from the
       // same routing engine — not decorative), kept alongside the distances
-      // so the map below can draw exactly what the numbers describe.
-      return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed, viaLabel, standardCoords: std.coordinates, altCoords: alt.coordinates }];
+      // so the map draws exactly what the numbers describe. altNm/altCoords
+      // stay null when the engine reports no route at all — a genuine dead
+      // end (Hormuz, Bosphorus — confirmed, not a guess), not a load failure.
+      if(alt.error){
+        return [id, { standardNm: std.distance, standardPassages: std.passagesUsed, standardCoords: std.coordinates,
+          altNm:null, altPassages:null, altCoords:null, viaLabel:null, noRoute:true }];
+      }
+      return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed,
+        viaLabel: describeRoute(alt.passagesUsed), standardCoords: std.coordinates, altCoords: alt.coordinates, noRoute:false }];
     }));
-    results.forEach(([id, data])=>{ routeData[id] = data; });
-    const summary = results.map(([id,d])=>`${CORRIDORS[id].label}: +${Math.round(d.altNm-d.standardNm).toLocaleString()}nm`).join(' · ');
-    statusEl.textContent = `Live routes: ${summary}. Diversion days now depend on each vessel's class + CII grade, not one flat speed. Hormuz/Bosphorus/Danish Straits have no reroute — flat estimates, not routed.`;
+    results.forEach(([id, data])=>{ routeData[id] = data; VOYAGE_PASSAGES[id] = data.standardPassages || []; });
+    const summary = results.map(([id,d])=> d.noRoute
+      ? `${CORRIDORS[id].label}: no water alternate`
+      : `${CORRIDORS[id].label}: +${Math.round(d.altNm-d.standardNm).toLocaleString()}nm`
+    ).join(' · ');
+    statusEl.textContent = `Live routes: ${summary}. Diversion days depend on each vessel's class + CII grade. Danish Straits has no reroute (no passage tag in the routing graph) — flat estimate only.`;
     statusEl.className = 'status-line ok';
   }catch(err){
-    statusEl.textContent = `Could not reach narrows-routing-api (${err.message}). Real-routing corridors' diversion costs are unavailable until this loads — the three terminal-strait corridors still work.`;
+    statusEl.textContent = `Could not reach narrows-routing-api (${err.message}). Real-routing corridors' diversion costs are unavailable until this loads — Danish Straits still works (flat estimate).`;
     statusEl.className = 'status-line err';
   }
   renderAll();
@@ -546,6 +687,8 @@ function detailsHtml(v, corridorId){
     routeLine = `<div class="dl-row"><span class="dl-k">Standard route</span><span class="dl-v">${Math.round(rd.standardNm).toLocaleString()}nm via ${describeRoute(rd.standardPassages)}</span></div>`;
     if(rd.altNm != null){
       routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">${Math.round(rd.altNm).toLocaleString()}nm via ${describeRoute(rd.altPassages)} (+${Math.round(rd.altNm-rd.standardNm).toLocaleString()}nm)</span></div>`;
+    } else if(rd.noRoute){
+      routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">No water route exists &mdash; confirmed against the routing graph, not assumed</span></div>`;
     }
     // Map-printer's own canvas renderer (land + route lines + endpoint
     // markers), trimmed down and pointed at this corridor's real coordinates
@@ -556,6 +699,14 @@ function detailsHtml(v, corridorId){
       mapHtml = `<div class="route-map-wrap" data-corridor="${corridorId}"><div class="rmap-loading">Loading route map&hellip;</div></div>`;
     }
   }
+  // Waypoints/bunker stops — ported from CAPE's own concept: a port a vessel
+  // actually calls at or bunkers at, separate from the strait it transits.
+  // Shown here (not gated behind diversion) because the risk is standing,
+  // not conditional on whether this vessel diverts.
+  let waypointLine = '';
+  if(v.waypoints && v.waypoints.length){
+    waypointLine = `<div class="dl-row wp-row"><span class="dl-k">Bunker/port calls</span><span class="dl-v">${v.waypoints.map(priChip).join(' ')}</span></div>`;
+  }
   return `<div class="detail-box" id="details-${v.id}">
     <div class="dl-row"><span class="dl-k">IMO</span><span class="dl-v">${v.imo}</span></div>
     <div class="dl-row"><span class="dl-k">Origin</span><span class="dl-v">${ep.fromLabel}</span></div>
@@ -564,11 +715,21 @@ function detailsHtml(v, corridorId){
     <div class="dl-row"><span class="dl-k">Value at risk</span><span class="dl-v">${fmtM(v.val)}</span></div>
     <div class="dl-row"><span class="dl-k">Strait ETA</span><span class="dl-v">${fmtEta(v.eta)}</span></div>
     ${routeLine}
+    ${waypointLine}
   </div>${mapHtml}`;
 }
 
-function corrCell(c){
-  return `${c.jwc?'<span class="jwc-dot"></span>':''}${c.label}`;
+// Now shows the corridor's REAL, full passage sequence once loaded (e.g.
+// "Bab el-Mandeb + Suez + Gibraltar") instead of just the single hand-
+// bucketed label — that single label, with no indication a vessel is
+// ALSO crossing Suez and Gibraltar on the very same voyage, was the root of
+// the "does it glaze over the other chokepoints" question. Falls back to
+// the plain corridor label before routes finish loading.
+function corrCell(c, corridorId){
+  const passages = VOYAGE_PASSAGES[corridorId];
+  const text = (passages && passages.length) ? describeRoute(passages) : c.label;
+  const jwc = c.jwc || (passages||[]).some(t=>PASSAGES[t]&&PASSAGES[t].jwc);
+  return `${jwc?'<span class="jwc-dot"></span>':''}${text}`;
 }
 
 function fmtEta(iso){
@@ -583,7 +744,7 @@ function makeLockedRow(v, corridorId){
   let html = `<tr class="vrow locked-row" onclick="toggleExpand('${v.id}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls} &middot; ${v.note}</div></td>
     <td class="v-imo">${v.imo}</td>
-    <td class="v-corr">${corrCell(c)}</td>
+    <td class="v-corr">${corrCell(c, corridorId)}</td>
     <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
     <td class="v-eta">${fmtEta(v.eta)}</td>
     <td class="v-val locked">${fmtM(v.val)}</td>
@@ -607,7 +768,7 @@ function makeDivertableRow(v, corridorId, wt){
   let html = `<tr class="vrow" onclick="toggleExpand('${v.id}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls}${winTag} &middot; ${v.note}</div></td>
     <td class="v-imo">${v.imo}</td>
-    <td class="v-corr">${corrCell(c)}</td>
+    <td class="v-corr">${corrCell(c, corridorId)}</td>
     <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
     <td class="v-eta">${fmtEta(v.eta)}</td>
     <td class="v-val ${wt}">${fmtM(v.val)}</td>
@@ -625,7 +786,7 @@ function makeDivertedRow(v, info){
   let html = `<tr class="vrow diverted-row" onclick="toggleExpand('${v.id}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note">${v.cls} &middot; ${info.detail.label}</div></td>
     <td class="v-imo">${v.imo}</td>
-    <td class="v-corr">${corrCell(c)}</td>
+    <td class="v-corr">${corrCell(c, info.corridor)}</td>
     <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
     <td class="v-eta">${fmtEta(v.eta)}</td>
     <td class="v-val diverted">${fmtUsd(info.detail.cost)}</td>
@@ -636,21 +797,33 @@ function makeDivertedRow(v, info){
       <div class="alt-route">
         <div class="alt-route-row"><span class="alt-route-name">${info.detail.label}</span><span class="alt-route-days">${info.detail.real?'+'+info.detail.days.toFixed(1)+'d':''}</span></div>
         <div class="alt-route-row"><span></span><span class="alt-route-cost">${fmtUsd(info.detail.cost)}</span></div>
-        <div class="alt-source">${info.detail.real ? 'Computed: narrows-routing-api × NARROWS-RATES.js day-rate' : 'Flat estimate — terminal strait, no route to compute'}</div>
+        <div class="alt-source">${info.detail.real ? 'Computed: narrows-routing-api × NARROWS-RATES.js day-rate' : 'Flat estimate — no water route exists (confirmed) or no passage tag for this corridor yet'}</div>
       </div></td></tr>`;
   }
   return html;
 }
 
+// A displaced vessel can land in a passage that has no FLEET bucket of its
+// own (south_africa, sunda, dardanelles, chili — confirmed real landings,
+// see VOYAGE_PASSAGES above; a Gibraltar closure sends a NY-Genova vessel
+// around the Cape even though no vessel is ever "stationed" there). This
+// gives any id used in the UI a real {label,jwc} either way.
+function corridorMeta(id){
+  if(CORRIDORS[id]) return CORRIDORS[id];
+  const tag = id.startsWith('_landing_') ? id.slice('_landing_'.length) : id;
+  const p = PASSAGES[tag];
+  return p ? { label:p.label, jwc:p.jwc, real:false } : { label:id, jwc:false, real:false };
+}
+
 function makeDisplacedRow(v, intoCorridorId, fromCorridorId){
-  const c = CORRIDORS[intoCorridorId];
-  const fromC = CORRIDORS[fromCorridorId];
+  const c = corridorMeta(intoCorridorId);
+  const fromC = corridorMeta(fromCorridorId);
   const isOpen = expanded.has(v.id+'-disp-'+intoCorridorId);
   const rowId = v.id+'-disp-'+intoCorridorId;
   let html = `<tr class="vrow displaced-row" onclick="toggleExpand('${rowId}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note"><span class="displaced-badge">↳ displaced from ${fromC.label}</span></div></td>
     <td class="v-imo">${v.imo}</td>
-    <td class="v-corr">${corrCell(c)}</td>
+    <td class="v-corr">${corrCell(c, intoCorridorId)}</td>
     <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
     <td class="v-eta">—</td>
     <td class="v-val pre">${fmtM(v.val)}</td>
@@ -938,7 +1111,12 @@ function renderAll(){
   // window/pre lists (pass 1, via the diverted.has check above).
   diverted.forEach((info, id)=>{
     (info.displacedInto||[]).forEach(intoId=>{
-      if(!corridorIds.includes(intoId)) return;
+      // Landing-only passages (no FLEET bucket, e.g. "_landing_south_africa")
+      // aren't in the filter chips at all, so they're not gated by them —
+      // showing "this vessel is now off Cape of Good Hope" doesn't depend on
+      // whether the Cape has its own chip toggled on. A real tracked
+      // corridor (bab, suez, ...) still respects the filter as before.
+      if(!intoId.startsWith('_landing_') && !corridorIds.includes(intoId)) return;
       const v = findVessel(info.corridor, id);
       if(!v) return;
       preAll.push(v);
