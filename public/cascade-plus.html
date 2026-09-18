@@ -148,6 +148,65 @@
     .footnote{font-size:11px;color:var(--text-dim);padding:18px 32px 40px;border-top:var(--rule);margin-top:14px;max-width:1760px;margin-left:auto;margin-right:auto;line-height:1.6}
     @media(max-width:1400px){.columns{grid-template-columns:1fr 1fr}.exp-inner{grid-template-columns:repeat(2,1fr);gap:12px}}
     @media(max-width:680px){.columns{grid-template-columns:1fr}}
+
+    /* ── ADD VESSEL / CSV IMPORT MODAL (2026-09-18) ──
+       Same schema-sharing pattern as CAPE's own add-vessel modal (D9): one
+       vessel shape for hand-add and CSV import, so they can't drift apart.
+       Structurally the same modal CAPE uses, restyled for CASCADE+'s
+       navy/gold theme rather than CAPE's light-surface one. */
+    .btn-sm.amber{border-color:rgba(240,180,41,.55);color:var(--gold)}
+    .btn-sm.amber:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+    .modal-overlay{
+      display:none;position:fixed;inset:0;background:rgba(10,37,64,.55);
+      z-index:500;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;
+      backdrop-filter:blur(2px);
+    }
+    .modal-overlay.open{display:flex}
+    .modal{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+      width:100%;max-width:640px;flex-shrink:0;
+      box-shadow:0 24px 64px rgba(10,37,64,.30);
+    }
+    .modal-head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 24px;border-bottom:3px solid var(--gold);background:var(--navy);
+      border-radius:var(--r) var(--r) 0 0;
+    }
+    .modal-title{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:#fff}
+    .modal-sub{font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+    .modal-close{background:transparent;border:none;color:rgba(255,255,255,.55);font-size:22px;cursor:pointer;line-height:1;padding:0}
+    .modal-close:hover{color:var(--gold)}
+    .modal-body{padding:24px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-grid.full{grid-template-columns:1fr}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+    .field input,.field select,.field textarea{
+      background:var(--bg);border:1px solid var(--border-mid);border-radius:5px;
+      padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;
+      transition:border-color .12s;
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+    .field textarea{resize:vertical;min-height:52px}
+    .field-hint{font-size:10.5px;color:var(--text-dim)}
+    .form-section{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:18px 0 8px;grid-column:1/-1;border-top:var(--rule);padding-top:16px}
+    .form-section:first-of-type{border-top:none;padding-top:0;margin-top:0}
+    .modal-foot{
+      display:flex;gap:10px;justify-content:space-between;align-items:center;
+      padding:16px 24px;border-top:var(--rule);background:var(--surface2);
+      border-radius:0 0 var(--r) var(--r);
+    }
+    .modal-foot-actions{display:flex;gap:10px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy);
+      border:none;border-radius:5px;padding:10px 20px;font-size:12px;font-weight:700;
+      letter-spacing:.05em;text-transform:uppercase;font-family:'DM Mono',monospace;cursor:pointer;transition:background .12s;
+    }
+    .btn-primary:hover{background:#e5aa20}
+    .btn-ghost-modal{background:transparent;border:1px solid var(--border-mid);color:var(--text-muted);border-radius:5px;padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+    .btn-ghost-modal:hover{border-color:var(--text-muted);color:var(--text)}
+    .import-note{font-size:12px;color:var(--text-muted);line-height:1.5;background:var(--surface2);border:var(--rule);border-radius:6px;padding:12px 14px;margin-bottom:16px}
+    .import-note code{font-family:'DM Mono',monospace;font-size:11px;background:rgba(10,37,64,.06);padding:1px 5px;border-radius:3px}
   </style>
 </head>
 <body>
@@ -162,7 +221,12 @@
     <span class="hdr-title">CASCADE+</span>
     <span class="hdr-sub">One book, every chokepoint it touches &middot; click a vessel for details</span>
   </div>
-  <button class="btn-sm" onclick="resetScenario()">Reset</button>
+  <div class="hdr-actions" style="display:flex;gap:8px">
+    <button class="btn-sm amber" onclick="openAddVesselModal()">+ Add vessel</button>
+    <button class="btn-sm amber" onclick="document.getElementById('csvInput').click()">Upload CSV</button>
+    <input type="file" id="csvInput" accept=".csv" style="display:none" onchange="handleCascadeCSV(event)">
+    <button class="btn-sm" onclick="resetScenario()">Reset</button>
+  </div>
 </header>
 
 <div class="status-line" id="status">Computing real routes via narrows-routing-api&hellip;</div>
@@ -258,6 +322,83 @@
     <b>Origins are real ports, not basins.</b> Every corridor's from/to endpoint is a named port with real coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports) — Al Fujayrah, Jiddah, Colombo, Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Singapore, Genova.<br><br>
     <b>Status is computed, not authored.</b> Locked/window/pre are derived every render from each vessel's ETA against the scenario clock in the header. Diversion days are per-vessel: class and CII grade set an effective speed (the same "CII-adjusted effective days" idea Narrows' own Malacca/Lombok analysis already publishes), not one flat speed for every ship.<br><br>
     <b>Built to receive shared assumptions later, not fake them now.</b> Corridors, passages, JWC flags, port risk, and per-class speed all live in one clearly marked block in this file, the same shape NARROWS-RATES.js already uses as a real shared file across CAPE and CASCADE+ — the next step is making that block a shared file the same way, so this page and CAPE/CDM stop hand-copying each other.
+  </div>
+</div>
+
+<!-- ADD VESSEL / CSV IMPORT MODAL (2026-09-18). Same vessel shape either way
+     (decision D9): a hand-added vessel and a CSV-imported row both end up as
+     the exact same object pushed into FLEET[corridorId], so they can never
+     drift into two different schemas. -->
+<div class="modal-overlay" id="vesselModalOverlay" onclick="if(event.target===this)closeAddVesselModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Add vessel</div>
+        <div class="modal-sub">Adds to the live book immediately &mdash; no reload needed</div>
+      </div>
+      <button class="modal-close" onclick="closeAddVesselModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="import-note">
+        Have a list already? Close this and use <b>Upload CSV</b> in the header instead &mdash;
+        <a href="#" onclick="downloadCascadeTemplate();return false" style="color:var(--navy);font-weight:600">download the template</a>
+        to see the expected columns. Both this form and the CSV import write the exact same vessel shape.
+      </div>
+      <div class="form-grid" id="cascadeVesselForm">
+
+        <div class="form-section" style="grid-column:1/-1">Vessel identity</div>
+        <div class="field"><label class="field-label">IMO number</label><input type="text" id="cv-imo" placeholder="e.g. 9284099"></div>
+        <div class="field"><label class="field-label">Vessel name</label><input type="text" id="cv-name" placeholder="e.g. MV Example"></div>
+        <div class="field">
+          <label class="field-label">Vessel class</label>
+          <select id="cv-cls">
+            <option value="VLCC">VLCC</option>
+            <option value="Suezmax" selected>Suezmax</option>
+            <option value="Aframax">Aframax</option>
+            <option value="Container">Container</option>
+            <option value="LNG">LNG</option>
+            <option value="Bulk">Bulk</option>
+            <option value="Neopanamax">Neopanamax</option>
+            <option value="LPG">LPG</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">CII rating</label>
+          <select id="cv-cii">
+            <option>A</option><option>B</option><option selected>C</option><option>D</option><option>E</option>
+          </select>
+        </div>
+
+        <div class="form-section" style="grid-column:1/-1">Corridor and timing</div>
+        <div class="field">
+          <label class="field-label">Corridor</label>
+          <select id="cv-corridor"></select>
+          <span class="field-hint">Which tracked chokepoint this voyage approaches</span>
+        </div>
+        <div class="field"><label class="field-label">Strait ETA</label><input type="date" id="cv-eta"></div>
+        <div class="field" style="grid-column:1/-1"><label class="field-label">Value at risk (USD, millions)</label><input type="number" id="cv-val" placeholder="e.g. 88" min="0" step="0.1"></div>
+
+        <div class="form-section" style="grid-column:1/-1">Bunker / port calls (optional)</div>
+        <div class="field" style="grid-column:1/-1">
+          <label class="field-label">Waypoints</label>
+          <input type="text" id="cv-waypoints" placeholder="e.g. Djibouti, Las Palmas">
+          <span class="field-hint">Comma-separated port names. Scored against the same PORT_RISK table CAPE uses &mdash; unrecognized names still show, just without a risk score.</span>
+        </div>
+
+        <div class="form-section" style="grid-column:1/-1">Notes (optional)</div>
+        <div class="field" style="grid-column:1/-1">
+          <textarea id="cv-note" placeholder="Status, routing constraint, anything worth flagging..."></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span></span>
+      <div class="modal-foot-actions">
+        <button class="btn-ghost-modal" onclick="closeAddVesselModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveCascadeVessel()">Add to book</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1158,6 +1299,152 @@ function renderAll(){
   document.getElementById('colDivertedTot').textContent = fmtUsd(divertedCostTotal);
 
   attachRouteMaps();
+}
+
+// ---- Add vessel (hand-add + CSV import, one shared shape) -----------------
+// Both paths below build the exact same object and push it straight into
+// FLEET[corridorId] — the array renderAll() already reads every render, so
+// no separate "custom vessels" list is needed the way CAPE's demo-gated
+// version has one. A corridor's route data (standard/alt distance, real
+// passage list) is per-corridor, not per-vessel, so a newly added vessel on
+// an already-loaded corridor is immediately correctly priced with no extra
+// routing-API call.
+let _cascadeVesselSeq = 0;
+function nextVesselId(){ _cascadeVesselSeq += 1; return 'add'+Date.now().toString(36)+'-'+_cascadeVesselSeq; }
+
+function populateCorridorSelect(selectEl){
+  selectEl.innerHTML = Object.entries(CORRIDORS).map(([id,c])=>`<option value="${id}">${c.label}</option>`).join('');
+}
+
+function openAddVesselModal(){
+  populateCorridorSelect(document.getElementById('cv-corridor'));
+  ['cv-imo','cv-name','cv-val','cv-waypoints','cv-note'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cv-cls').value = 'Suezmax';
+  document.getElementById('cv-cii').value = 'C';
+  // Default ETA: a few days out from the current scenario clock, so a
+  // hand-added vessel doesn't accidentally land in "locked" by default.
+  const d = new Date(getNow().getTime() + 5*24*3600*1000);
+  document.getElementById('cv-eta').value = d.toISOString().slice(0,10);
+  document.getElementById('vesselModalOverlay').classList.add('open');
+}
+function closeAddVesselModal(){ document.getElementById('vesselModalOverlay').classList.remove('open'); }
+
+function buildVesselFromFields(f){
+  // f: {imo,name,cls,cii,corridorId,eta,val,waypoints(csv string),note}
+  if(!f.name || !f.cls || !(f.val>0) || !f.eta || !CORRIDORS[f.corridorId]) return null;
+  const waypoints = (f.waypoints||'').split(/[,|;]/).map(s=>s.trim()).filter(Boolean);
+  return {
+    id: nextVesselId(),
+    imo: f.imo || '--',
+    name: f.name,
+    cls: f.cls,
+    val: Math.round(f.val*10)/10,
+    cii: (f.cii||'C').toUpperCase(),
+    eta: f.eta,
+    note: f.note || 'Hand-added to the book.',
+    ...(waypoints.length ? { waypoints } : {}),
+  };
+}
+
+function addVesselToFleet(corridorId, vessel){
+  if(!FLEET[corridorId]) FLEET[corridorId] = [];
+  FLEET[corridorId].push(vessel);
+}
+
+function saveCascadeVessel(){
+  const corridorId = document.getElementById('cv-corridor').value;
+  const vessel = buildVesselFromFields({
+    imo: document.getElementById('cv-imo').value.trim(),
+    name: document.getElementById('cv-name').value.trim(),
+    cls: document.getElementById('cv-cls').value,
+    cii: document.getElementById('cv-cii').value,
+    corridorId,
+    eta: document.getElementById('cv-eta').value,
+    val: parseFloat(document.getElementById('cv-val').value),
+    waypoints: document.getElementById('cv-waypoints').value,
+    note: document.getElementById('cv-note').value.trim(),
+  });
+  if(!vessel){ alert('Please fill in vessel name, class, a value at risk greater than 0, and a strait ETA.'); return; }
+  addVesselToFleet(corridorId, vessel);
+  closeAddVesselModal();
+  renderAll();
+}
+
+// ---- CSV import -------------------------------------------------------
+// Header row is case-insensitive; required columns: name, class, value_usd_m
+// (or value_millions), corridor, eta. Optional: imo, cii, waypoints, notes.
+// Unknown/blank corridor values, or rows missing a required field, are
+// skipped and counted, never silently guessed at.
+function parseCascadeCsvLine(line){
+  // Minimal CSV split: handles quoted fields with embedded commas, which a
+  // naive split(',') does not — a vessel note is exactly the kind of field
+  // likely to contain a comma.
+  const out = []; let cur = ''; let inQ = false;
+  for(let i=0;i<line.length;i++){
+    const ch = line[i];
+    if(inQ){
+      if(ch === '"' && line[i+1] === '"'){ cur += '"'; i++; }
+      else if(ch === '"'){ inQ = false; }
+      else cur += ch;
+    } else {
+      if(ch === '"') inQ = true;
+      else if(ch === ','){ out.push(cur); cur = ''; }
+      else cur += ch;
+    }
+  }
+  out.push(cur);
+  return out.map(s=>s.trim());
+}
+
+function handleCascadeCSV(e){
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = evt=>{
+    const lines = evt.target.result.split(/\r?\n/).filter(l=>l.trim() && !l.trim().startsWith('#'));
+    if(lines.length < 2){ alert('CSV appears empty.'); e.target.value=''; return; }
+    const hdr = parseCascadeCsvLine(lines[0]).map(h=>h.toLowerCase());
+    const idx = k => hdr.indexOf(k);
+    let added = 0, skipped = 0;
+    for(let i=1;i<lines.length;i++){
+      const cols = parseCascadeCsvLine(lines[i]);
+      const get = k => (idx(k)>=0 ? cols[idx(k)] : '') || '';
+      const corridorRaw = (get('corridor')||'').toLowerCase().replace(/\s+/g,'_');
+      const valRaw = get('value_usd_m') || get('value_millions') || get('cargo_value_m') || get('value');
+      const vessel = buildVesselFromFields({
+        imo: get('imo'), name: get('name'), cls: get('class')||get('cls'),
+        cii: get('cii')||get('cii_rating')||'C', corridorId: corridorRaw,
+        eta: get('eta')||get('strait_eta'), val: parseFloat(valRaw),
+        waypoints: get('waypoints'), note: get('notes')||get('note'),
+      });
+      if(!vessel){ skipped++; continue; }
+      addVesselToFleet(corridorRaw, vessel);
+      added++;
+    }
+    e.target.value = '';
+    if(added === 0){
+      alert('No valid vessel rows found. Check that name, class, value_usd_m, corridor, and eta columns are present and that each corridor matches one of: '+Object.keys(CORRIDORS).join(', ')+'.');
+      return;
+    }
+    renderAll();
+    alert(added+' vessel'+(added!==1?'s':'')+' imported.'+(skipped ? ' '+skipped+' row'+(skipped!==1?'s':'')+' skipped (missing a required field or an unrecognized corridor).' : ''));
+  };
+  reader.readAsText(file);
+}
+
+function downloadCascadeTemplate(){
+  const hdr = 'imo,name,class,cii,corridor,eta,value_usd_m,waypoints,notes\n';
+  const ex1 = '9284099,MV EXAMPLE,Suezmax,C,bab,2026-09-25,88,Djibouti,Hand-add and CSV import share this exact shape\n';
+  const ex2 = '9284100,MV SECOND EXAMPLE,VLCC,B,hormuz,2026-10-02,125,,No waypoints on this one\n';
+  const note = '# corridor: one of '+Object.keys(CORRIDORS).join('|')+'\n'
+    + '# class: one of VLCC|Suezmax|Aframax|Container|LNG|Bulk|Neopanamax|LPG\n'
+    + '# cii: A|B|C|D|E (defaults to C if blank)\n'
+    + '# eta: YYYY-MM-DD, the vessel\'s strait ETA\n'
+    + '# value_usd_m: value at risk in USD millions, e.g. 88 for $88M\n'
+    + '# waypoints: comma-separated port names, scored against PORT_RISK (optional)\n';
+  const blob = new Blob([note+hdr+ex1+ex2], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'CASCADE-PLUS_vessel_template.csv'; a.click();
+  URL.revokeObjectURL(url);
 }
 
 buildFilterBar();
