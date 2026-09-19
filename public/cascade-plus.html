@@ -747,6 +747,28 @@ const FLEET = {
     {id:'d02',imo:'9284027',name:'KATTEGAT TRADER',  cls:'Suezmax', val:76, cii:'C', eta:'2026-09-18', note:'Baltic approach. Ice-season routing review pending.'},
     {id:'d03',imo:'9284028',name:'OERESUND STAR',    cls:'LNG',     val:110,cii:'A', eta:'2026-10-08', note:'Liftings not yet confirmed. Full routing optionality.'},
   ],
+  // Added 2026-09-19 (decision D31) — real, named blue-water chokepoints,
+  // same terminal/flat-estimate treatment as Danish Straits above (no
+  // routing-graph tag for any of these four — see TERMINAL_ENDPOINTS'
+  // comment in NARROWS-CORRIDORS.js). IMO and ETA are placeholders for a
+  // demo fleet, same convention as every other corridor — the shape (real
+  // port, real cargo, real class) is real.
+  torres: [
+    {id:'t01',imo:'9284037',name:'CAPE ALUMINA',    cls:'Bulk', val:22, cii:'B', eta:'2026-09-19', note:'Weipa bauxite. Torres Strait transit booked, compulsory pilotage.'},
+    {id:'t02',imo:'9284038',name:'REEF NAVIGATOR',  cls:'Bulk', val:19, cii:'C', eta:'2026-09-20', note:'Alumina to North Asia. Standard Torres Strait routing.'},
+  ],
+  mozambique: [
+    {id:'m01',imo:'9284039',name:'RICHARDS TRADER', cls:'Bulk',    val:24, cii:'C', eta:'2026-09-19', note:'Richards Bay coal. Mozambique Channel routing to Asia.'},
+    {id:'m02',imo:'9284040',name:'AGULHAS CURRENT', cls:'Aframax', val:60, cii:'D', eta:'2026-09-20', note:'Products cargo, East African coastal routing.'},
+  ],
+  parana: [
+    {id:'p01',imo:'9284041',name:'ROSARIO PIONEER', cls:'Bulk', val:20, cii:'C', eta:'2026-09-19', note:'Up-river soy loading, Rosario. Draft-restricted by river level.'},
+    {id:'p02',imo:'9284042',name:'PAMPAS HARVEST',  cls:'Bulk', val:23, cii:'B', eta:'2026-09-20', note:'Soybean cargo to China. Hidrovía transit.'},
+  ],
+  mississippi: [
+    {id:'ms01',imo:'9284043',name:'DELTA QUEEN GRAIN', cls:'Bulk', val:21, cii:'B', eta:'2026-09-19', note:'Baton Rouge grain loading. Ship channel draft-dependent.'},
+    {id:'ms02',imo:'9284044',name:'GULF HARVESTER',    cls:'Bulk', val:18, cii:'D', eta:'2026-09-20', note:'Soybean/corn export. Lower Mississippi transit.'},
+  ],
 };
 
 // ---- Scenario clock -------------------------------------------------------

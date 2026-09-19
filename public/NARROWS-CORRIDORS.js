@@ -19,16 +19,27 @@
  * a silent fallback copy is exactly the two-sources-of-truth problem this
  * extraction exists to remove.
  *
- * STATUS (2026-09-18): CASCADE+ has been switched over to read from this
- * file. CAPE (app/cape.html) has NOT been switched over yet — its own CORR
- * object uses a different shape (tier/type fields CASCADE+'s CORRIDORS
- * doesn't have, and no `primary` passage-tag or real multi-passage voyage
- * model), and CAPE's own PORT_RISK table is currently the canonical source
- * CASCADE+'s copy below was ported FROM. Reconciling the two shapes and
- * cutting CAPE over is real, deliberately separate follow-up work — not
- * done silently as part of this extraction, per the same "no patch after
- * patch, walk through it properly" instruction this whole decision responds
- * to. See D14 in the decision ledger before attempting that merge.
+ * NOTE ON "SHARED": 0526/public/ and app/ are separate repos/deployments —
+ * there is no single cross-origin file both tools load. This works the
+ * same way NARROWS-RATES.js and NARROWS-SIGNALS.js already do: a
+ * byte-identical copy lives in each repo, and both are meant to be kept in
+ * sync by hand whenever one changes. "Shared" means "one file, copy-pasted
+ * to both places and never allowed to drift" — not literally one URL.
+ *
+ * STATUS (2026-09-19): CASCADE+ (0526/public/cascade-plus.html) reads
+ * PASSAGES, CORRIDORS, REAL_ROUTES, TERMINAL_ENDPOINTS, RATE_KEY,
+ * CARGO_DETAIL, TERMINAL_DECLINE_COST, CLASS_SPEED_KN, CII_SPEED_FACTOR,
+ * and PORT_RISK from this file. CAPE (app/cape.html) has its own copy of
+ * this file (decision D30) and reads PORT_RISK from it — CAPE's own local
+ * PORT_RISK table (the one this file's copy was originally ported FROM)
+ * is now a fallback only, used if this file fails to load. CAPE's `CORR`
+ * object is DELIBERATELY NOT part of this migration: it uses a different
+ * shape (tier/type/region fields CASCADE+'s CORRIDORS doesn't have, no
+ * `primary` passage tag, no real multi-passage voyage model) built for
+ * CAPE's own trade-exposure VaR model rather than CASCADE+'s routing
+ * simulator. Reconciling the two is real, separate, deliberately deferred
+ * work — see D14/D28 in the CASCADE+ decision ledger and D30's own note
+ * before attempting that merge.
  */
 (function(){
 
@@ -67,6 +78,19 @@ const CORRIDORS = {
   hormuz:         { label:'Hormuz',         jwc:true,  real:true, primary:'ormuz'       },
   bosphorus:      { label:'Bosphorus',      jwc:false, real:true, primary:'bosporus'    },
   danish_straits: { label:'Danish Straits', jwc:false, real:false },
+  // Added 2026-09-19 (decision D31) — real, named blue-water chokepoints the
+  // same tracked fleet classes actually use, same "terminal/flat-estimate"
+  // treatment Danish Straits already has: `narrows-routing-api`'s graph has
+  // no passage tag for any of these four either (confirmed the same way the
+  // Danish Straits gap was — no fabricated real-routing cost, an honest
+  // flat one instead). jwc:false on all four is NOT a claim they are clear
+  // of JWC Listed Area status — it means this session did not have a
+  // current JWC list to check them against, so false (not fabricated true)
+  // is the honest default. Verify before treating that flag as confirmed.
+  torres:         { label:'Torres Strait',        jwc:false, real:false },
+  mozambique:     { label:'Mozambique Channel',   jwc:false, real:false },
+  parana:         { label:'Paraná / Río de la Plata', jwc:false, real:false },
+  mississippi:    { label:'Mississippi River Ship Channel', jwc:false, real:false },
 };
 
 // One representative real voyage per real corridor, real port coordinates
@@ -85,16 +109,50 @@ const REAL_ROUTES = {
 // Terminal (non-real) corridor endpoints — illustrative only, for the
 // detail panel. No route is computed because the routing graph has no
 // passage tag for Danish Straits at all (a narrows-pipeline gap, not a
-// tool-level choice — see decision D4/D20).
+// tool-level choice — see decision D4/D20). Same reasoning for the four
+// added 2026-09-19 (D31): real named ports, real trades, no graph tag.
+// `from` coordinates are representative (matched to the precision already
+// used for PASSAGE_COORDS in cascade-plus.html — real locations, not
+// survey-grade), and `toLabel` is a market description rather than a
+// single port, same as Danish Straits, since no route geometry exists to
+// draw a real line to.
 const TERMINAL_ENDPOINTS = {
   danish_straits: { fromLabel:'Primorsk, RU', from:[28.633333,60.366667], toLabel:'North Sea / Atlantic export markets' },
+  // Weipa, QLD — real bauxite/alumina export port; the standing real trade
+  // that actually uses Torres Strait as a shortcut to North Asia rather
+  // than routing around Australia's south/west coast.
+  torres:      { fromLabel:'Weipa, AU', from:[141.92,-12.63], toLabel:'North Asia (China/Japan/Korea) bulk import markets' },
+  // Richards Bay, ZA — real major coal export port; Asia-bound coal traffic
+  // from southern/eastern Africa is the standing real trade routed past the
+  // Mozambique Channel.
+  mozambique:  { fromLabel:'Richards Bay, ZA', from:[32.08,-28.78], toLabel:'South & East Asia coal/crude import markets' },
+  // Rosario, AR — the real hub of the "up-river" grain port complex trade
+  // press calls Argentina's/South America's grain superhighway.
+  parana:      { fromLabel:'Rosario, AR', from:[-60.64,-32.95], toLabel:'China/Asia soybean and grain import markets' },
+  // Baton Rouge, US — the real deep-draft loading point at the head of the
+  // Mississippi River Ship Channel (the reach actively being dredged for
+  // larger vessels); real, quantified U.S. grain/petrochemical export gateway.
+  mississippi: { fromLabel:'Baton Rouge, US', from:[-91.15,30.45], toLabel:'Europe & Asia grain import markets' },
 };
 
 // Vessel-class → NARROWS-RATES.js rate-table key, cargo description, and
 // the flat per-class cost used for terminal (non-real-routing) corridors.
 const RATE_KEY = { Suezmax:'Suezmax', Container:'Container', LNG:'LNG_Carrier', Aframax:'Aframax', Bulk:'Handymax', VLCC:'VLCC', Neopanamax:'Neopanamax', LPG:'LPG' };
 const CARGO_DETAIL = { Suezmax:'Crude oil, ~1M bbl', VLCC:'Crude oil, ~2M bbl', Aframax:'Crude/products, ~600k bbl', Container:'Mixed containers, 4,000-8,000 TEU', LNG:'LNG, ~170,000m³', Bulk:'Grain or coal, 40-60k dwt', Neopanamax:'Mixed containers, ~13,000 TEU', LPG:'LPG, ~40,000m³' };
-const TERMINAL_DECLINE_COST = { VLCC:900000, Aframax:550000, Suezmax:700000, LNG:750000 };
+// Bulk added 2026-09-19 (D31) — the four new terminal corridors are real
+// grain/bulk trades (Torres Strait, Mozambique Channel, Paraná, Mississippi
+// all carry Bulk-class demo vessels), and without an entry here their
+// divert button silently no-ops (computeDivertCost returns null,
+// divertVessel() bails — a real functional gap, not a labeling one).
+// $280,000 is NOT independently sourced the way the routing-based costs
+// are — same honest-estimate category as CLASS_SPEED_KN/CII_SPEED_FACTOR
+// below. Derived by scaling Handymax's own day-rate (NARROWS-RATES.js:
+// $26,000/day bunker+charter) by roughly the same days-equivalent the
+// existing Aframax/Suezmax figures imply against their own day rates
+// (~11 days) — an extrapolation of this table's own existing pattern, not
+// a fresh guess, but still worth a real sourcing pass before this becomes
+// customer-facing, same flag as the speed table.
+const TERMINAL_DECLINE_COST = { VLCC:900000, Aframax:550000, Suezmax:700000, LNG:750000, Bulk:280000 };
 
 // Per-class service speed + CII-adjusted slow-steaming penalty. Known
 // limitation (see METHODOLOGY-DRAFT Section 4): engineering estimates, not
