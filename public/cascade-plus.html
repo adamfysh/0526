@@ -577,6 +577,98 @@ function effectiveSpeedKn(cls, cii){
 const VOYAGE_PASSAGES = {};
 Object.entries(PASSAGES).forEach(([tag, p])=>{ if(!p.voyage) VOYAGE_PASSAGES['_landing_'+tag] = [tag]; });
 
+// ── DISPLACED-ROW ETA (2026-09-19) ──────────────────────────────────────────
+// Known limitation this closes: the routing API returns total route distance
+// and which passages it uses, but not a per-leg breakdown — no "distance
+// from origin to the first NEW chokepoint specifically" (see
+// CASCADE-PLUS-METHODOLOGY-DRAFT.md Section 5/6). The API can't be changed
+// from here (that's a separate narrows-routing-api deploy), so this works
+// with what it already gives us: the actual route geometry, `coordinates`,
+// which is real — the same polyline the map draws (see loadRoutes()).
+//
+// PASSAGE_COORDS is a single representative real-world lon/lat per passage
+// tag (Suez ~ Ismailia, Gibraltar ~ Tarifa, and so on) — not the full width
+// of the strait, just a point close enough to it that "closest point on the
+// route polyline to this point" reliably lands on the right leg of the
+// voyage. distAlongRouteToPoint() walks the route's own coordinate list,
+// finds the closest point ON that polyline (interpolated within the nearest
+// segment, not just snapped to the nearest vertex), and returns the
+// cumulative real distance from route start to that point.
+//
+// loadRoutes() uses this to compute, per corridor: distToOwnPassage (nm from
+// the voyage's origin to ITS OWN corridor passage, along the standard
+// route) and altPassageDist (nm from origin to every passage tag the alt
+// route actually crosses, along the alt route). A displaced vessel's own
+// strait ETA (v.eta, already in the data) plus distToOwnPassage backs out an
+// implied departure time at the CII-adjusted speed already used for divert
+// cost; distToOwnPassage/altPassageDist ratio for the new corridor's tag
+// then gives a real, not-fabricated ETA at the chokepoint it's newly
+// exposed to. See displacedEta() below.
+const PASSAGE_COORDS = {
+  babalmandab:  [43.35, 12.65],   // Bab el-Mandeb
+  suez:         [32.28, 30.60],   // Suez Canal (Ismailia)
+  gibraltar:    [-5.60, 36.00],   // Strait of Gibraltar (Tarifa)
+  malacca:      [100.50, 3.00],   // Malacca Strait, mid-channel
+  panama:       [-79.92, 9.08],   // Panama Canal (Gatun Lake)
+  ormuz:        [56.25, 26.57],   // Strait of Hormuz
+  bosporus:     [29.02, 41.10],   // Bosphorus (Istanbul)
+  sunda:        [105.75, -6.00],  // Sunda Strait
+  dardanelles:  [26.40, 40.15],   // Dardanelles (Çanakkale)
+  south_africa: [18.47, -34.35],  // Cape of Good Hope
+  chili:        [-67.30, -55.98], // Cape Horn
+};
+
+function nmBetween(a, b){
+  const toRad = d => d * Math.PI/180;
+  const R = 3440.065; // nm
+  const dLat = toRad(b[1]-a[1]), dLon = toRad(b[0]-a[0]);
+  const lat1 = toRad(a[1]), lat2 = toRad(b[1]);
+  const h = Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;
+  return R * 2 * Math.asin(Math.sqrt(h));
+}
+function distAlongRouteToPoint(coords, target){
+  if(!coords || coords.length < 2 || !target) return null;
+  let cum = 0, best = null;
+  for(let i=0; i<coords.length-1; i++){
+    const a = coords[i], b = coords[i+1];
+    const segLen = nmBetween(a, b);
+    // Flat local projection, scaled by cos(latitude) so longitude degrees
+    // are weighted correctly — accurate enough at chokepoint scale.
+    const latRef = (a[1]+b[1])/2 * Math.PI/180, kx = Math.cos(latRef);
+    const ax=a[0]*kx, ay=a[1], bx=b[0]*kx, by=b[1], tx=target[0]*kx, ty=target[1];
+    const dx=bx-ax, dy=by-ay, len2=dx*dx+dy*dy;
+    let t = len2>0 ? ((tx-ax)*dx+(ty-ay)*dy)/len2 : 0;
+    t = Math.max(0, Math.min(1, t));
+    const px=ax+t*dx, py=ay+t*dy;
+    const distNm = Math.hypot(tx-px, ty-py) * 60; // deg -> nm, local approx
+    const cumAtPoint = cum + t*segLen;
+    if(!best || distNm < best.dist) best = { dist: distNm, cum: cumAtPoint };
+    cum += segLen;
+  }
+  return best;
+}
+// v: vessel (needs .eta, .cls, .cii). fromCorridorId: the real corridor it
+// diverted OUT of. matchedTag: the passage tag its alt route shares with the
+// newly-exposed corridor. Returns a Date (the implied arrival at that new
+// chokepoint) or null if the pieces aren't available (e.g. flat-estimate
+// corridors with no real route geometry at all).
+function displacedEta(v, fromCorridorId, matchedTag){
+  const rd = routeData[fromCorridorId];
+  if(!rd || rd.noRoute || !rd.distToOwnPassage || !rd.altPassageDist) return null;
+  const distToNew = rd.altPassageDist[matchedTag];
+  if(distToNew == null) return null;
+  const speedKn = effectiveSpeedKn(v.cls, v.cii);
+  const nmPerDay = speedKn * 24;
+  const daysToOwnStrait = rd.distToOwnPassage / nmPerDay;
+  const departureMs = new Date(v.eta+'T00:00:00Z').getTime() - daysToOwnStrait*86400000;
+  const daysToNewStrait = distToNew / nmPerDay;
+  return new Date(departureMs + daysToNewStrait*86400000);
+}
+function fmtEtaDate(d){
+  if(!d) return '—';
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'UTC' });
+}
+
 // PRI (Port Risk Index) × bunker/waypoint risk. PORT_RISK itself now lives
 // in NARROWS-CORRIDORS.js (destructured above) — CAPE's own canonical
 // table, ported into that shared file on 2026-09-18. This is the concept
@@ -792,12 +884,24 @@ async function loadRoutes(){
       // so the map draws exactly what the numbers describe. altNm/altCoords
       // stay null when the engine reports no route at all — a genuine dead
       // end (Hormuz, Bosphorus — confirmed, not a guess), not a load failure.
+      // distToOwnPassage/altPassageDist: real cumulative distance (along the
+      // engine's own route geometry) to this corridor's own passage and to
+      // every passage the alt route crosses — see the PASSAGE_COORDS/
+      // displacedEta() block above. Powers displaced-row ETA.
+      const ownPt = distAlongRouteToPoint(std.coordinates, PASSAGE_COORDS[primary]);
+      const distToOwnPassage = ownPt ? ownPt.cum : null;
       if(alt.error){
         return [id, { standardNm: std.distance, standardPassages: std.passagesUsed, standardCoords: std.coordinates,
-          altNm:null, altPassages:null, altCoords:null, viaLabel:null, noRoute:true }];
+          altNm:null, altPassages:null, altCoords:null, viaLabel:null, noRoute:true, distToOwnPassage, altPassageDist:null }];
       }
+      const altPassageDist = {};
+      (alt.passagesUsed||[]).forEach(tag=>{
+        const pt = distAlongRouteToPoint(alt.coordinates, PASSAGE_COORDS[tag]);
+        if(pt) altPassageDist[tag] = pt.cum;
+      });
       return [id, { standardNm: std.distance, altNm: alt.distance, standardPassages: std.passagesUsed, altPassages: alt.passagesUsed,
-        viaLabel: describeRoute(alt.passagesUsed), standardCoords: std.coordinates, altCoords: alt.coordinates, noRoute:false }];
+        viaLabel: describeRoute(alt.passagesUsed), standardCoords: std.coordinates, altCoords: alt.coordinates, noRoute:false,
+        distToOwnPassage, altPassageDist }];
     }));
     results.forEach(([id, data])=>{ routeData[id] = data; VOYAGE_PASSAGES[id] = data.standardPassages || []; });
     const summary = results.map(([id,d])=> d.noRoute
@@ -964,12 +1068,24 @@ function makeDisplacedRow(v, intoCorridorId, fromCorridorId){
   const fromC = corridorMeta(fromCorridorId);
   const isOpen = expanded.has(v.id+'-disp-'+intoCorridorId);
   const rowId = v.id+'-disp-'+intoCorridorId;
+  // Real, computed — not fabricated: see the PASSAGE_COORDS/displacedEta()
+  // block above loadRoutes(). matchedTag is whichever of the newly-exposed
+  // corridor's own real passage tags the alt route actually shares (usually
+  // just its `primary`, but landing-only corridors are single-tag anyway).
+  const tags = VOYAGE_PASSAGES[intoCorridorId] || [];
+  const rdFrom = routeData[fromCorridorId];
+  const matchedTag = rdFrom && rdFrom.altPassages ? tags.find(t=>rdFrom.altPassages.includes(t)) : null;
+  const etaDate = matchedTag ? displacedEta(v, fromCorridorId, matchedTag) : null;
+  const etaCell = etaDate ? fmtEtaDate(etaDate) : '—';
+  const timingLine = etaDate
+    ? `Computed from the alt route’s own real geometry: ${fmtEtaDate(etaDate)}, at ${v.cls}’s CII-adjusted speed. Approximate — based on the closest point on the route to ${passageLabel(matchedTag)}, not a routing-engine leg boundary.`
+    : 'Not modeled for this route — no real alt-route geometry to compute against (flat-estimate corridor, or the routing API had no data for it).';
   let html = `<tr class="vrow displaced-row" onclick="toggleExpand('${rowId}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note"><span class="displaced-badge">↳ displaced from ${fromC.label}</span></div></td>
     <td class="v-imo">${v.imo}</td>
     <td class="v-corr">${corrCell(c, intoCorridorId)}</td>
     <td><span class="cii cii-${v.cii.toLowerCase()}">${v.cii}</span></td>
-    <td class="v-eta">—</td>
+    <td class="v-eta">${etaCell}</td>
     <td class="v-val pre">${fmtM(v.val)}</td>
     <td class="v-expand">${isOpen?'▴':'▾'}</td>
   </tr>`;
@@ -978,7 +1094,7 @@ function makeDisplacedRow(v, intoCorridorId, fromCorridorId){
       <div class="dl-row"><span class="dl-k">New exposure</span><span class="dl-v">Real alt-route out of ${fromC.label} transits ${c.label}</span></div>
       <div class="dl-row"><span class="dl-k">Cargo</span><span class="dl-v">${CARGO_DETAIL[v.cls]||v.cls}</span></div>
       <div class="dl-row"><span class="dl-k">Value at risk</span><span class="dl-v">${fmtM(v.val)}</span></div>
-      <div class="dl-row"><span class="dl-k">Timing</span><span class="dl-v">Not yet modeled — needs per-leg transit time, not just total distance</span></div>
+      <div class="dl-row"><span class="dl-k">Timing</span><span class="dl-v">${timingLine}</span></div>
     </div></td></tr>`;
   }
   return html;
