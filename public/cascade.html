@@ -73,7 +73,6 @@
     .spillover-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.4}
     .spillover-text b{color:var(--gold);font-weight:600}
     .spillover-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-decoration:underline;cursor:pointer;flex-shrink:0;white-space:nowrap}
-    .spillover-live{font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);margin-left:auto;white-space:nowrap;display:none}
 
     /* ── EXPOSURE STRIP ── */
     .exp-strip{background:var(--navy);border-bottom:1px solid rgba(255,255,255,.05);padding:16px 32px}
@@ -223,7 +222,6 @@
     <span class="spillover-icon">Cascade link</span>
     <span class="spillover-text" id="spilloverText"></span>
     <span class="spillover-link" id="spilloverLink"></span>
-    <span class="spillover-live" id="spilloverLive"></span>
   </div>
 </div>
 
@@ -486,36 +484,6 @@ malacca:{
 
 }; // end FLEETS
 
-// ── CROSS-CORRIDOR SPILLOVER (Task #84) ────────────────────────────────────────
-// One-directional, computed only where the underlying mechanism is documented:
-// Suezmax tonnage that diverts off Bab el-Mandeb via the Cape of Good Hope is
-// competing for the same Suezmax pool the Black Sea / CPC corridor draws on.
-// This persists across tab switches (it is a market effect, not a per-tab toy
-// state) so it survives a reset of the source corridor's own diversion view.
-const SPILLOVER_LINKS = {
-  bab: { target:'blacksea', cls:'Suezmax' }
-};
-const spilloverSeen = {}; // corridor id -> Map(vesselId -> $M)
-
-function recordSpillover(cpId, v){
-  const link = SPILLOVER_LINKS[cpId];
-  if(!link || v.cls !== link.cls) return;
-  if(!spilloverSeen[cpId]) spilloverSeen[cpId] = new Map();
-  spilloverSeen[cpId].set(v.id, v.val);
-}
-function spilloverTotal(cpId){
-  const m = spilloverSeen[cpId];
-  if(!m) return 0;
-  let t = 0; m.forEach(val => t += val); return t;
-}
-function incomingSpillover(cpId){
-  for (const [srcId, link] of Object.entries(SPILLOVER_LINKS)){
-    if (link.target === cpId) return { srcId, link, total: spilloverTotal(srcId) };
-  }
-  return null;
-}
-
-
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let activeCp = 'hormuz';
 // Map: vessel id → { from:'pre'|'window', route: altRoute object }
@@ -581,8 +549,6 @@ function renderCtx(){
   pill.className='ctx-pill '+(cp.jwc?'listed':'not');
 
   const banner=document.getElementById('spilloverBanner');
-  const liveEl=document.getElementById('spilloverLive');
-  const incoming=incomingSpillover(activeCp);
 
   if(cp.spillover){
     document.getElementById('spilloverText').innerHTML=cp.spillover.note;
@@ -591,22 +557,8 @@ function renderCtx(){
     link.textContent='View '+linkedName+' \u2192';
     link.onclick=()=>selectCp(cp.spillover.corridor);
     banner.classList.add('show');
-  } else if(incoming){
-    document.getElementById('spilloverText').innerHTML='Live cross-corridor exposure carried over from <b>'+FLEETS[incoming.srcId].short+'</b>.';
-    const link=document.getElementById('spilloverLink');
-    link.textContent='View '+FLEETS[incoming.srcId].short+' \u2192';
-    link.onclick=()=>selectCp(incoming.srcId);
-    banner.classList.add('show');
   } else {
     banner.classList.remove('show');
-  }
-
-  if(incoming && incoming.total>0){
-    liveEl.textContent=fmt(incoming.total)+' of '+incoming.link.cls+' tonnage diverted off '+FLEETS[incoming.srcId].short+', now competing in this pool';
-    liveEl.style.display='inline';
-  } else {
-    liveEl.textContent='';
-    liveEl.style.display='none';
   }
 }
 
@@ -737,14 +689,13 @@ function divertVessel(id, from){
   const v=[...cp.in_window,...cp.pre].find(x=>x.id===id);
   if(!v)return;
   diverted.set(id,{from, route: altRoute(activeCp, v.cls, from)});
-  recordSpillover(activeCp, v);
   renderAll();
 }
 
 function executeCascade(){
   if(cascadeDone)return;
   const cp=FLEETS[activeCp];
-  cp.pre.forEach(v=>{ if(!diverted.has(v.id)){ diverted.set(v.id,{from:'pre',route:altRoute(activeCp,v.cls,'pre')}); recordSpillover(activeCp, v); } });
+  cp.pre.forEach(v=>{ if(!diverted.has(v.id)){ diverted.set(v.id,{from:'pre',route:altRoute(activeCp,v.cls,'pre')}); } });
   renderAll();
 }
 
@@ -806,7 +757,6 @@ function showPostCascade(){
 
 function resetScenario(){
   diverted.clear(); cascadeDone=false;
-  if(spilloverSeen[activeCp]) spilloverSeen[activeCp].clear();
   document.getElementById('btnCascade').disabled=false;
   document.getElementById('cascadeStatus').textContent='Divert all pre-commitment';
   document.getElementById('banner').classList.remove('show');
