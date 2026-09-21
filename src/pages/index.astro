@@ -220,6 +220,151 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   font-style: italic;
   margin-top: 2px;
 }
+.product-for {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 600;
+  margin-top: -2px;
+}
+
+/* ─── PRODUCT DETAIL ─── */
+.detail-section {
+  padding: var(--s6) var(--s4);
+  border-bottom: var(--rule-light);
+}
+.detail-inner { max-width: var(--max-w); margin: 0 auto; }
+.detail-header { max-width: 680px; margin-bottom: var(--s5); }
+.detail-title {
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: var(--s2);
+}
+.detail-lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  max-width: 560px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+}
+.detail-card {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 8px 8px;
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.detail-card-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.detail-eyebrow {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.detail-for {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.detail-example {
+  background: var(--surface);
+  border: var(--rule-light);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.detail-example-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 2px;
+}
+.detail-example-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+}
+.detail-example-value {
+  font-weight: 700;
+  color: var(--navy);
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.detail-example-caption {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.detail-example-caption a { color: var(--blue); font-weight: 600; text-decoration: none; }
+.detail-example-caption a:hover { text-decoration: underline; }
+.detail-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.detail-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  margin-top: auto;
+  padding-top: var(--s1);
+  flex-wrap: wrap;
+}
+.detail-terms-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  background: var(--surface);
+  border: var(--rule-light);
+  border-radius: 3px;
+  padding: 4px 9px;
+}
+.detail-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.15s var(--ease), color 0.15s;
+}
+.detail-link::after { content: '→'; }
+.detail-link:hover { color: var(--navy); gap: 8px; }
+@media (max-width: 800px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
 
 /* ─── PRI SECTION ─── */
 .pri-section {
@@ -535,6 +680,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="product-name">Chokepoint Dependency Model</div>
           <span class="badge badge-paid">Paid</span>
         </div>
+        <p class="product-for">For institutional and analytical clients</p>
         <p class="product-desc">Bilateral trade dependency at commodity level across the world's principal maritime corridors. The data foundation. Available to institutional and analytical clients.</p>
         <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="product-link">Enquire</a>
       </div>
@@ -544,6 +690,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="product-name">CAPE</div>
           <span class="badge badge-paid">Paid</span>
         </div>
+        <p class="product-for">For marine underwriters, reinsurers, P&amp;I clubs, commodity desks</p>
         <p class="product-desc">The CDM applied to a specific cargo portfolio. Locked positions, divertible positions, and rerouting cost by vessel class, charter and bunker included, tanker to dry bulk. A demonstration version is available.</p>
         <a href="/cape" class="product-link">View demonstration</a>
         <span class="product-link-note">Full version runs against a live portfolio.</span>
@@ -554,6 +701,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="product-name">CASCADE</div>
           <span class="badge badge-paid">Paid</span>
         </div>
+        <p class="product-for">For desks managing a live closure or diversion decision</p>
         <p class="product-desc">Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.</p>
         <a href="/cascade" class="product-link">View demonstration</a>
       </div>
@@ -563,8 +711,94 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="product-name">Bespoke Analysis</div>
           <span class="badge badge-paid">Paid</span>
         </div>
+        <p class="product-for">For anyone with a specific event, portfolio, or question</p>
         <p class="product-desc">The Narrows methodology applied to a specific event, portfolio, or research question. Commissioned scenario and corridor analysis delivered as a report.</p>
         <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="product-link">Enquire</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="detail-section">
+  <div class="detail-inner">
+    <div class="detail-header fade-up">
+      <h2 class="detail-title">What you get.</h2>
+      <p class="detail-lead">Concrete outputs, not just capability descriptions. Four products, four different deliverables.</p>
+    </div>
+    <div class="detail-grid">
+
+      <div class="detail-card fade-up">
+        <div class="detail-card-top">
+          <span class="detail-eyebrow">Chokepoint Dependency Model</span>
+          <span class="detail-for">Institutional &amp; analytical clients</span>
+        </div>
+        <div class="detail-example">
+          <div class="detail-example-label">From the data</div>
+          <div class="detail-example-row"><span>India's urea imports, headline Gulf dependency</span><span class="detail-example-value">85%</span></div>
+          <div class="detail-example-row"><span>Hormuz-specific, once Oman is separated out</span><span class="detail-example-value">36%</span></div>
+          <div class="detail-example-caption">The gap between a headline dependency figure and the one that's actually load-bearing. <a href="/analysis/hormuz-dry-cargo">Read the analysis &rarr;</a></div>
+        </div>
+        <p class="detail-desc">The bilateral trade dependency data behind every Narrows product: commodity-level, corridor-level, validated against vessel and port sources. Licensed directly to clients who want the underlying numbers, not just the tools built on them.</p>
+        <div class="detail-footer">
+          <span class="detail-terms-badge">Licensed access</span>
+          <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="detail-link">Enquire</a>
+        </div>
+      </div>
+
+      <div class="detail-card fade-up">
+        <div class="detail-card-top">
+          <span class="detail-eyebrow">CAPE</span>
+          <span class="detail-for">Underwriters, reinsurers, P&amp;I clubs, commodity desks</span>
+        </div>
+        <div class="detail-example">
+          <div class="detail-example-label">TIDE accumulation &mdash; Strait of Hormuz</div>
+          <div class="detail-example-row"><span>Event horizon (the insurer's at-risk number)</span><span class="detail-example-value">$36.5B</span></div>
+          <div class="detail-example-row"><span>War risk PML</span><span class="detail-example-value">$3.97B</span></div>
+          <div class="detail-example-caption">Live in the free demo, run against a sample fleet.</div>
+        </div>
+        <p class="detail-desc">Load a vessel portfolio, select a corridor event, get aggregate exposure by vessel class, corridor, and scenario severity, plus the TIDE accumulation figures reinsurers price against. The demo runs a fixed illustrative fleet; full access connects to a live portfolio.</p>
+        <div class="detail-footer">
+          <span class="detail-terms-badge">Free demo &middot; full access by request</span>
+          <a href="/cape" class="detail-link">View demonstration</a>
+        </div>
+      </div>
+
+      <div class="detail-card fade-up">
+        <div class="detail-card-top">
+          <span class="detail-eyebrow">CASCADE</span>
+          <span class="detail-for">Desks managing a live closure or diversion decision</span>
+        </div>
+        <div class="detail-example">
+          <div class="detail-example-label">What the interface shows, per vessel</div>
+          <div class="detail-example-row"><span>Position</span><span class="detail-example-value">Locked or divertible</span></div>
+          <div class="detail-example-row"><span>Diversion cost</span><span class="detail-example-value">By class &amp; route</span></div>
+          <div class="detail-example-row"><span>Displaced ETA</span><span class="detail-example-value">Recomputed live</span></div>
+        </div>
+        <p class="detail-desc">Committed fleet positions for a live event, the decision window before a vessel's diversion option closes, and the real cost and timeline of rerouting, corridor by corridor. Built for the desk that needs an answer today, not a quarterly refresh.</p>
+        <div class="detail-footer">
+          <span class="detail-terms-badge">Demo available &middot; full access by request</span>
+          <a href="/cascade" class="detail-link">View demonstration</a>
+        </div>
+      </div>
+
+      <div class="detail-card fade-up">
+        <div class="detail-card-top">
+          <span class="detail-eyebrow">Bespoke Analysis</span>
+          <span class="detail-for">Anyone with a specific event, portfolio, or question</span>
+        </div>
+        <div class="detail-example">
+          <div class="detail-example-label">Format</div>
+          <div class="detail-example-row"><span>Delivered as</span><span class="detail-example-value">Written report</span></div>
+          <div class="detail-example-row"><span>Includes</span><span class="detail-example-value">Methodology &amp; data appendix</span></div>
+          <div class="detail-example-caption">Same rigor as the published analysis, applied to your question. See: <a href="/analysis/model-validation-2024">We Built the Model on 2023 Data. Then 2024 Happened.</a></div>
+        </div>
+        <p class="detail-desc">The Narrows methodology, run against a specific event, portfolio, or research question rather than a general corridor. Every assumption stated, same standard as the free analysis. The difference is the question is yours.</p>
+        <div class="detail-footer">
+          <span class="detail-terms-badge">Per engagement</span>
+          <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="detail-link">Enquire</a>
+        </div>
       </div>
 
     </div>
