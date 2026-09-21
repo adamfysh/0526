@@ -574,7 +574,7 @@
       <button class="scn-preset" data-key="red_sea_2024" title="Historical, calibration use. Bab-el-Mandeb, 180+ days, 70% restriction. Ongoing since Dec 2023 Houthi attacks on commercial shipping. T1.">Red Sea 2024</button>
       <button class="scn-preset" data-key="panama_drought" title="Historical, calibration use. Panama, 90 days, 50% restriction. Gatun Lake water levels; canal daily transits cut from 36 to 18. T1.">Panama drought 2023-24</button>
       <button class="scn-preset" data-key="ever_given" title="Historical, calibration use. Suez, 6 days, full blockage. Single vessel grounding, 369 vessels queued. T1.">Ever Given 2021</button>
-      <button class="scn-preset" data-key="hormuz_closure" title="Stress test, hypothetical. Hormuz, 30-90 days, full to auction. Prediction-market-derived 15-25% annual. Most cited tail risk in marine war market.">Iran full Hormuz closure</button>
+      <button class="scn-preset" data-key="hormuz_closure" title="Live, ongoing. Hormuz, effectively closed since Feb 28 2026, no sign of cooling. ACLED override to CRITICAL, 2026-09-09 review.">Hormuz closure (live, ongoing)</button>
       <button class="scn-preset" data-key="taiwan_strait" title="Stress test, hypothetical. Modelled via Malacca (our proxy for Malacca/SCS trade), 60-180 days, variable severity. Prediction-market-derived 10-20% over 2 years. Exposure is concentrated at Fujian-facing ports, not evenly spread across Chinese trade -- see note below.">Taiwan Strait crisis</button>
       <button class="scn-preset" data-key="cascade" title="Stress test, hypothetical. Hormuz shown; pair with Bab-el-Mandeb manually to see the full compound picture, both corridors share the Iran-Houthi driver. Multi-corridor cascade, worst case for accumulation.">Multi-corridor cascade</button>
     </div>
@@ -935,7 +935,7 @@ const A = window.A; // shorthand ref used throughout
 let customVessels = [];
 
 function activeVessels() {
-  return S.mode === 'custom' && customVessels.length > 0 ? customVessels : VESSELS;
+  return S.mode === 'custom' ? customVessels : VESSELS;
 }
 
 // Diversion cost: per-class (bunker + charter) $/day × detour days × opex multiplier
@@ -1710,7 +1710,7 @@ const SCENARIOS = {
   ever_given:       { corridor:'suez', duration:6, severity:100,
     note:'<strong>Ever Given 2021 (historical, T1).</strong> Single vessel grounding blocked the Suez Canal for six days; 369 vessels queued. Shortest, sharpest scenario in the set.' },
   hormuz_closure:   { corridor:'hormuz', duration:60, severity:100,
-    note:'<strong>Iran full Hormuz closure (stress test, hypothetical).</strong> Prediction-market-derived at 15-25% annual (CAPE-METHODOLOGY.md Section 10.3). The most cited tail risk in the marine war risk market. Duration shown is the midpoint of a 30-90 day range; severity ranges from full closure to auction-only depending on scenario.' },
+    note:'<strong>Hormuz closure (live, ongoing).</strong> Not a hypothetical: a US/Israel-Iran war began 2026-02-28 and the Strait has been reported at or near full closure to commercial shipping since, transits down as much as 95% from the pre-war daily average. A ceasefire agreed in April 2026 (extended June 2026) has been violated repeatedly by both sides; a US naval blockade of Iranian ports was reinstated 2026-07-15; active mine-clearing was still ongoing as of 2026-08-25. This is not cooling off. Do not use the pre-war 15-25% prediction-market annual figure, it predates the war and is retired. Duration shown (60d) is an illustrative window for the VaR calculation below, not the full ~7-month elapsed closure, adjust the slider to explore other windows. Source: NARROWS-SIGNALS.js CORRIDOR_SIGNALS.hormuz, reviewed 2026-09-09.' },
   taiwan_strait:    { corridor:'malacca', duration:120, severity:50,
     note:'<strong>Taiwan Strait crisis (stress test, hypothetical).</strong> Modelled through Malacca, our proxy for the broader Malacca/South China Sea trade a Taiwan Strait crisis would touch, not as its own corridor. Correction to an earlier version of this note: the disruption is not evenly spread across all $1.3 trillion a year of Chinese port-bound trade. Most Chinese container traffic clears through ports well north of the strait itself. A great-circle check confirms this directly, cargo bound for Shanghai, Ningbo, Qingdao, or Dalian rerouted east of Taiwan via the Bashi Channel adds roughly 5% extra distance versus transiting the strait, a real cost but not a blockage. The concentrated exposure sits with Fujian-facing ports such as Xiamen and Fuzhou, a materially larger reroute in relative terms and, more importantly, the closest to any actual conflict. This is a case where port matters more than country, the Malacca-mapped figure here is a directional signal on the trade lane, not a claim that Chinese trade as a whole is captive. Prediction-market-derived at 10-20% over 2 years (Section 10.3); severity is genuinely variable and the 50% shown here is a starting point, not a claim, adjust the slider to explore the range.' },
   cascade:          { corridor:'hormuz', duration:45, severity:100,
