@@ -258,7 +258,7 @@
         Trade flow ensemble
         <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="flows-toggle" style="vertical-align:middle;margin-right:4px">show on map</label>
       </div>
-      <div class="closure-note" style="margin-bottom:8px">The top bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane, precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. Endpoints come from the CDM's own Port-Commodity Index where it covers that trade (76%/320 corridors here — a country's real export/import port for that specific commodity, split and weighted across ports when a country trades from more than one basin, e.g. Russian crude properly separates Black Sea/Baltic/Pacific loadings instead of one wrong line); the rest fall back to that country's largest port overall, and are labeled as such in the tooltip. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
+      <div class="closure-note" style="margin-bottom:8px">Bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane, precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. Endpoints come from the CDM's own Port-Commodity Index where it covers that trade (a country's real export/import port for that specific commodity, split and weighted across ports when a country trades from more than one basin, e.g. Russian crude properly separates Black Sea/Baltic/Pacific loadings instead of one wrong line); the rest fall back to that country's largest port overall, and are labeled as such in the tooltip. The full set is every corridor worth ≥$1M/yr (~3,900 of them, ~99.6% of resolved trade value) — no more arbitrary top-320 cut. Use "Show top corridors" plus the commodity/vessel filters below to cut the clutter down to what you're looking at. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
       <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
         <div class="field" style="flex:1">
           <label for="flows-topn-select">Show top corridors</label>
@@ -266,7 +266,24 @@
             <option value="50">50 (largest only)</option>
             <option value="100">100</option>
             <option value="200">200</option>
-            <option value="320" selected>320 (all loaded)</option>
+            <option value="320">320</option>
+            <option value="1000">1,000</option>
+            <option value="2000">2,000</option>
+            <option value="all" selected>All (≥$1M/yr)</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
+        <div class="field" style="flex:1">
+          <label for="flows-commodity-select">Commodity</label>
+          <select id="flows-commodity-select" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
+            <option value="">All commodities</option>
+          </select>
+        </div>
+        <div class="field" style="flex:1">
+          <label for="flows-vessel-select">Vessel class</label>
+          <select id="flows-vessel-select" style="width:100%;padding:7px 9px;border:1px solid var(--border-mid);border-radius:6px;font-size:13px">
+            <option value="">All vessel classes</option>
           </select>
         </div>
       </div>
@@ -470,6 +487,7 @@ Promise.all([
     }
   });
   flowEnsembleData = flows;
+  populateFlowFilters();
   renderFlowsLegend();
   // Ports must be loaded before any saved route layers can resolve their
   // waypoint names — initRouteLayers() (defined below, hoisted) recomputes
@@ -557,10 +575,55 @@ function getBlockedPassages() {
 const VESSEL_TYPE_COLORS = {
   Container: '#2B6CB0', VLCC: '#7C2D12', Aframax: '#C2410C', Capesize: '#78716C',
   LNG_Carrier: '#0F766E', Handymax: '#A16207', VLGC: '#6B46C1', Panamax: '#92400E',
+  'River-sea tanker (Volga-Don Canal, ~5,000dwt/140m lock cap)': '#0891B2',
 };
 const VESSEL_TYPE_FALLBACK = '#64748B';
 
 const flowsLayerGroup = L.layerGroup();
+
+// Both filter dropdowns are populated from whatever's actually in the
+// loaded data (not hardcoded) so they never drift out of sync with it —
+// e.g. the honest "River-sea tanker (Volga-Don Canal...)" relabel (see
+// build_map_printer_flow_ensemble.py's CANAL_LOCKED_BASINS) shows up here
+// automatically rather than needing a second place to update.
+function populateFlowFilters() {
+  if (!flowEnsembleData) return;
+  const commoditySel = document.getElementById('flows-commodity-select');
+  const vesselSel = document.getElementById('flows-vessel-select');
+  if (!commoditySel || !vesselSel) return;
+  const commodities = Array.from(new Set(flowEnsembleData.flows.map((f) => f.top_commodity))).sort();
+  const vessels = Array.from(new Set(flowEnsembleData.flows.map((f) => f.top_vessel_type))).sort();
+  commodities.forEach((c) => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c.length > 42 ? c.slice(0, 41) + '…' : c; opt.title = c;
+    commoditySel.appendChild(opt);
+  });
+  vessels.forEach((v) => {
+    const opt = document.createElement('option');
+    opt.value = v; opt.textContent = v.replace(/_/g, ' ');
+    vesselSel.appendChild(opt);
+  });
+}
+
+// Shared by the live map draw and the export path so the two never diverge:
+// commodity/vessel filters first (they don't change the ranking), then the
+// top-N cut against whatever's left, since flowEnsembleData.flows already
+// arrives sorted by trade value descending from the pipeline.
+function getFilteredFlows() {
+  if (!flowEnsembleData) return [];
+  const commodity = document.getElementById('flows-commodity-select')?.value || '';
+  const vessel = document.getElementById('flows-vessel-select')?.value || '';
+  const topNraw = document.getElementById('flows-topn-select')?.value || 'all';
+  let flows = flowEnsembleData.flows;
+  if (commodity) flows = flows.filter((f) => f.top_commodity === commodity);
+  if (vessel) flows = flows.filter((f) => f.top_vessel_type === vessel);
+  if (topNraw !== 'all') {
+    const topN = parseInt(topNraw, 10);
+    if (topN) flows = flows.slice(0, topN);
+  }
+  return flows;
+}
+
 function renderFlowsLegend() {
   const el = document.getElementById('flows-legend');
   if (!el) return;
@@ -577,8 +640,7 @@ function drawFlowEnsemble() {
   flowsLayerGroup.clearLayers();
   const toggle = document.getElementById('flows-toggle');
   if (!toggle || !toggle.checked || !flowEnsembleData) return;
-  const topN = parseInt(document.getElementById('flows-topn-select').value, 10) || 320;
-  const flows = flowEnsembleData.flows.slice(0, topN);
+  const flows = getFilteredFlows();
   if (!flows.length) return;
   const values = flows.map((f) => f.trade_value_usd);
   const logMin = Math.log(Math.min(...values));
@@ -613,6 +675,8 @@ document.getElementById('flows-toggle').addEventListener('change', (e) => {
   else map.removeLayer(flowsLayerGroup);
 });
 document.getElementById('flows-topn-select').addEventListener('change', drawFlowEnsemble);
+document.getElementById('flows-commodity-select').addEventListener('change', drawFlowEnsemble);
+document.getElementById('flows-vessel-select').addEventListener('change', drawFlowEnsemble);
 
 // ── VESSEL CLASS → AUTO-CLOSURES ──
 // Grounded in real physical limits, not preference: Suez Canal draft limits
@@ -1647,9 +1711,7 @@ async function renderMapCanvas() {
   // flow whose real routed path crosses a currently-checked closure) so the
   // export matches whatever's actually on screen when you hit export. ──
   const flowsVisible = document.getElementById('flows-toggle').checked && flowEnsembleData;
-  const shownFlows = flowsVisible
-    ? flowEnsembleData.flows.slice(0, parseInt(document.getElementById('flows-topn-select').value, 10) || 320)
-    : [];
+  const shownFlows = flowsVisible ? getFilteredFlows() : [];
   if (shownFlows.length) {
     const flowValues = shownFlows.map((f) => f.trade_value_usd);
     const logMin = Math.log(Math.min(...flowValues));
