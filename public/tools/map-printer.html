@@ -258,7 +258,7 @@
         Trade flow ensemble
         <label class="panel-h-action" style="cursor:pointer;text-decoration:none"><input type="checkbox" id="flows-toggle" style="vertical-align:middle;margin-right:4px">show on map</label>
       </div>
-      <div class="closure-note" style="margin-bottom:8px">Bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane, precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. Endpoints come from the CDM's own Port-Commodity Index where it covers that trade (a country's real export/import port for that specific commodity, split and weighted across ports when a country trades from more than one basin, e.g. Russian crude properly separates Black Sea/Baltic/Pacific loadings instead of one wrong line); the rest fall back to that country's largest port overall, and are labeled as such in the tooltip. The full set is every corridor worth ≥$1M/yr (~3,900 of them, ~99.6% of resolved trade value) — no more arbitrary top-320 cut. Use "Show top corridors" plus the commodity/vessel filters below to cut the clutter down to what you're looking at. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed.</div>
+      <div class="closure-note" style="margin-bottom:8px">Bilateral trade corridors by annual value (2024, from the CDM's own trade-flow data), weighted by $/yr — the broader context around whatever single route you're arguing about. Each line is a real sea lane, precomputed through the same routing graph the map above uses, so it threads the actual straits/capes rather than cutting a great-circle line across land. Endpoints come from the CDM's own Port-Commodity Index where it covers that trade (a country's real export/import port for that specific commodity, split and weighted across ports when a country trades from more than one basin, e.g. Russian crude properly separates Black Sea/Baltic/Pacific loadings instead of one wrong line); the rest fall back to that country's largest port overall, and are labeled as such in the tooltip. The full set is every corridor worth ≥$1M/yr in the 10 commodity classes this model firmly covers — crude, refined, LNG, coal, iron ore, grain, palm oil, copper, fertiliser, container (~3,800 corridors, ~99.6% of the trade value those classes cover) — no more arbitrary top-320 cut, and no more raw per-shipment line items (a country's biggest single T-shirt order no longer stands in for "container trade"). LPG and maize/corn aren't in that set yet — real commodities, just not port-resolved by this pipeline yet — so don't read their absence as zero trade. Use "Show top corridors" plus the commodity/vessel filters below to cut the clutter down to what you're looking at. A flow is drawn in red when its real routed path crosses a chokepoint you've currently checked closed above, so you can see which trade is actually exposed. Endpoints and vessel classes are still simplifications in a few known ways — hover a line's tooltip for a flagged caveat where one applies (e.g. Caspian-origin flows, which can't literally sail the whole route on one vessel).</div>
       <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:8px">
         <div class="field" style="flex:1">
           <label for="flows-topn-select">Show top corridors</label>
@@ -581,6 +581,15 @@ const VESSEL_TYPE_FALLBACK = '#64748B';
 
 const flowsLayerGroup = L.layerGroup();
 
+// top_commodity is now one of the 10 classes build_map_printer_flow_ensemble.py
+// firmly models (CRUDE/LNG/REFINED/COAL/IRON_ORE/GRAIN/PALM_OIL/COPPER/
+// CONTAINER/FERTILISER — 2026-09-21, replacing the raw per-HS-code line text
+// that used to surface as e.g. "T-shirts, singlets..." for Container cargo).
+// This just title-cases it for display; LNG stays an acronym.
+function prettifyCommodity(c) {
+  return String(c).split('_').map((w) => (w === 'LNG' ? 'LNG' : w.charAt(0) + w.slice(1).toLowerCase())).join(' ');
+}
+
 // Both filter dropdowns are populated from whatever's actually in the
 // loaded data (not hardcoded) so they never drift out of sync with it —
 // e.g. the honest "River-sea tanker (Volga-Don Canal...)" relabel (see
@@ -595,7 +604,7 @@ function populateFlowFilters() {
   const vessels = Array.from(new Set(flowEnsembleData.flows.map((f) => f.top_vessel_type))).sort();
   commodities.forEach((c) => {
     const opt = document.createElement('option');
-    opt.value = c; opt.textContent = c.length > 42 ? c.slice(0, 41) + '…' : c; opt.title = c;
+    opt.value = c; opt.textContent = prettifyCommodity(c);
     commoditySel.appendChild(opt);
   });
   vessels.forEach((v) => {
@@ -664,7 +673,7 @@ function drawFlowEnsemble() {
       ? `${f.from_port} → ${f.to_port}`
       : `${f.from_port} → ${f.to_port} <span style="opacity:.7">(largest-port proxy, not PCI-resolved)</span>`;
     line.bindTooltip(
-      `${f.exporter} → ${f.importer}<br><span style="opacity:.85">${portLine}</span><br>${f.top_commodity} (${f.top_vessel_type.replace('_', ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr · ${f.routed_distance_nm ? f.routed_distance_nm.toLocaleString() + ' nm' : ''}<br>via ${viaStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}`,
+      `${f.exporter} → ${f.importer}<br><span style="opacity:.85">${portLine}</span><br>${prettifyCommodity(f.top_commodity)} (${f.top_vessel_type.replace(/_/g, ' ')})<br>${valueStr} · ~${f.voyages_per_year.toLocaleString()} voyages/yr · ${f.routed_distance_nm ? f.routed_distance_nm.toLocaleString() + ' nm' : ''}<br>via ${viaStr}${isExposed ? '<br><b style="color:#B91C1C">exposed to a checked closure</b>' : ''}${f.vessel_class_corrected ? `<br><span style="opacity:.75">${f.vessel_class_note}</span>` : ''}`,
       { sticky: true }
     );
     line.addTo(flowsLayerGroup);
