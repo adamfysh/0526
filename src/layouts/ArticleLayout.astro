@@ -39,10 +39,13 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// title may contain inline markup (e.g. <em>) for the on-page <h1>;
+// strip it for <title>, meta/OG/Twitter tags, and JSON-LD, where raw HTML must not appear as text.
+const plainTitle = title.replace(/<[^>]+>/g, '');
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": title,
+  "headline": plainTitle,
   "description": description,
   "author": {
     "@type": "Organization",
@@ -62,7 +65,7 @@ const articleSchema = JSON.stringify({
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <BaseHead title={`Narrows — ${title}`} description={description} ogImage={ogImage} />
+  <BaseHead title={`Narrows — ${plainTitle}`} description={description} ogImage={ogImage} />
   <!-- Schema: Article -->
   <script type="application/ld+json" set:html={articleSchema} />
   <style>
