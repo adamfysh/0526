@@ -1,0 +1,243 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="Seven months in, Hormuz exports have <em>flatlined.</em>"
+ description="Zero means different things for different commodities, and for who ends up paying for it."
+ eyebrow="Scenario analysis · Strait of Hormuz · 30 September 2026"
+ publishDate="September 2026"
+ readTime="9 min read"
+ author="Narrows Research"
+ ogImage="/images/hormuz-seven-months-crude-chart.png"
+>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+ <div class="stat-bar-inner">
+  <div class="stat-bar-item">
+      <div class="stat-bar-label">Crude export index, Sep 2026</div>
+      <div class="stat-bar-value">0</div>
+      <div class="stat-bar-unit">7-day avg, every day this month</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">LNG export index, Sep 2026</div>
+      <div class="stat-bar-value">0</div>
+      <div class="stat-bar-unit">7-day avg, every day this month</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Fertilizer export index, Sep 2026</div>
+      <div class="stat-bar-value">0</div>
+      <div class="stat-bar-unit">Unbroken since 23 Aug (5.5 wks)</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Saudi crude reaching markets</div>
+      <div class="stat-bar-value" style="color:var(--gold-dark); font-size:19px;">~85%</div>
+      <div class="stat-bar-unit">Normally, via pipeline — cut to ~70% for 2.5 wks in Sep</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Qatar LNG capacity lost</div>
+      <div class="stat-bar-value" style="color:var(--red);">17%</div>
+      <div class="stat-bar-unit">2 trains at Ras Laffan hit 18 Mar</div>
+ </div>
+</div>
+
+<!-- PHOTO BAND -->
+<div slot="photo-band" class="article-photo-band">
+ <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz — satellite view" loading="eager" />
+ <span class="article-photo-caption">Strait of Hormuz · seven months since closure · three export series at zero</span>
+</div>
+
+<p class="prose" style="font-size:13px; color:var(--text-tertiary); margin-bottom:32px;">Source for the four index figures: <a href="https://datalab.wto.org/Strait-of-Hormuz-Trade-Tracker">WTO-AXSMarine Strait of Hormuz Trade Tracker</a>.</p>
+
+<div class="section-eyebrow">The framing</div>
+<h2 class="article-section-title">Zero means different things for different commodities.</h2>
+<p class="prose">The WTO-AXSMarine Strait of Hormuz Trade Tracker's three export series, crude oil, LNG, and fertilizer-related products, have all converged on the same figure this month: a 7-day moving average of zero. This is the flattest export record since the closure began. But zero transits through the strait does not mean the same thing for all three commodities. Crude, LNG, and fertilizer have each adapted in different ways, and the implications for dependent importers are different.</p>
+
+<div class="section-eyebrow">What the export data shows</div>
+<h2 class="article-section-title">The grind to zero took six months. September is when it finished.</h2>
+<p class="prose">All three series collapsed hard within the first four to six weeks of the closure, from a pre-closure baseline near 100 (each indexed to its own January-March 2025 average) into the single digits by April. In spite of regular announcements of memoranda of understanding and near-deals, none of the three ever recovered. Each kept grinding down through the summer (fertilizer: 7.5 in June, 6.6 in July, 2.0 in August; crude: 3.0 in July, 1.4 in August; LNG down to 0.9 in August), and September is the first month that grind has bottomed out completely. Fertilizer's zero run is unbroken since 23 August. Crude's started on 26 August. LNG's started earliest, 14 August.</p>
+<p class="prose">Read as one number, this looks like total, undifferentiated collapse. But there are two other factors at play: whether a physical alternative exists for the commodity, and what the tracker is actually measuring.</p>
+
+<div class="section-eyebrow">The tracker measures strait transits, not exports</div>
+<h2 class="article-section-title">A barrel that never enters the strait was never counted to begin with.</h2>
+<p class="prose">The WTO-AXSMarine tracker is built on AIS vessel-tracking data inside the strait. A barrel that never enters the strait does not register as a missed export. It is never counted as strait traffic to begin with — a limitation we've written about at more length in <a href="/analysis/hormuz">Hormuz and the Limits of the Index</a>.</p>
+<p class="prose">Saudi Arabia's East-West Pipeline, known as Petroline, runs 745 miles from the Eastern Province to Yanbu on the Red Sea, with a maximum capacity of 7 million barrels a day. Since the closure, Saudi Arabia has pushed the pipeline close to that ceiling. Roughly 5 million barrels a day of crude now moves out through Yanbu, plus 700,000 to 900,000 barrels a day of refined products. About 2 million barrels a day more feed domestic refineries sited along the pipeline's western terminus, chiefly at Yanbu and Rabigh; those refineries draw from the same pipeline flow. The result is that Saudi Arabia is reportedly still reaching roughly 85% of its pre-war export volume in normal conditions, almost entirely rerouted around the strait rather than through it. That figure held through most of the seven months, but it is not a fixed number, as September showed.</p>
+<p class="prose">The UAE has a smaller but real version of the same option: the Habshan-Fujairah pipeline to the Gulf of Oman coast currently carries around 1.8 million barrels a day, with an expansion underway that would roughly double it to 3.6 million barrels a day, against pre-war UAE exports of about 3.4 million barrels a day. That expansion is targeted for operational status in 2027.</p>
+
+<figure class="chart-figure">
+  <img src="/images/hormuz-seven-months-sites-map.png" alt="Hormuz and its workarounds: the sites behind this piece" loading="lazy">
+  <div class="chart-caption"><strong>Hormuz and its workarounds:</strong> the sites behind this piece. Schematic, not navigational — pipeline routes are illustrative paths between real endpoints, and the shaded chokepoint zones are approximate, not published JWC/war-risk boundaries.</div>
+</figure>
+
+<p class="prose">Why is not all crude routed this way as a matter of course, closure or not? Pipeline capacity is the binding constraint: Petroline's 7 million barrel ceiling and the Fujairah line's current 1.8 million fall well short of full Gulf export volume even combined, so the pipelines cannot carry everything regardless of preference. Loading directly at a Gulf terminal is also normally the shorter, cheaper voyage for cargo bound east, so producers use the pipeline mainly for cargo genuinely bound west or as a hedge. What has changed since February is the price of the alternative: VLCC freight to China has reportedly reached roughly $30 a barrel, close to a quarter of the total delivered cost of the barrel, which is what has pushed Saudi Arabia to run Petroline near its physical ceiling. We go deeper on where the rerouted barrels actually end up, and who it does and doesn't reach, in <a href="/analysis/hormuz-rebalancing">The Rebalancing Is Real. It Does Not Reach Everyone.</a></p>
+<p class="prose">A meaningful share of the zero in the crude series is probably attributable to alternative routing. Barrels that used to transit Hormuz are now leaving from Yanbu and Fujairah instead, invisible to a strait-transit tracker. That routing is not itself free of risk: drone strikes hit Petroline itself on 10 and 11 September. Saudi Arabia shut the pipeline as a precaution, taking an estimated 4 to 5 million barrels a day of bypass capacity offline. Within a day, Houthi forces seized Mayyun (Perim) Island, challenging the security of the Bab-el-Mandeb strait, the same corridor that Yanbu-loaded cargo depends on to reach the Red Sea and beyond. For two and a half weeks, the strait and its main bypass route were both compromised at once. Petroline came back on line around 28 September at roughly 3.5 million barrels a day. Diverting around Hormuz does not mean diverting into a risk-free corridor, or even a fixed one. It means trading one designated risk for a different one.</p>
+<figure class="chart-figure">
+  <img src="/images/hormuz-seven-months-bab-el-mandeb.jpg" alt="Satellite view of the Bab-el-Mandeb strait and Mayyun (Perim) Island, Red Sea">
+  <div class="chart-caption"><strong>Bab-el-Mandeb Strait, Red Sea.</strong> Mayyun (Perim) Island sits in the middle of the narrows, the position Houthi forces seized on 12 September. Photo credit: Coordenação-Geral de Observação da Terra/INPE.</div>
+</figure>
+<p class="prose">The price data backs up the routing explanation, and adds a wrinkle. Brent prices jumped on the initial closure, as expected, but after that first month the two series decouple entirely: Brent prices swooped from a roughly 118 dollar April and May peak down to about 72 in July and back to around 108 by September, while the export index stayed pinned near zero the whole time. Brent is a global benchmark blending many crude streams, so this is not a contradiction, but it does mean price action after the first month cannot be read as a live signal of Hormuz-specific supply. The market has not spent seven months pricing a full physical stoppage of Gulf crude, which is consistent with the pipeline-bypass and dark-transit picture above.</p>
+<p class="prose">The two big swings in the second half of the window both trace to identifiable events, not to Hormuz-specific supply news. The July trough coincides with OPEC+ agreeing a fifth consecutive monthly output increase alongside both OPEC and the IEA cutting their 2026 demand growth forecasts and a large US crude inventory build in early August. The September climb is different: it lines up with the Petroline attack and the Mayyun seizure described above, the closest this window comes to the market visibly pricing a Hormuz-adjacent supply risk, briefly, before easing back as Petroline resumed flowing.</p>
+
+<figure class="chart-figure">
+  <img src="/images/hormuz-seven-months-crude-chart.png" alt="Brent crude price overlaid with the Hormuz closure and key events" loading="lazy">
+  <div class="chart-caption"><strong>Crude: strait traffic vs. price.</strong> Both series indexed to 100 at the start of the window. Sources: WTO-AXSMarine Strait of Hormuz Trade Tracker; Investing.com Brent front-month futures, daily close.</div>
+</figure>
+
+<div class="section-eyebrow">LNG and fertilizer do not have that option</div>
+<h2 class="article-section-title">Pipeline bypass only works for a liquid that can move overland.</h2>
+<p class="prose">Pipeline bypass works for crude because crude is a liquid that can move overland. It does not work for LNG or for solid bulk fertilizer.</p>
+<p class="prose">LNG must be liquefied at the export terminal and moved by purpose-built LNG carriers. There is no overland pipeline substitute for liquefied gas at export scale. Qatar is the dominant supplier behind most Gulf LNG volumes and it lacks a meaningful alternative export route: no pipeline bypass exists at anything near LNG export scale, and building one would require years and heavy capital. Two Ras Laffan liquefaction trains were hit in a direct attack earlier this year, removing about 17% of Qatar's total export capacity, with repairs reportedly requiring three to five years. Qatar's undamaged capacity remains around 64 million tonnes a year. The constraint is export: cargo has queued and been turned back at the strait, more than 25 energy companies have declared force majeure since the war began, and Qatari LNG exports are not expected to return to pre-war normal even once Hormuz reopens.</p>
+<figure class="chart-figure">
+  <img src="/images/hormuz-seven-months-ras-laffan.jpg" alt="LNG carrier loading at Ras Laffan LNG Terminal, Qatar, with flare stacks in the foreground">
+  <div class="chart-caption"><strong>Ras Laffan LNG Terminal, Qatar.</strong> Two of the terminal's liquefaction trains were hit in the direct attack described above, cutting roughly 17% of Qatar's export capacity. Photo credit: Nabeel Hashmi.</div>
+</figure>
+<p class="prose">Fertilizer is a solid bulk commodity with the same overland problem: urea, ammonia, and sulphur move by bulk carrier, and there is no pipeline equivalent for solids. Unlike LNG, fertilizer's shortfall appears to be a mix of two things. Reporting indicates Gulf urea production itself has been disrupted, with one estimate suggesting more than half of the Middle East's urea output has been lost since the war began, attributed in part to strikes on energy and industrial infrastructure that feed fertilizer plants. Separately, other reporting describes real, if unquantified, volumes of already-produced fertilizer stranded in the Gulf awaiting available ships.</p>
+
+<div class="section-eyebrow">Squaring this against CDM's own Hormuz dependency data</div>
+<h2 class="article-section-title">Zero on the tracker; not zero for whoever is on the other end of the trade.</h2>
+<p class="prose">The Narrows <a href="/model">Chokepoint Dependency Model</a> ranks real 2024 bilateral trade exposure by importer for each commodity that transits Hormuz. Read against the export collapse, it reveals who is actually exposed — the question <a href="/analysis/hormuz-who-pays">Iran Can Hold Out. Here Is Who Pays.</a> asks at the country level across the whole crisis; this is the commodity-by-commodity version of the same question.</p>
+
+<table class="data-table">
+  <thead><tr><th>Importer</th><th>Exposure</th><th>Hormuz dependency</th></tr></thead>
+  <tbody>
+    <tr><td>China</td><td>$113B</td><td>34.6% of crude imports</td></tr>
+    <tr><td>India</td><td>$60B</td><td>42.3%</td></tr>
+    <tr><td>Japan</td><td>$57B</td><td>79.1% — highest in the group</td></tr>
+    <tr><td>South Korea</td><td>$55B</td><td>63.9%</td></tr>
+  </tbody>
+</table>
+<p class="table-note">Crude oil (HS 2709). Given the pipeline-bypass picture above, practical exposure for these importers is very likely smaller than a literal zero would suggest. Petroline and Fujairah together cap out short of full pre-war Gulf export volume, and whatever gap remains will probably be affecting the highest dependency-ratio importers, Japan and South Korea, hardest per barrel even where China and India show larger dollar totals.</p>
+
+<table class="data-table">
+  <thead><tr><th>Importer</th><th>Exposure</th><th>Hormuz dependency</th></tr></thead>
+  <tbody>
+    <tr><td>China</td><td>$11B</td><td>24.7% of LNG imports</td></tr>
+    <tr><td>South Korea</td><td>$6.9B</td><td>23.4%</td></tr>
+    <tr><td>Pakistan</td><td>$3.5B</td><td>82.3% — by far the highest in this table</td></tr>
+  </tbody>
+</table>
+<p class="table-note">LNG (HS 271111). These dependency percentages describe marine-borne imports specifically, not total energy supply from all sources. Pakistan has no meaningful land-based gas alternative currently in service: the long-discussed Iran-Pakistan pipeline remains stalled over sanctions risk, and the rival Turkmenistan-Afghanistan-Pakistan-India line remains unbuilt. Given LNG's lack of a pipeline-bypass option, Pakistan appears to be carrying that exposure with no structural alternative visible in this data.</p>
+
+<p class="prose"><strong>Fertilizer.</strong> India (48.4%), Thailand (53.0%), and Sri Lanka (65.8%) are the most exposed importers. The Narrows Chokepoint Dependency Model shows that none of the three have a viable alternative supplier, unlike Brazil, the US, and Mexico, which the model flags as having substitution options with a 30-45 day lag. Two of the world's other major fertilizer exporters have pulled back this year specifically because of this crisis. China has restricted roughly 50-80% of its phosphate export volume since March, citing the need to protect domestic supply after Hormuz disrupted global trade, and Russia is separately limiting nitrogen and phosphate volumes through its own quota system. For India, Thailand, and Sri Lanka, two conditions are hitting at once: the corridor they depend on most is at zero, and the backstop suppliers the rest of the market leans on are themselves constrained, for the same underlying reason. China's restraint has not been uniform across nutrients, though: phosphate stayed restricted, but China reversed course on nitrogen, reopening urea exports in late May after having held them back since March.</p>
+
+<p class="prose" style="font-size:13px; color:var(--text-secondary); font-weight:600; margin: 32px 0 8px;">The same three importers, as a picture. Each bar is one country's total fertilizer import bill, set to 100%, so length compares composition, not market size — the reliance this whole piece is about:</p>
+
+<div class="reliance-card">
+  <div class="reliance-legend">
+    <span class="sw"><i style="background:var(--red);"></i>Hormuz-dependent <span style="color:var(--text-secondary); font-weight:400;">(zero since Aug/Sep)</span></span>
+    <span class="sw"><i style="background:var(--gold);"></i>Non-Hormuz Gulf / other constrained <span style="color:var(--text-secondary); font-weight:400;">(China, Russia — see above)</span></span>
+    <span class="sw"><i style="background:#C3D2E0;"></i>Unconstrained supply</span>
+  </div>
+
+  <div class="reliance-row">
+    <div class="reliance-head"><span class="reliance-name">Sri Lanka</span><span class="reliance-total">65.8% <span>Hormuz-dependent share</span></span></div>
+    <div class="reliance-bar">
+      <div class="reliance-seg" style="width:65.8%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div class="reliance-seg" style="width:17%; background:var(--gold); margin-left:2px;"></div>
+      <div class="reliance-seg" style="width:17.2%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div class="reliance-detail"><span>No viable alternative supplier per CDM substitution flags</span></div>
+  </div>
+
+  <div class="reliance-row">
+    <div class="reliance-head"><span class="reliance-name">Thailand</span><span class="reliance-total">53.0% <span>Hormuz-dependent share</span></span></div>
+    <div class="reliance-bar">
+      <div class="reliance-seg" style="width:53.0%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div class="reliance-seg" style="width:20%; background:var(--gold); margin-left:2px;"></div>
+      <div class="reliance-seg" style="width:27.0%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div class="reliance-detail"><span>No viable alternative supplier per CDM substitution flags</span></div>
+  </div>
+
+  <div class="reliance-row">
+    <div class="reliance-head"><span class="reliance-name">India</span><span class="reliance-total">48.4% <span>Hormuz-dependent share</span></span></div>
+    <div class="reliance-bar">
+      <div class="reliance-seg" style="width:48.4%; background:var(--red); border-radius:3px 0 0 3px;"></div>
+      <div class="reliance-seg" style="width:22%; background:var(--gold); margin-left:2px;"></div>
+      <div class="reliance-seg" style="width:29.6%; background:#C3D2E0; margin-left:2px; border-radius:0 4px 4px 0;"></div>
+    </div>
+    <div class="reliance-detail"><span>No viable alternative supplier per CDM substitution flags</span></div>
+  </div>
+</div>
+<p class="table-note" style="margin-bottom:32px;">Hormuz-dependent shares are the corrected CDM figures. The gold and blue segments are illustrative splits of each country's remaining import bill, shown to scale the Hormuz share against the total rather than to claim a precise sourcing breakdown for the non-Hormuz portion.</p>
+
+<div class="section-eyebrow">What this means for breadbasket regions</div>
+<h2 class="article-section-title">This is a food-security question, not only a shipping one.</h2>
+<p class="prose">This is where the fertilizer collapse turns into a food-security question rather than a shipping one, and the exposure runs through major grain and protein producers themselves, not only through the countries most commonly discussed as food-insecure.</p>
+<p class="prose">The United States imports 95% of the potash it uses, though the bulk of that, 79%, comes from Canada largely by rail rather than by sea, with Russia (12%) and Israel (3%) making up most of the rest and arriving by ship. Nitrogen and phosphate are far less import-reliant for the US, at 13% and 16% respectively. Brazil is a different case entirely: imports covered 88% of Brazil's total fertilizer consumption in 2025, with potash at 96%, nitrogen at 95%, and phosphate at 72%, and unlike the US case, Brazil's supply (from Canada, Russia, Belarus, and Morocco among others) arrives overwhelmingly by sea. One estimate puts the Strait of Hormuz's normal share of global fertilizer shipments at up to 30%, and roughly a third of global fertilizer trade as disrupted by this conflict in some form. Brazil is a top global exporter of soybeans and corn, so a fertilizer-cost shock reaching Brazilian farmers has food-price implications that extend well beyond Brazil's borders.</p>
+<p class="prose">Reach continues beyond grain producers into other import-dependent regions. Sudan's Gulf-sourced fertilizer dependence is around 54%, the highest single-country exposure found in this research, and Bangladesh at 53.3%, applying the highest nitrogen-per-hectare usage rate among the countries covered, meaning it has the least margin to simply use less. The exposure is not limited to staple grains either: fertilizer-dependent cash crops in import-reliant growing regions carry the same input-cost risk, as already noted in Narrows' earlier <a href="/analysis/hormuz-dry-cargo">Hormuz Has a Fertilizer Problem Too</a>, which cited reporting on Cote d'Ivoire cocoa farmers going into the season short of fertilizer.</p>
+<p class="prose">Urea, ammonia, and phosphate feed directly into the cost of the next planting season, and a fertilizer shock shows up with a lag, at the point farmers are buying inputs for the next crop. Given fertilizer's flatline has now run 5.5 weeks with no substitution option for the most exposed importers, and the usual secondary suppliers are simultaneously tightening for a related reason, the input-cost pressure on India, Thailand, Sri Lanka, Brazil, Sudan, and Bangladesh's next planting cycles looks less like a temporary disruption to absorb and more like a supply picture with no clear near-term relief valve.</p>
+
+<p class="prose">On pricing itself: a futures and spot market exists for this, unlike for most of the corridor-level metrics elsewhere in this piece. CME/CBOT lists Urea (Granular) FOB US Gulf futures (ticker UFV) and a separate FOB Middle East contract (UME). The chart below plots the FOB Middle East contract against the fertilizer export index over the same window. Price rises through March and April as exports collapse, in line with what the export data alone would predict, but then falls for two straight months, back near its pre-closure level by late July, while exports stay pinned near zero the entire time. Price and physical export volume decouple well before the export data's own window ends, the same pattern as the crude chart above, and the urea data does not extend past 30 July, three weeks before the export index's final run to zero began, so it cannot say whether that decoupling held once the stoppage became total.</p>
+
+<p class="prose">The decline itself is a China supply story, not a Hormuz story, and it is worth being precise about which China. China's phosphate restrictions, noted above, tightened supply and pushed the other direction. Urea moved the opposite way. Beijing had throttled urea exports since March as well, but reversed that stance on 26 May, setting export price floors of $660 a tonne FOB for prilled urea and $670 for granular, and allocating 1.5 to 1.6 million tonnes for June through August. The market felt it almost immediately: when India's National Fertilisers Limited floated a 1.7 million tonne tender on 10 June, it drew roughly 6.24 million tonnes in competing offers from about 34 suppliers, and the lowest bids came in around $445 to 449 a tonne, versus the $935 to 959 a tonne India had paid in an emergency April purchase at the height of the crisis. A seasonal lull after the Northern Hemisphere spring application window, plus Brazil pulling back on purchases because its own planting cycle had already concluded, added to an already oversupplied market. None of this reflects an easing of the Hormuz-specific squeeze on the corridor itself, which the export index shows staying at zero. It reflects a different, non-Gulf supplier stepping into the gap that China's own earlier restriction had helped create.</p>
+
+<figure class="chart-figure">
+  <img src="/images/hormuz-seven-months-fertilizer-chart.png" alt="Fertilizer export index overlaid with urea price and key events" loading="lazy">
+  <div class="chart-caption"><strong>Fertilizer: strait traffic vs. price.</strong> Marked: China's 26 May urea export reopening and the 10 June India tender price crash. Sources: WTO-AXSMarine Strait of Hormuz Trade Tracker; CME/CBOT Urea (Granular) FOB Middle East futures (UME).</div>
+</figure>
+
+<div class="section-rule"></div>
+
+<div class="section-eyebrow">Seven months on</div>
+<h2 class="article-section-title">Zero is not one story.</h2>
+<p class="prose">For crude, it is largely a measurement artifact: the barrels are still moving, just around the tracker rather than through it, at a cost and a risk that briefly became very real when Petroline itself came under attack in September. For LNG, zero is close to the literal truth, a genuine capacity loss with no bypass and no fast repair. For fertilizer, zero sits on top of a market that is still finding its own price level independent of the closure, pulled down through the summer by a Chinese nitrogen-export reversal that had nothing to do with Hormuz, even as China's phosphate restrictions pulled the other way.</p>
+<p class="prose">What ties the three together is not the export index. It is what each zero forces someone else to absorb. Japan and South Korea carry crude exposure with the least practical pipeline relief per barrel. Pakistan carries LNG exposure with no structural alternative at all. India, Thailand, Sri Lanka, Sudan, and Bangladesh carry fertilizer exposure into a planting season where the usual backstop suppliers are themselves constrained, for reasons that trace back to the same closure. Seven months in, the strait's most durable effect may not be the zero on the tracker, but the fact that the costs of avoiding that zero, in pipeline capacity, in freight, in a second chokepoint's own war risk, have quietly been reassigned to whoever had the least room to absorb them.</p>
+
+<div class="method-note">
+  <div class="method-note-label">Sources</div>
+  <div class="method-note-body">Trade flow data: <a href="https://datalab.wto.org/Strait-of-Hormuz-Trade-Tracker">WTO-AXSMarine Strait of Hormuz Trade Tracker</a>, three export series (crude oil, LNG, fertilizer-related, voy intake indices), pulled 28 September 2026, covering 1 January 2025 to 28 September 2026.</div>
+  <div class="method-note-body">Pipeline bypass capacity and economics: Pipeline Technology Journal, Saudi Arabia Maxes Out East-West Pipeline to Bypass Strait of Hormuz; Middle East Eye, UAE building pipeline to double oil exports that can bypass Hormuz; The National, UAE's West-East pipeline expansion to become operational in 2027; OilPrice.com, Hormuz Workarounds Keep Gulf Oil Flowing at a Steep Cost.</div>
+  <div class="method-note-body">Petroline attack and reopening, and Mayyun/Perim seizure: reporting on the 10–11 September drone strikes on Petroline, the precautionary shutdown, the roughly 28 September restart, and the 12 September seizure of Mayyun (Perim) Island by Houthi forces, gathered via wire and trade press coverage. OPEC+ output increase and demand forecast cuts: reporting on OPEC+'s fifth straight monthly output increase (5 July 2026, effective August) and the accompanying OPEC/IEA demand forecast cuts and US crude inventory build.</div>
+  <div class="method-note-body">LNG: CSIS, The Battle for Hormuz Will Reshape the Global LNG Market; The National, Qatar LNG won't return to normal when Hormuz reopens, executives say.</div>
+  <div class="method-note-body">Fertilizer production, restrictions, and pricing: Bloomberg, Mideast Urea Output Slumps with Lack of Fertilizer Ships to Load; Fertilizer Daily, China extends phosphate export restrictions through August 2026; Profercy, China reopens urea exports with $660pt price floor; Business Standard, India's latest urea tender quotes a price over 50% lower than April; Global Agriculture, Global Urea Prices Ease as China's Export Surge Eases Supply Fears.</div>
+  <div class="method-note-body">US and Brazil fertilizer import dependence: farmdoc daily, Middle East Conflict Revives Concerns Over Fertilizer Dependence in the U.S. and Brazil. Breadbasket dependence, Sudan/Bangladesh: Global Agriculture, One-Third of Global Fertilizer Trade Disrupted as Gulf Conflict Raises Risks for Food Prices and Crop Yields. Cote d'Ivoire cocoa: CNBC Africa, cited in <a href="/analysis/hormuz-dry-cargo">Hormuz Has a Fertilizer Problem Too</a>.</div>
+  <div class="method-note-body">Urea pricing and futures: CME/CBOT Urea (Granular) FOB Middle East futures (UME), daily settlement, 2 Jan–30 Jul 2026, supplied by the client. Brent crude pricing: Investing.com, Brent front-month futures, daily close, 2 Jan–29 Sep 2026, supplied by the client.</div>
+  <div class="method-note-body">Pakistan gas alternatives: Pipeline Technology Journal, Pakistan Seeks to Abandon Iran Gas Pipeline Project Due to Low Demand and US Sanctions.</div>
+  <div class="method-note-body">CDM dependency and substitution data: Narrows shipping.db, dependency_matrix table, HORMUZ chokepoint, commodity codes 2709 (crude), 271111 (LNG), 3102 (fertilizer). Map: site coordinates from standard gazetteers; country outlines from Natural Earth 1:50m Admin 0 boundaries.</div>
+</div>
+
+<!-- CTA -->
+<div slot="cta" class="cta-strip">
+ <div class="cta-strip-inner">
+  <div>
+   <div class="cta-strip-title">Run your fertilizer exposure through the Narrows CDM.</div>
+   <div class="cta-strip-sub">India, Thailand, and Sri Lanka aren't the only bilateral pairs on the board. We will run your specific importer, commodity, and substitution assumptions in front of you.</div>
+  </div>
+  <a href="mailto:fysh@narrows.io?subject=CDM fertilizer exposure request&body=I would like to run a fertilizer exposure scenario through the Chokepoint Dependency Model.%0A%0AOrganisation:%0ARole:%0AImporter / region of interest:%0ACommodity:%0AScenario duration:" class="cta-btn">Request analysis</a>
+ </div>
+</div>
+
+</ArticleLayout>
+
+<style>
+.stat-bar-inner { grid-template-columns: repeat(5, 1fr) !important; }
+@media (max-width: 900px) {
+  .stat-bar-inner { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* CHART FIGURE (charts + photos embedded in the body) */
+.chart-figure { margin: 28px 0 32px; border: var(--rule-light); border-radius: 8px; overflow: hidden; background: var(--white); box-shadow: 0 2px 12px rgba(10,37,64,0.05); }
+.chart-figure img { display: block; width: 100%; height: auto; }
+.chart-caption { padding: 12px 20px 16px; font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); border-top: var(--rule-light); }
+.chart-caption strong { color: var(--text-primary); }
+
+.table-note { font-size: 11.5px; color: var(--text-tertiary); margin: -2px 0 24px; font-family: var(--font-body); line-height: 1.5; }
+
+/* RELIANCE BARS (matches the established convention from the dry-cargo piece) */
+.reliance-card { border: var(--rule-light); border-radius: 8px; padding: 24px 26px; margin: 20px 0 8px; background: var(--white); }
+.reliance-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: var(--rule-light); font-size: 12.5px; font-weight: 500; }
+.reliance-legend span.sw { display: flex; align-items: center; gap: 7px; }
+.reliance-legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.reliance-row { padding: 16px 0; border-top: 1px dashed var(--border); }
+.reliance-row:first-child { border-top: none; }
+.reliance-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; flex-wrap: wrap; }
+.reliance-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+.reliance-total { font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 700; color: var(--navy); }
+.reliance-total span { font-size: 11.5px; font-weight: 500; color: var(--text-secondary); }
+.reliance-bar { height: 24px; width: 100%; display: flex; }
+.reliance-seg { height: 100%; }
+.reliance-detail { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 9px; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.reliance-detail b { color: var(--navy); }
+</style>
