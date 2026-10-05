@@ -332,6 +332,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Corrections</div>
     <h2 class="section-heading">The record, most recent first.</h2>
 
+    <div class="correction-date">5 October 2026 — a second correction, Panama routing</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Asia to Europe and Asia to West Africa trade was counted as passing through the Panama Canal.</strong> The routing rules grouped every Atlantic-facing port into a single basin, so cargo moving between Asia and a European or West African Atlantic port was assigned a Panama leg, when the real routes run through the Strait of Malacca, Bab el-Mandeb, the Suez Canal and Gibraltar (Europe), or around the Cape of Good Hope (West Africa). The largest affected flows were containers, vehicles and electronics, for example China to Germany computers and Japan to Belgium cars. In total about 137 billion US dollars of annual trade value was moved off Panama, which takes Panama-routed trade in the model from roughly 348 billion to roughly 210 billion US dollars, every flow of which now has an American endpoint. No grain figure changed, and no figure for the tracked energy, ore and fertilizer commodities changed, because none of those flows had a European or West African Atlantic endpoint on a Panama route. The Panama analysis page no longer shows its all-commodity aggregate value at risk, which depended on the old routing base, and says so. A standing check now stops the release if any voyage transits Panama without an American exporter or importer. South American Atlantic countries were deliberately left as they were, because Panama, Cape Horn and the Cape of Good Hope are all live routes for them. Verified by a full rebuild in which every changed flow was a container, vehicle or electronics flow.</div>
+      </div>
+    </div>
+
+    <div class="correction-date">5 October 2026 — one correction found while reconciling published figures</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Russian-origin cargo to India was counted as passing through the Strait of Hormuz.</strong> For one country pair, Russia to India, the model's generic routing assigned the Strait of Hormuz to every commodity except crude oil, which had been corrected earlier. Russian cargo has no route through the Strait of Hormuz, so the assignment was wrong. It affected about 7.2 billion US dollars of annual trade value across coal, refined petroleum, fertilizer and smaller commodities. The visible effect was that India's Hormuz dependency for nitrogenous fertilizer read 48.4 percent when the correct figure, checked against the underlying 2024 trade data, is 26.6 percent, and India's refined petroleum dependency read 69.1 percent when the corrected figure is 37.4 percent. Several analysis pages that cited India's fertilizer figures have been restated and carry a correction note. The corrected cargo is now assigned to the Black Sea exit at the Bosphorus, which matches the existing treatment of Russian crude to India, and this is a documented estimate: the Suez and Bab el-Mandeb legs of that journey are not yet modeled. A standing check now runs on every rebuild and stops the release if any voyage passes through the Strait of Hormuz, the Bosphorus, the Danish Straits, the Kiel Canal or the St. Lawrence without an exporter or importer in that region. Verified by a full rebuild in which only six India rows changed.</div>
+      </div>
+    </div>
+
     <div class="correction-date">21 August 2026 — one correction found during a routine data refresh</div>
     <div class="limitation-list">
       <div class="limitation-item">
