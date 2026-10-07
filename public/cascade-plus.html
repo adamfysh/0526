@@ -681,12 +681,13 @@ function fmtEtaDate(d){
 // hull itself avoided). Same mechanism as chokepoint displacement, one
 // level down: diverting doesn't zero out risk, it relocates it, and a
 // bunker call is one more place for that relocation to land.
-function priRisk(score){ return score>=6?'high':score>=3?'med':'low'; }
+// PRI tiers (Critical>=3.0, High>=2.5, Elevated>=2.0, else Moderate) drive the chip colour.
+function priRisk(tier){ return (tier==='Critical'||tier==='High')?'high':tier==='Elevated'?'med':'low'; }
 function priChip(portName){
   const p = PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
-  const cls = p.jwc ? 'jwc' : priRisk(p.pri);
-  const label = p.jwc ? 'JWC' : 'PRI '+p.pri.toFixed(1);
-  return `<span class="port-risk ${cls}" title="${p.note}">${portName} &middot; ${label}</span>`;
+  const cls = p.jwc ? 'jwc' : priRisk(p.tier);
+  const label = (p.jwc ? 'JWC &middot; ' : '') + 'PRI '+p.pri.toFixed(2)+' '+p.tier;
+  return `<span class="port-risk ${cls}" title="${p.note} PRI rank ${p.rank} of 3,774. Event note as of ${p.asOf}.">${portName} &middot; ${label}</span>`;
 }
 function hasJwcWaypoint(v){ return !!(v.waypoints && v.waypoints.some(p=>PORT_RISK[p]?.jwc)); }
 
@@ -1629,7 +1630,7 @@ function buildAdvisoryText(v, info){
     lines.push('', 'BUNKER / PORT-CALL RISK (standing, independent of this diversion)');
     v.waypoints.forEach(p=>{
       const risk = (window.NARROWS_CORRIDORS.PORT_RISK||{})[p];
-      lines.push(`  - ${p}${risk ? (risk.jwc ? ' (JWC Listed Area)' : ' (PRI '+risk.pri.toFixed(1)+')') : ''}`);
+      lines.push(`  - ${p}${risk ? (' (PRI '+risk.pri.toFixed(2)+' '+risk.tier+(risk.jwc ? ', JWC Listed Area' : '')+')') : ''}`);
     });
   }
   lines.push('', `Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation — it is not routing instructions transmitted to the vessel.`);

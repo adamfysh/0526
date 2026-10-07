@@ -332,6 +332,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Corrections</div>
     <h2 class="section-heading">The record, most recent first.</h2>
 
+    <div class="correction-date">6 October 2026 — Port Risk Index corrections, country codes and conflict flags</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>About 350 of the 3,774 ports in the Port Risk Index were scored with a default governance and sanctions value instead of their own country's.</strong> These ports had no country code in the build pipeline, so the stability dimension fell back to the global median for political stability and government effectiveness, and to no sanctions. The affected countries include Haiti, North Korea, Burma, the Dominican Republic, Ireland, Iceland, Estonia, Liberia, Namibia and a number of island territories. For territories, the stability inputs now follow the sovereign state. The country codes were filled in and the stability dimension and composite score were recalculated for every affected port.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>The conflict and territorial dispute flags matched fewer than half of the ports they were meant to cover.</strong> The flags were matched by exact port name, but the index uses different spellings for many ports (for example Odesa, Al Mukalla, Al Ladhiqiyah), so ports such as Odesa, the Hodeidah area, Mukalla, Latakia and the Taiwan ports carried no flag. One flag also matched the wrong place: a town called Stanley in Tasmania was treated as the Falkland Islands. Flags are now matched by name within the right country or by location within 25 kilometres. The Tasmanian match was removed.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Effect.</strong> 335 ports changed composite score and 41 changed risk tier. The Critical tier grew from 3 to 24 ports and the High tier from 51 to 73. Ports in stable, unsanctioned countries with a missing country code, such as Iceland and Ireland, moved slightly down. <strong>Not yet corrected:</strong> the same ports also carry a default logistics-performance value, which feeds the dwell-time estimate for ports that rely on the national formula. That will be corrected in a later entry.</div>
+      </div>
+    </div>
+
     <div class="correction-date">5 October 2026 — a second correction, Panama routing</div>
     <div class="limitation-list">
       <div class="limitation-item">

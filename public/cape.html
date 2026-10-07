@@ -1071,11 +1071,15 @@ async function loadCorridorFeed() {
    PRI scores /10. Source: Narrows PRI model (illustrative).
 ═══════════════════════════════ */
 let PORT_RISK = {};
-function priRisk(score){ return score>=6?'high':score>=3?'med':'low'; }
+// Accepts both shapes the Worker may serve: new (PRI score + tier) and legacy (0-10 hand score).
+function priRisk(p){
+  if(p.tier) return (p.tier==='Critical'||p.tier==='High')?'high':p.tier==='Elevated'?'med':'low';
+  return p.pri>=6?'high':p.pri>=3?'med':'low';
+}
 function priChip(portName){
   const p=PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
-  const cls=p.jwc?'jwc':priRisk(p.pri);
-  const label=p.jwc?'JWC':'PRI '+p.pri.toFixed(1);
+  const cls=p.jwc?'jwc':priRisk(p);
+  const label=p.tier?((p.jwc?'JWC · ':'')+'PRI '+p.pri.toFixed(2)+' '+p.tier):(p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
   return `<span class="port-risk ${cls}" title="${p.note}">${portName} · ${label}</span>`;
 }
 
