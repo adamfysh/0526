@@ -332,6 +332,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Corrections</div>
     <h2 class="section-heading">The record, most recent first.</h2>
 
+    <div class="correction-date">8 October 2026 — Port Risk Index corrections, logistics performance values, and display of risk bands</div>
+    <div class="limitation-list">
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>The logistics-performance values behind the Port Risk Index reliability dimension were partly wrong, and the same default had been applied to about 350 ports.</strong> The index uses the World Bank Logistics Performance Index to estimate dwell time for ports that have no measured figure. The table of national values in the build pipeline had been typed in by hand. Checked against the published 2023 report, only 32 of 129 typed values matched, and the average difference was 0.23 points. The table is now replaced with the published 2023 scores for all 139 countries in the report. A further 60 countries in the earlier table have no published score and keep their earlier value, marked as unverified until a source is found. The roughly 350 ports corrected on 6 October also had default values for logistics performance, dwell time, labour regime and port state control; those were re-derived from each port's own country.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>Effect.</strong> The logistics-performance value changed for 2,830 ports and the estimated dwell time for 1,450. The composite score changed for 1,605 ports, by 0.03 on average, with the largest rise 0.15 and the largest fall 0.30. North Korea and Comoros rose; ports in Iceland, the Faroe Islands, Svalbard and Niue fell. 34 ports moved between the score bands used in earlier versions.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>The Port Risk Index no longer shows risk bands.</strong> The map and the port chips used four named bands (Moderate, Elevated, High, Critical). These were removed from displays because the names implied a judgement that the score does not support. Ports now show their score, rank and percentile, and the map colour runs continuously with the percentile. The scores themselves are unchanged by this display change.</div>
+      </div>
+      <div class="limitation-item">
+        <div class="limitation-bullet"></div>
+        <div class="limitation-text"><strong>One Joint War Committee listing flag was wrong.</strong> A Red Sea export port in Saudi Arabia was shown as not in a listed area. Saudi Arabia is a named country in the Joint War Committee list, so the port is listed. The listed-area outlines used in our internal map tool were also redrawn against the current circulars (JWLA-034 and JWLA-035). Every coordinate from the circular was already correct; the errors were in the closing lines we drew over land, and several named countries had been left out of our country list.</div>
+      </div>
+    </div>
+
     <div class="correction-date">6 October 2026 — Port Risk Index corrections, country codes and conflict flags</div>
     <div class="limitation-list">
       <div class="limitation-item">
