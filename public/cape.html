@@ -1072,15 +1072,23 @@ async function loadCorridorFeed() {
 ═══════════════════════════════ */
 let PORT_RISK = {};
 // Accepts both shapes the Worker may serve: new (PRI score + tier) and legacy (0-10 hand score).
-function priRisk(p){
-  if(p.tier) return (p.tier==='Critical'||p.tier==='High')?'high':p.tier==='Elevated'?'med':'low';
-  return p.pri>=6?'high':p.pri>=3?'med':'low';
+// PRI chip: score + rank. Colour is continuous by percentile of rank (green low, red high); no category labels.
+// Works with the old Worker shape (rank only) and the new one.
+function priPct(p){ return p.rank ? (3774 - p.rank) / 3774 * 100 : null; }
+function priRiskClass(p){ return p.pri>=6?'high':p.pri>=3?'med':'low'; }
+function priChipStyle(pct){
+  if(pct==null) return '';
+  const t=Math.max(0,Math.min(1,(pct-50)/50)), h=Math.round(140-140*t);
+  return ` style="background:hsl(${h} 55% 92%);color:hsl(${h} 60% 28%)"`;
 }
 function priChip(portName){
   const p=PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
-  const cls=p.jwc?'jwc':priRisk(p);
-  const label=p.tier?((p.jwc?'JWC · ':'')+'PRI '+p.pri.toFixed(2)+' '+p.tier):(p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
-  return `<span class="port-risk ${cls}" title="${p.note}">${portName} · ${label}</span>`;
+  const pct=priPct(p);
+  const cls=p.jwc?'jwc':(pct!=null?'low':priRiskClass(p));
+  const sty=(!p.jwc&&pct!=null)?priChipStyle(pct):'';
+  const label=p.rank!=null ? ((p.jwc?'JWC · ':'')+'PRI '+p.pri.toFixed(2)+' · #'+p.rank.toLocaleString()) : (p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
+  const tip=(p.note||'')+(p.rank!=null?' PRI rank '+p.rank.toLocaleString()+' of 3,774 (higher than '+Math.floor(pct)+'% of ports).':'')+(p.asOf?' Event note as of '+p.asOf+'.':'');
+  return `<span class="port-risk ${cls}"${sty} title="${tip}">${portName} · ${label}</span>`;
 }
 
 // Corridor weights loaded from protected endpoint at init — see narrows-weights-api Worker.

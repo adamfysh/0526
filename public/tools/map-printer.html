@@ -1354,18 +1354,21 @@ const JWC_LISTED_AREAS = [
     color: '#F0B429',
     behavior: 'premium',
     premiumPct: 1, // illustrative — researched AP range ~1% of hull value
+    // JWLA-035 (16 Sep 2026): Sea of Azov + the whole Black Sea, EXCLUDING territorial waters of adjoining countries other than Russia and Ukraine.
+    // The ring covers the whole sea (closed over land). Ports of adjoining countries (RO BG TR GE) are NOT listed: use portCountries.
+    portCountries: ['RU','UA'],
     latlngs: [
-      [45.18097, 29.76548],  // Ukraine–Romania border (JWLA-034 a)
-      [45.18725, 29.85233],  // JWLA-034 a
-      [45.19123, 29.99272],  // JWLA-034 b
-      [45.08923, 30.04013],  // JWLA-034 c
-      [44.77708, 30.97870],  // JWLA-034 c
-      [44.73740, 31.17495],  // JWLA-034 d
-      [44.04795, 31.41003],  // JWLA-034 d
-      [43.45152, 31.33257],  // JWLA-034 e
-      [43.38543, 40.00998],  // Russia–Georgia border (JWLA-034 e)
-      [47.70000, 39.50000],  // closing, not from circular — north of Sea of Azov
-      [47.70000, 27.00000],  // closing, not from circular — north of Black Sea, west of Ukraine
+      [41.15000, 28.00000],  // closing, not from circular — over land (Thrace), just west of the Bosphorus mouth
+      [43.00000, 26.50000],  // closing, not from circular — over land (Bulgaria)
+      [45.00000, 27.00000],  // closing, not from circular — over land (Romania)
+      [48.00000, 29.00000],  // closing, not from circular — over land (Ukraine)
+      [48.00000, 40.00000],  // closing, not from circular — over land (Ukraine/Russia), north of Sea of Azov
+      [47.00000, 40.50000],  // closing, not from circular — over land (Rostov)
+      [43.00000, 42.50000],  // closing, not from circular — over land (Georgia/Caucasus)
+      [41.00000, 42.00000],  // closing, not from circular — over land (NE Turkey)
+      [40.30000, 38.00000],  // closing, not from circular — over land (Turkey)
+      [40.50000, 33.00000],  // closing, not from circular — over land (Turkey)
+      [40.60000, 30.00000],  // closing, not from circular — over land (Turkey, south of Bosphorus)
     ],
   },
   {
@@ -1402,15 +1405,23 @@ const JWC_LISTED_AREAS = [
     behavior: 'premium',
     premiumPct: 3, // illustrative — midpoint of researched Hormuz 1–5% / Gulf of Oman 1–4% ranges
     latlngs: [
-      [30.50000, 47.50000],   // closing, not from circular — head of Persian Gulf (Iraq/Kuwait)
-      [25.32083, 65.00000],   // Pakistan coastline (JWLA-034 b)
-      [10.80000, 65.00000],   // high seas point (JWLA-034 c)
-      [10.80000, 60.25000],   // high seas point (JWLA-034 c)
-      [-6.75000, 48.75000],   // high seas point (JWLA-034 c)
-      [-1.66670, 41.56670],   // Somalia border (JWLA-034 d)
-      [11.50000, 43.30000],   // closing, not from circular — Gulf of Aden / Bab-el-Mandeb mouth
-      [15.00000, 51.00000],   // closing, not from circular — south Arabian coast (Yemen/Oman)
-      [24.00000, 51.50000],   // closing, not from circular — UAE/Qatar coast
+      [25.32083, 65.00000],  // JWLA-034 b) Pakistan coastline 25°19'15"N, 65°E
+      [10.80000, 65.00000],  // JWLA-034 c) high seas point 10°48'N, 65°E
+      [10.80000, 60.25000],  // JWLA-034 c) high seas point 10°48'N, 60°15'E
+      [-6.75000, 48.75000],  // JWLA-034 c)/d) high seas point 6°45'S, 48°45'E
+      [-1.66670, 41.56670],  // JWLA-034 d) Somalia border 1°40'S, 41°34'E
+      [4.00000, 38.00000],  // closing, not from circular — over land (Ethiopia/Somalia interior)
+      [9.00000, 38.00000],  // closing, not from circular — over land (Ethiopia)
+      [15.00000, 36.00000],  // closing, not from circular — over land (Eritrea/Sudan interior)
+      [20.00000, 36.00000],  // closing, not from circular — over land (Sudan interior)
+      [22.20000, 37.30000],  // closing, not from circular — Egypt–Sudan coast, edge of Egyptian territorial waters
+      [23.90000, 35.95000],  // closing, not from circular — ~12 nm off Egyptian coast (Egyptian waters excluded, JWLA-034 a)
+      [25.50000, 34.90000],  // JWLA-034 a) Red Sea north limit 25.5°N, west side (Egyptian waters excluded)
+      [25.50000, 37.20000],  // JWLA-034 a) Red Sea north limit 25.5°N, east side (Saudi coast)
+      [30.00000, 41.00000],  // closing, not from circular — over land (Arabian interior)
+      [33.00000, 44.00000],  // closing, not from circular — over land (Iraq)
+      [34.00000, 55.00000],  // closing, not from circular — over land (Iran)
+      [33.00000, 62.00000],  // closing, not from circular — over land (Iran/Afghanistan)
     ],
   },
   {
@@ -1424,18 +1435,24 @@ const JWC_LISTED_AREAS = [
     // non-self-crossing ring; an earlier version that zig-zagged between
     // coasts failed point-in-polygon tests near the strait, fixed here.
     latlngs: [
-      [25.50000, 34.00000],  // JWLA-034 a — Red Sea north limit, west side (excludes Egyptian waters)
-      [20.00000, 37.00000],  // closing, not from circular — Sudan coast (west)
-      [16.00000, 39.00000],  // closing, not from circular — Eritrea coast (west)
-      [13.00000, 42.50000],  // closing, not from circular — Djibouti coast (west)
-      [12.30000, 43.40000],  // closing, not from circular — Bab-el-Mandeb, south tip
-      [13.00000, 44.00000],  // closing, not from circular — Yemen coast (east)
-      [16.00000, 42.50000],  // closing, not from circular — Yemen coast (east)
-      [20.00000, 39.50000],  // closing, not from circular — Saudi coast (east)
-      [25.50000, 37.00000],  // closing, not from circular — Red Sea north limit, east side (Saudi)
+      [25.50000, 34.90000],  // JWLA-034 a) 25.5°N, off Egyptian waters
+      [25.50000, 37.20000],  // JWLA-034 a) 25.5°N, Saudi coast
+      [25.50000, 42.00000],  // closing, not from circular — over land (Saudi interior)
+      [20.00000, 45.00000],  // closing, not from circular — over land (Saudi/Yemen interior)
+      [14.00000, 45.50000],  // closing, not from circular — over land (Yemen interior)
+      [12.20000, 44.00000],  // closing, not from circular — Bab-el-Mandeb mouth
+      [12.20000, 42.00000],  // closing, not from circular — over land (Afar/Djibouti)
+      [13.00000, 39.50000],  // closing, not from circular — over land (Eritrea)
+      [20.00000, 36.00000],  // closing, not from circular — over land (Sudan interior)
+      [22.20000, 37.30000],  // closing, not from circular — Egypt–Sudan coast
+      [23.90000, 35.95000],  // closing, not from circular — ~12 nm off Egyptian coast
     ],
   },
 ];
+
+// JWLA-034 (29 July 2026) named countries (unchanged by JWLA-035, 16 Sep 2026, which amended only the Black Sea definition). They include ports and coastal waters to 12 nm. Recorded here so map and PRI agree.
+// Pakistan was DELETED in JWLA-034. Guyana: offshore installations in the EEZ only. Ukraine: all inland waters (+ Black Sea/Azov polygon).
+const JWC_NAMED_COUNTRIES = ['BJ','DJ','ER','LY','NG','SO','SD','TG','BH','IR','IQ','IL','KW','LB','OM','QA','SA','SY','AE','YE','RU','VE'];
 
 document.getElementById('load-jwc-btn').addEventListener('click', () => {
   const existingIds = new Set(zones.map((z) => z.id));

@@ -68,7 +68,12 @@
   }
 
   /* ── FILTERS ── */
-  .filters { display: flex; align-items: center; gap: 8px; }
+  .filters { display: flex; align-items: center; gap: 18px; }
+  .score-filter { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+  .score-filter input[type=range] { width: 170px; accent-color: #F0B429; }
+  #min-score-val { min-width: 34px; color: #fff; font-weight: 700; }
+  .ramp { display: flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .ramp-bar { width: 110px; height: 8px; border-radius: 4px; background: linear-gradient(90deg,#2E86D4 0%,#7FA8C9 50%,#E8952A 90%,#F0B429 100%); }
   .filter-btn {
     display: inline-flex;
     align-items: center;
@@ -246,33 +251,15 @@
   <header class="header">
     <div class="header-left">
       <a href="/" class="brand">Narrows<span>.</span></a>
-      <span class="header-title">Port Risk Index &mdash; 3,804 ports globally</span>
+      <span class="header-title">Port Risk Index &mdash; <span id="n-ports">3,774</span> ports globally</span>
     </div>
     <div class="filters" id="filters">
-      <button class="filter-btn active" data-tier="all">
-        All ports
-        <span class="count-badge">3,804</span>
-      </button>
-      <button class="filter-btn active" data-tier="Moderate">
-        <span class="filter-dot" style="background:var(--c-moderate)"></span>
-        Moderate
-        <span class="count-badge">3,345</span>
-      </button>
-      <button class="filter-btn active" data-tier="Elevated">
-        <span class="filter-dot" style="background:var(--c-elevated)"></span>
-        Elevated
-        <span class="count-badge">348</span>
-      </button>
-      <button class="filter-btn active" data-tier="High">
-        <span class="filter-dot" style="background:var(--c-high)"></span>
-        High
-        <span class="count-badge">84</span>
-      </button>
-      <button class="filter-btn active" data-tier="Critical">
-        <span class="filter-dot" style="background:var(--c-critical)"></span>
-        Critical
-        <span class="count-badge">27</span>
-      </button>
+      <label class="score-filter" for="min-score">
+        Show ports scoring at least
+        <input type="range" id="min-score" min="0.5" max="3.5" step="0.05" value="0.5">
+        <span id="min-score-val">0.50</span>
+      </label>
+      <span class="ramp" title="Colour = percentile of PRI score (0 = lowest, 100 = highest)"><span class="ramp-lo">lower</span><span class="ramp-bar"></span><span class="ramp-hi">higher</span></span>
     </div>
   </header>
 
@@ -281,11 +268,11 @@
   <div class="stats-bar">
     <div class="stats-item">
       <div class="stats-label">Ports indexed</div>
-      <div class="stats-value">3,804</div>
+      <div class="stats-value" id="n-ports2">3,774</div>
     </div>
     <div class="stats-item">
-      <div class="stats-label">Critical risk</div>
-      <div class="stats-value gold">27</div>
+      <div class="stats-label">Top 1% start at score</div>
+      <div class="stats-value gold" id="top1">—</div>
     </div>
     <div class="stats-item">
       <div class="stats-label">Countries</div>
@@ -293,22 +280,26 @@
     </div>
     <div class="stats-item">
       <div class="stats-label">Visible</div>
-      <div class="stats-value" id="visible-count">3,804</div>
+      <div class="stats-value" id="visible-count">3,774</div>
     </div>
   </div>
 
 </div>
 
 <script>
-// ── COLOUR MAP ──
-const TIER_COLOURS = {
-  Moderate: '#2E86D4',
-  Elevated: '#7FA8C9',
-  High:     '#E8952A',
-  Critical: '#F0B429',
-};
-
-const TIER_ORDER = ['Moderate','Elevated','High','Critical'];
+// ── COLOUR: continuous by percentile of PRI score (no category labels) ──
+const RAMP = [[0,[46,134,212]],[50,[127,168,201]],[90,[232,149,42]],[100,[240,180,41]]];
+function rampColour(pc) {
+  pc = Math.max(0, Math.min(100, pc || 0));
+  for (let i = 1; i < RAMP.length; i++) {
+    if (pc <= RAMP[i][0]) {
+      const [p0, c0] = RAMP[i-1], [p1, c1] = RAMP[i];
+      const t = (pc - p0) / (p1 - p0 || 1);
+      return 'rgb(' + c0.map((v, k) => Math.round(v + (c1[k] - v) * t)).join(',') + ')';
+    }
+  }
+  return '#F0B429';
+}
 
 // ── MAP INIT ──
 const map = L.map('map', {
@@ -335,11 +326,10 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.p
 
 // ── LOAD DATA ──
 let allMarkers = [];
-let layerGroups = {};
-let activeFilters = new Set(['Moderate','Elevated','High','Critical']);
+let minScore = 0;
 let countrySet = new Set();
 
-TIER_ORDER.forEach(t => { layerGroups[t] = L.layerGroup().addTo(map); });
+const markerLayer = L.layerGroup().addTo(map);
 
 function formatDwell(v) {
   if (!v || v === 'null') return '—';
@@ -356,10 +346,10 @@ function formatDepth(v) {
 }
 
 function buildPopup(p) {
-  const colour = TIER_COLOURS[p.t] || '#fff';
+  const colour = rampColour(p.pc);
   return `
     <div class="popup-inner">
-      <div class="popup-tier" style="color:${colour}">${p.t} Risk</div>
+      <div class="popup-tier" style="color:${colour}">Rank #${p.rk.toLocaleString()} &middot; riskier than ${Math.min(99, Math.floor(p.pc))}% of ports</div>
       <div class="popup-name">${p.n}</div>
       <div class="popup-country">${p.c}</div>
       <hr class="popup-divider">
@@ -385,9 +375,8 @@ function buildPopup(p) {
   `;
 }
 
-function getRadius(tier, zoom) {
-  const base = { Moderate: 4, Elevated: 5, High: 6, Critical: 7 };
-  const r = base[tier] || 4;
+function getRadius(pc, zoom) {
+  const r = 3.5 + 3.5 * Math.pow((pc || 0) / 100, 3);
   return zoom > 6 ? r + (zoom - 6) * 0.8 : r;
 }
 
@@ -396,23 +385,27 @@ fetch('/pri_ports.json')
   .then(ports => {
     ports.forEach(p => {
       countrySet.add(p.c);
-      const colour = TIER_COLOURS[p.t] || '#888';
-      const isCritical = p.t === 'Critical';
+      const colour = rampColour(p.pc);
+      const isCritical = p.pc >= 99;
       const marker = L.circleMarker([p.la, p.lo], {
-        radius: getRadius(p.t, map.getZoom()),
+        radius: getRadius(p.pc, map.getZoom()),
         fillColor: colour,
         fillOpacity: isCritical ? 0.95 : 0.75,
         color: isCritical ? colour : 'transparent',
         weight: isCritical ? 1.5 : 0,
-        className: `port-marker tier-${p.t.toLowerCase()}`,
+        className: 'port-marker',
       });
       marker.bindPopup(buildPopup(p), { maxWidth: 240, className: 'narrows-popup' });
       marker._portData = p;
       allMarkers.push(marker);
-      layerGroups[p.t].addLayer(marker);
+      markerLayer.addLayer(marker);
     });
 
     document.getElementById('country-count').textContent = countrySet.size;
+    const n = ports.length, fmt = n.toLocaleString();
+    ['n-ports','n-ports2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fmt; });
+    const sorted = ports.map(q => q.s).sort((x, y) => y - x);
+    document.getElementById('top1').textContent = sorted[Math.max(0, Math.floor(n * 0.01) - 1)].toFixed(2);
     updateVisibleCount();
   });
 
@@ -420,54 +413,26 @@ fetch('/pri_ports.json')
 map.on('zoomend', () => {
   const z = map.getZoom();
   allMarkers.forEach(m => {
-    m.setRadius(getRadius(m._portData.t, z));
+    m.setRadius(getRadius(m._portData.pc, z));
   });
 });
 
-// ── FILTERS ──
+// ── FILTER: minimum PRI score ──
 function updateVisibleCount() {
   let count = 0;
-  allMarkers.forEach(m => {
-    if (activeFilters.has(m._portData.t)) count++;
-  });
+  allMarkers.forEach(m => { if (m._portData.s >= minScore) count++; });
   document.getElementById('visible-count').textContent = count.toLocaleString();
 }
 
-document.querySelectorAll('.filter-btn[data-tier]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tier = btn.dataset.tier;
-
-    if (tier === 'all') {
-      // Toggle all
-      const allActive = activeFilters.size === 4;
-      if (allActive) {
-        activeFilters.clear();
-        TIER_ORDER.forEach(t => map.removeLayer(layerGroups[t]));
-        document.querySelectorAll('.filter-btn[data-tier]').forEach(b => b.classList.remove('active'));
-      } else {
-        TIER_ORDER.forEach(t => {
-          activeFilters.add(t);
-          layerGroups[t].addTo(map);
-        });
-        document.querySelectorAll('.filter-btn[data-tier]').forEach(b => b.classList.add('active'));
-      }
-    } else {
-      if (activeFilters.has(tier)) {
-        activeFilters.delete(tier);
-        map.removeLayer(layerGroups[tier]);
-        btn.classList.remove('active');
-      } else {
-        activeFilters.add(tier);
-        layerGroups[tier].addTo(map);
-        btn.classList.add('active');
-      }
-      // Update all-button state
-      const allBtn = document.querySelector('.filter-btn[data-tier="all"]');
-      allBtn.classList.toggle('active', activeFilters.size === 4);
-    }
-
-    updateVisibleCount();
+document.getElementById('min-score').addEventListener('input', e => {
+  minScore = parseFloat(e.target.value);
+  document.getElementById('min-score-val').textContent = minScore.toFixed(2);
+  allMarkers.forEach(m => {
+    const show = m._portData.s >= minScore;
+    if (show && !markerLayer.hasLayer(m)) markerLayer.addLayer(m);
+    if (!show && markerLayer.hasLayer(m)) markerLayer.removeLayer(m);
   });
+  updateVisibleCount();
 });
 </script>
 </body>

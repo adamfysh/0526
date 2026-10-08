@@ -134,7 +134,7 @@
     .rmap-loading{padding:28px 0;text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:.05em;text-transform:uppercase;line-height:1.5}
 
     /* ── bunker/waypoint port-risk chips (ported from app/cape.html's
-       PORT_RISK + priChip — same idea, same three-tier coloring) ── */
+       PORT_RISK + priChip — same idea, colour continuous by PRI percentile) ── */
     .wp-row{align-items:flex-start!important}
     .wp-row .dl-v{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
     .dl-remove-row{margin-top:8px;padding-top:8px;border-top:1px dashed var(--border-mid);text-align:right}
@@ -681,13 +681,23 @@ function fmtEtaDate(d){
 // hull itself avoided). Same mechanism as chokepoint displacement, one
 // level down: diverting doesn't zero out risk, it relocates it, and a
 // bunker call is one more place for that relocation to land.
-// PRI tiers (Critical>=3.0, High>=2.5, Elevated>=2.0, else Moderate) drive the chip colour.
-function priRisk(tier){ return (tier==='Critical'||tier==='High')?'high':tier==='Elevated'?'med':'low'; }
+// PRI chip: score + rank. Colour is continuous by percentile of rank (green low, red high); no category labels.
+// Works with the old Worker shape (rank only) and the new one.
+function priPct(p){ return p.rank ? (3774 - p.rank) / 3774 * 100 : null; }
+function priRiskClass(p){ return p.pri>=6?'high':p.pri>=3?'med':'low'; }
+function priChipStyle(pct){
+  if(pct==null) return '';
+  const t=Math.max(0,Math.min(1,(pct-50)/50)), h=Math.round(140-140*t);
+  return ` style="background:hsl(${h} 55% 92%);color:hsl(${h} 60% 28%)"`;
+}
 function priChip(portName){
-  const p = PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
-  const cls = p.jwc ? 'jwc' : priRisk(p.tier);
-  const label = (p.jwc ? 'JWC &middot; ' : '') + 'PRI '+p.pri.toFixed(2)+' '+p.tier;
-  return `<span class="port-risk ${cls}" title="${p.note} PRI rank ${p.rank} of 3,774. Event note as of ${p.asOf}.">${portName} &middot; ${label}</span>`;
+  const p=PORT_RISK[portName]; if(!p) return `<span class="port-risk low">${portName}</span>`;
+  const pct=priPct(p);
+  const cls=p.jwc?'jwc':(pct!=null?'low':priRiskClass(p));
+  const sty=(!p.jwc&&pct!=null)?priChipStyle(pct):'';
+  const label=p.rank!=null ? ((p.jwc?'JWC &middot; ':'')+'PRI '+p.pri.toFixed(2)+' &middot; #'+p.rank.toLocaleString()) : (p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
+  const tip=(p.note||'')+(p.rank!=null?' PRI rank '+p.rank.toLocaleString()+' of 3,774 (higher than '+Math.floor(pct)+'% of ports).':'')+(p.asOf?' Event note as of '+p.asOf+'.':'');
+  return `<span class="port-risk ${cls}"${sty} title="${tip}">${portName} &middot; ${label}</span>`;
 }
 function hasJwcWaypoint(v){ return !!(v.waypoints && v.waypoints.some(p=>PORT_RISK[p]?.jwc)); }
 
@@ -1630,7 +1640,7 @@ function buildAdvisoryText(v, info){
     lines.push('', 'BUNKER / PORT-CALL RISK (standing, independent of this diversion)');
     v.waypoints.forEach(p=>{
       const risk = (window.NARROWS_CORRIDORS.PORT_RISK||{})[p];
-      lines.push(`  - ${p}${risk ? (' (PRI '+risk.pri.toFixed(2)+' '+risk.tier+(risk.jwc ? ', JWC Listed Area' : '')+')') : ''}`);
+      lines.push(`  - ${p}${risk ? (' (PRI '+risk.pri.toFixed(2)+', rank #'+risk.rank+' of 3,774'+(risk.jwc ? ', JWC Listed Area' : '')+')') : ''}`);
     });
   }
   lines.push('', `Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation — it is not routing instructions transmitted to the vessel.`);
