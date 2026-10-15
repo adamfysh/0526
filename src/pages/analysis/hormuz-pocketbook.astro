@@ -1,0 +1,259 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+---
+
+<ArticleLayout
+ title="From the Strait of Hormuz to the pocketbooks of consumers"
+ description="Five governments have intervened in their own fuel markets to different degrees, in different ways. The bilateral Hormuz dependency data in the Narrows CDM predicts almost all of it — except the one country where the pump price moves anyway."
+ eyebrow="Analysis · Strait of Hormuz · 15 October 2026"
+ publishDate="October 2026"
+ readTime="6 min read"
+ author="Adam Fysh, Founder, The Narrows"
+ ogImage="/images/hormuz-pocketbook-thai-petrol-stall.jpg"
+>
+
+<!-- STAT BAR -->
+<div slot="stat-bar" class="stat-bar">
+  <div class="stat-bar-inner">
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Hormuz disruption</div>
+      <div class="stat-bar-value">8 months</div>
+      <div class="stat-bar-unit">Sustained, not a new shock</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Combined crude exposure</div>
+      <div class="stat-bar-value">$127B</div>
+      <div class="stat-bar-unit">Japan, Korea, NZ, Australia, Thailand</div>
+    </div>
+    <div class="stat-bar-item">
+      <div class="stat-bar-label">Governments intervening directly</div>
+      <div class="stat-bar-value">5</div>
+      <div class="stat-bar-unit">Reserves, price caps, or excise cuts</div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO BAND -->
+<div slot="photo-band" class="article-photo-band">
+  <img src="/images/hormuz-pocketbook-thai-petrol-stall.jpg" alt="A roadside petrol stall in Thailand; an attendant refuels a motorcycle by hand pump while three customers wait" loading="eager" />
+  <span class="article-photo-caption">Informal roadside fuel retail, Thailand &middot; Photo: Colin and Sarah Northway</span>
+</div>
+
+<p class="prose">Eight months ago, Iran and the United States went to war, and the Strait of Hormuz has been substantially closed, mined, or under direct attack ever since. The Black Sea has been a live shipping hazard for longer than that. This is now not just about war risk premiums and tanker schedules; it's affecting public policy and customer behaviour.</p>
+
+<p class="prose">Some countries are releasing national strategic reserves to contain prices, offering emergency tax cuts, price caps supported by government funds and advice for consumers to stock up.</p>
+
+<p class="prose">The relative exposure from the Narrows Chokepoint Dependency Monitor testifies to the urgency each government has demonstrated in intervening to keep that exposure from reaching ordinary people. The size of that intervention tracks pretty well with the bilateral Hormuz dependency figures in our model. The countries fretting the most have the most to lose.</p>
+
+<p class="prose">Japan's government has leaned on this harder than almost anyone. In March, Tokyo made its first release of state oil reserves in four years, followed by a second release in April. The trade ministry has since convened panels on subsidising alternative shipping routes to avoid Hormuz. By August, the Takaichi government was burning through reserve funds specifically to hold the nationwide pump price near 170 yen per litre. Japan's CDM figure explains the urgency: 79.1 percent of its crude imports depend on Hormuz, the highest of any major importer, worth 56.8 billion dollars a year in exposure.</p>
+
+<figure class="viz-figure">
+  <div class="viz-figure-title">The percentage is what hurts, not the dollar total</div>
+  <div class="viz-figure-sub">Hormuz dependency by commodity, percent of import value, five markets</div>
+  <div class="viz-legend">
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--blue)"></span>Crude oil (Hormuz)</div>
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold)"></span>Fertiliser (Hormuz)</div>
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold-dark)"></span>Fertiliser, + Oman (outside Hormuz)</div>
+  </div>
+  <svg viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grouped bar chart comparing Hormuz dependency percentage for crude oil and fertiliser across Japan, Korea, New Zealand, Australia and Thailand, with Oman's non-Hormuz fertiliser share shown as a second band for Australia and Thailand">
+    <g>
+      <line class="viz-grid-line" x1="48" y1="400" x2="600" y2="400"/>
+      <text class="viz-axis-text" x="42" y="403" text-anchor="end">0%</text>
+      <line class="viz-grid-line" x1="48" y1="328" x2="600" y2="328"/>
+      <text class="viz-axis-text" x="42" y="331" text-anchor="end">20%</text>
+      <line class="viz-grid-line" x1="48" y1="256" x2="600" y2="256"/>
+      <text class="viz-axis-text" x="42" y="259" text-anchor="end">40%</text>
+      <line class="viz-grid-line" x1="48" y1="184" x2="600" y2="184"/>
+      <text class="viz-axis-text" x="42" y="187" text-anchor="end">60%</text>
+      <line class="viz-grid-line" x1="48" y1="112" x2="600" y2="112"/>
+      <text class="viz-axis-text" x="42" y="115" text-anchor="end">80%</text>
+      <line class="viz-grid-line" x1="48" y1="40" x2="600" y2="40"/>
+      <text class="viz-axis-text" x="42" y="43" text-anchor="end">100%</text>
+      <text class="viz-axis-text" x="324" y="448" text-anchor="middle" style="font-weight:700;letter-spacing:.04em">DEPENDENCY, PERCENT OF IMPORT VALUE</text>
+    </g>
+
+    <!-- Japan: crude 79.1%, fertiliser 5.2% combined (below materiality floor, shown as single band) -->
+    <g>
+      <rect x="70.5" y="115.24" width="24" height="284.76" rx="4" fill="var(--blue)"/>
+      <text class="viz-bar-value" x="82.5" y="103.2" text-anchor="middle">79.1%</text>
+      <rect x="97.5" y="381.28" width="24" height="18.72" rx="4" fill="var(--gold)"/>
+      <text class="viz-bar-value" x="109.5" y="369.3" text-anchor="middle">5.2%*</text>
+      <text class="viz-bar-cat" x="96" y="418" text-anchor="middle">Japan</text>
+    </g>
+
+    <!-- Korea: crude 63.9%, fertiliser 21.0% combined (20.8% Hormuz + 0.2% Oman, rounds away) -->
+    <g>
+      <rect x="178.5" y="169.96" width="24" height="230.04" rx="4" fill="var(--blue)"/>
+      <text class="viz-bar-value" x="190.5" y="158" text-anchor="middle">63.9%</text>
+      <rect x="205.5" y="324.4" width="24" height="75.6" rx="4" fill="var(--gold)"/>
+      <text class="viz-bar-value" x="217.5" y="312.4" text-anchor="middle">21.0%</text>
+      <text class="viz-bar-cat" x="204" y="418" text-anchor="middle">Korea</text>
+    </g>
+
+    <!-- New Zealand: crude 72.5%, fertiliser 44.3% combined (43.8% Hormuz + 0.5% Oman, rounds away) -->
+    <g>
+      <rect x="286.5" y="139.0" width="24" height="261.0" rx="4" fill="var(--blue)"/>
+      <text class="viz-bar-value" x="298.5" y="127" text-anchor="middle">72.5%</text>
+      <rect x="313.5" y="240.52" width="24" height="159.48" rx="4" fill="var(--gold)"/>
+      <text class="viz-bar-value" x="325.5" y="228.5" text-anchor="middle">44.3%</text>
+      <text class="viz-bar-cat" x="312" y="418" text-anchor="middle">New Zealand</text>
+    </g>
+
+    <!-- Australia: crude 5.5%, fertiliser stacked 38.9% Hormuz + 9.7% Oman = 48.6% combined -->
+    <g>
+      <rect x="394.5" y="380.2" width="24" height="19.8" rx="4" fill="var(--blue)"/>
+      <text class="viz-bar-value" x="406.5" y="368.2" text-anchor="middle">5.5%</text>
+      <rect x="421.5" y="260.96" width="24" height="139.04" rx="4" fill="var(--gold)"/>
+      <rect x="421.5" y="225.04" width="24" height="33.92" rx="4" fill="var(--gold-dark)"/>
+      <text class="viz-bar-value" x="433.5" y="205.0" text-anchor="middle">48.6%</text>
+      <text class="viz-bar-subvalue" x="433.5" y="218.0" text-anchor="middle">incl. 9.7% Oman</text>
+      <text class="viz-bar-cat" x="420" y="418" text-anchor="middle">Australia</text>
+    </g>
+
+    <!-- Thailand: crude 45.6%, fertiliser stacked 53.0% Hormuz + 14.0% Oman = 67.0% combined -->
+    <g>
+      <rect x="502.5" y="235.84" width="24" height="164.16" rx="4" fill="var(--blue)"/>
+      <text class="viz-bar-value" x="514.5" y="223.8" text-anchor="middle">45.6%</text>
+      <rect x="529.5" y="210.2" width="24" height="189.8" rx="4" fill="var(--gold)"/>
+      <rect x="529.5" y="158.8" width="24" height="49.4" rx="4" fill="var(--gold-dark)"/>
+      <text class="viz-bar-value" x="541.5" y="138.8" text-anchor="middle">67.0%</text>
+      <text class="viz-bar-subvalue" x="541.5" y="151.8" text-anchor="middle">incl. 14.0% Oman</text>
+      <text class="viz-bar-cat" x="528" y="418" text-anchor="middle">Thailand</text>
+    </g>
+  </svg>
+  <div class="viz-figure-caption">Dependency is shown as a share of each country's own import book, not as a dollar figure: a government does not feel billions, it feels the percentage of its own supply running through one strait. Fertiliser carries a complication crude does not. Oman's own exports sit on the Gulf of Oman coast, geographically outside Hormuz, so the model correctly never assigns them the Hormuz chokepoint &mdash; but Oman sits inside the same conflict and sanctions perimeter as the Gulf states that do transit the strait. For Thailand and Australia, counting Oman's share changes the picture: Thailand's real Gulf-linked fertiliser exposure is 67.0 percent, not 53.0; Australia's is 48.6 percent, not 38.9. For Japan, Korea, and New Zealand, Oman's share is small enough to round away. *Japan's combined fertiliser-Hormuz exposure sits below the model's own materiality floor (under $9M total) and is not part of the published 31-country dataset; it is shown here only so the five markets in this piece can be read on the same percentage basis.</div>
+</figure>
+
+<p class="prose">South Korea's response has been faster and more visibly strained. In the first five days of March, national average gasoline rose 6.7 percent and diesel 11.7 percent, the first time pump prices had cleared 1,800 won per litre since 2022. The government's own state energy research institute, KEEI, told officials to prepare for an outright energy crisis in LNG and oil supply. Seoul cut energy taxes to soften the blow, and by April, even after that relief, gasoline and diesel were still climbing, with seven tankers, four of them Korean-operated, sitting idle in the strait. Korea's CDM dependency is 63.9 percent, 54.6 billion dollars at risk, the fourth-highest absolute figure in the full 31-country dataset, behind China, India, and Japan.</p>
+
+<p class="prose">New Zealand's dependency percentage, 72.5 percent of crude runs through Hormuz, sits second only to Japan's among the countries in this piece, yet its dollar value at risk, 384 million dollars, is the smallest of the five by a wide margin, because New Zealand's economy is small. That combination, a dependency share near the top of the model paired with the thinnest absolute buffer of any country on this list, is the profile that produces blunt public warnings. The Automobile Association has told drivers that petrol prices could reach four dollars a litre and that they ought to fill up before it does.</p>
+
+<p class="prose">Australia's own bilateral exposure to Hormuz is modest. 5.5 percent of its crude imports transit the strait, 315 million dollars at risk, nowhere near Japan's 79.1 percent. Most of Australia's crude arrives from Malaysia, the United States, Vietnam, and Brunei. Fertiliser is a different matter, though: 38.9 percent of Australia's fertiliser imports transit Hormuz, 789 million dollars at risk, a real agricultural input exposure. But in spite of Australia's relatively low dependency, national average petrol rose from 1.57 to 2.07 dollars a litre in eight weeks in March, and by September it had reached 2.11 dollars, up from 1.55 in July, with diesel up roughly 50 percent since June. Canberra has recently cut, then adjusted, and ultimately let lapse a fuel excise reduction to ease the burden for citizens at the gas pump.</p>
+
+<p class="prose">A federal minister has named the Strait of Hormuz as the reason why prices have risen, but this is a bit tricky. Australia has quite a low bilateral dependency, but Australia buys refined fuel based on regional benchmark pricing in Singapore rather than relying on fixed bilateral contracts, so a Hormuz disruption lifts that benchmark price for every buyer on it, regardless of whose tanker the fuel actually arrived on. The pump price moves with the conflict even when the trade data proves it does not have to.</p>
+
+<figure class="viz-figure">
+  <div class="viz-figure-title">Where Australia's fuel and fertiliser actually come from</div>
+  <div class="viz-figure-sub">Import sources flowing into each commodity, share of annual import value</div>
+  <div class="viz-legend">
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold)"></span>Gulf states, via Hormuz</div>
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold-dark)"></span>Oman, outside Hormuz</div>
+    <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--text-tertiary)"></span>Everywhere else</div>
+  </div>
+  <svg viewBox="0 0 660 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sankey diagram showing the countries supplying Australia's crude oil and fertiliser imports, converging into two totals, with Gulf states and Oman highlighted separately from all other sources">
+    <text class="viz-lane-title" x="317" y="20" text-anchor="middle">CRUDE OIL &middot; $5.75B/yr imported</text>
+
+    <g>
+      <path d="M110,30.00 C315.0,30.00 315.0,30.00 520,30.00 L520,91.88 C315.0,91.88 315.0,91.88 110,91.88 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="30.00" width="10" height="61.88" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="64.94" text-anchor="end">Malaysia <tspan class="viz-flow-pct">36.4%</tspan></text>
+
+      <path d="M110,95.88 C315.0,95.88 315.0,91.88 520,91.88 L520,128.60 C315.0,128.60 315.0,132.60 110,132.60 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="95.88" width="10" height="36.72" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="118.24" text-anchor="end">Other sources <tspan class="viz-flow-pct">21.6%</tspan></text>
+
+      <path d="M110,136.60 C315.0,136.60 315.0,128.60 520,128.60 L520,154.95 C315.0,154.95 315.0,162.95 110,162.95 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="136.60" width="10" height="26.35" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="153.77" text-anchor="end">United States <tspan class="viz-flow-pct">15.5%</tspan></text>
+
+      <path d="M110,166.95 C315.0,166.95 315.0,154.95 520,154.95 L520,173.14 C315.0,173.14 315.0,185.14 110,185.14 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="166.95" width="10" height="18.19" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="180.04" text-anchor="end">Vietnam <tspan class="viz-flow-pct">10.7%</tspan></text>
+
+      <path d="M110,189.14 C315.0,189.14 315.0,173.14 520,173.14 L520,190.65 C315.0,190.65 315.0,206.65 110,206.65 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="189.14" width="10" height="17.51" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="201.89" text-anchor="end">Brunei <tspan class="viz-flow-pct">10.3%</tspan></text>
+
+      <path d="M110,210.65 C315.0,210.65 315.0,190.65 520,190.65 L520,200.00 C315.0,200.00 315.0,220.00 110,220.00 Z" fill="var(--gold)" opacity="0.75"/>
+      <rect x="100" y="210.65" width="10" height="9.35" rx="2" fill="var(--gold)"/>
+      <text class="viz-flow-label" x="96" y="219.32" text-anchor="end">Gulf states <tspan class="viz-flow-pct">5.5%</tspan></text>
+
+      <rect x="520" y="30.00" width="14" height="170.00" rx="2" fill="var(--navy)"/>
+      <text class="viz-dest-title" x="544" y="111" text-anchor="start">Australia</text>
+      <text class="viz-dest-title" x="544" y="127" text-anchor="start">Crude oil</text>
+      <text class="viz-dest-sub" x="544" y="143" text-anchor="start">$5.75B/yr</text>
+    </g>
+
+    <line x1="0" y1="255" x2="660" y2="255" stroke="var(--border)" stroke-width="1"/>
+
+    <text class="viz-lane-title" x="317" y="280" text-anchor="middle">FERTILISER &middot; $2.03B/yr imported</text>
+
+    <g>
+      <path d="M110,290.00 C315.0,290.00 315.0,290.00 520,290.00 L520,383.55 C315.0,383.55 315.0,383.55 110,383.55 Z" fill="var(--text-tertiary)" opacity="0.45"/>
+      <rect x="100" y="290.00" width="10" height="93.55" rx="2" fill="var(--text-tertiary)"/>
+      <text class="viz-flow-label" x="96" y="340.77" text-anchor="end">Other sources <tspan class="viz-flow-pct">51.4%</tspan></text>
+
+      <path d="M110,387.55 C315.0,387.55 315.0,383.55 520,383.55 L520,454.35 C315.0,454.35 315.0,458.35 110,458.35 Z" fill="var(--gold)" opacity="0.75"/>
+      <rect x="100" y="387.55" width="10" height="70.80" rx="2" fill="var(--gold)"/>
+      <text class="viz-flow-label" x="96" y="426.95" text-anchor="end">Gulf states <tspan class="viz-flow-pct">38.9%</tspan></text>
+
+      <path d="M110,462.35 C315.0,462.35 315.0,454.35 520,454.35 L520,472.00 C315.0,472.00 315.0,480.00 110,480.00 Z" fill="var(--gold-dark)" opacity="0.85"/>
+      <rect x="100" y="462.35" width="10" height="17.65" rx="2" fill="var(--gold-dark)"/>
+      <text class="viz-flow-label" x="96" y="475.17" text-anchor="end">Oman <tspan class="viz-flow-pct">9.7%</tspan></text>
+
+      <rect x="520" y="290.00" width="14" height="182.00" rx="2" fill="var(--navy)"/>
+      <text class="viz-dest-title" x="544" y="377" text-anchor="start">Australia</text>
+      <text class="viz-dest-title" x="544" y="393" text-anchor="start">Fertiliser</text>
+      <text class="viz-dest-sub" x="544" y="409" text-anchor="start">$2.03B/yr</text>
+    </g>
+  </svg>
+  <div class="viz-figure-caption">Each lane adds to 100% of that commodity's own import book, traced to source by the CDM's bilateral trade data. Crude tells a clean story: Malaysia, the United States, Vietnam and Brunei supply 73% of it between them, and the Gulf states' own Hormuz-transiting share is a thin 5.5% sliver at the bottom &mdash; consistent with the pump price running on benchmark pricing rather than bilateral supply. Fertiliser inverts that picture. Gulf states supply 38.9% directly through Hormuz, and a further 9.7% arrives from Oman, which sits on the Gulf of Oman coast and never transits the strait, so the model correctly keeps it out of the Hormuz figure. But Oman is still inside the same conflict and sanctions perimeter as its Gulf neighbours, so the two gold bands together, not the darker one alone, are the honest answer to "how exposed is Australia's fertiliser supply to this war": 48.6%, not 38.9%.</div>
+</figure>
+
+<figure class="chart-figure">
+  <img src="/images/hormuz-pocketbook-thai-gas-bottles.jpg" alt="Bottled petrol for sale by the roadside in Thailand, repurposed glass bottles painted red on a wooden rack under a hand-painted Gasoline sign" loading="lazy" />
+  <div class="chart-caption">Bottled roadside fuel, a common sight across rural Thailand and a reminder of how far down the supply chain a Gulf conflict's price pressure eventually travels. Photo: Kirsten.</div>
+</figure>
+
+<p class="prose">Thailand's government moved earliest and most aggressively. In March, after panic buying at the pumps, Bangkok froze diesel prices, ordered the state Oil Fuel Fund to subsidise diesel to hold a 30 baht ceiling, suspended fuel exports outside the region, and tripled its mandatory reserve requirement from one to three percent of consumption. Officials had ninety-five days of cover at the time. By September, the Oil Fuel Fund's deficit had swollen past 80 billion baht and the energy ministry was warning prices would stay volatile as the US-Iran conflict reignited. As of this month, Bangkok pump prices sit at 50.43 baht a litre for petrol and 42.94 baht for diesel, but only because of continuous government intervention. Thailand's CDM dependency is 45.6 percent, 15.3 billion dollars at risk, moderate by regional standards, yet still enough to force the earliest state intervention of any country in this set.</p>
+
+<p class="prose">After eight months, this conflict has stressed the resilience of economies across Asia and toward the Pacific. For Japan, Korea, Thailand, and New Zealand, the order in which governments reached for solutions tracks the dependency ranking closely. The highest-dependency major economies reached for reserves and emergency panels. The others, each exposed in their own way, reached for price caps and blunt consumer warnings.</p>
+
+<div class="method-note">
+  <div class="method-note-label">Sources</div>
+  <div class="method-note-body">CDM dependency and exposure figures: Narrows Chokepoint Dependency Model, HORMUZ chokepoint, commodity codes 2709 (crude petroleum) and 3102 (nitrogenous fertilisers), bilateral trade data, 2022&ndash;2024.</div>
+  <div class="method-note-body">Japan: first state oil reserve release in four years, <a href="https://english.adnkronos.com/2026/03/26/japan-begins-1st-release-of-state-oil-reserves-in-4-years/">Adnkronos</a>; pump price defended near &yen;170/litre through August, <a href="https://english.adnkronos.com/2026/08/25/japan-to-keep-pump-price-target-at-around-170-yen/">Adnkronos</a>, with a &yen;616bn emergency fund approved in September, <a href="https://www.nst.com.my/amp/business/economy/2026/09/1523364/japan-approves-use-616bil-yen-emergency-funds-gasoline-subsidies">New Straits Times</a>.</div>
+  <div class="method-note-body">South Korea: early-March price moves and KEEI's crisis warning, reported via <a href="https://asianews.network/middle-east-tensions-raise-supply-stakes-for-energy-hungry-south-korea/">AsiaNews Network</a> and <a href="https://keia.org/publication/energy-shock-and-economic-resilience-south-korea-and-the-iran-war/">Korea Economic Institute of America</a>; idle tankers, <a href="https://www.koreajoongangdaily.com/business/seven-korean-oil-tankers-stuck-in-strait-of-hormuz-as-government-weighs-options/12518584">Korea JoongAng Daily</a>.</div>
+  <div class="method-note-body">New Zealand: Automobile Association's four-dollar-a-litre warning, <a href="https://autotrader.co.nz/news/petrol-in-new-zealand-could-reach-4-per-litre-warns-aa-adviser">Autotrader NZ</a>.</div>
+  <div class="method-note-body">Australia: fuel excise relief ending as the conflict pushed petrol prices higher, <a href="https://thenightly.com.au/politics/anthony-albanese-fuel-excise-cut-to-end-as-iran-us-conflict-threatens-petrol-prices-c-22409388">The Nightly</a>; ministerial comment linking the Strait of Hormuz to bowser prices, <a href="https://thenightly.com.au/politics/australian-fuel-prices-strait-of-hormuz-toll-threat-could-impact-amount-paid-at-the-bowser-ted-obrien-says--c-22462297">The Nightly</a>.</div>
+  <div class="method-note-body">Thailand: diesel ceiling, export suspension, and the tripled mandatory reserve requirement, <a href="https://www.bangkokpost.com/business/general/3211344/thai-oil-retailers-baulk-at-order-to-triple-reserves">Bangkok Post</a>; Oil Fuel Fund deficit through September, <a href="https://www.nationthailand.com/business/economy/40070569">Nation Thailand</a>.</div>
+  <div class="method-note-body">Pump price and policy figures are drawn from national and wire reporting through October 2026 and are each cited to their own reporting date rather than presented as uniformly current.</div>
+</div>
+
+</ArticleLayout>
+
+<style>
+  .viz-figure {
+    margin: 28px 0 32px;
+    border: var(--rule-light);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(10,37,64,0.05);
+    padding: 20px 20px 16px;
+  }
+  .viz-figure-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+  .viz-figure-sub { font-size: 12.5px; color: var(--text-tertiary); font-weight: 500; margin-bottom: 14px; }
+  .viz-figure svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .viz-figure-caption { font-size: 12px; color: var(--text-tertiary); margin-top: 10px; line-height: 1.5; padding-top: 10px; border-top: var(--rule-light); font-family: var(--font-body); }
+
+  .viz-legend { display: flex; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
+  .viz-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--text-secondary); font-family: var(--font-body); }
+  .viz-swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+
+  .viz-axis-text { font-family: var(--font-body); font-size: 10.5px; fill: var(--text-tertiary); }
+  .viz-grid-line { stroke: var(--border); stroke-width: 1; }
+  .viz-bar-value { font-family: var(--font-body); font-size: 15px; font-weight: 800; fill: var(--text-primary); }
+  .viz-bar-subvalue { font-family: var(--font-body); font-size: 10px; font-weight: 600; fill: var(--text-tertiary); }
+  .viz-bar-cat { font-family: var(--font-body); font-size: 12px; font-weight: 600; fill: var(--text-secondary); }
+  .viz-flow-label { font-family: var(--font-body); font-size: 11.5px; font-weight: 600; fill: var(--text-secondary); }
+  .viz-flow-pct { font-family: var(--font-body); font-size: 11.5px; font-weight: 500; fill: var(--text-tertiary); }
+  .viz-lane-title { font-family: var(--font-body); font-size: 12.5px; font-weight: 800; fill: var(--text-primary); letter-spacing: .03em; text-transform: uppercase; }
+  .viz-dest-title { font-family: var(--font-body); font-size: 13px; font-weight: 800; fill: var(--white); }
+  .viz-dest-sub { font-family: var(--font-body); font-size: 11px; font-weight: 500; fill: rgba(255,255,255,0.7); }
+
+  .chart-figure { margin: 28px 0 32px; border: var(--rule-light); border-radius: 8px; overflow: hidden; background: var(--white); box-shadow: 0 2px 12px rgba(10,37,64,0.05); }
+  .chart-figure img { display: block; width: 100%; height: auto; }
+  .chart-caption { padding: 12px 20px 16px; font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); border-top: var(--rule-light); }
+  .chart-caption strong { color: var(--text-primary); }
+</style>
