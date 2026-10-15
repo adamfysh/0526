@@ -33,17 +33,16 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </div>
 </div>
 
-<!-- PHOTO BAND -->
-<div slot="photo-band" class="article-photo-band">
-  <img src="/images/hormuz-pocketbook-thai-petrol-stall.jpg" alt="A roadside petrol stall in Thailand; an attendant refuels a motorcycle by hand pump while three customers wait" loading="eager" />
-  <span class="article-photo-caption">Informal roadside fuel retail, Thailand &middot; Photo: Colin and Sarah Northway</span>
-</div>
-
 <p class="prose">Eight months ago, Iran and the United States went to war, and the Strait of Hormuz has been substantially closed, mined, or under direct attack ever since. The Black Sea has been a live shipping hazard for longer than that. This is now not just about war risk premiums and tanker schedules; it's affecting public policy and customer behaviour.</p>
 
 <p class="prose">Some countries are releasing national strategic reserves to contain prices, offering emergency tax cuts, price caps supported by government funds and advice for consumers to stock up.</p>
 
 <p class="prose">The relative exposure from the Narrows Chokepoint Dependency Monitor testifies to the urgency each government has demonstrated in intervening to keep that exposure from reaching ordinary people. The size of that intervention tracks pretty well with the bilateral Hormuz dependency figures in our model. The countries fretting the most have the most to lose.</p>
+
+<figure class="chart-figure">
+  <img src="/images/hormuz-pocketbook-thai-petrol-stall.jpg" alt="A roadside petrol stall in Thailand; an attendant refuels a motorcycle by hand pump while three customers wait" loading="eager" />
+  <div class="chart-caption">Informal roadside fuel retail, Thailand. Photo: Colin and Sarah Northway.</div>
+</figure>
 
 <p class="prose">Japan's government has leaned on this harder than almost anyone. In March, Tokyo made its first release of state oil reserves in four years, followed by a second release in April. The trade ministry has since convened panels on subsidising alternative shipping routes to avoid Hormuz. By August, the Takaichi government was burning through reserve funds specifically to hold the nationwide pump price near 170 yen per litre. Japan's CDM figure explains the urgency: 79.1 percent of its crude imports depend on Hormuz, the highest of any major importer, worth 56.8 billion dollars a year in exposure.</p>
 
@@ -55,7 +54,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold)"></span>Fertiliser (Hormuz)</div>
     <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold-dark)"></span>Fertiliser, + Oman (outside Hormuz)</div>
   </div>
-  <svg viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grouped bar chart comparing Hormuz dependency percentage for crude oil and fertiliser across Japan, Korea, New Zealand, Australia and Thailand, with Oman's non-Hormuz fertiliser share shown as a second band for Australia and Thailand">
+  <svg viewBox="0 0 620 460" style="max-width:620px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grouped bar chart comparing Hormuz dependency percentage for crude oil and fertiliser across Japan, Korea, New Zealand, Australia and Thailand, with Oman's non-Hormuz fertiliser share shown as a second band for Australia and Thailand">
     <g>
       <line class="viz-grid-line" x1="48" y1="400" x2="600" y2="400"/>
       <text class="viz-axis-text" x="42" y="403" text-anchor="end">0%</text>
@@ -140,7 +139,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--gold-dark)"></span>Oman, outside Hormuz</div>
     <div class="viz-legend-item"><span class="viz-swatch" style="background:var(--text-tertiary)"></span>Everywhere else</div>
   </div>
-  <svg viewBox="0 0 660 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sankey diagram showing the countries supplying Australia's crude oil and fertiliser imports, converging into two totals, with Gulf states and Oman highlighted separately from all other sources">
+  <svg viewBox="0 0 660 500" style="max-width:660px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sankey diagram showing the countries supplying Australia's crude oil and fertiliser imports, converging into two totals, with Gulf states and Oman highlighted separately from all other sources">
     <text class="viz-lane-title" x="317" y="20" text-anchor="middle">CRUDE OIL &middot; $5.75B/yr imported</text>
 
     <g>
@@ -200,7 +199,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="viz-figure-caption">Each lane adds to 100% of that commodity's own import book, traced to source by the CDM's bilateral trade data. Crude tells a clean story: Malaysia, the United States, Vietnam and Brunei supply 73% of it between them, and the Gulf states' own Hormuz-transiting share is a thin 5.5% sliver at the bottom &mdash; consistent with the pump price running on benchmark pricing rather than bilateral supply. Fertiliser inverts that picture. Gulf states supply 38.9% directly through Hormuz, and a further 9.7% arrives from Oman, which sits on the Gulf of Oman coast and never transits the strait, so the model correctly keeps it out of the Hormuz figure. But Oman is still inside the same conflict and sanctions perimeter as its Gulf neighbours, so the two gold bands together, not the darker one alone, are the honest answer to "how exposed is Australia's fertiliser supply to this war": 48.6%, not 38.9%.</div>
 </figure>
 
-<figure class="chart-figure">
+<figure class="chart-figure chart-figure-narrow">
   <img src="/images/hormuz-pocketbook-thai-gas-bottles.jpg" alt="Bottled petrol for sale by the roadside in Thailand, repurposed glass bottles painted red on a wooden rack under a hand-painted Gasoline sign" loading="lazy" />
   <div class="chart-caption">Bottled roadside fuel, a common sight across rural Thailand and a reminder of how far down the supply chain a Gulf conflict's price pressure eventually travels. Photo: Kirsten.</div>
 </figure>
@@ -224,7 +223,8 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <style>
   .viz-figure {
-    margin: 28px 0 32px;
+    max-width: 680px;
+    margin: 28px auto 32px;
     border: var(--rule-light);
     border-radius: 8px;
     overflow: hidden;
@@ -234,7 +234,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   }
   .viz-figure-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
   .viz-figure-sub { font-size: 12.5px; color: var(--text-tertiary); font-weight: 500; margin-bottom: 14px; }
-  .viz-figure svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .viz-figure svg { width: 100%; height: auto; display: block; margin: 0 auto; overflow: visible; }
   .viz-figure-caption { font-size: 12px; color: var(--text-tertiary); margin-top: 10px; line-height: 1.5; padding-top: 10px; border-top: var(--rule-light); font-family: var(--font-body); }
 
   .viz-legend { display: flex; gap: 16px; margin-bottom: 10px; flex-wrap: wrap; }
@@ -252,8 +252,9 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   .viz-dest-title { font-family: var(--font-body); font-size: 13px; font-weight: 800; fill: var(--white); }
   .viz-dest-sub { font-family: var(--font-body); font-size: 11px; font-weight: 500; fill: rgba(255,255,255,0.7); }
 
-  .chart-figure { margin: 28px 0 32px; border: var(--rule-light); border-radius: 8px; overflow: hidden; background: var(--white); box-shadow: 0 2px 12px rgba(10,37,64,0.05); }
+  .chart-figure { max-width: 680px; margin: 28px auto 32px; border: var(--rule-light); border-radius: 8px; overflow: hidden; background: var(--white); box-shadow: 0 2px 12px rgba(10,37,64,0.05); }
   .chart-figure img { display: block; width: 100%; height: auto; }
+  .chart-figure-narrow { max-width: 360px; }
   .chart-caption { padding: 12px 20px 16px; font-size: 12px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); border-top: var(--rule-light); }
   .chart-caption strong { color: var(--text-primary); }
 </style>
