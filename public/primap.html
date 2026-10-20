@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Port Risk Index — Narrows</title>
+<title>Port Risk Index | Narrows</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -251,15 +251,15 @@
   <header class="header">
     <div class="header-left">
       <a href="/" class="brand">Narrows<span>.</span></a>
-      <span class="header-title">Port Risk Index &mdash; <span id="n-ports">3,774</span> ports globally</span>
+      <span class="header-title"><span data-i18n="hdr1">Port Risk Index</span> | <span id="n-ports">3,774</span> <span data-i18n="hdr2">ports globally</span></span>
     </div>
     <div class="filters" id="filters">
       <label class="score-filter" for="min-score">
-        Show ports scoring at least
+        <span data-i18n="minlbl">Show ports scoring at least</span>
         <input type="range" id="min-score" min="0.5" max="3.5" step="0.05" value="0.5">
         <span id="min-score-val">0.50</span>
       </label>
-      <span class="ramp" title="Colour = percentile of PRI score (0 = lowest, 100 = highest)"><span class="ramp-lo">lower</span><span class="ramp-bar"></span><span class="ramp-hi">higher</span></span>
+      <span class="ramp" data-i18n-title="ramptitle" title="Colour = percentile of PRI score (0 = lowest, 100 = highest)"><span class="ramp-lo" data-i18n="lower">lower</span><span class="ramp-bar"></span><span class="ramp-hi" data-i18n="higher">higher</span></span>
     </div>
   </header>
 
@@ -267,25 +267,54 @@
 
   <div class="stats-bar">
     <div class="stats-item">
-      <div class="stats-label">Ports indexed</div>
+      <div class="stats-label" data-i18n="s1">Ports indexed</div>
       <div class="stats-value" id="n-ports2">3,774</div>
     </div>
     <div class="stats-item">
-      <div class="stats-label">Top 1% start at score</div>
-      <div class="stats-value gold" id="top1">—</div>
+      <div class="stats-label" data-i18n="s2">Top 1% start at score</div>
+      <div class="stats-value gold" id="top1">–</div>
     </div>
     <div class="stats-item">
-      <div class="stats-label">Countries</div>
-      <div class="stats-value" id="country-count">—</div>
+      <div class="stats-label" data-i18n="s3">Countries</div>
+      <div class="stats-value" id="country-count">–</div>
     </div>
     <div class="stats-item">
-      <div class="stats-label">Visible</div>
+      <div class="stats-label" data-i18n="s4">Visible</div>
       <div class="stats-value" id="visible-count">3,774</div>
     </div>
   </div>
 
 </div>
 
+<script>
+// ── LANGUAGE: /primap.html?lang=fr gives the French version ──
+const FR = new URLSearchParams(location.search).get('lang') === 'fr';
+const NBSP = '\u00a0';
+const TX = FR ? {
+  hdr1: 'Indice de risque portuaire', hdr2: 'ports dans le monde',
+  minlbl: 'Afficher les ports notés au moins', lower: 'plus bas', higher: 'plus haut',
+  s1: 'Ports indexés', s2: 'Le top 1' + NBSP + '% commence au score', s3: 'Pays', s4: 'Visibles',
+  ramptitle: 'Couleur = centile du score PRI (0 = le plus bas, 100 = le plus haut)',
+  rank: 'Rang n°' + NBSP, riskier: 'plus risqué que', ofports: NBSP + '% des ports',
+  pri: 'Score PRI', composite: 'indice composite', dwell: 'Temps de séjour', avgwait: 'attente moyenne des marchandises',
+  depth: 'Profondeur limitante', chdepth: 'profondeur du chenal', cta: 'Explorer l’indice complet →',
+  title: 'Indice de risque portuaire | Narrows', href: '/fr/pri',
+} : {
+  rank: 'Rank #', riskier: 'riskier than', ofports: '% of ports',
+  pri: 'PRI Score', composite: 'composite index', dwell: 'Dwell Time', avgwait: 'avg cargo wait',
+  depth: 'Controlling Depth', chdepth: 'channel depth', cta: 'Explore full index →', href: '/pri',
+};
+const num = (x, d) => { const v = d === undefined ? String(x) : x.toFixed(d); return FR ? v.replace('.', ',') : v; };
+const intl = (n) => n.toLocaleString(FR ? 'fr-FR' : 'en-US').replace(/\u202f/g, NBSP);
+const DN = FR ? new Intl.DisplayNames(['fr'], { type: 'region' }) : null;
+const countryName = (p) => { if (DN && p.i) { try { const n = DN.of(p.i); if (n && n !== p.i) return n; } catch (e) {} } return p.c; };
+if (FR) {
+  document.documentElement.lang = 'fr';
+  document.title = TX.title;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = TX[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = TX[el.dataset.i18nTitle]; });
+}
+</script>
 <script>
 // ── COLOUR: continuous by percentile of PRI score (no category labels) ──
 const RAMP = [[0,[46,134,212]],[50,[127,168,201]],[90,[232,149,42]],[100,[240,180,41]]];
@@ -332,46 +361,46 @@ let countrySet = new Set();
 const markerLayer = L.layerGroup().addTo(map);
 
 function formatDwell(v) {
-  if (!v || v === 'null') return '—';
+  if (!v || v === 'null') return '–';
   const h = parseFloat(v);
-  if (isNaN(h)) return '—';
-  return h >= 24 ? (h/24).toFixed(1) + 'd' : Math.round(h) + 'h';
+  if (isNaN(h)) return '–';
+  return h >= 24 ? num(h/24, 1) + (FR ? NBSP + 'j' : 'd') : Math.round(h) + (FR ? NBSP : '') + 'h';
 }
 
 function formatDepth(v) {
-  if (!v || v === 'null') return '—';
+  if (!v || v === 'null') return '–';
   const d = parseFloat(v);
-  if (isNaN(d)) return '—';
-  return d.toFixed(1) + ' m';
+  if (isNaN(d)) return '–';
+  return num(d, 1) + (FR ? NBSP : ' ') + 'm';
 }
 
 function buildPopup(p) {
   const colour = rampColour(p.pc);
   return `
     <div class="popup-inner">
-      <div class="popup-tier" style="color:${colour}">Rank #${p.rk.toLocaleString()} &middot; riskier than ${Math.min(99, Math.floor(p.pc))}% of ports</div>
+      <div class="popup-tier" style="color:${colour}">${TX.rank}${intl(p.rk)} &middot; ${TX.riskier} ${Math.min(99, Math.floor(p.pc))}${TX.ofports}</div>
       <div class="popup-name">${p.n}</div>
-      <div class="popup-country">${p.c}</div>
+      <div class="popup-country">${countryName(p)}</div>
       <hr class="popup-divider">
       <div class="popup-stats">
         <div>
-          <div class="popup-stat-label">PRI Score</div>
-          <div class="popup-stat-value" style="color:${colour}">${p.s.toFixed(2)}</div>
-          <div class="popup-stat-unit">composite index</div>
+          <div class="popup-stat-label">${TX.pri}</div>
+          <div class="popup-stat-value" style="color:${colour}">${num(p.s, 2)}</div>
+          <div class="popup-stat-unit">${TX.composite}</div>
         </div>
         <div>
-          <div class="popup-stat-label">Dwell Time</div>
+          <div class="popup-stat-label">${TX.dwell}</div>
           <div class="popup-stat-value">${formatDwell(p.d)}</div>
-          <div class="popup-stat-unit">avg cargo wait</div>
+          <div class="popup-stat-unit">${TX.avgwait}</div>
         </div>
         <div>
-          <div class="popup-stat-label">Controlling Depth</div>
+          <div class="popup-stat-label">${TX.depth}</div>
           <div class="popup-stat-value">${formatDepth(p.dp)}</div>
-          <div class="popup-stat-unit">channel depth</div>
+          <div class="popup-stat-unit">${TX.chdepth}</div>
         </div>
       </div>
     </div>
-    <a class="popup-cta" href="/pri" target="_parent">Explore full index →</a>
+    <a class="popup-cta" href="${TX.href}" target="_parent">${TX.cta}</a>
   `;
 }
 
@@ -402,10 +431,10 @@ fetch('/pri_ports.json')
     });
 
     document.getElementById('country-count').textContent = countrySet.size;
-    const n = ports.length, fmt = n.toLocaleString();
+    const n = ports.length, fmt = intl(n);
     ['n-ports','n-ports2'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fmt; });
     const sorted = ports.map(q => q.s).sort((x, y) => y - x);
-    document.getElementById('top1').textContent = sorted[Math.max(0, Math.floor(n * 0.01) - 1)].toFixed(2);
+    document.getElementById('top1').textContent = num(sorted[Math.max(0, Math.floor(n * 0.01) - 1)], 2);
     updateVisibleCount();
   });
 
@@ -421,12 +450,12 @@ map.on('zoomend', () => {
 function updateVisibleCount() {
   let count = 0;
   allMarkers.forEach(m => { if (m._portData.s >= minScore) count++; });
-  document.getElementById('visible-count').textContent = count.toLocaleString();
+  document.getElementById('visible-count').textContent = intl(count);
 }
 
 document.getElementById('min-score').addEventListener('input', e => {
   minScore = parseFloat(e.target.value);
-  document.getElementById('min-score-val').textContent = minScore.toFixed(2);
+  document.getElementById('min-score-val').textContent = num(minScore, 2);
   allMarkers.forEach(m => {
     const show = m._portData.s >= minScore;
     if (show && !markerLayer.hasLayer(m)) markerLayer.addLayer(m);

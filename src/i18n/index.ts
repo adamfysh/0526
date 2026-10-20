@@ -11,6 +11,8 @@ export const TRANSLATED_PATHS = new Set<string>([
   '/methodology',
   '/data-verification-policy',
   '/data-changelog',
+  '/pri',
+  '/pri-methodology',
 ]);
 
 // Used by every [...lang] page: generates / and /fr/ variants.

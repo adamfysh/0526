@@ -1,24 +1,45 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { langPaths, getLang, lp } from '../../i18n';
+import { pri } from '../../i18n/pages/pri';
 
-// Read at build time — process.cwd() is always the repo root during Astro SSG
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = pri[lang];
+
+// Read at build time; process.cwd() is the repo root during Astro SSG
 const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8');
+const scores = JSON.parse(priDataStr).r.map((r) => r[6]);
+const N = scores.length;
+const lo = Math.min(...scores), hi = Math.max(...scores);
+const mean = scores.reduce((a, b) => a + b, 0) / N;
+const NB = '\u00a0';
+const dec = (x, d) => (lang === 'fr' ? x.toFixed(d).replace('.', ',') : x.toFixed(d));
+const nTxt = lang === 'fr' ? N.toLocaleString('fr-FR').replace(/\u202f/g, NB) : N.toLocaleString('en-US');
+const countries = new Set(JSON.parse(priDataStr).r.map((r) => r[3]).filter(Boolean)).size;
+const fill = (s) => s.replaceAll('{countries}', String(countries)).replaceAll('{n}', nTxt).replaceAll('{max}', dec(hi, 2)).replaceAll('{min}', dec(lo, 2)).replaceAll('{mean}', dec(mean, 2));
+const jsT = { ...t.js };
+const dimColors = ['#378ADD', '#EF9F27', '#7F77DD', '#D85A30'];
 ---
 
 <BaseLayout
-  title="Port Risk Index | Narrows"
-  description="3774 ports scored across four dimensions of risk: accessibility, reliability, concentration, and stability. The Narrows Port Risk Index."
+  lang={lang}
+  title={t.title}
+  description={fill(t.description)}
 >
 
-<!-- Data baked in at build time — no fetch, no runtime dependency -->
-<Fragment slot="head"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/></Fragment>
-<Fragment set:html={`<script>window.__PRI__=${priDataStr};</script>`} />
+<!-- Data baked in at build time, no fetch, no runtime dependency -->
+<Fragment set:html={`<script>window.__PRI__=${priDataStr};window.__PRI_T__=${JSON.stringify(jsT)};</script>`} />
 
 <style>
 /* ─────────────────────────────────────────
-   PRI PAGE — PAGE-SCOPED STYLES
+   PRI PAGE – PAGE-SCOPED STYLES
 ───────────────────────────────────────── */
 
 /* Hero */
@@ -488,6 +509,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 }
 </style>
 
+{COMMERCIAL && (
+<Fragment>
 <!-- ══════════════════════════════
      EMAIL GATE OVERLAY
 ══════════════════════════════ -->
@@ -579,131 +602,92 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
+</Fragment>
+)}
+
+<!-- HERO -->
 <div class="pri-hero fade-up">
-  <div class="pri-hero-kicker">Port Risk Index</div>
-  <h1>3774 ports scored.<br><em>Four dimensions of risk.</em></h1>
-  <p class="pri-hero-lead">
-    The Narrows PRI scores every major port in the World Port Index across four dimensions:
-    physical accessibility, operational reliability, trade concentration,
-    and geopolitical stability. Each scored from independent source data,
-    combined via geometric mean. Lower score is lower risk.
-  </p>
+  <div class="pri-hero-kicker">{t.hero.kicker}</div>
+  <h1 set:html={fill(t.hero.titleHtml)}></h1>
+  <p class="pri-hero-lead">{t.hero.lead}</p>
 </div>
 
 <!-- Stats strip -->
 <div class="pri-stats">
-  <div class="pri-stat"><span class="pri-stat-val">3774</span><span class="pri-stat-lbl">Ports indexed · World Port Index universe</span></div>
-  <div class="pri-stat"><span class="pri-stat-val">4</span><span class="pri-stat-lbl">Dimensions · Physical, operational, concentration, stability</span></div>
-  <div class="pri-stat"><span class="pri-stat-val">14</span><span class="pri-stat-lbl">Indicators · 5+3+3+3 across four dimensions</span></div>
-  <div class="pri-stat"><span class="pri-stat-val">195</span><span class="pri-stat-lbl">Countries · WPI + LPI + WGI base data</span></div>
+  {t.stats.map((s) => (
+    <div class="pri-stat"><span class="pri-stat-val">{fill(s.val)}</span><span class="pri-stat-lbl">{fill(s.lbl)}</span></div>
+  ))}
   <div class="pri-stat pri-stat-actions">
-    <a href="/narrows_pri_latest.csv" download class="btn-ghost" style="font-size:13px;white-space:nowrap;">↓ Download CSV</a>
-    <a href="/pri-methodology" class="pri-meth-link">Methodology →</a>
+    <a href="/narrows_pri_latest.csv" download class="btn-ghost" style="font-size:13px;white-space:nowrap;">{t.download}</a>
+    <a href={lp(lang, '/pri-methodology')} class="pri-meth-link">{t.methLink}</a>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════
-     MAP
-══════════════════════════════ -->
-<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+<!-- MAP -->
 <div class="pri-map-iframe-wrap">
   <iframe
-    src="/primap.html"
-    title="Global Port Risk Index map"
+    src={lang === 'fr' ? '/primap.html?lang=fr' : '/primap.html'}
+    title={t.mapTitle}
     scrolling="no"
     frameborder="0"
     style="width:100%;height:520px;border:none;display:block;"
   ></iframe>
 </div>
 
-<!-- ══════════════════════════════
-     EXPLORER
-══════════════════════════════ -->
+<!-- EXPLORER -->
 <section class="pri-explorer">
   <div class="pri-explorer-inner">
 
-    <!-- Search -->
     <div class="pri-search-wrap">
       <span class="pri-search-icon">⌕</span>
       <input
         type="text"
         class="pri-search-input"
         id="pri-search"
-        placeholder="Search by port name or country…"
+        placeholder={t.search.placeholder}
         autocomplete="off"
         spellcheck="false"
       />
-      <button class="pri-search-clear" id="pri-clear" title="Clear">✕</button>
+      <button class="pri-search-clear" id="pri-clear" title={t.search.clear}>✕</button>
       <div class="pri-dropdown" id="pri-dropdown"></div>
     </div>
 
-    <!-- Detail panel (shown when port selected) -->
     <div class="pri-detail" id="pri-detail">
       <div class="pri-detail-header">
         <div>
-          <div class="pri-detail-name" id="dd-name">—</div>
-          <div class="pri-detail-meta" id="dd-meta">—</div>
+          <div class="pri-detail-name" id="dd-name">–</div>
+          <div class="pri-detail-meta" id="dd-meta">–</div>
         </div>
         <div class="pri-detail-badge">
-          <span class="pri-detail-badge-lbl">Narrows Port Risk Index</span>
-          <span class="pri-detail-badge-score" id="dd-score">—</span>
+          <span class="pri-detail-badge-lbl">{t.detail.badge}</span>
+          <span class="pri-detail-badge-score" id="dd-score">–</span>
         </div>
       </div>
 
-      <!-- Commodity tags (populated by showDetail) -->
       <div class="pri-coms-row" id="dd-coms"></div>
 
       <div class="pri-dim-row">
-        <!-- D1 Accessibility -->
-        <div class="pri-dim-card">
-          <div class="pri-dc-lbl">Dimension 1</div>
-          <div class="pri-dc-name">Accessibility</div>
-          <div class="pri-dc-score"><span id="d1-score">—</span><span>/ 10</span></div>
-          <div class="pri-dc-bar"><div class="pri-dc-fill" id="d1-bar" style="background:#378ADD;width:0%"></div></div>
-          <div class="pri-dc-subs" id="d1-subs"></div>
-        </div>
-        <!-- D2 Reliability -->
-        <div class="pri-dim-card">
-          <div class="pri-dc-lbl">Dimension 2</div>
-          <div class="pri-dc-name">Reliability</div>
-          <div class="pri-dc-score"><span id="d2-score">—</span><span>/ 10</span></div>
-          <div class="pri-dc-bar"><div class="pri-dc-fill" id="d2-bar" style="background:#EF9F27;width:0%"></div></div>
-          <div class="pri-dc-subs" id="d2-subs"></div>
-        </div>
-        <!-- D3 Concentration -->
-        <div class="pri-dim-card">
-          <div class="pri-dc-lbl">Dimension 3</div>
-          <div class="pri-dc-name">Concentration</div>
-          <div class="pri-dc-score"><span id="d3-score">—</span><span>/ 10</span></div>
-          <div class="pri-dc-bar"><div class="pri-dc-fill" id="d3-bar" style="background:#7F77DD;width:0%"></div></div>
-          <div class="pri-dc-subs" id="d3-subs"></div>
-        </div>
-        <!-- D4 Stability -->
-        <div class="pri-dim-card">
-          <div class="pri-dc-lbl">Dimension 4</div>
-          <div class="pri-dc-name">Stability</div>
-          <div class="pri-dc-score"><span id="d4-score">—</span><span>/ 10</span></div>
-          <div class="pri-dc-bar"><div class="pri-dc-fill" id="d4-bar" style="background:#D85A30;width:0%"></div></div>
-          <div class="pri-dc-subs" id="d4-subs"></div>
-        </div>
+        {t.dims.map((name, i) => (
+          <div class="pri-dim-card">
+            <div class="pri-dc-lbl">{t.detail.dimension}{NB}{i + 1}</div>
+            <div class="pri-dc-name">{name}</div>
+            <div class="pri-dc-score"><span id={`d${i + 1}-score`}>–</span><span>/{NB}10</span></div>
+            <div class="pri-dc-bar"><div class="pri-dc-fill" id={`d${i + 1}-bar`} style={`background:${dimColors[i]};width:0%`}></div></div>
+            <div class="pri-dc-subs" id={`d${i + 1}-subs`}></div>
+          </div>
+        ))}
       </div>
 
-      <!-- Histogram -->
       <div class="pri-hist-section">
         <div class="pri-hist-header">
-          <span class="pri-hist-title">Global PRI distribution · 3774 ports</span>
+          <span class="pri-hist-title">{fill(t.hist.title)}</span>
           <span class="pri-hist-port-lbl" id="hist-port-lbl"></span>
         </div>
         <div class="pri-hist-svg-wrap" id="hist-wrap"></div>
         <div class="pri-hist-axis">
-          <span>0.69 (lowest)</span>
-          <span id="hist-mean-lbl">mean 1.35</span>
-          <span>3.65 (highest)</span>
+          <span>{dec(lo, 2)} ({t.hist.lowest})</span>
+          <span id="hist-mean-lbl">{t.hist.mean} {dec(mean, 2)}</span>
+          <span>{dec(hi, 2)} ({t.hist.highest})</span>
         </div>
       </div>
     </div>
@@ -711,9 +695,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     FULL TABLE
-══════════════════════════════ -->
+<!-- FULL TABLE -->
 <section style="background:var(--white);border-bottom:var(--rule-light);">
   <div class="pri-table-section">
     <div class="pri-table-controls">
@@ -724,10 +706,10 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       <table class="pri-table" id="pri-table">
         <thead>
           <tr>
-            <th data-col="pri_rank"><span class="th-inner">Rank<span class="sort-arrow" id="arr-pri_rank">↕</span></span></th>
-            <th data-col="port_name"><span class="th-inner">Port<span class="sort-arrow" id="arr-port_name">↕</span></span></th>
-            <th data-col="country_name"><span class="th-inner">Country<span class="sort-arrow" id="arr-country_name">↕</span></span></th>
-            <th data-col="pri_score"><span class="th-inner">PRI<span class="sort-arrow active" id="arr-pri_score">↓</span></span></th>
+            <th data-col="pri_rank"><span class="th-inner">{t.table.rank}<span class="sort-arrow" id="arr-pri_rank">↕</span></span></th>
+            <th data-col="port_name"><span class="th-inner">{t.table.port}<span class="sort-arrow" id="arr-port_name">↕</span></span></th>
+            <th data-col="country_name"><span class="th-inner">{t.table.country}<span class="sort-arrow" id="arr-country_name">↕</span></span></th>
+            <th data-col="pri_score"><span class="th-inner">{t.table.pri}<span class="sort-arrow active" id="arr-pri_score">↓</span></span></th>
             <th data-col="d1_score"><span class="th-inner">D1<span class="sort-arrow" id="arr-d1_score">↕</span></span></th>
             <th data-col="d2_score"><span class="th-inner">D2<span class="sort-arrow" id="arr-d2_score">↕</span></span></th>
             <th data-col="d3_score"><span class="th-inner">D3<span class="sort-arrow" id="arr-d3_score">↕</span></span></th>
@@ -741,56 +723,26 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     METHODOLOGY NOTE
-══════════════════════════════ -->
+<!-- METHODOLOGY NOTE -->
 <section class="pri-method">
   <div class="pri-method-inner">
     <div>
-      <div class="eyebrow">Methodology</div>
-      <h2 class="pri-method-title">Geometric mean composite scoring</h2>
-      <p class="pri-method-body">
-        Each dimension is scored 0–10 from independent source data, then combined via
-        <strong>geometric mean</strong> (floor 0.1 per component) to produce the composite PRI.
-        The geometric mean penalises extreme scores in any single dimension. A port that scores
-        very poorly on stability cannot be rescued by good physical access.
-      </p>
-      <p class="pri-method-body">
-        The effective empirical maximum in the World Port Index universe is <strong>3.645</strong>,
-        not 10. Most ports have reasonable physical infrastructure, which structurally moderates D1.
-        Score distribution is right-skewed; the vast majority of ports fall below 2.0.
-      </p>
-      <a href="/pri-methodology" class="btn-ghost">Full methodology documentation</a>
+      <div class="eyebrow">{t.method.eyebrow}</div>
+      <h2 class="pri-method-title">{t.method.title}</h2>
+      <p class="pri-method-body" set:html={t.method.p1}></p>
+      <p class="pri-method-body" set:html={fill(t.method.p2)}></p>
+      <a href={lp(lang, '/pri-methodology')} class="btn-ghost">{t.method.link}</a>
     </div>
     <div class="pri-dim-legend">
-      <div class="pri-dim-legend-item">
-        <div class="pri-dim-legend-dot" style="background:#378ADD"></div>
-        <div class="pri-dim-legend-text">
-          <h4>D1: Accessibility</h4>
-          <p>Controlling depth, vessel class coverage, terminal count, cyclone exposure, seismic hazard. Source: World Port Index, IBTrACS, USGS.</p>
+      {t.method.legend.map(([h, p], i) => (
+        <div class="pri-dim-legend-item">
+          <div class="pri-dim-legend-dot" style={`background:${dimColors[i]}`}></div>
+          <div class="pri-dim-legend-text">
+            <h4>{h}</h4>
+            <p>{p}</p>
+          </div>
         </div>
-      </div>
-      <div class="pri-dim-legend-item">
-        <div class="pri-dim-legend-dot" style="background:#EF9F27"></div>
-        <div class="pri-dim-legend-text">
-          <h4>D2: Reliability</h4>
-          <p>Dwell time, labour regime stability, port state control record. Source: World Bank CPPI/PPPI, ILO, Paris/Tokyo MOU.</p>
-        </div>
-      </div>
-      <div class="pri-dim-legend-item">
-        <div class="pri-dim-legend-dot" style="background:#7F77DD"></div>
-        <div class="pri-dim-legend-text">
-          <h4>D3: Concentration</h4>
-          <p>Catchment share, hinterland count, Herfindahl-Hirschman index, alternative port distance. Source: UN Comtrade, WPI.</p>
-        </div>
-      </div>
-      <div class="pri-dim-legend-item">
-        <div class="pri-dim-legend-dot" style="background:#D85A30"></div>
-        <div class="pri-dim-legend-text">
-          <h4>D4: Stability</h4>
-          <p>WGI governance score (PS and GE merged), sanctions exposure, active territorial dispute. Source: World Bank WGI, OFAC, ICJ.</p>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
@@ -798,10 +750,14 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 <script is:inline>
 (function() {
   'use strict';
+  const T = window.__PRI_T__;
+  const f = (v, d) => { const s = v.toFixed(d); return T.dec === ',' ? s.replace('.', ',') : s; };
+  const loc = (n) => n.toLocaleString(T.locale);
+  const tv = (x) => (x === null || x === undefined) ? '–' : (T.v[x] || x);
 
   /* ── CONFIG ── */
   const DIM_COLORS = ['#378ADD', '#EF9F27', '#7F77DD', '#D85A30'];
-  const EFF_MAX = 3.645; // empirical max, v1.2
+  // Dimension scores run 0-10; the bar shows score / 10 (the old divisor, the composite maximum, filled most bars)
 
   /* ── STATE ── */
   let allPorts = [];
@@ -830,10 +786,10 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     return '#378ADD';
   }
   function scoreChip(v, small) {
-    if (v === null || v === undefined) return '—';
+    if (v === null || v === undefined) return '–';
     const c = scoreColor(v);
     const bg = c + '18';
-    const s = v.toFixed(2);
+    const s = f(v, 2);
     if (small) return `<span class="td-dim" style="color:${c};font-weight:600">${s}</span>`;
     return `<span class="score-chip" style="color:${c};background:${bg}">${s}</span>`;
   }
@@ -893,7 +849,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     // Update mean label
     const meanLbl = document.getElementById('hist-mean-lbl');
-    if (meanLbl) meanLbl.textContent = `mean ${globalMean.toFixed(2)}`;
+    if (meanLbl) meanLbl.textContent = `${T.mean} ${f(globalMean, 2)}`;
   }
 
   /* ── SHOW DETAIL PANEL ── */
@@ -903,8 +859,8 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     document.getElementById('dd-name').textContent = port.port_name;
     document.getElementById('dd-meta').textContent =
-      `${port.country_name} · Rank #${port.pri_rank.toLocaleString()} of 3774 · rank 1 = highest risk · Data tier ${port.data_tier}`;
-    document.getElementById('dd-score').textContent = port.pri_score.toFixed(2);
+      T.rankLine.replace('{country}', port.country_disp).replace('{rank}', loc(port.pri_rank)).replace('{n}', loc(allPorts.length)).replace('{tier}', port.data_tier);
+    document.getElementById('dd-score').textContent = f(port.pri_score, 2);
 
     // Commodity chips
     const comsEl = document.getElementById('dd-coms');
@@ -928,35 +884,36 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     const dims = [
       { id: 'd1', score: port.d1_score, color: '#378ADD', subs: [
-        { l: 'Controlling depth', v: port.ctrl_depth_final ? port.ctrl_depth_final.toFixed(1) + 'm' : '—' },
-        { l: 'Vessel class coverage', v: port.vessel_class_count ?? '—' },
-        { l: 'Cyclone passes', v: port.cyclone_passes !== null ? port.cyclone_passes.toFixed(0) : '—' },
-        { l: 'Peak ground accel.', v: port.pga_g !== null ? port.pga_g.toFixed(3) + 'g' : '—' },
+        { l: T.l.depth, v: port.ctrl_depth_final ? f(port.ctrl_depth_final, 1) + T.sp + 'm' : '–' },
+        { l: T.l.vessels, v: port.vessel_class_count ?? '–' },
+        { l: T.l.terminals, v: port.terminal_count ?? '–' },
+        { l: T.l.cyclone, v: port.cyclone_passes !== null ? f(port.cyclone_passes, 0) : '–' },
+        { l: T.l.pga, v: port.pga_g !== null ? f(port.pga_g, 3) + T.sp + 'g' : '–' },
       ]},
       { id: 'd2', score: port.d2_score, color: '#EF9F27', subs: [
-        { l: 'LPI score (ref)', v: port.lpi_score !== null ? port.lpi_score.toFixed(2) : '—' },
-        { l: 'Dwell time', v: port.dwell_hours !== null ? port.dwell_hours.toFixed(0) + 'h' : '—' },
-        { l: 'Labour regime', v: port.labour_regime ?? '—' },
+        { l: T.l.lpi, v: port.lpi_score !== null ? f(port.lpi_score, 2) : '–' },
+        { l: T.l.dwell, v: port.dwell_hours !== null ? f(port.dwell_hours, 0) + T.sp + 'h' : '–' },
+        { l: T.l.labour, v: tv(port.labour_regime) },
       ]},
       { id: 'd3', score: port.d3_score, color: '#7F77DD', subs: [
-        { l: 'Catchment share', v: port.catchment_share_pct !== null ? port.catchment_share_pct.toFixed(1) + '%' : '—' },
-        { l: 'Herfindahl index', v: port.herfindahl !== null ? port.herfindahl.toFixed(3) : '—' },
-        { l: 'Alt. port distance', v: port.alt_distance_km !== null ? port.alt_distance_km.toFixed(0) + 'km' : '—' },
+        { l: T.l.catch, v: port.catchment_share_pct !== null ? f(port.catchment_share_pct, 1) + T.sp + '%' : '–' },
+        { l: T.l.hhi, v: port.herfindahl !== null ? f(port.herfindahl, 3) : '–' },
+        { l: T.l.alt, v: port.alt_distance_km !== null ? f(port.alt_distance_km, 0) + T.sp + 'km' : '–' },
       ]},
       { id: 'd4', score: port.d4_score, color: '#D85A30', subs: [
-        { l: 'WGI governance (merged)', v: port.score_4_wgi !== null ? port.score_4_wgi.toFixed(2) : '—' },
-        { l: 'WGI pol. stability (src)', v: port.wgi_ps !== null ? port.wgi_ps.toFixed(2) : '—' },
-        { l: 'WGI gov. effectiveness (src)', v: port.wgi_ge !== null ? port.wgi_ge.toFixed(2) : '—' },
-        { l: 'Sanctions level', v: port.sanctions_level ?? '—' },
-        { l: 'Dispute level', v: port.dispute_level ?? '—' },
+        { l: T.l.wgi, v: port.score_4_wgi !== null ? f(port.score_4_wgi, 2) : '–' },
+        { l: T.l.wgips, v: port.wgi_ps !== null ? f(port.wgi_ps, 2) : '–' },
+        { l: T.l.wgige, v: port.wgi_ge !== null ? f(port.wgi_ge, 2) : '–' },
+        { l: T.l.sanc, v: tv(port.sanctions_level) },
+        { l: T.l.disp, v: tv(port.dispute_level) },
       ]},
     ];
 
     dims.forEach(d => {
       const sc = d.score !== null && d.score !== undefined ? d.score : null;
-      document.getElementById(`${d.id}-score`).textContent = sc !== null ? sc.toFixed(2) : '—';
+      document.getElementById(`${d.id}-score`).textContent = sc !== null ? f(sc, 2) : '–';
       document.getElementById(`${d.id}-bar`).style.width =
-        sc !== null ? `${Math.min((sc / EFF_MAX) * 100, 100).toFixed(1)}%` : '0%';
+        sc !== null ? `${Math.min((sc / 10) * 100, 100).toFixed(1)}%` : '0%';
       const subsEl = document.getElementById(`${d.id}-subs`);
       subsEl.innerHTML = d.subs.map(s =>
         `<div class="pri-dc-sub-row">
@@ -968,7 +925,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 
     // Histogram
     document.getElementById('hist-port-lbl').textContent =
-      `${port.port_name} · ${port.pri_score.toFixed(2)}`;
+      `${port.port_name} · ${f(port.pri_score, 2)}`;
     drawHistogram(port.pri_score);
 
     // Scroll detail into view
@@ -982,7 +939,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
       return `<tr class="${sel}" data-rank="${port.pri_rank}">
         <td class="td-rank">${port.pri_rank}</td>
         <td class="td-port">${port.port_name}</td>
-        <td class="td-country">${port.country_name}</td>
+        <td class="td-country">${port.country_disp}</td>
         <td>${scoreChip(port.pri_score, false)}</td>
         <td>${scoreChip(port.d1_score, true)}</td>
         <td>${scoreChip(port.d2_score, true)}</td>
@@ -1006,7 +963,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     });
 
     // Count
-    countEl.innerHTML = `<strong>${filteredPorts.length.toLocaleString()}</strong> ports`;
+    countEl.innerHTML = `<strong>${loc(filteredPorts.length)}</strong> ${T.ports}`;
   }
 
   /* ── SORT ── */
@@ -1047,7 +1004,7 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     if (!q) return allPorts.slice();
     return allPorts.filter(p =>
       p.port_name.toLowerCase().includes(q) ||
-      p.country_name.toLowerCase().includes(q) ||
+      p.country_name.toLowerCase().includes(q) || p.country_disp.toLowerCase().includes(q) ||
       (p.iso2 && p.iso2.toLowerCase().includes(q))
     );
   }
@@ -1059,15 +1016,15 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     if (!q) { dropdown.classList.remove('open'); return; }
     const results = filterPorts(q).slice(0, 8);
     if (!results.length) {
-      dropdown.innerHTML = `<div class="pri-dd-none">No ports found for "${q}"</div>`;
+      dropdown.innerHTML = `<div class="pri-dd-none">${T.none.replace('{q}', q)}</div>`;
     } else {
       dropdown.innerHTML = results.map((p, i) =>
         `<div class="pri-dd-item" data-rank="${p.pri_rank}">
           <div>
             <div class="pri-dd-name">${p.port_name}</div>
-            <div class="pri-dd-country">${p.country_name} · Rank #${p.pri_rank}</div>
+            <div class="pri-dd-country">${p.country_disp} · ${T.rankShort}${p.pri_rank}</div>
           </div>
-          <div class="pri-dd-score">${p.pri_score.toFixed(2)}</div>
+          <div class="pri-dd-score">${f(p.pri_score, 2)}</div>
         </div>`
       ).join('');
       dropdown.querySelectorAll('.pri-dd-item').forEach(item => {
@@ -1133,79 +1090,16 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
     dropdown.classList.remove('open');
   });
 
-  /* ── EMAIL GATE ── */
-  (function initGate() {
-    const GATE_KEY = 'narrows_pri_access';
-    const LOOPS_FORM_ID = 'cmpfr589400le0jwr5mkw40v6'; // ← replace with your Loops form ID
-    const EXPIRY_MS = 90 * 24 * 60 * 60 * 1000; // 90 days
-
-    const gate = document.getElementById('pri-gate');
-    const form = document.getElementById('pri-gate-form');
-    const btn  = document.getElementById('pri-gate-btn');
-    const err  = document.getElementById('pri-gate-error');
-
-    console.log('[PRI Gate] init — gate:', !!gate, 'form:', !!form, 'btn:', !!btn);
-    if (!gate || !form || !btn) { console.error('[PRI Gate] missing elements'); return; }
-
-    // Check if already unlocked
-    let stored = null;
-    try { stored = localStorage.getItem(GATE_KEY); } catch(e) { console.warn('[PRI Gate] localStorage read error:', e); }
-    if (stored && (Date.now() - parseInt(stored, 10)) < EXPIRY_MS) {
-      console.log('[PRI Gate] already unlocked');
-      gate.classList.add('hidden');
-      return;
-    }
-
-    console.log('[PRI Gate] showing gate');
-    gate.classList.remove('hidden');
-
-    function grantAccess() {
-      console.log('[PRI Gate] grantAccess called');
-      try { localStorage.setItem(GATE_KEY, Date.now().toString()); } catch(e) {}
-      gate.classList.add('dismissing');
-      setTimeout(() => gate.classList.add('hidden'), 420);
-    }
-
-    form.addEventListener('submit', function(e) {
-      console.log('[PRI Gate] submit fired');
-      e.preventDefault();
-
-      const emailEl   = document.getElementById('pri-gate-email');
-      const companyEl = document.getElementById('pri-gate-company');
-      const email     = emailEl.value.trim();
-
-      // Basic format check
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailEl.style.borderColor = '#c0392b';
-        emailEl.focus();
-        return;
-      }
-      emailEl.style.borderColor = '';
-
-      // Grant access immediately — never block on API response
-      grantAccess();
-
-      // Send to Loops in background (fire and forget)
-      if (LOOPS_FORM_ID && LOOPS_FORM_ID !== 'YOUR_LOOPS_FORM_ID') {
-        const payload = new URLSearchParams({ email });
-        if (companyEl && companyEl.value.trim()) {
-          payload.set('company', companyEl.value.trim());
-        }
-        fetch(`https://app.loops.so/api/newsletter-form/${LOOPS_FORM_ID}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: payload.toString(),
-        }).catch(function() {});
-      }
-    });
-  })();
-
-  /* ── INIT — data is already in the page, no fetch needed ── */
+  /* ── INIT – data is already in the page, no fetch needed ── */
   (function initData() {
     const { h, r } = window.__PRI__;
+    let dn = null;
+    if (T.dec === ',') { try { dn = new Intl.DisplayNames(['fr'], { type: 'region' }); } catch (e) {} }
     allPorts = r.map(row => {
       const obj = {};
       h.forEach((k, i) => obj[k] = row[i]);
+      obj.country_disp = obj.country_name;
+      if (dn && obj.iso2) { try { const n = dn.of(obj.iso2); if (n && n !== obj.iso2) obj.country_disp = n; } catch (e) {} }
       return obj;
     });
     globalMean = allPorts.reduce((s, p) => s + p.pri_score, 0) / allPorts.length;
@@ -1218,133 +1112,6 @@ const priDataStr = readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8
 })();
 </script>
 
-
-<script is:inline>
-(function() {
-  var TIER_COLOURS = {
-    Moderate: '#2E86D4',
-    Elevated: '#7FA8C9',
-    High:     '#E8952A',
-    Critical: '#F0B429',
-  };
-  var TIER_ORDER = ['Moderate','Elevated','High','Critical'];
-
-  // Ensure container has explicit pixel height before Leaflet reads it
-  var mapEl = document.getElementById('pri-leaflet-map');
-  if (!mapEl) { console.error('[PRI Map] container not found'); return; }
-  if (!window.L) { console.error('[PRI Map] Leaflet not loaded'); return; }
-  console.log('[MAP] container size:', mapEl.offsetWidth, 'x', mapEl.offsetHeight, '| L defined:', typeof L);
-  // Force explicit pixel dimensions so Leaflet never sees a zero-size container
-  var mapH = mapEl.offsetHeight || 480;
-  var mapW = mapEl.offsetWidth || window.innerWidth || 800;
-  mapEl.style.width  = mapW + 'px';
-  mapEl.style.height = mapH + 'px';
-
-  var map = L.map('pri-leaflet-map', {
-    center: [20, 10], zoom: 2,
-    zoomControl: true, maxZoom: 14, minZoom: 2,
-  });
-
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
-    subdomains: 'abcd', maxZoom: 19, attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
-  }).addTo(map);
-
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png?key=cb1_3gva_1_acebee3ffd0b448154c0f98a', {
-    subdomains: 'abcd', maxZoom: 19, pane: 'shadowPane',
-  }).addTo(map);
-
-  console.log('[MAP] tile layers added, map size:', JSON.stringify(map.getSize()));
-
-  var layerGroups = {};
-  TIER_ORDER.forEach(function(t) { layerGroups[t] = L.layerGroup().addTo(map); });
-
-  var activeFilters = new Set(TIER_ORDER);
-  var allMarkers = [];
-
-  function fmtDwell(v) {
-    if (!v || v === 'null') return '—';
-    var h = parseFloat(v);
-    if (isNaN(h)) return '—';
-    return h >= 24 ? (h/24).toFixed(1) + 'd' : Math.round(h) + 'h';
-  }
-  function fmtDepth(v) {
-    if (!v || v === 'null') return '—';
-    var d = parseFloat(v);
-    if (isNaN(d)) return '—';
-    return d.toFixed(1) + ' m';
-  }
-
-  function buildPopup(p) {
-    var c = TIER_COLOURS[p.t] || '#fff';
-    return '<div class="map-popup-inner">' +
-      '<div class="map-popup-tier" style="color:' + c + '">' + p.t + ' Risk</div>' +
-      '<div class="map-popup-name">' + p.n + '</div>' +
-      '<div class="map-popup-country">' + p.c + '</div>' +
-      '<hr class="map-popup-hr">' +
-      '<div class="map-popup-stats">' +
-        '<div><div class="map-popup-stat-lbl">PRI Score</div>' +
-        '<div class="map-popup-stat-val" style="color:' + c + '">' + p.s.toFixed(2) + '</div>' +
-        '<div class="map-popup-stat-unit">composite index</div></div>' +
-        '<div><div class="map-popup-stat-lbl">Dwell Time</div>' +
-        '<div class="map-popup-stat-val">' + fmtDwell(p.d) + '</div>' +
-        '<div class="map-popup-stat-unit">avg cargo wait</div></div>' +
-        '<div><div class="map-popup-stat-lbl">Depth</div>' +
-        '<div class="map-popup-stat-val">' + fmtDepth(p.dp) + '</div>' +
-        '<div class="map-popup-stat-unit">controlling</div></div>' +
-      '</div></div>' +
-      '<a class="map-popup-cta" href="#pri-search" onclick="document.getElementById('pri-search').value='' + p.n.replace(/'/g, '') + '';document.getElementById('pri-search').dispatchEvent(new Event('input'));">View full index →</a>';
-  }
-
-  function getRadius(tier, zoom) {
-    var base = { Moderate: 4, Elevated: 5, High: 6, Critical: 7 };
-    var r = base[tier] || 4;
-    return zoom > 6 ? r + (zoom - 6) * 0.7 : r;
-  }
-
-  fetch('/pri_ports.json')
-    .then(function(r) { return r.json(); })
-    .then(function(ports) {
-      ports.forEach(function(p) {
-        var colour = TIER_COLOURS[p.t] || '#888';
-        var isCrit = p.t === 'Critical';
-        var marker = L.circleMarker([p.la, p.lo], {
-          radius: getRadius(p.t, map.getZoom()),
-          fillColor: colour,
-          fillOpacity: isCrit ? 0.95 : 0.72,
-          color: isCrit ? colour : 'transparent',
-          weight: isCrit ? 1.5 : 0,
-        });
-        marker.bindPopup(buildPopup(p), { maxWidth: 220 });
-        marker._tier = p.t;
-        marker._portData = p;
-        allMarkers.push(marker);
-        layerGroups[p.t].addLayer(marker);
-      });
-    });
-
-  map.on('zoomend', function() {
-    var z = map.getZoom();
-    allMarkers.forEach(function(m) { m.setRadius(getRadius(m._tier, z)); });
-  });
-
-  // Filters
-  document.querySelectorAll('#pri-map-filters .pri-map-filter').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var tier = btn.dataset.tier;
-      if (activeFilters.has(tier)) {
-        activeFilters.delete(tier);
-        map.removeLayer(layerGroups[tier]);
-        btn.classList.remove('active');
-      } else {
-        activeFilters.add(tier);
-        layerGroups[tier].addTo(map);
-        btn.classList.add('active');
-      }
-    });
-  });
-  // Force tile repaint after gate dismissal
-  setTimeout(function() { map.invalidateSize(); }, 300);
-})();
-</script>
+{COMMERCIAL && <script is:inline src="/pri-gate.js"></script>}
 
 </BaseLayout>

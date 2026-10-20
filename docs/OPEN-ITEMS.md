@@ -15,6 +15,17 @@ Last updated 20 Oct 2026. Every fix below must be made in **English and French t
 | A6 | `src/pages/model.astro` | Stub page. Decision: hide it rather than translate it | n/a | open: decide |
 | A7 | `src/pages/pri.astro` | Gate wording ("Free access, instant") sits oddly with the research-publication framing. Review while translating | n/a | open |
 | A8 | `src/pages/[...lang]/about.astro` | Validation link points at the English article until that article is translated | n/a | resolves when article translated |
+| A12 | `src/data/pri.json` | Embedded copy dated 7 Oct; the 8 Oct CSV differs only by rounding (+/-0.001) in about 400 scores. Regenerate from the CSV whenever the PRI is rebuilt (pri.json also needs `score_4_wgi` = mean of `score_4_1` and `score_4_2`) | CSV | open |
+| A13 | `public/pri_ports.json` | Added an `i` (ISO2) key so the French map can name countries. Regenerate with it on each rebuild. Still carries the old `t` tier field (unused by the display) | CSV | open |
+| A14 | PRI page | Port names stay in their source (English/local) spelling in French. Country names are translated at runtime with `Intl.DisplayNames` | n/a | decision |
+| A17 | `priMethodology.ts` s[179-184] | Section 12 (Charter Bleed) is hidden unless `COMMERCIAL` is true (cost per port call, rate module, calculator). Restore with the flag; its French text is written but only shown then | n/a | by design |
+| A18 | `pri-methodology.astro` | Custom weighting sentence (s[145]) and "model code on request for institutional users" (s[176]) are appended in English only when `COMMERCIAL` is true | n/a | by design |
+| A9 | PRI pages | RESOLVED 20 Oct: 14 indicators = D1 4 + D2 3 + D3 4 + D4 3, from notebooks 02-05 (MD-017 dropped LPI from D2, MD-018 merged the two WGI scores). The "16" in the LinkedIn launch post and the gate is the pre-MD-017 design. Pages now say 14 = 4+3+4+3; country count is computed from the data (193) | pipeline | done |
+| A11 | PRI explorer bars | RESOLVED 20 Oct: bars now show score / 10 (they divided by the composite maximum, so most were full) | n/a | done |
+| A15 | PRI methodology Section 8 | RESOLVED 20 Oct: named risk bands removed; text now says the index deliberately has no bands and points to rank / percentile. Note: score chip and histogram colours in the explorer table still switch at 2.0 / 2.5 / 3.0 (unnamed). Decide whether to make those continuous like the map | n/a | partly open |
+| A16 | PRI methodology details | RESOLVED 20 Oct against notebooks 02-05 and fixes v14-v23: geometric means throughout (not arithmetic), D1 = vessel classes / terminal diversity / cyclones / seismic, labour regime stable / uncertain / volatile (2 / 5 / 8), `score_2_4` port safety (flag tier ~60%), hinterland count row added, GSHAP seismic source, cyclones 1980 to present within 250 km, outlier handling updated, dwell tier counts, LPI correction note, "Version 1.2" replaced by "Updated 8 October 2026". STILL OPEN: Section 11 vintage rows for OFAC/EU/UN lists and ICJ/PCA say "Q1 2026 snapshot" but notebook 05 says "as of May 2024"; WGI "2023 edition" wording; confirm | pipeline | open |
+| A19 | `priMethodology.ts` static numbers | Dwell tiers 57 / 1,841 / 1,876, 35 flagged disputes, 79 Tier A ports, and "71 manual depth overrides" are typed from the 8 Oct CSV and notebooks. Refresh on each PRI rebuild (header comment in the file lists them) | CSV | open |
+| A20 | PRI raw inputs | 10+ ports sit at a flat 100% catchment share (not yet reviewed); `alt_distance_km` still has remote-port outliers (see methodology Section 3) | pipeline | open |
 
 ## B. Carried over from earlier sessions
 
@@ -27,7 +38,7 @@ Last updated 20 Oct 2026. Every fix below must be made in **English and French t
 
 ## C. Not yet translated
 
-`pri.astro`, `pri-methodology.astro`, `cape.astro` and `public/cape.html`, `lng-compare.astro`,
+`cape.astro` and `public/cape.html`, `lng-compare.astro`,
 `analysis/index.astro`, all articles under `src/pages/analysis/`, the standalone tools
 (`cascade*.html`, Sankeys).
 

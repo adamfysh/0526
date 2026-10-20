@@ -1,0 +1,617 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
+import { priMethodology } from '../../i18n/pages/priMethodology';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = priMethodology[lang];
+
+// Figures that come straight from the data
+const scores = JSON.parse(readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8')).r.map((r) => r[6]);
+const N = scores.length;
+const sorted = [...scores].sort((a, b) => a - b);
+const median = sorted[Math.floor(N / 2)];
+const countries = new Set(JSON.parse(readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8')).r.map((r) => r[3]).filter(Boolean)).size;
+const dec = (x, d) => (lang === 'fr' ? x.toFixed(d).replace('.', ',') : x.toFixed(d));
+const nTxt = lang === 'fr' ? N.toLocaleString('fr-FR').replace(/\u202f/g, '\u00a0') : N.toLocaleString('en-US');
+const fill = (s) => s.replaceAll('{n}', nTxt).replaceAll('{min}', dec(Math.min(...scores), 2)).replaceAll('{max}', dec(Math.max(...scores), 2)).replaceAll('{median}', dec(median, 2)).replaceAll('{countries}', String(countries));
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+>
+
+<style>
+.meth-hero {
+  padding: 120px var(--s4) var(--s5);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.meth-hero-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s2);
+}
+.meth-hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.meth-hero h1 {
+  font-size: clamp(28px, 3.5vw, 46px); font-weight: 700; color: var(--navy);
+  line-height: 1.1; letter-spacing: -0.03em; margin-bottom: var(--s2);
+}
+.meth-hero-lead {
+  font-size: 17px; color: var(--text-secondary); line-height: 1.5;
+  font-weight: 400; font-family: var(--font-body); max-width: 620px; margin-bottom: var(--s3);
+}
+.meth-meta {
+  display: flex; gap: var(--s3); flex-wrap: wrap;
+  font-size: 12px; color: var(--text-tertiary);
+}
+.meth-meta-item::before { content: '·'; margin-right: 6px; }
+.meth-meta-item:first-child::before { content: ''; margin-right: 0; }
+
+/* Two-column layout: sticky TOC + content */
+.meth-body {
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.meth-toc {
+  position: sticky; top: 88px;
+}
+.meth-toc-title {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s2); padding-bottom: var(--s1);
+  border-bottom: var(--rule-light);
+}
+.meth-toc ol { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.meth-toc a {
+  font-size: 13px; color: var(--text-secondary); text-decoration: none;
+  line-height: 1.5; display: block; padding: 4px 0; transition: color 0.15s;
+}
+.meth-toc a:hover { color: var(--navy); }
+
+/* Sections */
+.meth-section {
+  border-top: var(--rule-light); padding-top: var(--s4); margin-bottom: var(--s5);
+}
+.meth-section:first-of-type { border-top: none; padding-top: 0; }
+.meth-section-num {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--s1);
+}
+.meth-section h2 {
+  font-size: clamp(20px, 2vw, 26px); font-weight: 700; color: var(--navy);
+  letter-spacing: -0.02em; margin-bottom: var(--s3); line-height: 1.15;
+}
+.meth-section h3 {
+  font-size: 16px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.01em; margin: var(--s3) 0 var(--s2);
+  display: flex; align-items: center; gap: 10px;
+}
+.dim-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.meth-p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.5;
+  font-weight: 400; font-family: var(--font-body); margin-bottom: var(--s2);
+}
+.meth-p strong { color: var(--text-primary); font-weight: 600; }
+.meth-p code {
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px;
+  background: var(--surface); padding: 1px 6px; border-radius: 3px; color: var(--navy);
+}
+
+/* Formula block */
+.meth-formula {
+  background: var(--navy); border-radius: 8px;
+  padding: var(--s3) var(--s4); margin: var(--s3) 0;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 14px; color: var(--gold); letter-spacing: 0.02em; line-height: 1.6; font-family: var(--font-mono);
+}
+.meth-formula .formula-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); display: block; margin-bottom: 6px;
+  font-family: var(--font);
+}
+
+/* Indicator tables */
+.meth-table-wrap {
+  overflow-x: auto; margin: var(--s3) 0;
+  border: var(--rule-light); border-radius: 8px;
+}
+.meth-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.meth-table thead { background: var(--surface); }
+.meth-table th {
+  padding: 10px 14px; text-align: left;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-tertiary); white-space: nowrap; border-bottom: var(--rule-light);
+}
+.meth-table td {
+  padding: 11px 14px; border-bottom: var(--rule-light);
+  color: var(--text-secondary); line-height: 1.55; vertical-align: top;
+}
+.meth-table tr:last-child td { border-bottom: none; }
+.meth-table td:first-child { font-weight: 600; color: var(--navy); white-space: nowrap; }
+.meth-table td code {
+  font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px;
+  background: var(--surface); padding: 1px 5px; border-radius: 3px; color: var(--navy);
+}
+
+/* Score bands */
+.meth-bands {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden;
+  margin: var(--s3) 0;
+}
+.meth-band {
+  padding: 16px 14px; background: var(--white);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.meth-band-score { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+.meth-band-label { font-size: 12px; font-weight: 600; }
+.meth-band-desc { font-size: 11px; color: var(--text-tertiary); line-height: 1.4; margin-top: 2px; }
+
+/* Limitations */
+.meth-limits { display: flex; flex-direction: column; gap: var(--s2); margin: var(--s2) 0; }
+.meth-limit {
+  display: flex; gap: 14px; padding: var(--s2) var(--s3);
+  background: var(--surface); border-radius: 6px; border-left: 3px solid var(--border);
+}
+.meth-limit-icon { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+.meth-limit-body { font-size: 13px; color: var(--text-secondary); line-height: 1.5; font-family: var(--font-body); }
+.meth-limit-body strong { color: var(--text-primary); font-weight: 600; }
+
+.meth-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text-secondary); text-decoration: none;
+  margin-bottom: var(--s4); transition: color 0.15s;
+}
+.meth-back:hover { color: var(--navy); }
+
+@media (max-width: 900px) {
+  .meth-body { grid-template-columns: 1fr; }
+  .meth-toc { display: none; }
+  .meth-bands { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .meth-bands { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- Hero -->
+<div class="meth-hero fade-up">
+  <div class="meth-hero-kicker">{t.s[0]}</div>
+  <h1 set:html={t.s[1]}></h1>
+  <p class="meth-hero-lead">{t.s[2]}</p>
+  <div class="meth-meta">
+    <span class="meth-meta-item" set:html={fill(t.s[3])}></span>
+    <span class="meth-meta-item" set:html={fill(t.s[4])}></span>
+    <span class="meth-meta-item" set:html={fill(t.s[5])}></span>
+    <span class="meth-meta-item" set:html={fill(t.s[6])}></span>
+  </div>
+</div>
+
+<div class="meth-body">
+
+  <!-- TOC -->
+  <nav class="meth-toc">
+    <div class="meth-toc-title">{t.s[7]}</div>
+    <ol>
+      <li><a href="#overview">{t.s[8]}</a></li>
+      <li><a href="#universe">{t.s[9]}</a></li>
+      <li><a href="#composite">{t.s[10]}</a></li>
+      <li><a href="#d1">{t.s[11]}</a></li>
+      <li><a href="#d2">{t.s[12]}</a></li>
+      <li><a href="#d3">{t.s[13]}</a></li>
+      <li><a href="#d4">{t.s[14]}</a></li>
+      <li><a href="#interpretation">{t.s[15]}</a></li>
+      <li><a href="#tiers">{t.s[16]}</a></li>
+      <li><a href="#limitations">{t.s[17]}</a></li>
+      <li><a href="#vintage">{t.s[18]}</a></li>
+      {COMMERCIAL && <li><a href="#charter-bleed">{t.s[19]}</a></li>}
+      <li><a href="#cppi">{COMMERCIAL ? t.s[20] : t.s[20].replace('13.', '12.')}</a></li>
+    </ol>
+  </nav>
+
+  <!-- Content -->
+  <div>
+    <a href={lp(lang, '/pri')} class="meth-back">{t.s[21]}</a>
+
+    <!-- 1 -->
+    <div class="meth-section" id="overview">
+      <div class="meth-section-num">{t.sec} 1</div>
+      <h2>{t.s[22]}</h2>
+      <p class="meth-p" set:html={fill(t.s[23])}></p>
+      <p class="meth-p" set:html={fill(t.s[24])}></p>
+      <p class="meth-p" set:html={fill(t.s[25])}></p>
+      <p class="meth-p" set:html={fill(t.s[26])}></p>
+    </div>
+
+    <!-- 2 -->
+    <div class="meth-section" id="universe">
+      <div class="meth-section-num">{t.sec} 2</div>
+      <h2>{t.s[27]}</h2>
+      <p class="meth-p" set:html={fill(t.s[28])}></p>
+      <p class="meth-p" set:html={fill(t.s[29])}></p>
+      <p class="meth-p" set:html={fill(t.s[30])}></p>
+    </div>
+
+    <!-- 3 -->
+    <div class="meth-section" id="composite">
+      <div class="meth-section-num">{t.sec} 3</div>
+      <h2>{t.s[31]}</h2>
+      <p class="meth-p" set:html={fill(t.s[32])}></p>
+      <div class="meth-formula">
+        <span class="formula-label">{t.s[33]}</span>
+        PRI = (D1 × D2 × D3 × D4) ^ (1/4)<br><br>
+        where each Dₙ = max(raw_dimension_score, 0.1)
+      </div>
+      <p class="meth-p" set:html={fill(t.s[34])}></p>
+      <p class="meth-p" set:html={fill(t.s[35])}></p>
+      <p class="meth-p" set:html={fill(t.s[36])}></p>
+      <p class="meth-p" set:html={fill(t.s[37])}></p>
+      <p class="meth-p" set:html={fill(t.s[38])}></p>
+      <p class="meth-p" set:html={fill(t.s[39])}></p>
+    </div>
+
+    <!-- 4 D1 -->
+    <div class="meth-section" id="d1">
+      <div class="meth-section-num">{t.sec} 4</div>
+      <h2>{t.s[40]}</h2>
+      <h3><span class="dim-dot" style="background:#378ADD"></span>{t.s[41]}</h3>
+      <p class="meth-p" set:html={fill(t.s[42])}></p>
+      <p class="meth-p" set:html={fill(t.s[43])}></p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>{t.s[44]}</th>
+              <th>{t.s[45]}</th>
+              <th>{t.s[46]}</th>
+              <th>{t.s[47]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ctrl_depth_final</code></td>
+              <td set:html={t.s[48]}></td>
+              <td set:html={t.s[49]}></td>
+              <td set:html={t.s[50]}></td>
+            </tr>
+            <tr>
+              <td><code>vessel_class_count</code></td>
+              <td set:html={t.s[51]}></td>
+              <td set:html={t.s[52]}></td>
+              <td set:html={t.s[53]}></td>
+            </tr>
+            <tr>
+              <td><code>terminal_count</code></td>
+              <td set:html={t.s[54]}></td>
+              <td set:html={t.s[55]}></td>
+              <td set:html={t.s[56]}></td>
+            </tr>
+            <tr>
+              <td><code>cyclone_passes</code></td>
+              <td set:html={t.s[57]}></td>
+              <td set:html={t.s[58]}></td>
+              <td set:html={t.s[59]}></td>
+            </tr>
+            <tr>
+              <td><code>pga_g</code></td>
+              <td set:html={t.s[60]}></td>
+              <td set:html={t.s[61]}></td>
+              <td set:html={t.s[62]}></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p" set:html={fill(t.s[63])}></p>
+    </div>
+
+    <!-- 5 D2 -->
+    <div class="meth-section" id="d2">
+      <div class="meth-section-num">{t.sec} 5</div>
+      <h2>{t.s[64]}</h2>
+      <h3><span class="dim-dot" style="background:#EF9F27"></span>{t.s[65]}</h3>
+      <p class="meth-p" set:html={fill(t.s[66])}></p>
+      <p class="meth-p" set:html={fill(t.s[67])}></p>
+      <p class="meth-p" set:html={fill(t.s[68])}></p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>{t.s[69]}</th>
+              <th>{t.s[70]}</th>
+              <th>{t.s[71]}</th>
+              <th>{t.s[72]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dwell_hours</code></td>
+              <td set:html={t.s[73]}></td>
+              <td set:html={t.s[74]}></td>
+              <td set:html={t.s[75]}></td>
+            </tr>
+            <tr>
+              <td><code>labour_regime</code></td>
+              <td set:html={t.s[76]}></td>
+              <td set:html={t.s[77]}></td>
+              <td set:html={t.s[78]}></td>
+            </tr>
+            <tr>
+              <td><code>score_2_4</code></td>
+              <td set:html={t.s[79]}></td>
+              <td set:html={t.s[80]}></td>
+              <td set:html={t.s[81]}></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p" set:html={fill(t.s[82])}></p>
+    </div>
+
+    <!-- 6 D3 -->
+    <div class="meth-section" id="d3">
+      <div class="meth-section-num">{t.sec} 6</div>
+      <h2>{t.s[83]}</h2>
+      <h3><span class="dim-dot" style="background:#7F77DD"></span>{t.s[84]}</h3>
+      <p class="meth-p" set:html={fill(t.s[85])}></p>
+      <p class="meth-p" set:html={fill(t.s[86])}></p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>{t.s[87]}</th>
+              <th>{t.s[88]}</th>
+              <th>{t.s[89]}</th>
+              <th>{t.s[90]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>catchment_share_pct</code></td>
+              <td set:html={t.s[91]}></td>
+              <td set:html={t.s[92]}></td>
+              <td set:html={t.s[93]}></td>
+            </tr>
+            <tr>
+              <td><code>herfindahl</code></td>
+              <td set:html={t.s[94]}></td>
+              <td set:html={t.s[95]}></td>
+              <td set:html={t.s[96]}></td>
+            </tr>
+            <tr>
+              <td><code>alt_distance_km</code></td>
+              <td set:html={t.s[97]}></td>
+              <td set:html={t.s[98]}></td>
+              <td set:html={t.s[99]}></td>
+            </tr>
+            <tr>
+              <td><code>hinterland_count</code></td>
+              <td set:html={t.s[177]}></td>
+              <td set:html={t.s[178]}></td>
+              <td set:html={t.s[179]}></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p" set:html={fill(t.s[100])}></p>
+    </div>
+
+    <!-- 7 D4 -->
+    <div class="meth-section" id="d4">
+      <div class="meth-section-num">{t.sec} 7</div>
+      <h2>{t.s[101]}</h2>
+      <h3><span class="dim-dot" style="background:#D85A30"></span>{t.s[102]}</h3>
+      <p class="meth-p" set:html={fill(t.s[103])}></p>
+      <p class="meth-p" set:html={fill(t.s[104])}></p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>{t.s[105]}</th>
+              <th>{t.s[106]}</th>
+              <th>{t.s[107]}</th>
+              <th>{t.s[108]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>score_4_wgi</code></td>
+              <td set:html={t.s[109]}></td>
+              <td set:html={t.s[110]}></td>
+              <td set:html={t.s[111]}></td>
+            </tr>
+            <tr>
+              <td><code>sanctions_level</code></td>
+              <td set:html={t.s[112]}></td>
+              <td set:html={t.s[113]}></td>
+              <td set:html={t.s[114]}></td>
+            </tr>
+            <tr>
+              <td><code>dispute_level</code></td>
+              <td set:html={t.s[115]}></td>
+              <td set:html={t.s[116]}></td>
+              <td set:html={t.s[117]}></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p" set:html={fill(t.s[118])}></p>
+    </div>
+
+    <!-- 8 -->
+    <div class="meth-section" id="interpretation">
+      <div class="meth-section-num">{t.sec} 8</div>
+      <h2>{t.s[119]}</h2>
+      <p class="meth-p" set:html={fill(t.s[120])}></p>
+
+      
+
+      <p class="meth-p" set:html={fill(t.s[121])}></p>
+    </div>
+
+    <!-- 9 -->
+    <div class="meth-section" id="tiers">
+      <div class="meth-section-num">{t.sec} 9</div>
+      <h2>{t.s[122]}</h2>
+      <p class="meth-p" set:html={fill(t.s[123])}></p>
+      <p class="meth-p" set:html={fill(t.s[124])}></p>
+      <p class="meth-p" set:html={fill(t.s[125])}></p>
+      <p class="meth-p" set:html={fill(t.s[126])}></p>
+      <p class="meth-p" set:html={fill(t.s[127])}></p>
+    </div>
+
+    <!-- 10 -->
+    <div class="meth-section" id="limitations">
+      <div class="meth-section-num">{t.sec} 10</div>
+      <h2>{t.s[128]}</h2>
+      <p class="meth-p" set:html={fill(t.s[129])}></p>
+
+      <div class="meth-limits">
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body" set:html={t.s[130]}></div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body" set:html={t.s[131]}></div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body" set:html={t.s[132]}></div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body" set:html={t.s[133] + (COMMERCIAL ? ' Custom weighting is available on the Narrows platform for commercial users.' : '')}></div>
+        </div>
+        <div class="meth-limit">
+          <div class="meth-limit-icon">⚠</div>
+          <div class="meth-limit-body" set:html={t.s[134]}></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="meth-section" id="vintage">
+      <div class="meth-section-num">{t.sec} 11</div>
+      <h2>{t.s[135]}</h2>
+      <p class="meth-p" set:html={fill(t.s[136])}></p>
+
+      <div class="meth-table-wrap">
+        <table class="meth-table">
+          <thead>
+            <tr>
+              <th>{t.s[137]}</th>
+              <th>{t.s[138]}</th>
+              <th>{t.s[139]}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td set:html={t.s[140]}></td>
+              <td set:html={t.s[141]}></td>
+              <td set:html={t.s[142]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[143]}></td>
+              <td set:html={t.s[144]}></td>
+              <td set:html={t.s[145]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[146]}></td>
+              <td set:html={t.s[147]}></td>
+              <td set:html={t.s[148]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[149]}></td>
+              <td set:html={t.s[150]}></td>
+              <td set:html={t.s[151]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[152]}></td>
+              <td set:html={t.s[153]}></td>
+              <td set:html={t.s[154]}></td>
+            </tr>
+                        <tr>
+              <td set:html={t.s[180]}></td>
+              <td set:html={t.s[181]}></td>
+              <td set:html={t.s[182]}></td>
+            </tr>
+<tr>
+              <td set:html={t.s[155]}></td>
+              <td set:html={t.s[156]}></td>
+              <td set:html={t.s[157]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[158]}></td>
+              <td set:html={t.s[159]}></td>
+              <td set:html={t.s[160]}></td>
+            </tr>
+            <tr>
+              <td set:html={t.s[161]}></td>
+              <td set:html={t.s[162]}></td>
+              <td set:html={t.s[163]}></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="meth-p" set:html={localizeHtml(lang, fill(t.s[164]))}></p>
+
+      <a href={lp(lang, '/pri')} class="btn-ghost" style="display:inline-block;margin-top:var(--s3)" set:html={t.s[165]}></a>
+    </div>
+
+
+    {COMMERCIAL && (
+    <Fragment>
+    <!-- 12 -->
+    <div class="meth-section" id="charter-bleed">
+      <div class="meth-section-num">{t.sec} 12</div>
+      <h2>{t.s[166]}</h2>
+      <p class="meth-p" set:html={fill(t.s[167])}></p>
+      <div class="meth-formula">
+        <span class="formula-label">{t.s[168]}</span>
+        charter_bleed_usd = (dwell_hours / 24) &times; charterPerDay<br><br>
+        total_idle_usd    = (dwell_hours / 24) &times; (charterPerDay + bunkerPerDay)
+      </div>
+      <p class="meth-p" set:html={fill(t.s[169])}></p>
+      <p class="meth-p" set:html={fill(t.s[170])}></p>
+      <p class="meth-p" set:html={fill(t.s[171])}></p>
+      <p class="meth-p" set:html={fill(t.s[172])}></p>
+    </div>
+
+    </Fragment>
+    )}
+
+    <!-- 13 -->
+    <div class="meth-section" id="cppi">
+      <div class="meth-section-num">{t.sec} {COMMERCIAL ? 13 : 12}</div>
+      <h2>{t.s[173]}</h2>
+      <p class="meth-p" set:html={fill(t.s[174])}></p>
+      <p class="meth-p" set:html={fill(t.s[175])}></p>
+      <p class="meth-p" set:html={fill(t.s[176])}></p>
+    </div>
+
+  </div><!-- end content -->
+</div><!-- end meth-body -->
+</BaseLayout>
