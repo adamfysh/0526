@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "check:i18n": "node scripts/check-i18n.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

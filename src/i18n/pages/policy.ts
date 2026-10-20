@@ -15,7 +15,7 @@ const en = {
       { label: 'Data tiers', value: '3', unit: 'tiers' },
       { label: 'Reported-tier exposure', value: '48.0', unit: '% of value' },
       { label: 'Dependency matrix rows', value: '1,812', unit: 'rows' },
-      { label: 'Corrections logged', value: '19', unit: 'as of Oct 2026' },
+      { label: 'Corrections logged', value: '19', unit: 'as of 8 Oct 2026' },
     ],
   },
   purpose: {
