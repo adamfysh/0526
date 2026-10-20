@@ -30,7 +30,7 @@ const en = {
   work: {
     eyebrow: 'The work',
     title: 'Research, tools and one data foundation.',
-    lead: 'Everything here is built on the same underlying Chokepoint Dependency Model: 37 maritime risk corridors, $2.15 trillion in matched trade value, 44 importing countries, and 17 commodity classes.',
+    lead: 'Everything here is built on the same underlying Chokepoint Dependency Model: 14 chokepoints, 75 importing countries, and 20 commodity groups.',
     validationHtml:
       'For a look at how the model has held up against real disruption, not just a forward claim, read <a href="/analysis/model-validation-2024">We Built the Model on 2023 Data. Then 2024 Happened.</a>, a systematic account of what the model predicted against what actually occurred through the Red Sea and Panama disruptions.',
   },
@@ -95,7 +95,7 @@ const fr: typeof en = {
   work: {
     eyebrow: 'Le travail',
     title: 'Des recherches, des outils et un socle de données commun.',
-    lead: `Tout repose sur un même modèle de fond, le Chokepoint Dependency Model${nb}: 37 corridors maritimes à risque, 2${nb}150 milliards de dollars d’échanges appariés, 44 pays importateurs et 17 classes de produits.`,
+    lead: `Tout repose sur un même modèle de fond, le Chokepoint Dependency Model${nb}: 14 points de passage obligés, 75 pays importateurs et 20 groupes de produits.`,
     validationHtml:
       'Pour voir comment le modèle a résisté à de véritables perturbations, et pas seulement à une affirmation tournée vers l’avenir, lisez <a href="/analysis/model-validation-2024">We Built the Model on 2023 Data. Then 2024 Happened.</a> (en anglais), un compte rendu systématique de ce que le modèle avait prévu au regard de ce qui s’est réellement produit lors des perturbations en mer Rouge et à Panama.',
   },

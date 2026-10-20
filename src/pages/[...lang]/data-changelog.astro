@@ -1,0 +1,436 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
+import { changelog } from '../../i18n/pages/changelog';
+import { dataTiers } from '../../i18n/pages/dataTiers';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = changelog[lang];
+const tiers = dataTiers[lang];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+>
+
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s5);
+  border-bottom: 3px solid var(--gold);
+}
+.page-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: end;
+}
+.page-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s3);
+}
+.page-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.page-hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  max-width: 560px;
+}
+
+.hero-coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.hero-cov-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.hero-cov-item:last-child { border-bottom: none; }
+.hero-cov-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.hero-cov-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.hero-cov-value span {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  margin-left: 3px;
+}
+
+/* ── CONTENT ── */
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+}
+.content-section {
+  padding-top: var(--s5);
+  border-top: var(--rule-light);
+  margin-top: var(--s5);
+}
+.content-section:first-child { border-top: none; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.section-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.section-heading {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.text-body {
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-bottom: var(--s3);
+}
+.text-body p { margin-bottom: var(--s2); }
+.text-body p:last-child { margin-bottom: 0; }
+.text-body strong { color: var(--text-primary); font-weight: 500; }
+
+.pullquote {
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--navy);
+  padding: var(--s3) 0 var(--s3) var(--s3);
+  border-left: 2px solid var(--gold);
+  margin: var(--s4) 0;
+  max-width: 580px;
+}
+
+/* ── DATED CORRECTION GROUPS ── */
+.correction-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: var(--s4) 0 var(--s2);
+}
+.correction-date:first-child { margin-top: 0; }
+
+/* Reuses the site's limitation-item pattern for individual correction entries */
+.limitation-list { margin: var(--s3) 0; }
+.limitation-item {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: var(--s2);
+  padding: 14px 0;
+  border-bottom: var(--rule-light);
+  align-items: baseline;
+}
+.limitation-item:first-child { border-top: var(--rule-light); }
+.limitation-bullet {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 1px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+.limitation-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.limitation-text strong { font-weight: 600; color: var(--text-primary); }
+
+/* ── TIER COVERAGE BARS ── */
+.country-table { margin: var(--s3) 0; }
+.country-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 70px 70px;
+  align-items: center;
+  padding: 10px var(--s3);
+  border-bottom: var(--rule-light);
+  background: var(--white);
+  gap: var(--s2);
+}
+.country-row:first-child { border-top: var(--rule-light); }
+.country-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.country-bar-wrap { background: var(--surface); border-radius: 2px; height: 5px; }
+.country-bar { height: 5px; background: var(--gold); border-radius: 2px; }
+.country-val { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; }
+.country-val-label { font-size: 10px; font-weight: 400; color: var(--text-tertiary); text-align: right; }
+.country-note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  font-family: var(--font-body);
+  margin-top: var(--s2);
+  font-style: italic;
+}
+
+/* ── ACCESS / NDA ── */
+.access-section {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+  margin-top: var(--s6);
+}
+.access-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+.access-title {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.access-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.access-body {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  max-width: 520px;
+}
+.access-body strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+.access-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  min-width: 260px;
+}
+.access-form { display: flex; flex-direction: column; gap: var(--s1); }
+.access-input {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.access-input::placeholder { color: rgba(255,255,255,0.25); }
+.access-input:focus { border-color: var(--gold); }
+.access-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-coverage { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .access-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .access-right { min-width: unset; }
+}
+@media (max-width: 700px) {
+  .country-row { grid-template-columns: 100px 1fr 50px; }
+  .country-val-label { display: none; }
+  .hero-coverage { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="eyebrow">{t.hero.eyebrow}</div>
+      <h1 class="page-hero-title" set:html={t.hero.titleHtml}></h1>
+      <p class="page-hero-sub">
+        {t.hero.sub}
+      </p>
+    </div>
+    <div class="hero-coverage">
+      {t.hero.cov.map((c) => (
+        <div class="hero-cov-item">
+          <span class="hero-cov-label">{c.label}</span>
+          <span class="hero-cov-value">{c.value}<span>{c.unit}</span></span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <section class="content-section" style="border-top:none;padding-top:var(--s5);">
+    <div class="section-eyebrow">{t.about.eyebrow}</div>
+    <h2 class="section-heading">{COMMERCIAL ? "The public summary. The full technical record is available under NDA." : t.about.title}</h2>
+    <div class="text-body">
+      <p>{t.about.p}</p>
+      {COMMERCIAL && <p>A fuller technical writeup for each correction, including root cause detail and verification methodology, is available to serious prospects under a non disclosure agreement. See the request form at the bottom of this page.</p>}
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">{t.process.eyebrow}</div>
+    <h2 class="section-heading">{t.process.title}</h2>
+    <div class="text-body">
+      <p set:html={localizeHtml(lang, t.process.html)}></p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">{t.corrections.eyebrow}</div>
+    <h2 class="section-heading">{t.corrections.title}</h2>
+
+    {t.entries.map((e) => (
+      <Fragment>
+        <div class="correction-date">{e.date}</div>
+        <div class="limitation-list">
+          {e.items.map((item) => (
+            <div class="limitation-item">
+              <div class="limitation-bullet"></div>
+              <div class="limitation-text" set:html={item}></div>
+            </div>
+          ))}
+        </div>
+      </Fragment>
+    ))}
+
+    <div class="pullquote">
+      {t.earlier.quote}
+    </div>
+    <div class="text-body">
+      <p>{t.earlier.p} {COMMERCIAL ? 'Until that work is complete, the full internal history for any period is available to serious prospects under a non disclosure agreement, on the same terms as the technical detail behind the entries above.' : t.earlier.tail}</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">{tiers.sectionEyebrow}</div>
+    <h2 class="section-heading">{t.coverage.title}</h2>
+    <div class="text-body">
+      <p>{t.coverage.p}</p>
+    </div>
+    <div class="country-table">
+      {tiers.bars.map((b) => (
+        <div class="country-row">
+          <div class="country-name">{b.name}</div>
+          <div class="country-bar-wrap"><div class="country-bar" style={`width:${b.width}%`}></div></div>
+          <div class="country-val">{b.val}</div>
+          <div class="country-val-label">{tiers.ofValue}</div>
+        </div>
+      ))}
+    </div>
+    <div class="country-note">{tiers.rowNote} {t.coverage.noteTail}</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-eyebrow">{t.scope.eyebrow}</div>
+    <h2 class="section-heading">{t.scope.title}</h2>
+    <div class="text-body">
+      <p>{t.scope.p} {COMMERCIAL ? 'That level of detail, including exact root cause and code level verification steps, is available under non disclosure agreement on request, and is the kind of material we expect a data as liability buyer, an ESG platform, a reinsurer, or a port financier, to reasonably want before relying on our figures in their own work.' : t.scope.tail}</p>
+    </div>
+  </section>
+
+</div><!-- end content-wrap -->
+
+{COMMERCIAL ? (
+<Fragment>
+<!-- ACCESS / NDA SECTION -->
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">The full correction record is available<br><em>under NDA</em> for serious counterparties.</h2>
+      <p class="access-body">This page describes every correction at a level sufficient to judge our process. <strong>The full technical record</strong>, including root cause detail, exact verification steps, and our complete pre-July engineering history, is available on request to qualified counterparties under a standard NDA. Request it and we will send the record before the call.</p>
+    </div>
+    <div class="access-right">
+      <div class="access-form">
+        <input type="email" class="access-input" placeholder="your@organisation.com" id="changelog-email" />
+        <button class="btn btn-gold" id="changelog-btn" style="width:100%">Request the full record</button>
+      </div>
+      <span class="access-note">fysh@narrows.io · A person will reply.</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+function handleChangelogRequest() {
+  const input = document.getElementById('changelog-email');
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(192,57,43,0.8)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1600);
+    return;
+  }
+  window.location.href = `mailto:fysh@narrows.io?subject=Full correction record request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
+}
+document.getElementById('changelog-btn')?.addEventListener('click', handleChangelogRequest);
+document.getElementById('changelog-email')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') handleChangelogRequest();
+});
+</script>
+</Fragment>
+) : (
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">{t.contact.title}</h2>
+      <p class="access-body">{t.contact.body}</p>
+    </div>
+    <div class="access-right">
+      <span class="access-note">fysh@narrows.io</span>
+    </div>
+  </div>
+</div>
+)}
+
+</BaseLayout>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { COMMERCIAL } from '../../config';
-import { langPaths, getLang, lp } from '../../i18n';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
 import { home } from '../../i18n/pages/home';
 
 export function getStaticPaths() {
@@ -11,9 +11,9 @@ export function getStaticPaths() {
 const lang = getLang(Astro.params.lang);
 const t = home[lang];
 const dimColors = ['#378ADD', '#EF9F27', '#7F77DD', '#D85A30'];
-const dimScores = ['0.52', '4.33', '3.38', '0.70'];
-const dimFill = ['5.2%', '43.3%', '33.8%', '7%'];
-const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
+const dimScores = ['0.20', '4.36', '4.63', '0.37'];
+const dimFill = ['2%', '43.6%', '46.3%', '3.7%'];
+const dimScoresFr = ['0,20', '4,36', '4,63', '0,37'];
 ---
 
 <BaseLayout
@@ -656,7 +656,7 @@ const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
   <div class="cdm-inner">
     <div class="cdm-label">{t.cdm.label}</div>
     <p class="cdm-text">
-      <Fragment set:html={t.cdm.html} />
+      <Fragment set:html={localizeHtml(lang, t.cdm.html)} />
       {COMMERCIAL ? 'The CDM is available directly to institutional and analytical clients.' : t.cdm.tail}
     </p>
   </div>
@@ -827,7 +827,7 @@ const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
 <section class="pri-section">
   <div class="pri-inner">
     <div class="pri-header fade-up">
-      <h2 class="pri-title" set:html={t.pri.titleHtml}></h2>
+      <h2 class="pri-title" set:html={localizeHtml(lang, t.pri.titleHtml)}></h2>
       <p class="pri-lead">{t.pri.lead}</p>
     </div>
 
@@ -851,7 +851,7 @@ const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
         </div>
         <div class="pri-port-badge">
           <span class="pri-port-badge-label">{t.pri.badge}</span>
-          <span class="pri-port-badge-score">{lang === 'fr' ? '1,52' : '1.52'}</span>
+          <span class="pri-port-badge-score">{lang === 'fr' ? '1,10' : '1.10'}</span>
         </div>
       </div>
       <div class="pri-dim-grid">
@@ -876,14 +876,14 @@ const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
           </tbody>
         </table>
         <div class="pri-blur-overlay">
-          <span class="pri-blur-msg">{COMMERCIAL ? '3,772 more ports · open the full index free' : t.pri.overlay}</span>
+          <span class="pri-blur-msg">{COMMERCIAL ? '3,770 more ports · open the full index free' : t.pri.overlay}</span>
         </div>
       </div>
     </div>
 
     <div class="pri-open-cta fade-up">
       <a href={lp(lang, '/pri')} class="btn btn-gold">{t.pri.cta}</a>
-      <span class="pri-open-note">{COMMERCIAL ? '3,778 ports · free · no login required' : t.pri.note}</span>
+      <span class="pri-open-note">{COMMERCIAL ? '3,774 ports · free · no login required' : t.pri.note}</span>
     </div>
   </div>
 </section>

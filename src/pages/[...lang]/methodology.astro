@@ -1,0 +1,652 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
+import { methodology } from '../../i18n/pages/methodology';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = methodology[lang];
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.title}
+  description={COMMERCIAL ? "How the Narrows trade risk model works. Written for risk professionals who want to understand what is under the hood before a conversation." : t.description}
+>
+
+<style>
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s5);
+  border-bottom: 3px solid var(--gold);
+}
+.page-hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: end;
+}
+.page-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s3);
+}
+.page-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.page-hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  max-width: 560px;
+}
+
+/* Coverage numbers in hero */
+.hero-coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.hero-cov-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.hero-cov-item:last-child { border-bottom: none; }
+.hero-cov-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.hero-cov-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.hero-cov-value span {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  margin-left: 3px;
+}
+
+/* ── CONTENT ── */
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--s4) var(--s6);
+}
+.content-section {
+  padding-top: var(--s5);
+  border-top: var(--rule-light);
+  margin-top: var(--s5);
+}
+.content-section:first-child { border-top: none; }
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.section-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.section-heading {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.text-body {
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-bottom: var(--s3);
+}
+.text-body p { margin-bottom: var(--s2); }
+.text-body p:last-child { margin-bottom: 0; }
+.text-body strong { color: var(--text-primary); font-weight: 500; }
+
+/* Pullquote */
+.pullquote {
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--navy);
+  padding: var(--s3) 0 var(--s3) var(--s3);
+  border-left: 2px solid var(--gold);
+  margin: var(--s4) 0;
+  max-width: 580px;
+}
+
+/* ── PIPELINE ── */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 2px solid var(--navy);
+  border-bottom: 2px solid var(--navy);
+  margin: var(--s3) 0 var(--s4);
+}
+.pipeline-step {
+  padding: var(--s3) var(--s2) var(--s3) 0;
+  border-right: var(--rule-light);
+}
+.pipeline-step:last-child { border-right: none; }
+.pipeline-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.pipeline-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.pipeline-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+
+/* ── OUTPUTS ── */
+.outputs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  margin: var(--s3) 0;
+}
+.output-card {
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+}
+.output-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.output-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: var(--s2);
+  line-height: 1.2;
+}
+.output-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  margin-bottom: var(--s2);
+}
+.output-eg {
+  font-size: 11px;
+  color: var(--blue);
+  background: var(--blue-pale);
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 1.55;
+}
+.output-eg strong {
+  color: var(--navy);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ── SAMPLE OUTPUT ── */
+.sample-header {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s3);
+}
+.sample-params {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin-bottom: var(--s4);
+}
+.sample-param {
+  padding: var(--s2) var(--s3);
+  background: var(--white);
+  border: var(--rule-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+.sample-param-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.sample-param-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+.result-card {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+}
+.result-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.result-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.result-unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-left: 3px;
+}
+.result-note {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  font-family: var(--font-body);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Country bars */
+.country-table { margin: var(--s3) 0; }
+.country-row {
+  display: grid;
+  grid-template-columns: 120px 180px 1fr 70px;
+  align-items: center;
+  padding: 10px var(--s3);
+  border-bottom: var(--rule-light);
+  background: var(--white);
+  gap: var(--s2);
+}
+.country-row:first-child { border-top: var(--rule-light); }
+.country-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.country-dep { font-size: 12px; color: var(--text-secondary); font-weight: 400; font-family: var(--font-body); }
+.country-bar-wrap { background: var(--surface); border-radius: 2px; height: 5px; }
+.country-bar { height: 5px; background: var(--gold); border-radius: 2px; }
+.country-val { font-size: 14px; font-weight: 700; color: var(--navy); text-align: right; }
+.country-note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  font-family: var(--font-body);
+  margin-top: var(--s2);
+  font-style: italic;
+}
+
+/* ── LIMITATIONS ── */
+.limitation-list { margin: var(--s3) 0; }
+.limitation-item {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: var(--s2);
+  padding: 14px 0;
+  border-bottom: var(--rule-light);
+  align-items: baseline;
+}
+.limitation-item:first-child { border-top: var(--rule-light); }
+.limitation-bullet {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 1px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+.limitation-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.limitation-text strong { font-weight: 600; color: var(--text-primary); }
+
+/* ── ACCESS / NDA ── */
+.access-section {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+  margin-top: var(--s6);
+}
+.access-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+.access-title {
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s2);
+}
+.access-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.access-body {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  max-width: 520px;
+}
+.access-body strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+.access-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  min-width: 260px;
+}
+.access-form { display: flex; flex-direction: column; gap: var(--s1); }
+.access-input {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--white);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.access-input::placeholder { color: rgba(255,255,255,0.25); }
+.access-input:focus { border-color: var(--gold); }
+.access-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1000px) {
+  .page-hero-inner { grid-template-columns: 1fr; }
+  .hero-coverage { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .pipeline { grid-template-columns: 1fr 1fr; }
+  .pipeline-step { border-bottom: var(--rule-light); }
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+  .access-inner { grid-template-columns: 1fr; gap: var(--s4); }
+  .access-right { min-width: unset; }
+}
+@media (max-width: 700px) {
+  .outputs-grid { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: 1fr; }
+  .country-row { grid-template-columns: 100px 1fr 50px; }
+  .country-dep { display: none; }
+  .results-grid { grid-template-columns: 1fr; }
+  .hero-coverage { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="eyebrow">{t.hero.eyebrow}</div>
+      <h1 class="page-hero-title" set:html={t.hero.titleHtml}></h1>
+      <p class="page-hero-sub">
+        {t.hero.sub}
+      </p>
+    </div>
+    <div class="hero-coverage">
+      {t.hero.cov.map((c) => (
+        <div class="hero-cov-item">
+          <span class="hero-cov-label">{c.label}</span>
+          <span class="hero-cov-value">{c.value}<span>{c.unit}</span></span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- WHAT IT IS -->
+  <section class="content-section" style="border-top:none;padding-top:var(--s5);">
+    <div class="section-eyebrow">{t.what.eyebrow}</div>
+    <h2 class="section-heading">{t.what.title}</h2>
+    <div class="text-body">
+      <p>{t.what.p1}</p>
+      <p>{t.what.p2}</p>
+      <p>{t.what.p3}</p>
+    </div>
+    <div class="pullquote">
+      {t.what.quote}
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section class="content-section">
+    <div class="section-eyebrow">{t.pipeline.eyebrow}</div>
+    <h2 class="section-heading">{t.pipeline.title}</h2>
+    <div class="text-body">
+      <p>{t.pipeline.intro}</p>
+    </div>
+    <div class="pipeline">
+      {t.pipeline.steps.map(([title, desc], i) => (
+        <div class="pipeline-step">
+          <div class="pipeline-num">{String(i + 1).padStart(2, '0')}</div>
+          <div class="pipeline-title">{title}</div>
+          <div class="pipeline-desc">{desc}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- THREE OUTPUTS -->
+  <section class="content-section">
+    <div class="section-eyebrow">{t.outputs.eyebrow}</div>
+    <h2 class="section-heading">{t.outputs.title}</h2>
+    <div class="text-body">
+      <p>{t.outputs.intro}</p>
+    </div>
+    <div class="outputs-grid">
+      {t.outputs.cards.map((c, i) => (
+        <div class="output-card fade-up">
+          <div class="output-num">{t.outputs.label} {String(i + 1).padStart(2, '0')}</div>
+          <div class="output-title">{c.title}</div>
+          <p class="output-desc">{c.desc}</p>
+          <div class="output-eg">
+            <strong>{c.egTitle}</strong>
+            {c.egBody}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- SAMPLE OUTPUT -->
+  <section class="content-section">
+    <div class="section-eyebrow">{t.sample.eyebrow}</div>
+    <h2 class="section-heading">{t.sample.title}</h2>
+    <div class="text-body">
+      <p>{t.sample.intro} {COMMERCIAL ? 'All can be substituted in a demo session.' : t.sample.introTail}</p>
+    </div>
+    <div class="sample-params">
+      {t.sample.params.map(([label, value]) => (
+        <div class="sample-param"><div class="sample-param-label">{label}</div><div class="sample-param-value">{value}</div></div>
+      ))}
+    </div>
+    <div class="results-grid fade-up">
+      {t.sample.results.map((r) => (
+        <div class="result-card">
+          <div class="result-label">{r.label}</div>
+          <div class="result-value">{r.value}<span class="result-unit">{r.unit}</span></div>
+          <div class="result-note">{r.note}</div>
+        </div>
+      ))}
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:var(--s2);letter-spacing:-0.01em;">{t.sample.tableTitle}</h3>
+    <p style="font-size:13px;color:var(--text-secondary);font-weight:400;font-family:var(--font-body);margin-bottom:var(--s2);line-height:1.5;">{t.sample.tableNote}</p>
+    <div class="country-table">
+      {t.sample.countries.map((c) => (
+        <div class="country-row">
+          <div class="country-name">{c.name}</div>
+          <div class="country-dep">{c.dep}{lang === 'fr' ? '\u00a0%' : '%'} {t.sample.viaLabel}</div>
+          <div class="country-bar-wrap"><div class="country-bar" style={`width:${c.dep}%`}></div></div>
+          <div class="country-val">{c.val}</div>
+        </div>
+      ))}
+    </div>
+    <p class="country-note">{t.sample.countryNote}</p>
+  </section>
+
+  <!-- VALIDATION -->
+  <section class="content-section">
+    <div class="section-eyebrow">{t.validation.eyebrow}</div>
+    <h2 class="section-heading">{t.validation.title}</h2>
+    <div class="text-body">
+      <p>{t.validation.intro}</p>
+    </div>
+    <div class="outputs-grid" style="margin-top:var(--s3);">
+      {t.validation.sources.map(([title, desc], i) => (
+        <div class="output-card">
+          <div class="output-num">{t.validation.sourceLabel} {String(i + 1).padStart(2, '0')}</div>
+          <div class="output-title">{title}</div>
+          <p class="output-desc">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- LIMITATIONS -->
+  <section class="content-section">
+    <div class="section-eyebrow">{t.limits.eyebrow}</div>
+    <h2 class="section-heading">{t.limits.title}</h2>
+    <div class="text-body">
+      <p>{t.limits.intro}</p>
+    </div>
+    <div class="limitation-list">
+      {t.limits.items.map((html) => (
+        <div class="limitation-item">
+          <div class="limitation-bullet"></div>
+          <div class="limitation-text" set:html={html}></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</div><!-- end content-wrap -->
+
+{COMMERCIAL ? (
+<Fragment>
+<!-- ACCESS / NDA SECTION -->
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">Full documentation is available<br><em>under NDA</em> for serious counterparties.</h2>
+      <p class="access-body">This page describes the model at a level sufficient to evaluate its credibility and fit. <strong>Full documentation</strong>, including corridor definitions, the complete dependency matrix, simulation API specification, and integration notes, is available on request to qualified counterparties under a standard NDA. Request a demo and we will send the documentation pack before the call.</p>
+    </div>
+    <div class="access-right">
+      <div class="access-form">
+        <input type="email" class="access-input" placeholder="your@organisation.com" id="method-email" />
+        <button class="btn btn-gold" id="method-btn" style="width:100%">Request documentation</button>
+      </div>
+      <span class="access-note">fysh@narrows.io · A person will reply.</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+function handleMethodRequest() {
+  const input = document.getElementById('method-email');
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(192,57,43,0.8)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1600);
+    return;
+  }
+  window.location.href = `mailto:fysh@narrows.io?subject=Methodology documentation request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
+}
+document.getElementById('method-btn')?.addEventListener('click', handleMethodRequest);
+document.getElementById('method-email')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') handleMethodRequest();
+});
+</script>
+</Fragment>
+) : (
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">{t.contact.title}</h2>
+      <p class="access-body">{t.contact.body}</p>
+    </div>
+    <div class="access-right">
+      <span class="access-note">fysh@narrows.io</span>
+    </div>
+  </div>
+</div>
+)}
+
+</BaseLayout>

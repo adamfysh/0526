@@ -8,6 +8,9 @@ export const LANGS: Lang[] = ['en', 'fr'];
 export const TRANSLATED_PATHS = new Set<string>([
   '/',
   '/about',
+  '/methodology',
+  '/data-verification-policy',
+  '/data-changelog',
 ]);
 
 // Used by every [...lang] page: generates / and /fr/ variants.
@@ -46,4 +49,11 @@ export function altPath(lang: Lang, pathname: string): string | null {
   const base = basePath(pathname);
   if (lang === 'fr') return base;
   return TRANSLATED_PATHS.has(base) ? (base === '/' ? '/fr/' : '/fr' + base) : null;
+}
+
+// Rewrite internal href="/..." links inside an HTML string so French pages
+// link to French pages wherever a translation exists.
+export function localizeHtml(lang: Lang, html: string): string {
+  if (lang === 'en') return html;
+  return html.replace(/href="(\/[^"]*)"/g, (_m, path) => `href="${lp(lang, path)}"`);
 }

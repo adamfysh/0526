@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { COMMERCIAL } from '../../config';
-import { langPaths, getLang, lp } from '../../i18n';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
 import { about } from '../../i18n/pages/about';
 import { home } from '../../i18n/pages/home';
 
@@ -296,8 +296,8 @@ const h = home[lang].products;
       <span style="background:var(--gold);width:16px;height:2px;display:inline-block;margin-right:8px;vertical-align:middle;flex-shrink:0;"></span>
       {t.hero.eyebrow}
     </div>
-    <h1 class="about-hero-title" set:html={t.hero.titleHtml}></h1>
-    <p class="about-hero-body" set:html={t.hero.bodyHtml}></p>
+    <h1 class="about-hero-title" set:html={localizeHtml(lang, t.hero.titleHtml)}></h1>
+    <p class="about-hero-body" set:html={localizeHtml(lang, t.hero.bodyHtml)}></p>
   </div>
 </div>
 
@@ -310,7 +310,7 @@ const h = home[lang].products;
     <div class="about-body">
       <p>{t.premise.p1}</p>
       <p>{t.premise.p2}</p>
-      <p set:html={t.premise.p3Html}></p>
+      <p set:html={localizeHtml(lang, t.premise.p3Html)}></p>
     </div>
   </div>
 
@@ -382,7 +382,7 @@ const h = home[lang].products;
       )}
     </div>
     <div class="about-body" style="margin-top: var(--s3);">
-      <p style="font-size:14px;" set:html={t.work.validationHtml}></p>
+      <p style="font-size:14px;" set:html={localizeHtml(lang, t.work.validationHtml)}></p>
     </div>
   </div>
 
@@ -400,7 +400,7 @@ const h = home[lang].products;
       </div>
       <div class="principle-item">
         <div class="principle-mark"></div>
-        <div class="principle-text" set:html={t.how.principles[1]}></div>
+        <div class="principle-text" set:html={localizeHtml(lang, t.how.principles[1])}></div>
       </div>
       <div class="principle-item">
         <div class="principle-mark"></div>
@@ -423,7 +423,7 @@ const h = home[lang].products;
         <img src="/founder.jpg" alt={COMMERCIAL ? "Adam Fysh, Founder, Narrows" : t.who.alt} />
       </div>
       <div class="about-body">
-        <p set:html={t.who.p1Html}></p>
+        <p set:html={localizeHtml(lang, t.who.p1Html)}></p>
         <p>{t.who.p2}</p>
         <p>{t.who.p3}</p>
       </div>
@@ -448,7 +448,7 @@ const h = home[lang].products;
 <!-- CTA -->
 <div class="about-cta">
   <div class="about-cta-inner">
-    <div class="about-cta-text" set:html={t.cta.html}></div>
+    <div class="about-cta-text" set:html={localizeHtml(lang, t.cta.html)}></div>
     {COMMERCIAL && <a href="mailto:fysh@narrows.io?subject=Demo request: The Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>}
   </div>
 </div>
