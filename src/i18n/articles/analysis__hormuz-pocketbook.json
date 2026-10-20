@@ -1,0 +1,294 @@
+{
+ "path": "analysis/hormuz-pocketbook",
+ "meta": {
+  "title": "Narrows — Du détroit d’Ormuz au porte-monnaie des consommateurs",
+  "description": "Cinq gouvernements sont intervenus sur leur marché des carburants, à des degrés et de manières différents. Les données de dépendance bilatérale envers Ormuz du CDM de Narrows prédisent presque tout, sauf dans le seul pays où le prix à la pompe bouge malgré tout."
+ },
+ "pairs": [
+  [
+   "Analysis · Strait of Hormuz · 15 October 2026",
+   "Analyse · Détroit d’Ormuz · 15 octobre 2026"
+  ],
+  [
+   "From the Strait of Hormuz to the pocketbooks of consumers",
+   "Du détroit d’Ormuz au porte-monnaie des consommateurs"
+  ],
+  [
+   "Five governments have intervened in their own fuel markets to different degrees, in different ways. The bilateral Hormuz dependency data in the Narrows CDM predicts almost all of it, except the one country where the pump price moves anyway.",
+   "Cinq gouvernements sont intervenus sur leur marché des carburants, à des degrés et de manières différents. Les données de dépendance bilatérale envers Ormuz du CDM de Narrows prédisent presque tout, sauf dans le seul pays où le prix à la pompe bouge malgré tout."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Adam Fysh, Founder, The Narrows</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">October 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">7 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Adam Fysh, fondateur, The Narrows</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">octobre 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">7 min de lecture</span>"
+  ],
+  [
+   "Hormuz disruption",
+   "Perturbation d’Ormuz"
+  ],
+  [
+   "8 months",
+   "8 mois"
+  ],
+  [
+   "Sustained, not a new shock",
+   "Un état durable, pas un nouveau choc"
+  ],
+  [
+   "Combined crude exposure",
+   "Exposition combinée en brut"
+  ],
+  [
+   "Japan, Korea, NZ, Australia, Thailand",
+   "Japon, Corée, Nouvelle-Zélande, Australie, Thaïlande"
+  ],
+  [
+   "Governments intervening directly",
+   "Gouvernements intervenant directement"
+  ],
+  [
+   "Reserves, price caps, or excise cuts",
+   "Réserves, plafonds de prix ou baisses d’accises"
+  ],
+  [
+   "Eight months ago, Iran and the United States went to war, and the Strait of Hormuz has been substantially closed, mined, or under direct attack ever since. The Black Sea has been a live shipping hazard for longer than that. This is now not just about war risk premiums and tanker schedules; it's affecting public policy and customer behaviour.",
+   "Il y a huit mois, l’Iran et les États-Unis sont entrés en guerre, et le détroit d’Ormuz est depuis largement fermé, miné ou directement attaqué. La mer Noire est un danger réel pour la navigation depuis plus longtemps encore. Il ne s’agit plus seulement de primes de risque de guerre et de calendriers de pétroliers : cela touche les politiques publiques et le comportement des consommateurs."
+  ],
+  [
+   "Some countries are releasing national strategic reserves to contain prices, offering emergency tax cuts, price caps supported by government funds and advice for consumers to stock up.",
+   "Certains pays libèrent leurs réserves stratégiques nationales pour contenir les prix, proposent des baisses d’impôts d’urgence, des plafonds de prix soutenus par des fonds publics et conseillent aux consommateurs de faire des stocks."
+  ],
+  [
+   "The relative exposure from the Narrows Chokepoint Dependency Monitor testifies to the urgency each government has demonstrated in intervening to keep that exposure from reaching ordinary people. The size of that intervention tracks pretty well with the bilateral Hormuz dependency figures in our model. The countries fretting the most have the most to lose.",
+   "L’exposition relative mesurée par le Chokepoint Dependency Monitor de Narrows témoigne de l’urgence avec laquelle chaque gouvernement est intervenu pour empêcher cette exposition d’atteindre les gens ordinaires. L’ampleur de l’intervention suit assez bien les chiffres de dépendance bilatérale envers Ormuz de notre modèle. Les pays les plus inquiets sont ceux qui ont le plus à perdre."
+  ],
+  [
+   "Informal roadside fuel retail, Thailand. Photo: Colin and Sarah Northway.",
+   "Vente informelle de carburant en bord de route, Thaïlande. Photo : Colin et Sarah Northway."
+  ],
+  [
+   "Japan's government has leaned on this harder than almost anyone. In March, Tokyo made its first release of state oil reserves in four years, followed by a second release in April. The trade ministry has since convened panels on subsidising alternative shipping routes to avoid Hormuz. By August, the Takaichi government was burning through reserve funds specifically to hold the nationwide pump price near 170 yen per litre. Japan's CDM figure explains the urgency: 79.1 percent of its crude imports depend on Hormuz, the highest of any major importer, worth 56.8 billion dollars a year in exposure.",
+   "Le gouvernement japonais s’est appuyé sur ce levier plus que presque tout autre. En mars, Tokyo a procédé à sa première libération de réserves pétrolières d’État en quatre ans, suivie d’une seconde en avril. Le ministère du Commerce a depuis réuni des groupes de travail sur la subvention de routes maritimes alternatives évitant Ormuz. En août, le gouvernement Takaichi puisait dans les fonds de réserve précisément pour maintenir le prix à la pompe national près de 170 yens le litre. Le chiffre du CDM pour le Japon explique cette urgence : 79,1 % de ses importations de brut dépendent d’Ormuz, la proportion la plus élevée de tous les grands importateurs, soit 56,8 milliards de dollars d’exposition par an."
+  ],
+  [
+   "The percentage is what hurts, not the dollar total",
+   "C’est le pourcentage qui fait mal, pas le total en dollars"
+  ],
+  [
+   "Hormuz dependency by commodity, percent of import value, five markets",
+   "Dépendance envers Ormuz par produit, en pourcentage de la valeur importée, cinq marchés"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--blue)\"></span>Crude oil (Hormuz)",
+   "<span class=\"viz-swatch\" style=\"background:var(--blue)\"></span>Pétrole brut (Ormuz)"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--gold)\"></span>Fertiliser (Hormuz)",
+   "<span class=\"viz-swatch\" style=\"background:var(--gold)\"></span>Engrais (Ormuz)"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--gold-dark)\"></span>Fertiliser, + Oman (outside Hormuz)",
+   "<span class=\"viz-swatch\" style=\"background:var(--gold-dark)\"></span>Engrais, + Oman (hors Ormuz)"
+  ],
+  [
+   "DEPENDENCY, PERCENT OF IMPORT VALUE",
+   "DÉPENDANCE, EN POURCENTAGE DE LA VALEUR IMPORTÉE"
+  ],
+  [
+   "Japan",
+   "Japon"
+  ],
+  [
+   "Korea",
+   "Corée"
+  ],
+  [
+   "New Zealand",
+   "Nouvelle-Zélande"
+  ],
+  [
+   "incl. 5.1% Oman",
+   "dont 5,1 % d’Oman"
+  ],
+  [
+   "Australia",
+   "Australie"
+  ],
+  [
+   "incl. 5.6% Oman",
+   "dont 5,6 % d’Oman"
+  ],
+  [
+   "Thailand",
+   "Thaïlande"
+  ],
+  [
+   "Dependency is shown as a share of each country's own import book, not as a dollar figure: a government does not feel billions, it feels the percentage of its own supply running through one strait. Fertiliser carries a complication crude does not. Oman's own exports sit on the Gulf of Oman coast, geographically outside Hormuz, so the model correctly never assigns them the Hormuz chokepoint, but Oman sits inside the same conflict and sanctions perimeter as the Gulf states that do transit the strait. For Thailand and Australia, counting Oman's share changes the picture: Thailand's real Gulf-linked fertiliser exposure is 30.1 percent, not 24.5; Australia's is 32.8 percent, not 27.6. For Japan, Korea, and New Zealand, Oman's share is small enough to round away. These figures cover the full fertiliser basket (nitrogenous, ammonia, phosphatic, potassic and compound N/P/K, including DAP/MAP), added to the model on 15 October 2026; see the method note below for what changed and why. *Japan's combined fertiliser-Hormuz exposure sits below the model's own materiality floor (under $18M total) and is not part of the published 31-country dataset; it is shown here only so the five markets in this piece can be read on the same percentage basis.",
+   "La dépendance est exprimée en part du portefeuille d’importations de chaque pays, et non en dollars : un gouvernement ne ressent pas des milliards, il ressent la part de son approvisionnement qui passe par un seul détroit. L’engrais comporte une complication que le brut n’a pas. Les exportations d’Oman se situent sur la côte du golfe d’Oman, géographiquement hors d’Ormuz, si bien que le modèle ne leur attribue à juste titre jamais ce point de passage, mais Oman se trouve dans le même périmètre de conflit et de sanctions que les États du Golfe qui transitent bien par le détroit. Pour la Thaïlande et l’Australie, compter la part d’Oman change le tableau : l’exposition réelle de la Thaïlande aux engrais liés au Golfe est de 30,1 %, et non de 24,5 % ; celle de l’Australie est de 32,8 %, et non de 27,6 %. Pour le Japon, la Corée et la Nouvelle-Zélande, la part d’Oman est assez faible pour disparaître à l’arrondi. Ces chiffres couvrent le panier complet d’engrais (azotés, ammoniac, phosphatés, potassiques et composés N/P/K, y compris DAP/MAP), ajouté au modèle le 15 octobre 2026 ; voir la note méthodologique ci-dessous pour ce qui a changé et pourquoi. *L’exposition combinée du Japon aux engrais passant par Ormuz se situe sous le seuil de matérialité du modèle (moins de 18 M$ au total) et ne figure pas dans le jeu de données publié de 31 pays ; elle n’est montrée ici que pour que les cinq marchés de cet article puissent se lire sur la même base en pourcentage."
+  ],
+  [
+   "South Korea's response has been faster and more visibly strained. In the first five days of March, national average gasoline rose 6.7 percent and diesel 11.7 percent, the first time pump prices had cleared 1,800 won per litre since 2022. The government's own state energy research institute, KEEI, told officials to prepare for an outright energy crisis in LNG and oil supply. Seoul cut energy taxes to soften the blow, and by April, even after that relief, gasoline and diesel were still climbing, with seven tankers, four of them Korean-operated, sitting idle in the strait. Korea's CDM dependency is 63.9 percent, 54.6 billion dollars at risk, the fourth-highest absolute figure in the full 31-country dataset, behind China, India, and Japan.",
+   "La réponse de la Corée du Sud a été plus rapide et visiblement plus tendue. Durant les cinq premiers jours de mars, l’essence moyenne nationale a augmenté de 6,7 % et le gazole de 11,7 %, la première fois depuis 2022 que les prix à la pompe dépassaient 1 800 wons le litre. L’institut public de recherche énergétique du pays, le KEEI, a demandé aux responsables de se préparer à une véritable crise énergétique sur le GNL et le pétrole. Séoul a réduit les taxes sur l’énergie pour amortir le choc, et en avril, même après cet allègement, l’essence et le gazole continuaient de grimper, avec sept pétroliers, dont quatre exploités par des Coréens, immobilisés dans le détroit. La dépendance du CDM pour la Corée est de 63,9 %, soit 54,6 milliards de dollars en jeu, le quatrième chiffre absolu le plus élevé du jeu complet de 31 pays, derrière la Chine, l’Inde et le Japon."
+  ],
+  [
+   "New Zealand's dependency percentage, 72.5 percent of crude runs through Hormuz, sits second only to Japan's among the countries in this piece, yet its dollar value at risk, 384 million dollars, is the smallest of the five by a wide margin, because New Zealand's economy is small. That combination, a dependency share near the top of the model paired with the thinnest absolute buffer of any country on this list, is the profile that produces blunt public warnings. The Automobile Association has told drivers that petrol prices could reach four dollars a litre and that they ought to fill up before it does.",
+   "Le pourcentage de dépendance de la Nouvelle-Zélande, 72,5 % de son brut passant par Ormuz, n’est dépassé que par celui du Japon parmi les pays de cet article, mais sa valeur en jeu, 384 millions de dollars, est de loin la plus faible des cinq, car l’économie néo-zélandaise est petite. Cette combinaison, une part de dépendance près du sommet du modèle associée au coussin absolu le plus mince de tous les pays de cette liste, est le profil qui produit des avertissements publics directs. L’Automobile Association a prévenu les automobilistes que l’essence pourrait atteindre quatre dollars le litre et qu’ils feraient bien de faire le plein avant."
+  ],
+  [
+   "Australia's own bilateral exposure to Hormuz is modest. Just 5.5 percent of its crude imports transit the strait, 315 million dollars at risk, nowhere near Japan's 79.1 percent. Most of Australia's crude comes from Malaysia, the United States, Vietnam, and Brunei instead.",
+   "L’exposition bilatérale propre de l’Australie envers Ormuz est modeste. Seulement 5,5 % de ses importations de brut transitent par le détroit, soit 315 millions de dollars en jeu, très loin des 79,1 % du Japon. L’essentiel du brut australien vient de Malaisie, des États-Unis, du Vietnam et de Brunei."
+  ],
+  [
+   "Fertiliser is a more complicated picture. Counting the full basket of nitrogenous, ammonia, phosphatic, potassic and compound N/P/K fertilisers, including the Saudi-sourced DAP and MAP that a nitrogenous-only count would miss, 1.055 billion dollars of Australia's fertiliser imports transit Hormuz: 27.6 percent of the total, against 789 million dollars and 38.9 percent on the nitrogenous-only count. DAP and MAP alone account for the extra 266 million dollars. The percentage still fell, even as the dollar figure rose, because the full basket is nearly twice the size the nitrogenous-only figure implied, 3.8 billion dollars a year rather than 2.0 billion, and most of that added volume, potash and straight phosphate, is barely sourced from the Gulf at all. More dollars at risk, a smaller share of a bigger market: both are true at once.",
+   "Les engrais présentent un tableau plus compliqué. En comptant le panier complet d’engrais azotés, d’ammoniac, d’engrais phosphatés, potassiques et composés N/P/K, y compris le DAP et le MAP d’origine saoudienne qu’un décompte limité aux azotés manquerait, 1,055 milliard de dollars des importations australiennes d’engrais transitent par Ormuz : 27,6 % du total, contre 789 millions de dollars et 38,9 % dans le décompte limité aux azotés. Le DAP et le MAP à eux seuls expliquent les 266 millions de dollars supplémentaires. Le pourcentage a pourtant baissé alors que le montant en dollars augmentait, parce que le panier complet est presque deux fois plus grand que ce que laissait penser le chiffre limité aux azotés, 3,8 milliards de dollars par an au lieu de 2,0 milliards, et que l’essentiel du volume ajouté, potasse et phosphate simple, ne vient presque pas du Golfe. Plus de dollars en jeu, une part plus petite d’un marché plus grand : les deux sont vrais à la fois."
+  ],
+  [
+   "Despite that relatively low dependency, Australian petrol prices still climbed hard, from 1.57 to 2.07 dollars a litre in eight weeks in March, reaching 2.11 dollars by September, up from 1.55 in July, with diesel up roughly 50 percent since June. Canberra cut the fuel excise to ease the burden, then adjusted it, then let it lapse.",
+   "Malgré cette dépendance relativement faible, les prix de l’essence en Australie ont fortement grimpé, de 1,57 à 2,07 dollars le litre en huit semaines en mars, pour atteindre 2,11 dollars en septembre contre 1,55 en juillet, le gazole ayant augmenté d’environ 50 % depuis juin. Canberra a réduit l’accise sur les carburants pour alléger la charge, puis l’a ajustée, puis l’a laissée expirer."
+  ],
+  [
+   "A federal minister has named the Strait of Hormuz as the reason why prices have risen, but this is a bit tricky. Australia has quite a low bilateral dependency, but Australia buys refined fuel based on regional benchmark pricing in Singapore rather than relying on fixed bilateral contracts, so a Hormuz disruption lifts that benchmark price for every buyer on it, regardless of whose tanker the fuel actually arrived on. The pump price moves with the conflict even when the trade data proves it does not have to.",
+   "Un ministre fédéral a désigné le détroit d’Ormuz comme la cause de la hausse des prix, mais c’est un peu délicat. L’Australie a une dépendance bilatérale assez faible, mais elle achète ses carburants raffinés sur la base des prix de référence régionaux de Singapour plutôt que sur des contrats bilatéraux fixes, de sorte qu’une perturbation d’Ormuz fait monter ce prix de référence pour tous les acheteurs qui s’y réfèrent, quel que soit le pétrolier sur lequel le carburant est réellement arrivé. Le prix à la pompe suit le conflit même lorsque les données commerciales prouvent qu’il n’y est pas obligé."
+  ],
+  [
+   "Where Australia's fuel and fertiliser actually come from",
+   "D’où viennent réellement le carburant et les engrais de l’Australie"
+  ],
+  [
+   "Import sources flowing into each commodity, share of annual import value",
+   "Sources d’importation de chaque produit, en part de la valeur annuelle importée"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--gold)\"></span>Gulf states, via Hormuz",
+   "<span class=\"viz-swatch\" style=\"background:var(--gold)\"></span>États du Golfe, via Ormuz"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--gold-dark)\"></span>Oman, outside Hormuz",
+   "<span class=\"viz-swatch\" style=\"background:var(--gold-dark)\"></span>Oman, hors Ormuz"
+  ],
+  [
+   "<span class=\"viz-swatch\" style=\"background:var(--text-tertiary)\"></span>Everywhere else",
+   "<span class=\"viz-swatch\" style=\"background:var(--text-tertiary)\"></span>Partout ailleurs"
+  ],
+  [
+   "CRUDE OIL · $5.75B/yr imported",
+   "PÉTROLE BRUT · 5,75 Md$/an importés"
+  ],
+  [
+   "Malaysia <tspan class=\"viz-flow-pct\">36.4%</tspan>",
+   "Malaisie <tspan class=\"viz-flow-pct\">36,4 %</tspan>"
+  ],
+  [
+   "Other sources <tspan class=\"viz-flow-pct\">21.6%</tspan>",
+   "Autres sources <tspan class=\"viz-flow-pct\">21,6 %</tspan>"
+  ],
+  [
+   "United States <tspan class=\"viz-flow-pct\">15.5%</tspan>",
+   "États-Unis <tspan class=\"viz-flow-pct\">15,5 %</tspan>"
+  ],
+  [
+   "Vietnam <tspan class=\"viz-flow-pct\">10.7%</tspan>",
+   "Vietnam <tspan class=\"viz-flow-pct\">10,7 %</tspan>"
+  ],
+  [
+   "Brunei <tspan class=\"viz-flow-pct\">10.3%</tspan>",
+   "Brunei <tspan class=\"viz-flow-pct\">10,3 %</tspan>"
+  ],
+  [
+   "Gulf states <tspan class=\"viz-flow-pct\">5.5%</tspan>",
+   "États du Golfe <tspan class=\"viz-flow-pct\">5,5 %</tspan>"
+  ],
+  [
+   "Crude oil",
+   "Pétrole brut"
+  ],
+  [
+   "$5.75B/yr",
+   "5,75 Md$/an"
+  ],
+  [
+   "FERTILISER · $3.82B/yr imported",
+   "ENGRAIS · 3,82 Md$/an importés"
+  ],
+  [
+   "Other sources <tspan class=\"viz-flow-pct\">67.2%</tspan>",
+   "Autres sources <tspan class=\"viz-flow-pct\">67,2 %</tspan>"
+  ],
+  [
+   "Gulf states <tspan class=\"viz-flow-pct\">27.6%</tspan>",
+   "États du Golfe <tspan class=\"viz-flow-pct\">27,6 %</tspan>"
+  ],
+  [
+   "Oman <tspan class=\"viz-flow-pct\">5.1%</tspan>",
+   "Oman <tspan class=\"viz-flow-pct\">5,1 %</tspan>"
+  ],
+  [
+   "Fertiliser",
+   "Engrais"
+  ],
+  [
+   "$3.82B/yr",
+   "3,82 Md$/an"
+  ],
+  [
+   "Each lane adds to 100% of that commodity's own import book, traced to source by the CDM's bilateral trade data. Crude tells a clean story: Malaysia, the United States, Vietnam and Brunei supply 73% of it between them, and the Gulf states' own Hormuz-transiting share is a thin 5.5% sliver at the bottom, consistent with the pump price running on benchmark pricing rather than bilateral supply. Fertiliser is messier, and bigger than the nitrogenous-only figure suggested: the import book shown here is the full basket (nitrogenous, ammonia, phosphatic, potassic and compound N/P/K, including DAP and MAP), and it totals $3.82B/yr. Gulf states supply 27.6% of that total directly through Hormuz, and a further 5.1% arrives from Oman, which sits on the Gulf of Oman coast and never transits the strait, so the model correctly keeps it out of the Hormuz figure. Oman is still inside the same conflict and sanctions perimeter as its Gulf neighbours, so the two gold bands together are the honest answer to \"how exposed is Australia's fertiliser supply to this war\": 32.8%, not 27.6%. On the narrower nitrogenous-only count the figures were 38.9% and 48.6%, higher than the full-basket shares above even though the Gulf's own dollar total, driven by Saudi DAP and MAP, is larger under the full basket, because the newly-added potash and straight phosphate are barely Gulf-sourced.",
+   "Chaque couloir totalise 100 % du portefeuille d’importations propre à ce produit, retracé jusqu’à sa source par les données commerciales bilatérales du CDM. Le brut raconte une histoire nette : la Malaisie, les États-Unis, le Vietnam et Brunei en fournissent 73 % à eux quatre, et la part des États du Golfe transitant par Ormuz n’est qu’une mince frange de 5,5 % au bas du schéma, ce qui concorde avec un prix à la pompe indexé sur les prix de référence plutôt que sur l’approvisionnement bilatéral. Les engrais sont plus confus, et plus importants que le chiffre limité aux azotés ne le suggérait : le portefeuille d’importations montré ici est le panier complet (azotés, ammoniac, phosphatés, potassiques et composés N/P/K, y compris DAP et MAP), et il totalise 3,82 Md$/an. Les États du Golfe en fournissent 27,6 % directement par Ormuz, et 5,1 % supplémentaires arrivent d’Oman, qui se trouve sur la côte du golfe d’Oman et ne transite jamais par le détroit, de sorte que le modèle le garde à juste titre hors du chiffre d’Ormuz. Oman reste dans le même périmètre de conflit et de sanctions que ses voisins du Golfe, si bien que les deux bandes dorées ensemble donnent la réponse honnête à la question « dans quelle mesure l’approvisionnement australien en engrais est-il exposé à cette guerre » : 32,8 %, et non 27,6 %. Dans le décompte limité aux azotés, les chiffres étaient de 38,9 % et 48,6 %, plus élevés que les parts du panier complet ci-dessus alors que le total en dollars du Golfe, tiré par le DAP et le MAP saoudiens, est plus grand dans le panier complet, parce que la potasse et le phosphate simple nouvellement ajoutés ne viennent presque pas du Golfe."
+  ],
+  [
+   "Fertiliser is really three different commodities, and Hormuz matters to each differently. Urea, the nitrogen fertiliser Australian grain growers rely on most, had 43 percent of its global trade passing through the strait before the war, more than twice crude oil's 20 percent share; sulphur, the feedstock for phosphate fertiliser, was at 44 percent; anhydrous ammonia averaged 27 percent between 2019 and 2023. Australia's own dependence compounds this: between 2019 and 2023 the country imported close to 90 percent of its nitrogen fertiliser, nearly 70 percent of its phosphate, and the entirety of its potash. Australia's Hormuz-linked fertiliser exposure rose in dollar terms, because DAP and MAP, both overwhelmingly Saudi-sourced, add $266 million of Gulf-origin trade. It fell as a share of the total, because potash and straight phosphate add $371 million to the denominator while being almost entirely non-Gulf-sourced.",
+   "Les engrais sont en réalité trois produits différents, et Ormuz compte pour chacun de manière différente. L’urée, l’engrais azoté dont dépendent le plus les céréaliculteurs australiens, voyait 43 % de son commerce mondial passer par le détroit avant la guerre, plus du double de la part de 20 % du pétrole brut ; le soufre, matière première des engrais phosphatés, était à 44 % ; l’ammoniac anhydre a atteint en moyenne 27 % entre 2019 et 2023. La dépendance propre de l’Australie aggrave la situation : entre 2019 et 2023, le pays a importé près de 90 % de ses engrais azotés, près de 70 % de ses phosphatés et la totalité de sa potasse. L’exposition australienne aux engrais liés à Ormuz a augmenté en dollars, car le DAP et le MAP, tous deux massivement d’origine saoudienne, ajoutent 266 M$ d’échanges d’origine golfique. Elle a baissé en part du total, car la potasse et le phosphate simple ajoutent 371 M$ au dénominateur tout en étant presque entièrement d’origine non golfique."
+  ],
+  [
+   "Qatar's cheap gas makes it the world's largest urea producer, and more than 60 percent of Australia's urea imports come from the Middle East; an Iranian missile strike on a major Qatari facility in March knocked out a significant share of that supply, and Middle Eastern urea prices have nearly doubled in Australian-dollar terms since the start of the year. Australia has not produced its own urea since Incitec Pivot closed its Gibson Island plant in Brisbane in December 2022; a replacement, the company's Perdaman project in Karratha, Western Australia, is due online in mid-2027 and would meet around 90 percent of domestic urea demand, putting a known end date on the exposure. In the meantime, the Commonwealth Bank estimates fuel, fertiliser and road transport make up about 14 percent of total farm input costs (diesel 6 percent, fertiliser 5 percent), both now running well above their five-year averages (diesel up 79 percent, fertiliser up 67 percent), and models a worst case in which a 45 percent cut to fertiliser use trims wheat output by a quarter and barley and canola by more than 30 percent. Anthony Albanese returned from a regional tour with an extra 250,000 tonnes of Indonesian urea, enough to cover roughly a fifth of the season's remaining need.",
+   "Le gaz bon marché du Qatar en fait le premier producteur mondial d’urée, et plus de 60 % des importations australiennes d’urée viennent du Moyen-Orient ; une frappe de missile iranienne sur une grande installation qatarie en mars a mis hors service une part importante de cet approvisionnement, et les prix de l’urée du Moyen-Orient ont presque doublé en dollars australiens depuis le début de l’année. L’Australie ne produit plus d’urée depuis qu’Incitec Pivot a fermé son usine de Gibson Island à Brisbane en décembre 2022 ; un remplaçant, le projet Perdaman de l’entreprise à Karratha, en Australie-Occidentale, doit entrer en service à la mi-2027 et couvrirait environ 90 % de la demande intérieure d’urée, ce qui fixe une date de fin connue à l’exposition. D’ici là, la Commonwealth Bank estime que le carburant, les engrais et le transport routier représentent environ 14 % du total des coûts d’intrants agricoles (gazole 6 %, engrais 5 %), les deux se situant nettement au-dessus de leur moyenne sur cinq ans (gazole +79 %, engrais +67 %), et modélise un pire cas où une baisse de 45 % de l’usage d’engrais réduit la production de blé d’un quart et celles d’orge et de colza de plus de 30 %. Anthony Albanese est revenu d’une tournée régionale avec 250 000 tonnes supplémentaires d’urée indonésienne, de quoi couvrir environ un cinquième des besoins restants de la saison."
+  ],
+  [
+   "Bottled roadside fuel, a common sight across rural Thailand and a reminder of how far down the supply chain a Gulf conflict's price pressure eventually travels. Photo: Kirsten.",
+   "Du carburant en bouteilles au bord de la route, une vue courante dans la Thaïlande rurale, qui rappelle jusqu’où descend dans la chaîne d’approvisionnement la pression sur les prix d’un conflit du Golfe. Photo : Kirsten."
+  ],
+  [
+   "Thailand's government moved earliest and most aggressively. In March, after panic buying at the pumps, Bangkok froze diesel prices, ordered the state Oil Fuel Fund to subsidise diesel to hold a 30 baht ceiling, suspended fuel exports outside the region, and tripled its mandatory reserve requirement from one to three percent of consumption. Officials had ninety-five days of cover at the time. By September, the Oil Fuel Fund's deficit had swollen past 80 billion baht and the energy ministry was warning prices would stay volatile as the US-Iran conflict reignited. As of this month, Bangkok pump prices sit at 50.43 baht a litre for petrol and 42.94 baht for diesel, but only because of continuous government intervention. Thailand's CDM dependency is 45.6 percent, 15.3 billion dollars at risk, moderate by regional standards, yet still enough to force the earliest state intervention of any country in this set.",
+   "Le gouvernement thaïlandais a agi le plus tôt et le plus énergiquement. En mars, après des achats de panique aux pompes, Bangkok a gelé les prix du gazole, ordonné au Fonds public des carburants de subventionner le gazole pour maintenir un plafond de 30 bahts, suspendu les exportations de carburant hors de la région et triplé son obligation de réserve, de un à trois pour cent de la consommation. Les autorités disposaient alors de quatre-vingt-quinze jours de couverture. En septembre, le déficit du Fonds des carburants dépassait 80 milliards de bahts et le ministère de l’Énergie avertissait que les prix resteraient volatils alors que le conflit entre les États-Unis et l’Iran se rallumait. Ce mois-ci, les prix à la pompe de Bangkok s’établissent à 50,43 bahts le litre pour l’essence et 42,94 bahts pour le gazole, mais seulement grâce à une intervention publique continue. La dépendance du CDM pour la Thaïlande est de 45,6 %, soit 15,3 milliards de dollars en jeu, modérée à l’échelle régionale, mais suffisante pour déclencher l’intervention publique la plus précoce de tous les pays de cet ensemble."
+  ],
+  [
+   "After eight months, this conflict has stressed the resilience of economies across Asia and toward the Pacific. For Japan, Korea, Thailand, and New Zealand, the order in which governments reached for solutions tracks the dependency ranking closely. The highest-dependency major economies reached for reserves and emergency panels. The others, each exposed in their own way, reached for price caps and blunt consumer warnings.",
+   "Après huit mois, ce conflit a mis à l’épreuve la résilience des économies d’Asie et du Pacifique. Pour le Japon, la Corée, la Thaïlande et la Nouvelle-Zélande, l’ordre dans lequel les gouvernements ont cherché des solutions suit de près le classement de dépendance. Les grandes économies les plus dépendantes ont recouru aux réserves et aux groupes d’urgence. Les autres, exposées chacune à leur manière, ont recouru aux plafonds de prix et aux avertissements directs aux consommateurs."
+  ],
+  [
+   "Sources",
+   "Sources"
+  ],
+  [
+   "CDM dependency and exposure figures: Narrows Chokepoint Dependency Model, HORMUZ chokepoint, commodity codes 2709 (crude petroleum) and 2814, 3102, 3103, 3104 and 3105 (fertiliser: ammonia, nitrogenous, phosphatic, potassic and compound N/P/K respectively), bilateral trade data, 2022–2024. The fertiliser basket was expanded on 15 October 2026 from nitrogenous fertiliser and ammonia alone to the full basket above. On the nitrogenous-only count, Australia's figures were 38.9% / $789M (Hormuz) and 48.6% / $986M (incl. Oman) on a $2.03B/yr import book; on the full-basket count they are 27.6% / $1.055B and 32.8% / $1.251B on a $3.82B/yr import book.",
+   "Chiffres de dépendance et d’exposition du CDM : modèle de dépendance aux points de passage de Narrows, point de passage HORMUZ, codes de produits 2709 (pétrole brut) et 2814, 3102, 3103, 3104 et 3105 (engrais : respectivement ammoniac, azotés, phosphatés, potassiques et composés N/P/K), données commerciales bilatérales, 2022–2024. Le panier d’engrais a été élargi le 15 octobre 2026 : des seuls engrais azotés et de l’ammoniac, il est passé au panier complet ci-dessus. Dans le décompte limité aux azotés, les chiffres de l’Australie étaient de 38,9 % / 789 M$ (Ormuz) et 48,6 % / 986 M$ (Oman compris) sur un portefeuille d’importations de 2,03 Md$/an ; dans le décompte du panier complet, ils sont de 27,6 % / 1,055 Md$ et 32,8 % / 1,251 Md$ sur un portefeuille d’importations de 3,82 Md$/an."
+  ],
+  [
+   "Fertiliser transit shares, Australia's import dependence by nutrient, the Qatar/Gibson Island/Perdaman urea story, and CBA's cost and crop-impact modelling: <a href=\"https://www.theguardian.com/business/2026/apr/23/fertiliser-short-supply-australia-farmers-bread-prices-strait-of-hormuz\">The Guardian</a>.",
+   "Parts de transit des engrais, dépendance d’importation de l’Australie par nutriment, l’histoire de l’urée entre le Qatar, Gibson Island et Perdaman, et la modélisation des coûts et de l’impact sur les cultures de la CBA : <a href=\"https://www.theguardian.com/business/2026/apr/23/fertiliser-short-supply-australia-farmers-bread-prices-strait-of-hormuz\">The Guardian</a>."
+  ],
+  [
+   "Japan: first state oil reserve release in four years, <a href=\"https://english.adnkronos.com/2026/03/26/japan-begins-1st-release-of-state-oil-reserves-in-4-years/\">Adnkronos</a>; pump price defended near ¥170/litre through August, <a href=\"https://english.adnkronos.com/2026/08/25/japan-to-keep-pump-price-target-at-around-170-yen/\">Adnkronos</a>, with a ¥616bn emergency fund approved in September, <a href=\"https://www.nst.com.my/amp/business/economy/2026/09/1523364/japan-approves-use-616bil-yen-emergency-funds-gasoline-subsidies\">New Straits Times</a>.",
+   "Japon : première libération de réserves pétrolières d’État en quatre ans, <a href=\"https://english.adnkronos.com/2026/03/26/japan-begins-1st-release-of-state-oil-reserves-in-4-years/\">Adnkronos</a> ; prix à la pompe défendu près de ¥170/litre jusqu’en août, <a href=\"https://english.adnkronos.com/2026/08/25/japan-to-keep-pump-price-target-at-around-170-yen/\">Adnkronos</a>, avec un fonds d’urgence de ¥616 milliards approuvé en septembre, <a href=\"https://www.nst.com.my/amp/business/economy/2026/09/1523364/japan-approves-use-616bil-yen-emergency-funds-gasoline-subsidies\">New Straits Times</a>."
+  ],
+  [
+   "South Korea: early-March price moves and KEEI's crisis warning, reported via <a href=\"https://asianews.network/middle-east-tensions-raise-supply-stakes-for-energy-hungry-south-korea/\">AsiaNews Network</a> and <a href=\"https://keia.org/publication/energy-shock-and-economic-resilience-south-korea-and-the-iran-war/\">Korea Economic Institute of America</a>; idle tankers, <a href=\"https://www.koreajoongangdaily.com/business/seven-korean-oil-tankers-stuck-in-strait-of-hormuz-as-government-weighs-options/12518584\">Korea JoongAng Daily</a>.",
+   "Corée du Sud : évolution des prix début mars et alerte de crise du KEEI, rapportées par <a href=\"https://asianews.network/middle-east-tensions-raise-supply-stakes-for-energy-hungry-south-korea/\">AsiaNews Network</a> et <a href=\"https://keia.org/publication/energy-shock-and-economic-resilience-south-korea-and-the-iran-war/\">Korea Economic Institute of America</a> ; pétroliers immobilisés, <a href=\"https://www.koreajoongangdaily.com/business/seven-korean-oil-tankers-stuck-in-strait-of-hormuz-as-government-weighs-options/12518584\">Korea JoongAng Daily</a>."
+  ],
+  [
+   "New Zealand: Automobile Association's four-dollar-a-litre warning, <a href=\"https://autotrader.co.nz/news/petrol-in-new-zealand-could-reach-4-per-litre-warns-aa-adviser\">Autotrader NZ</a>.",
+   "Nouvelle-Zélande : avertissement de l’Automobile Association sur les quatre dollars le litre, <a href=\"https://autotrader.co.nz/news/petrol-in-new-zealand-could-reach-4-per-litre-warns-aa-adviser\">Autotrader NZ</a>."
+  ],
+  [
+   "Australia: fuel excise relief ending as the conflict pushed petrol prices higher, <a href=\"https://thenightly.com.au/politics/anthony-albanese-fuel-excise-cut-to-end-as-iran-us-conflict-threatens-petrol-prices-c-22409388\">The Nightly</a>; ministerial comment linking the Strait of Hormuz to bowser prices, <a href=\"https://thenightly.com.au/politics/australian-fuel-prices-strait-of-hormuz-toll-threat-could-impact-amount-paid-at-the-bowser-ted-obrien-says--c-22462297\">The Nightly</a>.",
+   "Australie : fin de l’allègement de l’accise sur les carburants alors que le conflit faisait grimper les prix de l’essence, <a href=\"https://thenightly.com.au/politics/anthony-albanese-fuel-excise-cut-to-end-as-iran-us-conflict-threatens-petrol-prices-c-22409388\">The Nightly</a> ; commentaire ministériel reliant le détroit d’Ormuz aux prix à la pompe, <a href=\"https://thenightly.com.au/politics/australian-fuel-prices-strait-of-hormuz-toll-threat-could-impact-amount-paid-at-the-bowser-ted-obrien-says--c-22462297\">The Nightly</a>."
+  ],
+  [
+   "Thailand: diesel ceiling, export suspension, and the tripled mandatory reserve requirement, <a href=\"https://www.bangkokpost.com/business/general/3211344/thai-oil-retailers-baulk-at-order-to-triple-reserves\">Bangkok Post</a>; Oil Fuel Fund deficit through September, <a href=\"https://www.nationthailand.com/business/economy/40070569\">Nation Thailand</a>.",
+   "Thaïlande : plafond du gazole, suspension des exportations et obligation de réserve triplée, <a href=\"https://www.bangkokpost.com/business/general/3211344/thai-oil-retailers-baulk-at-order-to-triple-reserves\">Bangkok Post</a> ; déficit du Fonds des carburants jusqu’en septembre, <a href=\"https://www.nationthailand.com/business/economy/40070569\">Nation Thailand</a>."
+  ],
+  [
+   "Pump price and policy figures are drawn from national and wire reporting through October 2026 and are each cited to their own reporting date rather than presented as uniformly current.",
+   "Les chiffres de prix à la pompe et de politiques publiques proviennent de la presse nationale et des agences jusqu’en octobre 2026 et sont chacun rattachés à leur propre date de publication plutôt que présentés comme uniformément actuels."
+  ]
+ ],
+ "js": []
+}

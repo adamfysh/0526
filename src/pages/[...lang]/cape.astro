@@ -1,11 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
+import { cape } from '../../i18n/pages/cape';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = cape[lang];
+const feed = JSON.parse(readFileSync(join(process.cwd(), 'public/cape_tide_feed.json'), 'utf-8'));
+const H = feed.corridors.hormuz;
+const NB = '\u00a0';
+const num = (x) => (lang === 'fr' ? x.toFixed(1).replace('.', ',') : x.toFixed(1));
+const money = (x) => (lang === 'fr' ? num(x) + NB + 'Md$' : '$' + num(x) + 'B');
+const maxC = Object.entries(feed.corridors).sort((a, b) => b[1].cascadeRatio - a[1].cascadeRatio)[0];
+const generated = new Date(feed._meta.generated_at).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const monthIdx = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(H.peakMonth);
+const fill = (s) => s.replaceAll('{peakMonth}', t.months[monthIdx]).replaceAll('{maxCascade}', num(maxC[1].cascadeRatio)).replaceAll('{maxCascadeName}', t.corridors[maxC[0]]).replaceAll('{generated}', generated);
+const tideVals = [H.baseline, H.peak, H.horizon, H.pml].map(money);
+const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
 ---
 
-<BaseLayout
-  title="CAPE — Corridor Accumulation and Portfolio Exposure | Narrows"
-  description="CAPE calculates your fleet's aggregate exposure to corridor disruption events. Powered by the Narrows CDM and TIDE accumulation model."
->
+<BaseLayout lang={lang} title={t.title} description={t.description}>
 
 <style>
 /* ── Demo notice ── */
@@ -188,154 +207,79 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 </style>
 
-<!-- Demo notice -->
 <div class="demo-notice">
-  <p class="demo-notice-inner">
-    <strong>Demonstration.</strong> This version runs against a sample fleet with fixed, illustrative positions.
-    It is shown to explain the method and is not available for use on any real portfolio.
-  </p>
+  <p class="demo-notice-inner"><strong>{t.demo.b}</strong> {t.demo.t}</p>
 </div>
 
-<!-- Hero -->
 <section class="cape-hero">
-  <div class="cape-kicker">Narrows analytics</div>
-  <h1>Corridor Accumulation<br>and <em>Portfolio Exposure</em></h1>
-  <p class="cape-hero-lead">
-    CAPE is a demonstration of how exposure can be computed for a vessel portfolio on a single bad day.
-    Select a corridor event to see aggregate exposure by vessel class, corridor, and scenario severity on an illustrative fleet.
-    Powered by the Narrows CDM and TIDE accumulation model.
-  </p>
+  <div class="cape-kicker">{t.hero.kicker}</div>
+  <h1 set:html={t.hero.titleHtml}></h1>
+  <p class="cape-hero-lead">{t.hero.lead}</p>
   <div class="cape-hero-actions">
-    <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
+    <a href={tool} class="btn-primary-lg" target="_blank">{t.hero.open}</a>
   </div>
 </section>
 
-<!-- What it is -->
 <section class="cape-what">
   <div class="cape-what-inner">
     <div class="cape-what-text">
-      <h2>Two questions. Two different answers.</h2>
-      <p>
-        The Narrows simulator answers the structural question: what share of Japan's crude imports
-        depends on Hormuz each year? That is a dependency figure. It tells you what is exposed.
-      </p>
-      <p>
-        CAPE answers the underwriting question: if Hormuz restricts today, how much cargo value
-        is simultaneously in transit through the corridor right now, at the worst point in the
-        seasonal calendar, including the approach window where vessels cannot economically divert?
-        That is an accumulation figure. It tells you what is at risk.
-      </p>
-      <p>
-        These are different numbers for different audiences. Both are in CAPE.
-      </p>
+      <h2>{t.what.h}</h2>
+      {t.what.p.map((p) => <p>{p}</p>)}
     </div>
     <div class="cape-distinction">
-      <div class="cape-distinction-row">
-        <div class="cape-distinction-label">CDM</div>
-        <div class="cape-distinction-text">
-          <strong>Annual structural dependency</strong>
-          <span>What percentage of a country's imports transit a given corridor each year. The strategic exposure view.</span>
+      {t.what.rows.map((r) => (
+        <div class="cape-distinction-row">
+          <div class="cape-distinction-label">{r[0]}</div>
+          <div class="cape-distinction-text">
+            <strong>{r[1]}</strong>
+            <span>{r[2]}</span>
+          </div>
         </div>
-      </div>
-      <div class="cape-distinction-row">
-        <div class="cape-distinction-label">CAPE</div>
-        <div class="cape-distinction-text">
-          <strong>Portfolio corridor exposure</strong>
-          <span>Your vessel book's aggregate VaR under a named corridor scenario. The underwriting view.</span>
-        </div>
-      </div>
-      <div class="cape-distinction-row">
-        <div class="cape-distinction-label">TIDE</div>
-        <div class="cape-distinction-text">
-          <strong>Market accumulation at risk</strong>
-          <span>Total cargo in transit through a chokepoint at seasonal peak, including cascade effects on diversion routes. The reinsurance and ILS view.</span>
-        </div>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 
-<!-- TIDE strip -->
 <section class="tide-strip">
   <div class="tide-strip-inner">
     <div class="tide-strip-head">
       <span class="tide-strip-label">TIDE</span>
-      <span class="tide-strip-sub">Strait of Hormuz — accumulation at risk</span>
+      <span class="tide-strip-sub">{t.tide.sub}</span>
     </div>
     <div class="tide-numbers">
-      <div class="tide-num">
-        <div class="tide-num-label">Baseline (avg day)</div>
-        <div class="tide-num-value">$21.8B</div>
-        <div class="tide-num-note">Annual flow divided by 365, weighted by transit duration</div>
-      </div>
-      <div class="tide-num">
-        <div class="tide-num-label">Seasonal peak</div>
-        <div class="tide-num-value">$25.6B</div>
-        <div class="tide-num-note">July — worst calendar month in the current model</div>
-      </div>
-      <div class="tide-num accent">
-        <div class="tide-num-label">Event horizon</div>
-        <div class="tide-num-value">$31.2B</div>
-        <div class="tide-num-note">Seasonal peak plus 3-day approach window — the insurer's at-risk number</div>
-      </div>
-      <div class="tide-num">
-        <div class="tide-num-label">War risk PML</div>
-        <div class="tide-num-value">$3.4B</div>
-        <div class="tide-num-note">Event horizon at 15% severity, weighted attachment rate</div>
-      </div>
+      {t.tide.cells.map((c, i) => (
+        <div class={'tide-num' + (i === 2 ? ' accent' : '')}>
+          <div class="tide-num-label">{c[0]}</div>
+          <div class="tide-num-value">{tideVals[i]}</div>
+          <div class="tide-num-note">{fill(c[1])}</div>
+        </div>
+      ))}
     </div>
     <div class="tide-cascade-note">
-      <strong>Cascade effect:</strong> When Suez closes, Cape of Good Hope accumulation spikes
-      <strong>83%</strong> above normal — more cargo is simultaneously at sea on the diversion route.
-      A Lloyd's syndicate writing Cape war risk has correlated exposure to Red Sea events.
-      TIDE models cascade ratios for all corridors.
+      <Fragment set:html={fill(t.tide.cascadeHtml)} />
+      <span style="display:block;margin-top:8px;opacity:.7;font-size:12px">{fill(t.tide.asof)}</span>
     </div>
   </div>
 </section>
 
-<!-- How it works -->
 <section class="cape-how">
-  <h2>How CAPE works</h2>
+  <h2>{t.how.h}</h2>
   <div class="cape-steps">
-    <div class="cape-step">
-      <div class="cape-step-num">Step 01 — Illustrative fleet</div>
-      <h3>A sample fleet</h3>
-      <p>
-        Twelve representative vessels across all major corridors are pre-loaded: VLCCs on Hormuz,
-        LNG carriers on Qatar routes, Neopanamax containers through Panama, Capesize bulk through
-        Malacca. Each vessel carries full JWC listing status, CII rating, diversion cost, and
-        cargo value. Run any scenario immediately.
-      </p>
-    </div>
-    <div class="cape-step">
-      <div class="cape-step-num">Step 02 — Method</div>
-      <h3>Exposure mapping</h3>
-      <p>
-        The model maps each vessel to its corridor exposure and computes aggregate VaR,
-        diversion cost, and JWC status across the positions in the sample fleet.
-      </p>
-    </div>
-    <div class="cape-step">
-      <div class="cape-step-num">Step 03 — Method</div>
-      <h3>TIDE accumulation output</h3>
-      <p>
-        The TIDE accumulation model produces an event horizon by corridor, a seasonal peak
-        calendar, cascade ratios for diversion routes, a vessel-count breakdown, and war risk PML
-        by scenario severity.
-      </p>
-    </div>
+    {t.how.steps.map((s) => (
+      <div class="cape-step">
+        <div class="cape-step-num">{s[0]}</div>
+        <h3>{s[1]}</h3>
+        <p>{s[2]}</p>
+      </div>
+    ))}
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cape-cta-section">
-  <h2>Try the demonstration</h2>
-  <p>
-    The demonstration runs on an illustrative fleet. It is a research tool shown to explain
-    the method, not a service.
-  </p>
+  <h2>{t.cta.h}</h2>
+  <p>{t.cta.p}</p>
   <div class="cape-hero-actions" style="justify-content:center">
-    <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
+    <a href={tool} class="btn-primary-lg" target="_blank">{t.hero.open}</a>
   </div>
 </section>
 

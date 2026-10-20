@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -97,7 +98,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="section-eyebrow">Squaring this against CDM's own Hormuz dependency data</div>
 <h2 class="article-section-title">Zero on the tracker; not zero for whoever is on the other end of the trade.</h2>
-<p class="prose">The Narrows <a href="/model">Chokepoint Dependency Model</a> ranks real 2024 bilateral trade exposure by importer for each commodity that transits Hormuz. Read against the export collapse, it reveals who is actually exposed; that is the question <a href="/analysis/hormuz-who-pays">Iran Can Hold Out. Here Is Who Pays.</a> asks at the country level across the whole crisis, and this is the commodity-by-commodity version of it.</p>
+<p class="prose">The Narrows <a href="/methodology">Chokepoint Dependency Model</a> ranks real 2024 bilateral trade exposure by importer for each commodity that transits Hormuz. Read against the export collapse, it reveals who is actually exposed; that is the question <a href="/analysis/hormuz-who-pays">Iran Can Hold Out. Here Is Who Pays.</a> asks at the country level across the whole crisis, and this is the commodity-by-commodity version of it.</p>
 
 <table class="data-table">
   <thead><tr><th>Importer</th><th>Exposure</th><th>Hormuz dependency</th></tr></thead>
@@ -196,10 +197,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   <div class="method-note-body">US and Brazil fertilizer import dependence: farmdoc daily, Middle East Conflict Revives Concerns Over Fertilizer Dependence in the U.S. and Brazil. Breadbasket dependence, Sudan/Bangladesh: Global Agriculture, One-Third of Global Fertilizer Trade Disrupted as Gulf Conflict Raises Risks for Food Prices and Crop Yields. Cote d'Ivoire cocoa: CNBC Africa, cited in <a href="/analysis/hormuz-dry-cargo">Hormuz Has a Fertilizer Problem Too</a>.</div>
   <div class="method-note-body">Urea pricing and futures: CME/CBOT Urea (Granular) FOB Middle East futures (UME), daily settlement, 2 Jan–30 Jul 2026. Brent crude pricing: Investing.com, Brent front-month futures, daily close, 2 Jan–29 Sep 2026.</div>
   <div class="method-note-body">Pakistan gas alternatives: Pipeline Technology Journal, Pakistan Seeks to Abandon Iran Gas Pipeline Project Due to Low Demand and US Sanctions.</div>
-  <div class="method-note-body">CDM dependency and substitution data: Narrows shipping.db, dependency_matrix table, HORMUZ chokepoint, commodity codes 2709 (crude), 271111 (LNG), 2814, 3102, 3103, 3104 and 3105 (fertiliser: ammonia, nitrogenous, phosphatic, potassic and compound N/P/K respectively; expanded 15 October 2026 from 3102 only). Map: site coordinates from standard gazetteers; country outlines from Natural Earth 1:50m Admin 0 boundaries.</div>
+  <div class="method-note-body">CDM dependency and substitution data: Narrows CDM dependency matrix, HORMUZ chokepoint, commodity codes 2709 (crude), 271111 (LNG), 2814, 3102, 3103, 3104 and 3105 (fertiliser: ammonia, nitrogenous, phosphatic, potassic and compound N/P/K respectively; expanded 15 October 2026 from 3102 only). Map: site coordinates from standard gazetteers; country outlines from Natural Earth 1:50m Admin 0 boundaries.</div>
 </div>
 
 <!-- CTA -->
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
  <div class="cta-strip-inner">
   <div>
@@ -210,6 +212,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
  </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style>

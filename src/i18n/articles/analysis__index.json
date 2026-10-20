@@ -1,0 +1,462 @@
+{
+ "path": "analysis/index",
+ "meta": {
+  "title": "Narrows — Analyses",
+  "description": "Analyses de scénarios appliquées de Narrows. Chaque chiffre est un résultat du modèle. Chaque hypothèse est énoncée."
+ },
+ "pairs": [
+  [
+   "Analysis",
+   "Analyses"
+  ],
+  [
+   "The model applied to<br> <em>live events.</em>",
+   "Le modèle appliqué<br> <em>à l’actualité.</em>"
+  ],
+  [
+   "Every figure is a model output. Every assumption is stated. Analysis is published as events warrant.",
+   "Chaque chiffre est un résultat du modèle. Chaque hypothèse est énoncée. Les analyses sont publiées au gré de l’actualité."
+  ],
+  [
+   "Publishing approach",
+   "Politique de publication"
+  ],
+  [
+   "Analysis is published when a live event warrants it: a corridor disruption, a policy shift, a market dislocation. <strong>Papers are not time-sensitive commentary.</strong> They are applied scenario analysis that remains useful as long as the structural dependency it models is unchanged.",
+   "Une analyse est publiée lorsqu’un événement le justifie : perturbation d’un corridor, changement de politique, dislocation de marché. <strong>Ces textes ne sont pas des commentaires sensibles à l’actualité immédiate.</strong> Ce sont des analyses de scénarios appliquées, qui restent utiles tant que la dépendance structurelle qu’elles modélisent ne change pas."
+  ],
+  [
+   "Tags allow you to find all papers relevant to a corridor, commodity, vessel class, or topic regardless of when they were published.",
+   "Les étiquettes permettent de retrouver tous les textes relatifs à un corridor, un produit, une classe de navires ou un sujet, quelle que soit leur date de publication."
+  ],
+  [
+   "accumulation",
+   "cumul"
+  ],
+  [
+   "australia",
+   "Australie"
+  ],
+  [
+   "Bab-el-Mandeb",
+   "Bab el-Mandeb"
+  ],
+  [
+   "Bulk",
+   "Vrac sec"
+  ],
+  [
+   "Capesize",
+   "Capesize"
+  ],
+  [
+   "China",
+   "Chine"
+  ],
+  [
+   "CII / IMO",
+   "CII / OMI"
+  ],
+  [
+   "consumer-prices",
+   "prix à la consommation"
+  ],
+  [
+   "Corn",
+   "Maïs"
+  ],
+  [
+   "Crude oil",
+   "Pétrole brut"
+  ],
+  [
+   "El Niño",
+   "El Niño"
+  ],
+  [
+   "Fertilizer",
+   "Engrais"
+  ],
+  [
+   "Grain",
+   "Céréales"
+  ],
+  [
+   "Greece",
+   "Grèce"
+  ],
+  [
+   "Handymax",
+   "Handymax"
+  ],
+  [
+   "Hormuz",
+   "Ormuz"
+  ],
+  [
+   "India",
+   "Inde"
+  ],
+  [
+   "Indonesia",
+   "Indonésie"
+  ],
+  [
+   "Infrastructure",
+   "Infrastructures"
+  ],
+  [
+   "insurance",
+   "assurance"
+  ],
+  [
+   "Iron ore",
+   "Minerai de fer"
+  ],
+  [
+   "Japan",
+   "Japon"
+  ],
+  [
+   "Kra",
+   "Kra"
+  ],
+  [
+   "LNG",
+   "GNL"
+  ],
+  [
+   "lombok",
+   "Lombok"
+  ],
+  [
+   "LPG",
+   "GPL"
+  ],
+  [
+   "Malacca",
+   "Malacca"
+  ],
+  [
+   "new-zealand",
+   "Nouvelle-Zélande"
+  ],
+  [
+   "Oman",
+   "Oman"
+  ],
+  [
+   "Panama",
+   "Panama"
+  ],
+  [
+   "Pipeline",
+   "Oléoduc"
+  ],
+  [
+   "Qatar",
+   "Qatar"
+  ],
+  [
+   "Rerouting",
+   "Déroutement"
+  ],
+  [
+   "South Korea",
+   "Corée du Sud"
+  ],
+  [
+   "Soybean",
+   "Soja"
+  ],
+  [
+   "Sri Lanka",
+   "Sri Lanka"
+  ],
+  [
+   "Suez",
+   "Suez"
+  ],
+  [
+   "suezmax",
+   "Suezmax"
+  ],
+  [
+   "Tanker",
+   "Pétrolier"
+  ],
+  [
+   "Thailand",
+   "Thaïlande"
+  ],
+  [
+   "Urea",
+   "Urée"
+  ],
+  [
+   "Validation",
+   "Validation"
+  ],
+  [
+   "Wheat",
+   "Blé"
+  ],
+  [
+   "yanbu",
+   "Yanbu"
+  ],
+  [
+   "Showing <strong>22</strong> papers",
+   "<strong>22</strong> textes affichés"
+  ],
+  [
+   "Strait of Hormuz · Oct 2026 <span class=\"paper-featured-badge\">Latest</span>",
+   "Détroit d’Ormuz · oct. 2026 <span class=\"paper-featured-badge\">Dernier paru</span>"
+  ],
+  [
+   "From the Strait of Hormuz to the Pocketbooks of Consumers",
+   "Du détroit d’Ormuz au porte-monnaie des consommateurs"
+  ],
+  [
+   "Five governments have intervened in their own fuel markets to different degrees, in different ways, since the war began. The size of each intervention tracks the bilateral Hormuz dependency data closely, except in Australia, where a low dependency figure still produced real pump-price pain.",
+   "Cinq gouvernements sont intervenus sur leur marché des carburants, à des degrés et de manières différents, depuis le début de la guerre. L’ampleur de chaque intervention suit de près les données de dépendance bilatérale envers Ormuz, sauf en Australie, où une faible dépendance a tout de même produit une vraie douleur à la pompe."
+  ],
+  [
+   "Japan crude dep: 79.1% · Korea exposure: $54.6B · Thailand reserve requirement: tripled",
+   "Dépendance du Japon au brut : 79,1 % · Exposition de la Corée : 54,6 Md$ · Réserve exigée en Thaïlande : triplée"
+  ],
+  [
+   "Topics covered",
+   "Sujets abordés"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Hormuz </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Crude oil </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Fertilizer </span><span class=\"paper-tag\" data-filter-tag=\"japan\"> Japan </span><span class=\"paper-tag\" data-filter-tag=\"south-korea\"> South Korea </span><span class=\"paper-tag\" data-filter-tag=\"new-zealand\"> new-zealand </span><span class=\"paper-tag\" data-filter-tag=\"australia\"> australia </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thailand </span><span class=\"paper-tag\" data-filter-tag=\"consumer-prices\"> consumer-prices </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Ormuz </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Pétrole brut </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Engrais </span><span class=\"paper-tag\" data-filter-tag=\"japan\"> Japon </span><span class=\"paper-tag\" data-filter-tag=\"south-korea\"> Corée du Sud </span><span class=\"paper-tag\" data-filter-tag=\"new-zealand\"> Nouvelle-Zélande </span><span class=\"paper-tag\" data-filter-tag=\"australia\"> Australie </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thaïlande </span><span class=\"paper-tag\" data-filter-tag=\"consumer-prices\"> prix à la consommation </span>"
+  ],
+  [
+   "Hormuz bypass, Red Sea · Oct 2026",
+   "Contournement d’Ormuz, mer Rouge · oct. 2026"
+  ],
+  [
+   "One Cargo from Yanbu to Korea Has to Get Through Five Constraints. Each One Sits on Someone's Book.",
+   "Une cargaison de Yanbu vers la Corée doit franchir cinq contraintes. Chacune pèse sur le portefeuille de quelqu’un."
+  ],
+  [
+   "A hypothetical Suezmax loads Saudi crude at Yanbu with Bab el-Mandeb closed. Following one voyage shows five limits: the pipeline, the Suez size limit, a route 123% longer, a chain of tail chokepoints and the price of cover. It also shows where the exposure accumulates across lines of business.",
+   "Un Suezmax hypothétique charge du brut saoudien à Yanbu alors que Bab el-Mandeb est fermé. Suivre ce seul voyage fait apparaître cinq limites : l’oléoduc, la limite de taille de Suez, une route plus longue de 123 %, une chaîne de points de passage en aval et le prix de la couverture. Il montre aussi où l’exposition s’accumule d’une branche d’activité à l’autre."
+  ],
+  [
+   "Yanbu to Ulsan: 7,095 nm open, 15,811 nm via Suez and the Cape · War risk ~3% of vessel value · CAPE models 2 of 5 links",
+   "Yanbu–Ulsan : 7 095 milles marins en voie directe, 15 811 via Suez et le Cap · Risque de guerre ≈ 3 % de la valeur du navire · CAPE modélise 2 liaisons sur 5"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"suez\"> Suez </span><span class=\"paper-tag\" data-filter-tag=\"bab-el-mandeb\"> Bab-el-Mandeb </span><span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Hormuz </span><span class=\"paper-tag\" data-filter-tag=\"yanbu\"> yanbu </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Crude oil </span><span class=\"paper-tag\" data-filter-tag=\"suezmax\"> suezmax </span><span class=\"paper-tag\" data-filter-tag=\"insurance\"> insurance </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Rerouting </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"suez\"> Suez </span><span class=\"paper-tag\" data-filter-tag=\"bab-el-mandeb\"> Bab el-Mandeb </span><span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Ormuz </span><span class=\"paper-tag\" data-filter-tag=\"yanbu\"> Yanbu </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Pétrole brut </span><span class=\"paper-tag\" data-filter-tag=\"suezmax\"> Suezmax </span><span class=\"paper-tag\" data-filter-tag=\"insurance\"> assurance </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Déroutement </span>"
+  ],
+  [
+   "Strait of Hormuz · Sept 2026",
+   "Détroit d’Ormuz · sept. 2026"
+  ],
+  [
+   "Seven Months In, Hormuz Exports Have Flatlined.",
+   "Sept mois plus tard, les exportations d’Ormuz sont à plat."
+  ],
+  [
+   "Crude, LNG, and fertilizer have all converged on a 7-day export average of zero. That looks like total collapse read as one number, but the three commodities got there by different paths, and zero on the tracker is not zero for whoever is on the other end of the trade.",
+   "Le brut, le GNL et les engrais ont tous convergé vers une moyenne d’exportation sur 7 jours de zéro. Cela ressemble à un effondrement total lu comme un seul chiffre, mais les trois produits y sont parvenus par des chemins différents, et zéro sur le suivi n’est pas zéro pour celui qui se trouve à l’autre bout de l’échange."
+  ],
+  [
+   "Crude, LNG, fertilizer export index: 0 · Qatar LNG capacity lost: 17% · Saudi crude reaching markets: ~85%",
+   "Indice d’exportation brut, GNL, engrais : 0 · Capacité de GNL qatarie perdue : 17 % · Brut saoudien parvenant aux marchés : ≈ 85 %"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Hormuz </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Crude oil </span><span class=\"paper-tag\" data-filter-tag=\"lng\"> LNG </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Fertilizer </span><span class=\"paper-tag\" data-filter-tag=\"qatar\"> Qatar </span><span class=\"paper-tag\" data-filter-tag=\"india\"> India </span><span class=\"paper-tag\" data-filter-tag=\"sri-lanka\"> Sri Lanka </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thailand </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Rerouting </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Ormuz </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Pétrole brut </span><span class=\"paper-tag\" data-filter-tag=\"lng\"> GNL </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Engrais </span><span class=\"paper-tag\" data-filter-tag=\"qatar\"> Qatar </span><span class=\"paper-tag\" data-filter-tag=\"india\"> Inde </span><span class=\"paper-tag\" data-filter-tag=\"sri-lanka\"> Sri Lanka </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thaïlande </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Déroutement </span>"
+  ],
+  [
+   "Route Analysis, Panama Canal Displacement · Sept 2026",
+   "Analyse de routes, déroutement du canal de Panama · sept. 2026"
+  ],
+  [
+   "The Long Way Around: How a Grain Fleet Threaded Four Chokepoints to Dodge One.",
+   "Le long détour : comment une flotte céréalière a franchi quatre points de passage pour en éviter un."
+  ],
+  [
+   "Blocked at Panama in 2023, the intuitive workaround was Cape Horn. Almost nobody sailed it: the distances say otherwise. The fleet went east instead, traded one chokepoint for four, then lost one of those to war risk and had to move again.",
+   "Bloqué à Panama en 2023, le contournement intuitif était le cap Horn. Presque personne ne l’a emprunté : les distances disent le contraire. La flotte est partie vers l’est, a échangé un point de passage contre quatre, puis en a perdu un à cause du risque de guerre et a dû se déplacer de nouveau."
+  ],
+  [
+   "Cape Horn: +70% farther, ~0% actual use · Suez chokepoints: 4 · Peak auction: $3.975M",
+   "Cap Horn : +70 % de distance, ≈ 0 % d’usage réel · Points de passage de Suez : 4 · Enchère record : 3,975 M$"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"panama\"> Panama </span><span class=\"paper-tag\" data-filter-tag=\"suez\"> Suez </span><span class=\"paper-tag\" data-filter-tag=\"bab-el-mandeb\"> Bab-el-Mandeb </span><span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"grain\"> Grain </span><span class=\"paper-tag\" data-filter-tag=\"lng\"> LNG </span><span class=\"paper-tag\" data-filter-tag=\"lpg\"> LPG </span><span class=\"paper-tag\" data-filter-tag=\"bulk\"> Bulk </span><span class=\"paper-tag\" data-filter-tag=\"handymax\"> Handymax </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Rerouting </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"panama\"> Panama </span><span class=\"paper-tag\" data-filter-tag=\"suez\"> Suez </span><span class=\"paper-tag\" data-filter-tag=\"bab-el-mandeb\"> Bab el-Mandeb </span><span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"grain\"> Céréales </span><span class=\"paper-tag\" data-filter-tag=\"lng\"> GNL </span><span class=\"paper-tag\" data-filter-tag=\"lpg\"> GPL </span><span class=\"paper-tag\" data-filter-tag=\"bulk\"> Vrac sec </span><span class=\"paper-tag\" data-filter-tag=\"handymax\"> Handymax </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Déroutement </span>"
+  ],
+  [
+   "Strait of Hormuz, dry cargo · August 2026",
+   "Détroit d’Ormuz, vrac sec · août 2026"
+  ],
+  [
+   "Hormuz Has a Fertilizer Problem Too",
+   "Ormuz a aussi un problème d’engrais"
+  ],
+  [
+   "Urea and sulphur from the Gulf are a live, underdiscussed piece of the Hormuz disruption. The country-level dependency figures overstate it, because part of the Gulf's fertilizer trade, Oman's, never crosses the strait at all.",
+   "L’urée et le soufre du Golfe forment un pan bien réel, et peu discuté, de la perturbation d’Ormuz. Les chiffres de dépendance par pays la surestiment, car une partie du commerce d’engrais du Golfe, celui d’Oman, ne traverse jamais le détroit."
+  ],
+  [
+   "India urea, Gulf-wide: 63% · Corrected, Hormuz-specific: ~27%",
+   "Urée de l’Inde, Golfe entier : 63 % · Corrigé, spécifique à Ormuz : ≈ 27 %"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Hormuz </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Fertilizer </span><span class=\"paper-tag\" data-filter-tag=\"urea\"> Urea </span><span class=\"paper-tag\" data-filter-tag=\"india\"> India </span><span class=\"paper-tag\" data-filter-tag=\"sri-lanka\"> Sri Lanka </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thailand </span><span class=\"paper-tag\" data-filter-tag=\"oman\"> Oman </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"hormuz\"> Ormuz </span><span class=\"paper-tag\" data-filter-tag=\"fertilizer\"> Engrais </span><span class=\"paper-tag\" data-filter-tag=\"urea\"> Urée </span><span class=\"paper-tag\" data-filter-tag=\"india\"> Inde </span><span class=\"paper-tag\" data-filter-tag=\"sri-lanka\"> Sri Lanka </span><span class=\"paper-tag\" data-filter-tag=\"thailand\"> Thaïlande </span><span class=\"paper-tag\" data-filter-tag=\"oman\"> Oman </span>"
+  ],
+  [
+   "Panama Canal · May 2026, updated Aug 2026",
+   "Canal de Panama · mai 2026, mis à jour en août 2026"
+  ],
+  [
+   "El Niño Does Not Close the Panama Canal. It Throttles It. That Is the Harder Problem.",
+   "El Niño ne ferme pas le canal de Panama. Il l’étrangle. C’est le problème le plus difficile."
+  ],
+  [
+   "A drought scenario is not binary. The 2023 El Niño cut transits by 36% over nine months, shifted 100M tonnes of grain to longer routes, and imposed a freight cost penalty that fell hardest on importers with no land alternative. Live update: the throttle has already started, a year ahead of the model's own prior projection.",
+   "Un scénario de sécheresse n’est pas binaire. L’El Niño de 2023 a réduit les transits de 36 % sur neuf mois, déplacé 100 Mt de céréales vers des routes plus longues et imposé une pénalité de fret qui a frappé le plus durement les importateurs sans alternative terrestre. Mise à jour en direct : l’étranglement a déjà commencé, un an avant la projection antérieure du modèle."
+  ],
+  [
+   "Grain VaR 50% severity: $14.0B · Draft: 48.0ft · Slots cut to 34 from 3 Sep",
+   "VaR céréales, gravité 50 % : 14,0 Md$ · Tirant d’eau : 48,0 ft · Créneaux ramenés à 34 dès le 3 sept."
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"panama\"> Panama </span><span class=\"paper-tag\" data-filter-tag=\"el-nino\"> El Niño </span><span class=\"paper-tag\" data-filter-tag=\"grain\"> Grain </span><span class=\"paper-tag\" data-filter-tag=\"corn\"> Corn </span><span class=\"paper-tag\" data-filter-tag=\"soybean\"> Soybean </span><span class=\"paper-tag\" data-filter-tag=\"wheat\"> Wheat </span><span class=\"paper-tag\" data-filter-tag=\"bulk\"> Bulk </span><span class=\"paper-tag\" data-filter-tag=\"handymax\"> Handymax </span><span class=\"paper-tag\" data-filter-tag=\"capesize\"> Capesize </span><span class=\"paper-tag\" data-filter-tag=\"japan\"> Japan </span><span class=\"paper-tag\" data-filter-tag=\"china\"> China </span><span class=\"paper-tag\" data-filter-tag=\"south-korea\"> South Korea </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Rerouting </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"panama\"> Panama </span><span class=\"paper-tag\" data-filter-tag=\"el-nino\"> El Niño </span><span class=\"paper-tag\" data-filter-tag=\"grain\"> Céréales </span><span class=\"paper-tag\" data-filter-tag=\"corn\"> Maïs </span><span class=\"paper-tag\" data-filter-tag=\"soybean\"> Soja </span><span class=\"paper-tag\" data-filter-tag=\"wheat\"> Blé </span><span class=\"paper-tag\" data-filter-tag=\"bulk\"> Vrac sec </span><span class=\"paper-tag\" data-filter-tag=\"handymax\"> Handymax </span><span class=\"paper-tag\" data-filter-tag=\"capesize\"> Capesize </span><span class=\"paper-tag\" data-filter-tag=\"japan\"> Japon </span><span class=\"paper-tag\" data-filter-tag=\"china\"> Chine </span><span class=\"paper-tag\" data-filter-tag=\"south-korea\"> Corée du Sud </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Déroutement </span>"
+  ],
+  [
+   "Strait of Malacca · June 2026",
+   "Détroit de Malacca · juin 2026"
+  ],
+  [
+   "The 80 Percent Malacca Figure Is Wrong.",
+   "Le chiffre de 80 % pour Malacca est faux."
+  ],
+  [
+   "Every risk report cites the same number: roughly 80 percent of China's energy imports transit Malacca. The Narrows CDM puts China's structural crude dependency at 46.2 percent. The gap between those two numbers is where mispriced accumulation risk lives.",
+   "Tous les rapports de risque citent le même chiffre : environ 80 % des importations d’énergie de la Chine transitent par Malacca. Le CDM de Narrows situe la dépendance structurelle de la Chine en brut à 46,2 %. L’écart entre ces deux chiffres est l’endroit où se loge un risque de cumul mal évalué."
+  ],
+  [
+   "China crude dep: 46.2% · Lombok bypass: 21.6% · Overstatement: ~73%",
+   "Dépendance de la Chine au brut : 46,2 % · Contournement par Lombok : 21,6 % · Surestimation : ≈ 73 %"
+  ],
+  [
+   "<span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Crude oil </span><span class=\"paper-tag\" data-filter-tag=\"china\"> China </span><span class=\"paper-tag\" data-filter-tag=\"lombok\"> lombok </span><span class=\"paper-tag\" data-filter-tag=\"accumulation\"> accumulation </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Rerouting </span>",
+   "<span class=\"paper-tag\" data-filter-tag=\"malacca\"> Malacca </span><span class=\"paper-tag\" data-filter-tag=\"crude\"> Pétrole brut </span><span class=\"paper-tag\" data-filter-tag=\"china\"> Chine </span><span class=\"paper-tag\" data-filter-tag=\"lombok\"> Lombok </span><span class=\"paper-tag\" data-filter-tag=\"accumulation\"> cumul </span><span class=\"paper-tag\" data-filter-tag=\"rerouting\"> Déroutement </span>"
+  ],
+  [
+   "Strait of Hormuz · May 2026",
+   "Détroit d’Ormuz · mai 2026"
+  ],
+  [
+   "Iran Can Hold Out. Here Is Who Pays.",
+   "L’Iran peut tenir. Voici qui paie."
+  ],
+  [
+   "A CIA assessment gives Iran 3 to 4 months of runway. That is long enough to exhaust strategic petroleum reserves in most exposed importers. The model identifies which importers carry the highest bilateral crude and LPG exposure, at what percentage of total seaborne supply, and what supply substitution actually costs.",
+   "Une évaluation de la CIA donne à l’Iran 3 à 4 mois d’autonomie, assez pour épuiser les réserves stratégiques de pétrole de la plupart des importateurs exposés. Le modèle identifie les importateurs qui portent la plus forte exposition bilatérale en brut et en GPL, en pourcentage de l’approvisionnement maritime total, et ce que coûte réellement la substitution de l’approvisionnement."
+  ],
+  [
+   "Greece 54.6% dep · China adj. VaR $128B · 5 SE Asia LPG nations uncovered",
+   "Grèce, dépendance de 54,6 % · VaR ajustée de la Chine : 128 Md$ · 5 pays d’Asie du Sud-Est sans couverture en GPL"
+  ],
+  [
+   "The Rebalancing Is Real. It Does Not Reach Everyone.",
+   "Le rééquilibrage est réel. Il n’atteint pas tout le monde."
+  ],
+  [
+   "Three pillars, Chinese demand reduction, pipeline rerouting, and Atlantic Basin supply growth, explain why aggregate oil markets have not collapsed. They do not explain who remains exposed. The bilateral data does.",
+   "Trois piliers, la baisse de la demande chinoise, le réacheminement par oléoduc et la hausse de l’offre du bassin atlantique, expliquent pourquoi les marchés pétroliers agrégés ne se sont pas effondrés. Ils n’expliquent pas qui reste exposé. Les données bilatérales, si."
+  ],
+  [
+   "Pipeline bypass: ~4mbd · Atlantic surge: +5mbd · LPG importers: 0 of 3 pillars",
+   "Contournement par oléoduc : ≈ 4 Mb/j · Poussée atlantique : +5 Mb/j · Importateurs de GPL : 0 des 3 piliers"
+  ],
+  [
+   "Hormuz and the Limits of the Index",
+   "Ormuz et les limites de l’indice"
+  ],
+  [
+   "Why the BDTI tells you tanker rates are up 156% but not which importers face binary exposure. The toll breakeven, the LNG no-route problem, and the forward scenario matrix by importer.",
+   "Pourquoi le BDTI indique que les taux des pétroliers ont augmenté de 156 %, sans dire quels importateurs font face à une exposition binaire. Le seuil de rentabilité du péage, le problème du GNL sans route de remplacement et la matrice de scénarios prospectifs par importateur."
+  ],
+  [
+   "Japan crude 30d VaR: $4.7B · Qatar LNG: no Cape option · BDTI +156%",
+   "VaR à 30 j du Japon en brut : 4,7 Md$ · GNL du Qatar : pas d’option par le Cap · BDTI +156 %"
+  ],
+  [
+   "Strait of Malacca · May 2026",
+   "Détroit de Malacca · mai 2026"
+  ],
+  [
+   "The Malacca Toll Question Has a Number. Here It Is.",
+   "La question du péage de Malacca a un chiffre. Le voici."
+  ],
+  [
+   "Indonesia floated a Malacca transit fee. The question did not go away when they walked it back. The model calculates the diversion threshold by vessel class, the bilateral dependency matrix, and what the CII slow-steaming adjustment does to the Lombok detour cost.",
+   "L’Indonésie a évoqué des droits de transit à Malacca. La question n’a pas disparu quand elle a reculé. Le modèle calcule le seuil de déroutement par classe de navires, la matrice de dépendance bilatérale et l’effet de l’ajustement de navigation lente du CII sur le coût du détour par Lombok."
+  ],
+  [
+   "Capesize diversion threshold: $800k · Global 14d VaR: $30B · CII cost: +$21M/yr",
+   "Seuil de déroutement Capesize : 800 k$ · VaR mondiale à 14 j : 30 Md$ · Coût du CII : +21 M$/an"
+  ],
+  [
+   "Kra Isthmus · Revised October 2026",
+   "Isthme de Kra · révisé en octobre 2026"
+  ],
+  [
+   "The Kra Land Bridge Is a $29B Project Built for Containers. Malacca's Exposure Sits in Crude and Gas.",
+   "Le pont terrestre de Kra est un projet de 29 Md$ conçu pour les conteneurs. L’exposition de Malacca se situe dans le brut et le gaz."
+  ],
+  [
+   "Thailand's land bridge is a real project with real geopolitical logic, but it is built around containers. Malacca's dependency in the model sits in crude, refined products and LNG. The model shows what the land bridge does and does not change for underwriters and commodity desks.",
+   "Le pont terrestre thaïlandais est un projet réel, à la logique géopolitique réelle, mais il est bâti autour des conteneurs. La dépendance de Malacca dans le modèle se situe dans le brut, les produits raffinés et le GNL. Le modèle montre ce que le pont terrestre change et ne change pas pour les assureurs et les négociants en matières premières."
+  ],
+  [
+   "Japan crude Malacca dependency: 95.7% · Japan iron ore: 0.8% · Kra project: ~$29B, container-focused",
+   "Dépendance du Japon à Malacca pour le brut : 95,7 % · Minerai de fer du Japon : 0,8 % · Projet de Kra : ≈ 29 Md$, centré sur les conteneurs"
+  ],
+  [
+   "Model Validation · May 2026",
+   "Validation du modèle · mai 2026"
+  ],
+  [
+   "We Built the Model on 2023 Data. Then 2024 Happened.",
+   "Nous avons bâti le modèle sur les données de 2023. Puis 2024 est arrivé."
+  ],
+  [
+   "The Chokepoint Dependency Model was locked before the Houthi Red Sea campaign and Panama Canal drought began. Two disruptions then unfolded in the precise corridors the model covers. Here is a systematic account of what the model predicted and what the disruptions confirmed.",
+   "Le modèle de dépendance aux points de passage a été figé avant la campagne houthie en mer Rouge et le début de la sécheresse du canal de Panama. Deux perturbations se sont alors déroulées dans les corridors précis que couvre le modèle. Voici un bilan systématique de ce que le modèle avait prédit et de ce que les perturbations ont confirmé."
+  ],
+  [
+   "5 of 6 predictions validated · $1.4M rerouting cost confirmed · Greece ranked #1 European exposure: confirmed",
+   "5 prédictions sur 6 validées · Coût de déroutement de 1,4 M$ confirmé · Grèce n° 1 de l’exposition européenne : confirmé"
+  ],
+  [
+   "No papers found for this filter combination. <a href=\"/analysis\" style=\"color:var(--blue);\">Clear filters</a>",
+   "Aucun texte ne correspond à cette combinaison de filtres. <a href=\"/analysis\" style=\"color:var(--blue);\">Effacer les filtres</a>"
+  ],
+  [
+   "Filter",
+   "Filtrer"
+  ],
+  [
+   "Clear",
+   "Effacer"
+  ],
+  [
+   "Read the analysis",
+   "Lire l’analyse"
+  ]
+ ],
+ "js": []
+}

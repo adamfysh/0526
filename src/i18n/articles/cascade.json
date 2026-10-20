@@ -1,0 +1,695 @@
+{
+ "path": "cascade",
+ "meta": {
+  "title": "CASCADE | The Narrows",
+  "description": "CASCADE : démonstration sur données illustratives de la manière dont un point de passage fermé se propage à une flotte, par fenêtre de décision et par navire."
+ },
+ "pairs": [
+  [
+   "The Narrows",
+   "The Narrows"
+  ],
+  [
+   "CASCADE",
+   "CASCADE"
+  ],
+  [
+   "Explore CASCADE+ <span class=\"bm-arrow\">→</span>",
+   "Explorer CASCADE+ <span class=\"bm-arrow\">→</span>"
+  ],
+  [
+   "Reset",
+   "Réinitialiser"
+  ],
+  [
+   "<span class=\"spillover-icon\">Cascade link</span> <span class=\"spillover-text\" id=\"spilloverText\"></span> <span class=\"spillover-link\" id=\"spilloverLink\"></span>",
+   "<span class=\"spillover-icon\">Lien en cascade</span> <span class=\"spillover-text\" id=\"spilloverText\"></span> <span class=\"spillover-link\" id=\"spilloverLink\"></span>"
+  ],
+  [
+   "Total exposure",
+   "Exposition totale"
+  ],
+  [
+   "Locked",
+   "Verrouillé"
+  ],
+  [
+   "In-window",
+   "Dans la fenêtre"
+  ],
+  [
+   "Pre-commitment",
+   "Pré-engagement"
+  ],
+  [
+   "Seafarers exposed",
+   "Gens de mer exposés"
+  ],
+  [
+   "Execute cascade →",
+   "Exécuter la cascade →"
+  ],
+  [
+   "Divert all pre-commitment",
+   "Dérouter tout le pré-engagement"
+  ],
+  [
+   "Cascade executed.",
+   "Cascade exécutée."
+  ],
+  [
+   "Loaded and transiting. Bills of lading issued. Physically committed, no diversion window.",
+   "Chargé et en transit. Connaissements émis. Engagé physiquement : aucune fenêtre de déroutement."
+  ],
+  [
+   "Approaching the strait. Diversion possible but costly; each vessel tracks its own closing window.",
+   "Approche du détroit. Déroutement possible mais coûteux ; chaque navire suit sa propre fenêtre de fermeture."
+  ],
+  [
+   "All diverted or committed",
+   "Tous déroutés ou engagés"
+  ],
+  [
+   "Liftings not yet loaded. Full optionality; zero diversion cost.",
+   "Enlèvements pas encore chargés. Pleine optionalité ; coût de déroutement nul."
+  ],
+  [
+   "All diverted",
+   "Tous déroutés"
+  ],
+  [
+   "Diverted",
+   "Dérouté"
+  ],
+  [
+   "Out of chokepoint risk window. Route detail and CII impact shown per vessel.",
+   "Hors de la fenêtre de risque du point de passage. Détail de la route et impact CII indiqués par navire."
+  ],
+  [
+   "No vessels diverted yet",
+   "Aucun navire dérouté pour l’instant"
+  ],
+  [
+   "Illustrative fleet dataset. Values: cargo at risk (USD). Decision windows based on simulated proximity. CII ratings per IMO MARPOL Annex VI Reg.28. The Narrows CDM methodology © 2026",
+   "Jeu de données de flotte illustratif. Valeurs : cargaison à risque (USD). Fenêtres de décision fondées sur une proximité simulée. Notations CII selon l’annexe VI de MARPOL de l’OMI, règle 28. Méthodologie CDM de The Narrows © 2026"
+  ]
+ ],
+ "js": [
+  [
+   "return m>=1000?'$'+(m/1000).toFixed(2)+'B':'$'+m+'M';",
+   "return m>=1000?(m/1000).toFixed(2).replace('.',',')+'\\u00a0Md$':m+'\\u00a0M$';"
+  ],
+  [
+   "let cur=parseFloat(el.textContent.replace(/[$BM,]/g,''));\n  if(el.textContent.includes('B'))cur*=1000;",
+   "let cur=parseFloat(el.textContent.replace(/[^0-9,.]/g,'').replace(',','.'));\n  if(el.textContent.includes('Md'))cur*=1000;"
+  ],
+  [
+   "+$2.1M bunker",
+   "+2,1 M$ de soute"
+  ],
+  [
+   "+$2.4M bunker",
+   "+2,4 M$ de soute"
+  ],
+  [
+   "cost:'+$0.3M'",
+   "cost:'+0,3 M$'"
+  ],
+  [
+   "cost:'+$0.8M'",
+   "cost:'+0,8 M$'"
+  ],
+  [
+   "cost:'+$0.4M'",
+   "cost:'+0,4 M$'"
+  ],
+  [
+   "'View '+linkedName+' \\u2192'",
+   "'Voir '+linkedName+' \\u2192'"
+  ],
+  [
+   ":'None'",
+   ":'Aucun'"
+  ],
+  [
+   "New chokepoints:",
+   "Nouveaux points de passage :"
+  ],
+  [
+   "No diversion window &middot; committed",
+   "Aucune fenêtre de déroutement &middot; engagé"
+  ],
+  [
+   "'+'+ar.days+'d",
+   "'+'+String(ar.days).replace('.',',')+' j"
+  ],
+  [
+   "' +'+arPre.days+'d",
+   "' +'+String(arPre.days).replace('.',',')+' j"
+  ],
+  [
+   "g.days+'d'",
+   "String(g.days).replace('.',',')+' j'"
+  ],
+  [
+   "Divert &rarr;",
+   "Dérouter &rarr;"
+  ],
+  [
+   "} crew${",
+   "} membres d’équipage${"
+  ],
+  [
+   "<span class=\"card-cls\">${v.cls}</span>",
+   "<span class=\"card-cls\">${({Container:'Porte-conteneurs',Bulk:'Vraquier',LNG:'GNL',Products:'Produits'})[v.cls]||v.cls}</span>"
+  ],
+  [
+   ">${v.cargo}</span>",
+   ">${({Crude:'Brut',LNG:'GNL',Container:'Conteneurs',Bulk:'Vrac',Products:'Produits'})[v.cargo]||v.cargo}</span>"
+  ],
+  [
+   ">Residual exposure<",
+   ">Exposition résiduelle<"
+  ],
+  [
+   "${fmt(divertedV)} diverted (${Math.round(divertedV/(remaining+divertedV)*100)}% of original)",
+   "${fmt(divertedV)} déroutés (${Math.round(divertedV/(remaining+divertedV)*100)}\\u00a0% de l’initial)"
+  ],
+  [
+   ">Seafarers cleared<",
+   ">Gens de mer mis à l’abri<"
+  ],
+  [
+   "${allDiverted.length} vessels${divertedUk>0?' · '+divertedUk+' UK nationals':''} out of risk window",
+   "${allDiverted.length} navires${divertedUk>0?' · '+divertedUk+' ressortissants britanniques':''} hors de la fenêtre de risque"
+  ],
+  [
+   "These seafarers will not now transit the affected strait. Locked and remaining in-window crew are still in the risk zone.",
+   "Ces gens de mer ne transiteront plus par le détroit concerné. Les équipages verrouillés et ceux restant dans la fenêtre sont toujours dans la zone de risque."
+  ],
+  [
+   "${g.vessels.length} vessels${g.days>0?' · +'",
+   "${g.vessels.length} navire${g.vessels.length>1?'s':''}${g.days>0?' · +'"
+  ],
+  [
+   "' · no extra transit'",
+   "' · aucun transit supplémentaire'"
+  ],
+  [
+   "' · New CPs: '",
+   "' · Nouveaux points de passage : '"
+  ],
+  [
+   "' diverted · '",
+   "' déroutés · '"
+  ],
+  [
+   "preRemaining.length)+' vessels'",
+   "preRemaining.length)+' navires'"
+  ],
+  [
+   "Ukrainian long-range strikes on tankers loading Russian and Kazakh crude at the CPC pipeline terminus. Two vessels hit at CPC in the past week alone. Suezmax rates on this route have spiked toward all-time highs; not purely a local shock: Red Sea-avoiding cargo is competing for the same Suezmax tonnage pool, on top of the direct Ukraine risk.",
+   "Frappes ukrainiennes à longue portée sur des pétroliers chargeant du brut russe et kazakh au terminus de l’oléoduc CPC. Deux navires touchés au CPC rien que la semaine dernière. Les taux Suezmax sur cette route ont grimpé vers des sommets historiques ; ce n’est pas seulement un choc local : les cargaisons évitant la mer Rouge se disputent le même bassin de tonnage Suezmax, en plus du risque ukrainien direct."
+  ],
+  [
+   "In-window vessels approaching Novorossiysk / CPC anchorage. Elevated strike risk at berth and at anchor. War-risk premiums moving faster than the underlying incident rate would suggest on its own.",
+   "Navires dans la fenêtre approchant du mouillage de Novorossiïsk / CPC. Risque de frappe élevé à quai et au mouillage. Les primes de risque de guerre augmentent plus vite que le taux d’incidents sous-jacent ne le laisserait penser à lui seul."
+  ],
+  [
+   "World\\'s busiest strait. 90,000 vessels/year. Narrows to 2.5nm at Phillips Channel. VLCCs already use Lombok at full draught. Residual piracy risk in Singapore Strait approaches.",
+   "Le détroit le plus fréquenté du monde. 90 000 navires par an. Se rétrécit à 2,5 nm au chenal Phillips. Les VLCC utilisent déjà Lombok à pleine charge. Risque résiduel de piraterie aux approches du détroit de Singapour."
+  ],
+  [
+   "In-window vessels approaching the Malacca/Singapore approach zone. Lombok diversion remains available for tankers. MSSP/ReCAAP coordination required for strait closure.",
+   "Navires dans la fenêtre approchant la zone de Malacca / Singapour. Le déroutement par Lombok reste disponible pour les pétroliers. Coordination MSSP/ReCAAP requise en cas de fermeture du détroit."
+  ],
+  [
+   "Part of this corridor\\u2019s rate spike traces back to Bab el-Mandeb; vessels avoiding the Red Sea are bidding up the same Suezmax pool that serves this route.",
+   "Une part de la hausse des taux de ce corridor remonte à Bab el-Mandeb ; les navires évitant la mer Rouge font monter les enchères sur le même bassin Suezmax qui dessert cette route."
+  ],
+  [
+   "Active Houthi anti-ship campaign. 40+ vessel attacks since Oct 2023. MSC, BP, and Maersk have suspended Red Sea routing. JWC war risk premiums elevated.",
+   "Campagne houthie active contre les navires. Plus de 40 attaques de navires depuis oct. 2023. MSC, BP et Maersk ont suspendu le routage par la mer Rouge. Primes de risque de guerre JWC élevées."
+  ],
+  [
+   "In-window vessels approaching Red Sea. Active Houthi threat at this range. UKMTO Dubai advisory in effect. Naval escort requests can be made via UKMTO.",
+   "Navires dans la fenêtre approchant de la mer Rouge. Menace houthie active à cette distance. Avis UKMTO Dubaï en vigueur. Des demandes d’escorte navale peuvent être faites via l’UKMTO."
+  ],
+  [
+   "21M bbl/day. Mandatory exit for all Persian Gulf crude and LNG. Iran interdiction capability. No alternative route for Gulf-loaded vessels.",
+   "21 M bbl/jour. Sortie obligatoire pour tout le brut et le GNL du Golfe Persique. Capacité d’interdiction de l’Iran. Aucune route alternative pour les navires chargés dans le Golfe."
+  ],
+  [
+   "Cape-diverted cargo is competing for Suezmax tonnage that would otherwise serve the Black Sea; this corridor is not isolated from that one.",
+   "Les cargaisons déroutées par le Cap sont en concurrence pour le tonnage Suezmax qui servirait autrement la mer Noire ; ce corridor n’est pas isolé de celui-là."
+  ],
+  [
+   "Locked and remaining in-window vessels stay on standard route. UKMTO Dubai is the reporting authority for vessels in the area.",
+   "Les navires verrouillés et ceux restant dans la fenêtre gardent la route standard. L’UKMTO Dubaï est l’autorité de signalement pour les navires de la zone."
+  ],
+  [
+   "Gulf of Oman, 200nm south of Hormuz. Ras Tanura loading T+3. Declining inbound transit; Atlantic cargo fixture viable.",
+   "Golfe d’Oman, à 200 nm au sud d’Ormuz. Chargement à Ras Tanura à T+3. Transit entrant refusé ; fixation d’une cargaison atlantique viable."
+  ],
+  [
+   "Coal cargo, Rotterdam-bound. Indian Ocean northbound, approaching Gulf of Aden. Cape alternative adds 16 days.",
+   "Cargaison de charbon, destination Rotterdam. Océan Indien, cap nord, approche du golfe d’Aden. L’alternative par le Cap ajoute 16 jours."
+  ],
+  [
+   "Gulf of Oman. Kharg Island loading fixture T+3. Can decline inbound Hormuz transit before crossing.",
+   "Golfe d’Oman. Fixation de chargement à l’île de Kharg à T+3. Peut refuser le transit entrant par Ormuz avant la traversée."
+  ],
+  [
+   "Bunkering Fujairah. Inbound loading fixture at Ruwais T+2. Can decline transit and redirect cargo.",
+   "Soutage à Fujairah. Fixation de chargement entrant à Ruwais à T+2. Peut refuser le transit et rediriger la cargaison."
+  ],
+  [
+   "Grain cargo, Egypt-bound. Indian Ocean northbound. Gulf of Aden, Bab passage in 6h. No option.",
+   "Cargaison de céréales, destination Égypte. Océan Indien, cap nord. Golfe d’Aden, passage de Bab dans 6 h. Aucune option."
+  ],
+  [
+   "Approaching CPC anchorage. Charterer reviewing after this week\\u2019s strikes.",
+   "Approche du mouillage CPC. L’affréteur réexamine après les frappes de cette semaine."
+  ],
+  [
+   "Liftings not yet confirmed. Re-nomination to a non-CPC terminal viable.",
+   "Enlèvements pas encore confirmés. Renommage vers un terminal hors CPC viable."
+  ],
+  [
+   "CII E: non-compliant; additional transit worsens port-state exposure",
+   "CII E : non conforme ; un transit supplémentaire aggrave l’exposition à l’État du port"
+  ],
+  [
+   "Laden inside Gulf. Hormuz transit in 4 days. Cargo documents issued.",
+   "Chargé dans le Golfe. Transit d’Ormuz dans 4 jours. Documents de cargaison émis."
+  ],
+  [
+   "Crude tanker. Laden, Singapore-bound. Draft within Malacca limits.",
+   "Pétrolier de brut. Chargé, destination Singapour. Tirant d’eau dans les limites de Malacca."
+  ],
+  [
+   "CII D: below threshold; Cape diversion deepens rating pressure",
+   "CII D : sous le seuil ; un déroutement par le Cap accentue la pression sur la notation"
+  ],
+  [
+   "Liftings confirmed. Vessel not nominated. Zero diversion cost.",
+   "Enlèvements confirmés. Navire non désigné. Coût de déroutement nul."
+  ],
+  [
+   "Container feeder. Port Klang to Shanghai. No alternative port.",
+   "Feeder porte-conteneurs. Port Klang vers Shanghai. Aucun port alternatif."
+  ],
+  [
+   "UK-flagged mega-box. Loading T-20. Philippines routing viable.",
+   "Méga porte-conteneurs sous pavillon britannique. Chargement à T-20. Routage par les Philippines viable."
+  ],
+  [
+   "Loaded at CPC Marine Terminal. Departure imminent. No option.",
+   "Chargé au terminal maritime CPC. Départ imminent. Aucune option."
+  ],
+  [
+   "CPC Marine Terminal, single-point mooring. Loading complete.",
+   "Terminal maritime CPC, point d’amarrage unique. Chargement terminé."
+  ],
+  [
+   "No commitment made. Alternate Black Sea terminal available.",
+   "Aucun engagement pris. Autre terminal de la mer Noire disponible."
+  ],
+  [
+   "Crude. Indian Ocean. Can divert to Lombok at minimal cost.",
+   "Brut. Océan Indien. Peut se dérouter vers Lombok à coût minimal."
+  ],
+  [
+   "Loading programme T-24. Redirect to North Sea or US Gulf.",
+   "Programme de chargement à T-24. Redirection vers la mer du Nord ou le golfe des États-Unis."
+  ],
+  [
+   "Indian Ocean. Cape diversion requires charterer approval.",
+   "Océan Indien. Le déroutement par le Cap exige l’accord de l’affréteur."
+  ],
+  [
+   "Crude. Liftings in negotiation. Lombok nomination viable.",
+   "Brut. Enlèvements en négociation. Désignation vers Lombok viable."
+  ],
+  [
+   "UK-flagged LNG. Laden, Korea-bound. 8h to Malacca entry.",
+   "GNL sous pavillon britannique. Chargé, destination Corée. À 8 h de l’entrée de Malacca."
+  ],
+  [
+   "LNG carrier. Loading T-22. Lombok route at zero premium.",
+   "Méthanier. Chargement à T-22. Route de Lombok sans prime."
+  ],
+  [
+   "Products. No commitment. Sunda Strait alternative ready.",
+   "Produits. Aucun engagement. Alternative par le détroit de la Sonde prête."
+  ],
+  [
+   "Liftings in negotiation. Counterparty not yet notified.",
+   "Enlèvements en négociation. Contrepartie pas encore notifiée."
+  ],
+  [
+   "Box ship. T-20 loading. Cape diversion at zero premium.",
+   "Porte-conteneurs. Chargement à T-20. Déroutement par le Cap sans prime."
+  ],
+  [
+   "Mega-box ship. Malacca transit booked. Fully committed.",
+   "Méga porte-conteneurs. Transit de Malacca réservé. Entièrement engagé."
+  ],
+  [
+   "Large box ship. Bay of Bengal. 72h to Malacca approach.",
+   "Grand porte-conteneurs. Golfe du Bengale. À 72 h de l’approche de Malacca."
+  ],
+  [
+   "Container. Loading T-21. Alternative port options open.",
+   "Conteneurs. Chargement à T-21. Options de port alternatif ouvertes."
+  ],
+  [
+   "Indian Ocean. Suez or Cape decision required by 0600Z.",
+   "Océan Indien. Décision Suez ou Cap requise avant 0600Z."
+  ],
+  [
+   "Crude. Loading T-21. Redirect to Cape without penalty.",
+   "Brut. Chargement à T-21. Redirection par le Cap sans pénalité."
+  ],
+  [
+   "Laden, Kerch Strait approach. Bills of lading issued.",
+   "Chargé, approche du détroit de Kertch. Connaissements émis."
+  ],
+  [
+   "Loaded at Ras Tanura. Mid-Strait transit. No option.",
+   "Chargé à Ras Tanura. Transit en plein détroit. Aucune option."
+  ],
+  [
+   "Contract signed. Loading T-21. Redirect to Atlantic.",
+   "Contrat signé. Chargement à T-21. Redirection vers l’Atlantique."
+  ],
+  [
+   "Red Sea transit. MSC feeder. Committed to Suez slot.",
+   "Transit en mer Rouge. Feeder MSC. Engagé sur un créneau de Suez."
+  ],
+  [
+   "UK-flagged. Cape route option open. Window closing.",
+   "Sous pavillon britannique. Option route du Cap ouverte. Fenêtre en train de se fermer."
+  ],
+  [
+   "UK-flagged LNG. Loading T-18. Cape route preferred.",
+   "GNL sous pavillon britannique. Chargement à T-18. Route du Cap préférée."
+  ],
+  [
+   "Anchorage off Novorossiysk. Cargo documents issued.",
+   "Mouillage au large de Novorossiïsk. Documents de cargaison émis."
+  ],
+  [
+   "Persian Gulf approach. Berth confirmation pending.",
+   "Approche du golfe Persique. Confirmation de poste à quai en attente."
+  ],
+  [
+   "Strait approach. Final window, divert or transit.",
+   "Approche du détroit. Dernière fenêtre ; dérouter ou transiter."
+  ],
+  [
+   "Charter fixture not yet signed. Full optionality.",
+   "Affrètement pas encore signé. Pleine optionalité."
+  ],
+  [
+   "Novorossiysk / Kerch Strait / CPC Marine Terminal",
+   "Novorossiïsk / détroit de Kertch / terminal maritime CPC"
+  ],
+  [
+   "Loaded at Novorossiysk. Bosphorus transit booked.",
+   "Chargé à Novorossiïsk. Transit du Bosphore réservé."
+  ],
+  [
+   "Charter fixture in negotiation. Full optionality.",
+   "Affrètement en négociation. Pleine optionalité."
+  ],
+  [
+   "Refined products. Jurong Island loading complete.",
+   "Produits raffinés. Chargement terminé à l’île de Jurong."
+  ],
+  [
+   "Loading Jubail. Departure 6h. Physically locked.",
+   "Chargement à Jubail. Départ dans 6 h. Physiquement verrouillé."
+  ],
+  [
+   "Laden. Escorted segment ends at Bab. Proceeding.",
+   "Chargé. Le segment escorté prend fin à Bab. En route."
+  ],
+  [
+   "Bunkering Fujairah. In JWC Listed Area. Urgent.",
+   "Soutage à Fujairah. En zone listée JWC. Urgent."
+  ],
+  [
+   "Products tanker. Loaded at Yanbu. Bab approach.",
+   "Pétrolier de produits. Chargé à Yanbu. Approche de Bab."
+  ],
+  [
+   "UK-flagged LNG carrier. Charter not yet signed.",
+   "Méthanier sous pavillon britannique. Affrètement pas encore signé."
+  ],
+  [
+   "Indian Ocean. Bills of lading signed at Basra.",
+   "Océan Indien. Connaissements signés à Bassora."
+  ],
+  [
+   "Loading T-22. West Africa substitution viable.",
+   "Chargement à T-22. Substitution par l’Afrique de l’Ouest viable."
+  ],
+  [
+   "Arabian Sea. Bills of lading issued at Jubail.",
+   "Mer d’Arabie. Connaissements émis à Jubail."
+  ],
+  [
+   "Gulf of Aden approach. UKMTO advisory flagged.",
+   "Approche du golfe d’Aden. Avis UKMTO signalé."
+  ],
+  [
+   "LNG carrier. Japan-bound. Lombok route viable.",
+   "Méthanier. Destination Japon. Route de Lombok viable."
+  ],
+  [
+   "Oman anchorage. Awaiting convoy slot. Loaded.",
+   "Mouillage d’Oman. En attente d’un créneau de convoi. Chargé."
+  ],
+  [
+   "Arabian Sea. Red Sea vs Cape: 17-day premium.",
+   "Mer d’Arabie. Mer Rouge contre Cap : 17 jours de prime."
+  ],
+  [
+   "Container ship. Philippines reroute possible.",
+   "Porte-conteneurs. Déroutement par les Philippines possible."
+  ],
+  [
+   "Arabian Sea. Charterer nomination confirmed.",
+   "Mer d’Arabie. Désignation de l’affréteur confirmée."
+  ],
+  [
+   "Liftings in negotiation. No commitment made.",
+   "Enlèvements en négociation. Aucun engagement pris."
+  ],
+  [
+   "Gulf of Aden. Bab passage in 18h. No option.",
+   "Golfe d’Aden. Passage de Bab dans 18 h. Aucune option."
+  ],
+  [
+   "LNG carrier. Japan delivery. Transit in 12h.",
+   "Méthanier. Livraison au Japon. Transit dans 12 h."
+  ],
+  [
+   "Products. Sunda Strait alternative feasible.",
+   "Produits. Alternative par le détroit de la Sonde réalisable."
+  ],
+  [
+   "Box ship. Andaman Sea. Decision window: 18h.",
+   "Porte-conteneurs. Mer d’Andaman. Fenêtre de décision : 18 h."
+  ],
+  [
+   "Gulf of Aden. Bab el-Mandeb passage in 36h.",
+   "Golfe d’Aden. Passage de Bab el-Mandeb dans 36 h."
+  ],
+  [
+   "Crude. Singapore anchorage. Awaiting pilot.",
+   "Brut. Mouillage de Singapour. En attente du pilote."
+  ],
+  [
+   "Fujairah approach. Window closes at 0600Z.",
+   "Approche de Fujairah. La fenêtre se ferme à 0600Z."
+  ],
+  [
+   "North-bound. Suez Canal booking confirmed.",
+   "Vers le nord. Réservation du canal de Suez confirmée."
+  ],
+  [
+   "Final approach. Divert or hold for escort.",
+   "Dernière approche. Dérouter ou attendre une escorte."
+  ],
+  [
+   "Crude. Indian Ocean. Lombok adds 1.5 days.",
+   "Brut. Océan Indien. Lombok ajoute 1,5 jour."
+  ],
+  [
+   "Re-nominate to non-CPC Black Sea terminal",
+   "Renommer vers un terminal de la mer Noire hors CPC"
+  ],
+  [
+   "Black Sea approach. Convoy slot pending.",
+   "Approche de la mer Noire. Créneau de convoi en attente."
+  ],
+  [
+   "Loading Ras Tanura. Departure imminent.",
+   "Chargement à Ras Tanura. Départ imminent."
+  ],
+  [
+   "Bunkering Djibouti. In JWC Listed Area.",
+   "Soutage à Djibouti. En zone listée JWC."
+  ],
+  [
+   "Feeder. T-22. Cape route if instructed.",
+   "Feeder. T-22. Route du Cap sur instruction."
+  ],
+  [
+   "Container ship. Bills of lading issued.",
+   "Porte-conteneurs. Connaissements émis."
+  ],
+  [
+   "Crude tanker. Bay of Bengal, inbound.",
+   "Pétrolier de brut. Golfe du Bengale, en route vers l’est."
+  ],
+  [
+   "Arabian Sea. Cargo documents issued.",
+   "Mer d’Arabie. Documents de cargaison émis."
+  ],
+  [
+   "LNG carrier. Charter not yet signed.",
+   "Méthanier. Affrètement pas encore signé."
+  ],
+  [
+   "Await naval-escorted convoy slot",
+   "Attendre un créneau de convoi escorté par la marine"
+  ],
+  [
+   "Crude. Liftings in negotiation.",
+   "Brut. Enlèvements en négociation."
+  ],
+  [
+   "Southeast Asia / Indian Ocean",
+   "Asie du Sud-Est / océan Indien"
+  ],
+  [
+   "Atlantic / North Sea re-load",
+   "Rechargement Atlantique / mer du Nord"
+  ],
+  [
+   "Persian Gulf / Gulf of Oman",
+   "Golfe Persique / golfe d’Oman"
+  ],
+  [
+   "Divert all pre-commitment",
+   "Dérouter tout le pré-engagement"
+  ],
+  [
+   "Re-nominate loading port",
+   "Renommer le port de chargement"
+  ],
+  [
+   "Black Sea / CPC Terminal",
+   "Mer Noire / terminal CPC"
+  ],
+  [
+   "Decline inbound transit",
+   "Refuser le transit entrant"
+  ],
+  [
+   "Freight adjustment only",
+   "Ajustement de fret seulement"
+  ],
+  [
+   "+$1.1M war-risk premium",
+   "+1,1 M$ de prime de risque de guerre"
+  ],
+  [
+   " vessels · free to move",
+   " navires · libres de se déplacer"
+  ],
+  [
+   "Pre-commitment diverted",
+   "Pré-engagement dérouté"
+  ],
+  [
+   "+$0.9M freight premium",
+   "+0,9 M$ de prime de fret"
+  ],
+  [
+   "Red Sea / Gulf of Aden",
+   "Mer Rouge / golfe d’Aden"
+  ],
+  [
+   " vessels · window open",
+   " navires · fenêtre ouverte"
+  ],
+  [
+   " remaining exposure · ",
+   " d’exposition résiduelle · "
+  ],
+  [
+   " vessels rerouted via ",
+   " navires déroutés via "
+  ],
+  [
+   "Lombok (T2 · not JWC)",
+   "Lombok (T2 · hors JWC)"
+  ],
+  [
+   "Freight premium only",
+   "Prime de fret seulement"
+  ],
+  [
+   " vessels · no option",
+   " navires · aucune option"
+  ],
+  [
+   "Philippines passage",
+   "Passage des Philippines"
+  ],
+  [
+   "Cape of Good Hope",
+   "cap de Bonne-Espérance"
+  ],
+  [
+   "Strait of Malacca",
+   "Détroit de Malacca"
+  ],
+  [
+   "on standard route",
+   "sur la route standard"
+  ],
+  [
+   "Strait of Hormuz",
+   "Détroit d’Ormuz"
+  ],
+  [
+   "JWC Listed · T1",
+   "Listé JWC · T1"
+  ],
+  [
+   "JWC Listed · T3",
+   "Listé JWC · T3"
+  ],
+  [
+   "Black Sea / CPC",
+   "Mer Noire / CPC"
+  ],
+  [
+   "Not JWC Listed",
+   "Non listé JWC"
+  ],
+  [
+   "Lombok Strait",
+   "Détroit de Lombok"
+  ],
+  [
+   "Black Sea",
+   "Mer Noire"
+  ]
+ ]
+}

@@ -1,0 +1,570 @@
+{
+ "path": "analysis/model-validation-2024",
+ "meta": {
+  "title": "Validation du modèle : perturbations de 2024 | The Narrows",
+  "description": "Le modèle de dépendance aux points de passage a été bâti sur les données de 2023 et figé avant le début de la campagne houthie en mer Rouge et de la sécheresse du canal de Panama. Voici ce qu’il avait prédit et ce que les perturbations ont confirmé."
+ },
+ "pairs": [
+  [
+   "<span class=\"article-eyebrow-line\"></span> Model Validation · Bab-el-Mandeb · Panama Canal · 2024",
+   "<span class=\"article-eyebrow-line\"></span> Validation du modèle · Bab el-Mandeb · canal de Panama · 2024"
+  ],
+  [
+   "We built the model on 2023 data.<br><em>Then 2024 happened.</em>",
+   "Nous avons bâti le modèle sur les données de 2023.<br><em>Puis 2024 est arrivé.</em>"
+  ],
+  [
+   "The Chokepoint Dependency Model was completed and locked before two of the most significant maritime disruptions in recent years began. Here is a systematic account of what the model predicted and what the disruptions confirmed.",
+   "Le modèle de dépendance aux points de passage a été achevé et figé avant le début de deux des perturbations maritimes les plus importantes de ces dernières années. Voici un bilan systématique de ce que le modèle avait prédit et de ce que les perturbations ont confirmé."
+  ],
+  [
+   "<span>The Narrows</span> <span class=\"article-meta-dot\"></span> <span>May 2026</span> <span class=\"article-meta-dot\"></span> <span>12 min read</span>",
+   "<span>The Narrows</span> <span class=\"article-meta-dot\"></span> <span>mai 2026</span> <span class=\"article-meta-dot\"></span> <span>12 min de lecture</span>"
+  ],
+  [
+   "Validation summary",
+   "Synthèse de la validation"
+  ],
+  [
+   "Six predictions testable against live data. <strong>Five validated directly.</strong> One partial. No false positives.",
+   "Six prédictions testables sur des données réelles. <strong>Cinq validées directement.</strong> Une partielle. Aucun faux positif."
+  ],
+  [
+   "Rerouting cost: per large tanker",
+   "Coût de déroutement : par grand pétrolier"
+  ],
+  [
+   "Predicted before disruption. Actual: $1.0–1.4M (UNCTAD / World Bank)",
+   "Prédit avant la perturbation. Réel : 1,0 $ à 1.4M (CNUCED / Banque mondiale)"
+  ],
+  [
+   "✓ Validated",
+   "✓ Validé"
+  ],
+  [
+   "Cape of Good Hope detour",
+   "Détour par le cap de Bonne-Espérance"
+  ],
+  [
+   "+14 days",
+   "+14 jours"
+  ],
+  [
+   "Predicted before disruption. Actual: +10–14 days (World Bank, UNCTAD)",
+   "Prédit avant la perturbation. Réel : +10 à 14 jours (Banque mondiale, CNUCED)"
+  ],
+  [
+   "Most exposed European crude importer",
+   "Importateur européen de brut le plus exposé"
+  ],
+  [
+   "Greece",
+   "Grèce"
+  ],
+  [
+   "Model ranked Greece #1 at 54.6% dependency. Disruption confirmed acute refiner pressure.",
+   "Le modèle a classé la Grèce n° 1 avec 54,6 % de dépendance. La perturbation a confirmé une forte pression sur les raffineurs."
+  ],
+  [
+   "Top Panama commodity: dollar exposure",
+   "Premier produit à Panama : exposition en dollars"
+  ],
+  [
+   "LNG #1",
+   "GNL n° 1"
+  ],
+  [
+   "Model ranked LNG first. Actual: LNG transits fell 66%, largest decline of any commodity class.",
+   "Le modèle a classé le GNL premier. Réel : les transits de GNL ont chuté de 66 %, la plus forte baisse de toutes les classes de produits."
+  ],
+  [
+   "In late 2023 and early 2024, two maritime corridors failed simultaneously. Houthi attacks on commercial shipping in the Red Sea corridor caused the Bab-el-Mandeb strait to lose roughly 70% of its transit volume between December 2023 and April 2024. At the same time, a severe drought in Central America forced the Panama Canal to cut its daily transit allowance in half, with liquefied natural gas carriers seeing a 66% fall in transits.",
+   "Fin 2023 et début 2024, deux corridors maritimes ont défailli simultanément. Les attaques houthies contre la navigation commerciale dans le corridor de la mer Rouge ont fait perdre au détroit de Bab el-Mandeb environ 70 % de son volume de transit entre décembre 2023 et avril 2024. Dans le même temps, une grave sécheresse en Amérique centrale a obligé le canal de Panama à réduire de moitié son quota quotidien de transits, les méthaniers voyant leurs transits chuter de 66 %."
+  ],
+  [
+   "Neither event was in the Chokepoint Dependency Model's data. The model was built on 2023 UN Comtrade bilateral trade flows and locked at its initial parameters before either disruption began. It had no information about the Houthi campaign or the drought severity. What it did have was a set of structural predictions: which importing countries depended most heavily on each corridor, which commodities dominated that exposure, and what rerouting would cost per voyage if the corridor failed.",
+   "Aucun de ces deux événements ne figurait dans les données du modèle de dépendance aux points de passage. Le modèle a été bâti sur les flux commerciaux bilatéraux UN Comtrade de 2023 et figé à ses paramètres initiaux avant le début de l’une ou l’autre perturbation. Il n’avait aucune information sur la campagne houthie ni sur la gravité de la sécheresse. Il disposait en revanche d’un ensemble de prédictions structurelles : quels pays importateurs dépendaient le plus fortement de chaque corridor, quels produits dominaient cette exposition et combien coûterait un déroutement par voyage si le corridor défaillait."
+  ],
+  [
+   "Two disruptions then tested those predictions against live data. What follows is an honest account of what the model got right, what it got partly right, and what it was never designed to predict.",
+   "Deux perturbations ont ensuite confronté ces prédictions aux données réelles. Ce qui suit est un compte rendu honnête de ce que le modèle a bien prédit, de ce qu’il a partiellement prédit et de ce qu’il n’a jamais été conçu pour prédire."
+  ],
+  [
+   "The appropriate use of the model is to pre-position analysis for when disruptions occur, not to forecast the disruptions themselves.",
+   "L’usage approprié du modèle est de pré-positionner l’analyse pour le moment où surviennent des perturbations, et non de prévoir les perturbations elles-mêmes."
+  ],
+  [
+   "<strong>What the model predicts, and what it does not.</strong> The Chokepoint Dependency Model is not a forecasting tool. It does not predict when a corridor will fail, how severe a disruption will be, or what freight rates will do in response. What it predicts is exposure: which importers carry the highest dependency on a given corridor, in which commodities, at what bilateral trade value, and what the per-voyage rerouting cost will be if the corridor closes. Those are the three dimensions tested below.",
+   "<strong>Ce que le modèle prédit, et ce qu’il ne prédit pas.</strong> Le modèle de dépendance aux points de passage n’est pas un outil de prévision. Il ne prédit ni quand un corridor défaillira, ni la gravité d’une perturbation, ni la réaction des taux de fret. Ce qu’il prédit, c’est l’exposition : quels importateurs portent la plus forte dépendance envers un corridor donné, dans quels produits, à quelle valeur commerciale bilatérale, et quel sera le coût de déroutement par voyage si le corridor ferme. Ce sont les trois dimensions testées ci-dessous."
+  ],
+  [
+   "Test 1: Bab-el-Mandeb rerouting cost",
+   "Test 1 : coût de déroutement à Bab el-Mandeb"
+  ],
+  [
+   "The model predicted $1.4 million per voyage via the Cape. Actuals came in at $1.0–1.4 million. This is the cleanest result.",
+   "Le modèle prédisait 1,4 million de dollars par voyage via le Cap. Les chiffres réels se sont situés entre 1,0 et 1,4 million de dollars. C’est le résultat le plus net."
+  ],
+  [
+   "When a loaded tanker can no longer transit Bab-el-Mandeb and the Suez Canal, the alternative is the Cape of Good Hope route around the southern tip of Africa. The detour is long: for a large oil tanker travelling from the Persian Gulf to a European destination, rerouting via the Cape adds approximately 14 days of sea time.",
+   "Lorsqu’un pétrolier chargé ne peut plus transiter par Bab el-Mandeb et le canal de Suez, l’alternative est la route du cap de Bonne-Espérance autour de la pointe sud de l’Afrique. Le détour est long : pour un grand pétrolier allant du golfe Persique vers une destination européenne, le déroutement par le Cap ajoute environ 14 jours de mer."
+  ],
+  [
+   "At the vessel operating costs built into the model ($55,000 per day in fuel and $45,000 per day in time charter equivalent), 14 additional days produces a per-voyage premium of $1.4 million. This calculation was made before the Red Sea disruption and published as a model output.",
+   "Aux coûts d’exploitation de navire intégrés au modèle (55 000 dollars par jour de combustible et 45 000 dollars par jour d’équivalent affrètement à temps), 14 jours supplémentaires produisent une prime de 1,4 million de dollars par voyage. Ce calcul a été fait avant la perturbation de la mer Rouge et publié comme résultat du modèle."
+  ],
+  [
+   "UNCTAD's impact assessment of the Red Sea disruption, published in early 2024, reported that rerouting added approximately $1 million per voyage in fuel costs alone, with total additional costs reaching $1.0 to $1.4 million depending on vessel class. World Bank analysis produced consistent figures. The model's $1.4 million estimate sits at the top of the reported range, which is consistent: the model uses the largest tanker class (VLCCs, which carry around 2 million barrels of crude) as its reference vessel, while the published averages cover a broader mix of vessel sizes.",
+   "L’évaluation d’impact de la CNUCED sur la perturbation de la mer Rouge, publiée début 2024, indiquait que le déroutement ajoutait environ 1 million de dollars par voyage en combustible seul, les coûts supplémentaires totaux atteignant 1,0 à 1,4 million de dollars selon la classe de navires. L’analyse de la Banque mondiale a produit des chiffres cohérents. L’estimation de 1,4 million de dollars du modèle se situe en haut de la fourchette rapportée, ce qui est cohérent : le modèle prend la plus grande classe de pétroliers (les VLCC, qui transportent environ 2 millions de barils de brut) comme navire de référence, alors que les moyennes publiées couvrent un éventail plus large de tailles de navires."
+  ],
+  [
+   "<strong>Validated: close quantitative match</strong>Model: $1.4M per voyage. Actual: $1.0–1.4M (UNCTAD / World Bank). Direction and order of magnitude correct. Model represents the top of the range because it models the largest vessel class specifically.",
+   "<strong>Validé : concordance quantitative étroite</strong>Modèle : 1,4 M$ par voyage. Réel : 1,0 $ à 1.4M (CNUCED / Banque mondiale). Direction et ordre de grandeur corrects. Le modèle représente le haut de la fourchette car il modélise précisément la plus grande classe de navires."
+  ],
+  [
+   "Metric",
+   "Indicateur"
+  ],
+  [
+   "Model prediction",
+   "Prédiction du modèle"
+  ],
+  [
+   "Reported actual (2024)",
+   "Réel rapporté (2024)"
+  ],
+  [
+   "Source",
+   "Source"
+  ],
+  [
+   "Verdict",
+   "Verdict"
+  ],
+  [
+   "Cape detour duration",
+   "Durée du détour par le Cap"
+  ],
+  [
+   "+10–14 days",
+   "+10 à 14 jours"
+  ],
+  [
+   "UNCTAD, World Bank, J.P. Morgan",
+   "CNUCED, Banque mondiale, J.P. Morgan"
+  ],
+  [
+   "✓ Correct",
+   "✓ Correct"
+  ],
+  [
+   "Per-voyage cost premium",
+   "Prime de coût par voyage"
+  ],
+  [
+   "UNCTAD; World Bank",
+   "CNUCED ; Banque mondiale"
+  ],
+  [
+   "✓ Within range",
+   "✓ Dans la fourchette"
+  ],
+  [
+   "Container freight premium",
+   "Prime de fret des conteneurs"
+  ],
+  [
+   "Not modelled",
+   "Non modélisé"
+  ],
+  [
+   "+40–60% sustained; +256% spot peak",
+   "+40 à 60 % durablement ; +256 % au pic spot"
+  ],
+  [
+   "Xeneta, Freightos Baltic Index",
+   "Xeneta, Freightos Baltic Index"
+  ],
+  [
+   "Out of scope",
+   "Hors périmètre"
+  ],
+  [
+   "The model covers rerouting cost per bulk voyage. It does not model aggregate container market pricing, which reflects fleet capacity dynamics rather than individual voyage economics.",
+   "Le modèle couvre le coût de déroutement par voyage en vrac. Il ne modélise pas la tarification agrégée du marché des conteneurs, qui reflète la dynamique de capacité de la flotte plutôt que l’économie de chaque voyage."
+  ],
+  [
+   "Test 2: Bab-el-Mandeb importer ranking",
+   "Test 2 : classement des importateurs à Bab el-Mandeb"
+  ],
+  [
+   "The model ranked Greece as the most exposed European crude importer. The disruption confirmed it.",
+   "Le modèle a classé la Grèce comme l’importateur européen de brut le plus exposé. La perturbation l’a confirmé."
+  ],
+  [
+   "The model uses real bilateral trade data (actual country-to-country import flows from UN Comtrade) to calculate each importer's dependency on a given corridor. For Bab-el-Mandeb crude, the European ordering was stark: Greece at 54.6% dependency, France at 13.4%, Germany at 6.6%. Greece's exposure was more than four times France's and more than eight times Germany's.",
+   "Le modèle utilise de vraies données commerciales bilatérales (flux d’importation réels de pays à pays issus d’UN Comtrade) pour calculer la dépendance de chaque importateur envers un corridor donné. Pour le brut de Bab el-Mandeb, l’ordre européen était net : la Grèce à 54,6 % de dépendance, la France à 13,4 %, l’Allemagne à 6,6 %. L’exposition de la Grèce était plus de quatre fois celle de la France et plus de huit fois celle de l’Allemagne."
+  ],
+  [
+   "The underlying reason is geography and sourcing. Greek independent refiners source heavily from Persian Gulf producers (Saudi Arabia, Iraq, the UAE) whose cargoes transit Bab-el-Mandeb on the way to Europe. French and German operators have more access to Atlantic Basin alternatives: Azerbaijani crude via the Bosphorus, Norwegian crude from the North Sea, pipeline routes from Kazakhstan. When the Red Sea corridor came under attack, those alternatives provided meaningful insulation. Greece had fewer of them.",
+   "La raison profonde tient à la géographie et à l’approvisionnement. Les raffineurs indépendants grecs s’approvisionnent massivement auprès de producteurs du golfe Persique (Arabie saoudite, Irak, EAU) dont les cargaisons transitent par Bab el-Mandeb vers l’Europe. Les opérateurs français et allemands ont davantage accès aux alternatives du bassin atlantique : brut azerbaïdjanais via le Bosphore, brut norvégien de la mer du Nord, oléoducs depuis le Kazakhstan. Lorsque le corridor de la mer Rouge a été attaqué, ces alternatives ont offert une protection significative. La Grèce en avait moins."
+  ],
+  [
+   "This is precisely what the disruption produced. Greek independent refiners reported acute supply chain pressure through the first half of 2024. Greece's shipping industry, the world's largest commercial fleet by deadweight tonnage, bore a disproportionate operational cost burden as tanker operators were forced around the Cape. France and Germany reported materially lower disruption consistent with the model's much lower dependency scores for both countries.",
+   "C’est précisément ce que la perturbation a produit. Les raffineurs indépendants grecs ont fait état d’une forte pression sur leur chaîne d’approvisionnement durant le premier semestre 2024. Le secteur maritime grec, la plus grande flotte commerciale du monde en tonnage de port en lourd, a supporté une charge de coûts d’exploitation disproportionnée lorsque les armateurs de pétroliers ont été contraints de passer par le Cap. La France et l’Allemagne ont fait état d’une perturbation nettement plus faible, cohérente avec les scores de dépendance bien plus bas du modèle pour les deux pays."
+  ],
+  [
+   "<strong>Validated: importer ordering correct</strong>The model's ranking of Greece above France above Germany held under live disruption conditions. No importer the model marked as low-exposure showed high observed impact; no importer marked as high-exposure escaped material disruption.",
+   "<strong>Validé : classement des importateurs correct</strong>Le classement du modèle, Grèce devant France devant Allemagne, a tenu en conditions de perturbation réelle. Aucun importateur que le modèle avait marqué comme peu exposé n’a montré un impact élevé observé ; aucun importateur marqué comme très exposé n’a échappé à une perturbation significative."
+  ],
+  [
+   "Importer",
+   "Importateur"
+  ],
+  [
+   "Model dependency",
+   "Dépendance du modèle"
+  ],
+  [
+   "Annual exposure",
+   "Exposition annuelle"
+  ],
+  [
+   "Observed 2024 impact",
+   "Impact observé en 2024"
+  ],
+  [
+   "Acute refiner pressure; highest per-capita shipping cost exposure in Europe; well-documented in industry reporting",
+   "Forte pression sur les raffineurs ; exposition au coût du transport maritime la plus élevée par habitant en Europe ; bien documentée dans la presse spécialisée"
+  ],
+  [
+   "✓ Confirmed #1",
+   "✓ Confirmée n° 1"
+  ],
+  [
+   "Indonesia",
+   "Indonésie"
+  ],
+  [
+   "Modest crude supply disruption via Bab-el-Mandeb; Indonesia's primary corridor exposure is Malacca and Lombok",
+   "Perturbation modeste de l’approvisionnement en brut via Bab el-Mandeb ; l’exposition principale de l’Indonésie concerne Malacca et Lombok"
+  ],
+  [
+   "✓ Lower-than-expected confirmed",
+   "✓ Impact inférieur aux attentes confirmé"
+  ],
+  [
+   "France",
+   "France"
+  ],
+  [
+   "Moderate impact; Atlantic Basin substitution accessible; Bosphorus-routed Azerbaijani crude unaffected",
+   "Impact modéré ; substitution par le bassin atlantique accessible ; brut azerbaïdjanais acheminé par le Bosphore non affecté"
+  ],
+  [
+   "✓ Lower impact vs. Greece",
+   "✓ Impact inférieur à celui de la Grèce"
+  ],
+  [
+   "Germany",
+   "Allemagne"
+  ],
+  [
+   "Low impact; TAL pipeline unaffected; Kazakhstani crude via Bosphorus insulated",
+   "Impact faible ; oléoduc TAL non affecté ; brut kazakh via le Bosphore protégé"
+  ],
+  [
+   "✓ Low impact confirmed",
+   "✓ Faible impact confirmé"
+  ],
+  [
+   "Tier 1 bilateral data. UN Comtrade 2023. Observed impact characterisations from World Bank, UNCTAD, EIA, and industry reporting through H1 2024.",
+   "Données bilatérales de rang 1. UN Comtrade 2023. Caractérisations d’impact observé de la Banque mondiale, de la CNUCED, de l’EIA et de la presse spécialisée jusqu’au S1 2024."
+  ],
+  [
+   "Test 3: Bab-el-Mandeb commodity mix",
+   "Test 3 : composition des produits à Bab el-Mandeb"
+  ],
+  [
+   "The model identified crude oil as 78% of Bab-el-Mandeb exposure. The disruption confirmed crude dominance, with an honest caveat on containers.",
+   "Le modèle a identifié le pétrole brut comme 78 % de l’exposition de Bab el-Mandeb. La perturbation a confirmé la dominance du brut, avec une réserve honnête sur les conteneurs."
+  ],
+  [
+   "Of the model's total Bab-el-Mandeb bilateral exposure across covered importers ($74.7 billion), crude petroleum accounts for $58.3 billion: 78%. Vehicles, palm oil, and copper ores make up most of the remainder. The model's prediction: if Bab fails, crude supply chains bear the largest financial impact.",
+   "Sur l’exposition bilatérale totale du modèle à Bab el-Mandeb pour les importateurs couverts (74,7 milliards de dollars), le pétrole brut représente 58,3 milliards de dollars : 78 %. Les véhicules, l’huile de palme et les minerais de cuivre forment l’essentiel du reste. La prédiction du modèle : si Bab défaille, les chaînes d’approvisionnement en brut supportent le plus grand impact financier."
+  ],
+  [
+   "The disruption confirmed this in dollar terms. The Red Sea corridor's share of global seaborne crude volumes fell from approximately 12% in April 2023 to 6% in August 2024, a halving of crude transit consistent with the scale of exposure the model identifies. The EIA, IEA, and Kpler all confirmed significant declines in seaborne crude via the corridor.",
+   "La perturbation l’a confirmé en dollars. La part du corridor de la mer Rouge dans les volumes mondiaux de brut maritime est passée d’environ 12 % en avril 2023 à 6 % en août 2024, soit une division par deux du transit de brut, cohérente avec l’échelle d’exposition que le modèle identifie. L’EIA, l’AIE et Kpler ont tous confirmé des baisses significatives du brut maritime par ce corridor."
+  ],
+  [
+   "Where the picture is more complex: container tonnage at Suez fell 82% at its February 2024 trough, a steeper proportional decline than crude in volume terms. The model covers container goods at Bab in lower-confidence estimates (vehicles, electronics, apparel), but its non-crude coverage is narrower than the full containerised goods universe transiting the corridor. The model's $74.7 billion total should be read as a floor on trade at risk, not a ceiling.",
+   "Là où le tableau est plus complexe : le tonnage de conteneurs à Suez a chuté de 82 % à son creux de février 2024, une baisse proportionnelle plus forte que celle du brut en volume. Le modèle couvre les biens conteneurisés à Bab dans des estimations de moindre confiance (véhicules, électronique, habillement), mais sa couverture hors brut est plus étroite que l’ensemble des biens conteneurisés qui transitent par le corridor. Le total de 74,7 milliards de dollars du modèle doit se lire comme un plancher du commerce à risque, non un plafond."
+  ],
+  [
+   "<strong>Partial validation: direction correct, containerised goods underrepresented</strong>Crude as dominant dollar exposure was confirmed. Container shipping disruption was proportionally steeper in volume terms than lower-confidence non-crude coverage implies. This is flagged as a known limitation, not concealed.",
+   "<strong>Validation partielle : direction correcte, biens conteneurisés sous-représentés</strong>Le brut comme première exposition en dollars a été confirmé. La perturbation du transport de conteneurs a été proportionnellement plus forte en volume que ne l’implique la couverture hors brut de moindre confiance. Ceci est signalé comme une limite connue, et non dissimulé."
+  ],
+  [
+   "Test 4: Panama Canal commodity ranking",
+   "Test 4 : classement des produits au canal de Panama"
+  ],
+  [
+   "The Panama drought hit LNG hardest: transits fell 66%. The model ranked LNG as the largest Panama exposure by dollar value. This is the second clean validation.",
+   "La sécheresse de Panama a frappé le GNL le plus durement : les transits ont chuté de 66 %. Le modèle avait classé le GNL comme la plus grande exposition de Panama en valeur. C’est la deuxième validation nette."
+  ],
+  [
+   "The Panama Canal drought cut daily transits from 36–38 in July 2023 to 18 per day by February 2024. Among all commodity classes transiting the canal, liquefied natural gas fell hardest: the Canal Authority reported a 66% decline in LNG transits, the single largest proportional drop of any cargo type.",
+   "La sécheresse du canal de Panama a fait passer les transits quotidiens de 36 à 38 en juillet 2023 à 18 par jour en février 2024. Parmi toutes les classes de produits transitant par le canal, le gaz naturel liquéfié a chuté le plus fortement : l’Autorité du canal a rapporté une baisse de 66 % des transits de GNL, la plus forte baisse proportionnelle de tous les types de cargaison."
+  ],
+  [
+   "LNG carriers (vessels that move gas cooled to minus 162 degrees Celsius in insulated tanks) are largely captive to the Panama route for US Gulf to Asian Pacific deliveries. Unlike bulk vessels, they cannot easily divert to alternative routes without transforming the economics of the voyage entirely. Japan and South Korea, which import significant volumes of US LNG through the canal, reported elevated LNG spot prices and accelerated purchases from alternative suppliers through the first half of 2024.",
+   "Les méthaniers (navires qui transportent du gaz refroidi à moins 162 degrés Celsius dans des cuves isolées) sont largement captifs de la route de Panama pour les livraisons de la côte américaine du Golfe vers l’Asie-Pacifique. Contrairement aux vraquiers, ils ne peuvent pas facilement se détourner vers d’autres routes sans bouleverser entièrement l’économie du voyage. Le Japon et la Corée du Sud, qui importent des volumes importants de GNL américain via le canal, ont fait état de prix spot du GNL élevés et d’achats accélérés auprès de fournisseurs alternatifs durant le premier semestre 2024."
+  ],
+  [
+   "The model's Panama rankings, calibrated against Panama Canal Authority tonnage data, place LNG and LPG as the largest dollar-value exposure: China at $8.3 billion, Japan at $5.1 billion, South Korea at $4.8 billion. The 2024 drought confirmed LNG as the single most impacted commodity class, precisely matching the model's ranking.",
+   "Les classements de Panama du modèle, calibrés sur les données de tonnage de l’Autorité du canal de Panama, placent le GNL et le GPL comme la plus grande exposition en valeur : la Chine à 8,3 milliards de dollars, le Japon à 5,1 milliards et la Corée du Sud à 4,8 milliards. La sécheresse de 2024 a confirmé le GNL comme la classe de produits la plus touchée, en parfaite concordance avec le classement du modèle."
+  ],
+  [
+   "<strong>Validated: commodity ranking correct</strong>The model ranked LNG as the dominant Panama exposure by dollar value. The 2024 drought confirmed LNG as the single most impacted commodity class (minus 66% transits). Dry bulk ranking (soybeans ahead of coal ahead of corn ahead of wheat) was also consistent with Canal Authority impact data.",
+   "<strong>Validé : classement des produits correct</strong>Le modèle a classé le GNL comme l’exposition dominante de Panama en valeur. La sécheresse de 2024 a confirmé le GNL comme la classe de produits la plus touchée (moins 66 % de transits). Le classement du vrac sec (soja devant charbon devant maïs devant blé) était aussi cohérent avec les données d’impact de l’Autorité du canal."
+  ],
+  [
+   "Commodity",
+   "Produit"
+  ],
+  [
+   "Model adj. exposure",
+   "Exposition ajustée du modèle"
+  ],
+  [
+   "LNG / LPG",
+   "GNL / GPL"
+  ],
+  [
+   "LNG transits minus 66%. Largest proportional decline of any commodity class. Japan and South Korea worst affected on US LNG route.",
+   "Transits de GNL moins 66 %. Plus forte baisse proportionnelle de toutes les classes de produits. Japon et Corée du Sud les plus touchés sur la route du GNL américain."
+  ],
+  [
+   "Soybeans",
+   "Soja"
+  ],
+  [
+   "Dry bulk transits severely curtailed. Brazil–Asia soybean route impacted; partial redirection via Suez documented.",
+   "Transits de vrac sec fortement réduits. Route soja Brésil–Asie touchée ; redirection partielle via Suez documentée."
+  ],
+  [
+   "✓ Major impact confirmed",
+   "✓ Impact majeur confirmé"
+  ],
+  [
+   "Coal",
+   "Charbon"
+  ],
+  [
+   "Dry bulk restrictions hit coal transit. US coal exports to Asia via Panama affected.",
+   "Les restrictions sur le vrac sec ont touché le transit du charbon. Exportations américaines de charbon vers l’Asie via Panama affectées."
+  ],
+  [
+   "✓ Impact confirmed",
+   "✓ Impact confirmé"
+  ],
+  [
+   "Corn",
+   "Maïs"
+  ],
+  [
+   "US corn to Asia disrupted; some diversion to Suez for Latin American origins.",
+   "Maïs américain vers l’Asie perturbé ; un certain détournement vers Suez pour les origines latino-américaines."
+  ],
+  [
+   "Wheat",
+   "Blé"
+  ],
+  [
+   "Smaller Panama wheat flow; Black Sea / Suez dominant; relatively lower impact at this chokepoint.",
+   "Flux de blé plus faible à Panama ; mer Noire / Suez dominants ; impact relativement moindre à ce point de passage."
+  ],
+  [
+   "✓ Lowest grain impact",
+   "✓ Impact le plus faible sur les céréales"
+  ],
+  [
+   "Panama LNG / LPG adj. exposure includes China ($8.3B), Japan ($5.1B), South Korea ($4.8B), Mexico ($1.9B), Indonesia ($1.5B) and others. ACP FY2024 annual data confirms LNG as top impacted commodity class.",
+   "L’exposition ajustée GNL / GPL de Panama comprend la Chine (8,3 Md$), le Japon (5,1 Md$), la Corée du Sud (4,8 Md$), le Mexique (1,9 Md$), l’Indonésie (1,5 Md$) et d’autres. Les données annuelles de l’ACP pour l’exercice 2024 confirment le GNL comme première classe de produits touchée."
+  ],
+  [
+   "What the model did not predict",
+   "Ce que le modèle n’a pas prédit"
+  ],
+  [
+   "Three outcomes were outside the model's scope. Being clear about this is part of how the model earns trust.",
+   "Trois résultats étaient hors du périmètre du modèle. Le dire clairement fait partie de ce qui fonde la confiance dans le modèle."
+  ],
+  [
+   "A validation exercise is only credible if it honestly identifies what was not predicted alongside what was. Three categories of 2024 outcomes were outside scope.",
+   "Un exercice de validation n’est crédible que s’il identifie honnêtement ce qui n’a pas été prédit en plus de ce qui l’a été. Trois catégories de résultats de 2024 étaient hors périmètre."
+  ],
+  [
+   "<strong>Freight rate movements</strong>Container spot rates from Shanghai to Europe increased 256% at the February 2024 peak. The model captures the rerouting cost per voyage, not aggregate freight market pricing driven by fleet capacity effects. It answers who is exposed and what rerouting costs per voyage, not what the freight market will price in a tight vessel supply environment.",
+   "<strong>Évolution des taux de fret</strong>Les taux spot des conteneurs de Shanghai vers l’Europe ont augmenté de 256 % au pic de février 2024. Le modèle capture le coût de déroutement par voyage, non la tarification agrégée du marché du fret pilotée par les effets de capacité de la flotte. Il répond à la question de savoir qui est exposé et ce que coûte le déroutement par voyage, non à celle de ce que le marché du fret tarifera dans un environnement d’offre de navires tendue."
+  ],
+  [
+   "<strong>Disruption timing and probability</strong>The model is conditional on a disruption occurring. It answers the question: if this corridor is disrupted, what is the exposure? It does not forecast which corridors will fail or when. Disruptions are exogenous events.",
+   "<strong>Calendrier et probabilité des perturbations</strong>Le modèle est conditionnel à la survenue d’une perturbation. Il répond à la question : si ce corridor est perturbé, quelle est l’exposition ? Il ne prévoit ni quels corridors défailliront ni quand. Les perturbations sont des événements exogènes."
+  ],
+  [
+   "<strong>Full container goods universe at Bab-el-Mandeb</strong>The model's Bab-el-Mandeb coverage is strong for bulk commodities and crude but narrower for containerised goods, which are carried in lower-confidence estimates. The total corridor exposure figure ($74.7B) is a floor on trade at risk, not a ceiling. Container tonnage at Suez fell 82% at the 2024 trough, a steeper proportional decline than the model's non-crude coverage captures.",
+   "<strong>L’ensemble des biens conteneurisés à Bab el-Mandeb</strong>La couverture de Bab el-Mandeb par le modèle est solide pour les produits en vrac et le brut mais plus étroite pour les biens conteneurisés, portés dans des estimations de moindre confiance. Le chiffre d’exposition totale du corridor (74,7 Md$) est un plancher du commerce à risque, non un plafond. Le tonnage de conteneurs à Suez a chuté de 82 % au creux de 2024, une baisse proportionnelle plus forte que ce que capte la couverture hors brut du modèle."
+  ],
+  [
+   "Final scorecard",
+   "Bilan final"
+  ],
+  [
+   "Narrows Chokepoint Dependency Model: Validation scorecard: 2024 disruptions",
+   "Modèle de dépendance aux points de passage de Narrows : bilan de validation : perturbations de 2024"
+  ],
+  [
+   "Rerouting cost: Bab-el-Mandeb / Cape of Good Hope",
+   "Coût de déroutement : Bab el-Mandeb / cap de Bonne-Espérance"
+  ],
+  [
+   "Cape detour +14 days (large tanker)",
+   "Détour par le Cap +14 jours (grand pétrolier)"
+  ],
+  [
+   "Vessel economics; routing geometry",
+   "Économie des navires ; géométrie du routage"
+  ],
+  [
+   "+10–14 days reported (UNCTAD, World Bank)",
+   "+10 à 14 jours rapportés (CNUCED, Banque mondiale)"
+  ],
+  [
+   "Per-voyage premium ~$1.4M (large tanker)",
+   "Prime par voyage ≈ 1,4 M$ (grand pétrolier)"
+  ],
+  [
+   "Fuel + charter rates × 14 days",
+   "Combustible + taux d’affrètement × 14 jours"
+  ],
+  [
+   "~$1.0–1.4M reported (UNCTAD)",
+   "≈ 1,0 $ à 1.4M rapportés (CNUCED)"
+  ],
+  [
+   "Bab-el-Mandeb importer ranking",
+   "Classement des importateurs à Bab el-Mandeb"
+  ],
+  [
+   "Greece: highest European crude dependency (54.6%)",
+   "Grèce : plus forte dépendance européenne en brut (54,6 %)"
+  ],
+  [
+   "Tier 1 bilateral Comtrade 2023",
+   "Données bilatérales Comtrade 2023 de rang 1"
+  ],
+  [
+   "Greek refiners most severely impacted in Europe; disproportionate shipping cost exposure",
+   "Raffineurs grecs les plus durement touchés en Europe ; exposition disproportionnée au coût du transport maritime"
+  ],
+  [
+   "Germany: lowest European crude dependency (6.6%)",
+   "Allemagne : plus faible dépendance européenne en brut (6,6 %)"
+  ],
+  [
+   "TAL pipeline; Kazakhstani crude via Bosphorus",
+   "Oléoduc TAL ; brut kazakh via le Bosphore"
+  ],
+  [
+   "Minimal crude disruption; pipeline routes unaffected",
+   "Perturbation minimale du brut ; routes par oléoduc non affectées"
+  ],
+  [
+   "Bab-el-Mandeb commodity mix",
+   "Composition des produits à Bab el-Mandeb"
+  ],
+  [
+   "Crude = 78% of Bab dollar exposure",
+   "Brut = 78 % de l’exposition en dollars de Bab"
+  ],
+  [
+   "Tier 1 crude; lower-confidence non-crude",
+   "Brut de rang 1 ; hors brut de moindre confiance"
+  ],
+  [
+   "Crude dominant in dollar terms; containerised goods declined steeply in volume but crude larger absolute value",
+   "Brut dominant en valeur ; biens conteneurisés en forte baisse en volume mais le brut représente une valeur absolue plus grande"
+  ],
+  [
+   "~ Partial",
+   "~ Partielle"
+  ],
+  [
+   "Panama Canal commodity ranking",
+   "Classement des produits au canal de Panama"
+  ],
+  [
+   "LNG = number 1 Panama commodity ($23.6B)",
+   "GNL = produit n° 1 de Panama (23,6 Md$)"
+  ],
+  [
+   "ACP-calibrated; Japan, South Korea, China",
+   "Calibré sur l’ACP ; Japon, Corée du Sud, Chine"
+  ],
+  [
+   "LNG transits minus 66%. Largest proportional decline (ACP FY2024)",
+   "Transits de GNL moins 66 %. Plus forte baisse proportionnelle (ACP, exercice 2024)"
+  ],
+  [
+   "Grain ranking: soybeans ahead of coal ahead of corn ahead of wheat",
+   "Classement des céréales : soja devant charbon devant maïs devant blé"
+  ],
+  [
+   "ACP Table 6 calibration",
+   "Calibrage du tableau 6 de l’ACP"
+  ],
+  [
+   "Dry bulk ranking consistent with ACP published impact data",
+   "Classement du vrac sec cohérent avec les données d’impact publiées par l’ACP"
+  ],
+  [
+   "Outside model scope: noted for completeness",
+   "Hors périmètre du modèle : signalé par souci d’exhaustivité"
+  ],
+  [
+   "Container freight rate spike",
+   "Flambée des taux de fret des conteneurs"
+  ],
+  [
+   "Not modelled: fleet capacity market dynamics",
+   "Non modélisé : dynamique de capacité de la flotte"
+  ],
+  [
+   "+256% spot peak; +40–60% sustained (Xeneta, Freightos)",
+   "+256 % au pic spot ; +40 à 60 % durablement (Xeneta, Freightos)"
+  ],
+  [
+   "Egypt canal revenue loss",
+   "Perte de recettes du canal pour l’Égypte"
+  ],
+  [
+   "Not modelled: transit fee economics",
+   "Non modélisé : économie des droits de transit"
+  ],
+  [
+   "~$4B revenue loss (IMF, March 2024)",
+   "≈ 4 Md$ de recettes perdues (FMI, mars 2024)"
+  ],
+  [
+   "Data sources",
+   "Sources des données"
+  ],
+  [
+   "Rerouting cost and Cape detour duration: UNCTAD OSGINF2024d2 \"Impact to global trade of disruption of shipping routes in the Red Sea region\" (2024); World Bank report (February 2024). Container freight rates: Xeneta; Freightos Baltic Index; Kpler \"Update on Red Sea trade flow impacts\" (October 2024). Bab-el-Mandeb transit decline (minus 70%): European Parliament EPRS Briefing (2024). Container tonnage at Suez (minus 82%): UNCTAD. Egypt canal revenue loss: IMF blog \"Red Sea Attacks Disrupt Global Trade\" (March 2024). Greek refiner impact: Hellenic Petroleum and Motor Oil operational filings H1 2024. Panama Canal: ACP FY2024 annual data. LNG transit decline (minus 66%): ACP FY2024; EIA Today in Energy (December 2024). Japan / South Korea LNG spot impacts: IEA Gas Market Report H1 2024. Bilateral trade data: UN Comtrade 2023. Chokepoint parameters locked before November 2023 disruption onset. All model assumptions are adjustable.",
+   "Coût de déroutement et durée du détour par le Cap : CNUCED OSGINF2024d2 « Impact to global trade of disruption of shipping routes in the Red Sea region » (2024) ; rapport de la Banque mondiale (février 2024). Taux de fret des conteneurs : Xeneta ; Freightos Baltic Index ; Kpler « Update on Red Sea trade flow impacts » (octobre 2024). Baisse du transit à Bab el-Mandeb (moins 70 %) : note de l’EPRS du Parlement européen (2024). Tonnage de conteneurs à Suez (moins 82 %) : CNUCED. Perte de recettes du canal pour l’Égypte : blog du FMI « Red Sea Attacks Disrupt Global Trade » (mars 2024). Impact sur les raffineurs grecs : documents d’exploitation de Hellenic Petroleum et Motor Oil, S1 2024. Canal de Panama : données annuelles de l’ACP, exercice 2024. Baisse des transits de GNL (moins 66 %) : ACP, exercice 2024 ; EIA Today in Energy (décembre 2024). Impacts sur les prix spot du GNL du Japon et de la Corée du Sud : IEA Gas Market Report, S1 2024. Données commerciales bilatérales : UN Comtrade 2023. Paramètres des points de passage figés avant le début de la perturbation de novembre 2023. Toutes les hypothèses du modèle sont ajustables."
+  ]
+ ],
+ "js": []
+}

@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -162,17 +163,18 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <div class="section-eyebrow">What this means for risk models</div>
 <h2 class="article-section-title">The land bridge does not change the dependency numbers. It changes, at the margin, one tail scenario.</h2>
 
-<p class="prose">For an accumulation underwriter, a crude desk or a lender looking at a tanker or Capesize book, the question is the same as before: how much of a specific counterparty's flow runs through Malacca, and what does disruption cost at a given severity and duration? On the model's evidence the land bridge does not move the crude, refined product or LNG dependency figures, because those cargoes are not what it is designed to carry, and it does not change dry bulk routing because Lombok is already the primary route.</p>
+<p class="prose">For anyone assessing marine insurance accumulation, crude supply or exposure on tanker and Capesize fleets, the question is the same as before: how much of a specific counterparty's flow runs through Malacca, and what does disruption cost at a given severity and duration? On the model's evidence the land bridge does not move the crude, refined product or LNG dependency figures, because those cargoes are not what it is designed to carry, and it does not change dry bulk routing because Lombok is already the primary route.</p>
 
 <p class="prose">What it could change is the container tail. A closure scenario that includes a functioning land crossing is somewhat less severe for container flows than one without it, subject to capacity actually existing and shipping lines actually using it, neither of which is established today. That is a narrowing of one tail, not a reduction of base-case exposure, and it only matters if the project is built.</p>
 
-<p class="prose">So the practical point for anyone writing cargo policy, a P&amp;I accumulation model or a trade finance facility now is that Malacca dependency should be modelled as it stands. A bridge that does not yet have an operator, a bidder or a committed shipping line is not a mitigant for any exposure being written today.</p>
+<p class="prose">So the practical point for any cargo insurance, accumulation or trade finance assessment today is that Malacca dependency should be modelled as it stands. A bridge that does not yet have an operator, a bidder or a committed shipping line is not a mitigant for any exposure being written today.</p>
 
 <div class="method-note">
   <div class="method-note-label">Methodology</div>
-  <div class="method-note-body">Dependency figures: Narrows Chokepoint Dependency Model v3, a multi-vintage blend of UN Comtrade authenticated bilateral pulls (2022 as the floor, 2024 overriding where a newer bilateral figure exists), covering 90 importing nations, 14 chokepoints and 17 commodity classes. Each row carries its own source and data year; the Japan iron ore figure is a 2022-vintage row. Note: iron ore bound for Japan and South Korea routes via the Philippine Sea/Luzon corridor and Lombok, which is why Malacca dependency for that commodity is very low (0.8 percent each). Cost assumptions are substitutable: dry bulk handling $8–12 per tonne (liquid bulk $15–20), containers $150–180 per TEU; Capesize 170,000-tonne cargo at about $32,000 per day bunkers plus $18,000 per day charter; VLCC 270,000-tonne cargo at about $55,000 bunkers plus $45,000 charter per day; ultra-large container ship 18,000 TEU at an assumed ~$165,000 per day all-in. Detours: Lombok +4 days (+5 for VLCC), Sunda +3 days, long sea reroute +18–22 days; land crossing adds an estimated 1.5 port-call days at each end. Detour costs are days multiplied by the per-day figures stated; an earlier version of this page showed higher detour figures than those inputs produce, and they have been recalculated. Project facts (cost, route, structure, timeline, claimed benefits, absence of committed shipping lines) are drawn from public reporting including <a href="https://www.nationthailand.com/business/economy/40054491" style="text-decoration:underline;">The Nation Thailand</a> (August 2025), <a href="https://www.mcg-asia.com/featured-insights/thailand-land-bridge-chokepoints-geopolitics" style="text-decoration:underline;">Maverick Consulting Group</a> and <a href="https://www.porttechnology.org/thailand-revisits-30-billion-land-bridge-plan/" style="text-decoration:underline;">Port Technology International</a>, and may have changed since. Dollar conversion of the baht cost is approximate. To run a scenario with your own assumptions, contact fysh@narrows.io.</div>
+  <div class="method-note-body">Dependency figures: Narrows Chokepoint Dependency Model v3, a multi-vintage blend of UN Comtrade authenticated bilateral pulls (2022 as the floor, 2024 overriding where a newer bilateral figure exists), covering 90 importing nations, 14 chokepoints and 17 commodity classes. Each row carries its own source and data year; the Japan iron ore figure is a 2022-vintage row. Note: iron ore bound for Japan and South Korea routes via the Philippine Sea/Luzon corridor and Lombok, which is why Malacca dependency for that commodity is very low (0.8 percent each). Cost assumptions are substitutable: dry bulk handling $8–12 per tonne (liquid bulk $15–20), containers $150–180 per TEU; Capesize 170,000-tonne cargo at about $32,000 per day bunkers plus $18,000 per day charter; VLCC 270,000-tonne cargo at about $55,000 bunkers plus $45,000 charter per day; ultra-large container ship 18,000 TEU at an assumed ~$165,000 per day all-in. Detours: Lombok +4 days (+5 for VLCC), Sunda +3 days, long sea reroute +18–22 days; land crossing adds an estimated 1.5 port-call days at each end. Detour costs are days multiplied by the per-day figures stated; an earlier version of this page showed higher detour figures than those inputs produce, and they have been recalculated. Project facts (cost, route, structure, timeline, claimed benefits, absence of committed shipping lines) are drawn from public reporting including <a href="https://www.nationthailand.com/business/economy/40054491" style="text-decoration:underline;">The Nation Thailand</a> (August 2025), <a href="https://www.mcg-asia.com/featured-insights/thailand-land-bridge-chokepoints-geopolitics" style="text-decoration:underline;">Maverick Consulting Group</a> and <a href="https://www.porttechnology.org/thailand-revisits-30-billion-land-bridge-plan/" style="text-decoration:underline;">Port Technology International</a>, and may have changed since. Dollar conversion of the baht cost is approximate.</div>
 </div>
 
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
   <div class="cta-strip-inner">
     <div>
@@ -183,6 +185,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style>

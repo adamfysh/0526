@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gulf LNG Route Tree — Narrows</title>
+<title>Gulf LNG Route Tree - Narrows</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -147,7 +147,7 @@
       </div>
       <span class="eyebrow-pill">Route Tree Analysis</span>
     </div>
-    <div class="card-title">All Gulf LNG exits through Hormuz — corridors and chokepoints diverge by destination</div>
+    <div class="card-title">All Gulf LNG exits through Hormuz - corridors and chokepoints diverge by destination</div>
     <div class="card-sub">Node size reflects annual bilateral trade value. Day count is approximate total transit from Gulf export terminal. Hover for detail. Qatar ≈ 75% of Gulf LNG.</div>
   </div>
 
@@ -203,13 +203,13 @@ const X1    = 80;
 const X2    = 216;
 const X3    = 384;
 const X4    = W - 100;
-const X_GIB = X3 + (X4 - X3) * 0.44;   // proportional — always left of X4
+const X_GIB = X3 + (X4 - X3) * 0.44;   // proportional - always left of X4
 
 // ── Vertical layout ───────────────────────────────────────────────────────────
 const Y_A  = 115;    // Malacca / Asia centre
 const YMID = 255;    // Origin + Hormuz
 const Y_E  = 360;    // Bab / Europe centre
-const Y_D  = 565;    // Direct routing node (invisible — clear of all Europe)
+const Y_D  = 565;    // Direct routing node (invisible - clear of all Europe)
 
 // ── Colour palette ────────────────────────────────────────────────────────────
 const C = {
@@ -221,7 +221,7 @@ const C = {
 const nodes = [
   // Trunk
   { id:'origin',  x:X1,  y:YMID,      label:['Gulf LNG','Exporters'],   type:'origin',  v:51.5,
-    note:'Qatar dominant (~75%). All Gulf LNG must transit Hormuz — there is no alternative maritime route out of the Arabian Gulf.' },
+    note:'Qatar dominant (~75%). All Gulf LNG must transit Hormuz - there is no alternative maritime route out of the Arabian Gulf.' },
   { id:'hormuz',  x:X2,  y:YMID,      label:'Hormuz',                   type:'choke',   v:51.5,
     note:'Single mandatory bottleneck for 100% of Gulf LNG. A closure simultaneously traps all Qatari and UAE LNG export capacity.' },
 
@@ -229,44 +229,44 @@ const nodes = [
   { id:'malacca', x:X3,  y:Y_A,       label:'Malacca',    type:'choke',  v:27.8,
     note:'Second mandatory chokepoint for all Asia-Pacific cargoes. Asia-bound Gulf LNG faces two sequential chokepoints before reaching market.' },
   { id:'china',   x:X4,  y:Y_A-82,    label:'China',      type:'asia',   v:11.7, dep:23.6, totalDays:11,
-    note:'Largest single buyer. 23.6% of Chinese LNG via Hormuz. Route passes Taiwan Strait — a further potential chokepoint.' },
+    note:'Largest single buyer. 23.6% of Chinese LNG via Hormuz. Route passes Taiwan Strait - a further potential chokepoint.' },
   { id:'korea',   x:X4,  y:Y_A-41,    label:'S. Korea',   type:'asia',   v:7.9,  dep:20.0, totalDays:13,
     note:'20.0% of South Korean imports via Hormuz. Route passes Taiwan Strait and Korea Strait.' },
   { id:'thailand',x:X4,  y:Y_A,       label:'Thailand',   type:'asia',   v:2.5,  dep:30.0, totalDays:10,
-    note:'30.0% of Thai imports via Hormuz — among the highest Asian dependencies.' },
+    note:'30.0% of Thai imports via Hormuz - among the highest Asian dependencies.' },
   { id:'taiwan',  x:X4,  y:Y_A+41,    label:'Taiwan',     type:'asia',   v:2.2,  dep:23.2, totalDays:12,
     note:'23.2% of Taiwanese imports via Hormuz. Taiwan Strait is both corridor and potential chokepoint.' },
   { id:'japan',   x:X4,  y:Y_A+82,    label:'Japan',      type:'asia',   v:3.0,  dep:6.5,  totalDays:14,
     note:'6.5% of Japanese imports via Hormuz. Japan has diversified to Australia, US, Malaysia. Route passes Taiwan/Korea Strait.' },
 
-  // Europe — Bab → Gibraltar sub-branch (Atlantic) + Med direct
+  // Europe - Bab → Gibraltar sub-branch (Atlantic) + Med direct
   { id:'bab',     x:X3,  y:Y_E,       label:['Bab el-Mandeb','/ Suez'], type:'choke', v:19.1,
     note:'Two further chokepoints in sequence: Bab el-Mandeb (Red Sea, ~30 km) then Suez Canal. European buyers face four sequential chokepoints: Hormuz → Bab → Suez → market. Bab el-Mandeb under active Houthi disruption since late 2023.' },
 
   { id:'gibraltar', x:X_GIB, y:Y_E-85, label:'Gibraltar', type:'choke', v:12.1,
     note:'Fifth chokepoint for Atlantic European LNG destinations. Strait of Gibraltar: 14 km minimum navigable width. Belgium, UK, and Netherlands LNG terminals all transit here.' },
   { id:'belgium',   x:X4, y:Y_E-130,  label:'Belgium',     type:'europe', v:6.2,  dep:55.8, totalDays:20,
-    note:'55.8% Hormuz dependency — highest in Europe. Zeebrugge (Gate Terminal) is a major LNG hub. Five sequential chokepoints: Hormuz → Bab → Suez → Gibraltar → destination.' },
+    note:'55.8% Hormuz dependency - highest in Europe. Zeebrugge (Gate Terminal) is a major LNG hub. Five sequential chokepoints: Hormuz → Bab → Suez → Gibraltar → destination.' },
   { id:'uk',        x:X4, y:Y_E-85,   label:'UK',          type:'europe', v:3.1,  dep:26.9, totalDays:21,
     note:'26.9% of UK imports via Hormuz. Isle of Grain and South Hook are Atlantic-facing. Five chokepoints in sequence.' },
   { id:'netherlands',x:X4, y:Y_E-38,  label:'Netherlands', type:'europe', v:2.8,  dep:13.2, totalDays:21,
     note:'13.2% of Dutch imports via Hormuz. Gate Terminal Rotterdam. Five sequential chokepoints to destination.' },
 
   { id:'france',  x:X4, y:Y_E+26,    label:'France',      type:'europe', v:3.4,  dep:10.2, totalDays:15,
-    note:'10.2% via Hormuz. Primary terminal Fos-sur-Mer is Mediterranean-facing — routes via Suez through the Med, bypassing Gibraltar.' },
+    note:'10.2% via Hormuz. Primary terminal Fos-sur-Mer is Mediterranean-facing - routes via Suez through the Med, bypassing Gibraltar.' },
   { id:'italy',   x:X4, y:Y_E+70,    label:'Italy',       type:'europe', v:2.0,  dep:21.6, totalDays:14,
-    note:'21.6% via Hormuz. Adriatic/Tyrrhenian terminals route via Suez and the Med — no Gibraltar transit.' },
+    note:'21.6% via Hormuz. Adriatic/Tyrrhenian terminals route via Suez and the Med - no Gibraltar transit.' },
   { id:'spain',   x:X4, y:Y_E+114,   label:'Spain',       type:'europe', v:1.6,  dep:17.2, totalDays:15,
-    note:'17.2% via Hormuz. Primary Gulf LNG arrives at Mediterranean terminals via Suez — no Gibraltar transit.' },
+    note:'17.2% via Hormuz. Primary Gulf LNG arrives at Mediterranean terminals via Suez - no Gibraltar transit.' },
 
-  // Direct — routed via invisible node below European section
+  // Direct - routed via invisible node below European section
   { id:'_direct', x:X3, y:Y_D,       label:'', type:'routing', v:0 },
   { id:'pakistan',x:X4, y:Y_D-34,    label:'Pakistan', type:'direct', v:4.0, dep:98.2, totalDays:2,
-    note:'98.2% Hormuz dependency — highest globally. No credible alternative supplier at scale. A Hormuz closure would rapidly paralyse Pakistani industry and power generation.' },
+    note:'98.2% Hormuz dependency - highest globally. No credible alternative supplier at scale. A Hormuz closure would rapidly paralyse Pakistani industry and power generation.' },
   { id:'india',   x:X4, y:Y_D+12,    label:'India',    type:'direct', v:0.4, dep:2.5,  totalDays:4,
-    note:'Only 2.5% of Indian LNG via Hormuz. India sources primarily from Australia, US, domestic production — low structural exposure. Hormuz to NW India (Dahej/Hazira) ≈ 2 days; southern terminals 4–5 days.' },
+    note:'Only 2.5% of Indian LNG via Hormuz. India sources primarily from Australia, US, domestic production - low structural exposure. Hormuz to NW India (Dahej/Hazira) ≈ 2 days; southern terminals 4–5 days.' },
   { id:'brazil',  x:X4, y:Y_D+58,    label:'Brazil',   type:'direct', v:0.2, dep:5.9,  totalDays:19,
-    note:'5.9% of Brazilian imports via Hormuz. Routed around Cape of Good Hope — no Bab/Suez dependency, but a very long voyage comparable in time to European Atlantic destinations.' },
+    note:'5.9% of Brazilian imports via Hormuz. Routed around Cape of Good Hope - no Bab/Suez dependency, but a very long voyage comparable in time to European Atlantic destinations.' },
 ];
 
 // ── Links ─────────────────────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ links.forEach(lk => {
   if (!s || !t) return;
 
   const col = C[t.type] || C[s.type] || '#64748b';
-  // Bolder strokes — proportional to flow value
+  // Bolder strokes - proportional to flow value
   const sw  = Math.max(1.8, Math.sqrt(Math.max(t.v, 0.1)) * 1.3);
   const cx  = (s.x + t.x) / 2;
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gulf LNG Flow — Narrows Sankey</title>
+<title>Gulf LNG Flow - Narrows Sankey</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
       </div>
       <span class="eyebrow-pill">Sankey Flow Analysis</span>
     </div>
-    <div class="card-title">Gulf LNG — annual bilateral flows through sequential chokepoints</div>
+    <div class="card-title">Gulf LNG - annual bilateral flows through sequential chokepoints</div>
     <div class="card-sub">Ribbon width is proportional to annual trade value ($B). All cargo transits Hormuz. Asia-Pacific adds Malacca; European routes add Bab el-Mandeb and Suez, with Atlantic terminals adding Gibraltar. Hover for detail.</div>
   </div>
 
@@ -104,13 +104,13 @@ window.addEventListener('load', function () {
   // ── Nodes ──────────────────────────────────────────────────────────────────
   const rawNodes = [
     { id:'gulf',        name:'Gulf LNG',              type:'origin',
-      note:'Qatar accounts for ~75% of Gulf LNG. Total annual flow: $51.5B. All cargo must transit Hormuz — no alternative maritime route exists.' },
+      note:'Qatar accounts for ~75% of Gulf LNG. Total annual flow: $51.5B. All cargo must transit Hormuz - no alternative maritime route exists.' },
     { id:'hormuz',      name:'Hormuz',                type:'choke',
       note:'Single mandatory transit for 100% of Gulf LNG. The full width of this node represents the entire $51.5B annual exposure at one bottleneck.' },
     { id:'malacca',     name:'Malacca',               type:'choke',
-      note:'Second mandatory chokepoint for all Asia-Pacific LNG. $27.8B — 54% of Gulf LNG — passes here. No viable bypass exists for laden tankers.' },
+      note:'Second mandatory chokepoint for all Asia-Pacific LNG. $27.8B - 54% of Gulf LNG - passes here. No viable bypass exists for laden tankers.' },
     { id:'bab',         name:'Bab el-Mandeb / Suez',  type:'choke',
-      note:'Bab el-Mandeb (active Houthi threat zone since late 2023) and Suez Canal in sequence. $19.1B — 37% of Gulf LNG. Disruption adds 14-16 days around the Cape.' },
+      note:'Bab el-Mandeb (active Houthi threat zone since late 2023) and Suez Canal in sequence. $19.1B - 37% of Gulf LNG. Disruption adds 14-16 days around the Cape.' },
     // Col-3 nodes: Gibraltar (visible) + phantom passthroughs for Med terminals (invisible)
     // Atlantic terminals first → Gibraltar at top of European block in col 3
     { id:'gibraltar',   name:'Gibraltar',              type:'choke',
@@ -124,19 +124,19 @@ window.addEventListener('load', function () {
     { id:'china',       name:'China',        type:'asia',   dep:23.6, td:11, note:'Largest single buyer of Gulf LNG. 23.6% of Chinese imports via Hormuz and Malacca.' },
     { id:'korea',       name:'S. Korea',     type:'asia',   dep:20.0, td:13, note:'20.0% of South Korean LNG via Hormuz. Route continues through the Taiwan and Korea Straits.' },
     { id:'japan',       name:'Japan',        type:'asia',   dep:6.5,  td:14, note:'6.5% of Japanese imports via Hormuz. Japan has diversified substantially to Australian and US LNG.' },
-    { id:'thailand',    name:'Thailand',     type:'asia',   dep:30.0, td:10, note:'30.0% of Thai LNG imports via Hormuz — among the higher Asian dependencies.' },
+    { id:'thailand',    name:'Thailand',     type:'asia',   dep:30.0, td:10, note:'30.0% of Thai LNG imports via Hormuz - among the higher Asian dependencies.' },
     { id:'taiwan',      name:'Taiwan',       type:'asia',   dep:23.2, td:12, note:'23.2% of Taiwanese imports via Hormuz. The Taiwan Strait adds a further potential chokepoint.' },
-    // European destinations — Atlantic terminals first (align with Gibraltar in col 3)
-    { id:'belgium',     name:'Belgium',      type:'europe', dep:55.8, td:20, note:'55.8% Hormuz dependency — highest in Europe. Zeebrugge transits five chokepoints in sequence: Hormuz, Bab, Suez, Gibraltar, then destination.' },
+    // European destinations - Atlantic terminals first (align with Gibraltar in col 3)
+    { id:'belgium',     name:'Belgium',      type:'europe', dep:55.8, td:20, note:'55.8% Hormuz dependency - highest in Europe. Zeebrugge transits five chokepoints in sequence: Hormuz, Bab, Suez, Gibraltar, then destination.' },
     { id:'uk',          name:'UK',           type:'europe', dep:26.9, td:21, note:'26.9% via Hormuz. Atlantic-facing terminals (Isle of Grain, South Hook) transit Gibraltar as the final chokepoint.' },
     { id:'netherlands', name:'Netherlands',  type:'europe', dep:13.2, td:21, note:'13.2% via Hormuz. Gate Terminal Rotterdam is Atlantic-facing; Gibraltar transited en route.' },
-    { id:'france',      name:'France',       type:'europe', dep:10.2, td:15, note:'10.2% via Hormuz. Fos-sur-Mer is Mediterranean-facing — Suez is the last chokepoint; Gibraltar bypassed.' },
-    { id:'italy',       name:'Italy',        type:'europe', dep:21.6, td:14, note:'21.6% via Hormuz. Mediterranean terminals route via Suez — Gibraltar not transited.' },
+    { id:'france',      name:'France',       type:'europe', dep:10.2, td:15, note:'10.2% via Hormuz. Fos-sur-Mer is Mediterranean-facing - Suez is the last chokepoint; Gibraltar bypassed.' },
+    { id:'italy',       name:'Italy',        type:'europe', dep:21.6, td:14, note:'21.6% via Hormuz. Mediterranean terminals route via Suez - Gibraltar not transited.' },
     { id:'spain',       name:'Spain',        type:'europe', dep:17.2, td:15, note:'17.2% via Hormuz. Primarily Mediterranean terminals via Suez.' },
-    // South Asia & Americas — direct from Hormuz, no intermediate named chokepoint
-    { id:'pakistan',    name:'Pakistan',     type:'south',  dep:98.2, td:2,  note:'98.2% Hormuz dependency — highest globally. No credible alternative at scale. A closure would rapidly paralyse Pakistani power generation.' },
+    // South Asia & Americas - direct from Hormuz, no intermediate named chokepoint
+    { id:'pakistan',    name:'Pakistan',     type:'south',  dep:98.2, td:2,  note:'98.2% Hormuz dependency - highest globally. No credible alternative at scale. A closure would rapidly paralyse Pakistani power generation.' },
     { id:'india',       name:'India',        type:'south',  dep:2.5,  td:4,  note:'2.5% of Indian imports via Hormuz. India has diversified across Australia, US, and domestic production.' },
-    { id:'brazil',      name:'Brazil',       type:'south',  dep:5.9,  td:19, note:'5.9% via Hormuz. Cape of Good Hope route — comparable transit time to Atlantic European destinations.' },
+    { id:'brazil',      name:'Brazil',       type:'south',  dep:5.9,  td:19, note:'5.9% via Hormuz. Cape of Good Hope route - comparable transit time to Atlantic European destinations.' },
   ];
 
   // ── Links ──────────────────────────────────────────────────────────────────
@@ -191,7 +191,7 @@ window.addEventListener('load', function () {
   // ── Post-layout: realign col-3 nodes to match Bab's vertical output ────────
   // sankeyJustify places Gibraltar at the top of col-3 space. But Gibraltar
   // must connect down to Belgium/UK/Netherlands in col-4 (mid-diagram), so the
-  // ribbon from Bab arcs upward through the Asia section — the bump the user sees.
+  // ribbon from Bab arcs upward through the Asia section - the bump the user sees.
   // Fix: shift each col-3 node so its vertical centre matches the y of its
   // incoming link's SOURCE side (i.e., where the ribbon exits Bab).
   // Then shift all connected link endpoints by the same delta.
@@ -249,7 +249,7 @@ window.addEventListener('load', function () {
 
   // ── Ribbons ────────────────────────────────────────────────────────────────
   // d3.sankeyLinkHorizontal() generates a single bezier CURVE (open path).
-  // Ribbon width comes from stroke-width: link.width — not fill.
+  // Ribbon width comes from stroke-width: link.width - not fill.
   svg.append('g')
     .selectAll('path')
     .data(links)
@@ -302,11 +302,11 @@ window.addEventListener('load', function () {
     .attr('stroke-opacity', 0.90);
 
   // ── Labels ─────────────────────────────────────────────────────────────────
-  // All labels sit outside the ribbon area — no text outline needed.
+  // All labels sit outside the ribbon area - no text outline needed.
   // Interior nodes (chokepoints): label LEFT of node, $B value on a second line.
   // Destination nodes (leaves): label RIGHT of node, $B·days sub-label below.
   nodeG.each(function(d) {
-    if (d.type === 'phantom') return; // invisible passthrough — no label
+    if (d.type === 'phantom') return; // invisible passthrough - no label
     const g      = d3.select(this);
     const nodeH  = d.y1 - d.y0;
     const cy     = (d.y0 + d.y1) / 2;
@@ -322,7 +322,7 @@ window.addEventListener('load', function () {
       const hasSubLabel = d.td != null && nodeH >= 13;
       const nameY = hasSubLabel ? cy - 8 : cy;
 
-      // Country name — larger and bolder, the meaningful part of the story
+      // Country name - larger and bolder, the meaningful part of the story
       g.append('text')
         .attr('x', lx).attr('y', nameY)
         .attr('text-anchor', 'start')
@@ -333,7 +333,7 @@ window.addEventListener('load', function () {
         .attr('font-family', FONT)
         .text(d.name);
 
-      // $B · days — clearly legible
+      // $B · days - clearly legible
       if (hasSubLabel) {
         g.append('text')
           .attr('x', lx).attr('y', cy + 8)
@@ -348,7 +348,7 @@ window.addEventListener('load', function () {
       }
 
     } else {
-      // ── Interior node (chokepoints, origin) — label LEFT of node ────────
+      // ── Interior node (chokepoints, origin) - label LEFT of node ────────
       const lx = d.x0 - 10;
 
       // Name
@@ -362,7 +362,7 @@ window.addEventListener('load', function () {
         .attr('font-family', FONT)
         .text(d.name);
 
-      // $B on second line — outside ribbons, fully legible
+      // $B on second line - outside ribbons, fully legible
       if (d.value) {
         g.append('text')
           .attr('x', lx).attr('y', cy + 8)

@@ -197,7 +197,7 @@
     <span class="hdr-title">CASCADE</span>
   </div>
   <div class="hdr-right">
-    <a class="btn-more" href="/cascade-plus.html" title="CASCADE+ — a further demonstration, on illustrative data">
+    <a class="btn-more" href="/cascade-plus.html" title="CASCADE+: a further demonstration, on illustrative data">
       Explore CASCADE+ <span class="bm-arrow">&rarr;</span>
     </a>
     <button class="btn-sm" onclick="resetScenario()">Reset</button>
@@ -273,14 +273,14 @@
     <div>
       <div class="col-lbl locked">Locked</div>
       <div class="col-tot locked" id="colLockedTot">--</div>
-      <div class="col-desc">Loaded and transiting. Bills of lading issued. Physically committed — no diversion window.</div>
+      <div class="col-desc">Loaded and transiting. Bills of lading issued. Physically committed, no diversion window.</div>
       <hr class="col-sep locked">
       <div id="colLocked"></div>
     </div>
     <div>
       <div class="col-lbl window">In-window</div>
       <div class="col-tot window" id="colWindowTot">--</div>
-      <div class="col-desc">Approaching the strait. Diversion possible but costly — each vessel tracks its own closing window.</div>
+      <div class="col-desc">Approaching the strait. Diversion possible but costly; each vessel tracks its own closing window.</div>
       <hr class="col-sep window">
       <div id="colWindow"></div>
       <div class="col-empty" id="colWindowEmpty" style="display:none">All diverted or committed</div>
@@ -288,7 +288,7 @@
     <div>
       <div class="col-lbl pre">Pre-commitment</div>
       <div class="col-tot pre" id="colPreTot">--</div>
-      <div class="col-desc">Liftings not yet loaded. Full optionality — zero diversion cost.</div>
+      <div class="col-desc">Liftings not yet loaded. Full optionality; zero diversion cost.</div>
       <hr class="col-sep pre">
       <div id="colPre"></div>
       <div class="col-empty" id="colPreEmpty" style="display:none">All diverted</div>
@@ -323,9 +323,9 @@ function altRoute(cpId, cls, wt) {
     if (wt === 'pre') return {route:'Re-nominate to non-CPC Black Sea terminal', days:0, cost:'Freight adjustment only', newCps:[]};
     return {route:'Await naval-escorted convoy slot', days:3, cost:'+$1.1M war-risk premium', newCps:[]};
   }
-  // malacca — pre-commitment: full optionality, no diversion cost
+  // malacca, pre-commitment: full optionality, no diversion cost
   if (wt === 'pre') return {route:'Re-nominate loading port', days:0, cost:'Freight adjustment only', newCps:[]};
-  // malacca — route depends on vessel class
+  // malacca, route depends on vessel class
   if (cls === 'VLCC' || cls === 'LNG')
     return {route:'Lombok Strait', days:1.5, cost:'+$0.3M', newCps:['Lombok (T2 · not JWC)']};
   if (cls === 'Container')
@@ -337,8 +337,8 @@ function altRoute(cpId, cls, wt) {
 // CII warning when diverting: Cape adds 14-16 days of extra fuel burn
 function ciiWarn(cii, days) {
   if (days < 3) return null; // Lombok/Sunda: minimal impact
-  if (cii === 'E') return 'CII E: non-compliant — additional transit worsens port-state exposure';
-  if (cii === 'D') return 'CII D: below threshold — Cape diversion deepens rating pressure';
+  if (cii === 'E') return 'CII E: non-compliant; additional transit worsens port-state exposure';
+  if (cii === 'D') return 'CII D: below threshold; Cape diversion deepens rating pressure';
   return null;
 }
 
@@ -351,7 +351,7 @@ const FLEETS = {
 hormuz:{
   name:'Strait of Hormuz', short:'Hormuz',
   region:'Persian Gulf / Gulf of Oman',
-  jwc:true, jwcLabel:'JWC Listed — T1',
+  jwc:true, jwcLabel:'JWC Listed · T1',
   threat:'21M bbl/day. Mandatory exit for all Persian Gulf crude and LNG. Iran interdiction capability. No alternative route for Gulf-loaded vessels.',
   residualNote:'Locked and remaining in-window vessels stay on standard route. UKMTO Dubai is the reporting authority for vessels in the area.',
   locked:[
@@ -368,11 +368,11 @@ hormuz:{
   in_window:[
     {id:'h10',name:'DAWN PIONEER',   cls:'VLCC',   val:110,flag:'LR',crew:26,ukNat:1,cargo:'Crude',  cii:'C', window_h:68, note:'Fujairah approach. Window closes at 0600Z.'},
     {id:'h11',name:'TIGRIS PRIDE',   cls:'Suezmax',val:82, flag:'GB',crew:22,ukNat:6,cargo:'Crude',  cii:'D', window_h:48, note:'Persian Gulf approach. Berth confirmation pending.'},
-    {id:'h12',name:'DESERT WIND',    cls:'VLCC',   val:115,flag:'PA',crew:25,ukNat:0,cargo:'Crude',  cii:'B', window_h:72, note:'Gulf of Oman, 200nm south of Hormuz. Ras Tanura loading T+3. Declining inbound transit — Atlantic cargo fixture viable.'},
+    {id:'h12',name:'DESERT WIND',    cls:'VLCC',   val:115,flag:'PA',crew:25,ukNat:0,cargo:'Crude',  cii:'B', window_h:72, note:'Gulf of Oman, 200nm south of Hormuz. Ras Tanura loading T+3. Declining inbound transit; Atlantic cargo fixture viable.'},
     {id:'h13',name:'ORYX CARRIER',   cls:'Aframax',val:65, flag:'MT',crew:19,ukNat:2,cargo:'Crude',  cii:'D', window_h:24, note:'Bunkering Fujairah. In JWC Listed Area. Urgent.'},
     {id:'h14',name:'ZAGROS LIGHT',   cls:'Suezmax',val:88, flag:'MH',crew:21,ukNat:0,cargo:'Crude',  cii:'C', window_h:36, note:'Gulf of Oman. Kharg Island loading fixture T+3. Can decline inbound Hormuz transit before crossing.'},
     {id:'h15',name:'RUWAIS SPIRIT',  cls:'Aframax',val:70, flag:'BS',crew:18,ukNat:1,cargo:'LNG',   cii:'B', window_h:60, note:'Bunkering Fujairah. Inbound loading fixture at Ruwais T+2. Can decline transit and redirect cargo.'},
-    {id:'h16',name:'GULF CONDOR',    cls:'Suezmax',val:77, flag:'LR',crew:22,ukNat:0,cargo:'Crude',  cii:'E', window_h:18, note:'Strait approach. Final window — divert or transit.'},
+    {id:'h16',name:'GULF CONDOR',    cls:'Suezmax',val:77, flag:'LR',crew:22,ukNat:0,cargo:'Crude',  cii:'E', window_h:18, note:'Strait approach. Final window, divert or transit.'},
   ],
   pre:[
     {id:'h17',name:'AURORA RESOLVE', cls:'VLCC',   val:128,flag:'MH',crew:25,ukNat:0,cargo:'Crude',  cii:'A', note:'Liftings confirmed. Vessel not nominated. Zero diversion cost.'},
@@ -388,10 +388,10 @@ hormuz:{
 bab:{
   name:'Bab el-Mandeb', short:'Bab el-Mandeb',
   region:'Red Sea / Gulf of Aden',
-  jwc:true, jwcLabel:'JWC Listed — T3',
+  jwc:true, jwcLabel:'JWC Listed · T3',
   threat:'Active Houthi anti-ship campaign. 40+ vessel attacks since Oct 2023. MSC, BP, and Maersk have suspended Red Sea routing. JWC war risk premiums elevated.',
   residualNote:'In-window vessels approaching Red Sea. Active Houthi threat at this range. UKMTO Dubai advisory in effect. Naval escort requests can be made via UKMTO.',
-  spillover:{corridor:'blacksea', note:'Cape-diverted cargo is competing for Suezmax tonnage that would otherwise serve the Black Sea \u2014 this corridor is not isolated from that one.'},
+  spillover:{corridor:'blacksea', note:'Cape-diverted cargo is competing for Suezmax tonnage that would otherwise serve the Black Sea; this corridor is not isolated from that one.'},
   locked:[
     {id:'b01',name:'ADEN RESOLVE',    cls:'Suezmax',  val:88, flag:'LR',crew:22,ukNat:0,cargo:'Crude',    cii:'C', note:'Gulf of Aden. Bab passage in 18h. No option.'},
     {id:'b02',name:'MEDSTAR PELICAN', cls:'Container', val:105,flag:'PA',crew:21,ukNat:1,cargo:'Container',cii:'B', note:'Red Sea transit. MSC feeder. Committed to Suez slot.'},
@@ -400,7 +400,7 @@ bab:{
     {id:'b05',name:'AQABA PRIDE',     cls:'Aframax',   val:58, flag:'MT',crew:18,ukNat:1,cargo:'Products', cii:'D', note:'Products tanker. Loaded at Yanbu. Bab approach.'},
     {id:'b06',name:'GULF BRIDGE',     cls:'Suezmax',   val:80, flag:'LR',crew:21,ukNat:0,cargo:'Crude',    cii:'C', note:'Arabian Sea. Bills of lading issued at Jubail.'},
     {id:'b07',name:'DJIBOUTI STAR',   cls:'Aframax',   val:62, flag:'CY',crew:18,ukNat:0,cargo:'Crude',    cii:'D', note:'Bunkering Djibouti. In JWC Listed Area.'},
-    {id:'b08',name:'ERITREA STAR',    cls:'Bulk',      val:44, flag:'MH',crew:20,ukNat:0,cargo:'Bulk',     cii:'E', note:'Grain cargo, Egypt-bound. Indian Ocean northbound. Gulf of Aden — Bab passage in 6h. No option.'},
+    {id:'b08',name:'ERITREA STAR',    cls:'Bulk',      val:44, flag:'MH',crew:20,ukNat:0,cargo:'Bulk',     cii:'E', note:'Grain cargo, Egypt-bound. Indian Ocean northbound. Gulf of Aden, Bab passage in 6h. No option.'},
   ],
   in_window:[
     {id:'b09',name:'LEVIATHAN',       cls:'LNG',       val:125,flag:'MH',crew:30,ukNat:2,cargo:'LNG',      cii:'A', window_h:70, note:'Gulf of Aden approach. UKMTO advisory flagged.'},
@@ -423,10 +423,10 @@ bab:{
 blacksea:{
   name:'Black Sea / CPC Terminal', short:'Black Sea',
   region:'Novorossiysk / Kerch Strait / CPC Marine Terminal',
-  jwc:true, jwcLabel:'JWC Listed \u2014 T1',
-  threat:'Ukrainian long-range strikes on tankers loading Russian and Kazakh crude at the CPC pipeline terminus. Two vessels hit at CPC in the past week alone. Suezmax rates on this route have spiked toward all-time highs \u2014 not purely a local shock: Red Sea-avoiding cargo is competing for the same Suezmax tonnage pool, on top of the direct Ukraine risk.',
+  jwc:true, jwcLabel:'JWC Listed · T1',
+  threat:'Ukrainian long-range strikes on tankers loading Russian and Kazakh crude at the CPC pipeline terminus. Two vessels hit at CPC in the past week alone. Suezmax rates on this route have spiked toward all-time highs; not purely a local shock: Red Sea-avoiding cargo is competing for the same Suezmax tonnage pool, on top of the direct Ukraine risk.',
   residualNote:'In-window vessels approaching Novorossiysk / CPC anchorage. Elevated strike risk at berth and at anchor. War-risk premiums moving faster than the underlying incident rate would suggest on its own.',
-  spillover:{corridor:'bab', note:'Part of this corridor\u2019s rate spike traces back to Bab el-Mandeb \u2014 vessels avoiding the Red Sea are bidding up the same Suezmax pool that serves this route.'},
+  spillover:{corridor:'bab', note:'Part of this corridor\u2019s rate spike traces back to Bab el-Mandeb; vessels avoiding the Red Sea are bidding up the same Suezmax pool that serves this route.'},
   locked:[
     {id:'k01',name:'NOVOROSSIYSK PRIDE', cls:'Suezmax', val:84, flag:'LR',crew:22,ukNat:0,cargo:'Crude', cii:'C', note:'Loaded at CPC Marine Terminal. Departure imminent. No option.'},
     {id:'k02',name:'KERCH VOYAGER',      cls:'Suezmax', val:80, flag:'MH',crew:21,ukNat:0,cargo:'Crude', cii:'D', note:'Laden, Kerch Strait approach. Bills of lading issued.'},

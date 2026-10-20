@@ -1,0 +1,678 @@
+{
+ "path": "analysis/panama",
+ "meta": {
+  "title": "Narrows — El Niño va étrangler le canal de Panama",
+  "description": "Une fermeture totale est improbable ; un étranglement durable par El Niño pèse sur les chaînes céréalières. Quantification du commerce céréalier à risque et validation sur l’épisode 2023–24."
+ },
+ "pairs": [
+  [
+   "Scenario analysis · Panama Canal · May 2026, updated Aug 2026",
+   "Analyse de scénarios · Canal de Panama · mai 2026, mis à jour en août 2026"
+  ],
+  [
+   "El Niño will throttle the Panama Canal. <em>This is a quantification challenge</em>",
+   "El Niño va étrangler le canal de Panama. <em>C’est un défi de quantification</em>"
+  ],
+  [
+   "A full closure is dramatic and unlikely. A sustained partial disruption as El Niño events typically produce, is highly consequential for food supply chains, prices and hedges.",
+   "Une fermeture totale est spectaculaire et peu probable. Une perturbation partielle durable, comme les épisodes El Niño en produisent d’ordinaire, pèse lourdement sur les chaînes d’approvisionnement alimentaires, les prix et les couvertures."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">May 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">14 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">mai 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">14 min de lecture</span>"
+  ],
+  [
+   "Grain trade at risk: 50% severity, 90 days",
+   "Commerce céréalier à risque : gravité de 50 %, 90 jours"
+  ],
+  [
+   "Corn, soy, wheat combined · CDM v3, updated Aug 2026",
+   "Maïs, soja, blé combinés · CDM v3, mis à jour en août 2026"
+  ],
+  [
+   "Grain trade at risk: full severity range",
+   "Commerce céréalier à risque : toute la fourchette de gravité"
+  ],
+  [
+   "33% to 100% severity · corn, soy, wheat · CDM v3, updated Aug 2026",
+   "Gravité de 33 % à 100 % · maïs, soja, blé · CDM v3, mis à jour en août 2026"
+  ],
+  [
+   "Cape Horn reroute, reference case: Handymax bulk carrier",
+   "Déroutement par le cap Horn, cas de référence : vraquier Handymax"
+  ],
+  [
+   "+38 days",
+   "+38 jours"
+  ],
+  [
+   "$1.14M voyage overrun per vessel · a cost ceiling, not observed behavior",
+   "1,14 M$ de surcoût par navire et par voyage · un plafond de coût, pas un comportement observé"
+  ],
+  [
+   "El Niño emergence probability: mid-2026",
+   "Probabilité d’émergence d’El Niño : mi-2026"
+  ],
+  [
+   "NOAA CPC April 2026 · 75% chance moderate-to-very-strong by Nov 2026",
+   "NOAA CPC, avril 2026 · 75 % de chances d’un épisode modéré à très fort d’ici novembre 2026"
+  ],
+  [
+   "Panama Canal · Pacific entrance · 14,000 vessels annually",
+   "Canal de Panama · entrée Pacifique · 14 000 navires par an"
+  ],
+  [
+   "The framing problem",
+   "Le problème de cadrage"
+  ],
+  [
+   "The Panama Canal has not closed in 110 years. But it has narrowed.",
+   "Le canal de Panama n’a pas fermé en 110 ans. Mais il s’est rétréci."
+  ],
+  [
+   "The standard scenario analysis for maritime chokepoints is binary: open or closed. For the Strait of Hormuz, that framing has held. The Panama Canal does not close. It throttles. Under drought conditions, the <i>Autoridad del Canal de Panamá</i> progressively restricts the number of daily transits and the maximum permitted vessel draft, reducing effective throughput over weeks and months rather than hours. The 2023–24 El Niño drought event did not produce a single catastrophic event. It produced a six-month, stepwise reduction in canal capacity from 36 transits per day in normal operations to 18 per day at the February 2024 nadir, a 50% throughput reduction sustained over a period long enough to restructure trade routing patterns across the Pacific Basin.",
+   "L’analyse de scénarios habituelle des points de passage maritimes est binaire : ouvert ou fermé. Pour le détroit d’Ormuz, ce cadrage a tenu. Le canal de Panama, lui, ne ferme pas. Il s’étrangle. En période de sécheresse, l’<i>Autoridad del Canal de Panamá</i> restreint progressivement le nombre de transits quotidiens et le tirant d’eau maximal autorisé, réduisant le débit effectif sur des semaines et des mois plutôt que sur des heures. La sécheresse El Niño de 2023–24 n’a pas produit un événement catastrophique unique. Elle a produit une réduction par paliers, sur six mois, de la capacité du canal : de 36 transits par jour en exploitation normale à 18 par jour au creux de février 2024, soit une baisse de 50 % du débit, maintenue assez longtemps pour redessiner les routes commerciales dans tout le bassin du Pacifique."
+  ],
+  [
+   "This distinction matters. A progressive throttle is harder to price than a binary closure. The onset is gradual, the severity uncertain, and the duration dependent on rainfall patterns that are themselves probabilistic. Second, a throttle does not affect all vessel classes or all commodity types equally. The distribution of impact across the vessel hierarchy is asymmetric in ways that have direct implications for the agricultural supply chains that depend on Handymax and Supramax bulk carriers, underrepresented in the energy-focused analysis that dominates current coverage.",
+   "Cette distinction compte. Un étranglement progressif est plus difficile à tarifer qu’une fermeture binaire. Le début est graduel, la gravité incertaine et la durée dépend de régimes de pluie eux-mêmes probabilistes. Ensuite, un étranglement n’affecte pas toutes les classes de navires ni tous les produits de la même façon. La répartition de l’impact le long de la hiérarchie des navires est asymétrique, avec des conséquences directes pour les chaînes agricoles qui dépendent des vraquiers Handymax et Supramax, sous-représentées dans l’analyse centrée sur l’énergie qui domine la couverture actuelle."
+  ],
+  [
+   "This paper has three purposes. It quantifies the probable range of trade exposure under throttling scenarios calibrated to the 2023–24 event. It validates those outputs against documented actuals to assess model performance in a partial-severity condition. And it situates the analysis within a forward-looking risk framework that is not speculative: NOAA's Climate Prediction Center assigned a 61% probability to El Niño emergence by mid-2026 in its April 2026 update, with a further finding that by the November 2026 to January 2027 peak, the probability of a moderate-to-very-strong event reaches approximately 75% (ACP, 2026; NOAA CPC, 2026).",
+   "Ce document poursuit trois objectifs. Il quantifie la fourchette probable d’exposition commerciale sous des scénarios d’étranglement calibrés sur l’épisode 2023–24. Il valide ces résultats par rapport aux chiffres réels documentés, pour évaluer la performance du modèle en condition de gravité partielle. Et il replace l’analyse dans un cadre de risque prospectif qui n’a rien de spéculatif : le Climate Prediction Center de la NOAA a attribué une probabilité de 61 % à l’émergence d’El Niño d’ici mi-2026 dans sa mise à jour d’avril 2026, avec en outre une probabilité d’environ 75 % d’un épisode modéré à très fort au pic de novembre 2026 à janvier 2027 (ACP, 2026 ; NOAA CPC, 2026)."
+  ],
+  [
+   "Live, 27 August 2026: the throttle has already begun",
+   "En direct, 27 août 2026 : l’étranglement a déjà commencé"
+  ],
+  [
+   "This paper's own forward-looking section, just below, projected that a 2026 El Niño onset would not produce a material transit or draft impact until the 2027 dry season, consistent with the historical lag pattern from prior events. That forecast has been overtaken by events. The Panama Canal Authority's own advisory, issued 20 August 2026, has already cut the maximum authorised draft to 48.0 feet, with a further cut to 47.5 feet and a reduction in daily transit slots from a normal 36 to 38 down to 34 from 3 September, and to 32 from 15 September. The 2027 projection below should now be read as a floor, not the ceiling it was written as. Discussed live on the Granular podcast with Holly Birkett, 27 August 2026, alongside a companion figure: a Handymax bulk carrier diverting from the current US Gulf to Asia corridor around Cape Horn, using today's live Baltic Handysize and Supramax rates and Ship &amp; Bunker's VLSFO benchmark rather than the 2023 documented baseline used later on this page, runs to roughly $580,000 to $840,000 in added charter and fuel cost. That is a different route and a different market snapshot from the $1.14 million Brazil-to-Japan figure quantified below, not a restatement of it. See also: <a href=\"/analysis/hormuz-dry-cargo\" style=\"text-decoration:underline;\">Hormuz and the fertiliser trade</a>, the companion piece from the same podcast appearance. Source: Panama Canal Authority advisory, 20 August 2026; Baltic Exchange; Ship &amp; Bunker, 27 August 2026.",
+   "La section prospective de ce document, juste en dessous, projetait qu’un début d’El Niño en 2026 ne produirait pas d’impact notable sur les transits ou le tirant d’eau avant la saison sèche de 2027, conformément au décalage historique observé lors des épisodes précédents. Cette prévision a été dépassée par les faits. L’avis de l’Autorité du canal de Panama du 20 août 2026 a déjà ramené le tirant d’eau maximal autorisé à 48,0 pieds, avec une nouvelle baisse à 47,5 pieds et une réduction des créneaux de transit quotidiens, de 36 à 38 en temps normal à 34 à partir du 3 septembre, puis à 32 à partir du 15 septembre. La projection pour 2027 ci-dessous doit désormais se lire comme un plancher, et non comme le plafond qu’elle était censée être. Discuté en direct dans le podcast Granular avec Holly Birkett, le 27 août 2026, avec un chiffre complémentaire : un vraquier Handymax qui se déroute du corridor actuel entre le golfe des États-Unis et l’Asie par le cap Horn, avec les taux Baltic Handysize et Supramax du jour et la référence VLSFO de Ship &amp; Bunker plutôt que la base documentée de 2023 utilisée plus loin dans cette page, revient à environ 580 000 à 840 000 dollars de coûts supplémentaires d’affrètement et de combustible. C’est une autre route et un autre instantané de marché que le chiffre de 1,14 million de dollars Brésil–Japon quantifié plus bas, et non une reformulation de celui-ci. Voir aussi : <a href=\"/analysis/hormuz-dry-cargo\" style=\"text-decoration:underline;\">Ormuz et le commerce des engrais</a>, l’article complémentaire issu de la même intervention au podcast. Source : avis de l’Autorité du canal de Panama, 20 août 2026 ; Baltic Exchange ; Ship &amp; Bunker, 27 août 2026."
+  ],
+  [
+   "The causal chain",
+   "La chaîne causale"
+  ],
+  [
+   "Reliance on Gatun Lake is the operational constraint binding everything downstream.",
+   "La dépendance au lac Gatún est la contrainte opérationnelle qui conditionne tout le reste."
+  ],
+  [
+   "The Panama Canal's operational capacity is determined by the water level of Gatun Lake, the artificial reservoir that feeds both the Panamax locks and the larger Neopanamax locks opened in 2016. Gatun Lake is freshwater-fed: its level is maintained entirely by rainfall over the Panama watershed, averaging approximately 2,600mm per year. There is no significant alternative source and no pumping infrastructure of the scale required to compensate for a rainfall deficit. Each lockage displaces approximately 200 million litres of freshwater into the ocean. When the lake level drops, the ACP has a single lever: reduce lockage frequency and restrict the maximum draft of transiting vessels.",
+   "La capacité opérationnelle du canal de Panama est déterminée par le niveau du lac Gatún, le réservoir artificiel qui alimente à la fois les écluses Panamax et les écluses Neopanamax, plus grandes, ouvertes en 2016. Le lac Gatún est alimenté en eau douce : son niveau est entretenu uniquement par les pluies sur le bassin versant du Panama, qui avoisinent 2 600 mm par an. Il n’existe aucune autre source significative ni d’infrastructure de pompage à l’échelle nécessaire pour compenser un déficit de pluie. Chaque éclusage déverse environ 200 millions de litres d’eau douce dans l’océan. Quand le niveau du lac baisse, l’ACP n’a qu’un seul levier : réduire la fréquence des éclusages et restreindre le tirant d’eau maximal des navires en transit."
+  ],
+  [
+   "El Niño events produce a well-documented suppression of wet season rainfall over the Panama watershed. During the 2023–24 event, total calendar year 2023 rainfall was 30% below the long-run average. October 2023 recorded 41% below average, the lowest October precipitation since records began in 1950 (World Weather Attribution, 2024). The cumulative effect was a Gatun Lake level decline from its normal end-of-rainy-season high of approximately 88 feet above mean sea level to 79.6 feet at the August 2023 low, recovering partially but remaining below operational norms through Q1 2024. An independent attribution analysis found that the level of drought that produced the 2023 shipping disruption was \"unlikely\" without the concurrent El Niño forcing (World Weather Attribution, 2024).",
+   "Les épisodes El Niño suppriment de façon bien documentée les pluies de la saison humide sur le bassin versant du Panama. Pendant l’épisode 2023–24, les précipitations de l’année civile 2023 ont été inférieures de 30 % à la moyenne de long terme. Octobre 2023 a enregistré 41 % de moins que la moyenne, les précipitations d’octobre les plus faibles depuis le début des relevés en 1950 (World Weather Attribution, 2024). L’effet cumulé a fait passer le niveau du lac Gatún de son plafond normal de fin de saison des pluies, environ 88 pieds au-dessus du niveau moyen de la mer, à 79,6 pieds au point bas d’août 2023, avec une remontée partielle mais un niveau resté sous les normes opérationnelles jusqu’au T1 2024. Une analyse d’attribution indépendante a conclu qu’un niveau de sécheresse tel que celui qui a perturbé la navigation en 2023 était « improbable » sans le forçage simultané d’El Niño (World Weather Attribution, 2024)."
+  ],
+  [
+   "The structural risk is not limited to the 2023–24 event. Muñoz, Lawrence, and Wang (2025), analysing Gatun Lake hydrology under CMIP6 climate projections, found that minimum annual lake levels decline substantially through the 21st century under moderately high and high emissions pathways (SSP3-7.0 and SSP5-8.5), driven primarily by reduced wet season precipitation. Under those scenarios, the frequency of droughts equivalent to the 2023–24 event approximately doubles by the end of the century. The implication is not that conditions will deteriorate linearly, but that the 2023–24 disruption should be understood as a recurring risk within a normal operational planning horizon, not a once-in-a-generation event.",
+   "Le risque structurel ne se limite pas à l’épisode 2023–24. Muñoz, Lawrence et Wang (2025), analysant l’hydrologie du lac Gatún sous les projections climatiques CMIP6, constatent que les niveaux annuels minimaux du lac baissent nettement au XXIe siècle dans les trajectoires d’émissions moyennement élevées et élevées (SSP3-7.0 et SSP5-8.5), principalement du fait d’une moindre pluviométrie en saison humide. Dans ces scénarios, la fréquence des sécheresses équivalentes à celle de 2023–24 double environ d’ici la fin du siècle. Il ne s’agit pas de conditions qui se détérioreraient linéairement, mais d’une perturbation de 2023–24 à comprendre comme un risque récurrent dans un horizon normal de planification opérationnelle, et non comme un événement de génération."
+  ],
+  [
+   "The Gatun Lake to throughput connection",
+   "Du lac Gatún au débit"
+  ],
+  [
+   "The ACP's operational response to declining lake levels follows a documented protocol. As levels fall below approximately 84 feet, draft restrictions are implemented first, reducing the maximum permitted vessel draft for Neopanamax transits from the standard 50 feet toward 44 feet at the 2023 floor. As levels continue to fall, daily transit slots are progressively reduced. At 79.6 feet, the ACP had cut daily transits from 36–38 (normal operations) to 18 (February 2024 minimum) and had imposed a 44-foot maximum draft on Neopanamax transits. The relationship between lake level, draft restriction, and transit capacity is not linear at all points, but is sufficiently consistent to support scenario modelling across a plausible severity range. Source: BTS (2024); ACP operational notices 2023–24.",
+   "La réponse opérationnelle de l’ACP à la baisse du niveau du lac suit un protocole documenté. Lorsque les niveaux passent sous environ 84 pieds, des restrictions de tirant d’eau sont d’abord appliquées, réduisant le tirant d’eau maximal des transits Neopanamax du standard de 50 pieds vers 44 pieds au plancher de 2023. Si les niveaux continuent de baisser, les créneaux de transit quotidiens sont progressivement réduits. À 79,6 pieds, l’ACP avait ramené les transits quotidiens de 36–38 (exploitation normale) à 18 (minimum de février 2024) et imposé un tirant d’eau maximal de 44 pieds aux transits Neopanamax. La relation entre niveau du lac, restriction de tirant d’eau et capacité de transit n’est pas linéaire en tout point, mais elle est assez constante pour permettre une modélisation de scénarios sur une plage de gravité plausible. Source : BTS (2024) ; avis opérationnels de l’ACP 2023–24."
+  ],
+  [
+   "Panama Canal · Operational history 2022–2026",
+   "Canal de Panama · Historique opérationnel 2022–2026"
+  ],
+  [
+   "Gatun Lake level vs. daily transit authorisations",
+   "Niveau du lac Gatún et autorisations de transit quotidiennes"
+  ],
+  [
+   "Feet above mean sea level (left axis) · Transits per day (right axis)",
+   "Pieds au-dessus du niveau moyen de la mer (axe gauche) · Transits par jour (axe droit)"
+  ],
+  [
+   "@t:Gatun Lake level (ft)",
+   "Niveau du lac Gatún (pi)"
+  ],
+  [
+   "@t:Daily transits authorised",
+   "Transits quotidiens autorisés"
+  ],
+  [
+   "Restriction threshold (84 ft)",
+   "Seuil de restriction (84 pi)"
+  ],
+  [
+   "@t:Normal seasonal high (~88 ft)",
+   "Plateau saisonnier normal (≈ 88 pi)"
+  ],
+  [
+   "Sources: ACP operational notices 2023–24; BTS (2024); Narrows estimates for 2025–26 based on ACP recovery reporting. Gatun Lake levels are monthly estimates derived from documented ACP operational data and independent hydrological reporting.",
+   "Sources : avis opérationnels de l’ACP 2023–24 ; BTS (2024) ; estimations de Narrows pour 2025–26 d’après les rapports de l’ACP sur le rétablissement. Les niveaux du lac Gatún sont des estimations mensuelles dérivées de données opérationnelles documentées de l’ACP et de rapports hydrologiques indépendants."
+  ],
+  [
+   "Vessel class differentiation",
+   "Différenciation par classe de navire"
+  ],
+  [
+   "The draft restriction is not symmetric. Neopanamax vessels lose 40% cargo capacity. Bulk carriers lose transit priority.",
+   "La restriction de tirant d’eau n’est pas symétrique. Les Neopanamax perdent 40 % de leur capacité de chargement. Les vraquiers perdent leur priorité de transit."
+  ],
+  [
+   "A Panama Canal throttle distributes costs unequally across the vessel hierarchy. The mechanism differs by vessel type, and the practical consequence is that the trade flows most affected are not those that dominate financial coverage.",
+   "Un étranglement du canal de Panama répartit inégalement les coûts le long de la hiérarchie des navires. Le mécanisme diffère selon le type de navire, et la conséquence pratique est que les flux commerciaux les plus touchés ne sont pas ceux qui dominent la couverture financière."
+  ],
+  [
+   "The Neopanamax locks, opened in 2016, accommodate vessels up to 1,200 feet in length with drafts up to 50 feet. These locks handle the largest container ships transiting the canal. Under the 44-foot draft restriction imposed in 2023, a Neopanamax container vessel that would normally transit laden to approximately 12,500 TEU is limited to approximately 7,500 TEU: a 40% reduction in cargo capacity per transit (Port Economics, Management and Policy, 2024). This creates a direct and quantifiable capacity loss for container trade even with no reduction in transit frequency.",
+   "Les écluses Neopanamax, ouvertes en 2016, accueillent des navires jusqu’à 1 200 pieds de long et 50 pieds de tirant d’eau. Elles reçoivent les plus grands porte-conteneurs qui transitent par le canal. Sous la restriction de tirant d’eau de 44 pieds imposée en 2023, un porte-conteneurs Neopanamax qui transiterait normalement chargé d’environ 12 500 EVP est limité à environ 7 500 EVP : une réduction de 40 % de la capacité de chargement par transit (Port Economics, Management and Policy, 2024). Cela crée une perte de capacité directe et quantifiable pour le commerce conteneurisé, même sans réduction de la fréquence des transits."
+  ],
+  [
+   "The original Panamax locks, handling vessels up to approximately 39.5-foot draft, are less directly affected by a 44-foot restriction because Panamax-class vessels already operate within that envelope under normal conditions. The primary impact on Panamax-class traffic is the reduction in daily transit slots, which affects all vessel types proportionally but is compounded by the priority slot auction system.",
+   "Les écluses Panamax d’origine, qui accueillent des navires jusqu’à environ 39,5 pieds de tirant d’eau, sont moins directement touchées par une restriction à 44 pieds, car les navires de classe Panamax évoluent déjà dans cette enveloppe en conditions normales. Le principal impact sur le trafic Panamax est la réduction des créneaux de transit quotidiens, qui touche tous les types de navires proportionnellement mais s’aggrave du fait du système d’enchères pour les créneaux prioritaires."
+  ],
+  [
+   "The priority slot auction mechanism is the critical distributional variable for agricultural commodity flows. When the ACP reduces available daily transit slots, it operates a tiered auction system in which operators can bid for priority passage. High-value container cargo, where the cost of a week's delay on time-sensitive manufactured goods is significant, consistently outbids lower-value bulk commodity cargo. The empirical result is that bulk carrier operators, who carry grain, coal, and fertiliser, are displaced from the transit queue at rates higher than the simple transit reduction percentage would imply. Fuentes and Munim (2025), analysing the relationship between ENSO indices and Panama Canal operational data, confirmed that El Niño events reduce bulk carrier transits proportionally more than container or other high-value segments, consistent with this auction mechanism.",
+   "Le mécanisme d’enchères pour les créneaux prioritaires est la variable distributive décisive pour les flux de produits agricoles. Lorsque l’ACP réduit les créneaux quotidiens disponibles, elle organise un système d’enchères à niveaux où les opérateurs peuvent enchérir pour un passage prioritaire. Les cargaisons de conteneurs de forte valeur, pour lesquelles le coût d’une semaine de retard sur des biens manufacturés sensibles au temps est considérable, surenchérissent systématiquement sur les cargaisons de vrac de moindre valeur. Résultat empirique : les armateurs de vraquiers, qui transportent céréales, charbon et engrais, sont écartés de la file de transit à des taux supérieurs à ce que laisserait croire la simple réduction en pourcentage des transits. Fuentes et Munim (2025), qui analysent la relation entre les indices ENSO et les données opérationnelles du canal de Panama, confirment que les épisodes El Niño réduisent les transits de vraquiers proportionnellement plus que ceux des conteneurs ou d’autres segments à forte valeur, ce qui est cohérent avec ce mécanisme d’enchères."
+  ],
+  [
+   "When available transit slots fall below demand, the ACP runs a daily priority auction for one or more additional slots. Any vessel that has been waiting in the anchorage queue for at least ten days may participate, with an opening bid of $55,000. During normal operations, super booking fees run $135,000 to $140,000. During the 2023–24 drought, winning bids reached $3.975 million: the documented record, paid in November 2023 by Japan's Eneos Group for an LPG carrier named Sunny Bright.",
+   "Lorsque les créneaux de transit disponibles tombent sous la demande, l’ACP organise une enchère prioritaire quotidienne pour un ou plusieurs créneaux supplémentaires. Tout navire qui attend depuis au moins dix jours dans la file de mouillage peut y participer, avec une mise de départ de 55 000 $. En exploitation normale, les frais de « super réservation » se situent entre 135 000 et 140 000 $. Pendant la sécheresse 2023–24, les enchères gagnantes ont atteint 3,975 millions de dollars : le record documenté, payé en novembre 2023 par le groupe japonais Eneos pour un transporteur de GPL nommé Sunny Bright."
+  ],
+  [
+   "The price escalation was not arbitrary. It was the market revealing each vessel class's walk-away price: the maximum a rational operator would pay for a canal slot before finding the long way around cheaper, east via Suez and the Red Sea rather than west around South America, a route that carries almost no commercial grain traffic at all. That walk-away price is a function of three variables: cargo value, scheduling constraint, and whether a Suez or Cape of Good Hope detour is physically or commercially feasible.",
+   "L’escalade des prix n’avait rien d’arbitraire. Le marché révélait le prix de renoncement de chaque classe de navire : le maximum qu’un opérateur rationnel paierait pour un créneau avant de juger moins cher le long détour, vers l’est par Suez et la mer Rouge plutôt que vers l’ouest autour de l’Amérique du Sud, une route qui n’accueille presque aucun trafic céréalier commercial. Ce prix de renoncement dépend de trois variables : la valeur de la cargaison, la contrainte de calendrier et la faisabilité physique ou commerciale d’un détour par Suez ou le cap de Bonne-Espérance."
+  ],
+  [
+   "At the November 2023 peak, an LPG or LNG carrier had the same logic pushing it to bid rather than divert: Suez adds weeks, boil-off losses accumulate en route, and the cargo value justifies almost any slot price. For a Neopanamax container ship, the locks themselves are the constraint: the vessel's beam exceeds the original Panamax lock dimensions, so the Neopanamax locks are the only available passage regardless of price. All three classes bid to the top through the drought's acute phase. That did not hold for LNG once the Red Sea itself turned unsafe. Once Houthi attacks on Red Sea shipping escalated in December 2023, gas carriers judged the war risk unacceptable for their cargo even before charter economics forced the issue, and skipped Suez entirely: US LNG cargoes to Asia transiting Panama fell from 38 in the third quarter of 2023 to just 10 a year later, with roughly 94% of US LNG bound for Asia routing via the Cape of Good Hope by 2024, about 20 days longer than Panama and 10 longer than Suez. VLGCs carrying LPG stayed on the bid-and-pay path: neopanamax lock slots effectively reserved for them fell from 31 a day to 8 by early 2024, and one VLGC auction slot sold for a documented $2.85 million. For a Handymax bulk carrier with 50,000 tonnes of grain, the arithmetic is different, and the direction matters. The real alternative to Panama for US Gulf grain bound for Asia was never Cape Horn, a route modern cargo ships essentially do not use. It was Suez and the Red Sea, sailing the long way east rather than the short way west. The Suez detour adds approximately 18 days at sea, roughly $540,000 in additional charter time at a $30,000-a-day Handymax rate, well below the auction prices bulk operators were facing. That is precisely what happened: US Gulf grain shipments to East Asia that ran 80% via Panama in October 2022 had flipped to 91% via the Red Sea by late October 2023, and by late November, 15 of 16 tracked vessels were routing that way, essentially none through the canal. For the full route-by-route breakdown, including why that fleet had to move again a few weeks later, see <a href=\"/analysis/panama-long-way-around\" style=\"text-decoration:underline;\">The long way around</a>.",
+   "Au pic de novembre 2023, un transporteur de GPL ou de GNL obéissait à la même logique, qui le poussait à enchérir plutôt qu’à se dérouter : Suez ajoute des semaines, les pertes par évaporation s’accumulent en route et la valeur de la cargaison justifie presque n’importe quel prix de créneau. Pour un porte-conteneurs Neopanamax, ce sont les écluses elles-mêmes qui contraignent : la largeur du navire dépasse les dimensions des écluses Panamax d’origine, de sorte que les écluses Neopanamax sont le seul passage possible quel que soit le prix. Les trois classes ont enchéri au maximum pendant la phase aiguë de la sécheresse. Cela n’a pas tenu pour le GNL une fois que la mer Rouge elle-même est devenue dangereuse. Quand les attaques houthies contre la navigation en mer Rouge se sont intensifiées en décembre 2023, les transporteurs de gaz ont jugé le risque de guerre inacceptable pour leur cargaison avant même que l’économie de l’affrètement ne l’impose, et ont évité Suez complètement : les cargaisons de GNL américain vers l’Asie transitant par Panama sont passées de 38 au troisième trimestre 2023 à seulement 10 un an plus tard, environ 94 % du GNL américain à destination de l’Asie passant par le cap de Bonne-Espérance en 2024, soit environ 20 jours de plus que par Panama et 10 de plus que par Suez. Les VLGC transportant du GPL sont restés sur la voie de l’enchère et du paiement : les créneaux d’écluses Neopanamax pratiquement réservés pour eux sont tombés de 31 par jour à 8 début 2024, et un créneau de VLGC a été vendu aux enchères pour 2,85 millions de dollars documentés. Pour un vraquier Handymax avec 50 000 tonnes de céréales, l’arithmétique est différente, et le sens compte. L’alternative réelle à Panama pour les céréales du golfe des États-Unis à destination de l’Asie n’a jamais été le cap Horn, une route que les cargos modernes n’empruntent pratiquement pas. C’était Suez et la mer Rouge, en faisant le long chemin vers l’est plutôt que le court chemin vers l’ouest. Le détour par Suez ajoute environ 18 jours en mer, soit environ 540 000 dollars de temps d’affrètement supplémentaire à un taux Handymax de 30 000 dollars par jour, bien en dessous des prix d’enchère auxquels faisaient face les opérateurs de vrac. C’est précisément ce qui s’est produit : les expéditions de céréales du golfe des États-Unis vers l’Asie de l’Est, passées à 80 % par Panama en octobre 2022, étaient passées à 91 % par la mer Rouge fin octobre 2023, et fin novembre, 15 des 16 navires suivis prenaient cette route, pratiquement aucun par le canal. Pour le détail route par route, y compris pourquoi cette flotte a dû se redéployer quelques semaines plus tard, voir <a href=\"/analysis/panama-long-way-around\" style=\"text-decoration:underline;\">Le long détour</a>."
+  ],
+  [
+   "The auction, in other words, is not merely a pricing mechanism. It is a sorting instrument. It systematically displaces low-value bulk cargo, grain, coal, and fertiliser, while preserving transit access for high-value cargo that can afford to bid. The relevant number is not the transit count reduction alone, but the price at which a given cargo class exits the queue.",
+   "L’enchère, autrement dit, n’est pas seulement un mécanisme de prix. C’est un instrument de tri. Elle écarte systématiquement le vrac de faible valeur, céréales, charbon et engrais, tout en préservant l’accès au transit des cargaisons de forte valeur capables d’enchérir. Le chiffre pertinent n’est pas la seule réduction du nombre de transits, mais le prix auquel une classe de cargaison donnée sort de la file."
+  ],
+  [
+   "Panama Canal · Priority slot auction · November 2023 peak",
+   "Canal de Panama · Enchères de créneaux prioritaires · pic de novembre 2023"
+  ],
+  [
+   "At $3.97M, the auction sorted vessel classes by cargo value",
+   "À 3,97 M$, l’enchère a trié les classes de navires selon la valeur de la cargaison"
+  ],
+  [
+   "Estimated maximum rational bid per vessel class vs. documented Nov 2023 peak auction price. Vessels left of the red line diverted east via Suez and the Red Sea, not west around South America.",
+   "Mise maximale rationnelle estimée par classe de navire, comparée au prix d’enchère record documenté de novembre 2023. Les navires à gauche de la ligne rouge se sont déroutés vers l’est par Suez et la mer Rouge, et non vers l’ouest autour de l’Amérique du Sud."
+  ],
+  [
+   "@t:Diverts via Suez / Red Sea",
+   "Se déroute par Suez / la mer Rouge"
+  ],
+  [
+   "@t:Marginal",
+   "Limite"
+  ],
+  [
+   "@t:Transits: bids and wins",
+   "Transite : enchères et victoires"
+  ],
+  [
+   "@t:Peak auction $3.97M (documented)",
+   "Enchère record : 3,97 M$ (documentée)"
+  ],
+  [
+   "@t:Red Sea cost, Handymax (~$540K)",
+   "Coût mer Rouge, Handymax (≈ 540 $K)"
+  ],
+  [
+   "What this meant for a Handymax grain carrier",
+   "Ce que cela signifiait pour un vraquier céréalier Handymax"
+  ],
+  [
+   "Normal operations",
+   "Exploitation normale"
+  ],
+  [
+   "Standard canal toll. No queue. Grain delivered on schedule.",
+   "Péage standard du canal. Pas de file. Céréales livrées dans les délais."
+  ],
+  [
+   "Bid for auction slot",
+   "Enchérir pour un créneau"
+  ],
+  [
+   "Peak Nov 2023 price. Freight cost up approximately 50% per tonne. Uneconomic for bulk grain.",
+   "Prix du pic de novembre 2023. Fret en hausse d’environ 50 % par tonne. Non rentable pour les céréales en vrac."
+  ],
+  [
+   "Divert via Red Sea",
+   "Se dérouter par la mer Rouge"
+  ],
+  [
+   "18 extra days. Cheaper than bidding. What most grain vessels actually did, not Cape Horn.",
+   "18 jours de plus. Moins cher qu’enchérir. Ce qu’ont réellement fait la plupart des navires céréaliers, et non le cap Horn."
+  ],
+  [
+   "*Nov 2023 peak: LPG and LNG carriers both bid to stay. That did not hold through 2024 for LNG, which shifted toward the Cape of Good Hope instead (38 to 10 quarterly transits, Q3 2023–Q3 2024; ~94% Cape of Good Hope share by 2024; SynMax Intelligence). LPG/VLGC carriers kept bidding for Panama slots through the squeeze: reserved slots fell from 31 to 8 a day and one auction slot sold for $2.85M (Riviera Maritime Media; Clarksons Research). Documented: Eneos Group (Sunny Bright LPG carrier) paid $3.975M, Nov 2023 record (Splash247; Maritime Executive). Chemical tanker documented at $1.1M. Grain ships documented in $2–4M+ range (Grain Journal, 2023). Normal super booking pre-drought: $135–140K. Max rational bid figures are Narrows estimates based on cargo value, Suez/Cape of Good Hope feasibility by vessel class, and lock-type constraint, not ACP data. Grain routing-shift figures (80% to 91% to 69%): American Farm Bureau Federation Market Intel, citing USDA Grain Transportation Report and CHS Inc. shipment data.",
+   "*Pic de novembre 2023 : les transporteurs de GPL et de GNL ont tous deux enchéri pour rester. Cela n’a pas tenu en 2024 pour le GNL, qui s’est reporté sur le cap de Bonne-Espérance (38 à 10 transits trimestriels, T3 2023–T3 2024 ; part d’environ 94 % pour le cap de Bonne-Espérance en 2024 ; SynMax Intelligence). Les transporteurs de GPL/VLGC ont continué d’enchérir pour des créneaux à Panama malgré l’étranglement : les créneaux réservés sont tombés de 31 à 8 par jour et un créneau d’enchère s’est vendu 2,85 M$ (Riviera Maritime Media ; Clarksons Research). Documenté : Eneos Group (transporteur de GPL Sunny Bright) a payé 3,975 M$, record de novembre 2023 (Splash247 ; Maritime Executive). Un pétrolier-chimiquier documenté à 1,1 M$. Navires céréaliers documentés dans une fourchette de 2 $–4M+ (Grain Journal, 2023). Super réservation normale avant la sécheresse : 135 $–140K. Les mises rationnelles maximales sont des estimations de Narrows fondées sur la valeur de la cargaison, la faisabilité d’un détour par Suez ou le cap de Bonne-Espérance selon la classe de navire et la contrainte du type d’écluse, et non des données de l’ACP. Chiffres du report de routage des céréales (80 % à 91 % à 69 %) : American Farm Bureau Federation Market Intel, citant le USDA Grain Transportation Report et les données d’expédition de CHS Inc."
+  ],
+  [
+   "A further constraint applies to the largest dry bulk vessels. Capesize bulk carriers, with beam widths exceeding the Panamax lock constraint, cannot transit the Panama Canal under any conditions. Iron ore and coal flows on Capesize vessels, notably Australian coal to East Asia, are already routed via the Cape of Good Hope as standard operations. The Panama Canal throttle does not affect these flows at all. The commodity classes that depend on Handymax and Supramax bulk carriers for Pacific Basin routing, principally grain, bear the concentrated operational risk of both transit reduction and priority displacement.",
+   "Une contrainte supplémentaire s’applique aux plus grands vraquiers. Les Capesize, dont la largeur dépasse la contrainte des écluses Panamax, ne peuvent transiter par le canal de Panama en aucune circonstance. Les flux de minerai de fer et de charbon sur Capesize, notamment le charbon australien vers l’Asie de l’Est, passent déjà par le cap de Bonne-Espérance en exploitation courante. L’étranglement du canal de Panama n’affecte donc pas du tout ces flux. Les classes de produits qui dépendent des vraquiers Handymax et Supramax pour le routage dans le bassin du Pacifique, principalement les céréales, portent le risque opérationnel concentré à la fois de la réduction des transits et de l’éviction prioritaire."
+  ],
+  [
+   "The diversion did not stay pointed toward Suez for long. Once Houthi attacks on Red Sea shipping escalated in December 2023, that route stopped being safe either, and the same fleet had to move again: by late December, US Gulf to East Asia grain routing had shifted to approximately 69% via the Cape of Good Hope, 19% still risking the Red Sea, and 13% back on Panama. A fleet displaced from a short Pacific crossing by drought ended up circling the Atlantic twice in the opposite direction within about ten weeks, first east around Africa's northern route, then further east around its southern one, chasing whichever ocean was safest and cheapest at that moment.",
+   "Le détournement n’est pas resté longtemps orienté vers Suez. Quand les attaques houthies contre la navigation en mer Rouge se sont intensifiées en décembre 2023, cette route a cessé d’être sûre elle aussi, et la même flotte a dû se redéployer : fin décembre, le routage des céréales du golfe des États-Unis vers l’Asie de l’Est était passé à environ 69 % par le cap de Bonne-Espérance, 19 % risquant encore la mer Rouge et 13 % de retour par Panama. Une flotte chassée d’une courte traversée du Pacifique par la sécheresse s’est retrouvée à tourner deux fois autour de l’Atlantique en sens inverse en une dizaine de semaines, d’abord vers l’est par le nord de l’Afrique, puis plus loin vers l’est par son extrémité sud, à la poursuite de l’océan le plus sûr et le moins cher du moment."
+  ],
+  [
+   "Updated August 2026: corn added as a full commodity, and a routing-engine bug fixed",
+   "Mise à jour d’août 2026 : le maïs ajouté comme produit à part entière, et un bogue du moteur de routage corrigé"
+  ],
+  [
+   "Two changes since the May 2026 version of this article, both material to the tables below. First, corn (HS 1005) is now a real, independently-pulled UN Comtrade commodity in the model rather than a placeholder; wheat, soybean, and corn are tracked as three separate lines throughout, not merged into a single \"grain\" bucket, on the view that food-security analysis will eventually need to know which grain is exposed, not just that \"grain\" is.",
+   "Deux changements depuis la version de mai 2026 de cet article, tous deux déterminants pour les tableaux ci-dessous. D’abord, le maïs (HS 1005) est désormais un produit UN Comtrade réel, extrait indépendamment, dans le modèle, et non plus un substitut provisoire ; le blé, le soja et le maïs sont suivis comme trois lignes distinctes partout, sans fusion dans une seule catégorie « céréales », dans l’idée que l’analyse de sécurité alimentaire finira par devoir savoir quelle céréale est exposée, et pas seulement que « les céréales » le sont."
+  ],
+  [
+   "Second, and more consequential: the routing engine that assigns bilateral trade flows to chokepoints was found to be taking only each country's <em>dominant</em> port basin and silently discarding the rest, even where a country had genuine port capacity on both the Atlantic and Pacific sides. US grain exports, for example, really do split roughly 83/17 between Gulf/Atlantic ports (Houston, New Orleans) and Pacific Northwest ports (Seattle), but the routing engine was crediting Panama with 100% of that trade regardless, because Seattle's real Pacific-direct routing was never being consulted. The same issue affected import-side countries that lacked any grain port in the routing database at all: Japan, South Korea, Colombia, and Mexico among them, all now added. Fixing this drops this page's aggregate grain-trade-at-risk figure from the previously-published $31B–$93B range to $9.3B–$28.0B, a real correction, not a change in underlying risk, and one that removes some genuinely mistaken country-level claims (Mexico's corn exposure was never really 53%; Brazil's wheat exposure was never really 99.5%) while leaving Japan and South Korea's real, structural exposure intact or, in Japan's case, properly recognised for the first time.",
+   "Ensuite, et c’est plus important : le moteur de routage qui affecte les flux commerciaux bilatéraux aux points de passage ne retenait que le bassin portuaire <em>dominant</em> de chaque pays et écartait silencieusement le reste, même lorsqu’un pays disposait d’une réelle capacité portuaire côté Atlantique comme côté Pacifique. Les exportations céréalières américaines, par exemple, se répartissent bien environ 83/17 entre les ports du golfe et de l’Atlantique (Houston, La Nouvelle-Orléans) et ceux du Nord-Ouest Pacifique (Seattle), mais le moteur de routage attribuait 100 % de ce commerce à Panama quoi qu’il arrive, parce que le routage direct réel de Seattle vers le Pacifique n’était jamais consulté. Le même problème touchait les pays importateurs sans aucun port céréalier dans la base de routage : le Japon, la Corée du Sud, la Colombie et le Mexique, entre autres, tous désormais ajoutés. Cette correction ramène le chiffre agrégé du commerce céréalier à risque de cette page de la fourchette publiée précédemment de 31 Md$–93 Md$ à 9,3 Md$–28,0 Md$, une vraie correction, et non un changement du risque sous-jacent, qui supprime plusieurs affirmations erronées au niveau des pays (l’exposition du Mexique pour le maïs n’a jamais été réellement de 53 % ; celle du Brésil pour le blé jamais réellement de 99,5 %) tout en laissant intacte l’exposition structurelle réelle du Japon et de la Corée du Sud ou, dans le cas du Japon, en la reconnaissant correctement pour la première fois."
+  ],
+  [
+   "Third, on 5 October 2026: a further routing correction (Fix-130) removed roughly $137 billion of Asia to Europe and Asia to West Africa trade that had been wrongly assigned to Panama. It does not change any grain figure on this page. It does remove the all-commodity aggregate that the monthly progression table used to show, which is why that column is gone.",
+   "Troisièmement, le 5 octobre 2026 : une nouvelle correction de routage (Fix-130) a retiré environ 137 $ milliards de commerce Asie–Europe et Asie–Afrique de l’Ouest qui avait été affecté à tort à Panama. Elle ne modifie aucun chiffre céréalier de cette page. En revanche, elle supprime l’agrégat tous produits que le tableau de progression mensuelle affichait auparavant, d’où la disparition de cette colonne."
+  ],
+  [
+   "Agricultural exposure",
+   "Exposition agricole"
+  ],
+  [
+   "The energy story dominates coverage. The agricultural story is where the binary constraints are.",
+   "L’énergie domine la couverture. C’est dans l’agriculture que se trouvent les contraintes binaires."
+  ],
+  [
+   "Panama Canal analysis in commercial shipping focuses disproportionately on container trade. The agricultural commodity exposure is structurally different and, for a subset of importers, considerably more acute. The canal carries a significant fraction of US corn and soybean exports destined for Asia, Southern Cone grain flows, and wheat imports for several Latin American economies with limited overland alternatives.",
+   "L’analyse du canal de Panama dans le transport maritime commercial se concentre de façon disproportionnée sur le commerce conteneurisé. L’exposition des produits agricoles est structurellement différente et, pour un sous-ensemble d’importateurs, bien plus aiguë. Le canal transporte une part importante des exportations américaines de maïs et de soja à destination de l’Asie, des flux céréaliers du Cône Sud et des importations de blé de plusieurs économies latino-américaines aux alternatives terrestres limitées."
+  ],
+  [
+   "Panama Canal bilateral dependency: corn (HS 1005), 2024 (CDM v3, updated Aug 2026)",
+   "Dépendance bilatérale au canal de Panama : maïs (HS 1005), 2024 (CDM v3, mis à jour en août 2026)"
+  ],
+  [
+   "Importer",
+   "Importateur"
+  ],
+  [
+   "Dep. %",
+   "Dép. %"
+  ],
+  [
+   "VaR at 100%",
+   "VaR à 100 %"
+  ],
+  [
+   "VaR at 50% sev.",
+   "VaR à 50 % de gravité"
+  ],
+  [
+   "Alternative path",
+   "Voie alternative"
+  ],
+  [
+   "China",
+   "Chine"
+  ],
+  [
+   "<span class=\"verdict-caution\">Brazilian and Argentine origin viable substitute but faces same Canal constraint</span>",
+   "<span class=\"verdict-caution\">L’origine brésilienne ou argentine est un substitut viable mais se heurte à la même contrainte du canal</span>"
+  ],
+  [
+   "Japan",
+   "Japon"
+  ],
+  [
+   "<span class=\"verdict-caution\">Partial: PNW and Ukraine routes exist but are volume-constrained. See note.</span>",
+   "<span class=\"verdict-caution\">Partiel : des routes via le Nord-Ouest Pacifique et l’Ukraine existent mais sont limitées en volume. Voir la note.</span>"
+  ],
+  [
+   "South Korea",
+   "Corée du Sud"
+  ],
+  [
+   "<span class=\"verdict-caution\">Partial: same constraints as Japan</span>",
+   "<span class=\"verdict-caution\">Partiel : mêmes contraintes que le Japon</span>"
+  ],
+  [
+   "Colombia",
+   "Colombie"
+  ],
+  [
+   "<span class=\"verdict-no\">Atlantic side only for this trade: Panama routing required</span>",
+   "<span class=\"verdict-no\">Côté Atlantique seulement pour ce commerce : routage par Panama requis</span>"
+  ],
+  [
+   "Peru",
+   "Pérou"
+  ],
+  [
+   "<span class=\"verdict-no\">No viable alternative at scale within a single season</span>",
+   "<span class=\"verdict-no\">Aucune alternative viable à grande échelle sur une seule saison</span>"
+  ],
+  [
+   "El Salvador",
+   "Salvador"
+  ],
+  [
+   "<span class=\"verdict-no\">No land alternative at comparable freight economics</span>",
+   "<span class=\"verdict-no\">Aucune alternative terrestre à des conditions de fret comparables</span>"
+  ],
+  [
+   "This table changed shape substantially in the August 2026 model update, and the change is itself the finding. The May 2026 version of this table led with Mexico at 53.2% Panama dependency ($5.76B) and included Vietnam (17.1%) and Taiwan (6.8%). All three have been removed. Mexico's US corn imports move by rail and short-sea Gulf routing that never approaches the isthmus; a routing-engine limitation was crediting Panama with Mexico's land-border trade, and correcting it takes Mexico's real Panama corn exposure to effectively zero, not a large partial number. Vietnam's corn (mostly South American and Black Sea origin) was already correctly reaching Vietnam via Malacca, Suez, and Bab el-Mandeb without ever touching Panama; the old table's Panama attribution for Vietnam did not hold up. Taiwan currently has no corn coverage in the model at all, a genuine data gap, not a verified zero, and it is dropped from this table rather than asserted either way. Japan and South Korea, the two importers the \"why substitution is slower than it looks\" callout below is built around, remain genuinely and materially exposed once the routing is corrected; that part of the original analysis holds.",
+   "Ce tableau a beaucoup changé de forme lors de la mise à jour du modèle d’août 2026, et ce changement est lui-même le constat. La version de mai 2026 de ce tableau s’ouvrait sur le Mexique, à 53,2 % de dépendance à Panama (5,76 Md$), et incluait le Vietnam (17,1 %) et Taïwan (6,8 %). Tous trois ont été retirés. Les importations mexicaines de maïs américain passent par le rail et le cabotage dans le golfe, qui n’approchent jamais l’isthme ; une limite du moteur de routage attribuait à Panama le commerce terrestre du Mexique, et sa correction ramène l’exposition réelle du Mexique au maïs via Panama à pratiquement zéro, et non à un grand chiffre partiel. Le maïs du Vietnam (surtout d’origine sud-américaine et de la mer Noire) arrivait déjà correctement au Vietnam par Malacca, Suez et Bab el-Mandeb sans jamais toucher Panama ; l’attribution à Panama de l’ancien tableau pour le Vietnam ne tenait pas. Taïwan n’a actuellement aucune couverture maïs dans le modèle, un véritable manque de données, et non un zéro vérifié, et il est retiré de ce tableau plutôt que d’être affirmé dans un sens ou l’autre. Le Japon et la Corée du Sud, les deux importateurs autour desquels est construit l’encadré « pourquoi la substitution est plus lente qu’il n’y paraît » ci-dessous, restent réellement et fortement exposés une fois le routage corrigé ; cette partie de l’analyse d’origine tient."
+  ],
+  [
+   "Panama Canal bilateral dependency: soybean (HS 1201), 2024 (CDM v3, updated Aug 2026)",
+   "Dépendance bilatérale au canal de Panama : soja (HS 1201), 2024 (CDM v3, mis à jour en août 2026)"
+  ],
+  [
+   "<span class=\"verdict-caution\">Brazilian origin via Atlantic viable but ships through Canal or Cape Horn</span>",
+   "<span class=\"verdict-caution\">L’origine brésilienne via l’Atlantique est viable mais passe par le canal ou le cap Horn</span>"
+  ],
+  [
+   "<span class=\"verdict-no\">No alternative soy source that bypasses Panama at scale</span>",
+   "<span class=\"verdict-no\">Aucune autre source de soja contournant Panama à grande échelle</span>"
+  ],
+  [
+   "<span class=\"verdict-no\">Same constraint as Japan</span>",
+   "<span class=\"verdict-no\">Même contrainte que le Japon</span>"
+  ],
+  [
+   "<span class=\"verdict-caution\">Partial: Pacific-side import infrastructure (Buenaventura) now reflected</span>",
+   "<span class=\"verdict-caution\">Partiel : l’infrastructure d’importation côté Pacifique (Buenaventura) est désormais prise en compte</span>"
+  ],
+  [
+   "Mexico",
+   "Mexique"
+  ],
+  [
+   "<span class=\"verdict-caution\">Mostly land-border/short-sea; residual is non-US-origin soy</span>",
+   "<span class=\"verdict-caution\">Surtout frontière terrestre et cabotage ; le résidu est du soja d’origine non américaine</span>"
+  ],
+  [
+   "China's figure moved the most in absolute terms: $58.42B down to $17.52B. This is not a routing correction so much as a stale-data correction; the May 2026 article's underlying bilateral figure predates the CDM v3 multi-vintage rebuild (5 August 2026), which blends 2022 and 2024 UN Comtrade pulls and replaced a number that, on reflection, implied a larger share of China's total soybean import book than independent trade data supports. Thailand (32.9% in the earlier table) is gone for the same reason Vietnam is gone from the corn table: its soy imports route to Southeast Asia without a Panama transit. Japan's dependency moved the other way, from a implausibly low 3.0% up to 48.3%, once its Kashima grain-import terminal was added to the routing model and the US Gulf/Pacific Northwest export split (roughly 83/17) could actually be applied on the Japan side instead of collapsing to a single default. Colombia's number came down from a mechanically-forced 100.0% to 64.2% once Buenaventura, Colombia's real Pacific-coast grain gateway, was added; the remaining Atlantic-side share genuinely does need Panama.",
+   "Le chiffre de la Chine est celui qui a le plus bougé en valeur absolue : de 58,42 Md$ à 17,52 Md$. C’est moins une correction de routage qu’une correction de données périmées ; le chiffre bilatéral sous-jacent de l’article de mai 2026 est antérieur à la reconstruction multi-millésimes de CDM v3 (5 août 2026), qui combine les extractions UN Comtrade de 2022 et 2024 et a remplacé un nombre qui, à la réflexion, impliquait une part plus grande de l’ensemble des importations chinoises de soja que ne l’étayent les données commerciales indépendantes. La Thaïlande (32,9 % dans le tableau précédent) disparaît pour la même raison que le Vietnam dans le tableau du maïs : ses importations de soja gagnent l’Asie du Sud-Est sans transit par Panama. La dépendance du Japon a évolué dans l’autre sens, d’un 3,0 % invraisemblablement bas à 48,3 %, une fois son terminal d’importation céréalière de Kashima ajouté au modèle de routage et la répartition des exportations golfe des États-Unis/Nord-Ouest Pacifique (environ 83/17) réellement applicable côté Japon, au lieu de se réduire à une valeur par défaut unique. Le chiffre de la Colombie est passé d’un 100,0 % mécaniquement imposé à 64,2 % une fois Buenaventura, la vraie porte d’entrée céréalière de la Colombie sur la côte pacifique, ajoutée ; la part restante côté Atlantique a bel et bien besoin de Panama."
+  ],
+  [
+   "On sourcing alternatives: why substitution is slower than it looks",
+   "Sur les sources alternatives : pourquoi la substitution est plus lente qu’il n’y paraît"
+  ],
+  [
+   "The obvious question is why Japan and South Korea cannot simply source corn from US Pacific Northwest ports or alternative origins. The answer is structural, not theoretical. (Vietnam and Mexico no longer belong in this question; the corrected routing shows both already sourcing corn in ways that don't touch Panama at meaningful scale, which is precisely why they've dropped out of the table above.)",
+   "La question évidente est de savoir pourquoi le Japon et la Corée du Sud ne peuvent pas simplement s’approvisionner en maïs dans les ports du Nord-Ouest Pacifique américain ou auprès d’autres origines. La réponse est structurelle, non théorique. (Le Vietnam et le Mexique n’entrent plus dans cette question ; le routage corrigé montre que tous deux s’approvisionnent déjà en maïs d’une manière qui ne touche pas Panama à une échelle significative, ce qui explique précisément pourquoi ils ont disparu du tableau ci-dessus.)"
+  ],
+  [
+   "<strong>US Pacific Northwest corn:</strong> The Columbia River grain terminals, primarily Portland and Longview, do export corn directly to Asian buyers. This route requires no Panama transit. But PNW corn export capacity is a fraction of Gulf capacity, constrained by rail throughput from the Midwest and fixed terminal infrastructure. Japan imports approximately 15–16 million tonnes of corn per year. PNW corn export volumes cannot compensate for Gulf displacement within a single season, and terminal capacity cannot be rapidly scaled.",
+   "<strong>Maïs du Nord-Ouest Pacifique américain :</strong> Les terminaux céréaliers du fleuve Columbia, principalement Portland et Longview, exportent bien du maïs directement vers des acheteurs asiatiques. Cette route n’exige aucun transit par Panama. Mais la capacité d’exportation de maïs du Nord-Ouest Pacifique ne représente qu’une fraction de celle du golfe, limitée par le débit ferroviaire depuis le Midwest et par des infrastructures terminales fixes. Le Japon importe environ 15–16 millions de tonnes de maïs par an. Les volumes d’exportation de maïs du Nord-Ouest Pacifique ne peuvent pas compenser l’éviction du golfe sur une seule saison, et la capacité des terminaux ne peut pas être augmentée rapidement."
+  ],
+  [
+   "<strong>Brazilian and Argentine corn:</strong> Both countries are now among the world's largest corn exporters, but they ship from Atlantic ports, principally Santos and Rosario. A vessel carrying Brazilian corn to Japan must either transit the Panama Canal (also affected under this scenario) or reroute via Cape Horn, adding 38 days and approximately $1.14M in voyage cost per Handymax. (The Horn is the reference case for this cost, not what vessels did in practice: the <a href=\"/analysis/panama-long-way-around\">sister analysis</a> sets out why almost no one sails it and what they do instead.) Substituting South American origin does not eliminate the Panama constraint for Asian buyers. It replaces one exposure with another.",
+   "<strong>Maïs brésilien et argentin :</strong> Les deux pays figurent désormais parmi les plus grands exportateurs de maïs du monde, mais ils expédient depuis des ports atlantiques, principalement Santos et Rosario. Un navire transportant du maïs brésilien vers le Japon doit soit transiter par le canal de Panama (également touché dans ce scénario), soit se dérouter par le cap Horn, ajoutant 38 jours et environ 1,14 M$ de coût de voyage par Handymax. (Le cap Horn est le cas de référence de ce coût, et non ce que les navires ont fait en pratique : l’<a href=\"/analysis/panama-long-way-around\">analyse sœur</a> explique pourquoi presque personne ne l’emprunte et ce qu’on fait à la place.) Se tourner vers une origine sud-américaine n’élimine pas la contrainte de Panama pour les acheteurs asiatiques. Cela remplace une exposition par une autre."
+  ],
+  [
+   "<strong>Ukrainian and Black Sea corn:</strong> Ukraine ships from Black Sea ports through the Bosphorus and Suez Canal to Asia. This route does not touch Panama and represents a genuine sourcing alternative that bypasses the Canal constraint entirely. Japan and South Korea do import Ukrainian corn. The limitation is war-related supply uncertainty and elevated Black Sea insurance costs, which constrain available volumes and add their own freight premium.",
+   "<strong>Maïs ukrainien et de la mer Noire :</strong> L’Ukraine expédie depuis les ports de la mer Noire par le Bosphore et le canal de Suez vers l’Asie. Cette route ne touche pas Panama et représente une véritable alternative d’approvisionnement qui contourne entièrement la contrainte du canal. Le Japon et la Corée du Sud importent bien du maïs ukrainien. La limite tient à l’incertitude d’approvisionnement liée à la guerre et au coût élevé de l’assurance en mer Noire, qui contraignent les volumes disponibles et ajoutent leur propre prime de fret."
+  ],
+  [
+   "<strong>Africa:</strong> Sub-Saharan Africa is a net corn importer across most of the continent. South Africa exports 2–3 million tonnes per year in a good season, relevant for regional food security but not at the scale required to substitute for Japan or Korea's annual import volumes.",
+   "<strong>Afrique :</strong> L’Afrique subsaharienne est importatrice nette de maïs sur la plus grande partie du continent. L’Afrique du Sud exporte 2–3 millions de tonnes par an en bonne saison, ce qui compte pour la sécurité alimentaire régionale mais n’atteint pas l’échelle nécessaire pour se substituer aux volumes d’importation annuels du Japon ou de la Corée."
+  ],
+  [
+   "<strong>The practical constraint:</strong> Sourcing substitution is possible over two to three seasons, given time to renegotiate purchase contracts, secure vessel capacity, and adjust storage logistics. Within a single six-month disruption event, the combination of volume constraints (PNW), concurrent Canal exposure (South America), war risk (Ukraine), and contract rigidity means that most exposed buyers face higher costs, not alternative supply. The model VaR figures reflect this short-run constraint.",
+   "<strong>La contrainte pratique :</strong> La substitution des sources est possible sur deux à trois saisons, le temps de renégocier les contrats d’achat, de sécuriser la capacité de navires et d’ajuster la logistique de stockage. Dans un seul épisode de perturbation de six mois, la combinaison des contraintes de volume (Nord-Ouest Pacifique), de l’exposition simultanée du canal (Amérique du Sud), du risque de guerre (Ukraine) et de la rigidité des contrats signifie que la plupart des acheteurs exposés font face à des coûts plus élevés, et non à un approvisionnement alternatif. Les chiffres de VaR du modèle reflètent cette contrainte de court terme."
+  ],
+  [
+   "The wheat picture adds a further dimension, and it is where the basin/elasticity correction matters most directly. The May 2026 version of this paragraph put Ecuador at 100% canal dependency, Colombia at 98.2%, and Brazil at 99.5%. Brazil should never have been in that list at all: Brazil is an Atlantic-facing wheat importer for US-origin supply and does not route through Panama for it, and Brazil does not appear in the corrected Panama wheat table at all now; its absence is the correct answer, not a gap. Ecuador (68.9%, $0.35B) and Colombia (53.8%, $0.31B) remain genuinely exposed but well below the earlier near-total figures, for the same reason as the corn and soybean corrections above: both had real, mechanically-forced 100%-style attribution before either country had a Pacific-side import port in the routing model. Peru (60.3%), Chile (65.6%), Japan (51.8%), and South Korea (34.4%) are the other importers with material modeled wheat exposure through Panama; Japan in particular moved up from an unmodeled near-zero to a genuine structural figure once its own import-side routing was corrected, mirroring the soybean story.",
+   "Le tableau du blé ajoute une dimension supplémentaire, et c’est là que la correction bassin/élasticité compte le plus directement. La version de mai 2026 de ce paragraphe plaçait l’Équateur à 100 % de dépendance au canal, la Colombie à 98,2 % et le Brésil à 99,5 %. Le Brésil n’aurait jamais dû figurer dans cette liste : le Brésil est un importateur de blé tourné vers l’Atlantique pour l’approvisionnement d’origine américaine et ne passe pas par Panama pour cela, et le Brésil n’apparaît plus du tout dans le tableau corrigé du blé via Panama ; son absence est la bonne réponse, et non une lacune. L’Équateur (68,9 %, 0,35 Md$) et la Colombie (53,8 %, 0,31 Md$) restent réellement exposés mais bien en dessous des anciens chiffres quasi totaux, pour la même raison que les corrections du maïs et du soja ci-dessus : les deux avaient une attribution réelle, mécaniquement forcée à 100 %, avant que l’un ou l’autre ne dispose d’un port d’importation côté Pacifique dans le modèle de routage. Le Pérou (60,3 %), le Chili (65,6 %), le Japon (51,8 %) et la Corée du Sud (34,4 %) sont les autres importateurs à exposition modélisée significative pour le blé via Panama ; le Japon en particulier est passé d’un quasi-zéro non modélisé à un véritable chiffre structurel une fois son propre routage côté importation corrigé, à l’image de l’histoire du soja."
+  ],
+  [
+   "Throttling scenarios",
+   "Scénarios d’étranglement"
+  ],
+  [
+   "The model run at three severity levels, calibrated to the 2023–24 event.",
+   "Le modèle exécuté à trois niveaux de gravité, calibrés sur l’épisode 2023–24."
+  ],
+  [
+   "The Narrows Chokepoint Dependency Model is designed for binary closure scenarios at adjustable severity and duration. For Panama Canal analysis, a partial-severity run more accurately reflects the nature of the disruption mechanism: the model is applied at 33%, 50%, and 100% severity, corresponding respectively to the November 2023 throughput (24 transits per day), the February 2024 peak (18 transits per day), and the analytical full-closure ceiling.",
+   "Le modèle de dépendance aux points de passage de Narrows est conçu pour des scénarios de fermeture binaire à gravité et durée réglables. Pour l’analyse du canal de Panama, une exécution à gravité partielle reflète plus fidèlement la nature du mécanisme de perturbation : le modèle est appliqué à 33 %, 50 % et 100 % de gravité, correspondant respectivement au débit de novembre 2023 (24 transits par jour), au pic de février 2024 (18 transits par jour) et au plafond analytique de fermeture totale."
+  ],
+  [
+   "The model applies a Panama-specific sensitivity factor of 0.90 to reflect the partial substitutability of canal routing via alternative vessel paths. Value at risk is calculated as exposed trade value multiplied by severity multiplied by the sensitivity factor. Rerouting penalty is calculated on a Handymax bulk carrier basis, the relevant vessel class for agricultural commodity flows, at $30,000 per day all-in (bunker plus charter) over 38 days to Cape Horn, producing a per-voyage overrun of $1.14 million. This figure should be treated as a floor rather than a ceiling: current BCI Capesize spot rates in May 2026 of approximately $35,000 per day suggest real-world rerouting costs are materially higher than the 2023 model baseline.",
+   "Le modèle applique un facteur de sensibilité propre à Panama de 0,90 pour tenir compte de la substituabilité partielle du routage par le canal via d’autres voies maritimes. La valeur à risque est calculée comme la valeur commerciale exposée multipliée par la gravité multipliée par le facteur de sensibilité. La pénalité de déroutement est calculée sur la base d’un vraquier Handymax, la classe de navire pertinente pour les flux de produits agricoles, à 30 000 dollars par jour tout compris (soute plus affrètement) sur 38 jours jusqu’au cap Horn, ce qui donne un surcoût de 1,14 million de dollars par voyage. Ce chiffre doit être considéré comme un plancher plutôt qu’un plafond : les taux spot BCI Capesize actuels de mai 2026, d’environ 35 000 dollars par jour, suggèrent que les coûts réels de déroutement sont nettement supérieurs à la base du modèle de 2023."
+  ],
+  [
+   "Panama Canal throttling scenarios: grain trade at risk (corn + soybean + wheat)",
+   "Scénarios d’étranglement du canal de Panama : commerce céréalier à risque (maïs + soja + blé)"
+  ],
+  [
+   "Scenario",
+   "Scénario"
+  ],
+  [
+   "Transit rate",
+   "Taux de transit"
+  ],
+  [
+   "Throughput reduction",
+   "Réduction du débit"
+  ],
+  [
+   "Grain VaR",
+   "VaR céréales"
+  ],
+  [
+   "Reroute / voyage",
+   "Déroutement / voyage"
+  ],
+  [
+   "Historical analogue",
+   "Analogue historique"
+  ],
+  [
+   "Low",
+   "Bas"
+  ],
+  [
+   "24/day",
+   "24/jour"
+  ],
+  [
+   "Nov 2023: initial ACP intervention (proportional-severity floor; observed bulk displacement ran higher)",
+   "Nov. 2023 : première intervention de l’ACP (plancher de gravité proportionnelle ; l’éviction observée du vrac a été plus élevée)"
+  ],
+  [
+   "Mid",
+   "Moyen"
+  ],
+  [
+   "18/day",
+   "18/jour"
+  ],
+  [
+   "Feb 2024: peak drought severity",
+   "Fév. 2024 : gravité maximale de la sécheresse"
+  ],
+  [
+   "High (ceiling)",
+   "Haut (plafond)"
+  ],
+  [
+   "0/day",
+   "0/jour"
+  ],
+  [
+   "Analytical ceiling: no historical precedent",
+   "Plafond analytique : aucun précédent historique"
+  ],
+  [
+   "A further finding from the model run deserves separate attention. The monthly progression of the 2023–24 event, applied to the Narrows model, shows that the Neopanamax draft restriction imposed in May 2023, before the ACP reduced a single transit slot, produced a 16% container-side severity purely from the 40% per-transit cargo capacity loss (the dollar figure published for this in earlier versions of this page has been withdrawn; see the correction note at the foot of the page). A vessel operator does not require a transit reduction to absorb a material cost: the draft restriction alone, if sustained over a full quarter, generates a significant volume impact on container trade flows even with the same number of transits running. This is the vessel-class differentiation story in a quantified form that is absent from most Canal coverage.",
+   "Un autre résultat de l’exécution du modèle mérite une attention distincte. La progression mensuelle de l’épisode 2023–24, appliquée au modèle de Narrows, montre que la restriction de tirant d’eau Neopanamax imposée en mai 2023, avant que l’ACP ne réduise le moindre créneau de transit, a produit une gravité de 16 % côté conteneurs, uniquement du fait de la perte de capacité de chargement de 40 % par transit (le chiffre en dollars publié à ce sujet dans les versions antérieures de cette page a été retiré ; voir la note de correction en bas de page). Un opérateur n’a pas besoin d’une réduction des transits pour absorber un coût important : la seule restriction de tirant d’eau, si elle est maintenue sur un trimestre entier, génère un impact de volume significatif sur les flux de commerce conteneurisé à nombre de transits égal. C’est l’histoire de la différenciation par classe de navire sous forme quantifiée, absente de la plupart des analyses du canal."
+  ],
+  [
+   "Monthly model progression: 2023–24 El Niño drought event",
+   "Progression mensuelle du modèle : épisode de sécheresse El Niño 2023–24"
+  ],
+  [
+   "Month",
+   "Mois"
+  ],
+  [
+   "Transits/day",
+   "Transits/jour"
+  ],
+  [
+   "Bulk severity",
+   "Gravité vrac"
+  ],
+  [
+   "Container severity",
+   "Gravité conteneurs"
+  ],
+  [
+   "May 2023",
+   "mai 2023"
+  ],
+  [
+   "Jul 2023",
+   "juil. 2023"
+  ],
+  [
+   "Sep 2023",
+   "sept. 2023"
+  ],
+  [
+   "Nov 2023",
+   "nov. 2023"
+  ],
+  [
+   "Jan 2024",
+   "janv. 2024"
+  ],
+  [
+   "Feb 2024",
+   "févr. 2024"
+  ],
+  [
+   "Validation",
+   "Validation"
+  ],
+  [
+   "Model outputs at 50% severity against documented 2023–24 actuals.",
+   "Résultats du modèle à 50 % de gravité comparés aux chiffres réels documentés de 2023–24."
+  ],
+  [
+   "The 2023–24 El Niño drought provides a rare opportunity to test a throttling model against observed outcomes. The model was not calibrated to the 2023–24 event: it is run post-hoc at the severity parameters that match the documented ACP operational record, and the outputs are compared against reported market outcomes.",
+   "La sécheresse El Niño de 2023–24 offre une occasion rare de tester un modèle d’étranglement sur des résultats observés. Le modèle n’a pas été calibré sur l’épisode 2023–24 : il est exécuté a posteriori avec les paramètres de gravité qui correspondent au registre opérationnel documenté de l’ACP, et ses résultats sont comparés aux résultats de marché rapportés."
+  ],
+  [
+   "<strong>Grain routing diversion.</strong> In the four-week period ending 31 October 2023, US Gulf grain vessels transiting the Panama Canal declined from 34 to 5, an 85% reduction in bulk grain transit volumes at a point when the ACP had reduced daily transits by approximately 33% from baseline (Rabobank, 2023). The model at 33% severity (Low scenario) produces a bulk displacement of 33% through the transit reduction mechanism alone. The observed 85% diversion rate implies a substantially higher effective displacement of bulk cargo than the transit count reduction alone would produce. This is consistent with the priority auction mechanism described by Fuentes and Munim (2025): the residual transit capacity at 24 per day was preferentially allocated to higher-value container cargo, displacing bulk at rates exceeding the proportional throughput reduction. The model identifies the direction of this displacement but understates its size: observed bulk displacement ran well above the proportional severity the model applies, and the model does not explicitly model the auction mechanism. The Low scenario below should therefore be read as a proportional-severity floor for grain trade at risk, not a calibrated estimate of what November 2023 actually displaced.",
+   "<strong>Détournement du routage des céréales.</strong> Sur les quatre semaines se terminant le 31 octobre 2023, les navires céréaliers du golfe des États-Unis transitant par le canal de Panama sont passés de 34 à 5, soit une baisse de 85 % des volumes de transit de céréales en vrac, au moment où l’ACP avait réduit les transits quotidiens d’environ 33 % par rapport à la base (Rabobank, 2023). Le modèle à 33 % de gravité (scénario Bas) produit une éviction du vrac de 33 % par le seul mécanisme de réduction des transits. Le taux de détournement observé de 85 % implique une éviction effective du vrac sensiblement plus élevée que ne le produirait la seule réduction du nombre de transits. Cela est cohérent avec le mécanisme d’enchères prioritaires décrit par Fuentes et Munim (2025) : la capacité de transit résiduelle de 24 par jour a été attribuée de préférence aux cargaisons de conteneurs de plus forte valeur, évinçant le vrac à des taux supérieurs à la réduction proportionnelle du débit. Le modèle identifie le sens de cette éviction mais en sous-estime l’ampleur : l’éviction observée du vrac a largement dépassé la gravité proportionnelle appliquée par le modèle, qui ne modélise pas explicitement le mécanisme d’enchères. Le scénario Bas ci-dessous doit donc se lire comme un plancher de gravité proportionnelle pour le commerce céréalier à risque, et non comme une estimation calibrée de ce que novembre 2023 a réellement évincé."
+  ],
+  [
+   "<strong>Freight rate pressure.</strong> Average container freight rates rose from approximately $700 per TEU in November 2023 to approximately $1,900 per TEU in January 2024 (S&amp;P Global, 2024). The Handymax Cape Horn rerouting penalty of $1.14 million per voyage, 38 days at $30,000 per day, is a reference-case cost for canal-dependent bulk operators displaced from the canal. Most did not sail the Horn; the Suez route (+18 days) was what grain vessels actually used, per the <a href=\"/analysis/panama-long-way-around\">sister analysis</a>, so treat $1.14M as the upper end of the displacement cost, not the typical one. The observed freight rate increase is directionally consistent with this cost pressure. The model does not forecast freight rates; it provides the cost input from which rate pressure is derivable.",
+   "<strong>Pression sur les taux de fret.</strong> Les taux moyens de fret conteneurisé sont passés d’environ 700 $ par EVP en novembre 2023 à environ 1 900 $ par EVP en janvier 2024 (S&amp;P Global, 2024). La pénalité de déroutement Handymax par le cap Horn de 1,14 million de dollars par voyage, 38 jours à 30 000 dollars par jour, est un coût de cas de référence pour les opérateurs de vrac dépendants du canal qui en sont écartés. La plupart n’ont pas emprunté le cap Horn ; la route par Suez (+18 jours) est celle que les navires céréaliers ont réellement utilisée, selon l’<a href=\"/analysis/panama-long-way-around\">analyse sœur</a>, de sorte qu’il faut voir 1,14 M$ comme la borne haute du coût de déroutement, et non comme sa valeur typique. La hausse observée des taux de fret est cohérente, dans sa direction, avec cette pression sur les coûts. Le modèle ne prévoit pas les taux de fret ; il fournit l’intrant de coût dont la pression sur les taux peut être déduite."
+  ],
+  [
+   "<strong>Aggregate exposure magnitude.</strong> The ACP reported that the 2023–24 drought produced its most severe operational disruption in the canal's 110-year history (ACP, 2024). Independent analyses estimated total economic impact to global trade in the range of tens of billions of dollars across the disruption period. This page no longer publishes an all-commodity aggregate VaR for the event: the figures it carried before were built on a routing base that wrongly sent roughly $137 billion of Asia to Europe and Asia to West Africa trade through the canal, and a replacement needs a documented bulk and container methodology that has not yet been built. The grain-specific figures are the current ones, and the severity columns in the table above are model inputs, not outputs.",
+   "<strong>Ampleur de l’exposition agrégée.</strong> L’ACP a indiqué que la sécheresse 2023–24 avait produit la perturbation opérationnelle la plus grave des 110 ans d’histoire du canal (ACP, 2024). Des analyses indépendantes ont estimé l’impact économique total sur le commerce mondial à plusieurs dizaines de milliards de dollars sur la période de perturbation. Cette page ne publie plus de VaR agrégée tous produits pour cet épisode : les chiffres qu’elle portait auparavant reposaient sur une base de routage qui envoyait à tort environ 137 $ milliards de commerce Asie–Europe et Asie–Afrique de l’Ouest par le canal, et leur remplacement exige une méthodologie documentée pour le vrac et les conteneurs, qui n’a pas encore été construite. Les chiffres propres aux céréales sont ceux en vigueur, et les colonnes de gravité du tableau ci-dessus sont des intrants du modèle, non des résultats."
+  ],
+  [
+   "Model limitations in this validation context",
+   "Limites du modèle dans ce contexte de validation"
+  ],
+  [
+   "All grain commodity data in the Narrows model for Panama is Tier 3: aggregate routing derived from bilateral trade flows, not direct vessel-level routing validation. The model treats throughput severity as a uniform proportional reduction and does not account for the priority auction mechanism that distributes residual capacity unequally across vessel classes. Both effects mean the model likely underestimates bulk displacement relative to what the auction mechanism produces in practice. This is a known and documented limitation. The validation exercise above suggests the model is directionally correct but should be understood as a lower bound on bulk trade disruption rather than a central estimate.",
+   "Toutes les données céréalières du modèle de Narrows pour Panama sont de niveau 3 : routage agrégé dérivé des flux commerciaux bilatéraux, sans validation directe du routage au niveau des navires. Le modèle traite la gravité du débit comme une réduction proportionnelle uniforme et ne tient pas compte du mécanisme d’enchères prioritaires qui répartit inégalement la capacité résiduelle entre les classes de navires. Ces deux effets font que le modèle sous-estime probablement l’éviction du vrac par rapport à ce que produit le mécanisme d’enchères en pratique. Il s’agit d’une limite connue et documentée. L’exercice de validation ci-dessus suggère que le modèle est correct dans sa direction mais doit se comprendre comme une borne basse de la perturbation du commerce de vrac, plutôt que comme une estimation centrale."
+  ],
+  [
+   "The 2026–27 risk window",
+   "La fenêtre de risque 2026–27"
+  ],
+  [
+   "The canal is fully operational today. NOAA gives a 75% probability of a moderate-to-very-strong El Niño by peak season. History puts the impact window in 2027.",
+   "Le canal est pleinement opérationnel aujourd’hui. La NOAA donne une probabilité de 75 % d’un El Niño modéré à très fort au pic de saison. L’histoire place la fenêtre d’impact en 2027."
+  ],
+  [
+   "The canal recovered through 2025 as a La Niña pattern restored above-average wet season rainfall. By early 2026, the ACP had rebuilt Gatun Lake reserves to historically high values and was operating at near-normal throughput of approximately 36 daily transits. From a market perspective, the 2023–24 event appeared to have passed.",
+   "Le canal s’est rétabli en 2025 grâce à un régime La Niña qui a restauré des pluies supérieures à la moyenne en saison humide. Début 2026, l’ACP avait reconstitué les réserves du lac Gatún à des valeurs historiquement élevées et fonctionnait à un débit proche de la normale, d’environ 36 transits quotidiens. Du point de vue du marché, l’épisode 2023–24 semblait derrière nous."
+  ],
+  [
+   "NOAA's Climate Prediction Center April 2026 update presents a different picture for the coming 12 months. ENSO-neutral conditions are currently in place, with La Niña ending. El Niño is assessed as likely to emerge in the June to August 2026 window, with a 61% probability of emergence by mid-year and persistence through at least end-2026. The more operationally significant figure is in the strength distribution: for the November 2026 to January 2027 peak season, the CPC assigns approximately equal 25% probability to very strong, strong, and moderate El Niño events, with roughly 10% probability of neutral conditions. That puts the combined probability of at least a moderate event at approximately 75% at peak season (NOAA CPC, 2026).",
+   "La mise à jour d’avril 2026 du Climate Prediction Center de la NOAA dresse un autre tableau pour les 12 prochains mois. Des conditions ENSO neutres sont actuellement en place, La Niña prenant fin. L’émergence d’El Niño est jugée probable sur la fenêtre de juin à août 2026, avec une probabilité de 61 % d’émergence d’ici mi-année et une persistance au moins jusqu’à fin 2026. Le chiffre opérationnellement plus significatif se trouve dans la distribution de l’intensité : pour la saison de pic de novembre 2026 à janvier 2027, le CPC attribue une probabilité à peu près égale de 25 % à des épisodes très forts, forts et modérés, avec environ 10 % de probabilité de conditions neutres. Cela porte la probabilité combinée d’un épisode au moins modéré à environ 75 % en saison de pic (NOAA CPC, 2026)."
+  ],
+  [
+   "This matters for Panama Canal operational planning because the most pronounced effects on canal throughput have consistently materialised in the year following El Niño onset. The 1982–83, 1997–98, 2015–16, and 2023–24 events all show the same pattern: an El Niño develops mid-year, the wet season delivers below-average rainfall, and by the following dry season Gatun Lake levels are sufficiently reduced to trigger draft restrictions and transit cuts. Applied to a 2026 El Niño onset, the operational impact window falls in 2027, consistent with the ACP's own forward guidance (ACP, 2026; Riviera Maritime Media, 2026).",
+   "Cela compte pour la planification opérationnelle du canal de Panama, car les effets les plus marqués sur le débit du canal se sont toujours matérialisés dans l’année suivant le début d’El Niño. Les épisodes de 1982–83, 1997–98, 2015–16 et 2023–24 montrent tous le même schéma : un El Niño se développe en milieu d’année, la saison humide apporte des pluies inférieures à la moyenne, et à la saison sèche suivante les niveaux du lac Gatún sont assez réduits pour déclencher des restrictions de tirant d’eau et des réductions de transits. Appliqué à un début d’El Niño en 2026, l’impact opérationnel tombe dans la fenêtre de 2027, conformément aux orientations prospectives de l’ACP elle-même (ACP, 2026 ; Riviera Maritime Media, 2026)."
+  ],
+  [
+   "That pattern held across four prior events. It has not held for this one. The ACP's own draft and transit restrictions arrived within the onset year itself, in August and September 2026, not in the following dry season as the historical pattern and the ACP's own April 2026 guidance implied. Whether this reflects a shorter lag at this specific lake-level starting point, a more aggressive ACP posture after 2023-24, or simply a faster-developing event is not yet possible to say from one data point, but the 2027 window above should not be read as the earliest date operational impact can occur. See the live update at the top of this page.",
+   "Ce schéma a tenu sur quatre épisodes précédents. Il n’a pas tenu pour celui-ci. Les restrictions de tirant d’eau et de transits de l’ACP sont arrivées dans l’année même du début, en août et septembre 2026, et non à la saison sèche suivante comme l’impliquaient le schéma historique et les orientations d’avril 2026 de l’ACP. Il n’est pas encore possible de dire, à partir d’un seul point de données, s’il s’agit d’un décalage plus court à ce niveau de départ du lac, d’une posture plus agressive de l’ACP après 2023-24 ou simplement d’un épisode qui se développe plus vite, mais la fenêtre de 2027 ci-dessus ne doit pas se lire comme la date au plus tôt à laquelle un impact opérationnel peut survenir. Voir la mise à jour en direct en haut de cette page."
+  ],
+  [
+   "The structural trajectory compounds this. Muñoz et al. (2025) project that under moderately high emissions pathways (SSP3-7.0), the frequency of low-water events equivalent to the 2023–24 drought doubles by the end of the century. The water-saving measures the ACP introduced in late 2025, including cross-filling procedures, suspension of hydroelectric generation during low-water periods, and increased use of water-saving basins in the Neopanamax locks, extend the operational buffer but do not address the underlying hydrological constraint.",
+   "La trajectoire structurelle aggrave la situation. Muñoz et al. (2025) projettent que, dans les trajectoires d’émissions moyennement élevées (SSP3-7.0), la fréquence des épisodes de basses eaux équivalents à la sécheresse 2023–24 double d’ici la fin du siècle. Les mesures d’économie d’eau introduites par l’ACP fin 2025, dont les procédures de remplissage croisé, la suspension de la production hydroélectrique en période de basses eaux et un recours accru aux bassins d’économie d’eau dans les écluses Neopanamax, prolongent la marge opérationnelle mais ne règlent pas la contrainte hydrologique sous-jacente."
+  ],
+  [
+   "What the exposure means",
+   "Ce que signifie l’exposition"
+  ],
+  [
+   "The numbers are in the model. The pricing is not in the market. Here is who carries the gap.",
+   "Les chiffres sont dans le modèle. Le prix n’est pas sur le marché. Voici qui porte l’écart."
+  ],
+  [
+   "The 2023–24 event established that a Panama Canal throttle produces quantifiable, bilateral, commodity-specific financial exposure. The Narrows model provides those numbers. The observation that matters more than any single VaR figure is that this exposure is, in most cases, not currently priced or hedged by the counterparties that carry it. The following is how the exposure falls across the market participants most directly affected.",
+   "L’épisode 2023–24 a établi qu’un étranglement du canal de Panama produit une exposition financière quantifiable, bilatérale et propre à chaque produit. Le modèle de Narrows fournit ces chiffres. Ce qui compte plus que n’importe quel chiffre de VaR isolé, c’est que cette exposition n’est, dans la plupart des cas, ni tarifée ni couverte par les contreparties qui la portent. Voici comment l’exposition se répartit entre les acteurs du marché les plus directement touchés."
+  ],
+  [
+   "<strong>Marine insurers and P&amp;I clubs.</strong> Traditional cargo policies do not cover throttle-related losses. There is no physical damage trigger. What accumulates instead is indirect exposure: delay claims, spoilage on extended Cape Horn voyages for temperature-sensitive cargo, general average contributions where rerouted vessels encounter further incidents, and reinsurance accumulation across books with correlated Canal exposure. The critical analytical gap for insurers is accumulation modelling. A cargo book that is diversified by geography can still be substantially concentrated in Panama-dependent routing if a significant portion of its Handymax and Supramax bulk exposures move on the US Gulf to Asia corridor. The bilateral dependency matrix shows where that concentration sits. The trigger variable is already observable and publicly reported: ACP transit counts, for example fewer than 24 transits per day sustained for 30 consecutive days.",
+   "<strong>Assureurs maritimes et clubs P&amp;I.</strong> Les polices de cargaison traditionnelles ne couvrent pas les pertes liées à l’étranglement. Il n’y a pas de déclencheur de dommage physique. Ce qui s’accumule à la place, c’est une exposition indirecte : réclamations pour retard, avaries sur les voyages prolongés par le cap Horn pour les cargaisons sensibles à la température, contributions d’avarie commune lorsque des navires déroutés rencontrent d’autres incidents, et cumul de réassurance entre portefeuilles à exposition corrélée au canal. La lacune analytique critique pour les assureurs est la modélisation du cumul. Un portefeuille de cargaisons diversifié géographiquement peut rester fortement concentré sur un routage dépendant de Panama si une part importante de ses expositions Handymax et Supramax en vrac emprunte le corridor entre le golfe des États-Unis et l’Asie. La matrice de dépendance bilatérale montre où se situe cette concentration. La variable de déclenchement est déjà observable et publiquement rapportée : les comptages de transits de l’ACP, par exemple moins de 24 transits par jour pendant 30 jours consécutifs."
+  ],
+  [
+   "<strong>Commodity traders.</strong> The immediate price signal in a throttle event is basis widening: the freight differential between US Gulf delivery and Pacific Asian destination blows out as displaced vessels seek the Cape Horn alternative. At $1.14 million additional voyage cost on a Handymax carrying approximately 50,000 tonnes of corn, that is $22.80 per tonne in additional freight, roughly 11% of the delivered corn price at current levels. Trading houses with contractual optionality on origin, the ability to shift purchasing toward US Pacific Northwest, Ukrainian, or Australian origins, capture the basis differential as margin. Those without that optionality pass the cost to buyers or take it as a loss on open positions. The model identifies which bilateral trade flows are most exposed and by what magnitude.",
+   "<strong>Négociants en matières premières.</strong> Le signal-prix immédiat lors d’un étranglement est l’élargissement de la base : l’écart de fret entre une livraison dans le golfe des États-Unis et une destination en Asie du Pacifique explose lorsque les navires évincés cherchent l’alternative par le cap Horn. Avec 1,14 $ million de coût de voyage supplémentaire sur un Handymax transportant environ 50 000 tonnes de maïs, cela fait 22,80 $ par tonne de fret supplémentaire, soit environ 11 % du prix livré du maïs aux niveaux actuels. Les maisons de négoce disposant d’une option contractuelle sur l’origine, soit la possibilité de réorienter leurs achats vers le Nord-Ouest Pacifique américain, l’Ukraine ou l’Australie, captent l’écart de base comme marge. Celles qui n’ont pas cette option répercutent le coût sur les acheteurs ou l’absorbent comme perte sur positions ouvertes. Le modèle identifie les flux commerciaux bilatéraux les plus exposés et dans quelle mesure."
+  ],
+  [
+   "<strong>Commodity derivatives and freight markets.</strong> A Panama throttle is structurally bullish CBOT corn: reduced export capacity tightens US domestic stocks while simultaneously reducing supply to the most import-dependent Asian buyers. The basis trade is straightforward in principle, long CBOT corn versus short Pacific freight, but the freight derivatives market for Panamax and Handymax routes is thin and illiquid compared to the Capesize market. The model does not generate a derivatives position; it measures the bilateral exposure in dollars by commodity. The gap between the model's $14.0B mid-severity grain VaR and the typical open interest in grain freight derivatives indicates the extent to which this risk is unhedged at an industry level.",
+   "<strong>Dérivés de matières premières et marchés du fret.</strong> Un étranglement de Panama est structurellement haussier pour le maïs du CBOT : la capacité d’exportation réduite resserre les stocks intérieurs américains tout en réduisant simultanément l’offre aux acheteurs asiatiques les plus dépendants des importations. Le pari de base est simple en principe, long maïs CBOT contre court fret Pacifique, mais le marché des dérivés de fret pour les routes Panamax et Handymax est étroit et peu liquide comparé à celui du Capesize. Le modèle ne génère pas de position sur dérivés ; il mesure l’exposition bilatérale en dollars par produit. L’écart entre la VaR céréales de gravité moyenne du modèle, 14,0 Md$, et l’intérêt ouvert typique sur les dérivés de fret céréalier indique dans quelle mesure ce risque n’est pas couvert au niveau du secteur."
+  ],
+  [
+   "<strong>Food security and policy.</strong> Financial intermediaries absorb cost through freight premiums and basis adjustments. The food security question is different: who cannot absorb the cost at all. Japan and South Korea have the foreign exchange reserves and import flexibility to pay higher delivered grain prices for a season without a domestic supply crisis. Vietnam, Colombia, and Ecuador operate at tighter margins. A sustained six-month throttle that adds $22 to $30 per tonne to delivered corn and wheat costs passes through to domestic feed prices, then to livestock production costs, then to retail food prices, in economies where food expenditure is a higher share of household income. The 2023–24 event contributed to elevated agricultural commodity prices across Canal-dependent economies in Q4 2023 and Q1 2024. A repeat event with a moderate-to-strong El Niño driver would produce the same transmission. The policy question, for institutions such as ERIA, ADB, and the ASEAN Secretariat, is whether regional food security frameworks account for a recurring, hydrologically-driven supply chain shock that bilateral trade dependency analysis can now quantify in advance.",
+   "<strong>Sécurité alimentaire et politiques publiques.</strong> Les intermédiaires financiers absorbent le coût par les primes de fret et les ajustements de base. La question de sécurité alimentaire est différente : qui ne peut pas du tout absorber le coût. Le Japon et la Corée du Sud ont les réserves de change et la flexibilité d’importation pour payer des prix de céréales livrées plus élevés pendant une saison sans crise d’approvisionnement intérieure. Le Vietnam, la Colombie et l’Équateur opèrent avec des marges plus serrées. Un étranglement soutenu de six mois qui ajoute 22 $ à 30 $ par tonne aux coûts du maïs et du blé livrés se répercute sur les prix de l’alimentation animale, puis sur les coûts de production de l’élevage, puis sur les prix alimentaires de détail, dans des économies où la dépense alimentaire pèse davantage dans le revenu des ménages. L’épisode 2023–24 a contribué à des prix agricoles élevés dans les économies dépendantes du canal aux T4 2023 et T1 2024. Un nouvel épisode avec un moteur El Niño modéré à fort produirait la même transmission. La question de politique publique, pour des institutions comme l’ERIA, la BAD et le Secrétariat de l’ASEAN, est de savoir si les cadres régionaux de sécurité alimentaire tiennent compte d’un choc récurrent de chaîne d’approvisionnement, d’origine hydrologique, que l’analyse de dépendance commerciale bilatérale peut désormais quantifier à l’avance."
+  ],
+  [
+   "What the model shows",
+   "Ce que montre le modèle"
+  ],
+  [
+   "The probable range is $9.3B to $28.0B in grain trade at risk. The mid-point is $14.0B. Neither figure is in most risk models.",
+   "La fourchette probable est de 9,3 Md$ à 28,0 Md$ de commerce céréalier à risque. Le point médian est 14,0 Md$. Aucun de ces chiffres ne figure dans la plupart des modèles de risque."
+  ],
+  [
+   "The Narrows Chokepoint Dependency Model produces three outputs for Panama Canal throttling scenarios: value at risk, rerouting penalty, and the commodity and country breakdown of exposure. The grain trade at risk range, $9.3B at 33% severity, $14.0B at 50% severity, and $28.0B at full closure, is derived from a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data (CDM v3, rebuilt August 2026) applied to a basin-aware corridor dependency matrix for corn, soybean, and wheat, tracked as three separate commodity lines rather than a merged grain bucket. Wheat and corn are Tier 3 (Estimated); soybean is Tier 2 (Corroborated, ~50% bilateral-match coverage). This range is roughly a third of the $31B–$93B figures published in the May 2026 version of this article; the reduction is a routing and data-vintage correction, documented below, not a change in the underlying risk.",
+   "Le modèle de dépendance aux points de passage de Narrows produit trois sorties pour les scénarios d’étranglement du canal de Panama : la valeur à risque, la pénalité de déroutement, et la ventilation de l’exposition par produit et par pays. La fourchette du commerce céréalier à risque, 9,3 Md$ à 33 % de gravité, 14,0 Md$ à 50 % de gravité et 28,0 Md$ en fermeture totale, est dérivée d’une combinaison multi-millésimes des données bilatérales UN Comtrade de 2022 et 2024 (CDM v3, reconstruit en août 2026) appliquée à une matrice de dépendance de corridors tenant compte des bassins pour le maïs, le soja et le blé, suivis comme trois lignes de produits distinctes plutôt qu’en une catégorie céréalière fusionnée. Le blé et le maïs sont de niveau 3 (estimés) ; le soja est de niveau 2 (corroboré, couverture d’appariement bilatéral d’environ 50 %). Cette fourchette représente environ un tiers des chiffres de 31 Md$–93 Md$ publiés dans la version de mai 2026 de cet article ; la réduction est une correction de routage et de millésime des données, documentée ci-dessous, et non un changement du risque sous-jacent."
+  ],
+  [
+   "The figures that are most analytically stable are those for the East Asian importers: Japan corn and soybean exposure at the mid-point severity runs to approximately $1.2B combined; South Korea approximately $0.7B. These are not the largest absolute numbers in the matrix. China's soybean exposure at 50% severity is $7.9B. But Japan and South Korea carry a structural constraint that China does not: no viable domestic production substitute at scale, and Pacific routing that is physically dependent on canal access or Cape Horn. Those are the figures that matter for any assessment of accumulation risk or of the resilience of a food import system.",
+   "Les chiffres les plus stables sur le plan analytique sont ceux des importateurs d’Asie de l’Est : l’exposition du Japon pour le maïs et le soja à la gravité médiane atteint environ 1,2 Md$ combinés ; celle de la Corée du Sud environ 0,7 Md$. Ce ne sont pas les plus grands chiffres absolus de la matrice. L’exposition de la Chine pour le soja à 50 % de gravité est de 7,9 Md$. Mais le Japon et la Corée du Sud portent une contrainte structurelle que la Chine n’a pas : pas de substitut de production nationale viable à grande échelle, et un routage Pacifique physiquement dépendant de l’accès au canal ou du cap Horn. Ce sont les chiffres qui comptent pour toute évaluation du risque de cumul ou de la résilience d’un système d’importation alimentaire."
+  ],
+  [
+   "The throttle problem, in the end, is a pricing problem. A full closure is dramatic, discussable, and precisely because it is dramatic, already present in most scenario frameworks. A sustained six-month reduction to 50% throughput is less dramatic, harder to communicate, and almost entirely absent from the risk models of the counterparties most exposed to it. The 2023–24 event established an empirical baseline. The forward ENSO outlook indicates the relevant risk horizon. The bilateral dependency data identifies who is on the hook. Few of the exposed counterparties appear to have run those inputs through a scenario model before the disruption begins.",
+   "Le problème de l’étranglement est, au fond, un problème de prix. Une fermeture totale est spectaculaire, discutable et, précisément parce qu’elle est spectaculaire, déjà présente dans la plupart des cadres de scénarios. Une réduction soutenue de six mois à 50 % du débit est moins spectaculaire, plus difficile à communiquer et presque entièrement absente des modèles de risque des contreparties qui y sont le plus exposées. L’épisode 2023–24 a établi une base empirique. Les perspectives ENSO à venir indiquent l’horizon de risque pertinent. Les données de dépendance bilatérale identifient qui est en première ligne. Peu de contreparties exposées semblent avoir passé ces intrants dans un modèle de scénarios avant le début de la perturbation."
+  ],
+  [
+   "Data and methodology",
+   "Données et méthodologie"
+  ],
+  [
+   "Bilateral dependency figures: Narrows Chokepoint Dependency Model v3 (rebuilt August 2026; corn/soybean/wheat tables and grain VaR scenarios updated from the May 2026 v0.3 baseline; see changelog note above the agricultural exposure section). Source data: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. Wheat (HS 1001) and corn (HS 1005) are Tier 3 (Estimated); soybean (HS 1201) is Tier 2 (Corroborated). Corn is a full independent Comtrade pull as of August 2026, not a placeholder; see changelog. Aggregate and coal figures include Tier 1 bilateral data where available. Dep% = Panama-routed exposed value divided by total commodity imports, computed via basin-aware routing (export-basin × import-basin weighted split, not a single dominant-basin assignment). Panama sensitivity factor: 0.90. Value at risk = exposed trade value × severity × sensitivity. Rerouting penalty: Handymax all-in rate $30,000/day × 38-day Cape Horn detour = $1.14M/voyage. Neopanamax capacity loss: 44ft draft vs 50ft standard yields approximately 7,500 TEU vs 12,500 TEU per transit (Port Economics, Management and Policy, 2024). Monthly throughput data: ACP operational notices and BTS (2024). Rainfall and attribution data: World Weather Attribution (2024). Climate projections: Muñoz, Lawrence and Wang (2025). ENSO forecast and strength outlook: NOAA CPC, April 2026. Forward ENSO risk pattern: ACP (2026); Riviera Maritime Media (2026). <br><br> <strong>Correction, 5 October 2026.</strong> The all-commodity aggregate VaR column and the aggregate validation figures that this page used to carry have been withdrawn. A routing audit (Fix-130) found that the basin rules treated every Atlantic-basin port as American, so Asia to Europe container, vehicle and electronics trade (for example China to Germany HS 8471, Japan to Belgium HS 8703) and Asia to West Africa trade were assigned a Panama leg. After the fix, those flows route via Malacca, Bab el-Mandeb, Suez and Gibraltar (Europe) or around the Cape (West Africa), and Panama-routed trade in the model falls from roughly $348 billion to roughly $210 billion, every flow of which now has an American endpoint. The grain-specific figures throughout this page (stat bar, corn/soybean/wheat tables, Low/Mid/High grain VaR scenario table) are unaffected: no grain flow had a European or African Atlantic endpoint on a Panama route. A re-derived all-commodity progression will be published only with its methodology. <br><br> <strong>References</strong><br> ACP (2026). The Panama Canal responds to the risk of El Niño with foresight. Autoridad del Canal de Panamá.<br> BTS (2024). Vessel Draft Restrictions on the Panama Canal by Locks: February 2022–August 2024. Bureau of Transportation Statistics.<br> Fuentes, G. and Munim, Z.H. (2025). Climate influence on Panama Canal operations: predicting canal water times with integrated environmental and operational data. <em>Transportation Research Part E</em>, 203. DOI: 10.1016/j.tre.2025.103606.<br> Muñoz, S., Lawrence, Z. and Wang, S. (2025). Drying of the Panama Canal in a warming climate. <em>Geophysical Research Letters</em>, 52(18), e2025GL117038. DOI: 10.1029/2025GL117038.<br> NOAA CPC (2026). ENSO: Recent Evolution, Current Status and Predictions. Climate Prediction Center / NCEP, 13 April 2026.<br> Port Economics, Management and Policy (2024). Effect of the Panama Canal draft limitation on containership capacity. porteconomicsmanagement.org.<br> Rabobank (2023). The Panama Canal needs a rainy October: impacts of Panama Canal drought on global agricultural trade.<br> Riviera Maritime Media (2026). Panama Canal Authority warns of potential El Niño impacts in 2027.<br> S&amp;P Global (2024). Panama Canal draft restrictions offer sustained challenge for carriers.<br> World Weather Attribution (2024). Low water levels in Panama Canal due to increasing demand exacerbated by El Niño event. <br><br> All model assumptions are substitutable.",
+   "Chiffres de dépendance bilatérale : modèle de dépendance aux points de passage de Narrows v3 (reconstruit en août 2026 ; tableaux maïs/soja/blé et scénarios de VaR céréales mis à jour depuis la base v0.3 de mai 2026 ; voir la note de changements au-dessus de la section sur l’exposition agricole). Données sources : combinaison multi-millésimes d’extractions bilatérales authentifiées UN Comtrade de 2022 et 2024. Le blé (HS 1001) et le maïs (HS 1005) sont de niveau 3 (estimés) ; le soja (HS 1201) est de niveau 2 (corroboré). Le maïs est une extraction Comtrade indépendante complète depuis août 2026, et non un substitut provisoire ; voir les changements. Les chiffres agrégés et du charbon incluent des données bilatérales de niveau 1 lorsqu’elles sont disponibles. Dép. % = valeur exposée routée par Panama divisée par le total des importations du produit, calculée par un routage tenant compte des bassins (répartition pondérée bassin d’exportation × bassin d’importation, et non attribution à un seul bassin dominant). Facteur de sensibilité de Panama : 0,90. Valeur à risque = valeur commerciale exposée × gravité × sensibilité. Pénalité de déroutement : taux tout compris Handymax 30 000 $/jour × 38 jours de détour par le cap Horn = 1,14 M$/voyage. Perte de capacité Neopanamax : un tirant d’eau de 44 pi contre le standard de 50 pi donne environ 7 500 EVP contre 12 500 EVP par transit (Port Economics, Management and Policy, 2024). Données mensuelles de débit : avis opérationnels de l’ACP et BTS (2024). Données de pluviométrie et d’attribution : World Weather Attribution (2024). Projections climatiques : Muñoz, Lawrence et Wang (2025). Prévision ENSO et perspectives d’intensité : NOAA CPC, avril 2026. Schéma prospectif du risque ENSO : ACP (2026) ; Riviera Maritime Media (2026). <br><br> <strong>Correction, 5 octobre 2026.</strong> La colonne de VaR agrégée tous produits et les chiffres de validation agrégés que cette page portait auparavant ont été retirés. Un audit du routage (Fix-130) a constaté que les règles de bassin traitaient tout port du bassin atlantique comme américain, de sorte que le commerce Asie–Europe de conteneurs, de véhicules et d’électronique (par exemple Chine–Allemagne HS 8471, Japon–Belgique HS 8703) et le commerce Asie–Afrique de l’Ouest se voyaient attribuer un tronçon par Panama. Après correction, ces flux passent par Malacca, Bab el-Mandeb, Suez et Gibraltar (Europe) ou par le Cap (Afrique de l’Ouest), et le commerce routé par Panama dans le modèle passe d’environ 348 $ milliards à environ 210 $ milliards, dont chaque flux a désormais un point d’extrémité américain. Les chiffres propres aux céréales dans toute cette page (barre de chiffres clés, tableaux maïs/soja/blé, tableau des scénarios de VaR céréales Bas/Moyen/Haut) ne sont pas affectés : aucun flux céréalier n’avait de point d’extrémité atlantique européen ou africain sur une route par Panama. Une progression tous produits re-dérivée ne sera publiée qu’avec sa méthodologie. <br><br> <strong>Références</strong><br> ACP (2026). The Panama Canal responds to the risk of El Niño with foresight. Autoridad del Canal de Panamá.<br> BTS (2024). Vessel Draft Restrictions on the Panama Canal by Locks: February 2022–August 2024. Bureau of Transportation Statistics.<br> Fuentes, G. and Munim, Z.H. (2025). Climate influence on Panama Canal operations: predicting canal water times with integrated environmental and operational data. <em>Transportation Research Part E</em>, 203. DOI: 10.1016/j.tre.2025.103606.<br> Muñoz, S., Lawrence, Z. and Wang, S. (2025). Drying of the Panama Canal in a warming climate. <em>Geophysical Research Letters</em>, 52(18), e2025GL117038. DOI: 10.1029/2025GL117038.<br> NOAA CPC (2026). ENSO: Recent Evolution, Current Status and Predictions. Climate Prediction Center / NCEP, 13 April 2026.<br> Port Economics, Management and Policy (2024). Effect of the Panama Canal draft limitation on containership capacity. porteconomicsmanagement.org.<br> Rabobank (2023). The Panama Canal needs a rainy October: impacts of Panama Canal drought on global agricultural trade.<br> Riviera Maritime Media (2026). Panama Canal Authority warns of potential El Niño impacts in 2027.<br> S&amp;P Global (2024). Panama Canal draft restrictions offer sustained challenge for carriers.<br> World Weather Attribution (2024). Low water levels in Panama Canal due to increasing demand exacerbated by El Niño event. <br><br> Toutes les hypothèses du modèle sont substituables."
+  ]
+ ],
+ "js": []
+}

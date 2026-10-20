@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
+Disallow: /viz/gulf-lng-flowmap.html
 Sitemap: https://narrows.io/sitemap-index.xml

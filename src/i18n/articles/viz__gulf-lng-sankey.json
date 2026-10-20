@@ -1,0 +1,203 @@
+{
+ "path": "viz/gulf-lng-sankey",
+ "meta": {
+  "title": "GNL du Golfe, flux Sankey | Narrows",
+  "description": "Flux annuels de GNL du Golfe vers les pays importateurs à travers Ormuz, Malacca, Bab el-Mandeb, Suez et Gibraltar."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "Sankey Flow Analysis",
+   "Analyse par diagramme de Sankey"
+  ],
+  [
+   "Gulf LNG - annual bilateral flows through sequential chokepoints",
+   "GNL du Golfe : flux bilatéraux annuels à travers des points de passage successifs"
+  ],
+  [
+   "Ribbon width is proportional to annual trade value ($B). All cargo transits Hormuz. Asia-Pacific adds Malacca; European routes add Bab el-Mandeb and Suez, with Atlantic terminals adding Gibraltar. Hover for detail.",
+   "La largeur des rubans est proportionnelle à la valeur annuelle des échanges (Md$). Toute la cargaison transite par Ormuz. L’Asie-Pacifique ajoute Malacca ; les routes européennes ajoutent Bab el-Mandeb et Suez, et les terminaux atlantiques ajoutent Gibraltar. Survolez pour le détail."
+  ],
+  [
+   "Chokepoint",
+   "Point de passage"
+  ],
+  [
+   "Asia-Pacific via Malacca",
+   "Asie-Pacifique via Malacca"
+  ],
+  [
+   "Europe via Bab / Suez",
+   "Europe via Bab / Suez"
+  ],
+  [
+   "South Asia &amp; Americas",
+   "Asie du Sud et Amériques"
+  ],
+  [
+   "Source: Narrows CDM v0.3 · HS 271111 bilateral trade data<br> Dep% = share of national LNG imports sourced via Hormuz",
+   "Source : Narrows CDM v0.3 · données commerciales bilatérales SH 271111<br> Dép. % = part des importations nationales de GNL passant par Ormuz"
+  ]
+ ],
+ "js": [
+  [
+   "name:'UK'",
+   "name:'Royaume-Uni'"
+  ],
+  [
+   "`$${d.value.toFixed(1)}B annual flow`",
+   "`${d.value.toFixed(1).replace('.',',')} Md$ de flux annuel`"
+  ],
+  [
+   "`${d.source.name}  →  ${d.target.name}`",
+   "`${d.source.name}  →  ${d.target.name}`"
+  ],
+  [
+   "`Hormuz dependency: ${d.dep}%`",
+   "`Dépendance à Ormuz : ${String(d.dep).replace('.',',')}\\u00a0%`"
+  ],
+  [
+   "`$${(d.value || 0).toFixed(1)}B` + (d.td ? `  ·  ~${d.td}d from origin` : '')",
+   "`${(d.value || 0).toFixed(1).replace('.',',')} Md$` + (d.td ? `  ·  ~${d.td}\\u00a0j depuis l’origine` : '')"
+  ],
+  [
+   "`$${(d.value || 0).toFixed(1)}B · ${d.td}d`",
+   "`${(d.value || 0).toFixed(1).replace('.',',')} Md$ · ${d.td}\\u00a0j`"
+  ],
+  [
+   "`$${(d.value || 0).toFixed(1)}B`)",
+   "`${(d.value || 0).toFixed(1).replace('.',',')} Md$`)"
+  ],
+  [
+   "note:'Transit point for Atlantic-facing European terminals. Belgium (Zeebrugge), UK (Isle of Grain, South Hook) and Netherlands (Gate Rotterdam) all transit Gibraltar. France, Italy and Spain use Mediterranean terminals and bypass it.'",
+   "note:'Point de transit des terminaux européens donnant sur l’Atlantique. La Belgique (Zeebrugge), le Royaume-Uni (Isle of Grain, South Hook) et les Pays-Bas (Gate Rotterdam) transitent tous par Gibraltar. La France, l’Italie et l’Espagne utilisent des terminaux méditerranéens et l’évitent.'"
+  ],
+  [
+   "note:'Bab el-Mandeb (active Houthi threat zone since late 2023) and Suez Canal in sequence. $19.1B - 37% of Gulf LNG. Disruption adds 14-16 days around the Cape.'",
+   "note:'Bab el-Mandeb (zone de menace houthie active depuis fin 2023) puis canal de Suez, en séquence. 19,1 Md$, soit 37 % du GNL du Golfe. Une perturbation ajoute 14 à 16 jours par le Cap.'"
+  ],
+  [
+   "note:'55.8% Hormuz dependency - highest in Europe. Zeebrugge transits five chokepoints in sequence: Hormuz, Bab, Suez, Gibraltar, then destination.'",
+   "note:'55,8 % de dépendance à Ormuz, la plus élevée d’Europe. Zeebrugge transite par cinq points de passage en séquence : Ormuz, Bab, Suez, Gibraltar, puis la destination.'"
+  ],
+  [
+   "note:'Single mandatory transit for 100% of Gulf LNG. The full width of this node represents the entire $51.5B annual exposure at one bottleneck.'",
+   "note:'Passage obligatoire unique pour 100 % du GNL du Golfe. Toute la largeur de ce nœud représente l’exposition annuelle totale de 51,5 Md$ concentrée sur un seul goulet.'"
+  ],
+  [
+   "note:'98.2% Hormuz dependency - highest globally. No credible alternative at scale. A closure would rapidly paralyse Pakistani power generation.'",
+   "note:'98,2 % de dépendance à Ormuz, la plus élevée au monde. Aucune alternative crédible à grande échelle. Une fermeture paralyserait rapidement la production d’électricité pakistanaise.'"
+  ],
+  [
+   "note:'Second mandatory chokepoint for all Asia-Pacific LNG. $27.8B - 54% of Gulf LNG - passes here. No viable bypass exists for laden tankers.'",
+   "note:'Deuxième point de passage obligatoire pour tout le GNL à destination de l’Asie-Pacifique. 27,8 Md$, soit 54 % du GNL du Golfe, y passent. Il n’existe aucun contournement viable pour les méthaniers chargés.'"
+  ],
+  [
+   "note:'Qatar accounts for ~75% of Gulf LNG. Total annual flow: $51.5B. All cargo must transit Hormuz - no alternative maritime route exists.'",
+   "note:'Le Qatar représente environ 75 % du GNL du Golfe. Flux annuel total : 51,5 Md$. Toute la cargaison doit transiter par Ormuz ; il n’existe aucune autre route maritime.'"
+  ],
+  [
+   "note:'26.9% via Hormuz. Atlantic-facing terminals (Isle of Grain, South Hook) transit Gibraltar as the final chokepoint.'",
+   "note:'26,9 % via Ormuz. Les terminaux donnant sur l’Atlantique (Isle of Grain, South Hook) transitent par Gibraltar comme dernier point de passage.'"
+  ],
+  [
+   "note:'10.2% via Hormuz. Fos-sur-Mer is Mediterranean-facing - Suez is the last chokepoint; Gibraltar bypassed.'",
+   "note:'10,2 % via Ormuz. Fos-sur-Mer donne sur la Méditerranée : Suez est le dernier point de passage ; Gibraltar est évité.'"
+  ],
+  [
+   "note:'2.5% of Indian imports via Hormuz. India has diversified across Australia, US, and domestic production.'",
+   "note:'2,5 % des importations indiennes passent par Ormuz. L’Inde s’est diversifiée entre l’Australie, les États-Unis et la production nationale.'"
+  ],
+  [
+   "note:'5.9% via Hormuz. Cape of Good Hope route - comparable transit time to Atlantic European destinations.'",
+   "note:'5,9 % via Ormuz. Route par le cap de Bonne-Espérance, avec un temps de transit comparable à celui des destinations atlantiques européennes.'"
+  ],
+  [
+   "note:'6.5% of Japanese imports via Hormuz. Japan has diversified substantially to Australian and US LNG.'",
+   "note:'6,5 % des importations japonaises passent par Ormuz. Le Japon s’est fortement diversifié vers le GNL australien et américain.'"
+  ],
+  [
+   "note:'23.2% of Taiwanese imports via Hormuz. The Taiwan Strait adds a further potential chokepoint.'",
+   "note:'23,2 % des importations taïwanaises passent par Ormuz. Le détroit de Taïwan ajoute un autre point de passage potentiel.'"
+  ],
+  [
+   "note:'20.0% of South Korean LNG via Hormuz. Route continues through the Taiwan and Korea Straits.'",
+   "note:'20,0 % du GNL sud-coréen passe par Ormuz. La route se poursuit par les détroits de Taïwan et de Corée.'"
+  ],
+  [
+   "note:'13.2% via Hormuz. Gate Terminal Rotterdam is Atlantic-facing; Gibraltar transited en route.'",
+   "note:'13,2 % via Ormuz. Gate Terminal Rotterdam donne sur l’Atlantique ; Gibraltar est franchi en route.'"
+  ],
+  [
+   "note:'21.6% via Hormuz. Mediterranean terminals route via Suez - Gibraltar not transited.'",
+   "note:'21,6 % via Ormuz. Les terminaux méditerranéens passent par Suez ; Gibraltar n’est pas franchi.'"
+  ],
+  [
+   "note:'Largest single buyer of Gulf LNG. 23.6% of Chinese imports via Hormuz and Malacca.'",
+   "note:'Premier acheteur de GNL du Golfe. 23,6 % des importations chinoises passent par Ormuz et Malacca.'"
+  ],
+  [
+   "note:'30.0% of Thai LNG imports via Hormuz - among the higher Asian dependencies.'",
+   "note:'30,0 % des importations thaïlandaises de GNL passent par Ormuz, l’une des dépendances asiatiques les plus élevées.'"
+  ],
+  [
+   "note:'17.2% via Hormuz. Primarily Mediterranean terminals via Suez.'",
+   "note:'17,2 % via Ormuz. Principalement des terminaux méditerranéens via Suez.'"
+  ],
+  [
+   "name:'Netherlands'",
+   "name:'Pays-Bas'"
+  ],
+  [
+   "name:'Gulf LNG'",
+   "name:'GNL du Golfe'"
+  ],
+  [
+   "name:'S. Korea'",
+   "name:'Corée du Sud'"
+  ],
+  [
+   "name:'Thailand'",
+   "name:'Thaïlande'"
+  ],
+  [
+   "name:'Belgium'",
+   "name:'Belgique'"
+  ],
+  [
+   "name:'Hormuz'",
+   "name:'Ormuz'"
+  ],
+  [
+   "name:'Taiwan'",
+   "name:'Taïwan'"
+  ],
+  [
+   "name:'Brazil'",
+   "name:'Brésil'"
+  ],
+  [
+   "name:'China'",
+   "name:'Chine'"
+  ],
+  [
+   "name:'Japan'",
+   "name:'Japon'"
+  ],
+  [
+   "name:'Italy'",
+   "name:'Italie'"
+  ],
+  [
+   "name:'Spain'",
+   "name:'Espagne'"
+  ],
+  [
+   "name:'India'",
+   "name:'Inde'"
+  ]
+ ]
+}

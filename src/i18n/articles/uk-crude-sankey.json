@@ -1,0 +1,207 @@
+{
+ "path": "uk-crude-sankey",
+ "meta": {
+  "title": "Importations britanniques de brut, Sankey | Narrows",
+  "description": "Origine du brut importé par le Royaume-Uni et points de passage maritimes traversés : Ormuz, Bab el-Mandeb, Suez, Bosphore et Gibraltar."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "UK Crude Import Analysis",
+   "Analyse des importations britanniques de brut"
+  ],
+  [
+   "Only 8% of UK crude transits Hormuz. All Mediterranean supply converges at Gibraltar before reaching UK refineries.",
+   "Seulement 8 % du brut britannique transite par Ormuz. Tout l’approvisionnement méditerranéen converge à Gibraltar avant d’atteindre les raffineries britanniques."
+  ],
+  [
+   "Norway and the United States supply 53% of UK crude with no major maritime chokepoint. Gulf crude (Saudi Arabia and Iraq, 8% combined) exits Hormuz, transits Bab el-Mandeb and Suez, and reaches the UK via Gibraltar. Kazakhstan routes via the CPC pipeline to Novorossiysk and the Bosphorus, emerging into the Mediterranean and clearing Gibraltar. Libya and Algeria load directly into the Mediterranean and also clear Gibraltar. North Sea and Atlantic flows bypass the entire chain. Hover any node or flow for detail.",
+   "La Norvège et les États-Unis fournissent 53 % du brut britannique sans point de passage maritime majeur. Le brut du Golfe (Arabie saoudite et Irak, 8 % au total) sort d’Ormuz, transite par Bab el-Mandeb et Suez, et atteint le Royaume-Uni via Gibraltar. Le Kazakhstan passe par l’oléoduc CPC jusqu’à Novorossiïsk et le Bosphore, émerge en Méditerranée et franchit Gibraltar. La Libye et l’Algérie chargent directement en Méditerranée et franchissent aussi Gibraltar. Les flux de la mer du Nord et de l’Atlantique contournent toute la chaîne. Survolez un nœud ou un flux pour le détail."
+  ],
+  [
+   "North Sea (direct)",
+   "Mer du Nord (direct)"
+  ],
+  [
+   "Atlantic (no chokepoint)",
+   "Atlantique (aucun point de passage)"
+  ],
+  [
+   "Mediterranean / Bosphorus",
+   "Méditerranée / Bosphore"
+  ],
+  [
+   "Gulf producers (via Hormuz)",
+   "Producteurs du Golfe (via Ormuz)"
+  ],
+  [
+   "Source: DESNZ Energy Trends ET 3.14 · 2024 annual average<br>Values = % of UK crude oil imports by volume",
+   "Source : DESNZ Energy Trends ET 3.14 · moyenne annuelle 2024<br>Valeurs = % des importations britanniques de pétrole brut, en volume"
+  ]
+ ],
+ "js": [
+  [
+   "`${lk.s.label} to ${lk.t.label}`",
+   "`${lk.s.label} vers ${lk.t.label}`"
+  ],
+  [
+   "`${lk.v}% of UK crude imports`",
+   "`${String(lk.v).replace('.',',')}\\u00a0% des importations de brut du Royaume-Uni`"
+  ],
+  [
+   "`${n.v}%`",
+   "`${n.v}\\u00a0%`"
+  ],
+  [
+   "note:'Bab el-Mandeb (Gate of Tears) and the Suez Canal form a sequential double chokepoint for all Arabian Sea traffic bound for the Mediterranean. Gulf crude exits Hormuz, crosses the Arabian Sea, transits Bab el-Mandeb into the Red Sea, then passes through the Suez Canal (193km, single-lane in parts) before emerging into the Mediterranean. Either node can independently block the route: Bab el-Mandeb through military interdiction, Suez through political closure or accident (as in 2021). Since late 2023, Houthi attacks have made Bab el-Mandeb the most actively contested maritime chokepoint in the world; most tankers have diverted to the Cape of Good Hope, adding 10 to 12 days and substantial cost.'",
+   "note:'Bab el-Mandeb (la porte des Larmes) et le canal de Suez forment un double point de passage successif pour tout le trafic de la mer d’Arabie à destination de la Méditerranée. Le brut du Golfe sort d’Ormuz, traverse la mer d’Arabie, franchit Bab el-Mandeb vers la mer Rouge, puis passe par le canal de Suez (193 km, à voie unique par endroits) avant d’émerger en Méditerranée. L’un ou l’autre peut bloquer seul la route : Bab el-Mandeb par une interdiction militaire, Suez par une fermeture politique ou un accident (comme en 2021). Depuis fin 2023, les attaques houthies ont fait de Bab el-Mandeb le point de passage maritime le plus activement disputé au monde ; la plupart des pétroliers se sont déroutés par le cap de Bonne-Espérance, ce qui ajoute 10 à 12 jours et un coût important.'"
+  ],
+  [
+   "note:'The Strait of Gibraltar is the exit from the Mediterranean into the Atlantic for all UK-bound crude routed via the Med. It receives three separate flows: Gulf crude arriving from Suez (8%), Kazakhstan CPC Blend arriving via the Bosphorus and Mediterranean (11%), and Libyan and Algerian crude loading directly into the Mediterranean (9%). All converge at Gibraltar before the final Atlantic leg to UK terminals. Gibraltar is wide (14km) and not classified as a strategic chokepoint, but it is the geographic confluence of the UK\\'s most complex crude supply chains.'",
+   "note:'Le détroit de Gibraltar est la sortie de la Méditerranée vers l’Atlantique pour tout le brut à destination du Royaume-Uni acheminé par la Méditerranée. Il reçoit trois flux distincts : le brut du Golfe arrivant de Suez (8 %), le CPC Blend du Kazakhstan arrivant par le Bosphore et la Méditerranée (11 %) et le brut libyen et algérien chargé directement en Méditerranée (9 %). Tous convergent à Gibraltar avant le dernier tronçon atlantique vers les terminaux britanniques. Gibraltar est large (14 km) et n’est pas classé comme point de passage stratégique, mais c’est le point de confluence géographique des chaînes d’approvisionnement en brut les plus complexes du Royaume-Uni.'"
+  ],
+  [
+   "note:'The Strait of Hormuz is the mandatory exit for all crude loaded inside the Persian Gulf. For the UK, only Saudi Arabia (5%) and Iraq (3%) transit Hormuz, totalling 8% of crude imports. Compare: China 44%, South Korea over 70%, Japan over 80%. Gulf crude then continues through the Arabian Sea to Bab el-Mandeb and the Suez Canal before reaching Mediterranean and Gibraltar.'",
+   "note:'Le détroit d’Ormuz est la sortie obligatoire de tout le brut chargé à l’intérieur du golfe Persique. Pour le Royaume-Uni, seuls l’Arabie saoudite (5 %) et l’Irak (3 %) transitent par Ormuz, soit 8 % des importations de brut. En comparaison : Chine 44 %, Corée du Sud plus de 70 %, Japon plus de 80 %. Le brut du Golfe poursuit ensuite par la mer d’Arabie vers Bab el-Mandeb et le canal de Suez avant d’atteindre la Méditerranée et Gibraltar.'"
+  ],
+  [
+   "note:'UK crude imports averaged approximately 850 thousand barrels per day in 2024. Primary receiving terminals: Milford Haven (Pembrokeshire), Hound Point (Firth of Forth), Teesside, Immingham, and Merseyside. UK domestic UKCS production has declined from a 1999 peak of 2.9 mb/d to under 700 kb/d; imports fill the gap. The UK is not a significant crude re-exporter.'",
+   "note:'Les importations britanniques de brut ont atteint en moyenne environ 850 milliers de barils par jour en 2024. Principaux terminaux de réception : Milford Haven (Pembrokeshire), Hound Point (Firth of Forth), Teesside, Immingham et Merseyside. La production nationale du plateau continental britannique (UKCS) est passée d’un pic de 2,9 mb/j en 1999 à moins de 700 kb/j ; les importations comblent l’écart. Le Royaume-Uni n’est pas un réexportateur de brut significatif.'"
+  ],
+  [
+   "note:'Kazakhstan CPC Blend pipes via the Caspian Pipeline Consortium to Novorossiysk on the Black Sea, then Suezmax tankers transit the Bosphorus into the Mediterranean and clear Gibraltar to UK refineries. The Bosphorus (minimum width 700m) is a separate, lower-risk chokepoint from Hormuz, managed under the Montreux Convention. No Hormuz exposure.'",
+   "note:'Le CPC Blend du Kazakhstan est acheminé par le Consortium du pipeline de la Caspienne jusqu’à Novorossiïsk, sur la mer Noire, puis des pétroliers Suezmax transitent par le Bosphore vers la Méditerranée et franchissent Gibraltar jusqu’aux raffineries britanniques. Le Bosphore (largeur minimale de 700 m) est un point de passage distinct d’Ormuz et à moindre risque, régi par la convention de Montreux. Aucune exposition à Ormuz.'"
+  ],
+  [
+   "note:'US Gulf Coast crude (WTI Midland, Eagle Ford) crossing the North Atlantic directly to UK refineries at Milford Haven, Immingham, and the Mersey. No maritime chokepoint. US crude exports have grown significantly since the 2015 lifting of the export ban and now represent the second-largest UK crude source.'",
+   "note:'Brut de la côte américaine du Golfe (WTI Midland, Eagle Ford) traversant directement l’Atlantique Nord vers les raffineries britanniques de Milford Haven, Immingham et de la Mersey. Aucun point de passage maritime. Les exportations américaines de brut ont fortement augmenté depuis la levée de l’interdiction d’exporter en 2015 et constituent désormais la deuxième source de brut du Royaume-Uni.'"
+  ],
+  [
+   "note:'Iraqi Basra crude from the northern Persian Gulf. Mandatory Hormuz transit, then Bab el-Mandeb, Suez Canal, Mediterranean, and Gibraltar to UK refineries. Iraq is the smallest named regular crude supplier to the UK; most Iraqi volume is committed to Asian buyers on long-term contracts.'",
+   "note:'Brut irakien de Bassora, du nord du golfe Persique. Transit d’Ormuz obligatoire, puis Bab el-Mandeb, canal de Suez, Méditerranée et Gibraltar jusqu’aux raffineries britanniques. L’Irak est le plus petit fournisseur régulier de brut du Royaume-Uni nommément identifié ; l’essentiel du volume irakien est engagé auprès d’acheteurs asiatiques dans le cadre de contrats de long terme.'"
+  ],
+  [
+   "note:'Saudi Arab Light and Arab Heavy load at Ras Tanura inside the Persian Gulf. Mandatory Hormuz transit, then Bab el-Mandeb, Suez Canal, Mediterranean, and Gibraltar to UK refineries. A small share of UK imports compared to Asian buyers, but fully dependent on the Red Sea supply chain.'",
+   "note:'L’Arab Light et l’Arab Heavy saoudiens sont chargés à Ras Tanura, à l’intérieur du golfe Persique. Transit d’Ormuz obligatoire, puis Bab el-Mandeb, canal de Suez, Méditerranée et Gibraltar jusqu’aux raffineries britanniques. Une faible part des importations britanniques comparée à celle des acheteurs asiatiques, mais entièrement dépendante de la chaîne d’approvisionnement de la mer Rouge.'"
+  ],
+  [
+   "note:'Norwegian Continental Shelf crude (Forties, Troll, Johan Sverdrup) delivered by subsea pipeline or short-haul tanker directly to Sullom Voe, Hound Point, and Teesside. No maritime chokepoint on any supply path. The most physically secure crude supply available to UK refineries.'",
+   "note:'Brut du plateau continental norvégien (Forties, Troll, Johan Sverdrup) livré par oléoduc sous-marin ou par pétrolier à courte distance directement à Sullom Voe, Hound Point et Teesside. Aucun point de passage maritime sur aucune route d’approvisionnement. L’approvisionnement en brut le plus sûr physiquement pour les raffineries britanniques.'"
+  ],
+  [
+   "note:'Libyan Es Sider and Sharara crude loads at Mediterranean coast terminals (Tripoli, Zawiya) and ships directly to UK refineries via Gibraltar. No strategic chokepoint, but Libyan production is chronically volatile due to internal political conflict.'",
+   "note:'Le brut libyen Es Sider et Sharara est chargé aux terminaux de la côte méditerranéenne (Tripoli, Zawiya) et expédié directement aux raffineries britanniques via Gibraltar. Pas de point de passage stratégique, mais la production libyenne est chroniquement instable en raison du conflit politique interne.'"
+  ],
+  [
+   "note:'Algerian Saharan Blend from Skikda and Arzew on the Mediterranean coast, transiting Gibraltar to UK refineries. No strategic chokepoint. Algeria is a modest but consistent crude supplier; its primary European energy relationship is through gas.'",
+   "note:'Le Saharan Blend algérien de Skikda et d’Arzew, sur la côte méditerranéenne, transite par Gibraltar jusqu’aux raffineries britanniques. Pas de point de passage stratégique. L’Algérie est un fournisseur de brut modeste mais constant ; sa principale relation énergétique avec l’Europe passe par le gaz.'"
+  ],
+  [
+   "note:'Atlantic-origin crude including Guyana (Liza), Brazil (Santos basin pre-salt), Colombia, and spot cargoes. All route via the Atlantic with no strategic chokepoint. Includes some minor volumes not separately attributed in DESNZ data.'",
+   "note:'Brut d’origine atlantique, dont le Guyana (Liza), le Brésil (pré-sel du bassin de Santos), la Colombie et des cargaisons spot. Tout passe par l’Atlantique sans point de passage stratégique. Inclut quelques volumes mineurs non attribués séparément dans les données du DESNZ.'"
+  ],
+  [
+   "note:'Nigerian Bonny Light and Qua Iboe transit the Atlantic directly to UK deep-water terminals. No strategic maritime chokepoint. High-quality low-sulphur crude well-suited to UK refinery configurations.'",
+   "note:'Le Bonny Light et le Qua Iboe nigérians traversent directement l’Atlantique jusqu’aux terminaux en eau profonde britanniques. Aucun point de passage maritime stratégique. Brut de haute qualité à faible teneur en soufre, bien adapté aux configurations des raffineries britanniques.'"
+  ],
+  [
+   "sub:'11% · Guyana, Brazil, rest'",
+   "sub:'11 % · Guyana, Brésil, autres'"
+  ],
+  [
+   "sub:'~850 kb/d crude imports'",
+   "sub:'≈ 850 kb/j d’importations de brut'"
+  ],
+  [
+   "sub:'11% · CPC / Bosphorus'",
+   "sub:'11 % · CPC / Bosphore'"
+  ],
+  [
+   "sub:'19% · Gulf of Mexico'",
+   "sub:'19 % · golfe du Mexique'"
+  ],
+  [
+   "sub:'5% · Mediterranean'",
+   "sub:'5 % · Méditerranée'"
+  ],
+  [
+   "sub:'4% · Mediterranean'",
+   "sub:'4 % · Méditerranée'"
+  ],
+  [
+   "sub:'8% · Bonny Light'",
+   "sub:'8 % · Bonny Light'"
+  ],
+  [
+   "label:'United Kingdom'",
+   "label:'Royaume-Uni'"
+  ],
+  [
+   "sub:'34% · North Sea'",
+   "sub:'34 % · mer du Nord'"
+  ],
+  [
+   "label:'United States'",
+   "label:'États-Unis'"
+  ],
+  [
+   "sub:'5% · via Hormuz'",
+   "sub:'5 % · via Ormuz'"
+  ],
+  [
+   "sub:'3% · via Hormuz'",
+   "sub:'3 % · via Ormuz'"
+  ],
+  [
+   "sub:'28% of UK crude'",
+   "sub:'28 % du brut du Royaume-Uni'"
+  ],
+  [
+   "label:'Supply Origin'",
+   "label:'Origine de l’offre'"
+  ],
+  [
+   "label:'Saudi Arabia'",
+   "label:'Arabie saoudite'"
+  ],
+  [
+   "sub:'8% of UK crude'",
+   "sub:'8 % du brut du Royaume-Uni'"
+  ],
+  [
+   "label:'Chokepoint'",
+   "label:'Point de passage'"
+  ],
+  [
+   "label:'Nigeria'",
+   "label:'Nigéria'"
+  ],
+  [
+   "label:'Algeria'",
+   "label:'Algérie'"
+  ],
+  [
+   "label:'Norway'",
+   "label:'Norvège'"
+  ],
+  [
+   "label:'Others'",
+   "label:'Autres'"
+  ],
+  [
+   "label:'Hormuz'",
+   "label:'Ormuz'"
+  ],
+  [
+   "label:'Libya'",
+   "label:'Libye'"
+  ],
+  [
+   "label:'Iraq'",
+   "label:'Irak'"
+  ]
+ ]
+}

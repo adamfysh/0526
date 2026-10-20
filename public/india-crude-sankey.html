@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>India Crude Sankey — Narrows</title>
+<title>India Crude Sankey | Narrows</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -110,7 +110,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:#F0B429"></div><span class="legend-label">Chokepoint</span></div>
       <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div><span class="legend-label">Gulf corridor (Hormuz)</span></div>
       <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div><span class="legend-label">Russian corridor (Bosphorus + Suez/Bab)</span></div>
-      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div><span class="legend-label">Open ocean (Cape — no chokepoint)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div><span class="legend-label">Open ocean (Cape, no chokepoint)</span></div>
     </div>
     <div class="source-note">
       Narrows CDM v0.3 · HS 2709 bilateral crude · 2022 base year<br>
@@ -136,19 +136,19 @@ const C = { gulf:'#38bdf8', russia:'#f97316', open:'#34d399', choke:'#F0B429', d
 // col 0 = origins, col 1 = chokepoints/corridors, col 2 = India
 const NODE_DEFS = [
   { id:'iraq',      col:0, v:22, group:'gulf',   label:'Iraq',                sub:'22% · $20.9B',  note:'Iraq is India\'s largest single crude supplier. All Basra Oil Terminal loadings require mandatory Hormuz transit. Primarily delivered to Reliance Jamnagar and HPCL Vizag.' },
-  { id:'saudi',     col:0, v:16, group:'gulf',   label:'Saudi Arabia',        sub:'16% · $15.2B',  note:'Saudi loadings from Ras Tanura and Juaymah — inside the Persian Gulf, mandatory Hormuz transit. Red Sea terminal at Yanbu rarely used for India-bound VLCCs at scale.' },
-  { id:'uae',       col:0, v:7,  group:'gulf',   label:'UAE',                 sub:'7% · $6.7B',   note:'UAE crude from Das Island, Ruwais, and Jebel Dhanna — all inside the Persian Gulf. Approximately 3 days to Indian west coast terminals at laden VLCC speed.' },
-  { id:'kuwait',    col:0, v:4,  group:'gulf',   label:'Kuwait',              sub:'4% · $3.8B',   note:'Kuwaiti crude from Ahmadi and Mina Abdullah — inside the Persian Gulf, mandatory Hormuz transit. Kuwait\'s share has declined since 2022 as Russia\'s expanded.' },
+  { id:'saudi',     col:0, v:16, group:'gulf',   label:'Saudi Arabia',        sub:'16% · $15.2B',  note:'Saudi loadings from Ras Tanura and Juaymah - inside the Persian Gulf, mandatory Hormuz transit. Red Sea terminal at Yanbu rarely used for India-bound VLCCs at scale.' },
+  { id:'uae',       col:0, v:7,  group:'gulf',   label:'UAE',                 sub:'7% · $6.7B',   note:'UAE crude from Das Island, Ruwais, and Jebel Dhanna - all inside the Persian Gulf. Approximately 3 days to Indian west coast terminals at laden VLCC speed.' },
+  { id:'kuwait',    col:0, v:4,  group:'gulf',   label:'Kuwait',              sub:'4% · $3.8B',   note:'Kuwaiti crude from Ahmadi and Mina Abdullah - inside the Persian Gulf, mandatory Hormuz transit. Kuwait\'s share has declined since 2022 as Russia\'s expanded.' },
   { id:'russia',    col:0, v:38, group:'russia', label:'Russia (Ural)',       sub:'38% · $36.1B', note:'Russian Ural grew from under 2% of India\'s crude book in 2021 to ~38% following Western sanctions. Black Sea loadings (Novorossiysk) and Baltic ports (Primorsk, Ust-Luga) must both transit the Bosphorus.' },
-  { id:'nigeria',   col:0, v:5,  group:'open',   label:'Nigeria',             sub:'5% · $4.8B',   note:'Bonny Light and Qua Iboe crude routes around the Cape of Good Hope — no chokepoint constraint. ~21 days to Indian west coast. Valued for low-sulphur specification.' },
+  { id:'nigeria',   col:0, v:5,  group:'open',   label:'Nigeria',             sub:'5% · $4.8B',   note:'Bonny Light and Qua Iboe crude routes around the Cape of Good Hope - no chokepoint constraint. ~21 days to Indian west coast. Valued for low-sulphur specification.' },
   { id:'angola',    col:0, v:3,  group:'open',   label:'Angola',              sub:'3% · $2.9B',   note:'Cabinda and Girassol crude routes around the Cape of Good Hope. ~23 days transit. No chokepoint on the supply route.' },
   { id:'usa',       col:0, v:3,  group:'open',   label:'USA',                 sub:'3% · $2.9B',   note:'WTI-specification crude from Gulf of Mexico loadings, routed via Cape of Good Hope. ~28 days. No chokepoint risk on supply route.' },
 
   { id:'hormuz',    col:1, v:49, group:'choke',  label:'Hormuz',              sub:'49% of India seaborne crude', note:'Mandatory exit for 100% of Persian Gulf crude. Minimum navigable width ~3 km. No alternative maritime route exists for laden VLCCs out of the Gulf. Largest single chokepoint in India\'s import book.' },
   { id:'bosphsuez', col:1, v:38, group:'choke',  label:'Bosphorus + Suez/Bab',sub:'38% of India seaborne crude', note:'Two sequential chokepoints on the Russian Ural route. Bosphorus minimum width ~0.7 km; transit rights governed by the Montreux Convention (1936). Suez/Bab el-Mandeb subject to active Houthi disruption since late 2023.' },
-  { id:'cape',      col:1, v:11, group:'cape',   label:'Cape of Good Hope',   sub:'11% — no chokepoint risk',    note:'Open ocean — no closure risk, no territorial waters, no transit authority. West African and American crude rounds the Cape. Adds ~10–12 days versus a Suez routing. Zero structural chokepoint dependency.' },
+  { id:'cape',      col:1, v:11, group:'cape',   label:'Cape of Good Hope',   sub:'11% · no chokepoint risk',    note:'Open ocean - no closure risk, no territorial waters, no transit authority. West African and American crude rounds the Cape. Adds ~10–12 days versus a Suez routing. Zero structural chokepoint dependency.' },
 
-  { id:'india',     col:2, v:98, group:'dest',   label:'India',               sub:'~$93B annual seaborne crude', note:'India imports ~5.5 mb/d of seaborne crude — the world\'s third largest importer. Primary west coast terminals: Vadinar (Reliance), Mundra, Mumbai. East coast: Vizag (HPCL), Paradip (IOC), Chennai (CPCL).' },
+  { id:'india',     col:2, v:98, group:'dest',   label:'India',               sub:'~$93B annual seaborne crude', note:'India imports ~5.5 mb/d of seaborne crude - the world\'s third largest importer. Primary west coast terminals: Vadinar (Reliance), Mundra, Mumbai. East coast: Vizag (HPCL), Paradip (IOC), Chennai (CPCL).' },
 ];
 
 // ── Link definitions ──────────────────────────────────────────────────────────
@@ -245,7 +245,7 @@ NODE_DEFS.forEach(n => { NM[n.id] = n; });
 const outOff = {}, inOff = {};
 NODE_DEFS.forEach(n => { outOff[n.id] = 0; inOff[n.id] = 0; });
 
-// Scale: same scale as layout — v relative to total in the column
+// Scale: same scale as layout - v relative to total in the column
 function linkH(n, v) {
   const colTotal = byCol[n.col].reduce((s,x) => s + x.v, 0);
   const usedH    = AVAIL_H - PAD * (byCol[n.col].length - 1);
@@ -393,7 +393,7 @@ NODE_DEFS.forEach(n => {
     : n.group === 'dest' ? '#e2e8f0'
     : '#94a3b8';
 
-  // Main label — split long labels
+  // Main label - split long labels
   const words = n.label.split(' ');
   // Max ~18 chars per line for right labels, ~16 for left
   const maxLen = isRight ? 20 : 16;

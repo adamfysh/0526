@@ -1,0 +1,457 @@
+{
+ "_meta": {
+  "generated_at": "2026-10-20T14:22:58.677518+00:00",
+  "pri_ports": 3774,
+  "jwc_circular": "JWLA-034 (29 Jul 2026) as amended by JWLA-035 (16 Sep 2026, Black Sea)",
+  "notes": [
+   "Port status: named countries (ports + 12 nm), country rules and polygon rings from data/jwc_listed_areas.json.",
+   "Corridor status: the mid-strait point tested against the polygon rings. Rings are approximations closed over land; a point within 50 km of a ring edge is reported as boundary (check the circular), never as listed or clear.",
+   "Zone behaviour (premium or avoid) is our classification, not the JWC’s."
+  ],
+  "warnings": []
+ },
+ "ports": {
+  "Djibouti": {
+   "pri": 1.54,
+   "rank": 716,
+   "of": 3774,
+   "dwellH": 72,
+   "dwellSrc": "port_level_curated",
+   "match": "Djibouti",
+   "matchKm": 0.7,
+   "iso2": "DJ",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Gulf of Aden approach. Bunker stop for Cape-diverting vessels.",
+    "fr": "Approche du golfe d’Aden. Escale de soutage des navires qui se déroutent par le Cap."
+   }
+  },
+  "Aden": {
+   "pri": 3.53,
+   "rank": 1,
+   "of": 3774,
+   "dwellH": 120,
+   "dwellSrc": "port_level_curated",
+   "match": "Aden",
+   "matchKm": 5.5,
+   "iso2": "YE",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Yemen coast. Active conflict.",
+    "fr": "Côte du Yémen. Conflit actif."
+   }
+  },
+  "Hudaydah": {
+   "pri": 3.2,
+   "rank": 12,
+   "of": 3774,
+   "dwellH": 121,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Al Ahmadi",
+   "matchKm": 4.1,
+   "iso2": "YE",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Houthi-controlled.",
+    "fr": "Contrôlé par les Houthis."
+   }
+  },
+  "Fujairah": {
+   "pri": 1.31,
+   "rank": 1432,
+   "of": 3774,
+   "dwellH": 24,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Al Fujayrah",
+   "matchKm": 1.0,
+   "iso2": "AE",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Gulf of Oman, near the Hormuz listed area.",
+    "fr": "Golfe d’Oman, près de la zone listée d’Ormuz."
+   }
+  },
+  "Ras Tanura": {
+   "pri": 1.22,
+   "rank": 1825,
+   "of": 3774,
+   "dwellH": 74,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Ras  Tannurah",
+   "matchKm": 1.0,
+   "iso2": "SA",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Main Saudi crude export terminal.",
+    "fr": "Principal terminal saoudien d’exportation de brut."
+   }
+  },
+  "Shuaiba": {
+   "pri": 1.12,
+   "rank": 2513,
+   "of": 3774,
+   "dwellH": 82,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Mina Ash Shuaybah",
+   "matchKm": 1.7,
+   "iso2": "KW",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Kuwait.",
+    "fr": "Koweït."
+   }
+  },
+  "Port Sudan": {
+   "pri": 2.34,
+   "rank": 130,
+   "of": 3774,
+   "dwellH": 113,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Port Sudan",
+   "matchKm": 1.8,
+   "iso2": "SD",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Red Sea. Conflict in the Sudanese interior.",
+    "fr": "Mer Rouge. Conflit à l’intérieur du Soudan."
+   }
+  },
+  "Singapore": {
+   "pri": 0.96,
+   "rank": 3340,
+   "of": 3774,
+   "dwellH": 25,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Keppel - (East Singapore)",
+   "matchKm": 2.8,
+   "iso2": "SG",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Major bunkering hub.",
+    "fr": "Grand centre de soutage."
+   }
+  },
+  "Colombo": {
+   "pri": 0.79,
+   "rank": 3651,
+   "of": 3774,
+   "dwellH": 24,
+   "dwellSrc": "port_level_curated",
+   "match": "Colombo",
+   "matchKm": 0.0,
+   "iso2": "LK",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Sri Lanka.",
+    "fr": "Sri Lanka."
+   }
+  },
+  "Port Said": {
+   "pri": 0.96,
+   "rank": 3337,
+   "of": 3774,
+   "dwellH": 86,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Bur Sa'id",
+   "matchKm": 1.2,
+   "iso2": "EG",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Suez Canal northern approach.",
+    "fr": "Approche nord du canal de Suez."
+   }
+  },
+  "Port Klang": {
+   "pri": 0.68,
+   "rank": 3748,
+   "of": 3774,
+   "dwellH": 20,
+   "dwellSrc": "port_level_curated",
+   "match": "Port Klang",
+   "matchKm": 3.3,
+   "iso2": "MY",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Malaysia.",
+    "fr": "Malaisie."
+   }
+  },
+  "Durban": {
+   "pri": 1.1,
+   "rank": 2659,
+   "of": 3774,
+   "dwellH": 48,
+   "dwellSrc": "port_level_curated",
+   "match": "Durban",
+   "matchKm": 3.6,
+   "iso2": "ZA",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "South Africa. Cape diversion bunker stop.",
+    "fr": "Afrique du Sud. Escale de soutage pour le déroutement par le Cap."
+   }
+  },
+  "Las Palmas": {
+   "pri": 0.59,
+   "rank": 3772,
+   "of": 3774,
+   "dwellH": 16,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Las Palmas",
+   "matchKm": 1.3,
+   "iso2": "ES",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Canary Islands. Atlantic transit hub.",
+    "fr": "Îles Canaries. Plaque tournante du transit atlantique."
+   }
+  },
+  "Gibraltar": {
+   "pri": 1.49,
+   "rank": 828,
+   "of": 3774,
+   "dwellH": 63,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Europa Point",
+   "matchKm": 0.7,
+   "iso2": "GI",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Mediterranean approach.",
+    "fr": "Approche de la Méditerranée."
+   }
+  },
+  "Rotterdam": {
+   "pri": 0.67,
+   "rank": 3753,
+   "of": 3774,
+   "dwellH": 20,
+   "dwellSrc": "port_level_curated",
+   "match": "Rotterdam",
+   "matchKm": 0.2,
+   "iso2": "NL",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "North Sea hub.",
+    "fr": "Plaque tournante de la mer du Nord."
+   }
+  },
+  "Balboa": {
+   "pri": 1.07,
+   "rank": 2856,
+   "of": 3774,
+   "dwellH": 21,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Balboa",
+   "matchKm": 0.4,
+   "iso2": "PA",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Panama Canal Pacific approach.",
+    "fr": "Approche pacifique du canal de Panama."
+   }
+  },
+  "Colon": {
+   "pri": 1.2,
+   "rank": 1975,
+   "of": 3774,
+   "dwellH": 21,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Puerto Colon",
+   "matchKm": 2.0,
+   "iso2": "PA",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Panama Canal Atlantic approach.",
+    "fr": "Approche atlantique du canal de Panama."
+   }
+  },
+  "Istanbul": {
+   "pri": 0.85,
+   "rank": 3580,
+   "of": 3774,
+   "dwellH": 48,
+   "dwellSrc": "port_level_curated",
+   "match": "Istanbul",
+   "matchKm": 1.9,
+   "iso2": "TR",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Bosphorus.",
+    "fr": "Bosphore."
+   }
+  },
+  "Odessa": {
+   "pri": 1.73,
+   "rank": 476,
+   "of": 3774,
+   "dwellH": 102,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Odesa",
+   "matchKm": 0.9,
+   "iso2": "UA",
+   "jwc": true,
+   "jwcBasis": "ukraine_rule",
+   "note": {
+    "en": "Ukraine. Active war zone.",
+    "fr": "Ukraine. Zone de guerre active."
+   }
+  },
+  "Novorossiysk": {
+   "pri": 1.48,
+   "rank": 833,
+   "of": 3774,
+   "dwellH": 60,
+   "dwellSrc": "port_level_curated",
+   "match": "Novorossiysk",
+   "matchKm": 0.5,
+   "iso2": "RU",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Russia, Black Sea. Sanctions exposure.",
+    "fr": "Russie, mer Noire. Exposition aux sanctions."
+   }
+  },
+  "Salalah": {
+   "pri": 1.06,
+   "rank": 2932,
+   "of": 3774,
+   "dwellH": 78,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Mina Raysut",
+   "matchKm": 3.3,
+   "iso2": "OM",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Oman. Gulf of Aden adjacency.",
+    "fr": "Oman. Proximité du golfe d’Aden."
+   }
+  },
+  "Yanbu": {
+   "pri": 1.25,
+   "rank": 1655,
+   "of": 3774,
+   "dwellH": 74,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Yanbu",
+   "matchKm": 0.7,
+   "iso2": "SA",
+   "jwc": true,
+   "jwcBasis": "named_country",
+   "note": {
+    "en": "Red Sea export outlet for the East-West pipeline.",
+    "fr": "Débouché en mer Rouge de l’oléoduc Est-Ouest."
+   }
+  },
+  "Ulsan": {
+   "pri": 1.0,
+   "rank": 3174,
+   "of": 3774,
+   "dwellH": 17,
+   "dwellSrc": "unctad_2021_country_median",
+   "match": "Ulsan",
+   "matchKm": 5.8,
+   "iso2": "KR",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "South Korea. Discharge port in the Yanbu analysis.",
+    "fr": "Corée du Sud. Port de déchargement dans l’analyse de Yanbu."
+   }
+  },
+  "Ain Sukhna": {
+   "pri": 0.97,
+   "rank": 3306,
+   "of": 3774,
+   "dwellH": 86,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Ain Sukhna Terminal",
+   "matchKm": 2.5,
+   "iso2": "EG",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Red Sea end of the SUMED pipeline.",
+    "fr": "Extrémité mer Rouge de l’oléoduc SUMED."
+   }
+  },
+  "Sidi Kerir": {
+   "pri": 1.44,
+   "rank": 943,
+   "of": 3774,
+   "dwellH": 86,
+   "dwellSrc": "lpi_formula_fallback",
+   "match": "Sidi Kerir (Kurayr)",
+   "matchKm": 5.2,
+   "iso2": "EG",
+   "jwc": false,
+   "jwcBasis": null,
+   "note": {
+    "en": "Mediterranean end of the SUMED pipeline.",
+    "fr": "Extrémité méditerranéenne de l’oléoduc SUMED."
+   }
+  }
+ },
+ "corridors": {
+  "hormuz": {
+   "status": "listed",
+   "basis": "jwc_gulf_oman_arabian_sea",
+   "edgeKm": 777
+  },
+  "bab_el_mandeb": {
+   "status": "listed",
+   "basis": "jwc_gulf_oman_arabian_sea",
+   "edgeKm": 675
+  },
+  "malacca": {
+   "status": "clear",
+   "basis": null,
+   "edgeKm": null
+  },
+  "panama": {
+   "status": "clear",
+   "basis": null,
+   "edgeKm": null
+  },
+  "suez": {
+   "status": "clear",
+   "basis": null,
+   "edgeKm": null
+  },
+  "lombok": {
+   "status": "clear",
+   "basis": null,
+   "edgeKm": null
+  },
+  "bosphorus": {
+   "status": "boundary",
+   "basis": "jwc_black_sea_azov",
+   "edgeKm": 28
+  },
+  "danish_straits": {
+   "status": "clear",
+   "basis": null,
+   "edgeKm": null
+  }
+ }
+}

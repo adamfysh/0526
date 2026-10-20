@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -39,7 +40,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <!-- PHOTO BAND -->
 <div slot="photo-band" class="article-photo-band">
- <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz — satellite view" loading="eager" />
+ <img src="/images/hormuz-n.jpg" alt="Strait of Hormuz, satellite view" loading="eager" />
  <span class="article-photo-caption">Strait of Hormuz · 39 km wide · 20% of global oil supply</span>
 </div>
 <!-- SECTION 1 -->
@@ -48,7 +49,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">The UNCTAD Strait of Hormuz Dashboard launched 28 April 2026 aggregates the market signal clearly. The Baltic Dirty Tanker Index stands at 2,795, against a 2024 average of 1,091. VLSFO bunker in Singapore has risen from a 2024 average of $571 per tonne to $1,076. Brent crude has traded above $120 on intraday peaks. These are the right numbers to watch. They confirm severity. They do not distribute it.</p>
 
-<p class="prose">An accumulation underwriter pricing a P&I book, a crude desk managing a supply position, or a lender stress-testing a Capesize fleet facility needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. Run it through The Narrows and you get the answer.</p>
+<p class="prose">Anyone assessing marine insurance accumulation, a crude supply position, or the resilience of a Capesize fleet needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. The bilateral model answers it.</p>
 
 <div class="compare-grid">
  <div class="compare-card featured">
@@ -73,7 +74,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="callout">
  <div class="callout-label">Updated August 2026: Hormuz-bypass pipeline routing now modeled</div>
- <div class="callout-body">The routing engine previously assigned every barrel of Saudi and UAE crude to a Hormuz transit regardless of loading terminal. Saudi Arabia's East-West Pipeline (Yanbu, Red Sea) and the UAE's Abu Dhabi Crude Oil Pipeline (Fujairah, Gulf of Oman) are both real, decades-old infrastructure specifically built to bypass the Strait — see the companion piece on pipeline rebalancing for the mechanics. The model now applies a weighted split across each exporter's real export-basin ports rather than defaulting every Gulf producer's crude to a single Hormuz-transiting basin. This brings Japan's and South Korea's crude dependency down from previous published figures and is corroborated against independent reporting on both pipelines' normal-time utilisation (see method note).</div>
+ <div class="callout-body">The routing engine previously assigned every barrel of Saudi and UAE crude to a Hormuz transit regardless of loading terminal. Saudi Arabia's East-West Pipeline (Yanbu, Red Sea) and the UAE's Abu Dhabi Crude Oil Pipeline (Fujairah, Gulf of Oman) are both real, decades-old infrastructure specifically built to bypass the Strait (see the companion piece on pipeline rebalancing for the mechanics). The model now applies a weighted split across each exporter's real export-basin ports rather than defaulting every Gulf producer's crude to a single Hormuz-transiting basin. This brings Japan's and South Korea's crude dependency down from previous published figures and is corroborated against independent reporting on both pipelines' normal-time utilisation (see method note).</div>
 </div>
 
 <div class="n-table-wrap">
@@ -238,14 +239,15 @@ The second question is forward-looking: can an importer substitute supply over a
  </table>
 </div>
 
-<p class="prose">The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. A counterparty running their own scenario can replace the model's default vessel-class rates with their own book rates and rerun the exposure calculation in real time. This is the capability that aggregate market data, however current, cannot replicate.</p>
+<p class="prose">The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. Anyone running their own scenario can replace the model's default vessel-class rates with their own rates and rerun the exposure calculation. This is the capability that aggregate market data, however current, cannot replicate.</p>
 
 <div class="method-note">
  <div class="method-note-label">Methodology and data sources</div>
- <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026). Data source: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. 14 commodity classes, 47+ importing nations, 14 chokepoints. Tier 1 bilateral data for crude petroleum and LNG. Route inference assigns chokepoints to bilateral trade flows using a basin-aware model: each exporter's and importer's real port geography is weighted across all its matched basins (not just the dominant one), so a producer with genuine multi-basin export capacity — Saudi Arabia via Ras Tanura (Gulf) and Yanbu (Red Sea); the UAE via Jebel Dhanna (Gulf) and Fujairah (Gulf of Oman, outside Hormuz) — has that split actually applied rather than defaulting 100% of its crude to a Hormuz transit. This is a routing-engine correction made in August 2026; it lowered Japan's and South Korea's modelled Hormuz crude dependency from previously published figures and is corroborated against independent reporting on Fujairah and Yanbu pipeline utilisation (Fujairah: ~71% of 1.5 mbd nameplate capacity in normal conditions; Saudi East-West Pipeline/Yanbu: ~800,000 b/d pre-2026-crisis baseline against ~7 mbd nameplate capacity). Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative exit for vessels already inside the Persian Gulf: this applies to all vessel classes regardless of cargo. The 'reroute viable' designation for crude petroleum in the dependency matrix refers to supply-chain sourcing alternatives (non-Gulf crude origins routed via Cape) available to importers over a multi-week horizon; it does not imply in-place vessel diversion from inside the Gulf. LNG rerouting is a harder case than crude, not an impossible one: a full Cape of Good Hope diversion for Gulf-origin cargo adds roughly 18 extra days versus the Gulf–Japan baseline, and boil-off losses plus long-term contract structures make that detour more costly for LNG than for other cargo classes. It is not categorical, though — LNG carriers did shift to the Cape of Good Hope at scale during 2024's Red Sea disruption (see the Panama analysis on this site), on a comparable order of added distance. The Hormuz case is a longer, more acute version of the same trade-off, not a fundamentally different one. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, May 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period; they do not include secondary economic impacts, inventory drawdown costs, or demand destruction effects. These figures describe structural, normal-year exposure — not a live tracker of the Strait's actual closure since 28 February 2026, which is covered separately (see the live-tracker piece on this site). All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario with your counterparty's specific inputs.</div>
+ <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026). Data source: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. 14 commodity classes, 47+ importing nations, 14 chokepoints. Tier 1 bilateral data for crude petroleum and LNG. Route inference assigns chokepoints to bilateral trade flows using a basin-aware model: each exporter's and importer's real port geography is weighted across all its matched basins (not just the dominant one), so a producer with genuine multi-basin export capacity (Saudi Arabia via Ras Tanura (Gulf) and Yanbu (Red Sea); the UAE via Jebel Dhanna (Gulf) and Fujairah (Gulf of Oman, outside Hormuz)) has that split actually applied rather than defaulting 100% of its crude to a Hormuz transit. This is a routing-engine correction made in August 2026; it lowered Japan's and South Korea's modelled Hormuz crude dependency from previously published figures and is corroborated against independent reporting on Fujairah and Yanbu pipeline utilisation (Fujairah: ~71% of 1.5 mbd nameplate capacity in normal conditions; Saudi East-West Pipeline/Yanbu: ~800,000 b/d pre-2026-crisis baseline against ~7 mbd nameplate capacity). Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative exit for vessels already inside the Persian Gulf: this applies to all vessel classes regardless of cargo. The 'reroute viable' designation for crude petroleum in the dependency matrix refers to supply-chain sourcing alternatives (non-Gulf crude origins routed via Cape) available to importers over a multi-week horizon; it does not imply in-place vessel diversion from inside the Gulf. LNG rerouting is a harder case than crude, not an impossible one: a full Cape of Good Hope diversion for Gulf-origin cargo adds roughly 18 extra days versus the Gulf–Japan baseline, and boil-off losses plus long-term contract structures make that detour more costly for LNG than for other cargo classes. It is not categorical, though: LNG carriers did shift to the Cape of Good Hope at scale during 2024's Red Sea disruption (see the Panama analysis on this site), on a comparable order of added distance. The Hormuz case is a longer, more acute version of the same trade-off, not a fundamentally different one. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, May 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period; they do not include secondary economic impacts, inventory drawdown costs, or demand destruction effects. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since 28 February 2026, which is covered separately (see the live-tracker piece on this site). All model assumptions are substitutable.</div>
 </div>
 
 <!-- CTA -->
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
  <div class="cta-strip-inner">
   <div>
@@ -256,6 +258,7 @@ The second question is forward-looking: can an importer substitute supply over a
  </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style>

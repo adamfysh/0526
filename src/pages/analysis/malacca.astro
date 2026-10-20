@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -46,7 +47,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 <div class="section-eyebrow">The structural distinction</div>
 <h2 class="article-section-title">Malacca is not Hormuz. The difference matters for risk pricing.</h2>
 
-<p class="prose">Most of the coverage of Indonesia's toll proposal drew an implicit comparison to Hormuz the idea being that Malacca offered similar leverage. It does not. The distinction is structural and it shows up directly in the model's capacity sensitivity scores.</p>
+<p class="prose">Most of the coverage of Indonesia's toll proposal drew an implicit comparison to Hormuz, the idea being that Malacca offered similar leverage. It does not. The distinction is structural and it shows up directly in the model's capacity sensitivity scores.</p>
 
 <div class="compare-grid">
  <div class="compare-card featured">
@@ -61,7 +62,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
  </div>
 </div>
 
-<p class="prose">This distinction is commercially critical. An underwriter pricing accumulation risk on Malacca exposure cannot simply apply Hormuz assumptions. The effective severity at Malacca after accounting for bypass capacity is 85 cents on every dollar of stated disruption, not 100. The remaining 15 cents is rerouting cost, not lost cargo. That changes the reserve calculation.</p>
+<p class="prose">This distinction is commercially critical. Accumulation risk on Malacca exposure cannot simply be priced with Hormuz assumptions. The effective severity at Malacca after accounting for bypass capacity is 85 cents on every dollar of stated disruption, not 100. The remaining 15 cents is rerouting cost, not lost cargo. That changes the reserve calculation.</p>
 
 <hr class="section-rule" />
 
@@ -166,9 +167,9 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">Iran established a working proof of concept: a state can impose tolls on a critical maritime passage, find paying customers, and operate that system in defiance of international maritime law. <strong>230 loaded oil tankers paid or waited.</strong> The commercial reality and the legal reality diverged, and the commercial reality won.</p>
 
-<p class="prose">Every other littoral state with a chokepoint in its territorial or contiguous waters looked at that and ran the same calculation Indonesia just ran out loud. Thailand is fast-tracking a $31 billion land bridge across the Kra Isthmus, not because it is economically obvious, but because controlling an alternative route to Malacca has geopolitical value that was previously theoretical and is now demonstrated.</p>
+<p class="prose">Every other littoral state with a chokepoint in its territorial or contiguous waters looked at that and ran the same calculation Indonesia just ran out loud. Thailand is fast-tracking a land bridge costed at about $29 billion across the Kra Isthmus, not because it is economically obvious, but because controlling an alternative route to Malacca has geopolitical value that was previously theoretical and is now demonstrated.</p>
 
-<p class="prose">The risk management implication is straightforward: structural exposure to any single maritime corridor needs to be quantified as a standing input to risk models, not as a scenario to be run when a crisis emerges. The next disruption whether toll, conflict, blockade, or weather will not provide advance notice.</p>
+<p class="prose">The risk management implication is straightforward: structural exposure to any single maritime corridor needs to be quantified as a standing input to risk models, not as a scenario to be run when a crisis emerges. The next disruption, whether toll, conflict, blockade or weather, will not provide advance notice.</p>
 
 <hr class="section-rule" />
 
@@ -178,16 +179,17 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">The figures that appear in coverage of Malacca disruption risk are predominantly aggregate: "30% of global seaborne trade," "100,000 vessels per year," "$5 trillion in annual trade value." These numbers are real. They are also analytically inert.</p>
 
-<p class="prose">An accumulation underwriter at a P&I club needs to know how many of their insured vessels are in-window during a specific disruption duration, carrying what commodity, for which importer. A crude desk at a commodity trading house needs to know what percentage of their specific supply chain depends on Malacca and what diversion costs look like against their current freight rates. A lender financing a Capesize fleet needs to know what a 4-day Lombok detour does to voyage economics across their book.</p>
+<p class="prose">Different readers need different cuts of the same data. For marine insurance accumulation: how many insured vessels are in-window during a specific disruption duration, carrying what commodity, for which importer. For a supply chain: what percentage depends on Malacca and what diversion costs look like against current freight rates. For a Capesize fleet: what a 4-day Lombok detour does to voyage economics across the fleet.</p>
 
-<p class="prose"><strong>None of those questions are answered by an aggregate throughput figure.</strong> They are answered by bilateral dependency analysis at commodity resolution the dependency percentage for a specific (importer, chokepoint, commodity) triplet, combined with vessel-class-specific rerouting economics. That is what you get when you run it through The Narrows.</p>
+<p class="prose"><strong>None of those questions are answered by an aggregate throughput figure.</strong> They are answered by bilateral dependency analysis at commodity resolution: the dependency percentage for a specific (importer, chokepoint, commodity) triplet, combined with vessel-class-specific rerouting economics.</p>
 
 <div class="method-note">
  <div class="method-note-label">Methodology</div>
- <div class="method-note-body">All figures derived from the Narrows Chokepoint Dependency Simulation Model. Data source: UN Comtrade 2023 bilateral import data. CDM Fix-15. Malacca bilateral matrix covers 14 importing nations across 11 commodity codes (crude petroleum, refined products, LNG, iron ore, copper ore, palm oil, coal, ammonia, fertilizer, soy, wheat). The model does not currently cover electronics, vehicles, or apparel at chokepoint resolution. Bilateral flows are classified by data quality tier: Tier 1 flows are direct bilateral reporter pairs; Tier 3 flows are aggregate or partner-imputed. Rerouting costs based on representative vessel-class rates: VLCC bunker $55k/day, charter $45k/day; Capesize bunker $32k/day, charter $18k/day; Container bunker $30k/day, charter $25k/day. Lombok detour costs include a CII-compliance adjustment of +0.7 effective days for Capesize vessels operating under slow-steaming constraints (~11 knots). Carrying cost at 5% p.a. on representative cargo values. Capacity sensitivity score of 0.85 for Malacca reflects Sunda and Lombok as partial alternatives with draft and throughput constraints. All model assumptions are substitutable; contact fysh@narrows.io to run a scenario with your own rate inputs.</div>
+ <div class="method-note-body">All figures derived from the Narrows Chokepoint Dependency Simulation Model. Data source: UN Comtrade 2023 bilateral import data. CDM Fix-15. Malacca bilateral matrix covers 14 importing nations across 11 commodity codes (crude petroleum, refined products, LNG, iron ore, copper ore, palm oil, coal, ammonia, fertilizer, soy, wheat). The model does not currently cover electronics, vehicles, or apparel at chokepoint resolution. Bilateral flows are classified by data quality tier: Tier 1 flows are direct bilateral reporter pairs; Tier 3 flows are aggregate or partner-imputed. Rerouting costs based on representative vessel-class rates: VLCC bunker $55k/day, charter $45k/day; Capesize bunker $32k/day, charter $18k/day; Container bunker $30k/day, charter $25k/day. Lombok detour costs include a CII-compliance adjustment of +0.7 effective days for Capesize vessels operating under slow-steaming constraints (~11 knots). Carrying cost at 5% p.a. on representative cargo values. Capacity sensitivity score of 0.85 for Malacca reflects Sunda and Lombok as partial alternatives with draft and throughput constraints. All model assumptions are substitutable.</div>
 </div>
 
 <!-- CTA -->
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
  <div class="cta-strip-inner">
   <div>
@@ -198,6 +200,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
  </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style>

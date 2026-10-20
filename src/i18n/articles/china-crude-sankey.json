@@ -1,0 +1,227 @@
+{
+ "path": "china-crude-sankey",
+ "meta": {
+  "title": "Importations de brut de la Chine, Sankey | Narrows",
+  "description": "Répartition des importations maritimes de brut de la Chine par point de passage : Ormuz, Malacca, Lombok et Pacifique."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "Crude Import Analysis",
+   "Analyse des importations de brut"
+  ],
+  [
+   "The 80% figure bundles two different things. Only one of them closes with Malacca.",
+   "Le chiffre de 80 % regroupe deux réalités différentes. Une seule disparaît avec la fermeture de Malacca."
+  ],
+  [
+   "Gulf crude exits Hormuz before transiting Malacca - two sequential chokepoints on the same cargo. West African and Americas VLCCs round the Cape of Good Hope and reach China via Lombok, a separate chokepoint with no Malacca exposure. Russian ESPO loads at Kozmino and crosses the Pacific: no maritime chokepoint at all. The structural Malacca dependency is 55.8%, not 80%. Hover any node or flow for detail.",
+   "Le brut du Golfe sort d’Ormuz avant de transiter par Malacca : deux points de passage successifs sur la même cargaison. Les VLCC d’Afrique de l’Ouest et des Amériques contournent le cap de Bonne-Espérance et atteignent la Chine par Lombok, un point de passage distinct sans exposition à Malacca. Le brut russe ESPO est chargé à Kozmino et traverse le Pacifique : aucun point de passage maritime. La dépendance structurelle envers Malacca est de 55,8 %, et non de 80 %. Survolez un nœud ou un flux pour le détail."
+  ],
+  [
+   "Gulf producers (via Hormuz)",
+   "Producteurs du Golfe (via Ormuz)"
+  ],
+  [
+   "Seaward of Hormuz (Malacca only)",
+   "En aval d’Ormuz (Malacca seulement)"
+  ],
+  [
+   "Cape of Good Hope route",
+   "Route du cap de Bonne-Espérance"
+  ],
+  [
+   "Pacific / no chokepoint",
+   "Pacifique / aucun point de passage"
+  ],
+  [
+   "Narrows CDM v0.3 · HS 2709 bilateral crude · 2022 base year<br>Values = % of China seaborne crude by annual trade value",
+   "Narrows CDM v0.3 · HS 2709 brut bilatéral · année de base 2022<br>Valeurs = % du brut maritime de la Chine, en valeur commerciale annuelle"
+  ]
+ ],
+ "js": [
+  [
+   "note:'East Siberia Pacific Ocean pipeline delivers crude to Kozmino terminal near Nakhodka on Russia\\'s Pacific coast. Tankers cross the Sea of Japan directly to Qingdao, Dalian, and Ningbo-Zhoushan. No maritime chokepoint on the supply path. CDM Fix-26 assigns RUS crude to CHN via no-chokepoint Pacific corridor.\\n\\nNote: Kazakhstan crude to China (~8% of seaborne value) travels via the Atyrau-Alashankou overland pipeline to Xinjiang refineries. Kazakhstan is landlocked and ships no crude by sea; it is absorbed in this node for completeness. Neither supply source has any maritime chokepoint exposure.'",
+   "note:'L’oléoduc Sibérie orientale-océan Pacifique achemine le brut jusqu’au terminal de Kozmino, près de Nakhodka, sur la côte pacifique de la Russie. Les pétroliers traversent la mer du Japon directement vers Qingdao, Dalian et Ningbo-Zhoushan. Aucun point de passage maritime sur le trajet d’approvisionnement. CDM Fix-26 affecte le brut russe vers la Chine via le corridor Pacifique sans point de passage.\\n\\nNote : le brut du Kazakhstan vers la Chine (≈ 8 % de la valeur maritime) passe par l’oléoduc terrestre Atyrau-Alashankou vers les raffineries du Xinjiang. Le Kazakhstan est enclavé et n’expédie aucun brut par mer ; il est intégré à ce nœud par souci d’exhaustivité. Aucune des deux sources d’approvisionnement n’est exposée à un point de passage maritime.'"
+  ],
+  [
+   "note:'The Lombok Strait (between Bali and Lombok, Indonesia) is a deep-water chokepoint handling VLCC traffic from the Indian Ocean that approaches China from the east. West African and Americas cargoes round the Cape of Good Hope, cross the Indian Ocean, and transit Lombok into the South China Sea. A Malacca closure does not interrupt this supply path - and vice versa. These flows account for 20.6% of China\\'s seaborne crude; they are the source of the inflated \"80%\" figure when combined with the Malacca total.'",
+   "note:'Le détroit de Lombok (entre Bali et Lombok, en Indonésie) est un point de passage en eaux profondes qui accueille le trafic VLCC de l’océan Indien abordant la Chine par l’est. Les cargaisons d’Afrique de l’Ouest et des Amériques contournent le cap de Bonne-Espérance, traversent l’océan Indien et transitent par Lombok vers la mer de Chine méridionale. Une fermeture de Malacca n’interrompt pas cette voie d’approvisionnement, et inversement. Ces flux représentent 20,6 % du brut maritime de la Chine ; ils sont à l’origine du chiffre gonflé de « 80 % » lorsqu’on les additionne au total de Malacca.'"
+  ],
+  [
+   "note:'The Strait of Hormuz is the mandatory exit for all crude loaded inside the Persian Gulf. Minimum navigable width approximately 3.2 km; no alternative maritime route for laden VLCCs. Gulf-inside producers (Saudi Arabia, Iraq, UAE, Kuwait) represent 44% of China\\'s seaborne crude import value and all transit Hormuz. A Hormuz closure would be the first interruption point for this supply before it even reaches Malacca. Oman loads seaward of Hormuz and does not transit it.'",
+   "note:'Le détroit d’Ormuz est la sortie obligatoire de tout le brut chargé à l’intérieur du golfe Persique. Largeur navigable minimale d’environ 3,2 km ; aucune route maritime alternative pour les VLCC chargés. Les producteurs situés à l’intérieur du Golfe (Arabie saoudite, Irak, EAU, Koweït) représentent 44 % de la valeur des importations maritimes de brut de la Chine et transitent tous par Ormuz. Une fermeture d’Ormuz serait le premier point d’interruption de cet approvisionnement avant même qu’il n’atteigne Malacca. Oman charge en aval d’Ormuz et ne le transite pas.'"
+  ],
+  [
+   "note:'The Malacca Strait narrows to approximately 2.8 km. There is no viable alternative maritime route for laden VLCCs from the Indian Ocean into the South China Sea. A closure event would strand crude equivalent to 55.8% of China\\'s annual seaborne import value with no short-run diversion. This is the correct number for the Malacca Dilemma calculation. Gulf-inside producers (44%) face Hormuz and Malacca sequentially. Oman (8%) and Malaysia (4%) face Malacca only.'",
+   "note:'Le détroit de Malacca se rétrécit à environ 2,8 km. Il n’existe aucune route maritime alternative viable pour les VLCC chargés de l’océan Indien vers la mer de Chine méridionale. Un événement de fermeture bloquerait un brut équivalent à 55,8 % de la valeur annuelle des importations maritimes de la Chine, sans déroutement possible à court terme. C’est le bon chiffre pour le calcul du dilemme de Malacca. Les producteurs situés à l’intérieur du Golfe (44 %) affrontent Ormuz puis Malacca en séquence. Oman (8 %) et la Malaisie (4 %) ne font face qu’à Malacca.'"
+  ],
+  [
+   "note:'China is the world\\'s largest crude importer by volume, receiving approximately 11 to 12 mb/d of seaborne crude in 2022. Primary east coast receiving terminals: Qingdao (Shandong independent refiners), Ningbo-Zhoushan (the world\\'s largest port by cargo tonnage), Dalian (CNPC), and Tianjin. The east coast refinery geography is the structural driver of Malacca dependency - every barrel arriving from the Indian Ocean must pass through either Malacca or Lombok.'",
+   "note:'La Chine est le premier importateur de brut du monde en volume, avec environ 11 à 12 mb/j de brut maritime reçus en 2022. Principaux terminaux de réception de la côte est : Qingdao (raffineurs indépendants du Shandong), Ningbo-Zhoushan (premier port du monde en tonnage de marchandises), Dalian (CNPC) et Tianjin. La géographie des raffineries de la côte est est le moteur structurel de la dépendance envers Malacca : chaque baril arrivant de l’océan Indien doit passer par Malacca ou par Lombok.'"
+  ],
+  [
+   "note:'Russian ESPO crude from Kozmino (Pacific coast) transits no maritime chokepoint between origin and Chinese east coast terminals. Kazakhstan crude to China travels the Atyrau-Alashankou overland pipeline with no sea leg at all. This 23.6% is structurally insulated from any maritime closure - Malacca, Lombok, or otherwise. Most analyses of the Malacca Dilemma substantially understate this figure.'",
+   "note:'Le brut russe ESPO de Kozmino (côte pacifique) ne transite par aucun point de passage maritime entre l’origine et les terminaux de la côte est chinoise. Le brut du Kazakhstan vers la Chine emprunte l’oléoduc terrestre Atyrau-Alashankou, sans aucun tronçon maritime. Ces 23,6 % sont structurellement à l’abri de toute fermeture maritime, que ce soit Malacca, Lombok ou autre. La plupart des analyses du dilemme de Malacca sous-estiment nettement ce chiffre.'"
+  ],
+  [
+   "note:'Malaysian crude from Sabah and Sarawak (Labuan, Bintulu) loads in the South China Sea and routes via Malacca to Chinese east coast refineries. Not a Gulf producer at all - included here because it transits Malacca only. Malaysia also functions as a re-export and blending hub; some volumes attributed to Malaysia in bilateral data may originate from sanctioned suppliers.'",
+   "note:'Le brut malaisien de Sabah et du Sarawak (Labuan, Bintulu) est chargé en mer de Chine méridionale et gagne les raffineries de la côte est chinoise via Malacca. Ce n’est pas du tout un producteur du Golfe ; il figure ici parce qu’il ne transite que par Malacca. La Malaisie joue aussi le rôle de plaque tournante de réexportation et de mélange ; certains volumes attribués à la Malaisie dans les données bilatérales peuvent provenir de fournisseurs sanctionnés.'"
+  ],
+  [
+   "note:'Santos basin and pre-salt FPSO loadings. Atlantic-origin VLCCs at laden draught cannot transit the Panama Canal. The route is eastward around the Cape of Good Hope - not Cape Horn, which is a longer westward passage essentially unused for VLCC crude to China. Lombok Strait entry to South China Sea. Also includes Colombian and Guyanese Atlantic loadings.'",
+   "note:'Chargements du bassin de Santos et des FPSO du pré-sel. Les VLCC d’origine atlantique à pleine charge ne peuvent pas transiter par le canal de Panama. La route passe vers l’est autour du cap de Bonne-Espérance, et non par le cap Horn, un passage vers l’ouest plus long, pratiquement inutilisé pour le brut VLCC vers la Chine. Entrée en mer de Chine méridionale par le détroit de Lombok. Inclut aussi les chargements atlantiques de Colombie et du Guyana.'"
+  ],
+  [
+   "note:'Mina Al Fahal and Duqm terminals are on the Gulf of Oman, seaward of Hormuz. Ships enter the Arabian Sea directly without transiting the Persian Gulf. No Hormuz exposure. Oman crude still transits Malacca to reach Chinese east coast ports. Hormuz and Malacca are independent risks for Oman volumes - a key distinction in chokepoint risk decomposition.'",
+   "note:'Les terminaux de Mina Al Fahal et de Duqm sont sur le golfe d’Oman, en aval d’Ormuz. Les navires entrent directement en mer d’Arabie sans transiter par le golfe Persique. Aucune exposition à Ormuz. Le brut omanais transite tout de même par Malacca pour atteindre les ports de la côte est chinoise. Ormuz et Malacca sont des risques indépendants pour les volumes omanais, une distinction essentielle dans la décomposition du risque par point de passage.'"
+  ],
+  [
+   "note:'Gulf of Mexico loadings (Mars, Thunder Horse, Shenandoah). VLCC class vessels at laden displacement are too large for the Panama Canal. Route is Cape of Good Hope eastward to Lombok. No Malacca transit. Includes some additional Atlantic Americas volumes (Trinidad, Ecuador Atlantic-coast loadings).'",
+   "note:'Chargements du golfe du Mexique (Mars, Thunder Horse, Shenandoah). Les navires de classe VLCC à pleine charge sont trop grands pour le canal de Panama. La route passe par le cap de Bonne-Espérance vers l’est jusqu’à Lombok. Aucun transit par Malacca. Inclut quelques volumes atlantiques supplémentaires des Amériques (chargements de la côte atlantique de Trinité et de l’Équateur).'"
+  ],
+  [
+   "note:'Cabinda, Girassol, and CLOV crude loads on VLCCs that exit the Atlantic, round the Cape of Good Hope eastward, and cross the Indian Ocean. CDM Fix-10 confirms West Africa to Asia crude routes via Lombok Strait, not Malacca. A Malacca closure has no effect on Angola supply to China.'",
+   "note:'Le brut de Cabinda, Girassol et CLOV est chargé sur des VLCC qui sortent de l’Atlantique, contournent le cap de Bonne-Espérance vers l’est et traversent l’océan Indien. CDM Fix-10 confirme que le brut d’Afrique de l’Ouest vers l’Asie passe par le détroit de Lombok, et non par Malacca. Une fermeture de Malacca n’a aucun effet sur l’approvisionnement de la Chine par l’Angola.'"
+  ],
+  [
+   "note:'Bonny Light and Qua Iboe follow the same Cape of Good Hope route as Angola. VLCCs transit Lombok Strait into the South China Sea from the east, bypassing Malacca entirely. Also represents smaller volumes from Congo, Gabon, and Equatorial Guinea on the same routing.'",
+   "note:'Le Bonny Light et le Qua Iboe suivent la même route par le cap de Bonne-Espérance que l’Angola. Les VLCC transitent par le détroit de Lombok pour entrer en mer de Chine méridionale par l’est, en évitant complètement Malacca. Représente aussi de plus petits volumes du Congo, du Gabon et de la Guinée équatoriale sur le même itinéraire.'"
+  ],
+  [
+   "note:'Ras Tanura and Juaymah are inside the Persian Gulf. Every laden VLCC must clear Hormuz before crossing the Indian Ocean to Malacca. Saudi Arabia is China\\'s largest single crude supplier and the dominant contributor to its Malacca structural dependency.'",
+   "note:'Ras Tanura et Juaymah sont à l’intérieur du golfe Persique. Chaque VLCC chargé doit franchir Ormuz avant de traverser l’océan Indien vers Malacca. L’Arabie saoudite est le plus grand fournisseur de brut de la Chine et le principal contributeur à sa dépendance structurelle envers Malacca.'"
+  ],
+  [
+   "note:'Das Island, Ruwais, and Jebel Dhanna - all inside the Persian Gulf. Mandatory Hormuz transit for Abu Dhabi crude. UAE is a substantial Malacca-dependent supplier; Red Sea terminal capacity for eastbound VLCC traffic is limited.'",
+   "note:'Das Island, Ruwais et Jebel Dhanna, tous à l’intérieur du golfe Persique. Transit d’Ormuz obligatoire pour le brut d’Abou Dhabi. Les EAU sont un fournisseur important dépendant de Malacca ; la capacité des terminaux de la mer Rouge pour le trafic VLCC vers l’est est limitée.'"
+  ],
+  [
+   "note:'Basra Oil Terminal and Khor Al-Amaya are inside the Persian Gulf. Mandatory Hormuz transit. Iraq\\'s crude runs long-haul across the Indian Ocean and through Malacca to east coast Chinese ports at Qingdao and Ningbo-Zhoushan.'",
+   "note:'Le terminal pétrolier de Bassora et Khor al-Amaya sont à l’intérieur du golfe Persique. Transit d’Ormuz obligatoire. Le brut irakien parcourt une longue distance à travers l’océan Indien puis Malacca jusqu’aux ports de la côte est chinoise, Qingdao et Ningbo-Zhoushan.'"
+  ],
+  [
+   "note:'Ahmadi and Mina Abdullah terminals are deep inside the Persian Gulf. Mandatory Hormuz transit for all Kuwait Export Crude destined for China. Kuwait\\'s share has held at around 6 to 7 percent.'",
+   "note:'Les terminaux d’Ahmadi et de Mina Abdullah sont au fond du golfe Persique. Transit d’Ormuz obligatoire pour tout le Kuwait Export Crude destiné à la Chine. La part du Koweït s’est maintenue autour de 6 à 7 pour cent.'"
+  ],
+  [
+   "~$${(lk.v * 3.65).toFixed(0)}B annual trade value",
+   "≈ ${(lk.v * 3.65).toFixed(0)} Md$ de valeur commerciale annuelle"
+  ],
+  [
+   "${lk.v.toFixed(1)}% of China seaborne crude",
+   "${lk.v.toFixed(1).replace('.',',')} % du brut maritime de la Chine"
+  ],
+  [
+   "sub:'23.6% · no maritime chokepoint'",
+   "sub:'23,6 % · aucun point de passage maritime'"
+  ],
+  [
+   "sub:'20.6% · via Cape of Good Hope'",
+   "sub:'20,6 % · via le cap de Bonne-Espérance'"
+  ],
+  [
+   "sub:'44% of China seaborne crude'",
+   "sub:'44 % du brut maritime de la Chine'"
+  ],
+  [
+   "sub:'55.8% structural dependency'",
+   "sub:'55,8 % de dépendance structurelle'"
+  ],
+  [
+   "sub:'~$365B seaborne crude'",
+   "sub:'≈ 365 Md$ de brut maritime'"
+  ],
+  [
+   "label:'Russia (ESPO)'",
+   "label:'Russie (ESPO)'"
+  ],
+  [
+   "label:'Supply Origin'",
+   "label:'Origine de l’offre'"
+  ],
+  [
+   "label:'Saudi Arabia'",
+   "label:'Arabie saoudite'"
+  ],
+  [
+   "label:'Chokepoint'",
+   "label:'Point de passage'"
+  ],
+  [
+   "sub:'17% · ~$62B'",
+   "sub:'17 % · ≈ 62 Md$'"
+  ],
+  [
+   "sub:'11% · ~$40B'",
+   "sub:'11 % · ≈ 40 Md$'"
+  ],
+  [
+   "sub:'24% · ~$86B'",
+   "sub:'24 % · ≈ 86 Md$'"
+  ],
+  [
+   "sub:'9% · ~$33B'",
+   "sub:'9 % · ≈ 33 Md$'"
+  ],
+  [
+   "sub:'7% · ~$26B'",
+   "sub:'7 % · ≈ 26 Md$'"
+  ],
+  [
+   "sub:'8% · ~$29B'",
+   "sub:'8 % · ≈ 29 Md$'"
+  ],
+  [
+   "label:'Malaysia'",
+   "label:'Malaisie'"
+  ],
+  [
+   "sub:'4% · ~$15B'",
+   "sub:'4 % · ≈ 15 Md$'"
+  ],
+  [
+   "sub:'5% · ~$18B'",
+   "sub:'5 % · ≈ 18 Md$'"
+  ],
+  [
+   "label:'Nigeria'",
+   "label:'Nigéria'"
+  ],
+  [
+   "label:'Pacific'",
+   "label:'Pacifique'"
+  ],
+  [
+   "label:'Kuwait'",
+   "label:'Koweït'"
+  ],
+  [
+   "label:'Brazil'",
+   "label:'Brésil'"
+  ],
+  [
+   "label:'Hormuz'",
+   "label:'Ormuz'"
+  ],
+  [
+   "label:'China'",
+   "label:'Chine'"
+  ],
+  [
+   "label:'Iraq'",
+   "label:'Irak'"
+  ],
+  [
+   "label:'UAE'",
+   "label:'EAU'"
+  ],
+  [
+   "label:'USA'",
+   "label:'États-Unis'"
+  ]
+ ]
+}

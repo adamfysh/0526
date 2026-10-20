@@ -12,7 +12,7 @@ export const TRANSLATED_PATHS = new Set<string>([
   '/data-verification-policy',
   '/data-changelog',
   '/pri',
-  '/pri-methodology',
+  '/pri-methodology', '/cape', '/lng-compare', '/analysis', '/analysis/hormuz-dry-cargo', '/viz/qatar-route-tree', '/viz/gulf-lng-sankey', '/uk-lng-sankey', '/uk-crude-sankey', '/india-crude-sankey', '/china-crude-sankey', '/cascade-plus', '/cascade', '/analysis/panama', '/analysis/yanbu-long-way-round', '/analysis/panama-long-way-around', '/analysis/model-validation-2024', '/analysis/malacca', '/analysis/malacca-zombie', '/analysis/kra-land-bridge', '/analysis/hormuz', '/analysis/hormuz-who-pays', '/analysis/hormuz-seven-months', '/analysis/hormuz-rebalancing', '/analysis/hormuz-pocketbook',
 ]);
 
 // Used by every [...lang] page: generates / and /fr/ variants.

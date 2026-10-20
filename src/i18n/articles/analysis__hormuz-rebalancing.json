@@ -1,0 +1,546 @@
+{
+ "path": "analysis/hormuz-rebalancing",
+ "meta": {
+  "title": "Narrows — Le rééquilibrage est réel. Il n’atteint pas tout le monde.",
+  "description": "Trois mécanismes côté offre expliquent pourquoi les marchés pétroliers agrégés ne se sont pas effondrés : la baisse de la demande chinoise, le réacheminement par oléoduc et la hausse de l’offre du bassin atlantique. Ils n’expliquent pas qui reste exposé. Les données bilatérales, si."
+ },
+ "pairs": [
+  [
+   "Scenario analysis · Strait of Hormuz · May 2026, updated Aug 2026",
+   "Analyse de scénarios · Détroit d’Ormuz · mai 2026, mis à jour en août 2026"
+  ],
+  [
+   "The rebalancing is real. <em>It does not reach everyone.</em>",
+   "Le rééquilibrage est réel. <em>Il n’atteint pas tout le monde.</em>"
+  ],
+  [
+   "Three supply-side mechanisms explain why aggregate oil markets have not collapsed: Chinese demand reduction, pipeline rerouting, and Atlantic Basin supply growth. They do not explain who remains exposed. The bilateral data does.",
+   "Trois mécanismes côté offre expliquent pourquoi les marchés pétroliers agrégés ne se sont pas effondrés : la baisse de la demande chinoise, le réacheminement par oléoduc et la hausse de l’offre du bassin atlantique. Ils n’expliquent pas qui reste exposé. Les données bilatérales, si."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">May 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">10 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">mai 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">10 min de lecture</span>"
+  ],
+  [
+   "Pipeline bypass capacity",
+   "Capacité de contournement par oléoduc"
+  ],
+  [
+   "~4 mbd",
+   "≈ 4 Mb/j"
+  ],
+  [
+   "Saudi Yanbu + UAE Fujairah · crude only · Red Sea and Mediterranean",
+   "Yanbu (Arabie saoudite) + Fujairah (EAU) · brut uniquement · mer Rouge et Méditerranée"
+  ],
+  [
+   "Atlantic Basin potential",
+   "Potentiel du bassin atlantique"
+  ],
+  [
+   "+5 mbd",
+   "+5 Mb/j"
+  ],
+  [
+   "US, Brazil, Guyana, W.Africa · surge on 60–90 day lag",
+   "États-Unis, Brésil, Guyana, Afrique de l’Ouest · hausse avec un décalage de 60 à 90 jours"
+  ],
+  [
+   "European crude: pillars apply",
+   "Brut européen : piliers applicables"
+  ],
+  [
+   "2 of 3",
+   "2 sur 3"
+  ],
+  [
+   "Atlantic supply close; Yanbu outputs to Mediterranean",
+   "L’offre atlantique est proche ; les volumes de Yanbu vont vers la Méditerranée"
+  ],
+  [
+   "LPG: pillars apply",
+   "GPL : piliers applicables"
+  ],
+  [
+   "0 of 3",
+   "0 sur 3"
+  ],
+  [
+   "No pipeline bypass · no Atlantic alternative · no demand reduction",
+   "Pas de contournement par oléoduc · pas d’alternative atlantique · pas de baisse de la demande"
+  ],
+  [
+   "The aggregate picture",
+   "Le tableau d’ensemble"
+  ],
+  [
+   "Global oil markets have not collapsed. Three mechanisms explain why, and why that is not the whole answer.",
+   "Les marchés pétroliers mondiaux ne se sont pas effondrés. Trois mécanismes l’expliquent, et c’est pourquoi cela ne suffit pas comme réponse."
+  ],
+  [
+   "Hormuz carries roughly 20% of global crude supply on a normal day. A sustained disruption of that corridor would be expected, on aggregate figures alone, to produce a severe supply shock. Aggregate figures are not showing one. The explanation sits in three supply-side mechanisms that have been widely noted in commodity analysis: Chinese demand has softened, Saudi and UAE pipeline infrastructure bypasses Hormuz, and Atlantic Basin producers are ramping output. Vortexa, among others, has labelled these the three pillars of rebalancing.",
+   "Ormuz transporte environ 20 % de l’offre mondiale de brut en temps normal. Une perturbation durable de ce corridor devrait, sur les seuls chiffres agrégés, produire un choc d’offre sévère. Les chiffres agrégés n’en montrent pas. L’explication tient à trois mécanismes côté offre largement relevés par l’analyse des marchés de matières premières : la demande chinoise s’est assouplie, les infrastructures d’oléoducs saoudiennes et émiriennes contournent Ormuz, et les producteurs du bassin atlantique augmentent leur production. Vortexa, entre autres, les a qualifiés de trois piliers du rééquilibrage."
+  ],
+  [
+   "The pillars are real. The aggregate market has genuinely absorbed more than many pre-disruption models suggested. What the aggregate commentary cannot tell you is which specific importers benefit from which pillars, and which importers sit outside all three. The bilateral data can. The answer is that European crude importers are relatively well-covered, Asian crude importers are partially covered at elevated cost, and South and Southeast Asian LPG importers are covered by none of the three pillars at all.",
+   "Les piliers sont réels. Le marché agrégé a véritablement absorbé davantage que ne le laissaient penser de nombreux modèles d’avant la perturbation. Ce que le commentaire agrégé ne peut pas dire, c’est quels importateurs précis bénéficient de quel pilier, et lesquels se situent hors des trois. Les données bilatérales le peuvent. La réponse : les importateurs européens de brut sont relativement bien couverts, les importateurs asiatiques de brut sont partiellement couverts à un coût élevé, et les importateurs de GPL d’Asie du Sud et du Sud-Est ne sont couverts par aucun des trois piliers."
+  ],
+  [
+   "Updated August 2026",
+   "Mis à jour en août 2026"
+  ],
+  [
+   "Two data corrections since May 2026. First, a routing-engine fix now properly applies Saudi Arabia's and the UAE's real multi-basin export capacity (Yanbu on the Red Sea; Fujairah on the Gulf of Oman) instead of defaulting all Gulf crude to a single Hormuz transit. This brings the crude dependency figures below down materially for every importer in this piece, corroborated against independent reporting on both pipelines' normal-time utilisation (see the method note in the Hormuz analysis for detail). Second, LPG (HS 271112/271113/271119) has now been pulled from Comtrade as a genuine data series, replacing the previously unmodeled placeholder figures, and it surfaces a bigger gap than the original Southeast Asia framing: India, Pakistan, and Sri Lanka show LPG dependency as high or higher than anything in Southeast Asia, all outside the three pillars just the same.",
+   "Deux corrections de données depuis mai 2026. Premièrement, un correctif du moteur d’acheminement applique désormais correctement la véritable capacité d’exportation multibassin de l’Arabie saoudite et des EAU (Yanbu sur la mer Rouge ; Fujairah sur le golfe d’Oman) au lieu de ramener tout le brut du Golfe à un seul transit par Ormuz. Cela fait baisser sensiblement les chiffres de dépendance en brut ci-dessous pour tous les importateurs de cet article, ce que corroborent des sources indépendantes sur l’utilisation normale des deux oléoducs (voir la note méthodologique de l’analyse sur Ormuz pour le détail). Deuxièmement, le GPL (SH 271112/271113/271119) a désormais été extrait de Comtrade comme véritable série de données, en remplacement des chiffres provisoires auparavant non modélisés, et il révèle un écart plus grand que le cadrage initial centré sur l’Asie du Sud-Est : l’Inde, le Pakistan et le Sri Lanka affichent une dépendance en GPL aussi élevée, voire plus, que tout pays d’Asie du Sud-Est, tous hors des trois piliers."
+  ],
+  [
+   "Chinese demand reduction",
+   "Baisse de la demande chinoise"
+  ],
+  [
+   "EV adoption, economic slowdown, and strategic reserve drawdown have reduced China's net seaborne crude demand. The softening comes primarily from Gulf crude, reducing aggregate competition for non-Chinese importers at the margin.",
+   "L’essor des véhicules électriques, le ralentissement économique et les prélèvements sur les réserves stratégiques ont réduit la demande nette de brut maritime de la Chine. Le ralentissement touche surtout le brut du Golfe, ce qui réduit à la marge la concurrence agrégée pour les importateurs non chinois."
+  ],
+  [
+   "<span class=\"pillar-reach-label\">Who benefits</span> <span class=\"pillar-reach-val reach-partial\">Indirect · global price pressure only</span>",
+   "<span class=\"pillar-reach-label\">Qui en bénéficie</span> <span class=\"pillar-reach-val reach-partial\">Indirectement · pression sur les prix mondiaux seulement</span>"
+  ],
+  [
+   "Pipeline rerouting",
+   "Réacheminement par oléoduc"
+  ],
+  [
+   "Saudi Arabia's East-West Pipeline (~5mbd capacity, currently ~2–3mbd utilisation) delivers crude to Yanbu on the Red Sea. UAE's Abu Dhabi Crude Oil Pipeline (~1.5mbd) delivers to Fujairah, outside Hormuz. Together they can bypass the Strait for Saudi and UAE crude volumes.",
+   "L’oléoduc Est-Ouest de l’Arabie saoudite (≈ 5 Mb/j de capacité, utilisation actuelle d’environ 2 à 3 Mb/j) achemine du brut à Yanbu, sur la mer Rouge. L’oléoduc d’Abou Dabi pour le brut des EAU (≈ 1,5 Mb/j) l’achemine à Fujairah, hors d’Ormuz. Ensemble, ils peuvent contourner le détroit pour les volumes saoudiens et émiriens."
+  ],
+  [
+   "<span class=\"pillar-reach-label\">Who benefits</span> <span class=\"pillar-reach-val reach-europe\">Europe via Mediterranean · Red Sea corridors</span>",
+   "<span class=\"pillar-reach-label\">Qui en bénéficie</span> <span class=\"pillar-reach-val reach-europe\">Europe via la Méditerranée · corridors de la mer Rouge</span>"
+  ],
+  [
+   "Atlantic Basin surge",
+   "Hausse de l’offre atlantique"
+  ],
+  [
+   "US shale, Brazilian pre-salt, Guyanese deepwater, and West African output can collectively add ~5mbd over a 60–90 day ramp window. Light sweet grades suit European refinery configurations. The volume is sufficient to partially offset Gulf crude shortfalls at the aggregate level.",
+   "Le schiste américain, le pré-sel brésilien, les eaux profondes guyaniennes et la production ouest-africaine peuvent ensemble ajouter ≈ 5 Mb/j sur une fenêtre de montée en puissance de 60 à 90 jours. Les qualités légères et douces conviennent aux configurations de raffineries européennes. Le volume suffit à compenser partiellement le déficit de brut du Golfe au niveau agrégé."
+  ],
+  [
+   "<span class=\"pillar-reach-label\">Who benefits</span> <span class=\"pillar-reach-val reach-europe\">Europe · Americas · partial Atlantic-facing Asia</span>",
+   "<span class=\"pillar-reach-label\">Qui en bénéficie</span> <span class=\"pillar-reach-val reach-europe\">Europe · Amériques · une partie de l’Asie tournée vers l’Atlantique</span>"
+  ],
+  [
+   "Geographic distribution of benefit",
+   "Répartition géographique des bénéfices"
+  ],
+  [
+   "Where the pillars reach, and where they do not, is determined by geography and refinery grade.",
+   "Là où les piliers atteignent leur cible, et là où ils ne l’atteignent pas, dépend de la géographie et de la qualité de brut raffinée."
+  ],
+  [
+   "The rebalancing is not uniformly distributed. Each pillar has a geography of benefit that is determined by shipping distance, refinery configuration, and pipeline terminal location. The aggregate surplus in Atlantic production does not automatically reach an Indonesian refinery configured for Gulf heavy sour crude. A Saudi tanker that loads at Yanbu and transits the Red Sea costs approximately four days less to reach a Mediterranean buyer than the same crude via Cape of Good Hope, though still a significant premium over normal Suez routing for an Asian buyer. The pipeline does not make Yanbu crude cheap for Japan.",
+   "Le rééquilibrage n’est pas réparti uniformément. Chaque pilier a une géographie de bénéfice déterminée par la distance maritime, la configuration des raffineries et l’emplacement des terminaux d’oléoduc. L’excédent agrégé de production atlantique n’atteint pas automatiquement une raffinerie indonésienne configurée pour le brut lourd et acide du Golfe. Un pétrolier saoudien qui charge à Yanbu et franchit la mer Rouge met environ quatre jours de moins à rejoindre un acheteur méditerranéen que le même brut passant par le cap de Bonne-Espérance, tout en restant nettement plus cher que la route normale par Suez pour un acheteur asiatique. L’oléoduc ne rend pas le brut de Yanbu bon marché pour le Japon."
+  ],
+  [
+   "Pillar coverage matrix: by importer region and commodity",
+   "Matrice de couverture par pilier : par région importatrice et par produit"
+  ],
+  [
+   "Importer / region",
+   "Importateur / région"
+  ],
+  [
+   "Hormuz crude dep.",
+   "Dép. au brut d’Ormuz"
+  ],
+  [
+   "Pillar 1 (demand)",
+   "Pilier 1 (demande)"
+  ],
+  [
+   "Pillar 2 (pipeline)",
+   "Pilier 2 (oléoduc)"
+  ],
+  [
+   "Pillar 3 (Atlantic)",
+   "Pilier 3 (Atlantique)"
+  ],
+  [
+   "Net coverage",
+   "Couverture nette"
+  ],
+  [
+   "European crude importers",
+   "Importateurs européens de brut"
+  ],
+  [
+   "Greece",
+   "Grèce"
+  ],
+  [
+   "indirect",
+   "indirect"
+  ],
+  [
+   "Yanbu → Med",
+   "Yanbu → Méd."
+  ],
+  [
+   "Atlantic close",
+   "Atlantique proche"
+  ],
+  [
+   "<span class=\"verdict-caution\">Partial · grade + vol constraints</span>",
+   "<span class=\"verdict-caution\">Partielle · contraintes de qualité et de volume</span>"
+  ],
+  [
+   "France",
+   "France"
+  ],
+  [
+   "<span class=\"verdict-ok\">Well covered · SPR buffer</span>",
+   "<span class=\"verdict-ok\">Bien couverte · tampon de réserves stratégiques</span>"
+  ],
+  [
+   "Germany",
+   "Allemagne"
+  ],
+  [
+   "<span class=\"verdict-ok\">Well covered · low base dep.</span>",
+   "<span class=\"verdict-ok\">Bien couverte · faible dépendance de base</span>"
+  ],
+  [
+   "Asian crude importers",
+   "Importateurs asiatiques de brut"
+  ],
+  [
+   "China",
+   "Chine"
+  ],
+  [
+   "self-reducing",
+   "se réduit d’elle-même"
+  ],
+  [
+   "+4–5d Cape",
+   "+4 à 5 j par le Cap"
+  ],
+  [
+   "+Cape premium",
+   "+ prime du Cap"
+  ],
+  [
+   "<span class=\"verdict-caution\">Partial · Cape cost + grade gap</span>",
+   "<span class=\"verdict-caution\">Partielle · coût du Cap + écart de qualité</span>"
+  ],
+  [
+   "Indonesia",
+   "Indonésie"
+  ],
+  [
+   "+13d Cape",
+   "+13 j par le Cap"
+  ],
+  [
+   "<span class=\"verdict-caution\">Limited · dual crude + LPG exposure</span>",
+   "<span class=\"verdict-caution\">Limitée · double exposition brut + GPL</span>"
+  ],
+  [
+   "LPG importers: South &amp; Southeast Asia",
+   "Importateurs de GPL : Asie du Sud et du Sud-Est"
+  ],
+  [
+   "Pakistan",
+   "Pakistan"
+  ],
+  [
+   "99.8% LPG",
+   "99,8 % GPL"
+  ],
+  [
+   "not applicable",
+   "sans objet"
+  ],
+  [
+   "no LPG pipeline",
+   "pas d’oléoduc GPL"
+  ],
+  [
+   "no equiv. supply",
+   "pas d’offre équivalente"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered · all three pillars absent</span>",
+   "<span class=\"verdict-no\">Non couvert · les trois piliers sont absents</span>"
+  ],
+  [
+   "Sri Lanka",
+   "Sri Lanka"
+  ],
+  [
+   "91.9% LPG",
+   "91,9 % GPL"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered · cooking fuel dependency</span>",
+   "<span class=\"verdict-no\">Non couvert · dépendance du gaz de cuisine</span>"
+  ],
+  [
+   "India",
+   "Inde"
+  ],
+  [
+   "91.2% LPG",
+   "91,2 % GPL"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered · largest absolute exposure</span>",
+   "<span class=\"verdict-no\">Non couvert · plus grande exposition absolue</span>"
+  ],
+  [
+   "Thailand",
+   "Thaïlande"
+  ],
+  [
+   "75.6% LPG",
+   "75,6 % GPL"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered · petrochemical feedstock</span>",
+   "<span class=\"verdict-no\">Non couvert · matière première pétrochimique</span>"
+  ],
+  [
+   "Malaysia",
+   "Malaisie"
+  ],
+  [
+   "52.0% LPG",
+   "52,0 % GPL"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered</span>",
+   "<span class=\"verdict-no\">Non couvert</span>"
+  ],
+  [
+   "Vietnam",
+   "Vietnam"
+  ],
+  [
+   "42.8% LPG",
+   "42,8 % GPL"
+  ],
+  [
+   "Philippines",
+   "Philippines"
+  ],
+  [
+   "33.2% LPG",
+   "33,2 % GPL"
+  ],
+  [
+   "28.4% LPG",
+   "28,4 % GPL"
+  ],
+  [
+   "<span class=\"verdict-no\">Uncovered · compound crude + LPG</span>",
+   "<span class=\"verdict-no\">Non couvert · brut et GPL cumulés</span>"
+  ],
+  [
+   "The coverage gap in one sentence",
+   "L’écart de couverture en une phrase"
+  ],
+  [
+   "The three pillars of rebalancing are <strong>geographically proximate to European buyers, partially accessible to Asian buyers at a Cape cost premium, and entirely absent for LPG importers across South and Southeast Asia.</strong> Aggregate analysis that treats the rebalancing as uniform systematically understates residual exposure in those two groups.",
+   "Les trois piliers du rééquilibrage sont <strong>géographiquement proches des acheteurs européens, partiellement accessibles aux acheteurs asiatiques moyennant une prime du Cap, et totalement absents pour les importateurs de GPL d’Asie du Sud et du Sud-Est.</strong> Une analyse agrégée qui traite le rééquilibrage comme uniforme sous-estime systématiquement l’exposition résiduelle de ces deux groupes."
+  ],
+  [
+   "Pillar 2 examined: the pipeline bypass",
+   "Le pilier 2 examiné : le contournement par oléoduc"
+  ],
+  [
+   "Saudi Yanbu and UAE Fujairah bypass Hormuz. The question is who can reach the terminals.",
+   "Yanbu en Arabie saoudite et Fujairah aux EAU contournent Ormuz. La question est de savoir qui peut atteindre les terminaux."
+  ],
+  [
+   "Saudi Arabia's East-West Pipeline is the oldest and largest piece of Hormuz bypass infrastructure. It runs from Abqaiq, the world's largest oil processing facility, west to Yanbu on the Red Sea, with a nameplate capacity of approximately 5 million barrels per day. In normal operations it runs below capacity, at roughly 2 to 3 mbd, because Hormuz transit is cheaper. Under sustained Hormuz disruption, Yanbu utilisation would increase, though it would take weeks to ramp, and the output terminates at a Red Sea port whose access involves either the Bab-el-Mandeb or the Suez Canal. Both are separately at risk in the current conflict environment.",
+   "L’oléoduc Est-Ouest saoudien est la plus ancienne et la plus grande infrastructure de contournement d’Ormuz. Il va d’Abqaiq, la plus grande installation de traitement de pétrole au monde, vers l’ouest jusqu’à Yanbu sur la mer Rouge, avec une capacité nominale d’environ 5 millions de barils par jour. En fonctionnement normal, il tourne sous sa capacité, à environ 2 à 3 Mb/j, parce que le transit par Ormuz est moins cher. En cas de perturbation durable d’Ormuz, l’utilisation de Yanbu augmenterait, mais la montée en puissance prendrait des semaines, et le flux aboutit à un port de la mer Rouge dont l’accès passe soit par Bab el-Mandeb, soit par le canal de Suez. Les deux sont séparément menacés dans l’environnement de conflit actuel."
+  ],
+  [
+   "The UAE's Abu Dhabi Crude Oil Pipeline terminates at Fujairah, in the Gulf of Oman, outside Hormuz. It has a capacity of approximately 1.5 mbd and is the cleanest bypass: no Red Sea transit required, crude loads directly onto tankers for any destination. Combined with the Yanbu volumes, the pipeline infrastructure can move approximately 4 mbd of Saudi and UAE crude outside the Strait. Against a normal Hormuz throughput of roughly 21 mbd, that is a partial but meaningful offset for the volumes that matter: Saudi Arab Light and UAE Murban, both widely used grades.",
+   "L’oléoduc d’Abou Dabi pour le brut des EAU aboutit à Fujairah, dans le golfe d’Oman, hors d’Ormuz. Sa capacité est d’environ 1,5 Mb/j et c’est le contournement le plus net : aucun transit en mer Rouge, le brut est chargé directement sur des pétroliers vers n’importe quelle destination. Avec les volumes de Yanbu, l’infrastructure d’oléoducs peut acheminer environ 4 Mb/j de brut saoudien et émirien hors du détroit. Face à un débit normal d’Ormuz d’environ 21 Mb/j, c’est une compensation partielle mais significative pour les volumes qui comptent : l’Arab Light saoudien et le Murban émirien, deux qualités très utilisées."
+  ],
+  [
+   "What the pipeline does not carry",
+   "Ce que l’oléoduc ne transporte pas"
+  ],
+  [
+   "The pipeline bypass is entirely a crude petroleum mechanism. <strong>Qatar's LPG, LNG, and condensate exports have no equivalent pipeline bypass.</strong> Qatar is the world's largest LPG exporter and the primary supplier to Southeast Asian importers. Qatar has no overland pipeline access to a non-Hormuz terminal. Every barrel-equivalent of Qatari LPG for Thailand, Indonesia, or Vietnam transits Hormuz or does not move at all. The pipeline rebalancing story is entirely a Saudi-UAE crude story, and it should be analysed as such.",
+   "Le contournement par oléoduc est entièrement un mécanisme pour le pétrole brut. <strong>Les exportations de GPL, de GNL et de condensat du Qatar n’ont pas d’équivalent par oléoduc.</strong> Le Qatar est le premier exportateur mondial de GPL et le principal fournisseur des importateurs d’Asie du Sud-Est. Le Qatar n’a aucun accès terrestre par oléoduc à un terminal hors d’Ormuz. Chaque équivalent-baril de GPL qatari destiné à la Thaïlande, à l’Indonésie ou au Vietnam transite par Ormuz ou ne bouge pas. L’histoire du rééquilibrage par oléoduc est entièrement une histoire de brut saoudo-émirien, et doit être analysée comme telle."
+  ],
+  [
+   "Pillar 3 examined: the Atlantic Basin",
+   "Le pilier 3 examiné : le bassin atlantique"
+  ],
+  [
+   "Atlantic supply can surge. The benefit concentrates where the tankers are already pointed.",
+   "L’offre atlantique peut monter en flèche. Le bénéfice se concentre là où les pétroliers sont déjà orientés."
+  ],
+  [
+   "Atlantic Basin crude production (US Gulf Coast, Brazilian pre-salt, Guyanese deepwater, West African) has grown substantially over the last decade and continues to grow. Vortexa's assessment puts the surge potential at approximately 5 million barrels per day over a 60 to 90 day ramp window, drawing on spare capacity, inventory drawdowns, and accelerated field output at existing projects. That is a large number. It is also a number whose benefit distribution is highly uneven.",
+   "La production de brut du bassin atlantique (côte américaine du Golfe, pré-sel brésilien, eaux profondes guyaniennes, Afrique de l’Ouest) a fortement augmenté au cours de la dernière décennie et continue de croître. L’évaluation de Vortexa situe le potentiel de hausse à environ 5 millions de barils par jour sur une fenêtre de montée en puissance de 60 à 90 jours, en s’appuyant sur la capacité excédentaire, les prélèvements sur stocks et l’accélération de la production de champs existants. C’est un chiffre élevé. C’est aussi un chiffre dont la répartition des bénéfices est très inégale."
+  ],
+  [
+   "Where Atlantic surge reaches efficiently",
+   "Là où la hausse atlantique arrive efficacement"
+  ],
+  [
+   "European refineries, US East Coast, Brazil domestic.",
+   "Raffineries européennes, côte Est des États-Unis, Brésil (marché intérieur)."
+  ],
+  [
+   "Atlantic Basin crude originates and terminates within the Atlantic. European refineries, particularly Spanish, Italian, French, and UK facilities, are configured to accept West African and Brazilian grades and have done so routinely. The effective delivered cost of Angolan Girassol or Brazilian Lula into Rotterdam is normal tanker economics, no rerouting premium. For these importers, the Atlantic surge is real and accessible. Greece is an exception: independent Greek refiners are configured around specific Gulf grades and have less flexibility to substitute.",
+   "Le brut du bassin atlantique naît et se termine dans l’Atlantique. Les raffineries européennes, en particulier espagnoles, italiennes, françaises et britanniques, sont configurées pour accepter les qualités ouest-africaines et brésiliennes et le font couramment. Le coût livré effectif du Girassol angolais ou du Lula brésilien à Rotterdam relève de l’économie normale du transport par pétrolier, sans prime de déroutement. Pour ces importateurs, la hausse atlantique est réelle et accessible. La Grèce fait exception : les raffineurs indépendants grecs sont configurés autour de qualités précises du Golfe et ont moins de souplesse pour s’en passer."
+  ],
+  [
+   "Where Atlantic surge reaches at a premium",
+   "Là où la hausse atlantique arrive avec une prime"
+  ],
+  [
+   "Asian refineries face grade mismatch and Cape economics.",
+   "Les raffineries asiatiques font face à un écart de qualité et à l’économie du Cap."
+  ],
+  [
+   "Chinese, Japanese, Korean, and Southeast Asian refineries are predominantly configured around Middle Eastern heavy sour crude. Atlantic Basin output is mostly light sweet, a different grade that requires either refinery adaptation or blending, neither of which happens at speed. Beyond grade, the economics are punishing: an Angolan VLCC to South Korea transits the Cape of Good Hope, adding roughly 15 days over a Hormuz routing. The same 5 mbd Atlantic surge that is normal economics for Rotterdam is a $1.4 million per voyage premium plus refinery-adjustment cost for Busan.",
+   "Les raffineries chinoises, japonaises, coréennes et d’Asie du Sud-Est sont majoritairement configurées autour du brut lourd et acide du Moyen-Orient. La production du bassin atlantique est surtout légère et douce, une qualité différente qui exige soit une adaptation de la raffinerie, soit des mélanges, ce qui ne se fait pas rapidement. Au-delà de la qualité, l’économie est pénalisante : un VLCC angolais vers la Corée du Sud passe par le cap de Bonne-Espérance, ce qui ajoute environ 15 jours par rapport à un acheminement par Ormuz. La même hausse atlantique de 5 Mb/j, qui relève de l’économie normale pour Rotterdam, représente une prime de 1,4 M$ par voyage plus le coût d’adaptation des raffineries pour Busan."
+  ],
+  [
+   "The LPG gap",
+   "L’écart du GPL"
+  ],
+  [
+   "All three pillars fail for LPG. The commodity is outside the rebalancing story entirely.",
+   "Les trois piliers échouent tous pour le GPL. Ce produit est entièrement hors de l’histoire du rééquilibrage."
+  ],
+  [
+   "The three pillars of rebalancing are, in their different ways, crude petroleum mechanisms. Chinese demand reduction reflects crude import cuts. The pipeline bypass carries crude. The Atlantic Basin surge is crude production. LPG sits outside all three in a structural sense that is not a modelling artefact: it reflects the actual supply geography of the global LPG market.",
+   "Les trois piliers du rééquilibrage sont, chacun à sa manière, des mécanismes du pétrole brut. La baisse de la demande chinoise reflète des réductions d’importations de brut. Le contournement par oléoduc transporte du brut. La hausse de l’offre atlantique est une production de brut. Le GPL est hors des trois dans un sens structurel qui n’est pas un artefact de modélisation : il reflète la géographie réelle de l’offre du marché mondial du GPL."
+  ],
+  [
+   "Qatar is the anchor supplier of LPG to Southeast Asia, providing the bulk of imports to Thailand, Indonesia, Vietnam, and the Philippines. Qatar's LPG exports transit Hormuz. Qatar has no pipeline bypass to a non-Hormuz terminal. The Atlantic Basin has no large-scale LPG production equivalent to the crude surge (US propane exports are growing but are fully committed to existing contract customers under a sustained disruption scenario). Chinese LPG demand has not softened in the same way as crude: LPG is a cooking and petrochemical feedstock, not a transport fuel being replaced by EVs.",
+   "Le Qatar est le fournisseur de référence de GPL de l’Asie du Sud-Est, assurant l’essentiel des importations de la Thaïlande, de l’Indonésie, du Vietnam et des Philippines. Les exportations de GPL du Qatar transitent par Ormuz. Le Qatar n’a pas de contournement par oléoduc vers un terminal hors d’Ormuz. Le bassin atlantique n’a pas de production de GPL à grande échelle équivalente à la hausse du brut (les exportations américaines de propane augmentent mais sont entièrement engagées auprès de clients sous contrat existants dans un scénario de perturbation durable). La demande chinoise de GPL ne s’est pas assouplie comme celle du brut : le GPL est un gaz de cuisson et une matière première pétrochimique, et non un carburant de transport remplacé par les véhicules électriques."
+  ],
+  [
+   "Eight nations outside all three pillars",
+   "Huit pays hors des trois piliers"
+  ],
+  [
+   "Pakistan (99.8% of LPG supply via Hormuz), Sri Lanka (91.9%), India (91.2%, $14.7B annual exposed, the largest absolute LPG value of any importer in the model), Thailand (75.6%), Malaysia (52.0%), Vietnam (42.8%), the Philippines (33.2%), and Indonesia (28.4%, on top of 20.1% crude) are Tier 1 bilateral exposures: real country-pair trade flows from CDM v3, a multi-vintage blend of 2022 and 2024 UN Comtrade data. For each of these importers, LPG supply disruption via Hormuz cannot be offset by demand reduction elsewhere, rerouted via pipeline, or replaced by Atlantic Basin production. <strong>These are the nations most systematically underanalysed in the current rebalancing commentary, and the South Asian members of this group (Pakistan, Sri Lanka, India) are absent from almost every existing writeup of the LPG gap.</strong> The analysis that leads with the three pillars and stops there will miss them entirely.",
+   "Le Pakistan (99,8 % de son approvisionnement en GPL via Ormuz), le Sri Lanka (91,9 %), l’Inde (91,2 %, 14,7 Md$ d’exposition annuelle, la plus grande valeur absolue de GPL de tous les importateurs du modèle), la Thaïlande (75,6 %), la Malaisie (52,0 %), le Vietnam (42,8 %), les Philippines (33,2 %) et l’Indonésie (28,4 %, en plus de 20,1 % pour le brut) sont des expositions bilatérales de rang 1 : de vrais flux commerciaux entre paires de pays issus du CDM v3, un mélange multimillésime des données UN Comtrade 2022 et 2024. Pour chacun de ces importateurs, une perturbation de l’approvisionnement en GPL via Ormuz ne peut être compensée ni par une baisse de la demande ailleurs, ni par un réacheminement par oléoduc, ni par la production du bassin atlantique. <strong>Ce sont les pays les plus systématiquement sous-analysés dans le commentaire actuel sur le rééquilibrage, et les membres sud-asiatiques de ce groupe (Pakistan, Sri Lanka, Inde) sont absents de presque tous les textes existants sur l’écart du GPL.</strong> L’analyse qui s’ouvre sur les trois piliers et s’arrête là les manquera complètement."
+  ],
+  [
+   "What the bilateral data adds",
+   "Ce qu’ajoutent les données bilatérales"
+  ],
+  [
+   "Aggregate rebalancing is not the same as individual importer coverage. The bilateral data distinguishes them.",
+   "Le rééquilibrage agrégé n’est pas la couverture de chaque importateur. Les données bilatérales les distinguent."
+  ],
+  [
+   "The commentary challenge is that both things are true. The aggregate oil market has partially rebalanced: the three pillars exist and are working to some degree. And specific importers remain materially exposed in ways the aggregate does not capture. These findings are not contradictory. They operate at different levels of analysis, and conflating them produces errors in either direction: excessive alarm if you only look at the bilateral exposures, false comfort if you only look at the aggregate rebalancing.",
+   "La difficulté du commentaire est que les deux choses sont vraies. Le marché pétrolier agrégé s’est partiellement rééquilibré : les trois piliers existent et fonctionnent dans une certaine mesure. Et certains importateurs restent substantiellement exposés d’une façon que l’agrégat ne capture pas. Ces constats ne se contredisent pas. Ils opèrent à des niveaux d’analyse différents, et les confondre produit des erreurs dans les deux sens : une alarme excessive si l’on ne regarde que les expositions bilatérales, un faux réconfort si l’on ne regarde que le rééquilibrage agrégé."
+  ],
+  [
+   "Aggregate rebalancing vs. bilateral exposure: what each analytical layer provides",
+   "Rééquilibrage agrégé et exposition bilatérale : ce qu’apporte chaque niveau d’analyse"
+  ],
+  [
+   "Analytical question",
+   "Question analytique"
+  ],
+  [
+   "Aggregate / three-pillar analysis",
+   "Analyse agrégée / des trois piliers"
+  ],
+  [
+   "Narrows bilateral model",
+   "Modèle bilatéral de Narrows"
+  ],
+  [
+   "Has the global market partially rebalanced?",
+   "Le marché mondial s’est-il partiellement rééquilibré ?"
+  ],
+  [
+   "Yes: three pillars are working",
+   "Oui : les trois piliers fonctionnent"
+  ],
+  [
+   "Not the primary instrument",
+   "Pas l’instrument principal"
+  ],
+  [
+   "Which importers benefit from pillar 2 (pipeline)?",
+   "Quels importateurs bénéficient du pilier 2 (oléoduc) ?"
+  ],
+  [
+   "Cannot answer: no bilateral resolution",
+   "Impossible de répondre : pas de résolution bilatérale"
+  ],
+  [
+   "Europe via Med; Asia pays Cape premium",
+   "Europe via la Méditerranée ; l’Asie paie la prime du Cap"
+  ],
+  [
+   "Does the Atlantic surge reach a given refinery grade?",
+   "La hausse atlantique correspond-elle à une qualité de brut raffinée donnée ?"
+  ],
+  [
+   "Cannot answer: no commodity granularity",
+   "Impossible de répondre : pas de granularité par produit"
+  ],
+  [
+   "Light sweet (Atlantic) vs heavy sour (Gulf) by refinery",
+   "Léger et doux (Atlantique) contre lourd et acide (Golfe), par raffinerie"
+  ],
+  [
+   "Are LPG importers covered by any pillar?",
+   "Les importateurs de GPL sont-ils couverts par un pilier ?"
+  ],
+  [
+   "Cannot answer: LPG absent from pillars",
+   "Impossible de répondre : le GPL est absent des piliers"
+  ],
+  [
+   "No · 8 nations across South &amp; Southeast Asia uncovered · bilateral Tier 1",
+   "Non · 8 pays d’Asie du Sud et du Sud-Est non couverts · bilatéral de rang 1"
+  ],
+  [
+   "What is a given counterparty's residual Hormuz exposure?",
+   "Quelle est l’exposition résiduelle à Ormuz d’une contrepartie donnée ?"
+  ],
+  [
+   "Cannot answer",
+   "Impossible de répondre"
+  ],
+  [
+   "Dep% at (importer, chokepoint, commodity) level",
+   "Dép. % au niveau (importateur, point de passage, produit)"
+  ],
+  [
+   "What does partial coverage cost this importer?",
+   "Combien coûte à cet importateur une couverture partielle ?"
+  ],
+  [
+   "Cape premium by vessel class; grade substitution lag",
+   "Prime du Cap par classe de navires ; décalage de substitution des qualités"
+  ],
+  [
+   "Methodology and data sources",
+   "Méthodologie et sources de données"
+  ],
+  [
+   "Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026), a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data, computed via basin-aware routing that weights each exporter's real port geography across all matched basins rather than defaulting to a single dominant basin. This is what brought the crude figures above down from the May 2026 baseline (see the method note in the Hormuz analysis for detail). LPG figures were rebuilt in August 2026 from a dedicated authenticated Comtrade pull covering HS 271112 (propane), 271113 (butane), and 271119 (other petroleum gases), aggregated into a single synthetic LPG commodity class and blended across vintages using the same methodology as every other CDM v3 commodity; this series was previously scoped but never completed, and the India/Pakistan/Sri Lanka figures above are new in this update. LPG and crude petroleum figures are Tier 1 bilateral data: real country-pair flows. Pipeline capacity figures: Saudi East-West Pipeline nameplate capacity ~5mbd (Aramco); Fujairah ADCOP ~1.5mbd (ADNOC). Atlantic Basin surge estimate: Vortexa, May 2026 scenario analysis. Rerouting cost estimates use representative vessel-class rates: VLCC bunker $30k/day, charter $85k/day; Cape detour +12–15 days by route. Grade mismatch characterisation: Middle East exports are predominantly medium/heavy sour; US shale, Brazilian and West African grades are predominantly light sweet; Asian refinery configurations sourced from IEA Refinery Survey 2023. Bab-el-Mandeb risk caveat sourced from public US DoD reporting. Three pillars framework: Vortexa Commodity Analytics, May 2026. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since 28 February 2026. All model assumptions are substitutable.",
+   "Les chiffres de dépendance bilatérale proviennent du modèle de dépendance aux points de passage de Narrows v3 (reconstruit en août 2026), un mélange multimillésime des données bilatérales UN Comtrade 2022 et 2024, calculé par un acheminement tenant compte des bassins, qui pondère la géographie portuaire réelle de chaque exportateur sur tous les bassins appariés au lieu de se rabattre sur un seul bassin dominant. C’est ce qui a fait baisser les chiffres de brut ci-dessus par rapport à la base de mai 2026 (voir la note méthodologique de l’analyse sur Ormuz pour le détail). Les chiffres de GPL ont été reconstruits en août 2026 à partir d’une extraction Comtrade authentifiée dédiée couvrant le SH 271112 (propane), 271113 (butane) et 271119 (autres gaz de pétrole), agrégés en une seule classe de produit synthétique GPL et fusionnés entre millésimes selon la même méthode que tous les autres produits du CDM v3 ; cette série était auparavant prévue mais jamais achevée, et les chiffres de l’Inde, du Pakistan et du Sri Lanka ci-dessus sont nouveaux dans cette mise à jour. Les chiffres de GPL et de pétrole brut sont des données bilatérales de rang 1 : de vrais flux entre paires de pays. Capacités des oléoducs : oléoduc Est-Ouest saoudien, capacité nominale ≈ 5 Mb/j (Aramco) ; ADCOP de Fujairah ≈ 1,5 Mb/j (ADNOC). Estimation de la hausse du bassin atlantique : Vortexa, analyse de scénario de mai 2026. Les estimations de coût de déroutement utilisent des taux représentatifs par classe de navires : soute VLCC 30 k$/jour, affrètement 85 k$/jour ; détour par le Cap de +12 à 15 jours selon la route. Caractérisation de l’écart de qualité : les exportations du Moyen-Orient sont surtout de qualité moyenne à lourde et acide ; le schiste américain et les qualités brésiliennes et ouest-africaines sont surtout légers et doux ; les configurations de raffineries asiatiques proviennent de l’IEA Refinery Survey 2023. La réserve sur le risque de Bab el-Mandeb provient de rapports publics du département américain de la Défense. Cadre des trois piliers : Vortexa Commodity Analytics, mai 2026. Ces chiffres décrivent une exposition structurelle, en année normale, et non un suivi en direct de la fermeture réelle du détroit depuis le 28 février 2026. Toutes les hypothèses du modèle sont substituables."
+  ]
+ ],
+ "js": []
+}

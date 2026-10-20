@@ -1,0 +1,130 @@
+{
+ "path": "lng-compare",
+ "meta": {
+  "title": "Narrows — GNL du Golfe : arbre des routes ou Sankey ?",
+  "description": "Deux visualisations des mêmes données. Dites-nous laquelle raconte le mieux l’histoire."
+ },
+ "pairs": [
+  [
+   "Interactive Analysis",
+   "Analyse interactive"
+  ],
+  [
+   "Gulf LNG: Route Tree or Sankey?",
+   "GNL du Golfe : arbre des routes ou Sankey ?"
+  ],
+  [
+   "Two visualisations of the same data. Please tell us which tells the story better.",
+   "Deux visualisations des mêmes données. Dites-nous laquelle raconte le mieux l’histoire."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">June 2026</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">juin 2026</span>"
+  ],
+  [
+   "Every Gulf LNG cargo ship passes through the <strong>Strait of Hormuz</strong>, then a further sequence of chokepoints before reaching its destination. These two charts show the same data in different ways. Please tell us which tells the story better.",
+   "Chaque méthanier de GNL du Golfe franchit le <strong>détroit d’Ormuz</strong>, puis une série d’autres points de passage obligés avant d’atteindre sa destination. Ces deux graphiques présentent les mêmes données de deux façons. Dites-nous laquelle raconte le mieux l’histoire."
+  ],
+  [
+   "<span class=\"thumb-num\">1</span> Route Tree",
+   "<span class=\"thumb-num\">1</span> Arbre des routes"
+  ],
+  [
+   "Gulf LNG",
+   "GNL du Golfe"
+  ],
+  [
+   "Hormuz",
+   "Ormuz"
+  ],
+  [
+   "Malacca",
+   "Malacca"
+  ],
+  [
+   "Bab/Suez",
+   "Bab/Suez"
+  ],
+  [
+   "Route Tree works better",
+   "L’arbre des routes est plus clair"
+  ],
+  [
+   "<span class=\"thumb-num\">2</span> Sankey",
+   "<span class=\"thumb-num\">2</span> Sankey"
+  ],
+  [
+   "Sankey works better",
+   "Le Sankey est plus clair"
+  ],
+  [
+   "<span class=\"viz-num\">1</span> Route Tree: hover nodes and links for detail",
+   "<span class=\"viz-num\">1</span> Arbre des routes : survolez les nœuds et les liens pour le détail"
+  ],
+  [
+   "<strong style=\"color:#38bdf8\">Asia-Pacific via Malacca</strong> &nbsp;·&nbsp; <strong style=\"color:#c084fc\">Europe via Bab el-Mandeb / Suez</strong> &nbsp;·&nbsp; <strong style=\"color:#34d399\">South Asia and Americas</strong>. Chokepoints in <strong style=\"color:#F0B429\">gold</strong>.",
+   "<strong style=\"color:#38bdf8\">Asie-Pacifique via Malacca</strong> &nbsp;·&nbsp; <strong style=\"color:#c084fc\">Europe via Bab el-Mandeb / Suez</strong> &nbsp;·&nbsp; <strong style=\"color:#34d399\">Asie du Sud et Amériques</strong>. Points de passage en <strong style=\"color:#F0B429\">or</strong>."
+  ],
+  [
+   "<span class=\"viz-num\">2</span> Sankey: ribbon width proportional to trade value",
+   "<span class=\"viz-num\">2</span> Sankey : largeur du ruban proportionnelle à la valeur des échanges"
+  ],
+  [
+   "The full height of <strong style=\"color:#F0B429\">Hormuz</strong> = $51.5B of annual exposure at a single mandatory chokepoint. Hover ribbons and nodes for detail.",
+   "La hauteur totale d’<strong style=\"color:#F0B429\">Ormuz</strong> = 51,5 Md$ d’exposition annuelle en un seul point de passage obligé. Survolez les rubans et les nœuds pour le détail."
+  ],
+  [
+   "Background",
+   "Contexte"
+  ],
+  [
+   "Why LNG chokepoints matter to risk and insurance",
+   "Pourquoi les points de passage du GNL comptent pour le risque et l’assurance"
+  ],
+  [
+   "Liquefied natural gas has become the critical swing fuel in the global energy system. Unlike pipeline gas, LNG shipments can be rerouted to wherever the price is highest. This flexibility is commercially valuable, but it concentrates physical risk at a handful of maritime chokepoints that cannot be bypassed by laden tankers.",
+   "Le gaz naturel liquéfié est devenu le combustible d’ajustement essentiel du système énergétique mondial. Contrairement au gaz par gazoduc, les cargaisons de GNL peuvent être redirigées vers le marché où le prix est le plus élevé. Cette flexibilité a une valeur commerciale, mais elle concentre le risque physique sur une poignée de points de passage maritimes que les méthaniers chargés ne peuvent pas contourner."
+  ],
+  [
+   "A closure of <strong>Hormuz</strong> would strand every Gulf LNG cargo at source. <strong>Malacca</strong> controls onward delivery to China, Japan, South Korea, Taiwan, and Thailand: collectively the largest LNG import market in the world. <strong>Bab el-Mandeb</strong> (under active disruption since late 2023) and the <strong>Suez Canal</strong> together control the European route. Atlantic-facing terminals in Belgium, the UK, and the Netherlands add <strong>Gibraltar</strong> as a fifth sequential chokepoint.",
+   "Une fermeture d’<strong>Ormuz</strong> bloquerait à la source toutes les cargaisons de GNL du Golfe. <strong>Malacca</strong> commande l’acheminement vers la Chine, le Japon, la Corée du Sud, Taïwan et la Thaïlande : ensemble, le premier marché importateur de GNL au monde. <strong>Bab el-Mandeb</strong> (perturbé de façon active depuis fin 2023) et le <strong>canal de Suez</strong> commandent ensemble la route européenne. Les terminaux atlantiques de Belgique, du Royaume-Uni et des Pays-Bas ajoutent <strong>Gibraltar</strong> comme cinquième point de passage successif."
+  ],
+  [
+   "Accumulation note",
+   "Note sur le cumul"
+  ],
+  [
+   "These are <strong>sequential chokepoints</strong>, not alternatives. A cargo bound for Zeebrugge transits Hormuz, Bab el-Mandeb, Suez, and Gibraltar before arriving. Disruption at any one cascades to the destination. This is the accumulation problem that conventional cargo models undercount.",
+   "Ces points de passage sont <strong>successifs</strong>, et non des solutions de remplacement. Une cargaison à destination de Zeebruges franchit Ormuz, Bab el-Mandeb, Suez et Gibraltar avant d’arriver. Une perturbation en un seul point se répercute jusqu’à la destination. C’est le problème de cumul que les modèles classiques de fret sous-estiment."
+  ],
+  [
+   "Annual Gulf LNG flow",
+   "Flux annuel de GNL du Golfe"
+  ],
+  [
+   "Bilateral trade data, all exporters",
+   "Données commerciales bilatérales, tous exportateurs"
+  ],
+  [
+   "Mandatory Hormuz transit",
+   "Transit obligatoire par Ormuz"
+  ],
+  [
+   "No pipeline or bypass route exists",
+   "Aucun gazoduc ni itinéraire de contournement n’existe"
+  ],
+  [
+   "Pakistan Hormuz dependency",
+   "Dépendance du Pakistan envers Ormuz"
+  ],
+  [
+   "Highest of any importing nation globally",
+   "La plus élevée de tous les pays importateurs"
+  ],
+  [
+   "Source: Narrows CDM v0.3. Bilateral trade data. Dependency percentages reflect each country's share of total LNG imports originating in Hormuz-transit corridors.",
+   "Source : Narrows CDM v0.3. Données commerciales bilatérales. Les pourcentages de dépendance reflètent la part de chaque pays dans ses importations totales de GNL provenant de corridors transitant par Ormuz."
+  ]
+ ],
+ "js": []
+}

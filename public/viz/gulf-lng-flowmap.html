@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Gulf LNG Export Routes | Narrows</title>
+  <meta name="robots" content="noindex">
+<title>Gulf LNG Export Routes | Narrows</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
@@ -98,7 +99,7 @@ window.addEventListener('load', function () {
 
   var ROUTES = [
 
-    // 1. HORMUZ TRUNK — threads east through the Persian Gulf
+    // 1. HORMUZ TRUNK - threads east through the Persian Gulf
     {
       id:'hormuz', label:'Strait of Hormuz', color:'#F0B429', vol:68,
       note:'Every Gulf LNG cargo passes here',
@@ -132,13 +133,13 @@ window.addEventListener('load', function () {
         [65.5,13.5],
         [67.5,10.5],
         [69.5, 8.5],
-        [73.0, 7.0],   // Laccadive Sea — India coast is ~77°E here
+        [73.0, 7.0],   // Laccadive Sea - India coast is ~77°E here
         [77.5, 5.8],   // south of Kanyakumari ✓
         [80.5, 4.8],   // south of Sri Lanka ✓
         [84.5, 5.0],   // Bay of Bengal, turning northeast
         [88.0, 6.0],
         [92.0, 6.5],   // approaching Andaman Sea from west
-        [94.0, 6.5],   // north of Banda Aceh (5.55°N) — tip of Sumatra ✓
+        [94.0, 6.5],   // north of Banda Aceh (5.55°N) - tip of Sumatra ✓
         [96.5, 5.5],   // east of Banda Aceh, NW Malacca approach
         [98.5, 5.0],   // NW entrance of Malacca Strait
         [100.0, 4.5],  // Malacca Strait (near Penang)
@@ -149,7 +150,7 @@ window.addEventListener('load', function () {
       ]
     },
 
-    // 3. INDIA BRANCH — stays west of India's coast in the Arabian Sea
+    // 3. INDIA BRANCH - stays west of India's coast in the Arabian Sea
     {
       id:'india', label:'India (west coast)', color:'#34d399', vol:8,
       note:'Petronet LNG, Dahej & Hazira terminals',
@@ -192,7 +193,7 @@ window.addEventListener('load', function () {
       ]
     },
 
-    // 5. JAPAN — South China Sea (west of Philippines) → East China Sea
+    // 5. JAPAN - South China Sea (west of Philippines) → East China Sea
     {
       id:'japan', label:'Japan', color:'#38bdf8', vol:20,
       note:"World's largest LNG importer",
@@ -339,7 +340,7 @@ window.addEventListener('load', function () {
       // ── FLOW LINES (clipped to ocean) ─────────────────────────────────
       //
       //  All elements in this group are clipped to ocean-only.
-      //  Wide flow lines will be visually squeezed at narrow straits —
+      //  Wide flow lines will be visually squeezed at narrow straits -
       //  the clip masks everything that extends onto land at the strait edges.
 
       var flowG = svg.append('g').attr('class','flows').attr('clip-path','url(#ocean-clip)');
@@ -368,7 +369,7 @@ window.addEventListener('load', function () {
           .attr('stroke-opacity', route.id === 'hormuz' ? 0.90 : 0.75)
           .attr('stroke-linecap','round').attr('pointer-events','none');
 
-        // Invisible wide hit area (also clipped — hover only fires in water)
+        // Invisible wide hit area (also clipped - hover only fires in water)
         flowG.append('path').datum(feature).attr('d',gPath)
           .attr('fill','none').attr('stroke','transparent')
           .attr('stroke-width', Math.max(w + 14, 20))

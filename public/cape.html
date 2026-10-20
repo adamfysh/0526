@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAPE — Narrows | Corridor Accumulation and Portfolio Exposure</title>
+<script src="cape-i18n.js"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='450 150 850 650'%3E%3Cpath fill='%230A2540' d='M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -721,7 +722,7 @@
   <!-- Panel 01 -->
   <div class="panel" id="p1">
     <div class="phead" onclick="tog('p1')">
-      <div class="phead-left"><span class="pnum">01</span><span class="ptitle">Chokepoint <em>Value at Risk</em></span></div>
+      <div class="phead-left"><span class="pnum">01</span><span class="ptitle" data-fr="Valeur à risque <em>par point de passage</em>">Chokepoint <em>Value at Risk</em></span></div>
       <span class="ptog" id="t1">&#9662;</span>
     </div>
     <div class="pbody" id="b1"></div>
@@ -730,7 +731,7 @@
   <!-- Panel 02 -->
   <div class="panel" id="p2">
     <div class="phead" onclick="tog('p2')">
-      <div class="phead-left"><span class="pnum">02</span><span class="ptitle">JWC &amp; Geopolitical <em>flags</em></span></div>
+      <div class="phead-left"><span class="pnum">02</span><span class="ptitle" data-fr="JWC et <em>alertes géopolitiques</em>">JWC &amp; Geopolitical <em>flags</em></span></div>
       <span class="ptog c" id="t2">&#9662;</span>
     </div>
     <div class="pbody c" id="b2"></div>
@@ -739,7 +740,7 @@
   <!-- Panel 03 -->
   <div class="panel" id="p3">
     <div class="phead" onclick="tog('p3')">
-      <div class="phead-left"><span class="pnum">03</span><span class="ptitle">CII <em>overlay</em></span></div>
+      <div class="phead-left"><span class="pnum">03</span><span class="ptitle" data-fr="Surcouche <em>CII</em>">CII <em>overlay</em></span></div>
       <span class="ptog c" id="t3">&#9662;</span>
     </div>
     <div class="pbody c" id="b3"></div>
@@ -748,7 +749,7 @@
   <!-- Panel 04 -->
   <div class="panel" id="p4">
     <div class="phead" onclick="tog('p4')">
-      <div class="phead-left"><span class="pnum">04</span><span class="ptitle">Bilateral <em>context</em></span></div>
+      <div class="phead-left"><span class="pnum">04</span><span class="ptitle" data-fr="Contexte <em>bilatéral</em>">Bilateral <em>context</em></span></div>
       <span class="ptog c" id="t4">&#9662;</span>
     </div>
     <div class="pbody c" id="b4"></div>
@@ -915,15 +916,17 @@ function divCost(v) {
    CORRIDOR META
 ═══════════════════════════════ */
 const CORR = {
-  hormuz:        { label:'Strait of Hormuz',        short:'Hormuz',        type:'terminal', region:'Persian Gulf / Gulf of Oman',        tier:'T1', jwc:true,  desc:'Persian Gulf is a JWC Listed Area. War risk additional premium required for all transiting vessels.' },
-  bab_el_mandeb: { label:'Bab-el-Mandeb',           short:'Bab-el-Mandeb', type:'through',  region:'Red Sea / Gulf of Aden',            tier:'T3', jwc:true,  desc:'Red Sea and Gulf of Aden are JWC Listed Areas. Standard route vessels require war risk notification.' },
-  malacca:       { label:'Strait of Malacca',       short:'Malacca',       type:'through',  region:'Indian Ocean / South China Sea',    tier:'T3', jwc:false, desc:'Not currently a JWC Listed Area. IMB piracy risk applies. Primary risk is operational and density-related.' },
-  panama:        { label:'Panama Canal',            short:'Panama',        type:'through',  region:'Pacific / Caribbean',              tier:'T3', jwc:false, desc:'Not a JWC Listed Area. Risk is operational and environmental: water level, lock capacity, hurricane season.' },
-  suez:          { label:'Suez Canal',              short:'Suez',          type:'through',  region:'Red Sea / Mediterranean',          tier:'T3', jwc:false, desc:'Canal-specific risk distinct from BAM. A Suez grounding (Ever Given type) or political closure affects the canal itself rather than the BAM southern approach.' },
-  lombok:        { label:'Lombok Strait',           short:'Lombok',        type:'through',  region:'Indonesia / Indian Ocean',         tier:'T3', jwc:false, desc:'Primary deep-water alternative to Malacca for VLCCs and wide-beam vessels unable to transit Malacca at full draught. Not a JWC Listed Area.' },
-  bosphorus:     { label:'Bosphorus / Turkish Straits', short:'Bosphorus', type:'terminal', region:'Black Sea / Mediterranean',       tier:'T3', jwc:false, desc:'Only exit from the Black Sea for commercial shipping. Governed by the Montreux Convention. Closure risk in conflict scenarios involving Black Sea states.' },
-  danish_straits:{ label:'Danish Straits',          short:'Danish Straits',type:'terminal', region:'Baltic Sea / North Sea',          tier:'T3', jwc:false, desc:'Sole commercial exit from the Baltic Sea. Risk is geopolitical (Baltic energy security) and environmental: winter ice and bridge air-draft constraints (Storebaelt Bridge: 65m clearance).' }
+  hormuz:        { label:'Strait of Hormuz',        short:'Hormuz',        type:'terminal', region:'Persian Gulf / Gulf of Oman',        tier:'T1', jwc:false, status:'unknown', desc:'Single exit from the Persian Gulf. There is no physical diversion route.' },
+  bab_el_mandeb: { label:'Bab-el-Mandeb',           short:'Bab-el-Mandeb', type:'through',  region:'Red Sea / Gulf of Aden',            tier:'T3', jwc:false, status:'unknown', desc:'Southern entrance to the Red Sea, linking the Suez Canal to the Gulf of Aden.' },
+  malacca:       { label:'Strait of Malacca',       short:'Malacca',       type:'through',  region:'Indian Ocean / South China Sea',    tier:'T3', jwc:false, status:'unknown', desc:'IMB piracy risk applies. Primary risk is operational and density-related.' },
+  panama:        { label:'Panama Canal',            short:'Panama',        type:'through',  region:'Pacific / Caribbean',              tier:'T3', jwc:false, status:'unknown', desc:'Risk is operational and environmental: water level, lock capacity, hurricane season.' },
+  suez:          { label:'Suez Canal',              short:'Suez',          type:'through',  region:'Red Sea / Mediterranean',          tier:'T3', jwc:false, status:'unknown', desc:'Canal-specific risk distinct from BAM. A Suez grounding (Ever Given type) or political closure affects the canal itself rather than the BAM southern approach.' },
+  lombok:        { label:'Lombok Strait',           short:'Lombok',        type:'through',  region:'Indonesia / Indian Ocean',         tier:'T3', jwc:false, status:'unknown', desc:'Primary deep-water alternative to Malacca for VLCCs and wide-beam vessels unable to transit Malacca at full draught.' },
+  bosphorus:     { label:'Bosphorus / Turkish Straits', short:'Bosphorus', type:'terminal', region:'Black Sea / Mediterranean',       tier:'T3', jwc:false, status:'unknown', desc:'Only exit from the Black Sea for commercial shipping. Governed by the Montreux Convention. Closure risk in conflict scenarios involving Black Sea states.' },
+  danish_straits:{ label:'Danish Straits',          short:'Danish Straits',type:'terminal', region:'Baltic Sea / North Sea',          tier:'T3', jwc:false, status:'unknown', desc:'Sole commercial exit from the Baltic Sea. Risk is geopolitical (Baltic energy security) and environmental: winter ice and bridge air-draft constraints (Storebaelt Bridge: 65m clearance).' }
 };
+
+if (window.CAPE_FR) { const _cf = window.CAPE_I18N.corr; for (const k in _cf) Object.assign(CORR[k], _cf[k]); }
 
 function sevMult(pct){ return (pct/100) * A.wr; }
 function sevLabel(pct){
@@ -933,74 +936,23 @@ function sevLabel(pct){
   return pct+'% disruption';
 }
 
+/* French formats: decimal comma, non-breaking spaces, "M$" / "Md$" */
+if (window.CAPE_FR) {
+  const _nb = ' ', _d = (x, n) => x.toFixed(n).replace('.', ',');
+  fM = function (v) { if (v >= 1e9) return _d(v / 1e9, 1) + _nb + 'Md$'; if (v >= 1e6) return _d(v / 1e6, 1) + _nb + 'M$'; return _d(v / 1e3, 0) + _nb + 'k$'; };
+  fP = function (v) { return _d(v * 100, 1) + _nb + '%'; };
+  sevLabel = function (pct) {
+    if (pct >= 100) return 'Fermeture totale';
+    if (pct === 50) return 'Restriction partielle';
+    if (pct === 30) return 'Enchère de créneaux';
+    return pct + _nb + '% de perturbation';
+  };
+}
+
 /* ═══════════════════════════════
    BILATERAL DATA
 ═══════════════════════════════ */
-const BIL_FALLBACK = {
-  hormuz:{
-    crude:[
-      {country:'Japan',dep:.942,v30:6.3e9,tier:'T1'},{country:'South Korea',dep:.715,v30:5.1e9,tier:'T1'},
-      {country:'India',dep:.475,v30:5.5e9,tier:'T1'},{country:'China',dep:.407,v30:11.3e9,tier:'T1'},
-      {country:'Greece',dep:.546,v30:.7e9,tier:'T1'}
-    ],
-    lng:[
-      {country:'Japan',dep:.89,v30:4.1e9,tier:'T1'},{country:'South Korea',dep:.82,v30:3.2e9,tier:'T1'}
-    ]
-  },
-  bab_el_mandeb:{
-    crude:[
-      {country:'Greece',dep:.546,v30:.7e9,tier:'T3'},{country:'France',dep:.129,v30:1.5e9,tier:'T3'},
-      {country:'Indonesia',dep:.296,v30:2.1e9,tier:'T3'}
-    ]
-  },
-  malacca:{
-    crude:[
-      {country:'China',dep:.407,v30:4.8e9,tier:'T3'},{country:'Japan',dep:.320,v30:2.1e9,tier:'T3'},
-      {country:'South Korea',dep:.290,v30:2.0e9,tier:'T3'}
-    ],
-    coal:[
-      {country:'Taiwan',dep:.707,v30:.9e9,tier:'T3'},{country:'Vietnam',dep:.488,v30:.4e9,tier:'T3'},
-      {country:'Philippines',dep:.423,v30:.3e9,tier:'T3'}
-    ]
-  },
-  panama:{
-    lng:[
-      {country:'China',dep:.41,v30:2.8e9,tier:'T3'},{country:'Japan',dep:.38,v30:1.7e9,tier:'T3'},
-      {country:'South Korea',dep:.31,v30:1.6e9,tier:'T3'}
-    ],
-    grain:[
-      {country:'Japan',dep:.71,v30:2.1e9,tier:'T3'},{country:'South Korea',dep:.65,v30:1.0e9,tier:'T3'}
-    ]
-  },
-  suez:{
-    crude:[
-      {country:'Netherlands',dep:.22,v30:2.1e9,tier:'T3'},{country:'Italy',dep:.31,v30:1.8e9,tier:'T3'},
-      {country:'Spain',dep:.19,v30:1.2e9,tier:'T3'}
-    ]
-  },
-  lombok:{
-    crude:[
-      {country:'China',dep:.12,v30:3.3e9,tier:'T3'},{country:'Japan',dep:.08,v30:.5e9,tier:'T3'}
-    ]
-  },
-  bosphorus:{
-    crude:[
-      {country:'Italy',dep:.18,v30:1.1e9,tier:'T3'},{country:'Romania',dep:.85,v30:.8e9,tier:'T3'},
-      {country:'Bulgaria',dep:.72,v30:.4e9,tier:'T3'}
-    ],
-    grain:[
-      {country:'Egypt',dep:.85,v30:1.8e9,tier:'T3'},{country:'Turkey',dep:.65,v30:.9e9,tier:'T3'}
-    ]
-  },
-  danish_straits:{
-    lng:[
-      {country:'Germany',dep:.28,v30:1.4e9,tier:'T3'},{country:'Poland',dep:.22,v30:.6e9,tier:'T3'}
-    ],
-    crude:[
-      {country:'Sweden',dep:.41,v30:.5e9,tier:'T3'},{country:'Finland',dep:.56,v30:.4e9,tier:'T3'}
-    ]
-  }
-};
+const BIL_FALLBACK = {};   // no typed fallback: figures come only from cape_corridor_feed.json
 
 let BIL = BIL_FALLBACK;
 let BIL_FEED_META = null;
@@ -1039,7 +991,8 @@ let PORT_RISK = {};
 // Accepts both shapes the Worker may serve: new (PRI score + rank) and legacy (0-10 hand score).
 // PRI chip: score + rank. Colour is continuous by percentile of rank (green low, red high); no category labels.
 // Works with the old Worker shape (rank only) and the new one.
-function priPct(p){ return p.rank ? (3774 - p.rank) / 3774 * 100 : null; }
+let PORTS_N = 0;
+function priPct(p){ const n = p.of || PORTS_N; return (p.rank && n) ? (n - p.rank) / n * 100 : null; }
 function priRiskClass(p){ return p.pri>=6?'high':p.pri>=3?'med':'low'; }
 function priChipStyle(pct){
   if(pct==null) return '';
@@ -1051,8 +1004,9 @@ function priChip(portName){
   const pct=priPct(p);
   const cls=p.jwc?'jwc':(pct!=null?'low':priRiskClass(p));
   const sty=(!p.jwc&&pct!=null)?priChipStyle(pct):'';
-  const label=p.rank!=null ? ((p.jwc?'JWC · ':'')+'PRI '+p.pri.toFixed(2)+' · #'+p.rank.toLocaleString()) : (p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
-  const tip=(p.note||'')+(p.rank!=null?' PRI rank '+p.rank.toLocaleString()+' of 3,774 (higher than '+Math.floor(pct)+'% of ports).':'')+(p.asOf?' Event note as of '+p.asOf+'.':'');
+  const label=p.rank!=null ? ((p.jwc?'JWC · ':'')+'PRI '+p.pri.toFixed(2)+' · #'+p.rank.toLocaleString(LX('en-US','fr-FR'))) : (p.jwc?'JWC':'PRI '+p.pri.toFixed(1));
+  const _loc = LX('en-US','fr-FR');
+  const tip=(p.note||'')+(p.rank!=null&&pct!=null?LX(' PRI rank ',' Rang PRI ')+p.rank.toLocaleString(_loc)+LX(' of ',' sur ')+(p.of||PORTS_N).toLocaleString(_loc)+LX(' (higher than ',' (plus risqué que ')+Math.floor(pct)+LX('% of ports).',' % des ports).'):'')+(p.match?LX(' PRI record: ',' Fiche PRI : ')+p.match+' ('+String(p.matchKm).replace('.',LX('.',','))+' km).':'');
   return `<span class="port-risk ${cls}"${sty} title="${tip}">${portName} · ${label}</span>`;
 }
 
@@ -1062,86 +1016,65 @@ let RATES = {vlcc:{},suezmax:{},aframax:{},lng:{},lpg:{},neopanamax:{},capesize:
 /* ═══════════════════════════════
    ILLUSTRATIVE VESSEL FLEET
 ═══════════════════════════════ */
-const VESSELS = [
-  {imo:'9100001',name:'MV Strait Queen',cls:'vlcc',cls_label:'VLCC',
-   corridors:{hormuz:1.0},cargo_type:'Saudi crude',cargo_value:95e6,cii:'A',flag:'Marshall Islands',
-   route:'Ras Tanura → Chiba',waypoints:['Ras Tanura','Fujairah'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'listed',jwc_text:'Standard route transits JWC Listed Area (Persian Gulf). In-window at standard rate.',
-   note:'Hormuz-captive. No diversion route exists for a loaded VLCC from the Persian Gulf. Full cargo value is at risk under any Hormuz restriction scenario.'},
-  {imo:'9100002',name:'MV Gulf Star',cls:'lng',cls_label:'LNG carrier',
-   corridors:{hormuz:1.0},cargo_type:'Qatar LNG',cargo_value:78e6,cii:'B',flag:'Panama',
-   route:'Ras Laffan → Incheon',waypoints:['Fujairah','Singapore'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'listed',jwc_text:'Standard route transits JWC Listed Area (Persian Gulf). In-window at standard rate.',
-   note:'No alternative route at any price. Qatar has no pipeline bypass for LNG. Hormuz closure means cargo does not move.'},
-  {imo:'9100003',name:'MV Lotus Arrow',cls:'lpg',cls_label:'LPG carrier',
-   corridors:{hormuz:1.0,malacca:1.0},cargo_type:'UAE LPG',cargo_value:42e6,cii:'C',flag:'Bahamas',
-   route:'Abu Dhabi → Singapore',waypoints:['Fujairah','Colombo'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'listed',jwc_text:'Standard route transits JWC Listed Area (Persian Gulf/Hormuz). Malacca leg is not currently a listed area.',
-   note:'Independent exposure to two corridors on every voyage: Hormuz outbound, Malacca on approach to Singapore. Both are full risk events. Weights are 1.0 for each.'},
-  {imo:'9100004',name:'MV Atlantic Bridge',cls:'suezmax',cls_label:'Suezmax',
-   corridors:{bab_el_mandeb:1.0},cargo_type:'Saudi crude',cargo_value:68e6,cii:'D',flag:'Greece',
-   route:'Ras Tanura → Rotterdam via Suez',waypoints:['Djibouti','Durban'],
-   diversion:'Cape of Good Hope',div_days:17,div_cost:2.1e6,status:'Rerouting Cape of Good Hope',
-   jwc_flag:'divert',jwc_text:'Standard route transits Red Sea JWC Listed Area. Diverting via Cape of Good Hope. Bunker stop at Djibouti places vessel in the JWC Listed Area even on the diversion route.',
-   note:'D-rated: rerouting via Cape of Good Hope adds 17 days, placing CII compliance under further pressure. Djibouti bunker stop creates JWC listed area exposure on the diversion route itself.'},
-  {imo:'9100005',name:'MV Pacific Link',cls:'neopanamax',cls_label:'Neopanamax container',
-   corridors:{panama:1.0},cargo_type:'Mixed containers',cargo_value:185e6,cii:'B',flag:'Liberia',
-   route:'Los Angeles → Yokohama',waypoints:['Balboa'],
-   diversion:'Suez westbound',div_days:21,div_cost:null,status:null,
-   jwc_flag:'divert',jwc_text:'Standard route does not transit a JWC Listed Area. Suez diversion route transits Red Sea Listed Area: new war risk exposure on the diversion path that is not covered by the standard attachment.',
-   note:'Auction-exposed. Suez westbound is the long-distance alternative, adding approximately 21 days. Walk-away price depends on cargo mix and delivery contract.'},
-  {imo:'9100006',name:'MV Prairie Wind',cls:'handymax',cls_label:'Handymax bulk',
-   corridors:{panama:1.0},cargo_type:'US Gulf grain',cargo_value:28e6,cii:'C',flag:'Malta',
-   route:'New Orleans → Osaka',waypoints:['Colon'],
-   diversion:'Cape Horn',div_days:30,div_cost:1.0e6,status:null,
-   jwc_flag:'clear',jwc_text:'No JWC Listed Area on standard route or Cape Horn diversion route.',
-   note:'Walk-away price approximately $1M. Cape Horn diversion adds 30 days and is commercially viable only when the auction slot premium exceeds the diversion cost.'},
-  {imo:'9100007',name:'MV Iron Cape',cls:'capesize',cls_label:'Capesize bulk',
-   corridors:{malacca:1.0},cargo_type:'Brazil iron ore',cargo_value:55e6,cii:'E',flag:'Hong Kong',
-   route:'Tubarão → Qingdao',waypoints:['Singapore','Port Klang'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'clear',jwc_text:'Malacca is not currently a JWC Listed Area.',
-   note:'E-rated: cannot absorb additional voyage inefficiency. Any meaningful diversion would trigger flag-state corrective action. Effectively captive to Malacca despite it being a through-route.'},
-  {imo:'9100008',name:'MV Banda Sea',cls:'aframax',cls_label:'Aframax',
-   corridors:{malacca:1.0},cargo_type:'Indonesia crude',cargo_value:38e6,cii:'A',flag:'Singapore',
-   route:'Dumai → Zhanjiang',waypoints:['Singapore'],
-   diversion:'Lombok Strait',div_days:2.5,div_cost:.4e6,status:null,
-   jwc_flag:'clear',jwc_text:'Malacca is not currently a JWC Listed Area. Lombok diversion alternative also outside listed areas.',
-   note:'Malacca-captive on this route. Lombok Strait and Sunda Strait are alternatives, adding 2 to 3 days and entering elevated piracy risk zones.'},
-  {imo:'9100009',name:'MV Odessa Star',cls:'suezmax',cls_label:'Suezmax',
-   corridors:{bosphorus:1.0},cargo_type:'Ukraine grain',cargo_value:32e6,cii:'C',flag:'Marshall Islands',
-   route:'Odessa → Iskenderun',waypoints:['Odessa','Istanbul'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'clear',jwc_text:'Bosphorus is not currently a JWC Listed Area. Black Sea transit carries elevated political risk in the current environment.',
-   note:'Bosphorus-captive for Black Sea exit. No alternative route from Ukraine to the Mediterranean. Montreux Convention closure risk applies in conflict scenarios involving Black Sea states.'},
-  {imo:'9100010',name:'MV Java Current',cls:'vlcc',cls_label:'VLCC',
-   corridors:{lombok:1.0},cargo_type:'Middle East crude',cargo_value:88e6,cii:'B',flag:'Liberia',
-   route:'Ras Tanura → Zhoushan via Lombok',waypoints:['Fujairah','Singapore'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'clear',jwc_text:'Lombok Strait is not a JWC Listed Area.',
-   note:'Transiting Lombok as the primary deep-water alternative to Malacca. VLCCs at full draught cannot safely transit Malacca. Lombok adds approximately 1.5 days versus Malacca but is the only viable option for this vessel class.'},
-  {imo:'9100011',name:'MV Northern Gate',cls:'lng',cls_label:'LNG carrier',
-   corridors:{danish_straits:1.0},cargo_type:'Baltic LNG',cargo_value:45e6,cii:'B',flag:'Norway',
-   route:'Klaipeda → Rotterdam',waypoints:['Rotterdam'],
-   diversion:null,div_days:null,div_cost:null,status:null,
-   jwc_flag:'clear',jwc_text:'Danish Straits is not a JWC Listed Area.',
-   note:'Danish Straits is the only practical exit from the Baltic for vessels of this class. Seasonal ice constraints (November to April) and bridge air-draft limitations (Storebaelt Bridge: 65m clearance) apply.'},
-  {imo:'9100012',name:'MV Alexandria Bridge',cls:'neopanamax',cls_label:'Neopanamax container',
-   corridors:{suez:1.0,bab_el_mandeb:1.0},cargo_type:'Mixed containers',cargo_value:160e6,cii:'C',flag:'Malta',
-   route:'Singapore → Felixstowe via Suez',waypoints:['Port Said','Djibouti'],
-   diversion:'Cape of Good Hope',div_days:14,div_cost:3.2e6,status:null,
-   jwc_flag:'divert',jwc_text:'Standard route transits Red Sea JWC Listed Area (Bab-el-Mandeb approach). Port Said approach normal. Djibouti bunker stop is JWC listed area exposure on diversion route.',
-   note:'Dual corridor exposure: Suez (canal grounding / political closure risk) and Bab-el-Mandeb (conflict / restriction risk) are both on the standard route. Djibouti bunker stop is flagged: JWC listed area even when diverting Cape.'},
-  {imo:'9100013',name:'MV Yanbu Relay',cls:'suezmax',cls_label:'Suezmax',
-   corridors:{suez:1.0,malacca:1.0},cargo_type:'Saudi crude (Yanbu loading)',leg_route:'yanbu_ulsan_long',leg_alt_route:'yanbu_ulsan_short',cargo_value:100e6,cii:'D',flag:'Marshall Islands',
-   route:'Yanbu → Suez → Gibraltar → Cape of Good Hope → Malacca → Ulsan',waypoints:['Port Said','Singapore'],
-   diversion:'SUMED pipeline transfer (Ain Sukhna to Sidi Kerir, reload in the Mediterranean)',div_days:3,div_cost:null,status:'On Suez + Cape routing (Bab-el-Mandeb closed)',
-   jwc_flag:'listed',jwc_text:'Loads in the Red Sea JWC Listed Area. War risk at Yanbu was reported at about 3% of hull value in late September 2026 (under 1% in July), roughly $3M per voyage against $100k before the conflict (Insurance Journal, 25 Sep 2026). Does not pass Bab-el-Mandeb.',
-   note:'Illustrative case of a Bab-el-Mandeb bypass. Hormuz is avoided by loading at Yanbu, and Bab-el-Mandeb is avoided by going north: Suezmax-size so a laden vessel can transit Suez (a laden VLCC cannot, and partially lightens or transfers via SUMED). Routing graph: 15,811 nm via Suez, Gibraltar, the Cape and Malacca versus 7,095 nm via Bab-el-Mandeb, about 47 versus about 21 days at 14 knots (press reports put it at about 54 versus about 24 days). CAPE models only the Suez and Malacca legs; Gibraltar, the Cape of Good Hope and the pipeline have no CAPE corridor. Single points of failure on this one voyage: the East-West pipeline feeding Yanbu (shut 11-12 September 2026 after drone attacks), the Suez Canal, and the Red Sea war-risk zone. SUMED is the alternative but ran near capacity in August (about 1.9 mb/d); transfer cost and delay are not published, so div_cost is left blank. Weights, cargo value and CII rating are illustrative, not observed.'}
-];
+let VESSELS = [];   // loaded from cape_fleet_feed.json (see loadFleet)
+let CAPE_JWC_CIRCULAR = '';
+
+/* JWC listed-area explanation, built from the computed flags (cape_fleet_feed.json / computeJwc). */
+function jwcItemName(it){ return it.type==='corridor' ? ((CORR[it.key]&&CORR[it.key].short)||it.key) : it.key; }
+function jwcText(j, diversion){
+  const names = a => a.map(jwcItemName).join(', ');
+  const parts = [];
+  if (j.flag==='divert') {
+    parts.push(LX('Standard route: ','Route standard : ') + (j.std.length ? LX('listed area at ','zone listée à ')+names(j.std) : LX('no listed area','aucune zone listée')) + '.');
+    parts.push(LX('The diversion route ('+diversion+') is exposed at '+names(j.div)+': new war risk exposure on the diversion path that the standard attachment does not cover.',
+                  'La route de déroutement ('+diversion+') est exposée à '+names(j.div)+' : nouvelle exposition au risque de guerre sur le chemin de déroutement, que le rattachement standard ne couvre pas.'));
+  } else if (j.flag==='listed') {
+    parts.push(LX('Standard route is in or passes through a JWC Listed Area: '+names(j.std)+'.','La route standard est située dans une zone listée par le JWC, ou la traverse : '+names(j.std)+'.'));
+  } else if (j.flag==='boundary') {
+    parts.push(LX(names(j.bound)+' lies near a listed-area boundary: check the circular.', names(j.bound)+' se situe près de la limite d’une zone listée : vérifier la circulaire.'));
+  } else {
+    parts.push(diversion ? LX('No JWC Listed Area on the standard route or the diversion route.','Aucune zone listée par le JWC sur la route standard ni sur la route de déroutement.')
+                         : LX('No JWC Listed Area on the standard route.','Aucune zone listée par le JWC sur la route standard.'));
+  }
+  if (j.bound.length && j.flag!=='boundary') parts.push(LX(names(j.bound)+' lies near a listed-area boundary: check the circular.', names(j.bound)+' se situe près de la limite d’une zone listée : vérifier la circulaire.'));
+  return parts.join(' ');
+}
+/* Same logic as pipeline/26_cape_fleet_feed.py, for vessels the user adds. */
+function computeJwc(corrKeys, ports, divPoints){
+  const classify = keys => { const l=[], b=[]; keys.forEach(k=>{
+    if (CORR[k]) { if (CORR[k].status==='listed') l.push({type:'corridor',key:k}); else if (CORR[k].status==='boundary') b.push({type:'corridor',key:k}); }
+    else if (PORT_RISK[k] && PORT_RISK[k].jwc) l.push({type:'port',key:k}); }); return [l,b]; };
+  const [sl,sb] = classify(corrKeys.concat(ports||[])); const [dl,db] = classify(divPoints||[]);
+  const flag = (divPoints&&divPoints.length&&dl.length) ? 'divert' : sl.length ? 'listed' : (sb.length||db.length) ? 'boundary' : 'clear';
+  return { flag, std: sl, div: dl, bound: sb.concat(db) };
+}
+async function loadFleet(){
+  try {
+    const r = await fetch('cape_fleet_feed.json', {cache:'no-store'});
+    if (!r.ok) throw new Error('fleet feed failed: '+r.status);
+    const f = await r.json();
+    const lg = LX('en','fr');
+    const pick = o => o ? o[lg] : null;
+    VESSELS = f.vessels.map(v=>{
+      const o = Object.assign({}, v, {route:pick(v.route), cargo_type:pick(v.cargo_type), diversion:pick(v.diversion), status:pick(v.status), note:pick(v.note)});
+      o.jwc_flag = v.jwc.flag;
+      o.jwc_text = jwcText(v.jwc, o.diversion);
+      return o;
+    });
+  } catch (e) { console.warn('CAPE: could not load the fleet feed.', e); VESSELS = []; }
+}
+async function loadPorts(){
+  try {
+    const r = await fetch('cape_ports_feed.json', {cache:'no-store'});
+    if (!r.ok) throw new Error('ports feed failed: '+r.status);
+    const f = await r.json();
+    PORTS_N = (f._meta||{}).pri_ports || 0;
+    CAPE_JWC_CIRCULAR = (f._meta||{}).jwc_circular || '';
+    const lg = LX('en','fr');
+    for (const [k,p] of Object.entries(f.ports)) PORT_RISK[k] = Object.assign({}, p, {note:p.note[lg]});
+    for (const [k,c] of Object.entries(f.corridors)) if (CORR[k]) { CORR[k].status=c.status; CORR[k].jwc=(c.status==='listed'); CORR[k].edgeKm=c.edgeKm; CORR[k].basis=c.basis; }
+  } catch (e) { console.warn('CAPE: could not load the ports feed; no PRI or listed-area data.', e); }
+}
 
 /* ═══════════════════════════════
    CALCULATIONS
@@ -1179,7 +1112,7 @@ function byCorr(vessels, dur, sev) {
 ═══════════════════════════════ */
 function fM(v){if(v>=1e9)return'$'+(v/1e9).toFixed(1)+'B';if(v>=1e6)return'$'+(v/1e6).toFixed(1)+'M';return'$'+(v/1e3).toFixed(0)+'K'}
 function fP(v){return(v*100).toFixed(1)+'%'}
-function tp(t){return t==='T1'?'<span class="t1p">T1</span>':t==='T2'?'<span class="t2p">T2</span>':'<span class="t3p" title="Directional estimate only. Not validated against primary source data.">~estimate</span>'}
+function tp(t){return t==='T1'?'<span class="t1p">T1</span>':t==='T2'?'<span class="t2p">T2</span>':'<span class="t3p" title="'+LX('Directional estimate only. Not validated against primary source data.','Estimation d’ordre de grandeur uniquement. Non validée par rapport aux données de source primaire.')+'">'+LX('~estimate','~estimation')+'</span>'}
 
 /* ═══════════════════════════════
    SIGNAL HELPERS
@@ -1193,9 +1126,9 @@ function getSig(cid) {
 function sigPlainText(sig, corrLabel) {
   if (!sig) return null;
   const lvl = sig.threshold_level||'L1';
-  if (lvl==='L4') return { cls:'alert',   icon:'⚠', title:corrLabel+': active corridor alert', body:'Two or more elevated risk signals are active on this corridor and a linked corridor simultaneously. This state requires a formal review before CAPE output is used in client-facing work.' };
-  if (lvl==='L3') return { cls:'elevated', icon:'↑', title:corrLabel+': risk elevated',         body:'An actionable signal has been detected on this corridor. Review recommended before next use. The scenario bar above may not reflect current conditions.' };
-  if (lvl==='L2') return { cls:'elevated', icon:'·', title:corrLabel+': signal flagged',        body:'A notable signal has been detected. Flagged for weekly review. No immediate action required, but monitor for escalation.' };
+  if (lvl==='L4') return { cls:'alert',   icon:'⚠', title:corrLabel+LX(': active corridor alert',' : alerte active sur le corridor'), body:LX('Two or more elevated risk signals are active on this corridor and a linked corridor simultaneously. This state requires a formal review before CAPE output is used in client-facing work.','Au moins deux signaux de risque élevé sont actifs simultanément sur ce corridor et sur un corridor lié. Cet état exige une revue formelle avant que les résultats de CAPE soient utilisés dans un travail destiné à des tiers.') };
+  if (lvl==='L3') return { cls:'elevated', icon:'↑', title:corrLabel+LX(': risk elevated',' : risque élevé'), body:LX('An actionable signal has been detected on this corridor. Review recommended before next use. The scenario bar above may not reflect current conditions.','Un signal exploitable a été détecté sur ce corridor. Une revue est recommandée avant la prochaine utilisation. La barre de scénario ci-dessus peut ne pas refléter les conditions actuelles.') };
+  if (lvl==='L2') return { cls:'elevated', icon:'·', title:corrLabel+LX(': signal flagged',' : signal relevé'), body:LX('A notable signal has been detected. Flagged for weekly review. No immediate action required, but monitor for escalation.','Un signal notable a été détecté. Signalé pour la revue hebdomadaire. Aucune action immédiate n’est requise, mais surveillez toute escalade.') };
   return null; // L1: normal -- show nothing
 }
 
@@ -1209,7 +1142,7 @@ function renderHeader() {
   if (sig) {
     const lvl = sig.threshold_level||'L1';
     if (lvl==='L4') pill = `<span class="alert-pill pill-alert"><span class="dot"></span>Active alert</span>`;
-    else if (lvl==='L3'||lvl==='L2') pill = `<span class="alert-pill pill-elevated"><span class="dot"></span>${c.short}: elevated</span>`;
+    else if (lvl==='L3'||lvl==='L2') pill = `<span class="alert-pill pill-elevated"><span class="dot"></span>${c.short}${LX(': elevated',' : élevé')}</span>`;
   }
   document.getElementById('hdrRight').innerHTML = pill + '<span>Narrows</span>';
 }
@@ -1238,14 +1171,14 @@ function renderHero() {
   const dePct = exposed.length>0?Math.round(de.length/exposed.length*100):0;
 
   document.getElementById('hGross').textContent = p+fM(gross);
-  document.getElementById('hGrossSub').textContent = 'Sum of corridor lines ('+S.duration+'d '+sevLabel(S.severity).toLowerCase()+')';
+  document.getElementById('hGrossSub').textContent = LX('Sum of corridor lines (','Somme des lignes de corridor (')+S.duration+LX('d ',' j, ')+sevLabel(S.severity).toLowerCase()+')';
   document.getElementById('hNet').textContent = p+fM(gross); // equals gross for single-corridor view
   document.getElementById('hCount').textContent = exposed.length+' / '+vessels.length;
-  document.getElementById('hCountSub').textContent = 'Exposed to '+c.short;
+  document.getElementById('hCountSub').textContent = LX('Exposed to ','Exposé à ')+c.short;
   const deEl = document.getElementById('hDE');
   deEl.textContent = dePct+'%';
   deEl.className = 'hstat-val'+(dePct>0?' warn':' muted');
-  document.getElementById('hDESub').textContent = de.length>0 ? de.length+' vessel'+(de.length>1?'s':'')+' CII-constrained' : 'No D/E vessels exposed';
+  document.getElementById('hDESub').textContent = de.length>0 ? de.length+LX(' vessel'+(de.length>1?'s':'')+' CII-constrained',' navire'+(de.length>1?'s':'')+' contraint'+(de.length>1?'s':'')+' par le CII') : 'No D/E vessels exposed';
 }
 
 /* ═══════════════════════════════
@@ -1262,16 +1195,16 @@ function legPanel(v){
   const fleetW=v.corridors[S.corridor];
   const fleetLine=fleetW?v.cargo_value*(RATES[v.cls][S.corridor]||0)*fleetW*(S.duration/30)*(S.severity/100)*A.wr:0;
   const nm=k=>(CORR[k]&&CORR[k].short)||(k.charAt(0).toUpperCase()+k.slice(1).replace(/_/g,' '));
-  const rows=r.legs.map(l=>`<tr><td>${l.kind==='port'?l.label+' (port call)':nm(l.label)}</td><td class="num">${l.zoneDays.toFixed(1)}d</td><td class="num">${(l.share*100).toFixed(0)}%</td><td class="num">${l.severity.toFixed(0)}%</td><td class="num">${(l.hit*100).toFixed(1)}%</td></tr>`).join('');
+  const rows=r.legs.map(l=>`<tr><td>${l.kind==='port'?l.label+LX(' (port call)',' (escale)'):nm(l.label)}</td><td class="num">${l.zoneDays.toFixed(1)}${LX('d',' j')}</td><td class="num">${(l.share*100).toFixed(0)}%</td><td class="num">${l.severity.toFixed(0)}%</td><td class="num">${(l.hit*100).toFixed(1)}%</td></tr>`).join('');
   return `
     <div class="vcol" style="grid-column:1/-1;border-top:var(--rule);padding:14px 20px">
-      <div class="vcol-head" style="margin-bottom:6px">Route-based exposure &middot; ${tpl.label}</div>
-      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Trade cycle ${r.cycleDays.toFixed(0)} days. Share caught = (scenario days + days in or near the passage) / cycle, capped at 100%. Only the selected corridor is disrupted, so legs on other corridors show 0%.</div>
+      <div class="vcol-head" style="margin-bottom:6px">${LX('Route-based exposure','Exposition par route')} &middot; ${T(tpl.label)}</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">${LX('Trade cycle '+r.cycleDays.toFixed(0)+' days. Share caught = (scenario days + days in or near the passage) / cycle, capped at 100%. Only the selected corridor is disrupted, so legs on other corridors show 0%.','Cycle commercial de '+r.cycleDays.toFixed(0)+' jours. Part touchée = (jours du scénario + jours dans le passage ou à proximité) / cycle, plafonnée à 100 %. Seul le corridor sélectionné est perturbé : les tronçons sur d’autres corridors affichent donc 0 %.')}</div>
       <table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="text-align:left;color:var(--text-muted)"><th>Leg</th><th class="num">Days in zone</th><th class="num">Share caught</th><th class="num">Severity</th><th class="num">Loss share</th></tr></thead><tbody>${rows}</tbody></table>
       <div style="margin-top:8px;font-size:12px;line-height:1.6">
-        Route-based VaR <b>${fM(r.var)}</b> (${(r.fraction*100).toFixed(1)}% of cargo, cannot exceed cargo value).
-        ${fleetLine?` Fleet-average line for comparison: ${fM(fleetLine)}${fleetLine>v.cargo_value?' (exceeds cargo value)':''}.`:''}
-        ${alt?` Same cargo on the alternative route (${altTpl.label}): <b>${fM(alt.var)}</b>${alt.var===0?' (not exposed to this corridor)':''}, cycle ${alt.cycleDays.toFixed(0)} days.`:''}
+        ${LX('Route-based VaR','VaR par route')} <b>${fM(r.var)}</b> (${(r.fraction*100).toFixed(1)}${LX('% of cargo, cannot exceed cargo value).',' % de la cargaison, ne peut pas dépasser la valeur de la cargaison).')}
+        ${fleetLine?` ${LX('Fleet-average line for comparison: ','Ligne en moyenne de flotte à titre de comparaison : ')}${fM(fleetLine)}${fleetLine>v.cargo_value?LX(' (exceeds cargo value)',' (dépasse la valeur de la cargaison)'):''}.`:''}
+        ${alt?` ${LX('Same cargo on the alternative route','Même cargaison sur la route alternative')} (${T(altTpl.label)})${LX(':',' :')} <b>${fM(alt.var)}</b>${alt.var===0?LX(' (not exposed to this corridor)',' (non exposée à ce corridor)'):''}, ${LX('cycle '+alt.cycleDays.toFixed(0)+' days.','cycle de '+alt.cycleDays.toFixed(0)+' jours.')}`:''}
       </div>
     </div>`;
 }
@@ -1300,6 +1233,7 @@ function renderCards() {
     const corrList=Object.keys(v.corridors).map(x=>CORR[x]?.short||x).join(' + ');
     const fcHtml = v.jwc_flag==='listed'?'<span class="flag-chip fc-listed">&#9651; In listed area</span>'
                   :v.jwc_flag==='divert'?'<span class="flag-chip fc-divert">&#9650; Diversion risk</span>'
+                  :v.jwc_flag==='boundary'?'<span class="flag-chip fc-divert">&#9651; Boundary: check circular</span>'
                   :'<span class="flag-chip fc-clear">&#10003; No listed area</span>';
     return `<div class="${cls}" id="vc${i}">
       <div class="vhead" onclick="tvcard(${i})">
@@ -1316,7 +1250,7 @@ function renderCards() {
         </div>
         <div class="vvar">
           <div class="vvar-label">Corridor VaR</div>
-          ${exp?`<div class="vvar-val">${px}${fM(val)}</div><div class="vvar-pct">${(val/v.cargo_value*100).toFixed(1)}% of cargo</div>`:'<div class="vvar-nil">Not exposed</div>'}
+          ${exp?`<div class="vvar-val">${px}${fM(val)}</div><div class="vvar-pct">${(val/v.cargo_value*100).toFixed(1)}${LX('% of cargo',' % de la cargaison')}</div>`:'<div class="vvar-nil">Not exposed</div>'}
         </div>
       </div>
       <div class="vbody" id="vb${i}">
@@ -1333,7 +1267,7 @@ function renderCards() {
           <div class="vrow"><span class="vk">Cargo type</span><span class="vv">${v.cargo_type||'--'}</span></div>
           <div class="vrow"><span class="vk">Cargo value</span><span class="vv hi">${fM(v.cargo_value)}</span></div>
           ${v.diversion?`<div class="vrow"><span class="vk">Diversion route</span><span class="vv">${v.diversion}</span></div>`:''}
-          ${v.div_days?`<div class="vrow"><span class="vk">Diversion adds</span><span class="vv hi">+${v.div_days}d</span></div>`:''}
+          ${v.div_days?`<div class="vrow"><span class="vk">Diversion adds</span><span class="vv hi">+${v.div_days}${LX('d',' j')}</span></div>`:''}
           ${divCost(v)?`<div class="vrow"><span class="vk">Diversion cost</span><span class="vv hi">${fM(divCost(v))} / voyage</span></div>`:''}
           <div class="vrow"><span class="vk">JWC status</span><span class="vv">${fcHtml}</span></div>
           ${v.owner?`<div class="vrow"><span class="vk">Owner / operator</span><span class="vv">${v.owner}</span></div>`:''}
@@ -1386,29 +1320,27 @@ function renderP1() {
   document.getElementById('b1').innerHTML = `
     <div class="var-blocks">
       <div class="var-block">
-        <div class="var-block-label">Gross VaR &middot; ${c.short} &middot; ${S.duration}d</div>
+        <div class="var-block-label">${LX('Gross VaR','VaR brute')} &middot; ${c.short} &middot; ${S.duration}${LX('d',' j')}</div>
         <div class="var-block-val">${p}${fM(gross)}</div>
-        <div class="var-block-sub">${sevLabel(S.severity)} scenario &middot; ${tp(c.tier)}</div>
+        <div class="var-block-sub">${LX(sevLabel(S.severity)+' scenario','Scénario : '+sevLabel(S.severity).toLowerCase())} &middot; ${tp(c.tier)}</div>
       </div>
       <div class="var-block">
-        <div class="var-block-label">Portfolio gross VaR &middot; all corridors</div>
+        <div class="var-block-label">${LX('Portfolio gross VaR','VaR brute du portefeuille')} &middot; ${LX('all corridors','tous corridors')}</div>
         <div class="var-block-val">~${fM(portTotal)}</div>
-        <div class="var-block-sub">All corridors, same scenario</div>
+        <div class="var-block-sub">${LX('All corridors, same scenario','Tous les corridors, même scénario')}</div>
       </div>
     </div>
     <div style="font-size:13px;color:var(--text-muted);line-height:1.75;margin-bottom:20px">
-      Gross VaR sums each vessel's exposure per corridor independently.
-      Multi-corridor vessels appear in each corridor line. Net VaR would count each vessel once at its highest single-corridor VaR.
-      For single-corridor scenario views, gross and net are equal.
+      ${LX('Gross VaR sums each vessel’s exposure per corridor independently. Multi-corridor vessels appear in each corridor line. Net VaR would count each vessel once at its highest single-corridor VaR. For single-corridor scenario views, gross and net are equal.','La VaR brute additionne séparément l’exposition de chaque navire par corridor. Les navires multi-corridors apparaissent dans chaque ligne de corridor. La VaR nette compterait chaque navire une seule fois, à sa VaR la plus élevée sur un corridor. Pour les scénarios à corridor unique, VaR brute et VaR nette sont égales.')}
     </div>
     ${concRows}
     <div class="chart-wrap">
-      <div class="chart-label">Portfolio concentration by corridor &middot; $M &middot; ${S.duration}d ${sevLabel(S.severity).toLowerCase()}</div>
+      <div class="chart-label">${LX('Portfolio concentration by corridor','Concentration du portefeuille par corridor')} &middot; ${LX('$M','M$')} &middot; ${S.duration}${LX('d',' j')} ${sevLabel(S.severity).toLowerCase()}</div>
       <canvas id="cChart" height="110"></canvas>
     </div>`;
 
   if (chartInst){chartInst.destroy();chartInst=null}
-  const labels=['Hormuz','BAM','Malacca','Panama','Suez','Lombok','Bosphorus','Danish Str.'];
+  const labels=['Hormuz','BAM','Malacca','Panama','Suez','Lombok','Bosphorus','Danish Str.'].map(T);
   const vals=corrOrder.map(k=>Math.round((bc[k]||0)/1e6*10)/10);
   const colors=corrOrder.map(k=>k===S.corridor?'#0A2540':'rgba(10,37,64,0.10)');
   const ctx=document.getElementById('cChart');
@@ -1417,8 +1349,8 @@ function renderP1() {
       chartInst=new Chart(ctx.getContext('2d'),{
         type:'bar',
         data:{labels,datasets:[{data:vals,backgroundColor:colors,borderRadius:3,borderSkipped:false}]},
-        options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.raw.toFixed(1)+'M'},backgroundColor:'#0A2540',borderColor:'rgba(10,37,64,0.12)',borderWidth:1,titleColor:'#ffffff',bodyColor:'rgba(255,255,255,0.65)',titleFont:{family:'DM Mono',size:11},bodyFont:{family:'DM Mono',size:10}}},
-          scales:{x:{grid:{color:'#DDE4EF'},ticks:{color:'#4A6078',font:{family:'DM Mono',size:10},callback:v=>'$'+v+'M'}},y:{grid:{display:false},ticks:{color:'#0A2540',font:{family:'DM Mono',size:11}}}}}
+        options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>LX(' $'+c.raw.toFixed(1)+'M',' '+c.raw.toFixed(1).replace('.',',')+' M$')},backgroundColor:'#0A2540',borderColor:'rgba(10,37,64,0.12)',borderWidth:1,titleColor:'#ffffff',bodyColor:'rgba(255,255,255,0.65)',titleFont:{family:'DM Mono',size:11},bodyFont:{family:'DM Mono',size:10}}},
+          scales:{x:{grid:{color:'#DDE4EF'},ticks:{color:'#4A6078',font:{family:'DM Mono',size:10},callback:v=>LX('$'+v+'M',v+' M$')}},y:{grid:{display:false},ticks:{color:'#0A2540',font:{family:'DM Mono',size:11}}}}}
       });
     } catch(chartErr) {
       console.warn('[Narrows] Chart render failed -- continuing without the corridor chart.', chartErr);
@@ -1442,25 +1374,35 @@ function renderP2() {
       <div class="risk-state-icon">${st.icon}</div>
       <div><div class="risk-state-title">${st.title}</div><div class="risk-state-text">${st.body}</div></div>
     </div>`;
-  } else if(c.jwc){
-    riskBar=`<div class="risk-state elevated">
-      <div class="risk-state-icon">&#9651;</div>
-      <div><div class="risk-state-title">${c.short} is a JWC Listed Area</div>
-      <div class="risk-state-text">${c.desc}</div></div>
-    </div>`;
   } else {
-    riskBar=`<div class="risk-state normal">
-      <div class="risk-state-icon">&#10003;</div>
-      <div><div class="risk-state-title">${c.short}: no listed area designation</div>
-      <div class="risk-state-text">${c.desc}</div></div>
+    const circ = CAPE_JWC_CIRCULAR ? LX(' Status computed from '+CAPE_JWC_CIRCULAR+'.',' Statut calculé à partir de '+CAPE_JWC_CIRCULAR+'.') : '';
+    if (c.status==='listed') {
+      riskBar=`<div class="risk-state elevated">
+      <div class="risk-state-icon">&#9651;</div>
+      <div><div class="risk-state-title">${c.short}${LX(' is a JWC Listed Area',' : zone listée par le JWC')}</div>
+      <div class="risk-state-text">${c.desc}${circ}</div></div>
     </div>`;
+    } else if (c.status==='boundary') {
+      riskBar=`<div class="risk-state elevated">
+      <div class="risk-state-icon">&#9651;</div>
+      <div><div class="risk-state-title">${c.short}${LX(': near a listed-area boundary',' : près de la limite d’une zone listée')}</div>
+      <div class="risk-state-text">${LX('The mid-strait point lies within '+c.edgeKm+' km of the edge of an approximate area outline. Check the current circular before relying on this status. ','Le point central du détroit se trouve à moins de '+c.edgeKm+' km du bord d’un contour de zone approximatif. Vérifiez la circulaire en vigueur avant de vous fier à ce statut. ')}${c.desc}${circ}</div></div>
+    </div>`;
+    } else {
+      riskBar=`<div class="risk-state normal">
+      <div class="risk-state-icon">&#10003;</div>
+      <div><div class="risk-state-title">${c.short}${LX(': no listed area designation',' : aucune zone listée')}</div>
+      <div class="risk-state-text">${c.desc}${circ}</div></div>
+    </div>`;
+    }
   }
 
   const sorted=[...activeVessels()].sort((a,b)=>{
-    const o={divert:0,listed:1,clear:2};return(o[a.jwc_flag]||2)-(o[b.jwc_flag]||2);
+    const o={divert:0,listed:1,boundary:2,clear:3};return(o[a.jwc_flag]??3)-(o[b.jwc_flag]??3);
   });
   const fcH=f=>f==='listed'?'<span class="flag-chip fc-listed">&#9651; In listed area</span>'
               :f==='divert'?'<span class="flag-chip fc-divert">&#9650; Diversion risk</span>'
+              :f==='boundary'?'<span class="flag-chip fc-divert">&#9651; Boundary: check circular</span>'
               :'<span class="flag-chip fc-clear">&#10003; No exposure</span>';
 
   const rows=sorted.map(v=>`<tr>
@@ -1472,10 +1414,8 @@ function renderP2() {
 
   const divCount=activeVessels().filter(v=>v.jwc_flag==='divert').length;
   const divNote=divCount>0?`<div class="unpriced-note">
-    <strong style="color:#B91C1C">The diversion risk flag is the unpriced scenario.</strong>
-    ${divCount} vessel${divCount>1?'s have':'has'} a standard route war risk attachment
-    that does not cover the diversion route currently being taken.
-    These vessels may be transiting a listed area or high-risk zone without valid war risk cover.
+    <strong style="color:#B91C1C">${LX('The diversion risk flag is the unpriced scenario.','L’alerte de risque de déroutement correspond au scénario non tarifé.')}</strong>
+    ${LX(divCount+' vessel'+(divCount>1?'s have':' has')+' a standard route war risk attachment that does not cover the diversion route currently being taken. These vessels may be transiting a listed area or high-risk zone without valid war risk cover.',divCount+' navire'+(divCount>1?'s ont':' a')+' une garantie risque de guerre de route standard qui ne couvre pas la route de déroutement actuellement suivie. Ces navires peuvent traverser une zone listée ou à haut risque sans couverture valide du risque de guerre.')}
   </div>`:'';
 
   // Waypoint PRI section
@@ -1495,10 +1435,8 @@ function renderP2() {
       </tr>`;
     }).join('');
     const jwcWarn = jwcWaypoints.length>0?`<div class="unpriced-note" style="margin-top:14px">
-      <strong style="color:#B91C1C">${jwcWaypoints.length} vessel${jwcWaypoints.length>1?'s have':'has'} a port stop in a JWC Listed Area.</strong>
-      A standard route war risk attachment may not automatically extend to named port calls outside the primary voyage corridor.
-      Verify held-covered status for each flagged stop. Djibouti is the most common exposure: vessels diverting around Bab-el-Mandeb
-      frequently bunker there, placing them inside the Gulf of Aden listed area on the diversion route itself.
+      <strong style="color:#B91C1C">${LX(jwcWaypoints.length+' vessel'+(jwcWaypoints.length>1?'s have':' has')+' a port stop in a JWC Listed Area.',jwcWaypoints.length+' navire'+(jwcWaypoints.length>1?'s ont':' a')+' une escale dans une zone listée par le JWC.')}</strong>
+      ${LX('A standard route war risk attachment may not automatically extend to named port calls outside the primary voyage corridor. Verify held-covered status for each flagged stop. Djibouti is the most common exposure: vessels diverting around Bab-el-Mandeb frequently bunker there, placing them inside the Gulf of Aden listed area on the diversion route itself.','Une garantie risque de guerre de route standard ne s’étend pas nécessairement aux escales nommées situées hors du corridor principal du voyage. Vérifiez le statut « held covered » pour chaque escale signalée. Djibouti est l’exposition la plus courante : les navires qui contournent Bab-el-Mandeb y font souvent soute, ce qui les place dans la zone listée du golfe d’Aden sur la route de déroutement elle-même.')}
     </div>`:'';
     wpSection = `<div style="margin-top:28px;padding-top:20px;border-top:var(--rule)">
       <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px">Port stops &middot; PRI &amp; JWC flags</div>
@@ -1553,7 +1491,7 @@ function renderP3() {
       <div class="cii-cell">
         <div class="hstat-label">D/E fraction</div>
         <div class="hstat-val${dePct>0?' warn':' muted'}">${dePct}%</div>
-        <div class="hstat-sub">${de.length} of ${res.length} exposed</div>
+        <div class="hstat-sub">${de.length}${LX(' of ',' sur ')}${res.length}${LX(' exposed',' exposés')}</div>
       </div>
       <div class="cii-cell">
         <div class="hstat-label">D/E VaR</div>
@@ -1583,7 +1521,7 @@ function renderP3() {
    RENDER: PANEL 04 -- BILATERAL
 ═══════════════════════════════ */
 function renderP4() {
-  const c=CORR[S.corridor]; const data=BIL[S.corridor];
+  const c=CORR[S.corridor]; const data=BIL[S.corridor]||{};
   const dm=S.duration/30; const sm=(S.severity/100 * A.wr);
   let tot=0; let rows='';
   const COMM_LABEL={crude:'Crude',lng:'LNG',coal:'Coal',grain:'Grain',refined:'Refined petroleum',
@@ -1609,13 +1547,13 @@ function renderP4() {
   document.getElementById('b4').innerHTML=`
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px">
       <div>
-        <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">${c.label} &middot; importer VaR</div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">${c.label} &middot; ${LX('importer VaR','VaR des importateurs')}</div>
         <div style="font-family:'Instrument Serif',serif;font-size:32px;color:var(--navy)">${totDisplay}</div>
-        <div style="font-size:13px;color:var(--text-muted)">${S.duration}d ${sevLabel(S.severity).toLowerCase()} &middot; selected importers</div>
+        <div style="font-size:13px;color:var(--text-muted)">${S.duration}${LX('d',' j')}${LX(' ',', ')}${sevLabel(S.severity).toLowerCase()} &middot; ${LX('selected importers','importateurs retenus')}</div>
       </div>${tp(c.tier)}
     </div>
     <table class="bil-table">
-      <thead><tr><th>Importer</th><th class="r">Corridor dep.</th><th class="r">VaR (${S.duration}d)</th><th>Source</th></tr></thead>
+      <thead><tr><th>Importer</th><th class="r">Corridor dep.</th><th class="r">VaR (${S.duration}${LX('d',' j')})</th><th>Source</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
     ${!isT1?'<div style="margin-top:14px;font-size:13px;color:var(--text-muted);line-height:1.7;padding-top:14px;border-top:var(--rule)">Figures marked with ~ are directional estimates only. Reported (T1) figures are validated against UN Comtrade bilateral data; Corroborated (T2) and Estimated (T3) figures use progressively more inferred routing, per the Narrows data verification policy.</div>':''}`;
@@ -1644,7 +1582,7 @@ function renderAll() {
     renderP3();
     renderP4();
     const ct=document.getElementById('portCount');
-    if(ct&&S.mode==='custom') ct.textContent=customVessels.length+' vessel'+(customVessels.length!==1?'s':'');
+    if(ct&&S.mode==='custom') ct.textContent=customVessels.length+LX(' vessel'+(customVessels.length!==1?'s':''),' navire'+(customVessels.length!==1?'s':''));
   } catch (err) {
     console.error('[Narrows] renderAll() failed partway through -- some panels may be stale or incomplete.', err);
   }
@@ -1675,9 +1613,10 @@ ni.addEventListener('input',()=>{
 /* Closure rate: slider + number input + presets */
 function fmtClosureFrac(pct){
   if(pct <= 0) return '';
-  if(pct >= 100) return 'full stop';
+  if(pct >= 100) return LX('full stop','arrêt total');
   const n = 100 / pct;
-  return '1 in '+(n >= 100 ? Math.round(n) : n.toFixed(1))+' transits';
+  const nn = (n >= 100 ? Math.round(n) : n.toFixed(1));
+  return LX('1 in '+nn+' transits','1 transit sur '+String(nn).replace('.',','));
 }
 function syncSev(pct){
   document.querySelectorAll('.sev-preset').forEach(b=>{
@@ -1745,7 +1684,7 @@ function applyScenario(key){
 
   document.querySelectorAll('.scn-preset').forEach(b=>b.classList.toggle('on', b.dataset.key===key));
   const noteEl = document.getElementById('scnNote');
-  noteEl.innerHTML = s.note;
+  noteEl.innerHTML = (window.CAPE_FR && window.CAPE_I18N.scen[key]) || s.note;
   noteEl.classList.add('show');
 
   renderAll();
@@ -1847,10 +1786,10 @@ function saveVessel() {
   const cls=document.getElementById('f-cls').value;
   const cii=document.getElementById('f-cii').value;
   const cargoVal=parseFloat(document.getElementById('f-val').value)||0;
-  if(!name||!cls||cargoVal<=0){alert('Please fill in vessel name, class, and cargo value.');return}
+  if(!name||!cls||cargoVal<=0){alert(LX('Please fill in vessel name, class, and cargo value.','Renseignez le nom du navire, sa classe et la valeur de la cargaison.'));return}
 
   const checked=[...document.querySelectorAll('#corrChecks input:checked')].map(i=>i.value);
-  if(checked.length===0){alert('Select at least one corridor.');return}
+  if(checked.length===0){alert(LX('Select at least one corridor.','Sélectionnez au moins un corridor.'));return}
 
   const corridors={};
   checked.forEach(c=>corridors[c]=1.0);
@@ -1866,8 +1805,9 @@ function saveVessel() {
     owner:document.getElementById('f-owner').value.trim()||null,
     route:from&&to?from+' → '+to:'',
     diversion:null,div_days:null,div_cost:null,status:null,
-    jwc_flag: checked.some(c=>CORR[c]?.jwc)?'listed':'clear',
-    jwc_text: checked.some(c=>CORR[c]?.jwc)?'Standard route transits a JWC Listed Area.':'No JWC Listed Area on standard route.',
+    waypoints: [from,to].filter(p=>PORT_RISK[p]),
+    jwc_flag: computeJwc(checked,[from,to]).flag,
+    jwc_text: jwcText(computeJwc(checked,[from,to]),null),
     note:document.getElementById('f-notes').value.trim()||''
   });
 
@@ -1884,12 +1824,13 @@ function saveVessel() {
 /* ═══════════════════════════════
    CSV UPLOAD
 ═══════════════════════════════ */
+const csvWp = get => (get('waypoints')||'').split(/[|,;]/).map(x=>x.trim()).filter(Boolean);
 function handleCSV(e) {
   const file=e.target.files[0]; if(!file)return;
   const reader=new FileReader();
   reader.onload=evt=>{
     const lines=evt.target.result.split('\n').filter(l=>l.trim());
-    if(lines.length<2){alert('CSV appears empty.');return}
+    if(lines.length<2){alert(LX('CSV appears empty.','Le fichier CSV semble vide.'));return}
     const hdr=lines[0].split(',').map(h=>h.trim().toLowerCase());
     const idx=k=>hdr.indexOf(k);
     let added=0;
@@ -1917,22 +1858,22 @@ function handleCSV(e) {
         owner:get('owner')||null,
         route:get('route_from')&&get('route_to')?get('route_from')+' → '+get('route_to'):'',
         diversion:null,div_days:null,div_cost:null,status:get('current_status')||null,
-        jwc_flag:corrKeys.some(c=>CORR[c]?.jwc)?'listed':'clear',
-        jwc_text:corrKeys.some(c=>CORR[c]?.jwc)?'Standard route transits a JWC Listed Area.':'No JWC Listed Area on standard route.',
-        waypoints:(get('waypoints')||'').split(/[|,;]/).map(x=>x.trim()).filter(Boolean),
+        jwc_flag:computeJwc(corrKeys,csvWp(get)).flag,
+        jwc_text:jwcText(computeJwc(corrKeys,csvWp(get)),null),
+        waypoints:csvWp(get),
         note:get('notes')||''
       });
       added++;
     }
     e.target.value='';
-    if(added===0){alert('No valid vessel rows found. Check that required columns (name, class, cargo_value, corridors) are present.');return}
+    if(added===0){alert(LX('No valid vessel rows found. Check that required columns (name, class, cargo_value, corridors) are present.','Aucune ligne de navire valide. Vérifiez que les colonnes obligatoires (name, class, cargo_value, corridors) sont présentes.'));return}
     if(S.mode!=='custom'){
       document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('on'));
       document.querySelector('.ptab[data-m="custom"]').classList.add('on');
       S.mode='custom';document.getElementById('portToolbar').style.display='flex';
     }
     renderAll();
-    alert(`${added} vessel${added!==1?'s':''} imported successfully.`);
+    alert(LX(`${added} vessel${added!==1?'s':''} imported successfully.`,`${added} navire${added!==1?'s':''} importé${added!==1?'s':''} avec succès.`));
   };
   reader.readAsText(file);
 }
@@ -1940,7 +1881,7 @@ function handleCSV(e) {
 function downloadTemplate() {
   const hdr='imo,name,class,flag,owner,route_from,route_to,cargo_type,cargo_value,corridors,waypoints,cii,current_status,notes\n';
   const ex='9100099,MV Example,VLCC,Marshall Islands,Example Shipping Co,Ras Tanura,Chiba,Saudi crude,95000000,hormuz,Fujairah|Singapore,A,,Example note\n';
-  const note='# waypoints: pipe-separated port call names used for PRI scoring. e.g. Fujairah|Singapore|Rotterdam\n# corridors: pipe-separated corridor keys. e.g. hormuz|malacca\n';
+  const note=LX('# waypoints: pipe-separated port call names used for PRI scoring. e.g. Fujairah|Singapore|Rotterdam\n# corridors: pipe-separated corridor keys. e.g. hormuz|malacca\n','# waypoints : noms d’escales séparés par « | », utilisés pour le score PRI. p. ex. Fujairah|Singapore|Rotterdam\n# corridors : clés de corridor séparées par « | ». p. ex. hormuz|malacca\n');
   const blob=new Blob([note+hdr+ex],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='CAPE_vessel_template.csv';a.click();
@@ -1955,30 +1896,30 @@ function generateReport() {
   const vessels=activeVessels();
   const gross=grossVaR(vessels,S.corridor,S.duration,S.severity);
   const res=vessels.map(v=>({v,var:vcVar(v,S.corridor,S.duration,S.severity)})).sort((a,b)=>b.var-a.var);
-  const lines=['CAPE: Corridor Accumulation and Portfolio Exposure','Narrows','='.repeat(56),'',
-    'SCENARIO',`Corridor:  ${c.label} (${c.type})`,`Duration:  ${S.duration} days`,
-    `Severity:  ${sevLabel(S.severity)}`,`Source:    ${c.tier} data`,'',
-    'PORTFOLIO SUMMARY',`Corridor VaR (${S.duration}d):  ${fM(gross)}`,
-    `Vessels exposed:  ${res.filter(r=>r.var>0).length} of ${vessels.length}`,'','PER-VESSEL BREAKDOWN',''];
+  const lines=[LX('CAPE: Corridor Accumulation and Portfolio Exposure','CAPE : accumulation par corridor et exposition d’un portefeuille'),'Narrows','='.repeat(56),'',
+    LX('SCENARIO','SCÉNARIO'),`${LX('Corridor:  ','Corridor :  ')}${c.label} (${LX(c.type,c.type==='terminal'?'terminal':'transit')})`,`${LX('Duration:  ','Durée :  ')}${S.duration} ${LX('days','jours')}`,
+    `${LX('Severity:  ','Gravité :  ')}${sevLabel(S.severity)}`,`${LX('Source:    ','Source :  ')}${LX(c.tier+' data','données '+c.tier)}`,'',
+    LX('PORTFOLIO SUMMARY','SYNTHÈSE DU PORTEFEUILLE'),`${LX('Corridor VaR ('+S.duration+'d):  ','VaR du corridor ('+S.duration+' j) :  ')}${fM(gross)}`,
+    `${LX('Vessels exposed:  ','Navires exposés :  ')}${res.filter(r=>r.var>0).length}${LX(' of ',' sur ')}${vessels.length}`,'',LX('PER-VESSEL BREAKDOWN','DÉTAIL PAR NAVIRE'),''];
   for(const r of res){
     const v=r.v;
-    lines.push(`${v.name}  [${v.cls_label}]  [CII ${v.cii}]`);
-    if(v.route)lines.push(`  Route:    ${v.route}`);
-    lines.push(`  Cargo:    ${v.cargo_type}  ${fM(v.cargo_value)}`);
-    lines.push(`  VaR:      ${r.var>0?fM(r.var):'Not exposed to '+c.short}`);
-    const _dc=divCost(v); if(_dc)lines.push(`  Diversion: ${v.diversion}  ${fM(_dc)} / voyage (+${v.div_days}d)`);
+    lines.push(`${v.name}  [${T(v.cls_label)}]  [CII ${v.cii}]`);
+    if(v.route)lines.push(`  ${LX('Route:    ','Route :    ')}${v.route}`);
+    lines.push(`  ${LX('Cargo:    ','Cargaison :  ')}${v.cargo_type}  ${fM(v.cargo_value)}`);
+    lines.push(`  VaR:      ${r.var>0?fM(r.var):LX('Not exposed to ','Non exposé à ')+c.short}`);
+    const _dc=divCost(v); if(_dc)lines.push(`  ${LX('Diversion: ','Déroutement : ')}${v.diversion}  ${fM(_dc)} / ${LX('voyage','voyage')} (+${v.div_days}${LX('d',' j')})`);
     lines.push('');
   }
   lines.push('='.repeat(56));
-  lines.push('Model estimate mode. Illustrative portfolio only.');
-  lines.push(`Generated: ${new Date().toISOString().slice(0,19).replace('T',' ')} UTC`);
+  lines.push(LX('Model estimate mode. Illustrative portfolio only.','Mode estimation du modèle. Portefeuille illustratif uniquement.'));
+  lines.push(`${LX('Generated: ','Généré le : ')}${new Date().toISOString().slice(0,19).replace('T',' ')} UTC`);
   lines.push('narrows.io');
   return lines.join('\n');
 }
 
 function copyReport(){
   navigator.clipboard.writeText(generateReport()).then(()=>{
-    const b=event.target;const o=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=o,2000);
+    const b=event.target;const o=b.textContent;b.textContent=LX('Copied','Copié');setTimeout(()=>b.textContent=o,2000);
   });
 }
 function dlTxt(){
@@ -1991,16 +1932,7 @@ function dlTxt(){
 /* ═══════════════════════════════
    TIDE — Accumulation data
 ═══════════════════════════════ */
-const TIDE_DATA_FALLBACK = {
-  hormuz:        {baseline:21.83,peak:25.63,horizon:31.22,cascade:25.63,pml:3.38,peakMonth:'Jul',cascadeRatio:1.0, cascadeRoute:null},
-  bab_el_mandeb: {baseline:10.72,peak:12.74,horizon:14.74,cascade:23.58,pml:1.64,peakMonth:'Jul',cascadeRatio:1.85,cascadeRoute:'Cape of Good Hope accumulation spikes — correlated exposure for Cape war risk writers'},
-  malacca:       {baseline:25.22,peak:29.86,horizon:38.23,cascade:39.56,pml:4.19,peakMonth:'Jan',cascadeRatio:1.32,cascadeRoute:'Lombok and Sunda strait traffic increases'},
-  suez:          {baseline:10.80,peak:12.83,horizon:14.81,cascade:23.53,pml:1.65,peakMonth:'Jul',cascadeRatio:1.83,cascadeRoute:'Cape of Good Hope accumulation spikes — correlated exposure for Cape war risk writers'},
-  panama:        {baseline:27.29,peak:31.88,horizon:33.85,cascade:69.43,pml:3.94,peakMonth:'Jul',cascadeRatio:2.18,cascadeRoute:'Cape Horn and Suez westbound accumulation spikes sharply'},
-  lombok:        {baseline:30.30,peak:35.55,horizon:38.80,cascade:38.36,pml:3.77,peakMonth:'Jun',cascadeRatio:1.08,cascadeRoute:'Malacca and Sunda traffic redistributes'},
-  bosphorus:     {baseline:5.90, peak:6.88, horizon:8.43, cascade:6.88, pml:0.90,peakMonth:'Jul',cascadeRatio:1.0, cascadeRoute:null},
-  danish_straits:{baseline:3.07, peak:3.56, horizon:4.62, cascade:3.56, pml:0.53,peakMonth:'Jul',cascadeRatio:1.0, cascadeRoute:'No alternative route — no cascade effect'}
-};
+const TIDE_DATA_FALLBACK = {};   // no typed fallback: figures come only from cape_tide_feed.json (panel hides if the feed fails)
 // Fix-116 (2026-09-10): synced to the live cape_tide_feed.json as of the
 // Fix-115 pipeline proof run. This is demo-only data (used solely when the
 // live feed fetch below fails) -- refresh it whenever the pipeline's
@@ -2012,7 +1944,8 @@ const TIDE_DATA_FALLBACK = {
 // stale right alongside them.
 
 function fTIDE(b){
-  if(b===0)return 'n/a';
+  if(b===0)return LX('n/a','n/d');
+  if(window.CAPE_FR) return b>=1?b.toFixed(1).replace('.',',')+'\u00a0Md$':Math.round(b*1000)+'\u00a0M$';
   return b>=1?'$'+b.toFixed(1)+'B':'$'+(b*1000).toFixed(0)+'M';
 }
 
@@ -2063,8 +1996,8 @@ function renderTIDE(){
   const cascNote = document.getElementById('tide-cascade-note');
   if(td.cascadeRoute && td.cascadeRatio){
     cascNote.style.display='block';
-    cascNote.innerHTML = '<strong>Cascade:</strong> ' + td.cascadeRoute +
-      '. 30-day closure scenario: <strong>' + fTIDE(td.cascade) + '</strong> simultaneously at sea on diversion routes.';
+    cascNote.innerHTML = '<strong>' + LX('Cascade:','Cascade :') + '</strong> ' + T(td.cascadeRoute) +
+      LX('. 30-day closure scenario: ','. Scénario de fermeture de 30 jours : ') + '<strong>' + fTIDE(td.cascade) + '</strong>' + LX(' simultaneously at sea on diversion routes.',' simultanément en mer sur les routes de déroutement.');
   } else {
     cascNote.style.display='none';
   }
@@ -2076,19 +2009,10 @@ function renderTIDE(){
    INIT
 ═══════════════════════════════ */
 (async function init() {
-  const CAPE_ENDPOINT = 'https://arrows-weights-api.fysh.workers.dev';
-  const CAPE_TOKEN    = 'a2c184f13aa8f60a03f33075172f204b';
-  try {
-    const r = await fetch(CAPE_ENDPOINT, {
-      headers: { 'Authorization': 'Bearer ' + CAPE_TOKEN }
-    });
-    if (!r.ok) throw new Error('weights endpoint returned ' + r.status);
-    const d = await r.json();
-    RATES     = d.rates;
-    PORT_RISK = d.portRisk;
-  } catch (e) {
-    console.warn('[Narrows] Weights endpoint unreachable — VaR display degraded:', e.message);
-  }
+  // Day-rate weights are public (NARROWS-RATES.js); port data and listed-area status come from the generated feeds.
+  try { RATES = window.NARROWS_RATES.corridorWeights; }
+  catch (e) { console.warn('[Narrows] NARROWS-RATES.js did not load; VaR will show zero.', e); }
+  await Promise.all([loadPorts(), loadFleet()]);
   renderAll();
   renderTIDE();
   loadCorridorFeed();

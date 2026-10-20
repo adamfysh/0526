@@ -1,0 +1,638 @@
+{
+ "path": "analysis/hormuz",
+ "meta": {
+  "title": "Narrows — Ormuz et les limites de l’indice.",
+  "description": "Le Baltic Dirty Tanker Index a augmenté de 156 % depuis le début de la perturbation. Ces chiffres confirment que le marché a intégré une perturbation sévère. Ils ne disent pas quelles chaînes d’approvisionnement bilatérales portent l’exposition, à quel pourcentage de l’approvisionnement total, ni ce que coûte chaque voie alternative pour chaque classe de navires."
+ },
+ "pairs": [
+  [
+   "Scenario analysis · Strait of Hormuz · May 2026, updated Aug 2026",
+   "Analyse de scénarios · Détroit d’Ormuz · mai 2026, mis à jour en août 2026"
+  ],
+  [
+   "Hormuz and the <em>limits of the index.</em>",
+   "Ormuz et les <em>limites de l’indice.</em>"
+  ],
+  [
+   "The Baltic Dirty Tanker Index has risen 156% since the disruption began. These numbers confirm that the market has priced in severe disruption. They cannot tell you which specific bilateral supply chains carry the exposure, at what percentage of total supply, or what each alternative pathway costs for each vessel class.",
+   "Le Baltic Dirty Tanker Index a augmenté de 156 % depuis le début de la perturbation. Ces chiffres confirment que le marché a intégré une perturbation sévère. Ils ne disent pas quelles chaînes d’approvisionnement bilatérales portent l’exposition, à quel pourcentage de l’approvisionnement total, ni ce que coûte chaque voie alternative pour chaque classe de navires."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">May 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">14 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">mai 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">14 min de lecture</span>"
+  ],
+  [
+   "BDTI vs 2024 baseline",
+   "BDTI par rapport à la base 2024"
+  ],
+  [
+   "Tanker freight, live market (LSEG / UNCTAD)",
+   "Fret pétrolier, marché en direct (LSEG / CNUCED)"
+  ],
+  [
+   "Cape reroute VLCC, current rates",
+   "Déroutement d’un VLCC par le Cap, taux actuels"
+  ],
+  [
+   "Per voyage vs. Hormuz transit at current VLSFO",
+   "Par voyage, par rapport à un transit par Ormuz au VLSFO actuel"
+  ],
+  [
+   "Qatar Hormuz dependency",
+   "Dépendance du Qatar envers Ormuz"
+  ],
+  [
+   "No alternative maritime exit exists",
+   "Aucune sortie maritime alternative n’existe"
+  ],
+  [
+   "Toll breakeven VLCC",
+   "Seuil de péage de rentabilité pour un VLCC"
+  ],
+  [
+   "Above this, Cape diversion becomes rational",
+   "Au-delà, le détour par le Cap devient rationnel"
+  ],
+  [
+   "Strait of Hormuz · 39 km wide · 20% of global oil supply",
+   "Détroit d’Ormuz · 39 km de large · 20 % de l’offre mondiale de pétrole"
+  ],
+  [
+   "The analytical gap",
+   "Le manque analytique"
+  ],
+  [
+   "What market indices can tell you, and what they cannot.",
+   "Ce que les indices de marché peuvent dire, et ce qu’ils ne peuvent pas dire."
+  ],
+  [
+   "The UNCTAD Strait of Hormuz Dashboard launched 28 April 2026 aggregates the market signal clearly. The Baltic Dirty Tanker Index stands at 2,795, against a 2024 average of 1,091. VLSFO bunker in Singapore has risen from a 2024 average of $571 per tonne to $1,076. Brent crude has traded above $120 on intraday peaks. These are the right numbers to watch. They confirm severity. They do not distribute it.",
+   "Le tableau de bord du détroit d’Ormuz de la CNUCED, lancé le 28 avril 2026, agrège clairement le signal du marché. Le Baltic Dirty Tanker Index s’établit à 2 795, contre une moyenne de 1 091 en 2024. Le combustible de soute VLSFO à Singapour est passé d’une moyenne de 571 $ la tonne en 2024 à 1 076 $. Le Brent a dépassé 120 $ lors de pics en séance. Ce sont les bons chiffres à surveiller. Ils confirment la gravité. Ils ne la répartissent pas."
+  ],
+  [
+   "Anyone assessing marine insurance accumulation, a crude supply position, or the resilience of a Capesize fleet needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. The bilateral model answers it.",
+   "Quiconque évalue le cumul d’assurance maritime, une position d’approvisionnement en brut ou la résilience d’une flotte de Capesize a besoin de ce que l’indice ne peut pas fournir : quelles contreparties précises portent une exposition à Ormuz, pour quel produit, à quel pourcentage de leur approvisionnement maritime total, et quel est le coût réel de chaque option de déroutement aux taux de marché actuels. Les indices agrégés sont des intrants de cette question. Le modèle bilatéral y répond."
+  ],
+  [
+   "Hormuz sensitivity score 1.00",
+   "Score de sensibilité d’Ormuz 1,00"
+  ],
+  [
+   "No alternative. Full exposure at stated severity.",
+   "Aucune alternative. Exposition totale à la gravité indiquée."
+  ],
+  [
+   "No navigable route exists for laden VLCCs or LNG carriers transiting out of the Persian Gulf. Qatar's entire LNG export capacity, plus Saudi, UAE, Kuwaiti, and Iraqi crude, exits via a single 33-kilometre navigable channel. A closure does not create a rerouting problem. It creates a supply halt. Capacity sensitivity: 1.00. Every percentage point of stated disruption translates directly to commercial impact with no bypass absorption.",
+   "Aucune route navigable n’existe pour les VLCC chargés ou les méthaniers quittant le golfe Persique. Toute la capacité d’exportation de GNL du Qatar, ainsi que le brut saoudien, émirien, koweïtien et irakien, sort par un seul chenal navigable de 33 kilomètres. Une fermeture ne crée pas un problème de déroutement. Elle crée un arrêt de l’approvisionnement. Sensibilité de capacité : 1,00. Chaque point de pourcentage de perturbation indiquée se traduit directement en impact commercial sans absorption par un contournement."
+  ],
+  [
+   "Malacca sensitivity score 0.85",
+   "Score de sensibilité de Malacca 0,85"
+  ],
+  [
+   "Alternatives exist. They are expensive, not impossible.",
+   "Des alternatives existent. Elles sont coûteuses, pas impossibles."
+  ],
+  [
+   "Lombok and Sunda Straits provide partial bypass capacity. A Malacca closure or toll is a rerouting problem at 85 cents on the dollar of stated disruption. The remaining 15 cents is absorbed through alternatives, at a cost. Hormuz offers no equivalent release valve. The two chokepoints require fundamentally different analytical frameworks for pricing exposure.",
+   "Les détroits de Lombok et de la Sonde offrent une capacité de contournement partielle. Une fermeture ou un péage à Malacca est un problème de déroutement à 85 cents par dollar de perturbation indiquée. Les 15 cents restants sont absorbés par des alternatives, à un coût. Ormuz n’offre aucune soupape équivalente. Les deux points de passage exigent des cadres analytiques fondamentalement différents pour tarifer l’exposition."
+  ],
+  [
+   "The bilateral dependency matrix",
+   "La matrice de dépendance bilatérale"
+  ],
+  [
+   "Who is exposed, for what commodity, and at what percentage of supply.",
+   "Qui est exposé, pour quel produit, et à quel pourcentage de l’approvisionnement."
+  ],
+  [
+   "The Narrows model produces bilateral dependency figures at the (importer, chokepoint, commodity) level. The table below shows Hormuz dependency for the commodity classes that account for the majority of the Strait's commercial traffic volume. These are not estimates of aggregate throughput. They are specific bilateral percentages: the share of each importer's total seaborne supply of each commodity that transits Hormuz, drawn from a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data (CDM v3, rebuilt August 2026).",
+   "Le modèle de Narrows produit des chiffres de dépendance bilatérale au niveau (importateur, point de passage, produit). Le tableau ci-dessous montre la dépendance envers Ormuz pour les classes de produits qui représentent l’essentiel du volume commercial du détroit. Ce ne sont pas des estimations du débit agrégé. Ce sont des pourcentages bilatéraux précis : la part de l’approvisionnement maritime total de chaque importateur, pour chaque produit, qui transite par Ormuz, tirée d’un mélange multimillésime des données bilatérales UN Comtrade 2022 et 2024 (CDM v3, reconstruit en août 2026)."
+  ],
+  [
+   "Updated August 2026: Hormuz-bypass pipeline routing now modeled",
+   "Mis à jour en août 2026 : l’acheminement par les oléoducs de contournement d’Ormuz est désormais modélisé"
+  ],
+  [
+   "The routing engine previously assigned every barrel of Saudi and UAE crude to a Hormuz transit regardless of loading terminal. Saudi Arabia's East-West Pipeline (Yanbu, Red Sea) and the UAE's Abu Dhabi Crude Oil Pipeline (Fujairah, Gulf of Oman) are both real, decades-old infrastructure specifically built to bypass the Strait (see the companion piece on pipeline rebalancing for the mechanics). The model now applies a weighted split across each exporter's real export-basin ports rather than defaulting every Gulf producer's crude to a single Hormuz-transiting basin. This brings Japan's and South Korea's crude dependency down from previous published figures and is corroborated against independent reporting on both pipelines' normal-time utilisation (see method note).",
+   "Le moteur d’acheminement attribuait auparavant chaque baril de brut saoudien et émirien à un transit par Ormuz, quel que soit le terminal de chargement. L’oléoduc Est-Ouest de l’Arabie saoudite (Yanbu, mer Rouge) et l’oléoduc d’Abou Dabi pour le brut des EAU (Fujairah, golfe d’Oman) sont tous deux de véritables infrastructures vieilles de plusieurs décennies, construites précisément pour contourner le détroit (voir l’article complémentaire sur le rééquilibrage par oléoduc pour le fonctionnement). Le modèle applique désormais une répartition pondérée entre les ports d’exportation réels de chaque exportateur plutôt que de ramener le brut de chaque producteur du Golfe à un seul bassin transitant par Ormuz. Cela fait baisser la dépendance en brut du Japon et de la Corée du Sud par rapport aux chiffres précédemment publiés, ce que corroborent des sources indépendantes sur l’utilisation normale des deux oléoducs (voir la note méthodologique)."
+  ],
+  [
+   "Bilateral Hormuz dependency matrix selected importers and commodities, 2024 (CDM v3, updated Aug 2026)",
+   "Matrice bilatérale de dépendance envers Ormuz : importateurs et produits sélectionnés, 2024 (CDM v3, mis à jour en août 2026)"
+  ],
+  [
+   "Importer",
+   "Importateur"
+  ],
+  [
+   "Commodity",
+   "Produit"
+  ],
+  [
+   "Hormuz dep.",
+   "Dép. envers Ormuz"
+  ],
+  [
+   "Annual exposure",
+   "Exposition annuelle"
+  ],
+  [
+   "30-day VaR",
+   "VaR à 30 jours"
+  ],
+  [
+   "Reroute viable?",
+   "Déroutement viable ?"
+  ],
+  [
+   "LNG liquefied natural gas (HS 271111)",
+   "GNL gaz naturel liquéfié (SH 271111)"
+  ],
+  [
+   "China",
+   "Chine"
+  ],
+  [
+   "LNG (LNG carrier)",
+   "GNL (méthanier)"
+  ],
+  [
+   "<span class=\"verdict-no\">No: no Cape option for LNG</span>",
+   "<span class=\"verdict-no\">Non : pas d’option par le Cap pour le GNL</span>"
+  ],
+  [
+   "South Korea",
+   "Corée du Sud"
+  ],
+  [
+   "Japan",
+   "Japon"
+  ],
+  [
+   "Thailand",
+   "Thaïlande"
+  ],
+  [
+   "India",
+   "Inde"
+  ],
+  [
+   "Crude petroleum (HS 2709)",
+   "Pétrole brut (SH 2709)"
+  ],
+  [
+   "Crude petroleum (VLCC)",
+   "Pétrole brut (VLCC)"
+  ],
+  [
+   "<span class=\"verdict-caution\">Supply sub.: +$3.5M/voyage · CDM v3 T1 bilateral</span>",
+   "<span class=\"verdict-caution\">Substitution d’approvisionnement : +3,5 M$/voyage · CDM v3 rang 1 bilatéral</span>"
+  ],
+  [
+   "<span class=\"verdict-caution\">Supply sub.: +$3.5M/voyage (future voyages)</span>",
+   "<span class=\"verdict-caution\">Substitution d’approvisionnement : +3,5 M$/voyage (voyages futurs)</span>"
+  ],
+  [
+   "In-Gulf vessels vs. forward supply chains",
+   "Navires dans le Golfe et chaînes d’approvisionnement futures"
+  ],
+  [
+   "Two distinct risks require different analytical treatment. <strong>For vessels already inside the Persian Gulf, whether loaded, at berth, or at anchor awaiting loading, there is no alternative exit.</strong> The Strait is the only way out. Every such vessel, regardless of cargo type, faces binary exposure: it transits Hormuz, or it waits. This is the accumulation number for underwriters pricing in-window fleet exposure. The second question is forward-looking: can an importer substitute supply over a longer horizon? For crude, the answer is yes, at a cost. West African, Brazilian, and North Sea crude can be sourced and routed via Cape at a voyage premium of approximately $3.5M per VLCC at current market rates. That option is painful but real. For LNG, no equivalent alternative supply exists. Qatari LNG cannot be replaced at scale from any other origin. <strong>Every LNG cargo in the Gulf is binary on both timeframes. Crude is binary for in-place vessels; it has a costly alternative for future supply.</strong> The reroute column in the table above reflects supply-chain optionality, not in-place vessel diversion.",
+   "Deux risques distincts exigent un traitement analytique différent. <strong>Pour les navires déjà à l’intérieur du golfe Persique, chargés, à quai ou au mouillage en attente de chargement, il n’existe aucune sortie alternative.</strong> Le détroit est la seule issue. Chacun de ces navires, quelle que soit sa cargaison, fait face à une exposition binaire : il transite par Ormuz, ou il attend. C’est le chiffre de cumul pour les assureurs qui tarifent l’exposition de la flotte présente dans la fenêtre. La seconde question est prospective : un importateur peut-il substituer son approvisionnement à plus long terme ? Pour le brut, la réponse est oui, à un coût. Du brut ouest-africain, brésilien et de mer du Nord peut être acquis et acheminé par le Cap avec une prime de voyage d’environ 3,5 M$ par VLCC aux taux de marché actuels. Cette option est douloureuse, mais réelle. Pour le GNL, aucune offre alternative équivalente n’existe. Le GNL qatari ne peut pas être remplacé à grande échelle depuis une autre origine. <strong>Chaque cargaison de GNL dans le Golfe est binaire sur les deux horizons. Le brut est binaire pour les navires déjà en place ; il a une alternative coûteuse pour l’approvisionnement futur.</strong> La colonne de déroutement du tableau ci-dessus reflète l’optionalité de la chaîne d’approvisionnement, et non la déviation de navires déjà en place."
+  ],
+  [
+   "The forward scenarios",
+   "Les scénarios prospectifs"
+  ],
+  [
+   "What continuation costs at current market rates, for specific importers.",
+   "Ce que coûte la poursuite, aux taux de marché actuels, pour des importateurs précis."
+  ],
+  [
+   "Market indices give a real-time aggregate read on disruption severity. The Narrows model translates that severity into bilateral cost for specific counterparties across four time horizons and two toll-level scenarios. The figures below use Japan as the primary example because Japan carries the highest absolute Hormuz exposure of any single importer across both LNG and crude petroleum. The model runs the same analysis for any importer and any commodity combination.",
+   "Les indices de marché donnent une lecture agrégée en temps réel de la gravité de la perturbation. Le modèle de Narrows traduit cette gravité en coût bilatéral pour des contreparties précises sur quatre horizons temporels et deux scénarios de niveau de péage. Les chiffres ci-dessous prennent le Japon comme exemple principal, car le Japon porte la plus forte exposition absolue envers Ormuz de tous les importateurs, en GNL comme en pétrole brut. Le modèle effectue la même analyse pour toute combinaison d’importateur et de produit."
+  ],
+  [
+   "All rerouting costs are recalculated at current market rates: VLSFO at $1,076 per tonne and tanker charter rates consistent with the BDTI at 2,795. These are approximately 1.9x and 2.5x their respective 2024 baselines. <strong>The cost of disruption at current market conditions is materially higher than any pre-crisis model assumption.</strong>",
+   "Tous les coûts de déroutement sont recalculés aux taux de marché actuels : VLSFO à 1 076 $ la tonne et taux d’affrètement cohérents avec un BDTI à 2 795. Cela représente environ 1,9 fois et 2,5 fois leurs bases respectives de 2024. <strong>Le coût de la perturbation aux conditions de marché actuelles est nettement supérieur à toute hypothèse de modèle d’avant la crise.</strong>"
+  ],
+  [
+   "Scenario matrix Japan combined Hormuz exposure (LNG + crude petroleum), 2024 bilateral data (CDM v3, updated Aug 2026)",
+   "Matrice de scénarios : exposition combinée du Japon envers Ormuz (GNL + pétrole brut), données bilatérales 2024 (CDM v3, mis à jour en août 2026)"
+  ],
+  [
+   "Scenario",
+   "Scénario"
+  ],
+  [
+   "Duration / toll level",
+   "Durée / niveau de péage"
+  ],
+  [
+   "Japan value at risk",
+   "Valeur à risque du Japon"
+  ],
+  [
+   "Cape reroute cost (crude only)",
+   "Coût de déroutement par le Cap (brut seulement)"
+  ],
+  [
+   "Constraint",
+   "Contrainte"
+  ],
+  [
+   "14-day disruption",
+   "Perturbation de 14 jours"
+  ],
+  [
+   "2 weeks",
+   "2 semaines"
+  ],
+  [
+   "$3.5M per VLCC voyage",
+   "3,5 M$ par voyage de VLCC"
+  ],
+  [
+   "Storage buffers hold; LNG terminal inventories stressed",
+   "Les tampons de stockage tiennent ; les stocks des terminaux GNL sont sous tension"
+  ],
+  [
+   "30-day disruption",
+   "Perturbation de 30 jours"
+  ],
+  [
+   "1 month",
+   "1 mois"
+  ],
+  [
+   "LNG inventory exhaustion begins; crude spot demand spikes",
+   "L’épuisement des stocks de GNL commence ; la demande spot de brut s’envole"
+  ],
+  [
+   "60-day disruption",
+   "Perturbation de 60 jours"
+  ],
+  [
+   "2 months",
+   "2 mois"
+  ],
+  [
+   "Supply substitution required; no LNG substitute available at scale",
+   "Substitution d’approvisionnement nécessaire ; aucun substitut au GNL à grande échelle"
+  ],
+  [
+   "90-day disruption",
+   "Perturbation de 90 jours"
+  ],
+  [
+   "3 months",
+   "3 mois"
+  ],
+  [
+   "Structural supply gap; no market mechanism closes the LNG shortfall",
+   "Déficit d’approvisionnement structurel ; aucun mécanisme de marché ne comble le manque de GNL"
+  ],
+  [
+   "Toll scenarios ongoing annual cost burden (Japan, all Hormuz-transiting vessel classes)",
+   "Scénarios de péage : charge annuelle récurrente (Japon, toutes classes de navires transitant par Ormuz)"
+  ],
+  [
+   "$500k toll per vessel",
+   "Péage de 500 k$ par navire"
+  ],
+  [
+   "Ongoing",
+   "Récurrent"
+  ],
+  [
+   "$400M/yr",
+   "400 M$/an"
+  ],
+  [
+   "Cape costs 7x more",
+   "Le Cap coûte 7 fois plus"
+  ],
+  [
+   "Compliance rational; operators pay rather than reroute",
+   "Se conformer est rationnel ; les armateurs paient plutôt que de se réacheminer"
+  ],
+  [
+   "$1M toll per vessel",
+   "Péage de 1 M$ par navire"
+  ],
+  [
+   "$800M/yr",
+   "800 M$/an"
+  ],
+  [
+   "Cape costs 3.5x more",
+   "Le Cap coûte 3,5 fois plus"
+  ],
+  [
+   "Compliance rational at current VLSFO; a structural freight cost addition",
+   "Se conformer est rationnel au VLSFO actuel ; ajout structurel au coût du fret"
+  ],
+  [
+   "$2M toll per vessel",
+   "Péage de 2 M$ par navire"
+  ],
+  [
+   "$1.6B/yr",
+   "1,6 Md$/an"
+  ],
+  [
+   "Cape costs 1.75x more",
+   "Le Cap coûte 1,75 fois plus"
+  ],
+  [
+   "Still below Cape breakeven; diversion not yet commercially rational",
+   "Encore sous le seuil de rentabilité du Cap ; le détour n’est pas encore commercialement rationnel"
+  ],
+  [
+   "$3.5M toll per vessel",
+   "Péage de 3,5 M$ par navire"
+  ],
+  [
+   "$2.8B/yr",
+   "2,8 Md$/an"
+  ],
+  [
+   "At Cape breakeven",
+   "Au seuil de rentabilité du Cap"
+  ],
+  [
+   "Above this level, Cape diversion becomes economically rational for crude",
+   "Au-delà de ce niveau, le détour par le Cap devient économiquement rationnel pour le brut"
+  ],
+  [
+   "The breakeven insight: forward voyages",
+   "Le constat du seuil de rentabilité : les voyages futurs"
+  ],
+  [
+   "This analysis applies to charterparties and supply decisions not yet committed to Gulf loading. Vessels already inside the Persian Gulf face binary exposure at any toll level: they pay or they wait. For operators fixing <em>new</em> voyages: at pre-crisis bunker and charter rates, a $1 million toll per vessel was approaching the supply-substitution breakeven. At current market rates (VLSFO at $1,076 per tonne, BDTI at 2,795), sourcing non-Gulf crude via Cape costs approximately $3.5 million per VLCC voyage. <strong>The threshold for rational supply substitution has shifted upward by roughly 75% since the disruption began.</strong> An operator facing a $1 million toll today fixes through Hormuz without hesitation. Above $3.5 million, diverting to non-Gulf crude origins becomes commercially rational. For LNG, no toll level changes the forward calculation either, because no alternative supply exists at scale.",
+   "Cette analyse s’applique aux chartes-parties et aux décisions d’approvisionnement non encore engagées pour un chargement dans le Golfe. Les navires déjà à l’intérieur du golfe Persique font face à une exposition binaire à tout niveau de péage : ils paient ou ils attendent. Pour les armateurs qui affrètent de <em>nouveaux</em> voyages : aux taux de soute et d’affrètement d’avant la crise, un péage de 1 $ million par navire approchait le seuil de rentabilité de la substitution d’approvisionnement. Aux taux de marché actuels (VLSFO à 1 076 $ la tonne, BDTI à 2 795), s’approvisionner en brut hors Golfe par le Cap coûte environ 3,5 $ millions par voyage de VLCC. <strong>Le seuil de substitution rationnelle de l’approvisionnement a augmenté d’environ 75 % depuis le début de la perturbation.</strong> Un armateur confronté aujourd’hui à un péage de 1 $ million affrète sans hésiter par Ormuz. Au-delà de 3,5 $ millions, se détourner vers des origines de brut hors Golfe devient commercialement rationnel. Pour le GNL, aucun niveau de péage ne change non plus le calcul prospectif, car aucune offre alternative n’existe à grande échelle."
+  ],
+  [
+   "The alternative pathways",
+   "Les voies alternatives"
+  ],
+  [
+   "What each option costs, vessel class by vessel class, at current market rates.",
+   "Ce que coûte chaque option, classe de navires par classe de navires, aux taux de marché actuels."
+  ],
+  [
+   "The following costs apply to <strong>future voyages and forward supply chain decisions</strong>, not to vessels already committed to Gulf loading. A laden VLCC inside the Persian Gulf has no exit alternative. These figures represent the cost premium facing importers who can reorganise sourcing toward non-Gulf origins, and the toll threshold at which doing so becomes commercially rational for new fixtures. Costs are recalculated at current market conditions: VLSFO at $1,076 per tonne and charter rates consistent with the live BDTI reading.",
+   "Les coûts suivants s’appliquent aux <strong>voyages futurs et aux décisions d’approvisionnement prospectives</strong>, et non aux navires déjà engagés pour un chargement dans le Golfe. Un VLCC chargé à l’intérieur du golfe Persique n’a aucune sortie alternative. Ces chiffres représentent la prime de coût à laquelle font face les importateurs qui peuvent réorganiser leur approvisionnement vers des origines hors Golfe, et le seuil de péage à partir duquel cela devient commercialement rationnel pour de nouveaux affrètements. Les coûts sont recalculés aux conditions de marché actuelles : VLSFO à 1 076 $ la tonne et taux d’affrètement cohérents avec la lecture en direct du BDTI."
+  ],
+  [
+   "Tanker: future voyages only",
+   "Pétrolier : voyages futurs seulement"
+  ],
+  [
+   "VLCC (crude)",
+   "VLCC (brut)"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Vessels in-Gulf (committed)</span><span class=\"vessel-card-row-val red\">No exit: binary</span>",
+   "<span class=\"vessel-card-row-label\">Navires dans le Golfe (engagés)</span></span><span class=\"vessel-card-row-val red\">Aucune sortie : binaire</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Supply substitute (future)</span><span class=\"vessel-card-row-val\">Non-Gulf crude via Cape</span>",
+   "<span class=\"vessel-card-row-label\">Substitut d’approvisionnement (futur)</span></span><span class=\"vessel-card-row-val\">Brut hors Golfe par le Cap</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra days vs. Gulf routing</span><span class=\"vessel-card-row-val\">+18 days</span>",
+   "<span class=\"vessel-card-row-label\">Jours supplémentaires par rapport à l’acheminement par le Golfe</span></span><span class=\"vessel-card-row-val\">+18 jours</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra bunker (current)</span><span class=\"vessel-card-row-val red\">$1.74M</span>",
+   "<span class=\"vessel-card-row-label\">Soute supplémentaire (actuelle)</span></span><span class=\"vessel-card-row-val red\">1,74 M$</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra charter (current)</span><span class=\"vessel-card-row-val red\">$1.76M</span>",
+   "<span class=\"vessel-card-row-label\">Affrètement supplémentaire (actuel)</span></span><span class=\"vessel-card-row-val red\">1,76 M$</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Supply sub. cost premium</span><span class=\"vessel-card-row-val gold\">$3.5M/voyage</span>",
+   "<span class=\"vessel-card-row-label\">Prime de coût de substitution d’approvisionnement</span></span><span class=\"vessel-card-row-val gold\">3,5 M$/voyage</span>"
+  ],
+  [
+   "Supply substitution viable above $3.5M toll",
+   "Substitution d’approvisionnement viable au-delà d’un péage de 3,5 M$"
+  ],
+  [
+   "LNG carrier",
+   "Méthanier"
+  ],
+  [
+   "Q-Flex / Q-Max",
+   "Q-Flex / Q-Max"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Alternative route</span><span class=\"vessel-card-row-val red\">None available</span>",
+   "<span class=\"vessel-card-row-label\">Route alternative</span></span><span class=\"vessel-card-row-val red\">Aucune disponible</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Cape boil-off loss</span><span class=\"vessel-card-row-val red\">Commercially prohibitive</span>",
+   "<span class=\"vessel-card-row-label\">Perte par évaporation par le Cap</span></span><span class=\"vessel-card-row-val red\">Commercialement prohibitive</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Contract structure</span><span class=\"vessel-card-row-val red\">Long-term, fixed destination</span>",
+   "<span class=\"vessel-card-row-label\">Structure contractuelle</span></span><span class=\"vessel-card-row-val red\">Long terme, destination fixe</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Spot substitute</span><span class=\"vessel-card-row-val red\">Not available at scale</span>",
+   "<span class=\"vessel-card-row-label\">Substitut spot</span></span><span class=\"vessel-card-row-val red\">Non disponible à grande échelle</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Toll breakeven</span><span class=\"vessel-card-row-val red\">No calculation applies</span>",
+   "<span class=\"vessel-card-row-label\">Seuil de péage de rentabilité</span></span><span class=\"vessel-card-row-val red\">Aucun calcul ne s’applique</span>"
+  ],
+  [
+   "No reroute at any toll level",
+   "Aucun déroutement à aucun niveau de péage"
+  ],
+  [
+   "Bulk carrier",
+   "Vraquier"
+  ],
+  [
+   "Capesize (fertiliser)",
+   "Capesize (engrais)"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Alternative</span><span class=\"vessel-card-row-val\">Cape of Good Hope</span>",
+   "<span class=\"vessel-card-row-label\">Alternative</span></span><span class=\"vessel-card-row-val\">Cap de Bonne-Espérance</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra days</span><span class=\"vessel-card-row-val\">+14 days</span>",
+   "<span class=\"vessel-card-row-label\">Jours supplémentaires</span></span><span class=\"vessel-card-row-val\">+14 jours</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra bunker (current)</span><span class=\"vessel-card-row-val red\">$960k</span>",
+   "<span class=\"vessel-card-row-label\">Soute supplémentaire (actuelle)</span></span><span class=\"vessel-card-row-val red\">960 k$</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Extra charter (current)</span><span class=\"vessel-card-row-val red\">$700k</span>",
+   "<span class=\"vessel-card-row-label\">Affrètement supplémentaire (actuel)</span></span><span class=\"vessel-card-row-val red\">700 k$</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Total extra cost</span><span class=\"vessel-card-row-val gold\">$1.66M</span>",
+   "<span class=\"vessel-card-row-label\">Surcoût total</span></span><span class=\"vessel-card-row-val gold\">1,66 M$</span>"
+  ],
+  [
+   "<span class=\"vessel-card-row-label\">Toll breakeven</span><span class=\"vessel-card-row-val\">~$1.7M</span>",
+   "<span class=\"vessel-card-row-label\">Seuil de péage de rentabilité</span></span><span class=\"vessel-card-row-val\">≈ 1,7 M$</span>"
+  ],
+  [
+   "Cape viable above $1.7M toll",
+   "Cap viable au-delà d’un péage de 1,7 M$"
+  ],
+  [
+   "The asymmetry between crude and LNG is the defining structural feature of Hormuz risk, but the framing matters. For vessels already in the Gulf, both crude and LNG face identical binary exposure. The distinction emerges in the forward supply chain response: crude importers have a costly but real sourcing alternative in non-Gulf origins. LNG importers do not. Any Hormuz disruption affecting Gulf LNG exports produces a supply gap that the market cannot fill through alternative sourcing, regardless of price or timeframe.",
+   "L’asymétrie entre le brut et le GNL est la caractéristique structurelle déterminante du risque d’Ormuz, mais le cadrage compte. Pour les navires déjà dans le Golfe, le brut comme le GNL font face à la même exposition binaire. La distinction apparaît dans la réponse de la chaîne d’approvisionnement future : les importateurs de brut disposent d’une alternative d’approvisionnement coûteuse mais réelle dans des origines hors Golfe. Les importateurs de GNL, non. Toute perturbation d’Ormuz touchant les exportations de GNL du Golfe produit un déficit d’approvisionnement que le marché ne peut pas combler par un approvisionnement alternatif, quels que soient le prix ou l’horizon."
+  ],
+  [
+   "The transition fuel dimension",
+   "La dimension du combustible de transition"
+  ],
+  [
+   "LNG is the IMO bridge fuel. The bridge runs through Hormuz.",
+   "Le GNL est le combustible de transition de l’OMI. Le pont passe par Ormuz."
+  ],
+  [
+   "IMO's revised GHG Strategy targets net-zero emissions from international shipping by 2050. Carbon Intensity Indicator regulations, effective from 2023, have pushed operators toward LNG as the primary compliant fuel available at scale for deep-sea voyages. LNG-fuelled vessels now represent over 40% of new deep-sea tonnage ordered. This energy transition creates a second-order Hormuz dependency that is not visible in the standard chokepoint exposure model.",
+   "La Stratégie révisée de l’OMI sur les GES vise des émissions nettes nulles du transport maritime international d’ici 2050. Les règles de l’indicateur d’intensité carbone, en vigueur depuis 2023, ont orienté les armateurs vers le GNL comme principal combustible conforme disponible à grande échelle pour les voyages hauturiers. Les navires propulsés au GNL représentent désormais plus de 40 % du nouveau tonnage hauturier commandé. Cette transition énergétique crée une dépendance de second ordre envers Ormuz qui n’est pas visible dans le modèle standard d’exposition aux points de passage."
+  ],
+  [
+   "As the global fleet converts to LNG propulsion, the nature of Hormuz exposure changes. It is no longer only a cargo risk for energy-importing nations. It becomes a propulsion risk for the fleet itself. A sustained Hormuz disruption simultaneously reduces LNG cargo supply and restricts the fuel supply for vessels designed to run on LNG. These two effects compound: the ships most affected by cargo disruption are increasingly the same ships that require LNG to operate.",
+   "À mesure que la flotte mondiale passe à la propulsion au GNL, la nature de l’exposition à Ormuz change. Ce n’est plus seulement un risque de cargaison pour les pays importateurs d’énergie. Cela devient un risque de propulsion pour la flotte elle-même. Une perturbation durable d’Ormuz réduit à la fois l’approvisionnement en GNL comme cargaison et l’approvisionnement en combustible des navires conçus pour fonctionner au GNL. Ces deux effets se cumulent : les navires les plus touchés par la perturbation de la cargaison sont de plus en plus les mêmes que ceux qui ont besoin de GNL pour fonctionner."
+  ],
+  [
+   "The compound risk",
+   "Le risque composé"
+  ],
+  [
+   "The standard assumption in energy transition analysis is that decarbonisation reduces fossil fuel concentration risk. For LNG and Hormuz, the opposite is true. Each vessel that converts from heavy fuel oil to LNG propulsion reduces carbon intensity and simultaneously increases its structural exposure to a single 33-kilometre channel. <strong>A slower, more decarbonised fleet is a more Hormuz-dependent fleet.</strong>",
+   "L’hypothèse habituelle de l’analyse de la transition énergétique est que la décarbonation réduit le risque de concentration des énergies fossiles. Pour le GNL et Ormuz, c’est l’inverse. Chaque navire qui passe du fioul lourd à la propulsion au GNL réduit son intensité carbone et accroît en même temps son exposition structurelle à un seul chenal de 33 kilomètres. <strong>Une flotte plus lente et plus décarbonée est une flotte plus dépendante d’Ormuz.</strong>"
+  ],
+  [
+   "The forward-look capability",
+   "La capacité prospective"
+  ],
+  [
+   "What the Narrows model adds that market data cannot provide.",
+   "Ce que le modèle de Narrows apporte et que les données de marché ne peuvent pas fournir."
+  ],
+  [
+   "The UNCTAD Hormuz Dashboard provides an excellent real-time read on market-level disruption. The Narrows Chokepoint Dependency Model operates at a different analytical layer: bilateral, commodity-specific, and scenario-driven. The two tools are complementary. The dashboard gives you the aggregate signal. The model shows which counterparty carries the exposure.",
+   "Le tableau de bord d’Ormuz de la CNUCED offre une excellente lecture en temps réel de la perturbation au niveau du marché. Le modèle de dépendance aux points de passage de Narrows opère à une autre couche d’analyse : bilatérale, propre à chaque produit et fondée sur des scénarios. Les deux outils sont complémentaires. Le tableau de bord donne le signal agrégé. Le modèle montre quelle contrepartie porte l’exposition."
+  ],
+  [
+   "What each analytical layer provides",
+   "Ce qu’apporte chaque couche d’analyse"
+  ],
+  [
+   "Analytical question",
+   "Question analytique"
+  ],
+  [
+   "Market index / dashboard",
+   "Indice de marché / tableau de bord"
+  ],
+  [
+   "Narrows model",
+   "Modèle de Narrows"
+  ],
+  [
+   "Is there a disruption?",
+   "Y a-t-il une perturbation ?"
+  ],
+  [
+   "Yes BDTI, bunker prices, Brent",
+   "Oui BDTI, prix de la soute, Brent"
+  ],
+  [
+   "Not the primary instrument",
+   "Pas l’instrument principal"
+  ],
+  [
+   "How severe is the aggregate impact?",
+   "Quelle est la gravité de l’impact agrégé ?"
+  ],
+  [
+   "Yes index levels vs. baselines",
+   "Oui niveaux des indices par rapport aux bases"
+  ],
+  [
+   "Which importer carries the highest exposure?",
+   "Quel importateur porte la plus forte exposition ?"
+  ],
+  [
+   "Cannot answer",
+   "Impossible de répondre"
+  ],
+  [
+   "Bilateral dependency by country and commodity",
+   "Dépendance bilatérale par pays et par produit"
+  ],
+  [
+   "What % of this importer's supply is at risk?",
+   "Quel % de l’approvisionnement de cet importateur est en jeu ?"
+  ],
+  [
+   "Dependency % at (importer, chokepoint, commodity) level",
+   "Dépendance % au niveau (importateur, point de passage, produit)"
+  ],
+  [
+   "What does 30 days of disruption cost this counterparty?",
+   "Combien coûtent 30 jours de perturbation à cette contrepartie ?"
+  ],
+  [
+   "Value at risk by duration and vessel class",
+   "Valeur à risque par durée et par classe de navires"
+  ],
+  [
+   "At what toll level does rerouting become rational?",
+   "À quel niveau de péage le déroutement devient-il rationnel ?"
+  ],
+  [
+   "Toll threshold per vessel class at live market rates",
+   "Seuil de péage par classe de navires aux taux de marché en direct"
+  ],
+  [
+   "Does LNG have the same rerouting option as crude?",
+   "Le GNL a-t-il la même option de déroutement que le brut ?"
+  ],
+  [
+   "Commodity-specific pathway analysis",
+   "Analyse des voies par produit"
+  ],
+  [
+   "What are costs if disruption drags 60 or 90 days?",
+   "Quels sont les coûts si la perturbation se prolonge 60 ou 90 jours ?"
+  ],
+  [
+   "Cannot answer forward scenarios",
+   "Impossible de répondre aux scénarios prospectifs"
+  ],
+  [
+   "Duration scenario matrix at any input assumption",
+   "Matrice de scénarios de durée pour toute hypothèse d’entrée"
+  ],
+  [
+   "The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. Anyone running their own scenario can replace the model's default vessel-class rates with their own rates and rerun the exposure calculation. This is the capability that aggregate market data, however current, cannot replicate.",
+   "Les hypothèses du modèle sont substituables. Les taux d’affrètement, les prix de la soute, la durée de la perturbation et le niveau de péage sont tous des intrants variables. Quiconque exécute son propre scénario peut remplacer les taux par classe de navires du modèle par les siens et relancer le calcul d’exposition. C’est la capacité que les données de marché agrégées, aussi actuelles soient-elles, ne peuvent pas reproduire."
+  ],
+  [
+   "Methodology and data sources",
+   "Méthodologie et sources de données"
+  ],
+  [
+   "Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026). Data source: multi-vintage blend of 2022 and 2024 UN Comtrade authenticated bilateral pulls. 14 commodity classes, 47+ importing nations, 14 chokepoints. Tier 1 bilateral data for crude petroleum and LNG. Route inference assigns chokepoints to bilateral trade flows using a basin-aware model: each exporter's and importer's real port geography is weighted across all its matched basins (not just the dominant one), so a producer with genuine multi-basin export capacity (Saudi Arabia via Ras Tanura (Gulf) and Yanbu (Red Sea); the UAE via Jebel Dhanna (Gulf) and Fujairah (Gulf of Oman, outside Hormuz)) has that split actually applied rather than defaulting 100% of its crude to a Hormuz transit. This is a routing-engine correction made in August 2026; it lowered Japan's and South Korea's modelled Hormuz crude dependency from previously published figures and is corroborated against independent reporting on Fujairah and Yanbu pipeline utilisation (Fujairah: ~71% of 1.5 mbd nameplate capacity in normal conditions; Saudi East-West Pipeline/Yanbu: ~800,000 b/d pre-2026-crisis baseline against ~7 mbd nameplate capacity). Capacity sensitivity score of 1.00 for Hormuz reflects the absence of any navigable alternative exit for vessels already inside the Persian Gulf: this applies to all vessel classes regardless of cargo. The 'reroute viable' designation for crude petroleum in the dependency matrix refers to supply-chain sourcing alternatives (non-Gulf crude origins routed via Cape) available to importers over a multi-week horizon; it does not imply in-place vessel diversion from inside the Gulf. LNG rerouting is a harder case than crude, not an impossible one: a full Cape of Good Hope diversion for Gulf-origin cargo adds roughly 18 extra days versus the Gulf–Japan baseline, and boil-off losses plus long-term contract structures make that detour more costly for LNG than for other cargo classes. It is not categorical, though: LNG carriers did shift to the Cape of Good Hope at scale during 2024's Red Sea disruption (see the Panama analysis on this site), on a comparable order of added distance. The Hormuz case is a longer, more acute version of the same trade-off, not a fundamentally different one. Rerouting costs recalculated at current market rates: VLSFO Singapore $1,076 per tonne (LSEG Data &amp; Analytics via UNCTAD Hormuz Dashboard, May 2026); charter rates consistent with BDTI 2,795. VLCC assumptions: 90 tonnes per day fuel consumption, 18 extra days Gulf–Japan via Cape. All scenario figures represent the value of foregone imports during the stated disruption period; they do not include secondary economic impacts, inventory drawdown costs, or demand destruction effects. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since 28 February 2026, which is covered separately (see the live-tracker piece on this site). All model assumptions are substitutable.",
+   "Les chiffres de dépendance bilatérale proviennent du modèle de dépendance aux points de passage de Narrows v3 (reconstruit en août 2026). Source des données : mélange multimillésime d’extractions bilatérales authentifiées UN Comtrade 2022 et 2024. 14 classes de produits, plus de 47 pays importateurs, 14 points de passage. Données bilatérales de rang 1 pour le pétrole brut et le GNL. L’inférence d’itinéraire attribue des points de passage aux flux commerciaux bilatéraux par un modèle tenant compte des bassins : la géographie portuaire réelle de chaque exportateur et importateur est pondérée sur tous ses bassins appariés (et pas seulement le dominant), de sorte qu’un producteur disposant d’une véritable capacité d’exportation multibassin (l’Arabie saoudite via Ras Tanura (Golfe) et Yanbu (mer Rouge) ; les EAU via Jebel Dhanna (Golfe) et Fujairah (golfe d’Oman, hors d’Ormuz)) voit cette répartition réellement appliquée plutôt que 100 % de son brut ramené à un transit par Ormuz. Il s’agit d’une correction du moteur d’acheminement faite en août 2026 ; elle a abaissé la dépendance modélisée du Japon et de la Corée du Sud en brut envers Ormuz par rapport aux chiffres précédemment publiés et est corroborée par des sources indépendantes sur l’utilisation des oléoducs de Fujairah et de Yanbu (Fujairah : ≈ 71 % de la capacité nominale de 1,5 Mb/j en conditions normales ; oléoduc Est-Ouest saoudien / Yanbu : base d’environ 800 000 b/j avant la crise de 2026 contre ≈ 7 Mb/j de capacité nominale). Le score de sensibilité de capacité de 1,00 pour Ormuz reflète l’absence de toute sortie alternative navigable pour les navires déjà dans le golfe Persique : cela s’applique à toutes les classes de navires, quelle que soit la cargaison. La désignation « déroutement viable » pour le pétrole brut dans la matrice de dépendance renvoie aux alternatives d’approvisionnement (origines de brut hors Golfe acheminées par le Cap) ouvertes aux importateurs sur un horizon de plusieurs semaines ; elle n’implique pas une déviation de navires déjà en place dans le Golfe. Le déroutement du GNL est un cas plus difficile que le brut, mais non impossible : un détour complet par le cap de Bonne-Espérance pour une cargaison d’origine golfique ajoute environ 18 jours par rapport à la base Golfe–Japon, et les pertes par évaporation ainsi que les structures de contrats à long terme rendent ce détour plus coûteux pour le GNL que pour d’autres classes de cargaison. Ce n’est toutefois pas catégorique : des méthaniers ont bien opté pour le cap de Bonne-Espérance à grande échelle durant la perturbation de la mer Rouge de 2024 (voir l’analyse sur Panama), pour un allongement de distance du même ordre. Le cas d’Ormuz est une version plus longue et plus aiguë du même arbitrage, et non un cas fondamentalement différent. Coûts de déroutement recalculés aux taux de marché actuels : VLSFO à Singapour 1 076 $ la tonne (LSEG Data &amp; Analytics via le tableau de bord d’Ormuz de la CNUCED, mai 2026) ; taux d’affrètement cohérents avec un BDTI de 2 795. Hypothèses VLCC : consommation de 90 tonnes de combustible par jour, 18 jours supplémentaires Golfe–Japon par le Cap. Tous les chiffres de scénario représentent la valeur des importations perdues pendant la période de perturbation indiquée ; ils n’incluent pas les impacts économiques secondaires, les coûts de prélèvement sur stocks ni les effets de destruction de la demande. Ces chiffres décrivent une exposition structurelle, en année normale, et non un suivi en direct de la fermeture réelle du détroit depuis le 28 février 2026, traité séparément (voir l’article de suivi en direct sur ce site). Toutes les hypothèses du modèle sont substituables."
+  ]
+ ],
+ "js": []
+}

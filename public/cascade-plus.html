@@ -251,7 +251,7 @@
 </header>
 <div style="background:#fff7dc;color:#5a4700;font:12px/1.4 -apple-system,system-ui,sans-serif;padding:6px 16px;text-align:center;border-bottom:1px solid #e6d79a">Demonstration on illustrative data. A research tool shown to explain the method, not a service and not live tracking.</div>
 
-<div class="status-line" id="status">Computing real routes via narrows-routing-api&hellip;</div>
+<div class="status-line" id="status">Computing real routes&hellip;</div>
 
 <div class="clock-bar">
   <span class="clock-lbl">Scenario clock</span>
@@ -342,12 +342,11 @@
   </div>
 
   <div class="footnote">
-    <b>Eight corridors, seven of them real-routing now — rebuilt 2026-09-18 against direct queries of the live routing graph, not assumptions.</b> <b>Bab el-Mandeb</b> (a Fujayrah&rarr;Rotterdam voyage that, confirmed against the graph, actually crosses THREE named passages in sequence &mdash; Bab el-Mandeb, Suez, and Gibraltar &mdash; not just the one it's filed under; blocking Bab el-Mandeb alone already forces the same full Cape reroute as blocking it and Suez together), <b>Suez</b> (Jiddah&rarr;Rotterdam, its own scenario &mdash; Jiddah sits north of Bab, so this voyage only ever crosses Suez + Gibraltar), <b>Malacca</b> (Colombo&rarr;Shanghai &mdash; moved off Singapore, which sits at the strait's own eastern mouth and so never actually crossed a Malacca-tagged edge; blocking it now produces a real, engine-confirmed +625nm detour via Sunda), <b>Panama</b> (Houston&rarr;Shanghai; blocking it sends this voyage the full way around through FOUR other tracked corridors at once &mdash; Gibraltar, Suez, Bab el-Mandeb, and Malacca, all confirmed), <b>Gibraltar</b> (New York&rarr;Genova; blocking it sends the vessel around the Cape of Good Hope and through Bab el-Mandeb and Suez), <b>Hormuz</b> (newly real &mdash; Ras Tannurah&rarr;Singapore genuinely crosses both Hormuz and Malacca on the same voyage, confirmed), and <b>Bosphorus</b> (newly real &mdash; Novorossiysk&rarr;Genova, confirmed via Bosphorus + Dardanelles in sequence). Hormuz and the Bosphorus both come back "no route found" when blocked &mdash; a real, engine-confirmed dead end (there is genuinely no water alternate out of the Persian Gulf or the Black Sea), shown as one, not guessed as one. Only <b>Danish Straits</b> is still a flat, labeled estimate, because the routing graph has no passage tag for it at all yet &mdash; confirmed by querying it directly, not assumed.<br><br>
-    <b>Corridors now show their real full passage list, not one label.</b> The Corridor column and each vessel's detail panel read directly off what the graph actually returned (e.g. "Bab el-Mandeb + Suez + Gibraltar"), not the single bucket a vessel happens to be filed under. A vessel that diverts out of ANY tracked corridor is checked against every OTHER corridor's own real passage list, plus four passages that have no FLEET bucket of their own but are confirmed real landings &mdash; Sunda, Dardanelles, Cape of Good Hope, and Cape Horn/Chile Strait — so a Gibraltar closure correctly shows a vessel now exposed off the Cape of Good Hope even though no vessel is ever "based" there. Nothing here is hand-mapped per corridor anymore; it's whatever the engine says a voyage actually crosses.<br><br>
-    <b>Bunker/port-call risk, ported from CAPE.</b> A handful of vessels list the ports they actually call at or bunker at (Djibouti, Las Palmas, Istanbul), scored against the same <code>PORT_RISK</code> table CAPE's own "waypoints" feature uses — because a diversion can be clean at the strait and still bunker somewhere JWC-listed on its own (Djibouti sits inside the Gulf of Aden listed area regardless of which strait the hull avoided). This is a risk overlay, the same as CAPE's, not a routed leg — it doesn't change distance or cost, only what shows as exposed.<br><br>
-    <b>Origins are real ports, not basins.</b> Every corridor's from/to endpoint is a named port with real coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports) — Al Fujayrah, Jiddah, Colombo, Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Singapore, Genova.<br><br>
-    <b>Status is computed, not authored.</b> Locked/window/pre are derived every render from each vessel's ETA against the scenario clock in the header. Diversion days are per-vessel: class and CII grade set an effective speed (the same "CII-adjusted effective days" idea Narrows' own Malacca/Lombok analysis already publishes), not one flat speed for every ship.<br><br>
-    <b>Built to receive shared assumptions later, not fake them now.</b> Corridors, passages, JWC flags, port risk, and per-class speed all live in one clearly marked block in this file, the same shape NARROWS-RATES.js already uses as a real shared file across CAPE and CASCADE+ — the next step is making that block a shared file the same way, so this page and CAPE/CDM stop hand-copying each other.
+    <b>Eight corridors, seven with real routing.</b> Each corridor is a representative voyage run against the live routing graph. <b>Bab el-Mandeb</b> (Fujairah to Rotterdam, a voyage that crosses three named passages in sequence: Bab el-Mandeb, Suez and Gibraltar; blocking Bab el-Mandeb alone already forces the same full Cape reroute as blocking it and Suez together), <b>Suez</b> (Jeddah to Rotterdam; Jeddah sits north of Bab el-Mandeb, so this voyage crosses only Suez and Gibraltar), <b>Malacca</b> (Colombo to Shanghai; blocking it produces a +625nm detour via Sunda), <b>Panama</b> (Houston to Shanghai; blocking it sends the voyage around through four other tracked corridors at once: Gibraltar, Suez, Bab el-Mandeb and Malacca), <b>Gibraltar</b> (New York to Genoa; blocking it sends the vessel around the Cape of Good Hope and through Bab el-Mandeb and Suez), <b>Hormuz</b> (Ras Tannurah to Singapore, crossing both Hormuz and Malacca on the same voyage) and <b>Bosphorus</b> (Novorossiysk to Genoa, via the Bosphorus and Dardanelles in sequence). Hormuz and the Bosphorus both return "no route found" when blocked: there is no water alternative out of the Persian Gulf or the Black Sea, and the page shows that rather than guessing a route. Only <b>Danish Straits</b> is still a flat, labelled estimate, because the routing graph has no passage tag for it yet.<br><br>
+    <b>Corridors show their full passage list.</b> The Corridor column and each vessel's detail panel list every passage the routed voyage crosses (for example "Bab el-Mandeb + Suez + Gibraltar"), not the single corridor a vessel is filed under. A vessel that diverts out of any tracked corridor is checked against every other corridor's passage list, plus four passages with no corridor of their own: Sunda, Dardanelles, Cape of Good Hope, and Cape Horn/Chile Strait. A Gibraltar closure therefore correctly shows a vessel exposed off the Cape of Good Hope.<br><br>
+    <b>Bunker and port-call risk.</b> A handful of vessels list the ports they call at or bunker at (Djibouti, Las Palmas, Istanbul), scored against the same port-risk table used by CAPE's waypoints feature, because a diversion can be clean at the strait and still bunker somewhere JWC-listed (Djibouti sits inside the Gulf of Aden listed area whichever strait the hull avoided). This is a risk overlay, not a routed leg: it changes what shows as exposed, not distance or cost.<br><br>
+    <b>Origins are real ports.</b> Every corridor's endpoints are named ports with coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports): Al Fujayrah, Jiddah, Colombo, Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Singapore, Genova.<br><br>
+    <b>Status is computed.</b> Locked, in-window and pre-commitment are derived on every render from each vessel's ETA against the scenario clock in the header. Diversion days are per vessel: class and CII grade set an effective speed (the CII-adjusted effective-days approach used in the Narrows Malacca/Lombok analysis), not one flat speed for every ship.
   </div>
 </div>
 
@@ -360,13 +359,13 @@
     <div class="modal-head">
       <div>
         <div class="modal-title">Add vessel</div>
-        <div class="modal-sub">Adds to the live book immediately &mdash; no reload needed</div>
+        <div class="modal-sub">Adds to the live book immediately; no reload needed</div>
       </div>
       <button class="modal-close" onclick="closeAddVesselModal()">&times;</button>
     </div>
     <div class="modal-body">
       <div class="import-note">
-        Have a list already? Close this and use <b>Upload CSV</b> in the header instead &mdash;
+        Have a list already? Close this and use <b>Upload CSV</b> in the header instead:
         <a href="#" onclick="downloadCascadeTemplate();return false" style="color:var(--navy);font-weight:600">download the template</a>
         to see the expected columns. Both this form and the CSV import write the exact same vessel shape.
       </div>
@@ -408,7 +407,7 @@
         <div class="field" style="grid-column:1/-1">
           <label class="field-label">Waypoints</label>
           <input type="text" id="cv-waypoints" placeholder="e.g. Djibouti, Las Palmas">
-          <span class="field-hint">Comma-separated port names. Scored against the same PORT_RISK table CAPE uses &mdash; unrecognized names still show, just without a risk score.</span>
+          <span class="field-hint">Comma-separated port names. Scored against the same port-risk table CAPE uses; unrecognized names still show, just without a risk score.</span>
         </div>
 
         <div class="form-section" style="grid-column:1/-1">Notes (optional)</div>
@@ -666,7 +665,7 @@ function displacedEta(v, fromCorridorId, matchedTag){
   return new Date(departureMs + daysToNewStrait*86400000);
 }
 function fmtEtaDate(d){
-  if(!d) return '—';
+  if(!d) return '–';
   return d.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'UTC' });
 }
 
@@ -850,7 +849,7 @@ function computeDivertCost(v, corridorId){
   const flat = TERMINAL_DECLINE_COST[v.cls];
   if(flat == null) return null;
   const noAlt = c.real && rd && rd.noRoute;
-  return { cost: flat, real:false, label: noAlt ? 'No water route out — decline transit, re-source elsewhere' : 'Decline transit, re-source elsewhere', days:0 };
+  return { cost: flat, real:false, label: noAlt ? 'No water route out: decline transit, re-source elsewhere' : 'Decline transit, re-source elsewhere', days:0 };
 }
 
 // After a vessel diverts out of a corridor, check whether the actual
@@ -942,10 +941,10 @@ async function loadRoutes(){
       ? `${CORRIDORS[id].label}: no water alternate`
       : `${CORRIDORS[id].label}: +${Math.round(d.altNm-d.standardNm).toLocaleString()}nm`
     ).join(' · ');
-    statusEl.textContent = `Live routes: ${summary}. Diversion days depend on each vessel's class + CII grade. Danish Straits has no reroute (no passage tag in the routing graph) — flat estimate only.`;
+    statusEl.textContent = `Live routes: ${summary}. Diversion days depend on each vessel's class + CII grade. Danish Straits has no reroute (no passage tag in the routing graph); flat estimate only.`;
     statusEl.className = 'status-line ok';
   }catch(err){
-    statusEl.textContent = `Could not reach narrows-routing-api (${err.message}). Real-routing corridors' diversion costs are unavailable until this loads — Danish Straits still works (flat estimate).`;
+    statusEl.textContent = `Could not reach the routing service (${err.message}). Real-routing corridors' diversion costs are unavailable until it loads; Danish Straits still works (flat estimate).`;
     statusEl.className = 'status-line err';
   }
   renderAll();
@@ -963,7 +962,7 @@ function detailsHtml(v, corridorId){
     if(rd.altNm != null){
       routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">${Math.round(rd.altNm).toLocaleString()}nm via ${describeRoute(rd.altPassages)} (+${Math.round(rd.altNm-rd.standardNm).toLocaleString()}nm)</span></div>`;
     } else if(rd.noRoute){
-      routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">No water route exists &mdash; confirmed against the routing graph, not assumed</span></div>`;
+      routeLine += `<div class="dl-row"><span class="dl-k">Alternate</span><span class="dl-v">No water route exists; confirmed against the routing graph, not assumed</span></div>`;
     }
     // Map-printer's own canvas renderer (land + route lines + endpoint
     // markers), trimmed down and pointed at this corridor's real coordinates
@@ -1009,7 +1008,7 @@ function corrCell(c, corridorId){
 }
 
 function fmtEta(iso){
-  if(!iso) return '—';
+  if(!iso) return '–';
   const d = new Date(iso+'T00:00:00Z');
   return d.toLocaleDateString('en-US', { month:'short', day:'numeric', timeZone:'UTC' });
 }
@@ -1073,10 +1072,10 @@ function makeDivertedRow(v, info){
       <div class="alt-route">
         <div class="alt-route-row"><span class="alt-route-name">${info.detail.label}</span><span class="alt-route-days">${info.detail.real?'+'+info.detail.days.toFixed(1)+'d':''}</span></div>
         <div class="alt-route-row"><span></span><span class="alt-route-cost">${fmtUsd(info.detail.cost)}</span></div>
-        <div class="alt-source">${info.detail.real ? 'Computed: narrows-routing-api × NARROWS-RATES.js day-rate' : 'Flat estimate — no water route exists (confirmed) or no passage tag for this corridor yet'}</div>
+        <div class="alt-source">${info.detail.real ? 'Computed: routing-graph distance × class/CII day-rate' : 'Flat estimate: no water route exists (confirmed) or no passage tag for this corridor yet'}</div>
       </div>
       <div class="advisory-actions">
-        <span class="advisory-lbl">Divert &rarr; forward to whoever has authority to act:</span>
+        <span class="advisory-lbl">Divert &rarr; advisory for evaluation:</span>
         <button class="btn-advisory" onclick="event.stopPropagation();copyAdvisory('${v.id}')">Copy advisory</button>
         <button class="btn-advisory" onclick="event.stopPropagation();downloadAdvisory('${v.id}')">Download .txt</button>
       </div>
@@ -1110,10 +1109,10 @@ function makeDisplacedRow(v, intoCorridorId, fromCorridorId){
   const rdFrom = routeData[fromCorridorId];
   const matchedTag = rdFrom && rdFrom.altPassages ? tags.find(t=>rdFrom.altPassages.includes(t)) : null;
   const etaDate = matchedTag ? displacedEta(v, fromCorridorId, matchedTag) : null;
-  const etaCell = etaDate ? fmtEtaDate(etaDate) : '—';
+  const etaCell = etaDate ? fmtEtaDate(etaDate) : '–';
   const timingLine = etaDate
-    ? `Computed from the alt route’s own real geometry: ${fmtEtaDate(etaDate)}, at ${v.cls}’s CII-adjusted speed. Approximate — based on the closest point on the route to ${passageLabel(matchedTag)}, not a routing-engine leg boundary.`
-    : 'Not modeled for this route — no real alt-route geometry to compute against (flat-estimate corridor, or the routing API had no data for it).';
+    ? `Computed from the alt route’s own real geometry: ${fmtEtaDate(etaDate)}, at ${v.cls}’s CII-adjusted speed. Approximate; based on the closest point on the route to ${passageLabel(matchedTag)}, not a routing-engine leg boundary.`
+    : 'Not modeled for this route: no real alt-route geometry to compute against (flat-estimate corridor, or the routing API had no data for it).';
   let html = `<tr class="vrow displaced-row" onclick="toggleExpand('${rowId}')">
     <td class="v-vessel"><div class="v-name">${v.name}</div><div class="v-note"><span class="displaced-badge">↳ displaced from ${fromC.label}</span></div></td>
     <td class="v-imo">${v.imo}</td>
@@ -1296,7 +1295,7 @@ async function buildCorridorMapCanvas(corridorId){
   drawLabel(stdCoords[stdCoords.length-1], ep.toLabel, -12);
 
   const legendRows = [{ swatch:'#0A2540', dash:false, label:'Standard route' }];
-  if(altCoords.length) legendRows.push({ swatch:'#B91C1C', dash:true, label:`Alternate — ${CORRIDORS[corridorId].label} closed` });
+  if(altCoords.length) legendRows.push({ swatch:'#B91C1C', dash:true, label:`Alternate: ${CORRIDORS[corridorId].label} closed` });
   const lbW = 220, rowH = 16, lbH = rowH*legendRows.length + 10;
   const lbX = width-lbW-8, lbY = height-lbH-8;
   ctx.fillStyle = 'rgba(255,255,255,.92)';
@@ -1354,7 +1353,7 @@ async function attachRouteMaps(){
 function fillRouteMapEls(cid, dataUrl){
   document.querySelectorAll(`.route-map-wrap[data-corridor="${cid}"]`).forEach(el=>{
     if(el.querySelector('img')) return;
-    el.innerHTML = `<img class="route-map-img" src="${dataUrl}" alt="Route map — ${CORRIDORS[cid].label}">`;
+    el.innerHTML = `<img class="route-map-img" src="${dataUrl}" alt="Route map: ${CORRIDORS[cid].label}">`;
   });
 }
 
@@ -1442,7 +1441,7 @@ function renderAll(){
   document.getElementById('expWindow').textContent = fmtM(winV);
   document.getElementById('expWindowSub').textContent = windowAll.length+' vessels';
   document.getElementById('expPre').textContent = fmtM(preV);
-  document.getElementById('expPreSub').textContent = uniqueCount(preAll)+' vessels'+(preAll.length>uniqueCount(preAll) ? ' ('+(preAll.length-uniqueCount(preAll))+' shown twice — displaced into 2 corridors)' : '');
+  document.getElementById('expPreSub').textContent = uniqueCount(preAll)+' vessels'+(preAll.length>uniqueCount(preAll) ? ' ('+(preAll.length-uniqueCount(preAll))+' shown twice, displaced into 2 corridors)' : '');
   document.getElementById('expDiv').textContent = fmtUsd(divertedCostTotal);
   document.getElementById('expDivSub').textContent = divertedAll.length+' vessels, real+estimated cost combined';
 
@@ -1593,7 +1592,7 @@ function downloadCascadeTemplate(){
     + '# cii: A|B|C|D|E (defaults to C if blank)\n'
     + '# eta: YYYY-MM-DD, the vessel\'s strait ETA\n'
     + '# value_usd_m: value at risk in USD millions, e.g. 88 for $88M\n'
-    + '# waypoints: comma-separated port names, scored against PORT_RISK (optional)\n';
+    + '# waypoints: comma-separated port names, scored against the CAPE port-risk table (optional)\n';
   const blob = new Blob([note+hdr+ex1+ex2], {type:'text/csv'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'CASCADE-PLUS_vessel_template.csv'; a.click();
@@ -1618,8 +1617,8 @@ function corrCellText(corridorId){
 function buildAdvisoryText(v, info){
   const corridorId = info.corridor;
   const lines = [
-    'DIVERSION ADVISORY — CASCADE+ / The Narrows',
-    '(a recommendation for evaluation, not an order given — forward to whoever has authority to act on the vessel)',
+    'DIVERSION ADVISORY: CASCADE+ / The Narrows',
+    '(simulation output for evaluation, not an order or routing instruction)',
     '='.repeat(70),
     '',
     'VESSEL',
@@ -1631,7 +1630,7 @@ function buildAdvisoryText(v, info){
     'RECOMMENDATION',
     `  Divert ${info.detail.label}${info.detail.real ? ' (+'+info.detail.days.toFixed(1)+' days transit)' : ''}`,
     `  Estimated cost: ${fmtUsd(info.detail.cost)}`,
-    `  Basis: ${info.detail.real ? "Computed — real route distance from narrows-routing-api × this vessel's class/CII-adjusted day-rate from NARROWS-RATES.js" : 'Flat per-class estimate — no real alternate water route exists for this corridor, or no passage tag for it yet'}`,
+    `  Basis: ${info.detail.real ? "Computed: real route distance from the routing graph × this vessel's class/CII-adjusted day-rate" : 'Flat per-class estimate: no real alternate water route exists for this corridor, or no passage tag for it yet'}`,
   ];
   if(info.displacedInto && info.displacedInto.length){
     lines.push('', 'NEW EXPOSURE FROM THIS DIVERSION (risk displaced, not removed)');
@@ -1644,7 +1643,7 @@ function buildAdvisoryText(v, info){
       lines.push(`  - ${p}${risk ? (' (PRI '+risk.pri.toFixed(2)+', rank #'+risk.rank+' of 3,774'+(risk.jwc ? ', JWC Listed Area' : '')+')') : ''}`);
     });
   }
-  lines.push('', `Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation — it is not routing instructions transmitted to the vessel.`);
+  lines.push('', `Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation; it is not routing instructions transmitted to the vessel.`);
   return lines.join('\n');
 }
 
@@ -1665,7 +1664,7 @@ function copyAdvisory(id){
   const info = diverted.get(id); if(!info) return;
   const v = findVessel(info.corridor, id); if(!v) return;
   copyToClipboardWithFallback(buildAdvisoryText(v, info), ok=>{
-    alert(ok ? 'Advisory copied to clipboard.' : 'Could not copy automatically — use Download .txt instead.');
+    alert(ok ? 'Advisory copied to clipboard.' : 'Could not copy automatically; use Download .txt instead.');
   });
 }
 

@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -156,7 +157,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">The third point is a limit on the first two. Hazard is not spread evenly across the 47 days. It concentrates at the load port, in listed areas, at chokepoints and in port stays. Most of the extra 26 days are open ocean around Africa, so the longer route adds a great deal of time-related exposure (delay, charter hire, cargo condition, accumulation at any moment) and rather less casualty hazard per day. Scaling risk in direct proportion to days at sea would therefore overstate the casualty side and understate the delay side.</p>
 
-<p class="prose">That is also the answer to whether risk scales linearly with time. Over short periods and small hazards it is a fair first approximation: with a constant daily hazard h, the chance of at least one event in t days is 1 minus exp(-ht), which is close to ht when ht is small. It stops being true when the loss is bounded by the value of the cargo and hull, when hazard varies by segment, and when events cluster, so that one incident raises the chance of the next. CAPE uses the linear form today. A segment-by-segment hazard with a cap is the better model, and it is the version we would run with a client&apos;s own assumptions.</p>
+<p class="prose">That is also the answer to whether risk scales linearly with time. Over short periods and small hazards it is a fair first approximation: with a constant daily hazard h, the chance of at least one event in t days is 1 minus exp(-ht), which is close to ht when ht is small. It stops being true when the loss is bounded by the value of the cargo and hull, when hazard varies by segment, and when events cluster, so that one incident raises the chance of the next. CAPE uses the linear form today. A segment-by-segment hazard with a cap is the better model.</p>
 
 <hr class="section-rule" />
 
@@ -209,7 +210,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </table>
 </div>
 
-<p class="prose">Read this table with three caveats. First, the class weights, 0.25 for Suez and 0.33 for Malacca on a Suezmax, are fleet averages from an AIS transit analysis for the second quarter of 2024, so a vessel that is certain to use the canal is under-weighted by construction. Second, CAPE has no corridor for the pipeline, Gibraltar or the Cape of Good Hope, so three of the five links are invisible to the model. Third, the formula is linear in duration and severity and is not capped at cargo value. For this cargo the uncapped total would pass $100 million after about 52 days of full closure, which no real loss on one cargo can do, so the longer scenarios overstate the loss and should be read with that limit in mind. A client running its own assumptions would replace the weights with its own view of how often its cargoes touch each link, and would cap the result.</p>
+<p class="prose">Read this table with three caveats. First, the class weights, 0.25 for Suez and 0.33 for Malacca on a Suezmax, are fleet averages from an AIS transit analysis for the second quarter of 2024, so a vessel that is certain to use the canal is under-weighted by construction. Second, CAPE has no corridor for the pipeline, Gibraltar or the Cape of Good Hope, so three of the five links are invisible to the model. Third, the formula is linear in duration and severity and is not capped at cargo value. For this cargo the uncapped total would pass $100 million after about 52 days of full closure, which no real loss on one cargo can do, so the longer scenarios overstate the loss and should be read with that limit in mind. Anyone running their own assumptions would replace the weights with their own view of how often cargoes touch each link, and would cap the result.</p>
 
 <hr class="section-rule" />
 
@@ -218,7 +219,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <p class="prose">Nothing in this analysis suggests that the market is pricing the Red Sea or Hormuz wrongly. A premium of about 3% of vessel value is a plausible response to a risk of this size. The practical gap is different: premium is set voyage by voyage, while the exposure accumulates across links, vessel classes and lines of business, and the same few waterways sit under many books at once.</p>
 
-<p class="prose">That is where a scenario tool helps. For a given book, the useful questions are: how many cargoes and hulls touch each link, which of them share a single point of failure, and what happens to the total if a throttle on one link, such as the pipeline, coincides with a limit on another, such as the canal. Running those questions with your own assumptions on severity, duration and routing is a short exercise, and it is the one we are built for.</p>
+<p class="prose">That is where scenario analysis helps. For a given book, the useful questions are: how many cargoes and hulls touch each link, which of them share a single point of failure, and what happens to the total if a throttle on one link, such as the pipeline, coincides with a limit on another, such as the canal. Those questions can be run under any assumptions on severity, duration and routing.</p>
 
 <div class="method-note">
   <div class="method-note-label">Methodology and sources</div>
@@ -244,6 +245,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </div>
 </div>
 
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
   <div class="cta-strip-inner">
     <div>
@@ -254,6 +256,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
   </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style is:global>

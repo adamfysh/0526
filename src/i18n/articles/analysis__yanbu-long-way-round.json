@@ -1,0 +1,454 @@
+{
+ "path": "analysis/yanbu-long-way-round",
+ "meta": {
+  "title": "Narrows — Yanbu vers la Corée : cinq contraintes",
+  "description": "Une cargaison hypothétique de Yanbu vers la Corée après la fermeture de Bab el-Mandeb : cinq contraintes, de l’oléoduc à la couverture, et où l’exposition s’accumule."
+ },
+ "pairs": [
+  [
+   "Scenario analysis · Hormuz bypass, Red Sea · October 2026",
+   "Analyse de scénarios · Contournement d’Ormuz, mer Rouge · octobre 2026"
+  ],
+  [
+   "One cargo from Yanbu to Korea has to get through five constraints. <em>Each one sits on someone's book.</em>",
+   "Une cargaison de Yanbu vers la Corée doit franchir cinq contraintes. <em>Chacune pèse sur le portefeuille de quelqu’un.</em>"
+  ],
+  [
+   "A hypothetical Suezmax loads Saudi crude at Yanbu with Bab el-Mandeb closed. Following that one voyage shows five separate throttles: the pipeline, the Suez size limit, the distance, a chain of tail chokepoints, and the price of cover. It also shows where the exposure accumulates.",
+   "Un Suezmax hypothétique charge du brut saoudien à Yanbu alors que Bab el-Mandeb est fermé. Suivre ce seul voyage fait apparaître cinq limites distinctes : l’oléoduc, la limite de taille de Suez, la distance, une chaîne de points de passage en aval et le prix de la couverture. Il montre aussi où l’exposition s’accumule."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">October 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">10 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">octobre 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">10 min de lecture</span>"
+  ],
+  [
+   "Yanbu to Ulsan, Bab el-Mandeb open",
+   "Yanbu–Ulsan, Bab el-Mandeb ouvert"
+  ],
+  [
+   "7,095 nm",
+   "7 095 nm"
+  ],
+  [
+   "About 21 days at 14 knots",
+   "Environ 21 jours à 14 nœuds"
+  ],
+  [
+   "Bab closed, via Suez and the Cape",
+   "Bab fermé, via Suez et le Cap"
+  ],
+  [
+   "15,811 nm",
+   "15 811 nm"
+  ],
+  [
+   "+123%. About 47 days at 14 knots. Press reports put it at about 24 days versus about 54",
+   "+123 %. Environ 47 jours à 14 nœuds. Les articles de presse parlent d’environ 24 jours contre environ 54"
+  ],
+  [
+   "War risk at Yanbu",
+   "Risque de guerre à Yanbu"
+  ],
+  [
+   "Of vessel value, from under 1% in July. About $3M a voyage against about $100k before the conflict",
+   "De la valeur du navire, contre moins de 1 % en juillet. Environ 3 M$ par voyage contre environ 100 k$ avant le conflit"
+  ],
+  [
+   "Links in the chain CAPE models",
+   "Maillons de la chaîne que CAPE modélise"
+  ],
+  [
+   "2 of 5",
+   "2 sur 5"
+  ],
+  [
+   "Suez and Malacca have corridors. The pipeline, Gibraltar and the Cape do not",
+   "Suez et Malacca ont des corridors. L’oléoduc, Gibraltar et le Cap, non"
+  ],
+  [
+   "The voyage",
+   "Le voyage"
+  ],
+  [
+   "Take one hypothetical Suezmax and follow it from the load port to the discharge port.",
+   "Prenons un Suezmax hypothétique et suivons-le du port de chargement au port de déchargement."
+  ],
+  [
+   "The Hormuz bypass is usually described as a pipeline and a port. One cargo shows that it is a chain. Take a hypothetical Suezmax loading about one million barrels of Saudi crude at Yanbu, on the Red Sea, for Ulsan in South Korea. Bab el-Mandeb has been under a Houthi blockade since 20 July 2026, so the vessel cannot go south. It goes north through the Suez Canal, west through the Mediterranean, out past Gibraltar, down the Atlantic coast of Africa, around the Cape of Good Hope, and east across the Indian Ocean to the Strait of Malacca and on to Korea.",
+   "Le contournement d’Ormuz est généralement décrit comme un oléoduc et un port. Une seule cargaison montre que c’est une chaîne. Prenons un Suezmax hypothétique qui charge environ un million de barils de brut saoudien à Yanbu, sur la mer Rouge, à destination d’Ulsan, en Corée du Sud. Bab el-Mandeb est sous blocus houthi depuis le 20 juillet 2026, le navire ne peut donc pas aller vers le sud. Il remonte vers le nord par le canal de Suez, traverse la Méditerranée vers l’ouest, passe Gibraltar, longe la côte atlantique de l’Afrique, contourne le cap de Bonne-Espérance, puis traverse l’océan Indien vers l’est jusqu’au détroit de Malacca et la Corée."
+  ],
+  [
+   "What this analysis does and does not claim",
+   "Ce que cette analyse affirme et n’affirme pas"
+  ],
+  [
+   "The vessel is hypothetical. This page does not track any ship, and it does not forecast whether any chokepoint will close or reopen. The distances come from the Narrows routing graph, the same network used by our Map Printer tool, and the loss figures come from CAPE's default assumptions. Where a market figure comes from a press report, it is attributed, and where reports disagree, the page says so.",
+   "Le navire est hypothétique. Cette page ne suit aucun navire et ne prévoit pas si un point de passage fermera ou rouvrira. Les distances viennent du graphe de routage de Narrows, le même réseau que celui de notre outil Map Printer, et les chiffres de perte viennent des hypothèses par défaut de CAPE. Lorsqu’un chiffre de marché provient d’un article de presse, il est attribué, et lorsque les sources divergent, la page le dit."
+  ],
+  [
+   "Bab el-Mandeb closed",
+   "Bab el-Mandeb fermé"
+  ],
+  [
+   "Yanbu",
+   "Yanbu"
+  ],
+  [
+   "Suez",
+   "Suez"
+  ],
+  [
+   "Gibraltar",
+   "Gibraltar"
+  ],
+  [
+   "Cape of Good Hope",
+   "Cap de Bonne-Espérance"
+  ],
+  [
+   "Malacca",
+   "Malacca"
+  ],
+  [
+   "Ulsan",
+   "Ulsan"
+  ],
+  [
+   "East-West pipeline (schematic)",
+   "Oléoduc Est-Ouest (schématique)"
+  ],
+  [
+   "Normal, via Bab el-Mandeb: 7,095 nm, about 21 days",
+   "Normal, via Bab el-Mandeb : 7 095 nm, environ 21 jours"
+  ],
+  [
+   "Bab closed, via Suez and the Cape: 15,811 nm, about 47 days",
+   "Bab fermé, via Suez et le Cap : 15 811 nm, environ 47 jours"
+  ],
+  [
+   "Routing graph distances; days at 14 knots; hypothetical vessel.",
+   "Distances du graphe de routage ; jours à 14 nœuds ; navire hypothétique."
+  ],
+  [
+   "Pipeline line is schematic.",
+   "Le tracé de l’oléoduc est schématique."
+  ],
+  [
+   "Hypothetical Suezmax, Yanbu to Ulsan. The dashed blue line is the normal route through Bab el-Mandeb. The gold line is the route with Bab el-Mandeb closed. The vessel is too wide for the Panama Canal, so Panama is excluded. The pipeline line is schematic.",
+   "Suezmax hypothétique, Yanbu–Ulsan. La ligne bleue en pointillés est la route normale par Bab el-Mandeb. La ligne dorée est la route avec Bab el-Mandeb fermé. Le navire est trop large pour le canal de Panama, qui est donc exclu. Le tracé de l’oléoduc est schématique."
+  ],
+  [
+   "Leg",
+   "Tronçon"
+  ],
+  [
+   "Distance (nm)",
+   "Distance (nm)"
+  ],
+  [
+   "Days at 14 knots",
+   "Jours à 14 nœuds"
+  ],
+  [
+   "Yanbu to the southern end of the Suez Canal",
+   "De Yanbu à l’extrémité sud du canal de Suez"
+  ],
+  [
+   "Suez Canal transit to Port Said",
+   "Transit du canal de Suez jusqu’à Port-Saïd"
+  ],
+  [
+   "Port Said to Gibraltar",
+   "De Port-Saïd à Gibraltar"
+  ],
+  [
+   "Gibraltar to the Cape of Good Hope",
+   "De Gibraltar au cap de Bonne-Espérance"
+  ],
+  [
+   "Cape of Good Hope to the northern Malacca approach",
+   "Du cap de Bonne-Espérance à l’approche nord de Malacca"
+  ],
+  [
+   "Malacca approach to Ulsan",
+   "De l’approche de Malacca à Ulsan"
+  ],
+  [
+   "Total, Bab el-Mandeb closed",
+   "Total, Bab el-Mandeb fermé"
+  ],
+  [
+   "Total, Bab el-Mandeb open",
+   "Total, Bab el-Mandeb ouvert"
+  ],
+  [
+   "Five constraints",
+   "Cinq contraintes"
+  ],
+  [
+   "Each leg adds a different kind of limit, and each limit lands on a different part of the market.",
+   "Chaque tronçon ajoute un type de limite différent, et chaque limite retombe sur une partie différente du marché."
+  ],
+  [
+   "<strong>1. The source: a pipeline and a terminal.</strong> Yanbu exports depend on the East-West pipeline, about 1,200 km long, which carries crude from the Gulf side of the kingdom to the Red Sea coast. Its nominal capacity is quoted anywhere between about 4 and 7 million barrels a day depending on the source. Drone attacks in mid-September damaged pumping stations, and flows fell to about 2 to 2.65 million barrels a day from about 5.5 million before the attack, with recovery to 3 to 4 million expected over weeks (The Cradle, 3 October). The pipeline restarted on 22 September at a low rate (Hydrocarbon Processing). Satellite imagery showed about 40 vessels at Yanbu and Al Muajjiz on 27 September, with nearly 10 million barrels loading (TankerTrackers, via Seatrade). One analyst notes that Red Sea coast refineries and power plants consume about 1.8 million barrels a day before any crude reaches an export berth, so export availability sits below pipeline capacity. For an insurer, this constraint sits mostly outside marine: it is a single-asset dependency of the kind that business interruption and political violence books carry.",
+   "<strong>1. La source : un oléoduc et un terminal.</strong> Les exportations de Yanbu dépendent de l’oléoduc Est-Ouest, long d’environ 1 200 km, qui achemine le brut du côté du Golfe du royaume vers la côte de la mer Rouge. Sa capacité nominale est citée entre environ 4 et 7 millions de barils par jour selon les sources. Des attaques de drones à la mi-septembre ont endommagé des stations de pompage, et les flux sont tombés à environ 2 à 2,65 millions de barils par jour contre environ 5,5 millions avant l’attaque, avec un rétablissement à 3 à 4 millions attendu sur plusieurs semaines (The Cradle, 3 octobre). L’oléoduc a redémarré le 22 septembre à bas débit (Hydrocarbon Processing). Des images satellites montraient environ 40 navires à Yanbu et à Al Muajjiz le 27 septembre, avec près de 10 millions de barils en cours de chargement (TankerTrackers, via Seatrade). Un analyste note que les raffineries et centrales électriques de la côte de la mer Rouge consomment environ 1,8 million de barils par jour avant que le moindre brut n’atteigne un poste d’exportation, de sorte que la disponibilité à l’export est inférieure à la capacité de l’oléoduc. Pour un assureur, cette contrainte se situe surtout hors du maritime : c’est une dépendance à un actif unique, du type de celles que portent les portefeuilles d’interruption d’activité et de violence politique."
+  ],
+  [
+   "<strong>2. The size limit at Suez.</strong> A Suezmax is defined by the largest laden vessel the canal accepts, with a draft limit of 20.1 metres. A fully laden VLCC exceeds that, so its cargo has to be split between ships or moved through the SUMED pipeline between the Red Sea and the Mediterranean. SUMED carried about 1.9 million barrels a day in August, near its maximum (Rio Times). A VLCC cargo of about two million barrels therefore becomes two Suezmax cargoes of about one million each, and each million barrels a day of Yanbu exports needs about one Suezmax loading a day. The consequence for accumulation is that the hulls, the cargo values and the canal transits all concentrate in one vessel class and one waterway.",
+   "<strong>2. La limite de taille à Suez.</strong> Un Suezmax est défini par le plus grand navire chargé que le canal accepte, avec une limite de tirant d’eau de 20,1 mètres. Un VLCC pleinement chargé la dépasse, de sorte que sa cargaison doit être répartie entre des navires ou acheminée par l’oléoduc SUMED entre la mer Rouge et la Méditerranée. SUMED a transporté environ 1,9 million de barils par jour en août, près de son maximum (Rio Times). Une cargaison de VLCC d’environ deux millions de barils devient donc deux cargaisons de Suezmax d’environ un million chacune, et chaque million de barils par jour d’exportations de Yanbu exige environ un chargement de Suezmax par jour. La conséquence pour le cumul est que les coques, les valeurs de cargaison et les transits du canal se concentrent tous dans une seule classe de navires et une seule voie d’eau."
+  ],
+  [
+   "<strong>3. The distance.</strong> The long route adds 8,716 nautical miles, a 123% increase. A laden leg of about 47 days, a ballast return of about the same length and four days in port gives about 98 ship-days per cargo on the long route, against about 46 on the direct route (our arithmetic, at 14 knots in both directions). Moving one million barrels a day from Yanbu to Korea by Suezmax therefore ties up roughly 98 ships on the long route against roughly 46 on the direct one. That is the mechanism behind charter rate spikes: more ship-days demanded for the same barrels. One reported fixture shows the scale: a 2026-built VLCC fixed for a Red Sea to South Korea voyage via Suez, carrying 270,000 tonnes at $55 million, or $634,000 a day (Seatrade Maritime). On about two million barrels that is roughly $28 a barrel in freight (our arithmetic on a single fixture, which may differ from the market average). About 15% of available VLCC capacity was also reported positioned in the Gulf of Oman for ship-to-ship transfers, which tightens the market further.",
+   "<strong>3. La distance.</strong> La longue route ajoute 8 716 milles marins, soit +123 %. Un tronçon chargé d’environ 47 jours, un retour sur lest de durée à peu près égale et quatre jours au port donnent environ 98 jours-navire par cargaison sur la longue route, contre environ 46 sur la route directe (nos calculs, à 14 nœuds dans les deux sens). Acheminer un million de barils par jour de Yanbu vers la Corée par Suezmax immobilise donc environ 98 navires sur la longue route contre environ 46 sur la directe. C’est le mécanisme derrière les envolées des taux d’affrètement : davantage de jours-navire demandés pour les mêmes barils. Une opération rapportée donne l’échelle : un VLCC construit en 2026 affrété pour un voyage de la mer Rouge vers la Corée du Sud via Suez, transportant 270 000 tonnes pour 55 millions de dollars, soit 634 000 dollars par jour (Seatrade Maritime). Sur environ deux millions de barils, cela représente à peu près 28 dollars le baril de fret (nos calculs sur une seule opération, qui peut différer de la moyenne du marché). Environ 15 % de la capacité disponible de VLCC aurait aussi été positionnée dans le golfe d’Oman pour des transferts de navire à navire, ce qui resserre encore le marché."
+  ],
+  [
+   "<strong>4. A chain of tail chokepoints.</strong> The voyage passes the Suez Canal, Gibraltar, the Cape of Good Hope and the Strait of Malacca. The 2021 grounding of the Ever Given showed that one vessel can obstruct the canal. More important is the geometry at the start. Yanbu sits inside the Red Sea, whose only sea exits are Bab el-Mandeb and Suez. In our routing graph, with both blocked, the vessel has no route out at all. That is a low-probability tail, included here to show the structure of the risk, and it is the scenario in which every Yanbu cargo is stranded at once. One industry bulletin also reports that Houthi forces have captured Red Sea islands and a port near the Bab el-Mandeb approaches (IFDC, 22 September), the kind of development that moves a tail without moving the base case.",
+   "<strong>4. Une chaîne de points de passage en aval.</strong> Le voyage franchit le canal de Suez, Gibraltar, le cap de Bonne-Espérance et le détroit de Malacca. L’échouage de l’Ever Given en 2021 a montré qu’un seul navire peut obstruer le canal. Plus important encore est la géométrie au départ. Yanbu se situe à l’intérieur de la mer Rouge, dont les seules sorties maritimes sont Bab el-Mandeb et Suez. Dans notre graphe de routage, les deux étant bloqués, le navire n’a aucune route de sortie. C’est un risque extrême de faible probabilité, inclus ici pour montrer la structure du risque, et c’est le scénario dans lequel chaque cargaison de Yanbu est bloquée à la fois. Un bulletin du secteur rapporte aussi que les forces houthies se sont emparées d’îles de la mer Rouge et d’un port près des approches de Bab el-Mandeb (IFDC, 22 septembre), le type d’évolution qui déplace une queue de distribution sans déplacer le scénario de base."
+  ],
+  [
+   "<strong>5. The price and availability of cover.</strong> War risk at Yanbu was reported at about 3% of vessel value in late September, up from under 1% in July, against up to 7% for southern Saudi ports near the Yemen coast, 6 to 9% for Hormuz and 0.2 to 0.3% for non-Saudi-affiliated Red Sea tankers. The same report puts a Yanbu voyage at about $3 million in war risk premium against at least $100,000 before the conflict, and notes that the United States provides air cover for Hormuz transits and none in the Red Sea, where only EU patrols operate (Insurance Journal, 25 September). Reinsurance commentary on the Hormuz crisis shows how the structure of cover shifts as well as the price: annual war risk cover on Gulf policies converted to voyage-by-voyage, some P&amp;I mutuals issued 72-hour cancellation notices to non-mutual entries, and reinsurers moved to a client-by-client approach with reduced line sizes (Howden Re, March 2026). The same report raises the question of whether coordinated strikes across several countries count as one occurrence, which determines whether political violence treaty limits are exhausted at once.",
+   "<strong>5. Le prix et la disponibilité de la couverture.</strong> Le risque de guerre à Yanbu était rapporté à environ 3 % de la valeur du navire fin septembre, contre moins de 1 % en juillet, face à jusqu’à 7 % pour les ports saoudiens du sud proches de la côte yéménite, 6 à 9 % pour Ormuz et 0,2 à 0,3 % pour les pétroliers de la mer Rouge non affiliés à l’Arabie saoudite. Le même rapport estime un voyage depuis Yanbu à environ 3 millions de dollars de prime de risque de guerre contre au moins 100 000 dollars avant le conflit, et note que les États-Unis assurent une couverture aérienne pour les transits d’Ormuz et aucune en mer Rouge, où seules opèrent des patrouilles de l’UE (Insurance Journal, 25 septembre). Les commentaires de réassurance sur la crise d’Ormuz montrent que la structure de la couverture change autant que le prix : la couverture annuelle du risque de guerre sur les polices du Golfe est passée au voyage par voyage, certaines mutuelles P&amp;I ont émis des préavis d’annulation de 72 heures à des adhérents non mutualistes, et les réassureurs sont passés à une approche client par client avec des lignes réduites (Howden Re, mars 2026). Le même rapport soulève la question de savoir si des frappes coordonnées dans plusieurs pays comptent comme un seul sinistre, ce qui détermine si les limites des traités de violence politique sont épuisées d’un seul coup."
+  ],
+  [
+   "What the voyage shows",
+   "Ce que montre le voyage"
+  ],
+  [
+   "The Hormuz bypass is a chain of five limits, and a loss on any link is a loss on the same cargo. <strong>The pipeline, the canal, the hull, the cargo and the Korean refinery can all sit on different books.</strong> The question for a risk manager is whether the accumulation across those books is visible anywhere in one place.",
+   "Le contournement d’Ormuz est une chaîne de cinq limites, et une perte sur un maillon est une perte sur la même cargaison. <strong>L’oléoduc, le canal, la coque, la cargaison et la raffinerie coréenne peuvent tous figurer dans des portefeuilles différents.</strong> La question pour un gestionnaire de risques est de savoir si le cumul entre ces portefeuilles est visible quelque part en un seul endroit."
+  ],
+  [
+   "The wider effect",
+   "L’effet élargi"
+  ],
+  [
+   "Extra ship-days and extra premium show up in places well beyond the tanker market.",
+   "Des jours-navire supplémentaires et une prime supplémentaire se font sentir bien au-delà du marché des pétroliers."
+  ],
+  [
+   "We do not model price pass-through, and no single number below is the effect of the Yanbu route alone. They are the observable places where longer voyages, tighter ship supply and higher cover costs appear.",
+   "Nous ne modélisons pas la répercussion sur les prix, et aucun chiffre ci-dessous n’est l’effet de la seule route de Yanbu. Ce sont les endroits observables où apparaissent les voyages plus longs, l’offre de navires plus tendue et les coûts de couverture plus élevés."
+  ],
+  [
+   "<strong>Freight and crude.</strong> After the September pipeline attack, Kpler reported Middle East Gulf to Asia VLCC rates of about $30 a barrel, against about $20 from the Gulf of Oman, a premium it ties to Hormuz transit risk. Brent traded at $103.37 on 2 October, up $37.41 on a year earlier (Fortune). Many forces sit behind that price, and the extra ton-miles on the Yanbu chain are one of them. Gulf crude exports were reported at about 80% of pre-war levels in late September, with about 40% of Gulf crude now bypassing the Strait of Hormuz against 17% before the war (as reported by Business Today on 5 October). A rising bypass share means more cargo on exactly the chain described above.",
+   "<strong>Fret et brut.</strong> Après l’attaque de l’oléoduc en septembre, Kpler a rapporté des taux de VLCC du Golfe du Moyen-Orient vers l’Asie d’environ 30 $ le baril, contre environ 20 $ depuis le golfe d’Oman, une prime qu’il relie au risque de transit d’Ormuz. Le Brent s’échangeait à 103,37 $ le 2 octobre, en hausse de 37,41 $ sur un an (Fortune). De nombreuses forces sous-tendent ce prix, et les tonnes-milles supplémentaires de la chaîne de Yanbu en font partie. Les exportations de brut du Golfe étaient rapportées à environ 80 % des niveaux d’avant-guerre fin septembre, avec environ 40 % du brut du Golfe contournant désormais le détroit d’Ormuz contre 17 % avant la guerre (selon Business Today le 5 octobre). Une part de contournement croissante signifie plus de cargaisons sur exactement la chaîne décrite ci-dessus."
+  ],
+  [
+   "<strong>Fertilizer and food.</strong> The FAO Food Price Index averaged 136.0 points in September, up 1.5% on the month and 5.8% on the year, and the FAO cites transport disruptions and Strait of Hormuz uncertainty among the drivers. The AMIS Market Monitor points to elevated freight rates and firmer fertilizer markets. The IFDC bulletin of 22 September put Middle East granular urea at $470 to $480 a tonne FOB and described fertilizer shipments through Hormuz as effectively at a standstill, with farmers reducing application, delaying purchases or planting less. Those decisions feed through to harvests months later.",
+   "<strong>Engrais et alimentation.</strong> L’indice FAO des prix des produits alimentaires a atteint en moyenne 136,0 points en septembre, en hausse de 1,5 % sur le mois et de 5,8 % sur l’année, et la FAO cite les perturbations du transport et l’incertitude sur le détroit d’Ormuz parmi les facteurs. Le moniteur de marché AMIS signale des taux de fret élevés et des marchés d’engrais plus fermes. Le bulletin de l’IFDC du 22 septembre situait l’urée granulée du Moyen-Orient à 470 $ à 480 $ la tonne FOB et décrivait les expéditions d’engrais par Ormuz comme pratiquement à l’arrêt, les agriculteurs réduisant l’épandage, retardant leurs achats ou semant moins. Ces décisions se répercutent sur les récoltes des mois plus tard."
+  ],
+  [
+   "Exposed time",
+   "Temps d’exposition"
+  ],
+  [
+   "The long route more than doubles the days a cargo is exposed, but those days are not equally risky.",
+   "La longue route plus que double les jours d’exposition d’une cargaison, mais ces jours ne sont pas également risqués."
+  ],
+  [
+   "The same barrels spend about 47 days laden on the long route against about 21 on the short one, which is 2.2 times the ship-days. For an insurer that matters in three separate ways.",
+   "Les mêmes barils passent environ 47 jours chargés sur la longue route contre environ 21 sur la courte, soit 2,2 fois les jours-navire. Pour un assureur, cela compte de trois façons distinctes."
+  ],
+  [
+   "Per 1 million barrels a day of Yanbu flow",
+   "Pour 1 million de barils par jour de flux de Yanbu"
+  ],
+  [
+   "Short route",
+   "Route courte"
+  ],
+  [
+   "Long route",
+   "Route longue"
+  ],
+  [
+   "Days laden",
+   "Jours en charge"
+  ],
+  [
+   "Oil afloat at any moment",
+   "Pétrole en mer à tout instant"
+  ],
+  [
+   "about 21M bbl",
+   "environ 21 M bbl"
+  ],
+  [
+   "about 47M bbl",
+   "environ 47 M bbl"
+  ],
+  [
+   "Value afloat at $103.37 a barrel",
+   "Valeur en mer à 103,37 $ le baril"
+  ],
+  [
+   "about $2.2B",
+   "environ 2,2 Md$"
+  ],
+  [
+   "about $4.9B",
+   "environ 4,9 Md$"
+  ],
+  [
+   "The oil-afloat figures are our arithmetic: daily flow multiplied by laden days, valued at the Brent price of 2 October 2026, and they ignore the return leg in ballast. The first consequence is accumulation. Even if the hazard on each day were unchanged, the same flow now keeps more than twice the value on the water at once, and it sits in the same hulls for longer.",
+   "Les chiffres de pétrole en mer sont nos calculs : flux quotidien multiplié par les jours en charge, valorisé au cours du Brent du 2 octobre 2026, et ils ignorent le retour sur lest. La première conséquence est le cumul. Même si le risque de chaque jour restait inchangé, le même flux garde désormais plus de deux fois la valeur sur l’eau à la fois, et elle reste plus longtemps dans les mêmes coques."
+  ],
+  [
+   "The second is a mismatch with cover. Reports describe war cover being written voyage by voyage, with P&amp;I cancellation notices as short as 72 hours (Howden Re). A voyage of 47 days passes through far more opportunities for terms, listed areas or notice periods to change than one of 21 days, so the premium agreed at loading may not describe the risk at discharge. We have not verified the cancellation wording of any specific clause, so treat this as a question to ask of a wording, not a finding about one.",
+   "La deuxième est un décalage avec la couverture. Des rapports décrivent une couverture de guerre souscrite voyage par voyage, avec des préavis d’annulation P&amp;I pouvant être aussi courts que 72 heures (Howden Re). Un voyage de 47 jours traverse bien plus d’occasions de modification des conditions, des zones listées ou des préavis qu’un voyage de 21 jours, de sorte que la prime convenue au chargement peut ne pas décrire le risque au déchargement. Nous n’avons pas vérifié la formulation d’annulation d’une clause précise, il faut donc y voir une question à poser à un libellé, et non un constat sur l’un d’eux."
+  ],
+  [
+   "The third point is a limit on the first two. Hazard is not spread evenly across the 47 days. It concentrates at the load port, in listed areas, at chokepoints and in port stays. Most of the extra 26 days are open ocean around Africa, so the longer route adds a great deal of time-related exposure (delay, charter hire, cargo condition, accumulation at any moment) and rather less casualty hazard per day. Scaling risk in direct proportion to days at sea would therefore overstate the casualty side and understate the delay side.",
+   "Le troisième point est une limite aux deux premiers. Le risque n’est pas réparti uniformément sur les 47 jours. Il se concentre au port de chargement, dans les zones listées, aux points de passage et pendant les séjours au port. La plupart des 26 jours supplémentaires se passent en pleine mer autour de l’Afrique, de sorte que la longue route ajoute beaucoup d’exposition liée au temps (retard, affrètement, état de la cargaison, cumul à un instant donné) et un peu moins de risque de sinistre par jour. Faire évoluer le risque en proportion directe des jours en mer surestimerait donc le volet sinistre et sous-estimerait le volet retard."
+  ],
+  [
+   "That is also the answer to whether risk scales linearly with time. Over short periods and small hazards it is a fair first approximation: with a constant daily hazard h, the chance of at least one event in t days is 1 minus exp(-ht), which is close to ht when ht is small. It stops being true when the loss is bounded by the value of the cargo and hull, when hazard varies by segment, and when events cluster, so that one incident raises the chance of the next. CAPE uses the linear form today. A segment-by-segment hazard with a cap is the better model.",
+   "C’est aussi la réponse à la question de savoir si le risque évolue linéairement avec le temps. Sur de courtes périodes et pour de petits risques, c’est une bonne première approximation : avec un risque quotidien constant h, la probabilité d’au moins un événement en t jours est 1 moins exp(-ht), proche de ht quand ht est petit. Cela cesse d’être vrai lorsque la perte est plafonnée par la valeur de la cargaison et de la coque, lorsque le risque varie selon le segment et lorsque les événements se regroupent, de sorte qu’un incident augmente la probabilité du suivant. CAPE utilise aujourd’hui la forme linéaire. Un risque segment par segment avec plafond est le meilleur modèle."
+  ],
+  [
+   "Where exposure accumulates",
+   "Où l’exposition s’accumule"
+  ],
+  [
+   "The same voyage touches at least five lines of business.",
+   "Le même voyage touche au moins cinq branches d’activité."
+  ],
+  [
+   "Link",
+   "Maillon"
+  ],
+  [
+   "Constraint",
+   "Contrainte"
+  ],
+  [
+   "Where it lands",
+   "Où cela retombe"
+  ],
+  [
+   "East-West pipeline and Yanbu terminal",
+   "Oléoduc Est-Ouest et terminal de Yanbu"
+  ],
+  [
+   "Pumping stations, loading rate, local refinery demand",
+   "Stations de pompage, cadence de chargement, demande des raffineries locales"
+  ],
+  [
+   "Business interruption, political violence, offshore and energy property",
+   "Interruption d’activité, violence politique, dommages offshore et énergie"
+  ],
+  [
+   "Suez Canal",
+   "Canal de Suez"
+  ],
+  [
+   "Size limit, single waterway, grounding or blockage",
+   "Limite de taille, voie d’eau unique, échouage ou blocage"
+  ],
+  [
+   "Hull, cargo, delay and general average",
+   "Corps, cargaison, retard et avarie commune"
+  ],
+  [
+   "Long haul around the Cape",
+   "Longue route par le Cap"
+  ],
+  [
+   "47 days against 21, twice the ship-days per cargo",
+   "47 jours contre 21, le double de jours-navire par cargaison"
+  ],
+  [
+   "Charterers, cargo owners, freight and delay",
+   "Affréteurs, propriétaires de cargaison, fret et retard"
+  ],
+  [
+   "Tail chokepoints",
+   "Points de passage en aval"
+  ],
+  [
+   "Gibraltar, Cape, Malacca, and the Red Sea as a closed basin",
+   "Gibraltar, le Cap, Malacca et la mer Rouge comme bassin fermé"
+  ],
+  [
+   "War, strikes and political violence, correlated across hulls",
+   "Guerre, grèves et violence politique, corrélées entre les coques"
+  ],
+  [
+   "Cover itself",
+   "La couverture elle-même"
+  ],
+  [
+   "3% of vessel value, voyage-by-voyage terms, 72-hour cancellation",
+   "3 % de la valeur du navire, conditions voyage par voyage, annulation sous 72 heures"
+  ],
+  [
+   "Hull war, P&amp;I, reinsurance treaty limits",
+   "Guerre sur corps, P&amp;I, limites des traités de réassurance"
+  ],
+  [
+   "Scale matters here. At about $100 million of crude per Suezmax cargo (roughly one million barrels at the recent Brent price of $103.37), a book holding twenty such cargoes carries about $2.0 billion of cargo value through the same canal, before any hull value (illustrative arithmetic). If those cargoes also sit under different underwriters, each underwriter sees a modest line while the market sees a concentrated one.",
+   "L’échelle compte ici. À environ 100 millions de dollars de brut par cargaison de Suezmax (environ un million de barils au récent cours du Brent de 103,37 $), un portefeuille de vingt cargaisons de ce type fait transiter environ 2,0 milliards de dollars de valeur de cargaison par le même canal, avant toute valeur de coque (calcul illustratif). Si ces cargaisons relèvent aussi d’assureurs différents, chaque assureur voit une ligne modeste tandis que le marché en voit une concentrée."
+  ],
+  [
+   "What CAPE shows",
+   "Ce que montre CAPE"
+  ],
+  [
+   "CAPE models two of the five links, and it understates this vessel for a reason worth stating.",
+   "CAPE modélise deux des cinq maillons, et il sous-estime ce navire pour une raison qu’il vaut la peine d’énoncer."
+  ],
+  [
+   "We added the hypothetical vessel to CAPE as an illustrative case: a Suezmax carrying $100 million of Saudi crude, with full weight on the Suez and Malacca corridors. CAPE computes value at risk as cargo value, times the class exposure weight, times the vessel weight, times duration over 30 days, times severity.",
+   "Nous avons ajouté le navire hypothétique à CAPE comme cas illustratif : un Suezmax transportant 100 millions de dollars de brut saoudien, avec pleine pondération sur les corridors de Suez et de Malacca. CAPE calcule la valeur à risque comme la valeur de cargaison, multipliée par le poids d’exposition de la classe, multiplié par le poids du navire, multiplié par la durée sur 30 jours, multiplié par la gravité."
+  ],
+  [
+   "30-day scenario",
+   "Scénario à 30 jours"
+  ],
+  [
+   "Total",
+   "Total"
+  ],
+  [
+   "33% throttle",
+   "Étranglement de 33 %"
+  ],
+  [
+   "50% throttle",
+   "Étranglement de 50 %"
+  ],
+  [
+   "Full closure",
+   "Fermeture totale"
+  ],
+  [
+   "Read this table with three caveats. First, the class weights, 0.25 for Suez and 0.33 for Malacca on a Suezmax, are fleet averages from an AIS transit analysis for the second quarter of 2024, so a vessel that is certain to use the canal is under-weighted by construction. Second, CAPE has no corridor for the pipeline, Gibraltar or the Cape of Good Hope, so three of the five links are invisible to the model. Third, the formula is linear in duration and severity and is not capped at cargo value. For this cargo the uncapped total would pass $100 million after about 52 days of full closure, which no real loss on one cargo can do, so the longer scenarios overstate the loss and should be read with that limit in mind. Anyone running their own assumptions would replace the weights with their own view of how often cargoes touch each link, and would cap the result.",
+   "Il faut lire ce tableau avec trois réserves. Premièrement, les poids de classe, 0,25 pour Suez et 0,33 pour Malacca sur un Suezmax, sont des moyennes de flotte tirées d’une analyse de transits AIS du deuxième trimestre 2024, de sorte qu’un navire qui utilisera à coup sûr le canal est sous-pondéré par construction. Deuxièmement, CAPE n’a pas de corridor pour l’oléoduc, Gibraltar ou le cap de Bonne-Espérance, si bien que trois des cinq maillons sont invisibles pour le modèle. Troisièmement, la formule est linéaire en durée et en gravité et n’est pas plafonnée à la valeur de la cargaison. Pour cette cargaison, le total non plafonné dépasserait 100 millions de dollars après environ 52 jours de fermeture totale, ce qu’aucune perte réelle sur une cargaison ne peut faire, de sorte que les scénarios les plus longs surestiment la perte et doivent se lire avec cette limite à l’esprit. Quiconque exécute ses propres hypothèses remplacerait les poids par sa propre vision de la fréquence à laquelle les cargaisons touchent chaque maillon, et plafonnerait le résultat."
+  ],
+  [
+   "What this means for insurers",
+   "Ce que cela signifie pour les assureurs"
+  ],
+  [
+   "Higher premiums are a rational response to a real risk. The open question is whether the accumulation is visible.",
+   "Des primes plus élevées sont une réponse rationnelle à un risque réel. La question ouverte est de savoir si le cumul est visible."
+  ],
+  [
+   "Nothing in this analysis suggests that the market is pricing the Red Sea or Hormuz wrongly. A premium of about 3% of vessel value is a plausible response to a risk of this size. The practical gap is different: premium is set voyage by voyage, while the exposure accumulates across links, vessel classes and lines of business, and the same few waterways sit under many books at once.",
+   "Rien dans cette analyse ne suggère que le marché tarifie mal la mer Rouge ou Ormuz. Une prime d’environ 3 % de la valeur du navire est une réponse plausible à un risque de cette ampleur. L’écart pratique est autre : la prime est fixée voyage par voyage, tandis que l’exposition s’accumule entre maillons, classes de navires et branches d’activité, et que les mêmes quelques voies d’eau se retrouvent dans de nombreux portefeuilles à la fois."
+  ],
+  [
+   "That is where scenario analysis helps. For a given book, the useful questions are: how many cargoes and hulls touch each link, which of them share a single point of failure, and what happens to the total if a throttle on one link, such as the pipeline, coincides with a limit on another, such as the canal. Those questions can be run under any assumptions on severity, duration and routing.",
+   "C’est là que l’analyse de scénarios aide. Pour un portefeuille donné, les questions utiles sont : combien de cargaisons et de coques touchent chaque maillon, lesquelles partagent un point de défaillance unique, et que devient le total si un étranglement sur un maillon, comme l’oléoduc, coïncide avec une limite sur un autre, comme le canal. Ces questions peuvent être traitées sous toute hypothèse de gravité, de durée et de routage."
+  ],
+  [
+   "Methodology and sources",
+   "Méthodologie et sources"
+  ],
+  [
+   "Distances: Narrows routing graph (9,708 nodes, about 16,000 edges, the network used by searoute-py and by our Map Printer tool). Origin: Yanbu offshore (37.0E, 24.0N). Destination: Ulsan (129.6E, 35.4N). Arctic routes and the Panama Canal are excluded because the vessel cannot use them. Days at 14 knots, the Suezmax service speed in our corridor table. Press reports of about 24 days versus about 54 days to Korea (Al Jazeera, The National) include slower speeds and port time and are consistent in ratio. Ship-day arithmetic assumes the same speed in ballast and four port days. The CAPE vessel is illustrative, with cargo value, weights and CII rating that are not observed. <br><br> Known limits: pipeline capacity, shutdown dates and flow rates differ between sources (for example 4 versus 7 million barrels a day nominal, and a shutdown dated 11, 12 or 13 September), and attribution of the September attacks differs between reports, so this page does not attribute them. The war risk percentages are as reported and are not quotes. Gulf crude export recovery figures are from commentary. We do not model price pass-through to fuel, fertilizer or food. <br><br> <strong>References</strong><br> Insurance Journal (25 September 2026). Saudi Oil Export Strategy Hits New Hurdle as Red Sea Insurance Costs Soar.<br> Seatrade Maritime (September 2026). Saudi resumes loadings in Yanbu, DHT fixes VLCC for $55m.<br> Kpler (September 2026). Yanbu pipeline attack ripples across crude, freight and gas markets.<br> Rio Times (September 2026). Saudi Crude Exports Fall by Two Thirds as the Yanbu Pipeline Shuts and Egypt Becomes the Last Route Out.<br> Hydrocarbon Processing (September 2026). Saudi Arabia restarts East-West oil pipeline.<br> The Cradle, Yeganegi, K. (3 October 2026). The oil routes around Hormuz face their own chokepoints.<br> Wisdom and Boats (2026). Yanbu Analysis: The East-West Pipeline, Port Congestion, and Actual Export Capacity.<br> Howden Re (27 March 2026). Strait of Hormuz: market report.<br> Fortune (2 October 2026). Current price of oil as of Oct. 2, 2026.<br> FAO (2 October 2026). FAO Food Price Index rises in September amid weather concerns and transport disruptions.<br> IFDC (22 September 2026). Fertilizer Crisis Response Bulletin #30.<br> Business Today (5 October 2026). Oil exports via Hormuz rebound to 80% of pre-war levels.<br> Wikipedia, Suezmax (draft limit and definition).",
+   "Distances : graphe de routage de Narrows (9 708 nœuds, environ 16 000 arêtes, le réseau utilisé par searoute-py et par notre outil Map Printer). Origine : Yanbu au large (37,0 E, 24,0 N). Destination : Ulsan (129,6 E, 35,4 N). Les routes arctiques et le canal de Panama sont exclus car le navire ne peut pas les utiliser. Jours à 14 nœuds, la vitesse de service du Suezmax dans notre tableau de corridors. Les articles de presse indiquant environ 24 jours contre environ 54 jours vers la Corée (Al Jazeera, The National) incluent des vitesses plus lentes et du temps au port et sont cohérents en ratio. Le calcul des jours-navire suppose la même vitesse sur lest et quatre jours au port. Le navire CAPE est illustratif, avec une valeur de cargaison, des poids et une notation CII non observés. <br><br> Limites connues : la capacité de l’oléoduc, les dates d’arrêt et les débits diffèrent selon les sources (par exemple 4 contre 7 millions de barils par jour nominaux, et un arrêt daté du 11, 12 ou 13 septembre), et l’attribution des attaques de septembre diffère selon les rapports, de sorte que cette page ne les attribue pas. Les pourcentages de risque de guerre sont tels que rapportés et ne sont pas des cotations. Les chiffres de rétablissement des exportations de brut du Golfe proviennent de commentaires. Nous ne modélisons pas la répercussion sur les prix des carburants, des engrais ou de l’alimentation. <br><br> <strong>Références</strong><br> Insurance Journal (25 septembre 2026). Saudi Oil Export Strategy Hits New Hurdle as Red Sea Insurance Costs Soar.<br> Seatrade Maritime (septembre 2026). Saudi resumes loadings in Yanbu, DHT fixes VLCC for 55 $m.<br> Kpler (septembre 2026). Yanbu pipeline attack ripples across crude, freight and gas markets.<br> Rio Times (septembre 2026). Saudi Crude Exports Fall by Two Thirds as the Yanbu Pipeline Shuts and Egypt Becomes the Last Route Out.<br> Hydrocarbon Processing (septembre 2026). Saudi Arabia restarts East-West oil pipeline.<br> The Cradle, Yeganegi, K. (3 octobre 2026). The oil routes around Hormuz face their own chokepoints.<br> Wisdom and Boats (2026). Yanbu Analysis: The East-West Pipeline, Port Congestion, and Actual Export Capacity.<br> Howden Re (27 mars 2026). Strait of Hormuz: market report.<br> Fortune (2 octobre 2026). Current price of oil as of Oct. 2, 2026.<br> FAO (2 octobre 2026). FAO Food Price Index rises in September amid weather concerns and transport disruptions.<br> IFDC (22 septembre 2026). Fertilizer Crisis Response Bulletin #30.<br> Business Today (5 octobre 2026). Oil exports via Hormuz rebound to 80 % of pre-war levels.<br> Wikipedia, Suezmax (limite de tirant d’eau et définition)."
+  ]
+ ],
+ "js": []
+}

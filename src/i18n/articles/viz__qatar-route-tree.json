@@ -1,0 +1,203 @@
+{
+ "path": "viz/qatar-route-tree",
+ "meta": {
+  "title": "GNL du Golfe, arbre des routes | Narrows",
+  "description": "Corridors et points de passage du GNL du Golfe selon la destination."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "Route Tree Analysis",
+   "Analyse de l’arbre des routes"
+  ],
+  [
+   "All Gulf LNG exits through Hormuz - corridors and chokepoints diverge by destination",
+   "Tout le GNL du Golfe sort par Ormuz : les corridors et les points de passage divergent selon la destination"
+  ],
+  [
+   "Node size reflects annual bilateral trade value. Day count is approximate total transit from Gulf export terminal. Hover for detail. Qatar ≈ 75% of Gulf LNG.",
+   "La taille des nœuds reflète la valeur annuelle des échanges bilatéraux. Le nombre de jours est le transit total approximatif depuis le terminal d’exportation du Golfe. Survolez pour le détail. Qatar ≈ 75 % du GNL du Golfe."
+  ],
+  [
+   "Chokepoint",
+   "Point de passage"
+  ],
+  [
+   "Asia-Pacific via Malacca",
+   "Asie-Pacifique via Malacca"
+  ],
+  [
+   "Europe via Bab / Suez",
+   "Europe via Bab / Suez"
+  ],
+  [
+   "South Asia &amp; Americas (direct)",
+   "Asie du Sud et Amériques (direct)"
+  ],
+  [
+   "Source: Narrows CDM v0.3 · HS 271111 bilateral trade data<br> Transit estimates at 17 kts · Dep% = share of national LNG imports via Hormuz",
+   "Source : Narrows CDM v0.3 · données commerciales bilatérales SH 271111<br> Estimations de transit à 17 nœuds · Dép. % = part des importations nationales de GNL passant par Ormuz"
+  ]
+ ],
+ "js": [
+  [
+   "label:'UK'",
+   "label:'Royaume-Uni'"
+  ],
+  [
+   "['Gulf LNG','Exporters']",
+   "['GNL du Golfe','Exportateurs']"
+  ],
+  [
+   "'Bab el-Mandeb'",
+   "'Bab el-Mandeb'"
+  ],
+  [
+   "`$${n.v.toFixed(1)}B · ${n.totalDays}d`",
+   "`${n.v.toFixed(1).replace('.',',')} Md$ · ${n.totalDays}\\u00a0j`"
+  ],
+  [
+   "`$${n.v.toFixed(1)}B annual flow`",
+   "`${n.v.toFixed(1).replace('.',',')} Md$ de flux annuel`"
+  ],
+  [
+   "` · ~${n.totalDays} days from origin`",
+   "` · ~${n.totalDays} jours depuis l’origine`"
+  ],
+  [
+   "`Hormuz dependency: ${n.dep}%`",
+   "`Dépendance à Ormuz : ${String(n.dep).replace('.',',')}\\u00a0%`"
+  ],
+  [
+   "`${lk.days}d`",
+   "`${lk.days}\\u00a0j`"
+  ],
+  [
+   "note:'Two further chokepoints in sequence: Bab el-Mandeb (Red Sea, ~30 km) then Suez Canal. European buyers face four sequential chokepoints: Hormuz → Bab → Suez → market. Bab el-Mandeb under active Houthi disruption since late 2023.'",
+   "note:'Deux autres points de passage en séquence : Bab el-Mandeb (mer Rouge, ≈ 30 km) puis le canal de Suez. Les acheteurs européens font face à quatre points de passage successifs : Ormuz → Bab → Suez → marché. Bab el-Mandeb est activement perturbé par les Houthis depuis fin 2023.'"
+  ],
+  [
+   "note:'Only 2.5% of Indian LNG via Hormuz. India sources primarily from Australia, US, domestic production - low structural exposure. Hormuz to NW India (Dahej/Hazira) ≈ 2 days; southern terminals 4–5 days.'",
+   "note:'Seulement 2,5 % du GNL indien passe par Ormuz. L’Inde s’approvisionne surtout en Australie, aux États-Unis et en production nationale : faible exposition structurelle. D’Ormuz au nord-ouest de l’Inde (Dahej/Hazira) ≈ 2 jours ; terminaux du sud 4–5 jours.'"
+  ],
+  [
+   "note:'5.9% of Brazilian imports via Hormuz. Routed around Cape of Good Hope - no Bab/Suez dependency, but a very long voyage comparable in time to European Atlantic destinations.'",
+   "note:'5,9 % des importations brésiliennes passent par Ormuz. Route par le cap de Bonne-Espérance : aucune dépendance à Bab/Suez, mais un très long voyage, comparable en durée à celui des destinations atlantiques européennes.'"
+  ],
+  [
+   "note:'Fifth chokepoint for Atlantic European LNG destinations. Strait of Gibraltar: 14 km minimum navigable width. Belgium, UK, and Netherlands LNG terminals all transit here.'",
+   "note:'Cinquième point de passage pour les destinations européennes de GNL donnant sur l’Atlantique. Détroit de Gibraltar : 14 km de largeur navigable minimale. Les terminaux GNL de la Belgique, du Royaume-Uni et des Pays-Bas transitent tous par ici.'"
+  ],
+  [
+   "note:'98.2% Hormuz dependency - highest globally. No credible alternative supplier at scale. A Hormuz closure would rapidly paralyse Pakistani industry and power generation.'",
+   "note:'98,2 % de dépendance à Ormuz, la plus élevée au monde. Aucun fournisseur alternatif crédible à grande échelle. Une fermeture d’Ormuz paralyserait rapidement l’industrie et la production d’électricité du Pakistan.'"
+  ],
+  [
+   "note:'55.8% Hormuz dependency - highest in Europe. Zeebrugge (Gate Terminal) is a major LNG hub. Five sequential chokepoints: Hormuz → Bab → Suez → Gibraltar → destination.'",
+   "note:'55,8 % de dépendance à Ormuz, la plus élevée d’Europe. Zeebrugge (Gate Terminal) est une plaque tournante majeure du GNL. Cinq points de passage successifs : Ormuz → Bab → Suez → Gibraltar → destination.'"
+  ],
+  [
+   "note:'Second mandatory chokepoint for all Asia-Pacific cargoes. Asia-bound Gulf LNG faces two sequential chokepoints before reaching market.'",
+   "note:'Deuxième point de passage obligatoire pour toutes les cargaisons vers l’Asie-Pacifique. Le GNL du Golfe à destination de l’Asie franchit deux points de passage successifs avant d’atteindre le marché.'"
+  ],
+  [
+   "note:'10.2% via Hormuz. Primary terminal Fos-sur-Mer is Mediterranean-facing - routes via Suez through the Med, bypassing Gibraltar.'",
+   "note:'10,2 % via Ormuz. Le terminal principal de Fos-sur-Mer donne sur la Méditerranée : route par Suez puis la Méditerranée, sans passer par Gibraltar.'"
+  ],
+  [
+   "note:'Qatar dominant (~75%). All Gulf LNG must transit Hormuz - there is no alternative maritime route out of the Arabian Gulf.'",
+   "note:'Le Qatar domine (≈ 75 %). Tout le GNL du Golfe doit transiter par Ormuz ; il n’existe aucune autre route maritime hors du golfe Arabo-Persique.'"
+  ],
+  [
+   "note:'Single mandatory bottleneck for 100% of Gulf LNG. A closure simultaneously traps all Qatari and UAE LNG export capacity.'",
+   "note:'Goulet obligatoire unique pour 100 % du GNL du Golfe. Une fermeture piège simultanément toute la capacité d’exportation de GNL du Qatar et des Émirats.'"
+  ],
+  [
+   "note:'6.5% of Japanese imports via Hormuz. Japan has diversified to Australia, US, Malaysia. Route passes Taiwan/Korea Strait.'",
+   "note:'6,5 % des importations japonaises passent par Ormuz. Le Japon s’est diversifié vers l’Australie, les États-Unis et la Malaisie. La route traverse le détroit de Taïwan ou de Corée.'"
+  ],
+  [
+   "note:'Largest single buyer. 23.6% of Chinese LNG via Hormuz. Route passes Taiwan Strait - a further potential chokepoint.'",
+   "note:'Premier acheteur. 23,6 % du GNL chinois passe par Ormuz. La route traverse le détroit de Taïwan, un autre point de passage potentiel.'"
+  ],
+  [
+   "note:'26.9% of UK imports via Hormuz. Isle of Grain and South Hook are Atlantic-facing. Five chokepoints in sequence.'",
+   "note:'26,9 % des importations britanniques passent par Ormuz. Isle of Grain et South Hook donnent sur l’Atlantique. Cinq points de passage en séquence.'"
+  ],
+  [
+   "note:'13.2% of Dutch imports via Hormuz. Gate Terminal Rotterdam. Five sequential chokepoints to destination.'",
+   "note:'13,2 % des importations néerlandaises passent par Ormuz. Gate Terminal Rotterdam. Cinq points de passage successifs jusqu’à la destination.'"
+  ],
+  [
+   "note:'17.2% via Hormuz. Primary Gulf LNG arrives at Mediterranean terminals via Suez - no Gibraltar transit.'",
+   "note:'17,2 % via Ormuz. L’essentiel du GNL du Golfe arrive aux terminaux méditerranéens via Suez, sans transit par Gibraltar.'"
+  ],
+  [
+   "note:'21.6% via Hormuz. Adriatic/Tyrrhenian terminals route via Suez and the Med - no Gibraltar transit.'",
+   "note:'21,6 % via Ormuz. Les terminaux de l’Adriatique et de la Tyrrhénienne passent par Suez et la Méditerranée, sans transit par Gibraltar.'"
+  ],
+  [
+   "note:'23.2% of Taiwanese imports via Hormuz. Taiwan Strait is both corridor and potential chokepoint.'",
+   "note:'23,2 % des importations taïwanaises passent par Ormuz. Le détroit de Taïwan est à la fois un corridor et un point de passage potentiel.'"
+  ],
+  [
+   "note:'20.0% of South Korean imports via Hormuz. Route passes Taiwan Strait and Korea Strait.'",
+   "note:'20,0 % des importations sud-coréennes passent par Ormuz. La route traverse le détroit de Taïwan et le détroit de Corée.'"
+  ],
+  [
+   "note:'30.0% of Thai imports via Hormuz - among the highest Asian dependencies.'",
+   "note:'30,0 % des importations thaïlandaises passent par Ormuz, l’une des dépendances asiatiques les plus élevées.'"
+  ],
+  [
+   "label:'Netherlands'",
+   "label:'Pays-Bas'"
+  ],
+  [
+   "label:'S. Korea'",
+   "label:'Corée du Sud'"
+  ],
+  [
+   "label:'Thailand'",
+   "label:'Thaïlande'"
+  ],
+  [
+   "label:'Belgium'",
+   "label:'Belgique'"
+  ],
+  [
+   "label:'Hormuz'",
+   "label:'Ormuz'"
+  ],
+  [
+   "label:'Taiwan'",
+   "label:'Taïwan'"
+  ],
+  [
+   "label:'Brazil'",
+   "label:'Brésil'"
+  ],
+  [
+   "label:'China'",
+   "label:'Chine'"
+  ],
+  [
+   "label:'Japan'",
+   "label:'Japon'"
+  ],
+  [
+   "label:'Italy'",
+   "label:'Italie'"
+  ],
+  [
+   "label:'Spain'",
+   "label:'Espagne'"
+  ],
+  [
+   "label:'India'",
+   "label:'Inde'"
+  ]
+ ]
+}

@@ -1,0 +1,779 @@
+{
+ "path": "cascade-plus",
+ "meta": {
+  "title": "CASCADE+ | The Narrows",
+  "description": "CASCADE+ : démonstration sur données illustratives d’un portefeuille de navires exposé à plusieurs points de passage, avec routage réel et coût de déroutement par navire."
+ },
+ "pairs": [
+  [
+   "The Narrows",
+   "The Narrows"
+  ],
+  [
+   "CASCADE+",
+   "CASCADE+"
+  ],
+  [
+   "One book, every chokepoint it touches · click a vessel for details",
+   "Un portefeuille, tous les points de passage qu’il touche · cliquez sur un navire pour les détails"
+  ],
+  [
+   "+ Add vessel",
+   "+ Ajouter un navire"
+  ],
+  [
+   "Upload CSV",
+   "Importer un CSV"
+  ],
+  [
+   "Reset",
+   "Réinitialiser"
+  ],
+  [
+   "Demonstration on illustrative data. A research tool shown to explain the method, not a service and not live tracking.",
+   "Démonstration sur données illustratives. Un outil de recherche présenté pour expliquer la méthode, ni un service ni un suivi en direct."
+  ],
+  [
+   "Computing real routes…",
+   "Calcul des routes réelles…"
+  ],
+  [
+   "Scenario clock",
+   "Horloge du scénario"
+  ],
+  [
+   "Reset to today",
+   "Revenir à aujourd’hui"
+  ],
+  [
+   "Locked/window/pre are computed from each vessel's ETA against this clock, not hand-assigned",
+   "Verrouillé/dans la fenêtre/pré-engagement sont calculés à partir de l’ETA de chaque navire par rapport à cette horloge, et non attribués à la main"
+  ],
+  [
+   "<span class=\"filter-lbl\">Corridors in this book</span>",
+   "<span class=\"filter-lbl\">Corridors de ce portefeuille</span>"
+  ],
+  [
+   "Total exposure",
+   "Exposition totale"
+  ],
+  [
+   "Locked",
+   "Verrouillé"
+  ],
+  [
+   "no option",
+   "aucune option"
+  ],
+  [
+   "In-window",
+   "Dans la fenêtre"
+  ],
+  [
+   "window open",
+   "fenêtre ouverte"
+  ],
+  [
+   "Pre-commitment",
+   "Pré-engagement"
+  ],
+  [
+   "free to move",
+   "libres de se déplacer"
+  ],
+  [
+   "Diverted · real+est. cost",
+   "Dérouté · coût réel + estimé"
+  ],
+  [
+   "0 vessels",
+   "0 navire"
+  ],
+  [
+   "Divert all pre-commitment",
+   "Dérouter tout le pré-engagement"
+  ],
+  [
+   "across the whole book · <a href=\"#\" onclick=\"downloadAllAdvisories();return false\">export all diverted advisories</a> · <a href=\"#\" onclick=\"openRemovalLedgerModal();return false\" id=\"removedLedgerLink\">removed (0)</a>",
+   "sur l’ensemble du portefeuille · <a href=\"#\" onclick=\"downloadAllAdvisories();return false\">exporter tous les avis de déroutement</a> · <a href=\"#\" onclick=\"openRemovalLedgerModal();return false\" id=\"removedLedgerLink\">retirés (0)</a>"
+  ],
+  [
+   "Loaded and transiting. No diversion window, whichever corridor they're in.",
+   "Chargés et en transit. Aucune fenêtre de déroutement, quel que soit leur corridor."
+  ],
+  [
+   "Approaching a strait. Diversion possible at the cost shown, computed per vessel's own corridor.",
+   "Approche d’un détroit. Déroutement possible au coût indiqué, calculé selon le corridor propre à chaque navire."
+  ],
+  [
+   "All diverted or committed",
+   "Tous déroutés ou engagés"
+  ],
+  [
+   "Not yet loaded. Same cost basis, zero sunk cost.",
+   "Pas encore chargés. Même base de coût, aucun coût irrécupérable."
+  ],
+  [
+   "All diverted",
+   "Tous déroutés"
+  ],
+  [
+   "Diverted",
+   "Dérouté"
+  ],
+  [
+   "Rerouted. Cost is real where a real alternate route exists, flagged as an estimate where it doesn't.",
+   "Rerouté. Le coût est réel lorsqu’une route alternative réelle existe, signalé comme estimation lorsqu’elle n’existe pas."
+  ],
+  [
+   "No vessels diverted yet",
+   "Aucun navire dérouté pour l’instant"
+  ],
+  [
+   "<b>Eight corridors, seven with real routing.</b> Each corridor is a representative voyage run against the live routing graph. <b>Bab el-Mandeb</b> (Fujairah to Rotterdam, a voyage that crosses three named passages in sequence: Bab el-Mandeb, Suez and Gibraltar; blocking Bab el-Mandeb alone already forces the same full Cape reroute as blocking it and Suez together), <b>Suez</b> (Jeddah to Rotterdam; Jeddah sits north of Bab el-Mandeb, so this voyage crosses only Suez and Gibraltar), <b>Malacca</b> (Colombo to Shanghai; blocking it produces a +625nm detour via Sunda), <b>Panama</b> (Houston to Shanghai; blocking it sends the voyage around through four other tracked corridors at once: Gibraltar, Suez, Bab el-Mandeb and Malacca), <b>Gibraltar</b> (New York to Genoa; blocking it sends the vessel around the Cape of Good Hope and through Bab el-Mandeb and Suez), <b>Hormuz</b> (Ras Tannurah to Singapore, crossing both Hormuz and Malacca on the same voyage) and <b>Bosphorus</b> (Novorossiysk to Genoa, via the Bosphorus and Dardanelles in sequence). Hormuz and the Bosphorus both return \"no route found\" when blocked: there is no water alternative out of the Persian Gulf or the Black Sea, and the page shows that rather than guessing a route. Only <b>Danish Straits</b> is still a flat, labelled estimate, because the routing graph has no passage tag for it yet.<br><br> <b>Corridors show their full passage list.</b> The Corridor column and each vessel's detail panel list every passage the routed voyage crosses (for example \"Bab el-Mandeb + Suez + Gibraltar\"), not the single corridor a vessel is filed under. A vessel that diverts out of any tracked corridor is checked against every other corridor's passage list, plus four passages with no corridor of their own: Sunda, Dardanelles, Cape of Good Hope, and Cape Horn/Chile Strait. A Gibraltar closure therefore correctly shows a vessel exposed off the Cape of Good Hope.<br><br> <b>Bunker and port-call risk.</b> A handful of vessels list the ports they call at or bunker at (Djibouti, Las Palmas, Istanbul), scored against the same port-risk table used by CAPE's waypoints feature, because a diversion can be clean at the strait and still bunker somewhere JWC-listed (Djibouti sits inside the Gulf of Aden listed area whichever strait the hull avoided). This is a risk overlay, not a routed leg: it changes what shows as exposed, not distance or cost.<br><br> <b>Origins are real ports.</b> Every corridor's endpoints are named ports with coordinates from the Narrows port index (World Port Index-derived, ~4,000 ports): Al Fujayrah, Jiddah, Colombo, Houston, New York, Ras Tannurah, Novorossiysk, Primorsk, Rotterdam, Shanghai, Singapore, Genova.<br><br> <b>Status is computed.</b> Locked, in-window and pre-commitment are derived on every render from each vessel's ETA against the scenario clock in the header. Diversion days are per vessel: class and CII grade set an effective speed (the CII-adjusted effective-days approach used in the Narrows Malacca/Lombok analysis), not one flat speed for every ship.",
+   "<b>Huit corridors, dont sept avec un routage réel.</b> Chaque corridor est un voyage représentatif exécuté sur le graphe de routage en direct. <b>Bab el-Mandeb</b> (Fujairah vers Rotterdam, un voyage qui franchit trois passages nommés en séquence : Bab el-Mandeb, Suez et Gibraltar ; bloquer Bab el-Mandeb seul impose déjà le même déroutement complet par le Cap que le bloquer avec Suez), <b>Suez</b> (Djeddah vers Rotterdam ; Djeddah se trouve au nord de Bab el-Mandeb, ce voyage ne franchit donc que Suez et Gibraltar), <b>Malacca</b> (Colombo vers Shanghai ; le bloquer produit un détour de +625 nm via la Sonde), <b>Panama</b> (Houston vers Shanghai ; le bloquer fait faire au voyage le tour par quatre autres corridors suivis à la fois : Gibraltar, Suez, Bab el-Mandeb et Malacca), <b>Gibraltar</b> (New York vers Gênes ; le bloquer envoie le navire autour du cap de Bonne-Espérance puis par Bab el-Mandeb et Suez), <b>Ormuz</b> (Ras Tannurah vers Singapour, franchissant à la fois Ormuz et Malacca sur le même voyage) et <b>Bosphore</b> (Novorossiïsk vers Gênes, via le Bosphore puis les Dardanelles en séquence). Ormuz et le Bosphore renvoient tous deux « aucune route trouvée » lorsqu’ils sont bloqués : il n’existe aucune alternative maritime hors du golfe Persique ou de la mer Noire, et la page le montre au lieu de deviner une route. Seuls les <b>détroits danois</b> restent une estimation forfaitaire, étiquetée comme telle, car le graphe de routage n’a pas encore d’étiquette de passage pour eux.<br><br> <b>Les corridors affichent leur liste complète de passages.</b> La colonne Corridor et le panneau de détail de chaque navire listent tous les passages que franchit le voyage routé (par exemple « Bab el-Mandeb + Suez + Gibraltar »), et non le seul corridor sous lequel le navire est classé. Un navire qui se déroute hors d’un corridor suivi est vérifié par rapport à la liste de passages de chacun des autres corridors, plus quatre passages sans corridor propre : la Sonde, les Dardanelles, le cap de Bonne-Espérance et le cap Horn/détroit chilien. Une fermeture de Gibraltar montre donc correctement un navire exposé au large du cap de Bonne-Espérance.<br><br> <b>Risque de soutage et d’escale.</b> Quelques navires indiquent les ports où ils font escale ou soutent (Djibouti, Las Palmas, Istanbul), notés d’après la même table de risque portuaire que la fonction d’escales de CAPE, car un déroutement peut être sain au détroit tout en soutant quelque part en zone listée JWC (Djibouti se trouve dans la zone listée du golfe d’Aden quel que soit le détroit évité par la coque). Il s’agit d’une superposition de risque, et non d’un tronçon routé : elle modifie ce qui apparaît comme exposé, pas la distance ni le coût.<br><br> <b>Les origines sont des ports réels.</b> Les extrémités de chaque corridor sont des ports nommés, avec des coordonnées issues de l’index des ports de Narrows (dérivé du World Port Index, environ 4 000 ports) : Al Fujayrah, Djeddah, Colombo, Houston, New York, Ras Tannurah, Novorossiïsk, Primorsk, Rotterdam, Shanghai, Singapour, Gênes.<br><br> <b>Le statut est calculé.</b> Verrouillé, dans la fenêtre et pré-engagement sont dérivés à chaque rendu de l’ETA de chaque navire par rapport à l’horloge du scénario en en-tête. Les jours de déroutement sont propres à chaque navire : la classe et la note CII fixent une vitesse effective (l’approche des jours effectifs ajustés CII utilisée dans l’analyse Malacca/Lombok de Narrows), et non une vitesse unique pour tous les navires."
+  ],
+  [
+   "Add vessel",
+   "Ajouter un navire"
+  ],
+  [
+   "Adds to the live book immediately; no reload needed",
+   "S’ajoute immédiatement au portefeuille en direct ; aucun rechargement nécessaire"
+  ],
+  [
+   "Have a list already? Close this and use <b>Upload CSV</b> in the header instead: <a href=\"#\" onclick=\"downloadCascadeTemplate();return false\" style=\"color:var(--navy);font-weight:600\">download the template</a> to see the expected columns. Both this form and the CSV import write the exact same vessel shape.",
+   "Vous avez déjà une liste ? Fermez ceci et utilisez plutôt <b>Importer un CSV</b> dans l’en-tête : <a href=\"#\" onclick=\"downloadCascadeTemplate();return false\" style=\"color:var(--navy);font-weight:600\">téléchargez le modèle</a> pour voir les colonnes attendues. Ce formulaire et l’import CSV produisent exactement la même structure de navire."
+  ],
+  [
+   "Vessel identity",
+   "Identité du navire"
+  ],
+  [
+   "IMO number",
+   "Numéro IMO"
+  ],
+  [
+   "Vessel name",
+   "Nom du navire"
+  ],
+  [
+   "Vessel class",
+   "Classe du navire"
+  ],
+  [
+   "VLCC",
+   "VLCC"
+  ],
+  [
+   "Suezmax",
+   "Suezmax"
+  ],
+  [
+   "Aframax",
+   "Aframax"
+  ],
+  [
+   "Container",
+   "Porte-conteneurs"
+  ],
+  [
+   "LNG",
+   "GNL"
+  ],
+  [
+   "Bulk",
+   "Vraquier"
+  ],
+  [
+   "Neopanamax",
+   "Neopanamax"
+  ],
+  [
+   "LPG",
+   "GPL"
+  ],
+  [
+   "CII rating",
+   "Note CII"
+  ],
+  [
+   "Corridor and timing",
+   "Corridor et calendrier"
+  ],
+  [
+   "Corridor",
+   "Corridor"
+  ],
+  [
+   "Which tracked chokepoint this voyage approaches",
+   "Quel point de passage suivi ce voyage approche"
+  ],
+  [
+   "Strait ETA",
+   "ETA au détroit"
+  ],
+  [
+   "Value at risk (USD, millions)",
+   "Valeur à risque (USD, millions)"
+  ],
+  [
+   "Bunker / port calls (optional)",
+   "Soutage / escales (facultatif)"
+  ],
+  [
+   "Waypoints",
+   "Escales"
+  ],
+  [
+   "Comma-separated port names. Scored against the same port-risk table CAPE uses; unrecognized names still show, just without a risk score.",
+   "Noms de ports séparés par des virgules. Notés d’après la même table de risque portuaire que celle utilisée par CAPE ; les noms non reconnus s’affichent quand même, simplement sans note de risque."
+  ],
+  [
+   "Notes (optional)",
+   "Notes (facultatif)"
+  ],
+  [
+   "Cancel",
+   "Annuler"
+  ],
+  [
+   "Add to book",
+   "Ajouter au portefeuille"
+  ],
+  [
+   "Remove vessel",
+   "Retirer le navire"
+  ],
+  [
+   "Reason",
+   "Motif"
+  ],
+  [
+   "Diverted &amp; completed",
+   "Dérouté et terminé"
+  ],
+  [
+   "Transited as planned",
+   "Transité comme prévu"
+  ],
+  [
+   "Fixture fell through / re-nominated",
+   "Affrètement abandonné / renommé"
+  ],
+  [
+   "Manually removed",
+   "Retiré manuellement"
+  ],
+  [
+   "Note (optional)",
+   "Note (facultatif)"
+  ],
+  [
+   "Remove from book",
+   "Retirer du portefeuille"
+  ],
+  [
+   "Removed vessels",
+   "Navires retirés"
+  ],
+  [
+   "Every removal this session, with a reason and a timestamp",
+   "Chaque retrait de cette session, avec un motif et un horodatage"
+  ],
+  [
+   "No vessels removed yet this session.",
+   "Aucun navire retiré pour l’instant dans cette session."
+  ],
+  [
+   "Vessel",
+   "Navire"
+  ],
+  [
+   "Removed",
+   "Retiré"
+  ],
+  [
+   "Value",
+   "Valeur"
+  ],
+  [
+   "Close",
+   "Fermer"
+  ],
+  [
+   "Export .csv",
+   "Exporter en .csv"
+  ]
+ ],
+ "js": [
+  [
+   "`  Basis: ${info.detail.real ? \"Computed: real route distance from the routing graph × this vessel's class/CII-adjusted day-rate\" : 'Flat per-class estimate: no real alternate water route exists for this corridor, or no passage tag for it yet'}`",
+   "`  Base : ${info.detail.real ? \"Calculé : distance de route réelle du graphe de routage × taux journalier de ce navire ajusté selon classe/CII\" : 'Estimation forfaitaire par classe : aucune route maritime alternative réelle n’existe pour ce corridor, ou pas encore d’étiquette de passage'}`"
+  ],
+  [
+   "Computed from the alt route’s own real geometry: ${fmtEtaDate(etaDate)}, at ${v.cls}’s CII-adjusted speed. Approximate; based on the closest point on the route to ${passageLabel(matchedTag)}, not a routing-engine leg boundary.",
+   "Calculé à partir de la géométrie réelle propre à la route alternative : ${fmtEtaDate(etaDate)}, à la vitesse ajustée CII du ${v.cls}. Approximatif ; fondé sur le point de la route le plus proche de ${passageLabel(matchedTag)}, et non sur une limite de tronçon du moteur de routage."
+  ],
+  [
+   "Live routes: ${summary}. Diversion days depend on each vessel's class + CII grade. Danish Straits has no reroute (no passage tag in the routing graph); flat estimate only.",
+   "Routes en direct : ${summary}. Les jours de déroutement dépendent de la classe et de la note CII de chaque navire. Les détroits danois n’ont pas de déroutement (aucune étiquette de passage dans le graphe de routage) ; estimation forfaitaire seulement."
+  ],
+  [
+   "Could not reach the routing service (${err.message}). Real-routing corridors' diversion costs are unavailable until it loads; Danish Straits still works (flat estimate).",
+   "Service de routage injoignable (${err.message}). Les coûts de déroutement des corridors à routage réel sont indisponibles tant qu’il n’est pas chargé ; les détroits danois fonctionnent toujours (estimation forfaitaire)."
+  ],
+  [
+   "`Generated ${new Date().toISOString()} by CASCADE+. This is a simulation output for evaluation; it is not routing instructions transmitted to the vessel.`",
+   "`Généré le ${new Date().toISOString()} par CASCADE+. Il s’agit d’un résultat de simulation pour évaluation ; ce ne sont pas des instructions de routage transmises au navire.`"
+  ],
+  [
+   "'Computed: routing-graph distance × class/CII day-rate' : 'Flat estimate: no water route exists (confirmed) or no passage tag for this corridor yet'",
+   "'Calculé : distance du graphe de routage × taux journalier selon classe/CII' : 'Estimation forfaitaire : aucune route maritime n’existe (confirmé) ou pas encore d’étiquette de passage pour ce corridor'"
+  ],
+  [
+   "'No valid vessel rows found. Check that name, class, value_usd_m, corridor, and eta columns are present and that each corridor matches one of: '",
+   "'Aucune ligne de navire valide trouvée. Vérifiez que les colonnes name, class, value_usd_m, corridor et eta sont présentes et que chaque corridor correspond à l’un de : '"
+  ],
+  [
+   "Not modeled for this route: no real alt-route geometry to compute against (flat-estimate corridor, or the routing API had no data for it).",
+   "Non modélisé pour cette route : aucune géométrie réelle de route alternative sur laquelle calculer (corridor à estimation forfaitaire, ou l’API de routage n’avait pas de données)."
+  ],
+  [
+   "`  Divert ${info.detail.label}${info.detail.real ? ' (+'+info.detail.days.toFixed(1)+' days transit)' : ''}`",
+   "`  Dérouter ${info.detail.label}${info.detail.real ? ' (+'+info.detail.days.toFixed(1).replace('.',',')+' jours de transit)' : ''}`"
+  ],
+  [
+   "'No water route out: decline transit, re-source elsewhere' : 'Decline transit, re-source elsewhere'",
+   "'Aucune route maritime de sortie : refuser le transit, s’approvisionner ailleurs' : 'Refuser le transit, s’approvisionner ailleurs'"
+  ],
+  [
+   "' row'+(skipped!==1?'s':'')+' skipped (missing a required field or an unrecognized corridor).'",
+   "' ligne'+(skipped!==1?'s':'')+' ignorée'+(skipped!==1?'s':'')+' (champ obligatoire manquant ou corridor non reconnu).'"
+  ],
+  [
+   "function fmtUsd(n){ return n>=1e6 ? '$'+(n/1e6).toFixed(2)+'M' : '$'+Math.round(n/1e3)+'K'; }",
+   "function fmtUsd(n){ return n>=1e6 ? (n/1e6).toFixed(2).replace('.',',')+'\\u00a0M$' : Math.round(n/1e3)+'\\u00a0k$'; }"
+  ],
+  [
+   "alert('Please fill in vessel name, class, a value at risk greater than 0, and a strait ETA.')",
+   "alert('Veuillez renseigner le nom du navire, la classe, une valeur à risque supérieure à 0 et une ETA au détroit.')"
+  ],
+  [
+   "'(simulation output for evaluation, not an order or routing instruction)'",
+   "'(résultat de simulation pour évaluation, ni un ordre ni une instruction de routage)'"
+  ],
+  [
+   "note:'Weipa bauxite. Torres Strait transit booked, compulsory pilotage.'",
+   "note:'Bauxite de Weipa. Transit du détroit de Torres réservé, pilotage obligatoire.'"
+  ],
+  [
+   "No water route exists; confirmed against the routing graph, not assumed",
+   "Aucune route maritime n’existe ; confirmé sur le graphe de routage, et non supposé"
+  ],
+  [
+   "note:'Up-river soy loading, Rosario. Draft-restricted by river level.'",
+   "note:'Chargement de soja en amont, Rosario. Tirant d’eau limité par le niveau du fleuve.'"
+  ],
+  [
+   "note:'Liftings confirmed. Vessel not nominated. Zero diversion cost.'",
+   "note:'Enlèvements confirmés. Navire non désigné. Coût de déroutement nul.'"
+  ],
+  [
+   "'BUNKER / PORT-CALL RISK (standing, independent of this diversion)'",
+   "'RISQUE DE SOUTAGE / D’ESCALE (permanent, indépendant de ce déroutement)'"
+  ],
+  [
+   "note:'Crude. Loading not yet confirmed. Full routing optionality.'",
+   "note:'Brut. Chargement pas encore confirmé. Pleine optionalité de routage.'"
+  ],
+  [
+   "note:'Loaded Primorsk. Danish Straits transit booked. No option.'",
+   "note:'Chargé à Primorsk. Transit des détroits danois réservé. Aucune option.'"
+  ],
+  [
+   "note:'Loaded Novorossiysk. Bosphorus transit booked. No option.'",
+   "note:'Chargé à Novorossiïsk. Transit du Bosphore réservé. Aucune option.'"
+  ],
+  [
+   "`  Class ${v.cls} · CII ${v.cii} · Value at risk ${fmtM(v.val)}`",
+   "`  Classe ${v.cls} · CII ${v.cii} · Valeur à risque ${fmtM(v.val)}`"
+  ],
+  [
+   "'NEW EXPOSURE FROM THIS DIVERSION (risk displaced, not removed)'",
+   "'NOUVELLE EXPOSITION DUE À CE DÉROUTEMENT (risque déplacé, non supprimé)'"
+  ],
+  [
+   "note:'Baton Rouge grain loading. Ship channel draft-dependent.'",
+   "note:'Chargement de céréales à Baton Rouge. Chenal dépendant du tirant d’eau.'"
+  ],
+  [
+   "note:'Mega-box ship. Malacca transit booked. Fully committed.'",
+   "note:'Méga porte-conteneurs. Transit de Malacca réservé. Entièrement engagé.'"
+  ],
+  [
+   "note:'LNG carrier. Loading T-22. Sunda route at zero premium.'",
+   "note:'Méthanier. Chargement à T-22. Route de la Sonde sans prime.'"
+  ],
+  [
+   "note:'Crude. Loading T-21. Redirect to Cape without penalty.'",
+   "note:'Brut. Chargement à T-21. Redirection par le Cap sans pénalité.'"
+  ],
+  [
+   "note:'Loaded at Ras Tannurah. Mid-Strait transit. No option.'",
+   "note:'Chargé à Ras Tannurah. Transit en plein détroit. Aucune option.'"
+  ],
+  [
+   "note:'Alumina to North Asia. Standard Torres Strait routing.'",
+   "note:'Alumine vers l’Asie du Nord. Routage standard par le détroit de Torres.'"
+  ],
+  [
+   "note:'Richards Bay coal. Mozambique Channel routing to Asia.'",
+   "note:'Charbon de Richards Bay. Routage par le canal du Mozambique vers l’Asie.'"
+  ],
+  [
+   "note:'Liftings not yet confirmed. Full routing optionality.'",
+   "note:'Enlèvements pas encore confirmés. Pleine optionalité de routage.'"
+  ],
+  [
+   "note:'Red Sea transit. MSC feeder. Committed to Suez slot.'",
+   "note:'Transit en mer Rouge. Feeder MSC. Engagé sur un créneau de Suez.'"
+  ],
+  [
+   "divertedAll.length+' vessels, real+estimated cost combined'",
+   "divertedAll.length+' navires, coût réel + estimé combiné'"
+  ],
+  [
+   "note:'UK-flagged LNG. Loading T-18. Cape route preferred.'",
+   "note:'GNL sous pavillon britannique. Chargement à T-18. Route du Cap préférée.'"
+  ],
+  [
+   "note:'Neopanamax container. Mid-canal transit. No option.'",
+   "note:'Porte-conteneurs Neopanamax. Transit en plein canal. Aucune option.'"
+  ],
+  [
+   "note:'Liftings not yet confirmed. Re-nomination possible.'",
+   "note:'Enlèvements pas encore confirmés. Renommage possible.'"
+  ],
+  [
+   "note:'Baltic approach. Ice-season routing review pending.'",
+   "note:'Approche de la Baltique. Examen du routage en saison des glaces en attente.'"
+  ],
+  [
+   "'Could not copy automatically; use Download .txt instead.'",
+   "'Copie automatique impossible ; utilisez plutôt Télécharger .txt.'"
+  ],
+  [
+   "note:'Products. Loading T-19. Full routing optionality.'",
+   "note:'Produits. Chargement à T-19. Pleine optionalité de routage.'"
+  ],
+  [
+   "note:'Pacific approach. Canal slot vs reroute decision.'",
+   "note:'Approche du Pacifique. Décision créneau du canal ou déroutement.'"
+  ],
+  [
+   "Real alt-route out of ${fromC.label} transits ${c.label}",
+   "L’itinéraire alternatif réel au départ de ${fromC.label} transite par ${c.label}"
+  ],
+  [
+   "note:'Mid-Atlantic. Gibraltar closure advisory issued.'",
+   "note:'Milieu de l’Atlantique. Avis de fermeture de Gibraltar émis.'"
+  ],
+  [
+   "note:'Red Sea, Suez-bound. Grounding advisory issued.'",
+   "note:'Mer Rouge, à destination de Suez. Avis d’échouement émis.'"
+  ],
+  [
+   "note:'Soybean/corn export. Lower Mississippi transit.'",
+   "note:'Export de soja/maïs. Transit du bas Mississippi.'"
+  ],
+  [
+   "note:'Gulf of Aden approach. UKMTO advisory flagged.'",
+   "note:'Approche du golfe d’Aden. Avis UKMTO signalé.'"
+  ],
+  [
+   "note:'Mega-box. Loading T-20. Sunda routing viable.'",
+   "note:'Méga porte-conteneurs. Chargement à T-20. Routage par la Sonde viable.'"
+  ],
+  [
+   "note:'Products cargo, East African coastal routing.'",
+   "note:'Cargaison de produits, routage côtier d’Afrique de l’Est.'"
+  ],
+  [
+   "note:'Gulf of Aden. Bab passage in 18h. No option.'",
+   "note:'Golfe d’Aden. Passage de Bab dans 18 h. Aucune option.'"
+  ],
+  [
+   "note:'Northbound in the canal itself. No option.'",
+   "note:'Vers le nord dans le canal même. Aucune option.'"
+  ],
+  [
+   "note:'Fujairah approach. Window closes at 0600Z.'",
+   "note:'Approche de Fujairah. La fenêtre se ferme à 0600Z.'"
+  ],
+  [
+   "note:'Soybean cargo to China. Hidrovía transit.'",
+   "note:'Cargaison de soja vers la Chine. Transit de l’Hidrovía.'"
+  ],
+  [
+   "note:'Indian Ocean. Malacca vs Sunda decision.'",
+   "note:'Océan Indien. Décision Malacca ou Sonde.'"
+  ],
+  [
+   "note:'Black Sea approach. Convoy slot pending.'",
+   "note:'Approche de la mer Noire. Créneau de convoi en attente.'"
+  ],
+  [
+   "note:'Arabian Sea. Red Sea vs Cape decision.'",
+   "note:'Mer d’Arabie. Décision mer Rouge ou Cap.'"
+  ],
+  [
+   "alert('No vessels removed yet this session.')",
+   "alert('Aucun navire retiré pour l’instant dans cette session.')"
+  ],
+  [
+   "'DIVERSION ADVISORY: CASCADE+ / The Narrows'",
+   "'AVIS DE DÉROUTEMENT : CASCADE+ / The Narrows'"
+  ],
+  [
+   "note:'Approaching the Strait. No option.'",
+   "note:'Approche du détroit. Aucune option.'"
+  ],
+  [
+   " shown twice, displaced into 2 corridors)",
+   " affichés deux fois, déplacés vers 2 corridors)"
+  ],
+  [
+   "' vessel'+(added!==1?'s':'')+' imported.'",
+   "' navire'+(added!==1?'s':'')+' importé'+(added!==1?'s':'')+'.'"
+  ],
+  [
+   "note:'Crude. Loading not yet confirmed.'",
+   "note:'Brut. Chargement pas encore confirmé.'"
+  ],
+  [
+   "Divert &rarr; advisory for evaluation:",
+   "Dérouter &rarr; avis pour évaluation :"
+  ],
+  [
+   "function fmtM(m){ return '$'+m+'M'; }",
+   "function fmtM(m){ return m+'\\u00a0M$'; }"
+  ],
+  [
+   "'Fixture fell through / re-nominated'",
+   "'Affrètement abandonné / renommé'"
+  ],
+  [
+   "alert('No vessels diverted yet.')",
+   "alert('Aucun navire dérouté pour l’instant.')"
+  ],
+  [
+   "info.detail.days.toFixed(1)+'d'",
+   "info.detail.days.toFixed(1).replace('.',',')+' j'"
+  ],
+  [
+   "Remove vessel from book&hellip;",
+   "Retirer le navire du portefeuille&hellip;"
+  ],
+  [
+   "totalUniqueVessels+' vessels, '",
+   "totalUniqueVessels+' navires, '"
+  ],
+  [
+   "'Advisory copied to clipboard.'",
+   "'Avis copié dans le presse-papiers.'"
+  ],
+  [
+   "uniqueCount(preAll)+' vessels'",
+   "uniqueCount(preAll)+' navires'"
+  ],
+  [
+   "<th>Vessel</th><th>IMO</th>",
+   "<th>Navire</th><th>IMO</th>"
+  ],
+  [
+   "lockedAll.length+' vessels'",
+   "lockedAll.length+' navires'"
+  ],
+  [
+   "windowAll.length+' vessels'",
+   "windowAll.length+' navires'"
+  ],
+  [
+   "allChip.textContent = 'All'",
+   "allChip.textContent = 'Tous'"
+  ],
+  [
+   "alert('CSV appears empty.')",
+   "alert('Le CSV semble vide.')"
+  ],
+  [
+   "Strait ETA (pre-diversion):",
+   "ETA au détroit (avant déroutement) :"
+  ],
+  [
+   "No diversion window</div>",
+   "Aucune fenêtre de déroutement</div>"
+  ],
+  [
+   "Loading route map&hellip;",
+   "Chargement de la carte de l’itinéraire&hellip;"
+  ],
+  [
+   "'Hand-added to the book.'",
+   "'Ajouté à la main au portefeuille.'"
+  ],
+  [
+   "dl-k\">Bunker/port calls<",
+   "dl-k\">Soutage / escales<"
+  ],
+  [
+   "'Route map unavailable'",
+   "'Carte d’itinéraire indisponible'"
+  ],
+  [
+   " of 3,774 (higher than ",
+   " sur 3 774 (supérieur à "
+  ],
+  [
+   "d.days.toFixed(1)+'d)'",
+   "d.days.toFixed(1).replace('.',',')+' j)'"
+  ],
+  [
+   "Divert &rarr; ${label}",
+   "Dérouter &rarr; ${label}"
+  ],
+  [
+   "label:'Standard route'",
+   "label:'Route standard'"
+  ],
+  [
+   "'Diverted & completed'",
+   "'Dérouté et terminé'"
+  ],
+  [
+   "'Transited as planned'",
+   "'Transité comme prévu'"
+  ],
+  [
+   "dl-k\">Standard route<",
+   "dl-k\">Route standard<"
+  ],
+  [
+   "dl-k\">Value at risk<",
+   "dl-k\">Valeur à risque<"
+  ],
+  [
+   "label:`Alternate: ${",
+   "label:`Alternative : ${"
+  ],
+  [
+   "dl-k\">New exposure<",
+   "dl-k\">Nouvelle exposition<"
+  ],
+  [
+   "', JWC Listed Area'",
+   "', zone listée JWC'"
+  ],
+  [
+   "dl-k\">Destination<",
+   "dl-k\">Destination<"
+  ],
+  [
+   "'Route not loaded'",
+   "'Route non chargée'"
+  ],
+  [
+   "Standing corridor:",
+   "Corridor habituel :"
+  ],
+  [
+   "'Manually removed'",
+   "'Retiré manuellement'"
+  ],
+  [
+   " Event note as of ",
+   " Note d’événement au "
+  ],
+  [
+   "dl-k\">Strait ETA<",
+   "dl-k\">ETA au détroit<"
+  ],
+  [
+   "window closes in ",
+   "fenêtre : fermeture dans "
+  ],
+  [
+   "Math.round(h))}h`",
+   "Math.round(h))}\\u00a0h`"
+  ],
+  [
+   "↳ displaced from ",
+   "↳ déplacé depuis "
+  ],
+  [
+   "wrapTable('Value'",
+   "wrapTable('Valeur'"
+  ],
+  [
+   "'alternate route'",
+   "'route alternative'"
+  ],
+  [
+   "'RECOMMENDATION',",
+   "'RECOMMANDATION',"
+  ],
+  [
+   "dl-k\">Alternate<",
+   "dl-k\">Alternative<"
+  ],
+  [
+   "wrapTable('Cost'",
+   "wrapTable('Coût'"
+  ],
+  [
+   ">Copy advisory<",
+   ">Copier l’avis<"
+  ],
+  [
+   ">Download .txt<",
+   ">Télécharger .txt<"
+  ],
+  [
+   "Estimated cost:",
+   "Coût estimé :"
+  ],
+  [
+   "dl-k\">Origin<",
+   "dl-k\">Origine<"
+  ],
+  [
+   "dl-k\">Timing<",
+   "dl-k\">Calendrier<"
+  ],
+  [
+   "dl-k\">Cargo<",
+   "dl-k\">Cargaison<"
+  ],
+  [
+   "'removed ('+",
+   "'retirés ('+"
+  ],
+  [
+   "% of ports).",
+   " % des ports)."
+  ],
+  [
+   " PRI rank ",
+   " Rang PRI "
+  ],
+  [
+   "'VESSEL',",
+   "'NAVIRE',"
+  ],
+  [
+   "'en-US'",
+   "'fr-FR'"
+  ]
+ ]
+}

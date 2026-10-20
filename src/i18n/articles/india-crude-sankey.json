@@ -1,0 +1,203 @@
+{
+ "path": "india-crude-sankey",
+ "meta": {
+  "title": "Importations de brut de l’Inde, Sankey | Narrows",
+  "description": "Répartition des importations maritimes de brut de l’Inde par corridor de points de passage : Ormuz, Bosphore et Suez/Bab, cap de Bonne-Espérance."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "Crude Import Analysis",
+   "Analyse des importations de brut"
+  ],
+  [
+   "87% of India's seaborne crude flows through two independent chokepoint corridors",
+   "87 % du brut maritime de l’Inde transite par deux corridors de points de passage indépendants"
+  ],
+  [
+   "Flow width = volume share. Hormuz (~49%) and Bosphorus + Suez/Bab (~38%) are entirely separate strategic risks. Hover any flow or node for detail.",
+   "La largeur du flux correspond à la part du volume. Ormuz (≈ 49 %) et Bosphore + Suez/Bab (≈ 38 %) sont des risques stratégiques entièrement distincts. Survolez un flux ou un nœud pour le détail."
+  ],
+  [
+   "Chokepoint",
+   "Point de passage"
+  ],
+  [
+   "Gulf corridor (Hormuz)",
+   "Corridor du Golfe (Ormuz)"
+  ],
+  [
+   "Russian corridor (Bosphorus + Suez/Bab)",
+   "Corridor russe (Bosphore + Suez/Bab)"
+  ],
+  [
+   "Open ocean (Cape, no chokepoint)",
+   "Haute mer (Cap, aucun point de passage)"
+  ],
+  [
+   "Narrows CDM v0.3 · HS 2709 bilateral crude · 2022 base year<br> Values = % of India seaborne crude by annual trade value",
+   "Narrows CDM v0.3 · HS 2709 brut bilatéral · année de base 2022<br> Valeurs = % du brut maritime de l’Inde, en valeur commerciale annuelle"
+  ]
+ ],
+ "js": [
+  [
+   "'DESTINATION']",
+   "'DESTINATION']"
+  ],
+  [
+   "`Annual flow: ~$${(lk.v * 0.95).toFixed(0)}B`",
+   "`Flux annuel : ≈ ${(lk.v * 0.95).toFixed(0)}\\u00a0Md$`"
+  ],
+  [
+   "note:'Two sequential chokepoints on the Russian Ural route. Bosphorus minimum width ~0.7 km; transit rights governed by the Montreux Convention (1936). Suez/Bab el-Mandeb subject to active Houthi disruption since late 2023.'",
+   "note:'Deux points de passage successifs sur la route du brut russe Oural. Largeur minimale du Bosphore d’environ 0,7 km ; droits de transit régis par la convention de Montreux (1936). Suez/Bab el-Mandeb soumis à des perturbations houthies actives depuis fin 2023.'"
+  ],
+  [
+   "note:'Russian Ural grew from under 2% of India\\'s crude book in 2021 to ~38% following Western sanctions. Black Sea loadings (Novorossiysk) and Baltic ports (Primorsk, Ust-Luga) must both transit the Bosphorus.'",
+   "note:'Le brut russe Oural est passé de moins de 2 % du portefeuille de brut de l’Inde en 2021 à environ 38 % après les sanctions occidentales. Les chargements en mer Noire (Novorossiïsk) et dans les ports baltes (Primorsk, Oust-Louga) doivent tous deux transiter par le Bosphore.'"
+  ],
+  [
+   "note:'India imports ~5.5 mb/d of seaborne crude - the world\\'s third largest importer. Primary west coast terminals: Vadinar (Reliance), Mundra, Mumbai. East coast: Vizag (HPCL), Paradip (IOC), Chennai (CPCL).'",
+   "note:'L’Inde importe environ 5,5 mb/j de brut maritime et est le troisième importateur mondial. Principaux terminaux de la côte ouest : Vadinar (Reliance), Mundra, Mumbai. Côte est : Vizag (HPCL), Paradip (IOC), Chennai (CPCL).'"
+  ],
+  [
+   "note:'Open ocean - no closure risk, no territorial waters, no transit authority. West African and American crude rounds the Cape. Adds ~10–12 days versus a Suez routing. Zero structural chokepoint dependency.'",
+   "note:'Haute mer : aucun risque de fermeture, aucune eau territoriale, aucune autorité de transit. Le brut d’Afrique de l’Ouest et des Amériques contourne le Cap. Ajoute environ 10–12 jours par rapport à un routage par Suez. Aucune dépendance structurelle envers un point de passage.'"
+  ],
+  [
+   "note:'Mandatory exit for 100% of Persian Gulf crude. Minimum navigable width ~3 km. No alternative maritime route exists for laden VLCCs out of the Gulf. Largest single chokepoint in India\\'s import book.'",
+   "note:'Sortie obligatoire pour 100 % du brut du golfe Persique. Largeur navigable minimale d’environ 3 km. Il n’existe aucune route maritime alternative pour les VLCC chargés sortant du Golfe. Premier point de passage du portefeuille d’importations de l’Inde.'"
+  ],
+  [
+   "note:'Iraq is India\\'s largest single crude supplier. All Basra Oil Terminal loadings require mandatory Hormuz transit. Primarily delivered to Reliance Jamnagar and HPCL Vizag.'",
+   "note:'L’Irak est le premier fournisseur de brut de l’Inde. Tous les chargements du terminal pétrolier de Bassora exigent un transit obligatoire par Ormuz. Livré principalement à Reliance Jamnagar et à HPCL Vizag.'"
+  ],
+  [
+   "note:'Saudi loadings from Ras Tanura and Juaymah - inside the Persian Gulf, mandatory Hormuz transit. Red Sea terminal at Yanbu rarely used for India-bound VLCCs at scale.'",
+   "note:'Chargements saoudiens à Ras Tanura et Juaymah, à l’intérieur du golfe Persique, avec transit d’Ormuz obligatoire. Le terminal de la mer Rouge à Yanbu est rarement utilisé à grande échelle pour les VLCC à destination de l’Inde.'"
+  ],
+  [
+   "note:'Bonny Light and Qua Iboe crude routes around the Cape of Good Hope - no chokepoint constraint. ~21 days to Indian west coast. Valued for low-sulphur specification.'",
+   "note:'Le brut Bonny Light et Qua Iboe passe par le cap de Bonne-Espérance, sans contrainte de point de passage. Environ 21 jours jusqu’à la côte ouest de l’Inde. Apprécié pour sa faible teneur en soufre.'"
+  ],
+  [
+   "note:'Kuwaiti crude from Ahmadi and Mina Abdullah - inside the Persian Gulf, mandatory Hormuz transit. Kuwait\\'s share has declined since 2022 as Russia\\'s expanded.'",
+   "note:'Brut koweïtien d’Ahmadi et de Mina Abdullah, à l’intérieur du golfe Persique, avec transit d’Ormuz obligatoire. La part du Koweït a reculé depuis 2022 à mesure que celle de la Russie augmentait.'"
+  ],
+  [
+   "note:'UAE crude from Das Island, Ruwais, and Jebel Dhanna - all inside the Persian Gulf. Approximately 3 days to Indian west coast terminals at laden VLCC speed.'",
+   "note:'Brut des EAU de Das Island, Ruwais et Jebel Dhanna, tous à l’intérieur du golfe Persique. Environ 3 jours jusqu’aux terminaux de la côte ouest de l’Inde à la vitesse d’un VLCC chargé.'"
+  ],
+  [
+   "note:'WTI-specification crude from Gulf of Mexico loadings, routed via Cape of Good Hope. ~28 days. No chokepoint risk on supply route.'",
+   "note:'Brut de spécification WTI chargé dans le golfe du Mexique, acheminé par le cap de Bonne-Espérance. Environ 28 jours. Aucun risque de point de passage sur la route d’approvisionnement.'"
+  ],
+  [
+   "note:'Cabinda and Girassol crude routes around the Cape of Good Hope. ~23 days transit. No chokepoint on the supply route.'",
+   "note:'Le brut de Cabinda et de Girassol passe par le cap de Bonne-Espérance. Environ 23 jours de transit. Aucun point de passage sur la route d’approvisionnement.'"
+  ],
+  [
+   "sub:'49% of India seaborne crude'",
+   "sub:'49 % du brut maritime de l’Inde'"
+  ],
+  [
+   "sub:'38% of India seaborne crude'",
+   "sub:'38 % du brut maritime de l’Inde'"
+  ],
+  [
+   "sub:'~$93B annual seaborne crude'",
+   "sub:'≈ 93 Md$ de brut maritime par an'"
+  ],
+  [
+   "${lk.v}% of India seaborne crude",
+   "${String(lk.v).replace('.',',')} % du brut maritime de l’Inde"
+  ],
+  [
+   "sub:'11% · no chokepoint risk'",
+   "sub:'11 % · aucun risque de point de passage'"
+  ],
+  [
+   "label:'Bosphorus + Suez/Bab'",
+   "label:'Bosphore + Suez/Bab'"
+  ],
+  [
+   "label:'Cape of Good Hope'",
+   "label:'Cap de Bonne-Espérance'"
+  ],
+  [
+   "label:'Russia (Ural)'",
+   "label:'Russie (Oural)'"
+  ],
+  [
+   "CHOKEPOINT / CORRIDOR",
+   "POINT DE PASSAGE / CORRIDOR"
+  ],
+  [
+   "label:'Saudi Arabia'",
+   "label:'Arabie saoudite'"
+  ],
+  [
+   "sub:'22% · $20.9B'",
+   "sub:'22 % · 20,9 Md$'"
+  ],
+  [
+   "sub:'16% · $15.2B'",
+   "sub:'16 % · 15,2 Md$'"
+  ],
+  [
+   "sub:'38% · $36.1B'",
+   "sub:'38 % · 36,1 Md$'"
+  ],
+  [
+   "sub:'7% · $6.7B'",
+   "sub:'7 % · 6,7 Md$'"
+  ],
+  [
+   "sub:'4% · $3.8B'",
+   "sub:'4 % · 3,8 Md$'"
+  ],
+  [
+   "sub:'5% · $4.8B'",
+   "sub:'5 % · 4,8 Md$'"
+  ],
+  [
+   "sub:'3% · $2.9B'",
+   "sub:'3 % · 2,9 Md$'"
+  ],
+  [
+   "label:'Nigeria'",
+   "label:'Nigéria'"
+  ],
+  [
+   "label:'Kuwait'",
+   "label:'Koweït'"
+  ],
+  [
+   "label:'Hormuz'",
+   "label:'Ormuz'"
+  ],
+  [
+   "label:'India'",
+   "label:'Inde'"
+  ],
+  [
+   "SUPPLY ORIGIN",
+   "ORIGINE DE L’OFFRE"
+  ],
+  [
+   "label:'Iraq'",
+   "label:'Irak'"
+  ],
+  [
+   "label:'UAE'",
+   "label:'EAU'"
+  ],
+  [
+   "label:'USA'",
+   "label:'États-Unis'"
+  ]
+ ]
+}

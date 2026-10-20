@@ -1,0 +1,147 @@
+{
+ "path": "uk-lng-sankey",
+ "meta": {
+  "title": "Importations britanniques de GNL, Sankey | Narrows",
+  "description": "Origine du GNL importé par le Royaume-Uni et points de passage maritimes traversés : Ormuz, Bab el-Mandeb, Suez et Gibraltar."
+ },
+ "pairs": [
+  [
+   "Narrows",
+   "Narrows"
+  ],
+  [
+   "UK LNG Import Analysis",
+   "Analyse des importations britanniques de GNL"
+  ],
+  [
+   "Qatar (27%) clears Hormuz, Bab el-Mandeb, Suez, and Gibraltar to reach the UK. The Americas now supply 47% with no chokepoint at all.",
+   "Le Qatar (27 %) franchit Ormuz, Bab el-Mandeb, Suez et Gibraltar pour atteindre le Royaume-Uni. Les Amériques en fournissent désormais 47 %, sans aucun point de passage."
+  ],
+  [
+   "The UK LNG supply mix has been transformed by US liquefaction capacity. Americas cargoes (USA, Trinidad, others) reach South Hook and Isle of Grain via the North Atlantic with no chokepoint exposure. Norway and Russia supply the North Sea corridor directly. Qatari cargoes, which underpin long-term UK gas contracts, must clear four successive chokepoints: Hormuz, Bab el-Mandeb, Suez Canal, and Gibraltar. Algeria loads into the Mediterranean and joins Qatar at Gibraltar before the final Atlantic leg. Hover any node or flow for detail.",
+   "Le bouquet d’approvisionnement britannique en GNL a été transformé par les capacités de liquéfaction américaines. Les cargaisons des Amériques (États-Unis, Trinité, autres) atteignent South Hook et Isle of Grain par l’Atlantique Nord sans exposition à un point de passage. La Norvège et la Russie approvisionnent directement le corridor de la mer du Nord. Les cargaisons qataries, qui sous-tendent les contrats gaziers de long terme du Royaume-Uni, doivent franchir quatre points de passage successifs : Ormuz, Bab el-Mandeb, le canal de Suez et Gibraltar. L’Algérie charge en Méditerranée et rejoint le Qatar à Gibraltar avant le dernier tronçon atlantique. Survolez un nœud ou un flux pour le détail."
+  ],
+  [
+   "Americas (no chokepoint)",
+   "Amériques (aucun point de passage)"
+  ],
+  [
+   "North Sea (no chokepoint)",
+   "Mer du Nord (aucun point de passage)"
+  ],
+  [
+   "Mediterranean / Gibraltar",
+   "Méditerranée / Gibraltar"
+  ],
+  [
+   "Qatar (via Hormuz)",
+   "Qatar (via Ormuz)"
+  ],
+  [
+   "Source: DESNZ Energy Trends ET 4.3 · 2024 annual average<br>Values = % of UK LNG imports by volume",
+   "Source : DESNZ Energy Trends ET 4.3 · moyenne annuelle 2024<br>Valeurs = % des importations britanniques de GNL, en volume"
+  ]
+ ],
+ "js": [
+  [
+   "`${lk.s.label} to ${lk.t.label}`",
+   "`${lk.s.label} vers ${lk.t.label}`"
+  ],
+  [
+   "`${lk.v}% of UK LNG imports`",
+   "`${String(lk.v).replace('.',',')}\\u00a0% des importations de GNL du Royaume-Uni`"
+  ],
+  [
+   "`${n.v}%`",
+   "`${n.v}\\u00a0%`"
+  ],
+  [
+   "note:'Bab el-Mandeb and the Suez Canal are a sequential double chokepoint for Qatari LNG bound for the UK. After transiting Hormuz, LNG carriers cross the Arabian Sea, clear Bab el-Mandeb into the Red Sea, then transit the Suez Canal before emerging into the Mediterranean. Either node can independently block the route: Bab through military interdiction, Suez through political closure or accident. Since late 2023, Houthi attacks have made Bab el-Mandeb the most actively contested maritime chokepoint globally. Most LNG operators have diverted around the Cape of Good Hope, adding 10 to 12 days of voyage time and substantially increasing delivered gas costs to the UK.'",
+   "note:'Bab el-Mandeb et le canal de Suez forment un double point de passage successif pour le GNL qatari à destination du Royaume-Uni. Après Ormuz, les méthaniers traversent la mer d’Arabie, franchissent Bab el-Mandeb vers la mer Rouge, puis transitent par le canal de Suez avant d’émerger en Méditerranée. L’un ou l’autre peut bloquer seul la route : Bab par une interdiction militaire, Suez par une fermeture politique ou un accident. Depuis fin 2023, les attaques houthies ont fait de Bab el-Mandeb le point de passage maritime le plus activement disputé au monde. La plupart des opérateurs de GNL se sont déroutés par le cap de Bonne-Espérance, ce qui ajoute 10 à 12 jours de voyage et augmente sensiblement le coût du gaz livré au Royaume-Uni.'"
+  ],
+  [
+   "note:'The Strait of Gibraltar is the final chokepoint for Mediterranean-routed LNG before it enters the Atlantic for the UK. Qatar cargoes (27%), after clearing Hormuz, Bab el-Mandeb, and the Suez Canal, emerge into the Mediterranean and transit Gibraltar. Algerian LNG (8%) loads directly into the Mediterranean and joins at Gibraltar. Together they represent 35% of UK LNG, all converging at this single Atlantic entry point. Gibraltar itself is not considered a strategic chokepoint (14km width, no single-nation control), but it is the geographic confluence of the most supply-chain-complex LNG routes serving the UK market.'",
+   "note:'Le détroit de Gibraltar est le dernier point de passage du GNL acheminé par la Méditerranée avant son entrée dans l’Atlantique vers le Royaume-Uni. Les cargaisons du Qatar (27 %), après avoir franchi Ormuz, Bab el-Mandeb et le canal de Suez, émergent en Méditerranée et transitent par Gibraltar. Le GNL algérien (8 %) est chargé directement en Méditerranée et les rejoint à Gibraltar. Ensemble, ils représentent 35 % du GNL britannique, tous convergeant vers ce seul point d’entrée atlantique. Gibraltar n’est pas lui-même considéré comme un point de passage stratégique (14 km de large, aucun contrôle par une seule nation), mais c’est le point de confluence géographique des routes de GNL les plus complexes sur le plan de la chaîne d’approvisionnement qui desservent le marché britannique.'"
+  ],
+  [
+   "note:'Norway (Hammerfest LNG, Snohvit field on the Barents Sea coast) ships via the Norwegian Sea directly to UK terminals. No chokepoint. Russia (Yamal LNG, Sabetta terminal on the Yamal Peninsula) routes westbound via the Northern Sea Route and Norwegian Sea to Isle of Grain. Russian LNG was not covered by the UK commodity ban that applied to crude oil; imports have continued under existing contracts while the government presses for phase-down. Combined these two North Sea-corridor sources represent 18% of UK LNG with no strategic maritime chokepoint on either supply path.'",
+   "note:'La Norvège (Hammerfest LNG, champ de Snøhvit sur la côte de la mer de Barents) expédie par la mer de Norvège directement vers les terminaux britanniques. Aucun point de passage. La Russie (Yamal LNG, terminal de Sabetta sur la péninsule de Yamal) emprunte vers l’ouest la route maritime du Nord et la mer de Norvège jusqu’à Isle of Grain. Le GNL russe n’était pas couvert par l’interdiction britannique sur les produits de base qui s’appliquait au pétrole brut ; les importations se sont poursuivies dans le cadre des contrats existants, tandis que le gouvernement pousse à leur réduction progressive. Ensemble, ces deux sources du corridor de la mer du Nord représentent 18 % du GNL britannique, sans point de passage maritime stratégique sur l’une ou l’autre route d’approvisionnement.'"
+  ],
+  [
+   "note:'US Gulf Coast LNG terminals (Sabine Pass, Freeport, Corpus Christi, Calcasieu Pass) have become the dominant UK LNG source. Trinidad Atlantic LNG and smaller volumes from other Americas origins are included here. All cargoes cross the North Atlantic directly to South Hook (Milford Haven) or Isle of Grain (Kent). No maritime chokepoint on any of these routes. The US LNG build-out, enabled by the shale revolution, is the single largest structural shift in UK gas supply security since North Sea production peak.'",
+   "note:'Les terminaux GNL de la côte américaine du Golfe (Sabine Pass, Freeport, Corpus Christi, Calcasieu Pass) sont devenus la première source de GNL du Royaume-Uni. Atlantic LNG de Trinité et de plus petits volumes d’autres origines des Amériques sont inclus ici. Toutes les cargaisons traversent directement l’Atlantique Nord vers South Hook (Milford Haven) ou Isle of Grain (Kent). Aucun point de passage maritime sur ces routes. Le développement du GNL américain, rendu possible par la révolution du gaz de schiste, est le plus grand changement structurel de la sécurité d’approvisionnement gazier du Royaume-Uni depuis le pic de production de la mer du Nord.'"
+  ],
+  [
+   "note:'Qatar underpins UK long-term LNG contracts, primarily via the South Hook terminal in Milford Haven (capacity 21 bcm/yr, 60% owned by QatarEnergy). Cargoes load at Ras Laffan on the Persian Gulf coast and must clear Hormuz, then Bab el-Mandeb, then the Suez Canal, before emerging into the Mediterranean and clearing Gibraltar to reach South Hook. Four successive chokepoints. A Hormuz closure stops Qatar supply entirely; there is no alternative Qatari export terminal outside the Persian Gulf.'",
+   "note:'Le Qatar sous-tend les contrats de GNL de long terme du Royaume-Uni, principalement via le terminal de South Hook à Milford Haven (capacité de 21 milliards de m³/an, détenu à 60 % par QatarEnergy). Les cargaisons sont chargées à Ras Laffan, sur la côte du golfe Persique, et doivent franchir Ormuz, puis Bab el-Mandeb, puis le canal de Suez, avant d’émerger en Méditerranée et de franchir Gibraltar pour atteindre South Hook. Quatre points de passage successifs. Une fermeture d’Ormuz interrompt totalement l’approvisionnement du Qatar ; il n’existe aucun autre terminal d’exportation qatari hors du golfe Persique.'"
+  ],
+  [
+   "note:'The Strait of Hormuz is the mandatory exit for all LNG loaded at Ras Laffan inside the Persian Gulf. At 27% of UK LNG, Qatar\\'s entire contracted supply transits Hormuz. Compare this with UK crude, where only 8% transits Hormuz. LNG vessels (Q-Flex and Q-Max class) cannot be rerouted to alternative loading points; Ras Laffan is Qatar\\'s only export terminal. After Hormuz, Qatar LNG continues to Bab el-Mandeb and the Suez Canal before reaching the Mediterranean.'",
+   "note:'Le détroit d’Ormuz est la sortie obligatoire de tout le GNL chargé à Ras Laffan, à l’intérieur du golfe Persique. Avec 27 % du GNL britannique, la totalité de l’approvisionnement contractuel du Qatar transite par Ormuz. À comparer avec le brut du Royaume-Uni, dont seulement 8 % transite par Ormuz. Les méthaniers (classes Q-Flex et Q-Max) ne peuvent pas être redirigés vers d’autres points de chargement ; Ras Laffan est le seul terminal d’exportation du Qatar. Après Ormuz, le GNL du Qatar poursuit vers Bab el-Mandeb et le canal de Suez avant d’atteindre la Méditerranée.'"
+  ],
+  [
+   "note:'Algerian LNG from the Skikda and Arzew liquefaction plants on the Mediterranean coast transits via Gibraltar into the Atlantic to reach UK terminals. No strategic maritime chokepoint. Algeria merges with Qatari cargoes at Gibraltar, representing the full Mediterranean LNG approach to the UK. Algeria has supplied European gas markets since the 1970s and remains a consistent mid-tier supplier despite constraints from rising domestic consumption.'",
+   "note:'Le GNL algérien des usines de liquéfaction de Skikda et d’Arzew, sur la côte méditerranéenne, transite par Gibraltar vers l’Atlantique pour atteindre les terminaux britanniques. Aucun point de passage maritime stratégique. L’Algérie rejoint les cargaisons qataries à Gibraltar, ce qui représente l’ensemble de l’approche méditerranéenne du GNL vers le Royaume-Uni. L’Algérie approvisionne les marchés gaziers européens depuis les années 1970 et reste un fournisseur régulier de rang intermédiaire malgré les contraintes de la hausse de la consommation intérieure.'"
+  ],
+  [
+   "note:'UK LNG imports averaged approximately 14 to 16 billion cubic metres per year in 2024. Primary receiving terminals: South Hook LNG (Milford Haven, Wales, primarily Qatari), Dragon LNG (also Milford Haven), and Isle of Grain LNG (Kent, primarily US and Russian). The UK grid connects these terminals to the National Transmission System for distribution.'",
+   "note:'Les importations britanniques de GNL ont atteint en moyenne environ 14 à 16 milliards de mètres cubes par an en 2024. Principaux terminaux de réception : South Hook LNG (Milford Haven, pays de Galles, principalement qatari), Dragon LNG (également à Milford Haven) et Isle of Grain LNG (Kent, principalement américain et russe). Le réseau britannique relie ces terminaux au réseau national de transport pour la distribution.'"
+  ],
+  [
+   "sub:'47% · USA, Trinidad, others'",
+   "sub:'47 % · États-Unis, Trinité, autres'"
+  ],
+  [
+   "sub:'18% · Norway and Russia'",
+   "sub:'18 % · Norvège et Russie'"
+  ],
+  [
+   "sub:'~15 bcm/yr LNG imports'",
+   "sub:'≈ 15 milliards de m³/an d’importations de GNL'"
+  ],
+  [
+   "sub:'27% · via Hormuz'",
+   "sub:'27 % · via Ormuz'"
+  ],
+  [
+   "label:'United Kingdom'",
+   "label:'Royaume-Uni'"
+  ],
+  [
+   "sub:'8% · Skikda LNG'",
+   "sub:'8 % · GNL de Skikda'"
+  ],
+  [
+   "label:'Supply Origin'",
+   "label:'Origine de l’offre'"
+  ],
+  [
+   "sub:'27% of UK LNG'",
+   "sub:'27 % du GNL du Royaume-Uni'"
+  ],
+  [
+   "sub:'35% of UK LNG'",
+   "sub:'35 % du GNL du Royaume-Uni'"
+  ],
+  [
+   "label:'Chokepoint'",
+   "label:'Point de passage'"
+  ],
+  [
+   "label:'North Sea'",
+   "label:'Mer du Nord'"
+  ],
+  [
+   "label:'Americas'",
+   "label:'Amériques'"
+  ],
+  [
+   "label:'Algeria'",
+   "label:'Algérie'"
+  ],
+  [
+   "label:'Hormuz'",
+   "label:'Ormuz'"
+  ]
+ ]
+}

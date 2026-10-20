@@ -1,0 +1,641 @@
+{
+ "_meta": {
+  "generated_at": "2026-10-20T14:22:58.718820+00:00",
+  "jwc_circular": "JWLA-034 (29 Jul 2026) as amended by JWLA-035 (16 Sep 2026, Black Sea)",
+  "notes": [
+   "Illustrative fleet. Listed-area flags are computed from data/jwc_listed_areas.json via cape_ports_feed.json."
+  ],
+  "warnings": []
+ },
+ "vessels": [
+  {
+   "imo": "9100001",
+   "name": "MV Strait Queen",
+   "cls": "vlcc",
+   "cls_label": "VLCC",
+   "corridors": {
+    "hormuz": 1
+   },
+   "cargo_value": 95000000,
+   "cii": "A",
+   "flag": "Marshall Islands",
+   "waypoints": [
+    "Ras Tanura",
+    "Fujairah"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Ras Tanura → Chiba",
+    "fr": "Ras Tanura → Chiba"
+   },
+   "cargo_type": {
+    "en": "Saudi crude",
+    "fr": "Brut saoudien"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "Hormuz-captive. No diversion route exists for a loaded VLCC from the Persian Gulf. Full cargo value is at risk under any Hormuz restriction scenario.",
+    "fr": "Captif d’Ormuz. Aucune route de déroutement n’existe pour un VLCC chargé depuis le golfe Persique. La valeur totale de la cargaison est exposée dans tout scénario de restriction d’Ormuz."
+   },
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "corridor",
+      "key": "hormuz"
+     },
+     {
+      "type": "port",
+      "key": "Ras Tanura"
+     },
+     {
+      "type": "port",
+      "key": "Fujairah"
+     }
+    ],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100002",
+   "name": "MV Gulf Star",
+   "cls": "lng",
+   "cls_label": "LNG carrier",
+   "corridors": {
+    "hormuz": 1
+   },
+   "cargo_value": 78000000,
+   "cii": "B",
+   "flag": "Panama",
+   "waypoints": [
+    "Fujairah",
+    "Singapore"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Ras Laffan → Incheon",
+    "fr": "Ras Laffan → Incheon"
+   },
+   "cargo_type": {
+    "en": "Qatar LNG",
+    "fr": "GNL du Qatar"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "No alternative route at any price. Qatar has no pipeline bypass for LNG. Hormuz closure means cargo does not move.",
+    "fr": "Aucune route alternative, à aucun prix. Le Qatar n’a pas de gazoduc de contournement pour le GNL. Une fermeture d’Ormuz signifie que la cargaison ne bouge pas."
+   },
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "corridor",
+      "key": "hormuz"
+     },
+     {
+      "type": "port",
+      "key": "Fujairah"
+     }
+    ],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100003",
+   "name": "MV Lotus Arrow",
+   "cls": "lpg",
+   "cls_label": "LPG carrier",
+   "corridors": {
+    "hormuz": 1,
+    "malacca": 1
+   },
+   "cargo_value": 42000000,
+   "cii": "C",
+   "flag": "Bahamas",
+   "waypoints": [
+    "Fujairah",
+    "Colombo"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Abu Dhabi → Singapore",
+    "fr": "Abou Dhabi → Singapour"
+   },
+   "cargo_type": {
+    "en": "UAE LPG",
+    "fr": "GPL des Émirats"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "Independent exposure to two corridors on every voyage: Hormuz outbound, Malacca on approach to Singapore. Both are full risk events. Weights are 1.0 for each.",
+    "fr": "Exposition indépendante à deux corridors à chaque voyage : Ormuz à l’aller, Malacca à l’approche de Singapour. Ce sont deux événements à risque plein. Les pondérations valent 1,0 pour chacun."
+   },
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "corridor",
+      "key": "hormuz"
+     },
+     {
+      "type": "port",
+      "key": "Fujairah"
+     }
+    ],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100004",
+   "name": "MV Atlantic Bridge",
+   "cls": "suezmax",
+   "cls_label": "Suezmax",
+   "corridors": {
+    "bab_el_mandeb": 1
+   },
+   "cargo_value": 68000000,
+   "cii": "D",
+   "flag": "Greece",
+   "waypoints": [
+    "Djibouti",
+    "Durban"
+   ],
+   "div_points": [
+    "Djibouti"
+   ],
+   "div_days": 17,
+   "div_cost": 2100000,
+   "route": {
+    "en": "Ras Tanura → Rotterdam via Suez",
+    "fr": "Ras Tanura → Rotterdam via Suez"
+   },
+   "cargo_type": {
+    "en": "Saudi crude",
+    "fr": "Brut saoudien"
+   },
+   "diversion": {
+    "en": "Cape of Good Hope",
+    "fr": "Cap de Bonne-Espérance"
+   },
+   "status": {
+    "en": "Rerouting Cape of Good Hope",
+    "fr": "Déroutement par le cap de Bonne-Espérance"
+   },
+   "note": {
+    "en": "D-rated: rerouting via Cape of Good Hope adds 17 days, placing CII compliance under further pressure. Djibouti bunker stop creates JWC listed area exposure on the diversion route itself.",
+    "fr": "Notation D : le déroutement par le cap de Bonne-Espérance ajoute 17 jours et accroît la pression sur la conformité CII. L’escale de soutage à Djibouti crée une exposition à une zone listée sur la route de déroutement elle-même."
+   },
+   "jwc": {
+    "flag": "divert",
+    "std": [
+     {
+      "type": "corridor",
+      "key": "bab_el_mandeb"
+     },
+     {
+      "type": "port",
+      "key": "Djibouti"
+     }
+    ],
+    "div": [
+     {
+      "type": "port",
+      "key": "Djibouti"
+     }
+    ],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100005",
+   "name": "MV Pacific Link",
+   "cls": "neopanamax",
+   "cls_label": "Neopanamax container",
+   "corridors": {
+    "panama": 1
+   },
+   "cargo_value": 185000000,
+   "cii": "B",
+   "flag": "Liberia",
+   "waypoints": [
+    "Balboa"
+   ],
+   "div_points": [
+    "bab_el_mandeb"
+   ],
+   "div_days": 21,
+   "div_cost": null,
+   "route": {
+    "en": "Los Angeles → Yokohama",
+    "fr": "Los Angeles → Yokohama"
+   },
+   "cargo_type": {
+    "en": "Mixed containers",
+    "fr": "Conteneurs mixtes"
+   },
+   "diversion": {
+    "en": "Suez westbound",
+    "fr": "Suez vers l’ouest"
+   },
+   "status": null,
+   "note": {
+    "en": "Auction-exposed. Suez westbound is the long-distance alternative, adding approximately 21 days. Walk-away price depends on cargo mix and delivery contract.",
+    "fr": "Exposé aux enchères. Suez vers l’ouest est l’alternative longue distance, qui ajoute environ 21 jours. Le prix de renoncement dépend du mélange de cargaisons et du contrat de livraison."
+   },
+   "jwc": {
+    "flag": "divert",
+    "std": [],
+    "div": [
+     {
+      "type": "corridor",
+      "key": "bab_el_mandeb"
+     }
+    ],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100006",
+   "name": "MV Prairie Wind",
+   "cls": "handymax",
+   "cls_label": "Handymax bulk",
+   "corridors": {
+    "panama": 1
+   },
+   "cargo_value": 28000000,
+   "cii": "C",
+   "flag": "Malta",
+   "waypoints": [
+    "Colon"
+   ],
+   "div_points": [],
+   "div_days": 30,
+   "div_cost": 1000000,
+   "route": {
+    "en": "New Orleans → Osaka",
+    "fr": "La Nouvelle-Orléans → Osaka"
+   },
+   "cargo_type": {
+    "en": "US Gulf grain",
+    "fr": "Céréales du golfe du Mexique (États-Unis)"
+   },
+   "diversion": {
+    "en": "Cape Horn",
+    "fr": "Cap Horn"
+   },
+   "status": null,
+   "note": {
+    "en": "Walk-away price approximately $1M. Cape Horn diversion adds 30 days and is commercially viable only when the auction slot premium exceeds the diversion cost.",
+    "fr": "Prix de renoncement d’environ 1 M$. Le déroutement par le cap Horn ajoute 30 jours et n’est commercialement viable que lorsque la prime du créneau aux enchères dépasse son coût."
+   },
+   "jwc": {
+    "flag": "clear",
+    "std": [],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100007",
+   "name": "MV Iron Cape",
+   "cls": "capesize",
+   "cls_label": "Capesize bulk",
+   "corridors": {
+    "malacca": 1
+   },
+   "cargo_value": 55000000,
+   "cii": "E",
+   "flag": "Hong Kong",
+   "waypoints": [
+    "Singapore",
+    "Port Klang"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Tubarão → Qingdao",
+    "fr": "Tubarão → Qingdao"
+   },
+   "cargo_type": {
+    "en": "Brazil iron ore",
+    "fr": "Minerai de fer du Brésil"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "E-rated: cannot absorb additional voyage inefficiency. Any meaningful diversion would trigger flag-state corrective action. Effectively captive to Malacca despite it being a through-route.",
+    "fr": "Notation E : ne peut pas absorber d’inefficacité supplémentaire sur le voyage. Tout déroutement notable entraînerait une action corrective de l’État du pavillon. Captif de Malacca en pratique, bien que ce soit une route de transit."
+   },
+   "jwc": {
+    "flag": "clear",
+    "std": [],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100008",
+   "name": "MV Banda Sea",
+   "cls": "aframax",
+   "cls_label": "Aframax",
+   "corridors": {
+    "malacca": 1
+   },
+   "cargo_value": 38000000,
+   "cii": "A",
+   "flag": "Singapore",
+   "waypoints": [
+    "Singapore"
+   ],
+   "div_points": [],
+   "div_days": 2.5,
+   "div_cost": 400000,
+   "route": {
+    "en": "Dumai → Zhanjiang",
+    "fr": "Dumai → Zhanjiang"
+   },
+   "cargo_type": {
+    "en": "Indonesia crude",
+    "fr": "Brut indonésien"
+   },
+   "diversion": {
+    "en": "Lombok Strait",
+    "fr": "Détroit de Lombok"
+   },
+   "status": null,
+   "note": {
+    "en": "Malacca-captive on this route. Lombok Strait and Sunda Strait are alternatives, adding 2 to 3 days and entering elevated piracy risk zones.",
+    "fr": "Captif de Malacca sur cette route. Les détroits de Lombok et de la Sonde sont des alternatives, qui ajoutent 2 à 3 jours et traversent des zones où le risque de piraterie est élevé."
+   },
+   "jwc": {
+    "flag": "clear",
+    "std": [],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100009",
+   "name": "MV Odessa Star",
+   "cls": "suezmax",
+   "cls_label": "Suezmax",
+   "corridors": {
+    "bosphorus": 1
+   },
+   "cargo_value": 32000000,
+   "cii": "C",
+   "flag": "Marshall Islands",
+   "waypoints": [
+    "Odessa",
+    "Istanbul"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Odessa → Iskenderun",
+    "fr": "Odessa → Iskenderun"
+   },
+   "cargo_type": {
+    "en": "Ukraine grain",
+    "fr": "Céréales ukrainiennes"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "Bosphorus-captive for Black Sea exit. No alternative route from Ukraine to the Mediterranean. Montreux Convention closure risk applies in conflict scenarios involving Black Sea states.",
+    "fr": "Captif du Bosphore pour sortir de la mer Noire. Aucune route alternative de l’Ukraine vers la Méditerranée. Le risque de fermeture prévu par la convention de Montreux s’applique dans les scénarios de conflit impliquant des États de la mer Noire."
+   },
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "port",
+      "key": "Odessa"
+     }
+    ],
+    "div": [],
+    "bound": [
+     {
+      "type": "corridor",
+      "key": "bosphorus"
+     }
+    ]
+   }
+  },
+  {
+   "imo": "9100010",
+   "name": "MV Java Current",
+   "cls": "vlcc",
+   "cls_label": "VLCC",
+   "corridors": {
+    "lombok": 1
+   },
+   "cargo_value": 88000000,
+   "cii": "B",
+   "flag": "Liberia",
+   "waypoints": [
+    "Ras Tanura",
+    "Fujairah",
+    "Singapore"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Ras Tanura → Zhoushan via Lombok",
+    "fr": "Ras Tanura → Zhoushan via Lombok"
+   },
+   "cargo_type": {
+    "en": "Middle East crude",
+    "fr": "Brut du Moyen-Orient"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "Transiting Lombok as the primary deep-water alternative to Malacca. VLCCs at full draught cannot safely transit Malacca. Lombok adds approximately 1.5 days versus Malacca but is the only viable option for this vessel class.",
+    "fr": "Transit par Lombok, principale alternative en eau profonde à Malacca. Les VLCC à pleine charge ne peuvent pas franchir Malacca en sécurité. Lombok ajoute environ 1,5 jour par rapport à Malacca, mais c’est la seule option viable pour cette classe de navire."
+   },
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "port",
+      "key": "Ras Tanura"
+     },
+     {
+      "type": "port",
+      "key": "Fujairah"
+     }
+    ],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100011",
+   "name": "MV Northern Gate",
+   "cls": "lng",
+   "cls_label": "LNG carrier",
+   "corridors": {
+    "danish_straits": 1
+   },
+   "cargo_value": 45000000,
+   "cii": "B",
+   "flag": "Norway",
+   "waypoints": [
+    "Rotterdam"
+   ],
+   "div_points": [],
+   "div_days": null,
+   "div_cost": null,
+   "route": {
+    "en": "Klaipeda → Rotterdam",
+    "fr": "Klaipeda → Rotterdam"
+   },
+   "cargo_type": {
+    "en": "Baltic LNG",
+    "fr": "GNL de la Baltique"
+   },
+   "diversion": null,
+   "status": null,
+   "note": {
+    "en": "Danish Straits is the only practical exit from the Baltic for vessels of this class. Seasonal ice constraints (November to April) and bridge air-draft limitations (Storebaelt Bridge: 65m clearance) apply.",
+    "fr": "Les détroits danois sont la seule sortie praticable de la Baltique pour des navires de cette classe. Les contraintes de glace saisonnières (novembre à avril) et les limites de tirant d’air des ponts (pont du Grand Belt : 65 m de dégagement) s’appliquent."
+   },
+   "jwc": {
+    "flag": "clear",
+    "std": [],
+    "div": [],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100012",
+   "name": "MV Alexandria Bridge",
+   "cls": "neopanamax",
+   "cls_label": "Neopanamax container",
+   "corridors": {
+    "suez": 1,
+    "bab_el_mandeb": 1
+   },
+   "cargo_value": 160000000,
+   "cii": "C",
+   "flag": "Malta",
+   "waypoints": [
+    "Port Said",
+    "Djibouti"
+   ],
+   "div_points": [
+    "Djibouti"
+   ],
+   "div_days": 14,
+   "div_cost": 3200000,
+   "route": {
+    "en": "Singapore → Felixstowe via Suez",
+    "fr": "Singapour → Felixstowe via Suez"
+   },
+   "cargo_type": {
+    "en": "Mixed containers",
+    "fr": "Conteneurs mixtes"
+   },
+   "diversion": {
+    "en": "Cape of Good Hope",
+    "fr": "Cap de Bonne-Espérance"
+   },
+   "status": null,
+   "note": {
+    "en": "Dual corridor exposure: Suez (canal grounding / political closure risk) and Bab-el-Mandeb (conflict / restriction risk) are both on the standard route. Djibouti bunker stop is flagged: JWC listed area even when diverting Cape.",
+    "fr": "Double exposition à des corridors : Suez (échouement dans le canal, fermeture politique) et Bab-el-Mandeb (conflit, restriction) figurent tous deux sur la route standard. L’escale de soutage à Djibouti est signalée : zone listée même en cas de déroutement par le Cap."
+   },
+   "jwc": {
+    "flag": "divert",
+    "std": [
+     {
+      "type": "corridor",
+      "key": "bab_el_mandeb"
+     },
+     {
+      "type": "port",
+      "key": "Djibouti"
+     }
+    ],
+    "div": [
+     {
+      "type": "port",
+      "key": "Djibouti"
+     }
+    ],
+    "bound": []
+   }
+  },
+  {
+   "imo": "9100013",
+   "name": "MV Yanbu Relay",
+   "cls": "suezmax",
+   "cls_label": "Suezmax",
+   "corridors": {
+    "suez": 1,
+    "malacca": 1
+   },
+   "cargo_value": 100000000,
+   "cii": "D",
+   "flag": "Marshall Islands",
+   "waypoints": [
+    "Yanbu",
+    "Port Said",
+    "Singapore"
+   ],
+   "div_points": [],
+   "div_days": 3,
+   "div_cost": null,
+   "leg_route": "yanbu_ulsan_long",
+   "leg_alt_route": "yanbu_ulsan_short",
+   "route": {
+    "en": "Yanbu → Suez → Gibraltar → Cape of Good Hope → Malacca → Ulsan",
+    "fr": "Yanbu → Suez → Gibraltar → cap de Bonne-Espérance → Malacca → Ulsan"
+   },
+   "cargo_type": {
+    "en": "Saudi crude (Yanbu loading)",
+    "fr": "Brut saoudien (chargement à Yanbu)"
+   },
+   "diversion": {
+    "en": "SUMED pipeline transfer (Ain Sukhna to Sidi Kerir, reload in the Mediterranean)",
+    "fr": "Transfert par l’oléoduc SUMED (Aïn Soukhna vers Sidi Kerir, rechargement en Méditerranée)"
+   },
+   "status": {
+    "en": "On Suez + Cape routing (Bab-el-Mandeb closed)",
+    "fr": "Sur routage Suez + Cap (Bab-el-Mandeb fermé)"
+   },
+   "note": {
+    "en": "Illustrative case of a Bab-el-Mandeb bypass. Hormuz is avoided by loading at Yanbu, and Bab-el-Mandeb is avoided by going north: Suezmax-size so a laden vessel can transit Suez (a laden VLCC cannot, and partially lightens or transfers via SUMED). Routing graph: 15,811 nm via Suez, Gibraltar, the Cape and Malacca versus 7,095 nm via Bab-el-Mandeb, about 47 versus about 21 days at 14 knots (press reports put it at about 54 versus about 24 days). CAPE models only the Suez and Malacca legs; Gibraltar, the Cape of Good Hope and the pipeline have no CAPE corridor. Single points of failure on this one voyage: the East-West pipeline feeding Yanbu (shut 11-12 September 2026 after drone attacks), the Suez Canal, and the Red Sea war-risk zone. SUMED is the alternative but ran near capacity in August (about 1.9 mb/d); transfer cost and delay are not published, so the diversion cost is left blank. Weights, cargo value and CII rating are illustrative, not observed.",
+    "fr": "Cas illustratif d’un contournement de Bab-el-Mandeb. Ormuz est évité en chargeant à Yanbu, et Bab-el-Mandeb en passant par le nord : taille Suezmax pour qu’un navire chargé puisse franchir Suez (un VLCC chargé ne le peut pas, et doit s’alléger en partie ou transférer via SUMED). Graphe de routage : 15 811 nm via Suez, Gibraltar, le Cap et Malacca contre 7 095 nm via Bab-el-Mandeb, soit environ 47 contre environ 21 jours à 14 nœuds (la presse avance environ 54 contre environ 24 jours). CAPE ne modélise que les tronçons Suez et Malacca ; Gibraltar, le cap de Bonne-Espérance et l’oléoduc n’ont pas de corridor dans CAPE. Points de défaillance uniques de ce voyage : l’oléoduc Est-Ouest qui alimente Yanbu (arrêté les 11 et 12 septembre 2026 après des attaques de drones), le canal de Suez et la zone de risque de guerre de la mer Rouge. SUMED est l’alternative, mais fonctionnait près de sa capacité en août (environ 1,9 Mb/j) ; le coût et le délai d’un transfert ne sont pas publiés, donc le coût du déroutement est laissé vide. Les pondérations, la valeur de cargaison et la notation CII sont illustratives, non observées."
+   },
+   "note_asof": "2026-10-08",
+   "jwc": {
+    "flag": "listed",
+    "std": [
+     {
+      "type": "port",
+      "key": "Yanbu"
+     }
+    ],
+    "div": [],
+    "bound": []
+   }
+  }
+ ]
+}

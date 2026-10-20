@@ -1,4 +1,5 @@
 ---
+import { COMMERCIAL } from '../../config';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 ---
 
@@ -47,7 +48,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="callout" style="margin:0 0 24px;">
   <div class="callout-label">Updated August 2026</div>
-  <div class="callout-body">Two data corrections since May 2026. First, a routing-engine fix now properly applies Saudi Arabia's and the UAE's real multi-basin export capacity (Yanbu on the Red Sea; Fujairah on the Gulf of Oman) instead of defaulting all Gulf crude to a single Hormuz transit — this brings the crude dependency figures below down materially for every importer in this piece, corroborated against independent reporting on both pipelines' normal-time utilisation (see hormuz.astro method note for detail). Second, LPG (HS 271112/271113/271119) has now been pulled from Comtrade as a genuine data series, replacing the previously unmodeled placeholder figures — and it surfaces a bigger gap than the original Southeast Asia framing: India, Pakistan, and Sri Lanka show LPG dependency as high or higher than anything in Southeast Asia, all outside the three pillars just the same.</div>
+  <div class="callout-body">Two data corrections since May 2026. First, a routing-engine fix now properly applies Saudi Arabia's and the UAE's real multi-basin export capacity (Yanbu on the Red Sea; Fujairah on the Gulf of Oman) instead of defaulting all Gulf crude to a single Hormuz transit. This brings the crude dependency figures below down materially for every importer in this piece, corroborated against independent reporting on both pipelines' normal-time utilisation (see the method note in the Hormuz analysis for detail). Second, LPG (HS 271112/271113/271119) has now been pulled from Comtrade as a genuine data series, replacing the previously unmodeled placeholder figures, and it surfaces a bigger gap than the original Southeast Asia framing: India, Pakistan, and Sri Lanka show LPG dependency as high or higher than anything in Southeast Asia, all outside the three pillars just the same.</div>
 </div>
 
 <div class="pillar-grid">
@@ -266,7 +267,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="callout-red">
  <div class="callout-label">Eight nations outside all three pillars</div>
- <div class="callout-body">Pakistan (99.8% of LPG supply via Hormuz), Sri Lanka (91.9%), India (91.2%, $14.7B annual exposed, the largest absolute LPG value of any importer in the model), Thailand (75.6%), Malaysia (52.0%), Vietnam (42.8%), the Philippines (33.2%), and Indonesia (28.4%, on top of 20.1% crude) are Tier 1 bilateral exposures: real country-pair trade flows from CDM v3, a multi-vintage blend of 2022 and 2024 UN Comtrade data. For each of these importers, LPG supply disruption via Hormuz cannot be offset by demand reduction elsewhere, rerouted via pipeline, or replaced by Atlantic Basin production. <strong>These are the nations most systematically underanalysed in the current rebalancing commentary, and the South Asian members of this group — Pakistan, Sri Lanka, India — are absent from almost every existing writeup of the LPG gap.</strong> The analysis that leads with the three pillars and stops there will miss them entirely.</div>
+ <div class="callout-body">Pakistan (99.8% of LPG supply via Hormuz), Sri Lanka (91.9%), India (91.2%, $14.7B annual exposed, the largest absolute LPG value of any importer in the model), Thailand (75.6%), Malaysia (52.0%), Vietnam (42.8%), the Philippines (33.2%), and Indonesia (28.4%, on top of 20.1% crude) are Tier 1 bilateral exposures: real country-pair trade flows from CDM v3, a multi-vintage blend of 2022 and 2024 UN Comtrade data. For each of these importers, LPG supply disruption via Hormuz cannot be offset by demand reduction elsewhere, rerouted via pipeline, or replaced by Atlantic Basin production. <strong>These are the nations most systematically underanalysed in the current rebalancing commentary, and the South Asian members of this group (Pakistan, Sri Lanka, India) are absent from almost every existing writeup of the LPG gap.</strong> The analysis that leads with the three pillars and stops there will miss them entirely.</div>
 </div>
 
 <hr class="section-rule" />
@@ -299,7 +300,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     <td style="color:var(--green);font-weight:600;">Europe via Med; Asia pays Cape premium</td>
    </tr>
    <tr>
-    <td>Does the Atlantic surge reach my refinery grade?</td>
+    <td>Does the Atlantic surge reach a given refinery grade?</td>
     <td style="color:var(--red);font-weight:600;">Cannot answer: no commodity granularity</td>
     <td style="color:var(--green);font-weight:600;">Light sweet (Atlantic) vs heavy sour (Gulf) by refinery</td>
    </tr>
@@ -309,7 +310,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
     <td style="color:var(--green);font-weight:600;">No · 8 nations across South &amp; Southeast Asia uncovered · bilateral Tier 1</td>
    </tr>
    <tr>
-    <td>What is my counterparty's residual Hormuz exposure?</td>
+    <td>What is a given counterparty's residual Hormuz exposure?</td>
     <td style="color:var(--red);font-weight:600;">Cannot answer</td>
     <td style="color:var(--green);font-weight:600;">Dep% at (importer, chokepoint, commodity) level</td>
    </tr>
@@ -324,10 +325,11 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 <div class="method-note">
  <div class="method-note-label">Methodology and data sources</div>
- <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026), a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data, computed via basin-aware routing that weights each exporter's real port geography across all matched basins rather than defaulting to a single dominant basin — this is what brought the crude figures above down from the May 2026 baseline (see hormuz.astro method note for detail). LPG figures were rebuilt in August 2026 from a dedicated authenticated Comtrade pull covering HS 271112 (propane), 271113 (butane), and 271119 (other petroleum gases), aggregated into a single synthetic LPG commodity class and blended across vintages using the same methodology as every other CDM v3 commodity; this series was previously scoped but never completed, and the India/Pakistan/Sri Lanka figures above are new in this update. LPG and crude petroleum figures are Tier 1 bilateral data: real country-pair flows. Pipeline capacity figures: Saudi East-West Pipeline nameplate capacity ~5mbd (Aramco); Fujairah ADCOP ~1.5mbd (ADNOC). Atlantic Basin surge estimate: Vortexa, May 2026 scenario analysis. Rerouting cost estimates use representative vessel-class rates: VLCC bunker $30k/day, charter $85k/day; Cape detour +12–15 days by route. Grade mismatch characterisation: Middle East exports are predominantly medium/heavy sour; US shale, Brazilian and West African grades are predominantly light sweet; Asian refinery configurations sourced from IEA Refinery Survey 2023. Bab-el-Mandeb risk caveat sourced from public US DoD reporting. Three pillars framework: Vortexa Commodity Analytics, May 2026. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since 28 February 2026. All model assumptions are substitutable. Contact fysh@narrows.io to run a scenario against your specific inputs.</div>
+ <div class="method-note-body">Bilateral dependency figures derived from the Narrows Chokepoint Dependency Model v3 (rebuilt August 2026), a multi-vintage blend of 2022 and 2024 UN Comtrade bilateral data, computed via basin-aware routing that weights each exporter's real port geography across all matched basins rather than defaulting to a single dominant basin. This is what brought the crude figures above down from the May 2026 baseline (see the method note in the Hormuz analysis for detail). LPG figures were rebuilt in August 2026 from a dedicated authenticated Comtrade pull covering HS 271112 (propane), 271113 (butane), and 271119 (other petroleum gases), aggregated into a single synthetic LPG commodity class and blended across vintages using the same methodology as every other CDM v3 commodity; this series was previously scoped but never completed, and the India/Pakistan/Sri Lanka figures above are new in this update. LPG and crude petroleum figures are Tier 1 bilateral data: real country-pair flows. Pipeline capacity figures: Saudi East-West Pipeline nameplate capacity ~5mbd (Aramco); Fujairah ADCOP ~1.5mbd (ADNOC). Atlantic Basin surge estimate: Vortexa, May 2026 scenario analysis. Rerouting cost estimates use representative vessel-class rates: VLCC bunker $30k/day, charter $85k/day; Cape detour +12–15 days by route. Grade mismatch characterisation: Middle East exports are predominantly medium/heavy sour; US shale, Brazilian and West African grades are predominantly light sweet; Asian refinery configurations sourced from IEA Refinery Survey 2023. Bab-el-Mandeb risk caveat sourced from public US DoD reporting. Three pillars framework: Vortexa Commodity Analytics, May 2026. These figures describe structural, normal-year exposure, not a live tracker of the Strait's actual closure since 28 February 2026. All model assumptions are substitutable.</div>
 </div>
 
 <!-- CTA -->
+{COMMERCIAL && (
 <div slot="cta" class="cta-strip">
  <div class="cta-strip-inner">
   <div>
@@ -338,6 +340,7 @@ import ArticleLayout from '../../layouts/ArticleLayout.astro';
  </div>
 </div>
 
+)}
 </ArticleLayout>
 
 <style>

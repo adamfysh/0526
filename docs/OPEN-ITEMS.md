@@ -58,3 +58,40 @@ Last updated 20 Oct 2026. Every fix below must be made in **English and French t
 - STALE, need real refresh (warned by the exporter): sanctions country table (May 2024), WGI (2022), PSC (2023), labour record (2024), catchment base (2022).
 - A19 still open: typed numbers inside the long prose strings of `priMethodology.ts` (57/1,841/1,876, 35, 79, 24 m, 250 km, 1980, 12 storms, 0.4 g, 12 to 168 h, 50 to 2,500 km, 22 % cap, maps, thresholds). `fill()` already accepts the meta placeholders ({dwell_port}, {dwell_unctad}, {dwell_lpi}, {disputes}, {tier_a}, {tier_b}, ...); replace the literals string by string. PSC string s[79] must say flag tier 60 % + regional detention rate 40 %.
 - Same approach to be applied to CDM figures (A1 to A4).
+
+## F. CAPE (20 Oct 2026)
+
+DONE
+- Explainer `/cape` and `/fr/cape`: dictionary `src/i18n/pages/cape.ts`, route `[...lang]/cape.astro`. The TIDE strip reads `public/cape_tide_feed.json` at build. The old typed strip was stale (Hormuz baseline 21.8 vs feed 21.35, peak 25.6 vs 25.09, horizon 31.2 vs 30.55, PML 3.4 vs 3.31, and "July" peak where the feed says Jan). The typed "Suez closes, Cape +83%" claim had no source and was replaced by the feed's largest cascade ratio.
+- Tool `public/cape.html` French via `?lang=fr` (`public/cape-i18n.js`). Interface strings: exact English to French in that file. Interpolated sentences use `LX(en, fr)` in `cape.html`. Fleet, port and listed-area data are bilingual at source.
+- No more hand-typed facts in the tool. New pipeline steps, run in this order after a PRI or JWC update:
+  1. `narrows-pipeline/notebooks/25_cape_ports_feed.py` -> `public/cape_ports_feed.json` (PRI score, rank, dwell, nearest PRI record and distance, JWC listed status per port and per corridor, from `data/jwc_listed_areas.json`; editorial one-line notes from `data/cape_ports.json`).
+  2. `narrows-pipeline/notebooks/26_cape_fleet_feed.py` -> `public/cape_fleet_feed.json` (fleet from `data/cape_fleet.json`; listed-area flag computed, not stored).
+  3. Existing `21_cape_corridor_feed.py` and `22_cape_tide_feed.py` (unchanged).
+- Removed from the page: the Worker call and its bearer token, the typed PORT_RISK table (it lived in the deployed Worker), the typed fallback bilateral and TIDE numbers. Day-rate weights come from `NARROWS-RATES.js` (identical to what the Worker served).
+- Verification: `python3 scripts/check-cape-i18n.py` renders the tool in French through every scenario and corridor and fails on English left or page errors (needs Playwright).
+
+Corrections the computed data made to the old typed statuses
+- MV Odessa Star: was "clear"; now "listed" (Odessa is covered by the Ukraine rule) with Bosphorus flagged as a boundary case.
+- MV Java Current: was "clear"; now "listed" (loads at Ras Tanura, Fujairah are in named countries).
+- Bosphorus corridor: was "not listed"; now "boundary" (28 km from the approximate Black Sea ring edge): check against JWLA-035 before relying on it.
+
+OPEN
+- SECURITY: the CAPE Worker bearer token was published in the public page source for months and is still in git history and in the deployed Worker. Rotate `CAPE_SECRET` or retire the Worker (nothing needs it now). Decide before the next deploy.
+- JWC rings in `data/jwc_listed_areas.json` are approximations closed over land (most vertices not from the circular). Port status uses country rules only; corridor status uses the rings and reports "boundary" within 50 km of an edge. Replace with the circular's own coordinates.
+- Editorial text still typed in the tool (translated, dated where possible): scenario notes (the Hormuz "live" note is from the 9 Sep 2026 signals review, six weeks old), Yanbu vessel note (war-risk quote 25 Sep, pipeline shutdown 11 to 12 Sep, 15,811 nm / 7,095 nm from the routing graph), CII multipliers, route days in `NARROWS-LEGS.js`. Decide whether each is to be fed from `NARROWS-SIGNALS.js` / the routing tool.
+- `NARROWS-LEGS.js` route labels are English strings translated in `cape-i18n.js` by exact match: add new routes there.
+- "Phase 4" wording in the CII panel is internal roadmap language; consider removing for the publication.
+- TIDE fallback comment (Fix-116) in `cape.html` is obsolete.
+
+## G. Static pages translation sweep (20 Oct 2026)
+
+DONE: French for lng-compare, all analysis articles, cascade, cascade-plus, the four crude/LNG Sankeys, `viz/gulf-lng-sankey`, `viz/qatar-route-tree`. Em-dashes and internal/commercial wording removed in those sources. Iframes follow the language.
+
+OPEN
+- `public/tools/map-printer.html` is an internal tool (title says "internal") published at /tools/. Now noindex and disallowed in robots.txt, but still public: move it out of `public/` or behind the Cloudflare password. Same for the orphan `viz/gulf-lng-flowmap.html` (not translated, noindex).
+- Sankeys and viz still cite "Narrows CDM v0.3 ... 2022 base year": stale versus CDM v3. Refresh the source lines from the tools.
+- `malacca.astro` methodology is stale (UN Comtrade 2023, CDM Fix-15, 14 importers versus 90). The $31B land bridge is $29B in malacca: log as stale-figure fix.
+- Underwriter-framed phrasing remains in hormuz, malacca-zombie and malacca; "Adam Fysh, Founder, The Narrows" bylines remain in hormuz-pocketbook.
+- `NARROWS-CORRIDORS.js` / `NARROWS-RATES.js` labels English on French pages; CASCADE+ fleet data uses fixed Sept 2026 dates.
+- `sk.py` regenerates `js` pairs; after re-running it on `viz/qatar-route-tree`, delete the unused pairs "Gulf LNG" and " · ~${n.totalDays} days from origin" (build flags them).

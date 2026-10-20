@@ -1,0 +1,378 @@
+{
+ "path": "analysis/panama-long-way-around",
+ "meta": {
+  "title": "Narrows — Bloquée à un point de passage, une flotte céréalière a pris la longue route vers l’est, par quatre autres points de passage, puis a dû de nouveau se déplacer.",
+  "description": "Lorsque la sécheresse de 2023–24 a chassé les céréaliers de la côte américaine du Golfe de l’enchère de Panama, contourner l’Amérique du Sud n’a jamais vraiment été envisagé. La flotte est partie dans la direction opposée, a échangé un point de passage contre une chaîne de quatre, puis en a perdu un à cause du risque de guerre et a dû se déplacer de nouveau."
+ },
+ "pairs": [
+  [
+   "Route Analysis · Panama Canal Displacement · Sept 2026",
+   "Analyse de routes · Déroutement du canal de Panama · sept. 2026"
+  ],
+  [
+   "Blocked at one chokepoint, a grain fleet sailed <em>the long way east</em>, through four more chokepoints, then had to move again.",
+   "Bloquée à un point de passage, une flotte céréalière a pris <em>la longue route vers l’est</em>, par quatre autres points de passage, puis a dû de nouveau se déplacer."
+  ],
+  [
+   "When the 2023–24 drought priced US Gulf grain carriers out of the Panama auction, rounding South America was never really on the table. The fleet went the opposite direction instead, traded one chokepoint for a chain of four, then lost one of those to war risk and had to move again.",
+   "Lorsque la sécheresse de 2023–24 a chassé les céréaliers de la côte américaine du Golfe de l’enchère de Panama, contourner l’Amérique du Sud n’a jamais vraiment été envisagé. La flotte est partie dans la direction opposée, a échangé un point de passage contre une chaîne de quatre, puis en a perdu un à cause du risque de guerre et a dû se déplacer de nouveau."
+  ],
+  [
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">Sept 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">9 min read</span>",
+   "<span class=\"article-meta-item\"><strong>Narrows Research</strong></span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">sept. 2026</span> <span class=\"article-meta-sep\">·</span><span class=\"article-meta-item\">9 min de lecture</span>"
+  ],
+  [
+   "Panama, US Gulf to Shanghai",
+   "Panama, côte américaine du Golfe vers Shanghai"
+  ],
+  [
+   "10,807 nm",
+   "10 807 nm"
+  ],
+  [
+   "Baseline great-circle distance",
+   "Distance de base en grand cercle"
+  ],
+  [
+   "Cape Horn, the road not taken",
+   "Cap Horn, la route non prise"
+  ],
+  [
+   "Farther than Panama; almost no vessel sailed it",
+   "Plus long que Panama ; presque aucun navire ne l’a emprunté"
+  ],
+  [
+   "Suez / Red Sea corridor",
+   "Corridor Suez / mer Rouge"
+  ],
+  [
+   "Chokepoints: Gibraltar, Suez, Bab-el-Mandeb, Malacca",
+   "Points de passage : Gibraltar, Suez, Bab el-Mandeb, Malacca"
+  ],
+  [
+   "Peak Panama slot auction",
+   "Enchère record de créneau à Panama"
+  ],
+  [
+   "Documented record bid, November 2023",
+   "Offre record documentée, novembre 2023"
+  ],
+  [
+   "US Gulf",
+   "Côte américaine du Golfe"
+  ],
+  [
+   "East Asia",
+   "Asie de l’Est"
+  ],
+  [
+   "Panama",
+   "Panama"
+  ],
+  [
+   "draft",
+   "tirant d’eau"
+  ],
+  [
+   "Gibraltar",
+   "Gibraltar"
+  ],
+  [
+   "Suez",
+   "Suez"
+  ],
+  [
+   "Bab-el-Mandeb",
+   "Bab el-Mandeb"
+  ],
+  [
+   "war risk, 2023–",
+   "risque de guerre, 2023–"
+  ],
+  [
+   "Malacca",
+   "Malacca"
+  ],
+  [
+   "Cape of Good Hope",
+   "Cap de Bonne-Espérance"
+  ],
+  [
+   "storms, current",
+   "tempêtes, courant"
+  ],
+  [
+   "Cape Horn",
+   "Cap Horn"
+  ],
+  [
+   "<span class=\"swatch\" style=\"border-color:var(--blue);\"></span>1&nbsp;·&nbsp;Panama (normal, 80%)",
+   "<span class=\"swatch\" style=\"border-color:var(--blue);\"></span>1&nbsp;·&nbsp;Panama (normal, 80 %)"
+  ],
+  [
+   "<span class=\"swatch\" style=\"border-color:var(--text-tertiary); border-top-style:dotted;\"></span>Cape Horn (considered, not used)",
+   "<span class=\"swatch\" style=\"border-color:var(--text-tertiary); border-top-style:dotted;\"></span>Cap Horn (envisagé, non utilisé)"
+  ],
+  [
+   "<span class=\"swatch\" style=\"border-color:var(--gold-dark);\"></span>2&nbsp;·&nbsp;Suez / Red Sea (91%, then blocked)",
+   "<span class=\"swatch\" style=\"border-color:var(--gold-dark);\"></span>2&nbsp;·&nbsp;Suez / mer Rouge (91 %, puis bloquée)"
+  ],
+  [
+   "<span class=\"swatch\" style=\"border-color:var(--red); border-top-style:dashed;\"></span>3&nbsp;·&nbsp;Cape of Good Hope (69%, forced)",
+   "<span class=\"swatch\" style=\"border-color:var(--red); border-top-style:dashed;\"></span>3&nbsp;·&nbsp;Cap de Bonne-Espérance (69 %, forcée)"
+  ],
+  [
+   "<span class=\"swatch\" style=\"border-color:var(--navy); border-radius:50%; width:9px; height:9px; border-width:1.6px;\"></span>Chokepoint: never 100% flowable, whatever the reason",
+   "<span class=\"swatch\" style=\"border-color:var(--navy); border-radius:50%; width:9px; height:9px; border-width:1.6px;\"></span>Point de passage : jamais à 100 % franchissable, quelle qu’en soit la raison"
+  ],
+  [
+   "Route 1",
+   "Route 1"
+  ],
+  [
+   "Straight through Panama",
+   "Tout droit par Panama"
+  ],
+  [
+   "<span>Distance</span><span>10,807 nm</span>",
+   "<span>Distance</span><span>10 807 nm</span>"
+  ],
+  [
+   "<span>Chokepoints</span><span>1 · draft</span>",
+   "<span>Points de passage</span><span>1 · tirant d’eau</span>"
+  ],
+  [
+   "<span>Extra days</span><span>none</span>",
+   "<span>Jours supplémentaires</span><span>aucun</span>"
+  ],
+  [
+   "<span>Extra cost</span><span>none</span>",
+   "<span>Surcoût</span><span>aucun</span>"
+  ],
+  [
+   "<span>Share, Oct ’22</span><span>80%</span>",
+   "<span>Part, oct. ’22</span><span>80 %</span>"
+  ],
+  [
+   "Considered",
+   "Envisagée"
+  ],
+  [
+   "Around Cape Horn",
+   "Par le cap Horn"
+  ],
+  [
+   "<span>Distance</span><span>18,335 nm</span>",
+   "<span>Distance</span><span>18 335 nm</span>"
+  ],
+  [
+   "<span>Chokepoints</span><span>1 · storms, current</span>",
+   "<span>Points de passage</span><span>1 · tempêtes, courant</span>"
+  ],
+  [
+   "<span>Extra days</span><span>~35–38</span>",
+   "<span>Jours supplémentaires</span><span>≈ 35–38</span>"
+  ],
+  [
+   "<span>Extra cost</span><span>~$1.0–1.14M</span>",
+   "<span>Surcoût</span><span>≈ 1,0–1,14 M$</span>"
+  ],
+  [
+   "<span>Share, actual</span><span>≈0%</span>",
+   "<span>Part, réelle</span><span>≈ 0 %</span>"
+  ],
+  [
+   "Route 2",
+   "Route 2"
+  ],
+  [
+   "East via Suez / Red Sea",
+   "Vers l’est via Suez / mer Rouge"
+  ],
+  [
+   "<span>Distance</span><span>13,563 nm</span>",
+   "<span>Distance</span><span>13 563 nm</span>"
+  ],
+  [
+   "<span>Chokepoints</span><span>4 · beam, traffic, war risk</span>",
+   "<span>Points de passage</span><span>4 · largeur, trafic, risque de guerre</span>"
+  ],
+  [
+   "<span>Extra days</span><span>+18</span>",
+   "<span>Jours supplémentaires</span><span>+18</span>"
+  ],
+  [
+   "<span>Extra cost</span><span>+$540K</span>",
+   "<span>Surcoût</span><span>+540 k$</span>"
+  ],
+  [
+   "<span>Share, Nov ’23</span><span>91%</span>",
+   "<span>Part, nov. ’23</span><span>91 %</span>"
+  ],
+  [
+   "Route 3",
+   "Route 3"
+  ],
+  [
+   "Further east: Cape of Good Hope",
+   "Plus à l’est : cap de Bonne-Espérance"
+  ],
+  [
+   "<span>Distance</span><span>15,582 nm</span>",
+   "<span>Distance</span><span>15 582 nm</span>"
+  ],
+  [
+   "<span>Chokepoints</span><span>2 · traffic, storms, current</span>",
+   "<span>Points de passage</span><span>2 · trafic, tempêtes, courant</span>"
+  ],
+  [
+   "<span>Extra days</span><span>+22</span>",
+   "<span>Jours supplémentaires</span><span>+22</span>"
+  ],
+  [
+   "<span>Extra cost</span><span>&gt;$540K</span>",
+   "<span>Surcoût</span><span>&gt;540 k$</span>"
+  ],
+  [
+   "<span>Share, Dec ’23</span><span>69%</span>",
+   "<span>Part, déc. ’23</span><span>69 %</span>"
+  ],
+  [
+   "Distances are great-circle for this corridor (Houston to Shanghai as a proxy pair), calculated via realistic waypoints. They represent the shortest possible path, not a sailed track.",
+   "Les distances sont en grand cercle pour ce corridor (Houston–Shanghai comme paire de référence), calculées par des points de cheminement réalistes. Elles représentent le chemin le plus court possible, et non une route réellement parcourue."
+  ],
+  [
+   "Why not the Horn",
+   "Pourquoi pas le Horn"
+  ],
+  [
+   "The longest option on the map, not the shortest",
+   "L’option la plus longue de la carte, non la plus courte"
+  ],
+  [
+   "Cape Horn looks like the obvious workaround, the same ocean system in the opposite direction from Suez. The distances say otherwise. On this exact corridor the Horn runs <b>18,335 nm against 10,807 nm via Panama, 70% farther</b>, and longer than either eastbound option too (Suez 13,563 nm, Cape of Good Hope 15,582 nm). Wind and current compound the problem. A westbound transit around the Horn sails against the Southern Ocean’s prevailing westerlies and the Antarctic Circumpolar Current, the same conditions that made the age of sail dread this passage. A modern engine will not get stranded the way a square-rigger could, but it still burns more fuel fighting them. Scaled to a Handymax grain run, the distance and conditions together land around 35–38 extra days and roughly $1.0–1.14M, a figure that happens to match the Cape Horn number The Narrows uses for Brazil to Japan reroutes in <a href=\"/analysis/panama\">its Panama Canal scenario model</a>. Suez, at +18 days and +$540K, was simply the cheaper way around, even counting four extra chokepoints against it.",
+   "Le cap Horn paraît le contournement évident, le même système océanique dans la direction opposée à Suez. Les distances disent le contraire. Sur ce corridor précis, le Horn représente <b>18 335 nm contre 10 807 nm par Panama, soit 70 % de plus</b>, et il est aussi plus long que l’une ou l’autre option vers l’est (Suez 13 563 nm, cap de Bonne-Espérance 15 582 nm). Le vent et le courant aggravent le problème. Une traversée vers l’ouest autour du Horn va à l’encontre des vents d’ouest dominants de l’océan Austral et du courant circumpolaire antarctique, les mêmes conditions qui faisaient redouter ce passage à l’âge de la voile. Un moteur moderne ne s’échouera pas comme un trois-mâts carré, mais il brûle tout de même plus de carburant à lutter contre eux. Ramenés à un voyage de céréales en Handymax, la distance et les conditions produisent environ 35 à 38 jours supplémentaires et à peu près 1,0 à 1,14 M$, un chiffre qui correspond justement au coût du cap Horn que The Narrows utilise pour les déroutements du Brésil vers le Japon dans <a href=\"/analysis/panama\">son modèle de scénario du canal de Panama</a>. Suez, à +18 jours et +540 k$, était simplement le contournement le moins cher, même en comptant quatre points de passage supplémentaires contre lui."
+  ],
+  [
+   "A reader’s good question",
+   "La bonne question d’un lecteur"
+  ],
+  [
+   "Are capes chokepoints too?",
+   "Les caps sont-ils aussi des points de passage ?"
+  ],
+  [
+   "Yes, and The Narrows treats them that way. A chokepoint is not defined by geometry: narrow channel, canal, strait. It is defined by whether flow is guaranteed at 100%, and it never is. Panama’s constraint is draft. Gibraltar, Suez and Malacca are beam and traffic density. Bab-el-Mandeb, since late 2023, is war risk. Cape Horn and the Cape of Good Hope are storms and current. Elsewhere the list runs to ice, coral, and piracy. The mechanism differs. The exposure does not: every one of these concentrates cost, delay and casualty risk onto whatever has to pass through, which is the only property that matters for accumulation risk. This is also why the Cape of Good Hope already behaves as a chokepoint in The Narrows’ own model, as the documented landing zone for accumulation whenever Suez throttles or closes.",
+   "Oui, et The Narrows les traite ainsi. Un point de passage ne se définit pas par sa géométrie : chenal étroit, canal, détroit. Il se définit par le fait que le flux soit garanti à 100 % ou non, et il ne l’est jamais. La contrainte de Panama est le tirant d’eau. Gibraltar, Suez et Malacca sont la largeur et la densité du trafic. Bab el-Mandeb, depuis fin 2023, est le risque de guerre. Le cap Horn et le cap de Bonne-Espérance sont les tempêtes et le courant. Ailleurs, la liste va des glaces aux coraux et à la piraterie. Le mécanisme diffère. L’exposition, non : chacun de ces points concentre le coût, le retard et le risque de sinistre sur tout ce qui doit y passer, ce qui est la seule propriété qui compte pour le risque de cumul. C’est aussi pourquoi le cap de Bonne-Espérance se comporte déjà comme un point de passage dans le propre modèle de The Narrows, comme zone documentée de réception du cumul chaque fois que Suez s’étrangle ou ferme."
+  ],
+  [
+   "History",
+   "Historique"
+  ],
+  [
+   "This is not the first time the price has done the sorting",
+   "Ce n’est pas la première fois que le prix fait le tri"
+  ],
+  [
+   "The Panama Canal Authority runs a daily priority auction whenever transit demand exceeds available slots. Any vessel that has waited at least ten days may bid, starting at $55,000. In normal conditions, a super booking fee of $135,000 to $140,000 buys a place in the queue. In November 2023, at the worst of the drought, the winning bid reached $3.975 million, a documented record paid by Japan’s Eneos Group for an LPG carrier, the Sunny Bright. Other vessels that stayed on Panama that month paid comparably: chemical tankers around $1.1 million, grain ships in the $2 million to $4 million range.",
+   "L’Autorité du canal de Panama organise une enchère de priorité quotidienne chaque fois que la demande de transits dépasse les créneaux disponibles. Tout navire ayant attendu au moins dix jours peut enchérir, à partir de 55 000 dollars. En conditions normales, des frais de réservation prioritaire de 135 000 à 140 000 dollars achètent une place dans la file. En novembre 2023, au pire de la sécheresse, l’enchère gagnante a atteint 3,975 millions de dollars, un record documenté versé par le groupe japonais Eneos pour un gazier de GPL, le Sunny Bright. D’autres navires restés sur Panama ce mois-là ont payé des sommes comparables : environ 1,1 million de dollars pour les chimiquiers, de 2 à 4 millions de dollars pour les céréaliers."
+  ],
+  [
+   "The auction does not affect every vessel class the same way, and that is the point. LNG and LPG carriers have no workable alternative: the long way around adds weeks, boil-off losses accumulate, and the cargo value justifies almost any slot price, so they bid to the top. Neopanamax container ships face a different constraint: their beam exceeds the old Panamax locks, so the Neopanamax locks are the only passage available regardless of price, and liner schedules make a multi-week reroute expensive in its own right. Both classes stayed on Panama and paid. Handymax and Supramax bulk carriers, the vessels that move grain, coal and fertiliser, could not clear that price against a cargo of 50,000 tonnes of grain, so they left instead, first for Suez and the Red Sea, later for the Cape of Good Hope.",
+   "L’enchère n’affecte pas toutes les classes de navires de la même façon, et c’est tout l’enjeu. Les gaziers de GNL et de GPL n’ont pas d’alternative praticable : le long détour ajoute des semaines, les pertes par évaporation s’accumulent, et la valeur de la cargaison justifie presque n’importe quel prix de créneau, si bien qu’ils enchérissent au plus haut. Les porte-conteneurs Neopanamax font face à une contrainte différente : leur largeur dépasse les anciennes écluses Panamax, de sorte que les écluses Neopanamax sont le seul passage disponible quel que soit le prix, et les calendriers des lignes régulières rendent un déroutement de plusieurs semaines coûteux en lui-même. Les deux classes sont restées sur Panama et ont payé. Les vraquiers Handymax et Supramax, les navires qui transportent les céréales, le charbon et les engrais, ne pouvaient pas absorber ce prix face à une cargaison de 50 000 tonnes de céréales, et sont donc partis, d’abord vers Suez et la mer Rouge, puis vers le cap de Bonne-Espérance."
+  ],
+  [
+   "Container side",
+   "Côté conteneurs"
+  ],
+  [
+   "Exposure The Narrows’ model attributes to the May 2023 draft restriction alone, the 40% Neopanamax cargo-capacity loss, before the ACP had cut a single transit slot. Sustained over a full quarter. No vessel was denied passage. The cost showed up anyway.",
+   "Exposition que le modèle de The Narrows attribue à la seule restriction de tirant d’eau de mai 2023, la perte de 40 % de capacité de cargaison Neopanamax, avant que l’ACP n’ait supprimé un seul créneau de transit. Maintenue sur un trimestre entier. Aucun navire n’a été refusé au passage. Le coût est apparu quand même."
+  ],
+  [
+   "Bulk grain side",
+   "Côté céréales en vrac"
+  ],
+  [
+   "The Narrows’ estimate of grain cargo value displaced in the four weeks to 31 October 2023, when Panama-transiting US Gulf grain vessels fell from 34 to 5 (Rabobank), applied against a representative blended grain export price. A single month, one commodity class, one corridor.",
+   "Estimation par The Narrows de la valeur de cargaison de céréales déplacée au cours des quatre semaines jusqu’au 31 octobre 2023, lorsque les céréaliers de la côte américaine du Golfe transitant par Panama sont passés de 34 à 5 (Rabobank), appliquée à un prix d’exportation moyen représentatif des céréales. Un seul mois, une seule classe de produits, un seul corridor."
+  ],
+  [
+   "The same two-lever sequence is running again right now. The ACP’s 20 August 2026 advisory cut the maximum authorised draft to 48.0 feet, with a further cut to 47.5 feet, and reduced daily transit slots from a normal 36 to 38 down to 34 from 3 September and 32 from 15 September. Draft restriction first, then transit cuts: the identical order of operations as the opening moves of 2023. Whether it reaches the 2023 auction prices depends on how the rest of the dry season plays out, but the mechanism that produced a $3.975 million bid once is already live again.",
+   "La même séquence en deux leviers est de nouveau à l’œuvre en ce moment. L’avis de l’ACP du 20 août 2026 a réduit le tirant d’eau maximal autorisé à 48,0 pieds, avec une nouvelle réduction à 47,5 pieds, et ramené les créneaux de transit quotidiens de la normale de 36 à 38 à 34 à partir du 3 septembre et à 32 à partir du 15 septembre. D’abord la restriction de tirant d’eau, puis les réductions de transits : le même ordre d’opérations que les premiers coups de 2023. Que cela atteigne ou non les prix d’enchère de 2023 dépend de l’évolution de la saison sèche, mais le mécanisme qui a produit une enchère de 3,975 millions de dollars est déjà de nouveau actif."
+  ],
+  [
+   "What about the other direction? Asia to the Atlantic side",
+   "Et dans l’autre sens ? De l’Asie vers l’Atlantique"
+  ],
+  [
+   "Plenty comes through that way, more than the westbound grain story might suggest. Asia to the US East Coast is the single largest corridor on the canal by tonnage, 48.4% of total 2024 traffic (Port Economics, Management and Policy), well ahead of any other route pairing including the one this page has been describing. It is affected by the same auction and draft mechanism, but different cargo classes responded in different ways, and not always the ways this page assumed above.",
+   "Beaucoup de trafic passe par là, davantage que ne le suggère l’histoire des céréales vers l’ouest. L’Asie vers la côte est des États-Unis est le plus grand corridor du canal en tonnage, 48,4 % du trafic total de 2024 (Port Economics, Management and Policy), très loin devant toute autre paire de routes, y compris celle que cette page a décrite. Il est touché par le même mécanisme d’enchère et de tirant d’eau, mais les différentes classes de cargaison ont réagi de façons différentes, et pas toujours comme cette page l’a supposé plus haut."
+  ],
+  [
+   "Neopanamax container ships mostly stayed on Panama and paid, for the beam and schedule reasons already described. Where lines did shift volume away, the main alternative was not a Suez or Cape reroute but an intermodal one: discharge on the US West Coast and move cargo east by double-stack rail, adding Houston, Charleston and Savannah traffic from a Los Angeles or Long Beach landing instead of a direct East Coast call, the pattern the Baker Institute documented at Rice University, down to a single named vessel, the Ever Max, unloading 700 containers onto Panama’s own railroad rather than transiting. Some volume also moved onto the pre-existing Asia to US East Coast Suez service, roughly a week slower than Panama. Spot cost on the Asia to East Coast lane rose more than a third during the acute period, to an estimated $2,400 per container (Baker Institute). What this page cannot responsibly claim is a clean Los Angeles dwell-time spike caused by that diversion: the port's own leadership was projecting a volume bump as early as August 2023, but the sharpest documented volume swings in the following months, an 18% year-on-year jump in January 2024 among them, were attributed by the port itself to Lunar New Year restocking and a strong US consumer, not to Panama. The diversion to the West Coast was real. A clean, isolated congestion signature from it is not something the public data supports.",
+   "Les porte-conteneurs Neopanamax sont surtout restés sur Panama et ont payé, pour les raisons de largeur et de calendrier déjà décrites. Quand les lignes ont détourné des volumes, la principale alternative n’était pas un déroutement par Suez ou le Cap mais une solution intermodale : décharger sur la côte ouest américaine et acheminer les marchandises vers l’est par train à double conteneur, ce qui a ajouté du trafic à Houston, Charleston et Savannah depuis un débarquement à Los Angeles ou Long Beach plutôt qu’une escale directe sur la côte est, le schéma documenté par le Baker Institute de l’université Rice, jusqu’à un navire précis, l’Ever Max, qui a déchargé 700 conteneurs sur le chemin de fer de Panama plutôt que de transiter. Un certain volume est aussi passé sur le service Asie–côte est des États-Unis par Suez déjà existant, environ une semaine plus lent que Panama. Le coût spot sur la liaison Asie–côte est a augmenté de plus d’un tiers durant la période aiguë, à environ 2 400 dollars par conteneur (Baker Institute). Ce que cette page ne peut pas affirmer de façon responsable, c’est un pic net de temps d’attente à Los Angeles causé par ce détournement : la direction du port prévoyait elle-même une hausse de volume dès août 2023, mais les variations de volume les plus marquées documentées dans les mois suivants, dont une hausse de 18 % sur un an en janvier 2024, ont été attribuées par le port lui-même au réapprovisionnement du Nouvel An lunaire et à une forte consommation américaine, et non à Panama. Le détournement vers la côte ouest était réel. Une signature de congestion nette et isolée qui en découlerait n’est pas ce que soutiennent les données publiques."
+  ],
+  [
+   "Non-container cargo tells a sharper story, and it complicates something this page said earlier. Above, this page treated LNG and LPG carriers as vessels that simply bid to the top and stayed, because the cargo value justifies almost any slot price. That was true of the individual record-setting bids, but not of the fleet as a whole. US LNG cargoes to Asia transiting Panama fell from 38 in the third quarter of 2023 to just 10 a year later; by 2024, roughly 94% of US LNG bound for Asia was routing via the Cape of Good Hope instead, not Suez, adding about 20 days versus Panama and 10 days versus Suez (SynMax). Gas carriers appear to have judged Red Sea war risk unacceptable for their cargo even before their charter economics forced the issue, so they skipped the intermediate Suez step entirely and went straight to the longest safe option. The extra distance carries its own cost beyond charter and bunker: LNG boil-off runs about 0.1% to 0.15% of cargo volume per day on modern tonnage, so 20 extra days at sea means meaningfully more of the cargo either burned as fuel or reliquefied rather than delivered.<sup style=\"font-size:9px;\">1</sup> Very large gas carriers faced a harder version of the same squeeze: neopanamax lock slots effectively reserved for them fell from 31 a day to 8 by early 2024, one VLGC auction slot sold for a documented $2.85 million, and Clarksons Research warned outright that some VLGCs might not be able to transit at all (Riviera Maritime Media). Large crude oil tankers fared worse still. Poten &amp; Partners' assessment was blunt: they will not feature in this trade anymore, priced out of advance scheduling by the same auction mechanism that produced the grain and LNG numbers above.",
+   "Les cargaisons hors conteneurs racontent une histoire plus tranchée, et elle complique ce que cette page a dit plus haut. Plus haut, cette page a traité les gaziers de GNL et de GPL comme des navires qui enchérissent simplement au plus haut et restent, parce que la valeur de la cargaison justifie presque n’importe quel prix de créneau. C’était vrai des enchères record prises individuellement, mais pas de la flotte dans son ensemble. Les cargaisons de GNL américain vers l’Asie transitant par Panama sont passées de 38 au troisième trimestre 2023 à seulement 10 un an plus tard ; en 2024, environ 94 % du GNL américain à destination de l’Asie passait par le cap de Bonne-Espérance, et non par Suez, ce qui ajoutait environ 20 jours par rapport à Panama et 10 jours par rapport à Suez (SynMax). Les gaziers semblent avoir jugé le risque de guerre en mer Rouge inacceptable pour leur cargaison avant même que l’économie de leurs affrètements ne les y contraigne, si bien qu’ils ont sauté entièrement l’étape intermédiaire de Suez pour aller droit à l’option sûre la plus longue. La distance supplémentaire a son propre coût au-delà de l’affrètement et de la soute : l’évaporation du GNL représente environ 0,1 % à 0,15 % du volume de cargaison par jour sur le tonnage moderne, de sorte que 20 jours de mer supplémentaires signifient qu’une part sensiblement plus grande de la cargaison est brûlée comme combustible ou reliquéfiée plutôt que livrée.<sup style=\"font-size:9px;\">1</sup> Les très grands gaziers ont subi une version plus dure de la même contrainte : les créneaux d’écluse Neopanamax pratiquement réservés pour eux sont passés de 31 par jour à 8 début 2024, un créneau d’enchère pour VLGC s’est vendu pour un record documenté de 2,85 millions de dollars, et Clarksons Research a averti sans détour que certains VLGC pourraient ne pas pouvoir transiter du tout (Riviera Maritime Media). Les grands pétroliers de brut s’en sont encore plus mal tirés. L’évaluation de Poten &amp; Partners a été sans détour : ils ne figureront plus dans ce commerce, évincés de la planification anticipée par le même mécanisme d’enchère qui a produit les chiffres des céréales et du GNL ci-dessus."
+  ],
+  [
+   "<sup style=\"font-size:9px;\">1</sup>&nbsp;Boil-off is not a clean loss figure. Modern carriers burn it as propulsion fuel or reliquefy it, and the charterparty, not a fixed rate, determines who bears the cost. A precise dollar figure for the Cape of Good Hope premium would need a specific vessel's boil-off and reliquefaction spec plus its contract terms, neither of which this page has.",
+   "<sup style=\"font-size:9px;\">1</sup>&nbsp;L’évaporation n’est pas un chiffre de perte net. Les navires modernes la brûlent comme combustible de propulsion ou la reliquéfient, et c’est la charte-partie, et non un taux fixe, qui détermine qui supporte le coût. Un chiffre précis en dollars de la prime du cap de Bonne-Espérance exigerait les spécifications d’évaporation et de reliquéfaction d’un navire précis ainsi que ses conditions contractuelles, dont cette page ne dispose d’aucune."
+  ],
+  [
+   "LNG, Panama transits to Asia",
+   "GNL, transits de Panama vers l’Asie"
+  ],
+  [
+   "US LNG cargoes routed via Panama, Q3 2023 versus Q3 2024. Most of the fleet left. It did not wait to be priced out one auction at a time.",
+   "Cargaisons de GNL américain acheminées par Panama, T3 2023 contre T3 2024. La plus grande partie de la flotte est partie. Elle n’a pas attendu d’être évincée une enchère à la fois."
+  ],
+  [
+   "LNG to Asia, 2024",
+   "GNL vers l’Asie, 2024"
+  ],
+  [
+   "Share routed via the Cape of Good Hope rather than Panama or Suez, the longest of the three options, chosen anyway once Red Sea risk entered the calculation.",
+   "Part acheminée par le cap de Bonne-Espérance plutôt que par Panama ou Suez, la plus longue des trois options, choisie malgré tout dès lors que le risque de la mer Rouge est entré dans le calcul."
+  ],
+  [
+   "If it happened today",
+   "Si cela se produisait aujourd’hui"
+  ],
+  [
+   "Aug 2026 rates put the Suez-style detour at $580K–$840K",
+   "Aux taux d’août 2026, le détour de type Suez coûte de 580 k$ à 840 k$"
+  ],
+  [
+   "Discussed live on the Granular podcast with Holly Birkett, 27 Aug 2026, using live Baltic indices and Ship&amp;Bunker’s VLSFO benchmark rather than the 2023 documented baseline above. This is a different market snapshot, not a restatement of it.",
+   "Discuté en direct dans le podcast Granular avec Holly Birkett, le 27 août 2026, à partir des indices Baltic en direct et de la référence VLSFO de Ship&amp;Bunker plutôt que de la base documentée de 2023 ci-dessus. C’est un instantané de marché différent, et non une reprise de la même base."
+  ],
+  [
+   "Baltic Handysize index",
+   "Indice Baltic Handysize"
+  ],
+  [
+   "$15,849/day",
+   "15 849 $/jour"
+  ],
+  [
+   "Baltic Supramax index",
+   "Indice Baltic Supramax"
+  ],
+  [
+   "$20,789/day",
+   "20 789 $/jour"
+  ],
+  [
+   "Est. added charter + bunker cost, Handymax, ~18–20 day detour",
+   "Surcoût estimé d’affrètement + soute, Handymax, détour de ≈ 18–20 jours"
+  ],
+  [
+   "<b>Sources.</b> Grain routing shares (80% → 91% → 69%): American Farm Bureau Federation Market Intel, citing USDA Grain Transportation Report and CHS Inc. shipment data. Suez-route cost (+18 days, +$540K, $30K/day Handymax): The Narrows estimate from documented 2023 charter baselines. Route distances (10,807 / 18,335 / 13,563 / 15,582 nm): The Narrows calculation, a great-circle sum over realistic waypoints for this corridor, not tracked AIS data. Fuel-burn premium in Southern Ocean conditions: general pattern per Sinay.ai route-comparison data, for large containerships on a different corridor, directional only and not scaled to Handymax here. Prevailing westerlies and the Antarctic Circumpolar Current opposing westbound Cape Horn transits: standard maritime navigational knowledge, not independently modeled by The Narrows. Suez-corridor chokepoint list (Gibraltar ~300 transits/day, Suez ~15% of global maritime trade, Bab-el-Mandeb two 3km channels, Malacca ~30% of world trade): Port Economics, Management and Policy. Live rates (31 Aug 2026): Baltic Exchange Handysize and Supramax indices; Ship&amp;Bunker VLSFO, Houston $679.50/mt and global average $848.50/mt. Auction bid history (opening bid $55K, normal $135–140K, Nov 2023 peak $3.975M, chemical tanker $1.1M, grain ships $2–4M): documented, Splash247, Maritime Executive, Grain Journal 2023. Container-side quarterly exposure ($8.0B) and grain-vessel count decline (34 to 5, four weeks to 31 Oct 2023): The Narrows Chokepoint Dependency Model, the latter citing Rabobank 2023; the $500–600M grain-value figure is a Narrows estimate applying a representative blended export price to that vessel count, not an independently documented number. Current 2026 draft and transit-slot advisory (48.0ft, 47.5ft, 34 and 32 transits from 3 and 15 September): Panama Canal Authority advisory, 20 August 2026. Asia to US East Coast canal share (48.4% of 2024 tonnage): Port Economics, Management and Policy. West Coast and rail diversion, the Ever Max example, Suez alternative, and per-container cost increase: Baker Institute, Rice University. Los Angeles volume and dwell context (August 2023 planning guidance; January 2024 18% year-on-year growth attributed to Lunar New Year restocking and consumer demand, not Panama): Port of Los Angeles public statements, CNBC, Seatrade Maritime. LNG transit decline (38 to 10 cargoes, Q3 2023 to Q3 2024) and 94% Cape of Good Hope share, 2024, with day-count comparisons: SynMax Intelligence. VLGC slot reduction (31 to 8 per day) and $2.85M record auction slot: Riviera Maritime Media, Clarksons Research. Large crude tanker assessment: Poten &amp; Partners, via Riviera Maritime Media. LNG boil-off rate (0.1–0.15% of cargo volume per day, modern tonnage): Wartsila technical reference. Route lines are great-circle paths plotted on an equirectangular base map (world-atlas 110m land), built for legibility of the argument rather than navigational accuracy.",
+   "<b>Sources.</b> Parts d’acheminement des céréales (80 % → 91 % → 69 %) : American Farm Bureau Federation Market Intel, citant le Grain Transportation Report de l’USDA et les données d’expédition de CHS Inc. Coût de la route par Suez (+18 jours, +540 k$, 30 k$/jour pour un Handymax) : estimation de The Narrows à partir de bases d’affrètement documentées de 2023. Distances des routes (10 807 / 18 335 / 13 563 / 15 582 nm) : calcul de The Narrows, somme de grands cercles sur des points de cheminement réalistes pour ce corridor, et non données AIS suivies. Prime de consommation de carburant dans les conditions de l’océan Austral : schéma général d’après les données de comparaison de routes de Sinay.ai, pour de grands porte-conteneurs sur un autre corridor, indicatif seulement et non mis à l’échelle d’un Handymax ici. Vents d’ouest dominants et courant circumpolaire antarctique s’opposant aux traversées du cap Horn vers l’ouest : connaissance de navigation maritime standard, non modélisée indépendamment par The Narrows. Liste des points de passage du corridor de Suez (Gibraltar ≈ 300 transits/jour, Suez ≈ 15 % du commerce maritime mondial, Bab el-Mandeb deux chenaux de 3 km, Malacca ≈ 30 % du commerce mondial) : Port Economics, Management and Policy. Taux en direct (31 août 2026) : indices Baltic Exchange Handysize et Supramax ; VLSFO de Ship&amp;Bunker, Houston 679,50 $/t et moyenne mondiale 848,50 $/t. Historique des enchères (offre d’ouverture 55 k$, normale 135–140 k$, pic de novembre 2023 3,975 M$, chimiquier 1,1 M$, céréaliers 2–4 M$) : documenté, Splash247, Maritime Executive, Grain Journal 2023. Exposition trimestrielle côté conteneurs (8,0 Md$) et baisse du nombre de céréaliers (34 à 5, quatre semaines jusqu’au 31 oct. 2023) : modèle de dépendance aux points de passage de The Narrows, ce dernier citant Rabobank 2023 ; le chiffre de 500–600 M$ de valeur de céréales est une estimation de Narrows appliquant un prix d’exportation moyen représentatif à ce nombre de navires, et non un chiffre documenté de façon indépendante. Avis actuel de 2026 sur le tirant d’eau et les créneaux de transit (48,0 pi, 47,5 pi, 34 et 32 transits à partir des 3 et 15 septembre) : avis de l’Autorité du canal de Panama, 20 août 2026. Part du canal du trafic Asie–côte est des États-Unis (48,4 % du tonnage 2024) : Port Economics, Management and Policy. Détournement par la côte ouest et le rail, exemple de l’Ever Max, alternative par Suez et hausse du coût par conteneur : Baker Institute, université Rice. Contexte de volume et de temps d’attente à Los Angeles (consignes de planification d’août 2023 ; hausse de 18 % sur un an en janvier 2024 attribuée au réapprovisionnement du Nouvel An lunaire et à la demande des consommateurs, non à Panama) : déclarations publiques du port de Los Angeles, CNBC, Seatrade Maritime. Baisse des transits de GNL (38 à 10 cargaisons, T3 2023 à T3 2024) et part de 94 % du cap de Bonne-Espérance, 2024, avec comparaisons en nombre de jours : SynMax Intelligence. Réduction des créneaux VLGC (31 à 8 par jour) et créneau d’enchère record de 2,85 M$ : Riviera Maritime Media, Clarksons Research. Évaluation des grands pétroliers de brut : Poten &amp; Partners, via Riviera Maritime Media. Taux d’évaporation du GNL (0,1–0,15 % du volume de cargaison par jour, tonnage moderne) : référence technique Wärtsilä. Les lignes de route sont des tracés en grand cercle sur un fond de carte équirectangulaire (terres world-atlas 110m), conçus pour la lisibilité de l’argument plutôt que pour la précision de navigation."
+  ]
+ ],
+ "js": []
+}

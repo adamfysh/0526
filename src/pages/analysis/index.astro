@@ -8,7 +8,7 @@ const papers = [
     slug: '/analysis/hormuz-pocketbook',
     title: 'From the Strait of Hormuz to the Pocketbooks of Consumers',
     eyebrow: 'Strait of Hormuz · Oct 2026',
-    body: 'Five governments have intervened in their own fuel markets to different degrees, in different ways, since the war began. The size of each intervention tracks the bilateral Hormuz dependency data closely — except in Australia, where a low dependency figure still produced real pump-price pain.',
+    body: 'Five governments have intervened in their own fuel markets to different degrees, in different ways, since the war began. The size of each intervention tracks the bilateral Hormuz dependency data closely, except in Australia, where a low dependency figure still produced real pump-price pain.',
     stat: 'Japan crude dep: 79.1% · Korea exposure: $54.6B · Thailand reserve requirement: tripled',
     tags: ['hormuz', 'crude', 'fertilizer', 'japan', 'south-korea', 'new-zealand', 'australia', 'thailand', 'consumer-prices'],
     date: 'Oct 2026',
@@ -531,7 +531,7 @@ const tagLabels: Record<string, string> = {
         The model applied to<br>
         <em>live events.</em>
       </h1>
-      <p class="analysis-hero-body">Every figure is a model output. Every assumption is stated. Every number can be run with your own inputs in a demo session. Analysis is published as events warrant.</p>
+      <p class="analysis-hero-body">Every figure is a model output. Every assumption is stated. Analysis is published as events warrant.</p>
     </div>
     <div class="publish-note">
       <div class="publish-note-label">Publishing approach</div>
@@ -627,7 +627,10 @@ function updateDisplay() {
   });
 
   if (countEl) {
-    countEl.innerHTML = `Showing <strong>${visible}</strong> ${visible === 1 ? 'paper' : 'papers'}${activeTags.size > 0 ? ' matching filter' : ''}`;
+    const fr = document.documentElement.lang === 'fr';
+    countEl.innerHTML = fr
+      ? `<strong>${visible}</strong> ${visible === 1 ? 'texte affiché' : 'textes affichés'}${activeTags.size > 0 ? ' pour ce filtre' : ''}`
+      : `Showing <strong>${visible}</strong> ${visible === 1 ? 'paper' : 'papers'}${activeTags.size > 0 ? ' matching filter' : ''}`;
   }
 
   if (noResults) {
