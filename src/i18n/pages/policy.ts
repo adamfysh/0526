@@ -13,9 +13,9 @@ const en = {
     subTail: 'Written for anyone relying on the figures published on this site.',
     cov: [
       { label: 'Data tiers', value: '3', unit: 'tiers' },
-      { label: 'Reported-tier exposure', value: '48.0', unit: '% of value' },
-      { label: 'Dependency matrix rows', value: '1,812', unit: 'rows' },
-      { label: 'Corrections logged', value: '19', unit: 'as of 8 Oct 2026' },
+      { label: 'Reported-tier exposure', value: '42.4', unit: '% of value' },
+      { label: 'Dependency matrix rows', value: '2,008', unit: 'rows' },
+      { label: 'Corrections logged', value: '20', unit: 'as of 15 Oct 2026' },
     ],
   },
   purpose: {
@@ -30,7 +30,7 @@ const en = {
   },
   coverage: {
     title: 'Where each tier sits, by row and by value.',
-    p: 'Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, the picture reverses: Reported-tier rows carry the largest share of total modelled exposure. The flows with the most money behind them are disproportionately the ones with the strongest sourcing. We publish this breakdown both ways rather than a single confidence claim, so a reader can judge how their own specific exposure sits, not take our word for the average.',
+    p: 'Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, Reported-tier rows carry a far larger share (42.4 percent of value against 14.0 percent of rows), but Estimated is now the largest tier by value as well (47.6 percent), after the October 2026 fertiliser expansion added Estimated-tier rows. The flows with the most money behind them are better sourced than the average row, though not mostly so. We publish this breakdown both ways rather than a single confidence claim, so a reader can judge how their own specific exposure sits, not take our word for the average.',
   },
   process: {
     eyebrow: 'Process',
@@ -68,9 +68,9 @@ const fr: typeof en = {
     subTail: 'Écrit pour quiconque s’appuie sur les chiffres publiés sur ce site.',
     cov: [
       { label: 'Niveaux de données', value: '3', unit: 'niveaux' },
-      { label: 'Exposition de niveau Déclaré', value: '48,0', unit: `${nb}% de la valeur` },
-      { label: 'Lignes de la matrice de dépendance', value: `1${nb}812`, unit: 'lignes' },
-      { label: 'Corrections consignées', value: '19', unit: 'au 8 octobre 2026' },
+      { label: 'Exposition de niveau Déclaré', value: '42,4', unit: `${nb}% de la valeur` },
+      { label: 'Lignes de la matrice de dépendance', value: `2${nb}008`, unit: 'lignes' },
+      { label: 'Corrections consignées', value: '20', unit: 'au 15 octobre 2026' },
     ],
   },
   purpose: {
@@ -85,7 +85,7 @@ const fr: typeof en = {
   },
   coverage: {
     title: 'Où se situe chaque niveau, en nombre de lignes et en valeur.',
-    p: `En nombre de lignes, le niveau Estimé est le plus important, concentré dans la longue traîne des flux bilatéraux plus modestes, là où la déclaration officielle est la plus mince. En valeur en dollars, le tableau s’inverse${nb}: les lignes de niveau Déclaré portent la plus grande part de l’exposition modélisée totale. Les flux qui représentent le plus d’argent sont, de façon disproportionnée, ceux dont les sources sont les plus solides. Nous publions cette répartition dans les deux sens plutôt qu’une seule affirmation de confiance, afin que le lecteur puisse juger où se situe sa propre exposition, sans nous croire sur parole pour la moyenne.`,
+    p: `En nombre de lignes, le niveau Estimé est le plus important, concentré dans la longue traîne des flux bilatéraux plus modestes, là où la déclaration officielle est la plus mince. En valeur en dollars, les lignes de niveau Déclaré portent une part bien plus grande (42,4${nb}% de la valeur contre 14,0${nb}% des lignes), mais le niveau Estimé est désormais aussi le plus important en valeur (47,6${nb}%), après l’élargissement des engrais d’octobre 2026 qui a ajouté des lignes de niveau Estimé. Les flux qui représentent le plus d’argent sont mieux sourcés que la ligne moyenne, sans l’être pour la plupart. Nous publions cette répartition dans les deux sens plutôt qu’une seule affirmation de confiance, afin que le lecteur puisse juger où se situe sa propre exposition, sans nous croire sur parole pour la moyenne.`,
   },
   process: {
     eyebrow: 'Processus',

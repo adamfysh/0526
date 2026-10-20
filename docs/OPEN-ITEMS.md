@@ -7,10 +7,10 @@ Last updated 20 Oct 2026. Every fix below must be made in **English and French t
 
 | # | Where | Problem | Source of truth | Status |
 |---|-------|---------|-----------------|--------|
-| A1 | `src/i18n/pages/dataTiers.ts` (used by policy + changelog) | Tier shares of value 48.0 / 40.8 / 11.2% and of rows 61.6 / 22.7 / 15.6% are the August 2026 values | Recompute from the current CDM build | open |
-| A2 | `dataTiers.ts` rowNote, `policy.ts` + `changelog.ts` hero `cov` | "1,812 rows" in the dependency matrix. The simulator data (`public/simulator_data.json`, CDM 16 Oct) has about 2,008 rows | Current CDM build | open |
+| A1 | `src/i18n/pages/dataTiers.ts` (used by policy + changelog) | Tier shares of value 48.0 / 40.8 / 11.2% and of rows 61.6 / 22.7 / 15.6% are the August 2026 values | Recompute from the current CDM build | DONE 20 Oct: 42.4 / 47.6 / 10.0% of value (varB), rows 14.0 / 21.3 / 64.7% over 2,008 |
+| A2 | `dataTiers.ts` rowNote, `policy.ts` + `changelog.ts` hero `cov` | "1,812 rows" in the dependency matrix. The simulator data (`public/simulator_data.json`, CDM 16 Oct) has about 2,008 rows | Current CDM build | DONE 20 Oct (2,008) |
 | A3 | `methodology.ts` | v0.2 figures: 37 corridors, $2.15T, 87.2% coverage, 44 nations, 17 commodity classes, "model 0.2, May 2026", sample Malacca output. Production CDM is 14 chokepoints, 75 importers, 20 commodity groups | Current CDM build | open |
-| A4 | `policy.ts` / `changelog.ts` | "Corrections logged: 19" is hand-counted. Should equal the number of correction items in the public changelog | `NARROWS-CHANGELOG-PUBLIC.md` | open: recount |
+| A4 | `policy.ts` / `changelog.ts` | "Corrections logged: 19" is hand-counted. Should equal the number of correction items in the public changelog | `NARROWS-CHANGELOG-PUBLIC.md` | DONE 20 Oct (20, with Fix-134 entry) |
 | A5 | `src/pages/analysis/hormuz-seven-months.astro` | Cites 14 commodity classes and 47+ importers, which conflict with the current model | Current CDM build | open |
 | A6 | `src/pages/model.astro` | Stub page. Decision: hide it rather than translate it | n/a | open: decide |
 | A7 | `src/pages/pri.astro` | Gate wording ("Free access, instant") sits oddly with the research-publication framing. Review while translating | n/a | open |

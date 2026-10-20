@@ -10,12 +10,12 @@ const en = {
     ['Estimated', 'The figure is a national total allocated across corridors using routing logic, applied where a direct or exporter-side bilateral figure is not available. Disclosed on every row where it applies.'],
   ],
   bars: [
-    { name: 'Reported', width: 48, val: '48.0%' },
-    { name: 'Estimated', width: 40.8, val: '40.8%' },
-    { name: 'Corroborated', width: 11.2, val: '11.2%' },
+    { name: 'Reported', width: 42.4, val: '42.4%' },
+    { name: 'Estimated', width: 47.6, val: '47.6%' },
+    { name: 'Corroborated', width: 10, val: '10.0%' },
   ],
   ofValue: 'of value',
-  rowNote: 'By row count instead of value: Estimated 61.6%, Corroborated 22.7%, Reported 15.6%, across 1,812 rows in the current dependency matrix.',
+  rowNote: 'By row count instead of value: Estimated 64.7%, Corroborated 21.3%, Reported 14.0%, across 2,008 rows in the current dependency matrix.',
   sectionEyebrow: 'Coverage',
 };
 
@@ -26,12 +26,12 @@ const fr: typeof en = {
     ['Estimé', 'Le chiffre est un total national réparti entre les corridors selon une logique de routage, appliquée lorsqu’aucun chiffre bilatéral direct ou du côté exportateur n’est disponible. Indiqué sur chaque ligne concernée.'],
   ],
   bars: [
-    { name: 'Déclaré', width: 48, val: `48,0${nb}%` },
-    { name: 'Estimé', width: 40.8, val: `40,8${nb}%` },
-    { name: 'Recoupé', width: 11.2, val: `11,2${nb}%` },
+    { name: 'Déclaré', width: 42.4, val: `42,4${nb}%` },
+    { name: 'Estimé', width: 47.6, val: `47,6${nb}%` },
+    { name: 'Recoupé', width: 10, val: `10,0${nb}%` },
   ],
   ofValue: 'de la valeur',
-  rowNote: `En nombre de lignes plutôt qu’en valeur${nb}: Estimé 61,6${nb}%, Recoupé 22,7${nb}%, Déclaré 15,6${nb}%, sur 1${nb}812 lignes de la matrice de dépendance actuelle.`,
+  rowNote: `En nombre de lignes plutôt qu’en valeur${nb}: Estimé 64,7${nb}%, Recoupé 21,3${nb}%, Déclaré 14,0${nb}%, sur 2${nb}008 lignes de la matrice de dépendance actuelle.`,
   sectionEyebrow: 'Couverture',
 };
 

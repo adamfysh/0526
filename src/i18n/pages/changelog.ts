@@ -15,10 +15,10 @@ const en = {
     titleHtml: 'Every correction we have made,<br>\n        <em>dated, in one place.</em>',
     sub: 'A running record of corrections to the data behind the Chokepoint Dependency Model and the Port Risk Index. Updated as corrections happen, not on a schedule. A model with a visible history of catching and fixing its own errors is more trustworthy than one that claims never to have had any.',
     cov: [
-      { label: 'Corrections logged, 2026', value: '19', unit: 'corrections' },
-      { label: 'Most recent', value: '8 Oct', unit: '2026' },
-      { label: 'Reported-tier exposure', value: '48.0', unit: '% of value' },
-      { label: 'Dependency matrix rows', value: '1,812', unit: 'rows' },
+      { label: 'Corrections logged, 2026', value: '20', unit: 'corrections' },
+      { label: 'Most recent', value: '15 Oct', unit: '2026' },
+      { label: 'Reported-tier exposure', value: '42.4', unit: '% of value' },
+      { label: 'Dependency matrix rows', value: '2,008', unit: 'rows' },
     ],
   },
   about: {
@@ -36,6 +36,13 @@ const en = {
     title: 'The record, most recent first.',
   },
   entries: [
+    {
+      date: '15 October 2026, Fertiliser coverage widened from nitrogenous products to the full basket',
+      items: [
+        '<strong>The fertiliser class covered only nitrogenous fertiliser and ammonia.</strong> The model held fertiliser under two trade codes only, HS 3102 (nitrogenous fertilisers) and HS 2814 (ammonia). Phosphatic fertilisers (HS 3103), potassic fertilisers (HS 3104) and compound nitrogen, phosphorus and potassium fertilisers (HS 3105, which includes DAP and MAP) were missing, so for importers such as Australia the largest fertiliser imports were not counted. The three codes were added with UN Comtrade pulls for 2022 and 2024. All six source files are classed Estimated until bilateral coverage has been measured, and the per-commodity selector now lists the three new codes.',
+        '<strong>Effect.</strong> Dollar exposure rose and, for most importers, percentage dependence on the Gulf fell, because the newly counted potash and phosphate volumes are barely Gulf-sourced. Australia: Hormuz-only dependence 27.6 percent (was 38.9 percent on the nitrogenous-only count), 32.8 percent including Oman, on a full import book of about 3.8 billion US dollars a year (was about 2.0 billion). New Zealand, Thailand and Sri Lanka moved the same way. India: Hormuz-only 26.0 percent (was 26.6 percent) and 40.0 percent including Oman (was 63 percent). The dependency matrix grew to 2,008 rows. Three analysis pages carrying fertiliser figures were restated or annotated: the Hormuz pocketbook, the seven-months review and the dry cargo piece, whose urea-only figures are unchanged.',
+      ],
+    },
     {
       date: '8 October 2026, Port Risk Index corrections, logistics performance values, and display of risk bands',
       items: [
@@ -99,7 +106,7 @@ const en = {
   },
   coverage: {
     title: 'Where each data tier sits, by row and by value.',
-    p: 'Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, the picture reverses: Reported-tier rows carry the largest share of total modelled exposure. The flows with the most money behind them are disproportionately the ones with the strongest sourcing.',
+    p: 'Counted by row, Estimated is the largest tier, concentrated in the long tail of smaller bilateral flows where official reporting is thinnest. Counted by the dollar value those rows represent, Reported-tier rows carry a far larger share (42.4 percent of value against 14.0 percent of rows), but Estimated is now the largest tier by value as well (47.6 percent), after the October 2026 fertiliser expansion added Estimated-tier rows. The flows with the most money behind them are better sourced than the average row, though not mostly so.',
     noteTail: 'Full tier definitions are in our data verification policy.',
   },
   scope: {
@@ -123,10 +130,10 @@ const fr: typeof en = {
     titleHtml: 'Chaque correction que nous avons apportée,<br>\n        <em>datée, au même endroit.</em>',
     sub: 'Un relevé continu des corrections apportées aux données qui sous-tendent le Chokepoint Dependency Model et le Port Risk Index. Mis à jour au fil des corrections, et non selon un calendrier. Un modèle dont l’historique montre qu’il détecte et corrige ses propres erreurs est plus digne de confiance qu’un modèle qui prétend n’en avoir jamais eu.',
     cov: [
-      { label: 'Corrections consignées, 2026', value: '19', unit: 'corrections' },
-      { label: 'La plus récente', value: '8 oct.', unit: '2026' },
-      { label: 'Exposition de niveau Déclaré', value: '48,0', unit: `${nb}% de la valeur` },
-      { label: 'Lignes de la matrice de dépendance', value: `1${nb}812`, unit: 'lignes' },
+      { label: 'Corrections consignées, 2026', value: '20', unit: 'corrections' },
+      { label: 'La plus récente', value: '15 oct.', unit: '2026' },
+      { label: 'Exposition de niveau Déclaré', value: '42,4', unit: `${nb}% de la valeur` },
+      { label: 'Lignes de la matrice de dépendance', value: `2${nb}008`, unit: 'lignes' },
     ],
   },
   about: {
@@ -144,6 +151,13 @@ const fr: typeof en = {
     title: 'Le relevé, de la plus récente à la plus ancienne.',
   },
   entries: [
+    {
+      date: '15 octobre 2026, couverture des engrais élargie des produits azotés à l’ensemble du panier',
+      items: [
+        '<strong>La classe des engrais ne couvrait que les engrais azotés et l’ammoniac.</strong> Le modèle ne rangeait les engrais que sous deux codes commerciaux, SH 3102 (engrais azotés) et SH 2814 (ammoniac). Les engrais phosphatés (SH 3103), potassiques (SH 3104) et composés azote, phosphore et potassium (SH 3105, qui comprend le DAP et le MAP) manquaient ; pour des importateurs comme l’Australie, les plus gros achats d’engrais n’étaient donc pas comptés. Les trois codes ont été ajoutés avec des extractions UN Comtrade pour 2022 et 2024. Les six fichiers sources sont classés Estimé tant que la couverture bilatérale n’a pas été mesurée, et le sélecteur par produit propose désormais les trois nouveaux codes.',
+        '<strong>Effet.</strong> L’exposition en dollars a augmenté et, pour la plupart des importateurs, la dépendance en pourcentage vis-à-vis du Golfe a baissé, car les volumes de potasse et de phosphate désormais comptés viennent à peine du Golfe. Australie : dépendance à Ormuz seul de 27,6' + nb + '% (contre 38,9' + nb + '% sur le comptage azoté seul), 32,8' + nb + '% en incluant Oman, sur un portefeuille d’importations complet d’environ 3,8 milliards de dollars américains par an (contre environ 2,0 milliards). La Nouvelle-Zélande, la Thaïlande et le Sri Lanka ont évolué dans le même sens. Inde : Ormuz seul 26,0' + nb + '% (contre 26,6' + nb + '%) et 40,0' + nb + '% en incluant Oman (contre 63' + nb + '%). La matrice de dépendance compte désormais 2' + nb + '008 lignes. Trois pages d’analyse contenant des chiffres sur les engrais ont été corrigées ou annotées : le livret de poche d’Ormuz, le bilan de sept mois et l’article sur le vrac sec, dont les chiffres limités à l’urée sont inchangés.',
+      ],
+    },
     {
       date: '8 octobre 2026, corrections de l’indice de risque portuaire, valeurs de performance logistique et affichage des bandes de risque',
       items: [
@@ -207,7 +221,7 @@ const fr: typeof en = {
   },
   coverage: {
     title: 'Où se situe chaque niveau de données, en nombre de lignes et en valeur.',
-    p: `En nombre de lignes, le niveau Estimé est le plus important, concentré dans la longue traîne des flux bilatéraux plus modestes, là où la déclaration officielle est la plus mince. En valeur en dollars, le tableau s’inverse${nb}: les lignes de niveau Déclaré portent la plus grande part de l’exposition modélisée totale. Les flux qui représentent le plus d’argent sont, de façon disproportionnée, ceux dont les sources sont les plus solides.`,
+    p: `En nombre de lignes, le niveau Estimé est le plus important, concentré dans la longue traîne des flux bilatéraux plus modestes, là où la déclaration officielle est la plus mince. En valeur en dollars, les lignes de niveau Déclaré portent une part bien plus grande (42,4${nb}% de la valeur contre 14,0${nb}% des lignes), mais le niveau Estimé est désormais aussi le plus important en valeur (47,6${nb}%), après l’élargissement des engrais d’octobre 2026 qui a ajouté des lignes de niveau Estimé. Les flux qui représentent le plus d’argent sont mieux sourcés que la ligne moyenne, sans l’être pour la plupart.`,
     noteTail: 'Les définitions complètes des niveaux figurent dans notre politique de vérification des données.',
   },
   scope: {
