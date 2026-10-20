@@ -49,3 +49,12 @@ Last updated 20 Oct 2026. Every fix below must be made in **English and French t
 - Visual check of the EN/FR switcher in a browser (not done: the preview was unreachable).
 - Commercial-mode French copy (the `COMMERCIAL` branches are English only).
 - Leftover `node_modules/.vite/deps_temp_*` in `0526` is harmless; delete by hand.
+
+## E. PRI figures flow from the tools (20 Oct 2026)
+
+- `narrows-pipeline/data/pri_sources.json` is the one registry of source vintages. Edit `as_of` / `retrieved` there when a source is refreshed.
+- `notebooks/port-index/export_pri_meta.py` (run automatically at the end of `export_pri_json.py`) writes `src/data/pri-meta.json`: counts, tiers, dwell sources, disputes, score stats, indicators per dimension, scoring parameters probed from the live functions, and sources with a `stale` flag.
+- Methodology section 11 (vintage table) is now rendered from the meta. Stale sources are starred; a footnote explains it.
+- STALE, need real refresh (warned by the exporter): sanctions country table (May 2024), WGI (2022), PSC (2023), labour record (2024), catchment base (2022).
+- A19 still open: typed numbers inside the long prose strings of `priMethodology.ts` (57/1,841/1,876, 35, 79, 24 m, 250 km, 1980, 12 storms, 0.4 g, 12 to 168 h, 50 to 2,500 km, 22 % cap, maps, thresholds). `fill()` already accepts the meta placeholders ({dwell_port}, {dwell_unctad}, {dwell_lpi}, {disputes}, {tier_a}, {tier_b}, ...); replace the literals string by string. PSC string s[79] must say flag tier 60 % + regional detention rate 40 %.
+- Same approach to be applied to CDM figures (A1 to A4).

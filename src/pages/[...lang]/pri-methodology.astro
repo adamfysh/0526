@@ -11,7 +11,7 @@ export function getStaticPaths() {
 }
 
 const lang = getLang(Astro.params.lang);
-const t = priMethodology[lang];
+const t0 = priMethodology[lang];
 
 // Figures that come straight from the data
 const scores = JSON.parse(readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8')).r.map((r) => r[6]);
@@ -21,7 +21,15 @@ const median = sorted[Math.floor(N / 2)];
 const countries = new Set(JSON.parse(readFileSync(join(process.cwd(), 'src/data/pri.json'), 'utf-8')).r.map((r) => r[3]).filter(Boolean)).size;
 const dec = (x, d) => (lang === 'fr' ? x.toFixed(d).replace('.', ',') : x.toFixed(d));
 const nTxt = lang === 'fr' ? N.toLocaleString('fr-FR').replace(/\u202f/g, '\u00a0') : N.toLocaleString('en-US');
-const fill = (s) => s.replaceAll('{n}', nTxt).replaceAll('{min}', dec(Math.min(...scores), 2)).replaceAll('{max}', dec(Math.max(...scores), 2)).replaceAll('{median}', dec(median, 2)).replaceAll('{countries}', String(countries));
+const meta = JSON.parse(readFileSync(join(process.cwd(), 'src/data/pri-meta.json'), 'utf-8'));
+const P = meta.params, F = meta.facts;
+const nf = (x) => (lang === 'fr' ? Number(x).toLocaleString('fr-FR').replace(/\u202f/g, '\u00a0') : Number(x).toLocaleString('en-US'));
+const vals = { cyclone_from: P.cyclone_from, cyclone_radius: P.cyclone_radius_km, unctad_n: P.unctad_economies, disputes: F.disputes,
+  lpi_retrieved: new Date((meta.sources.find((x) => x.id === 'lpi') || {}).retrieved).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }), dwell_port: F.dwell_port_level, dwell_unctad: nf(F.dwell_unctad),
+  dwell_lpi: nf(F.dwell_lpi_formula), tier_a: F.tier_a, tier_b: nf(F.tier_b), tier_a_pct: F.tier_a_pct, tier_b_pct: F.tier_b_pct };
+const vfill = (s) => Object.entries(vals).reduce((acc, [k, v]) => acc.replaceAll('{' + k + '}', String(v)), s);
+const fill = (s) => vfill(s).replaceAll('{n}', nTxt).replaceAll('{min}', dec(Math.min(...scores), 2)).replaceAll('{max}', dec(Math.max(...scores), 2)).replaceAll('{median}', dec(median, 2)).replaceAll('{countries}', String(countries));
+const t = { ...t0, s: t0.s.map(fill) };
 ---
 
 <BaseLayout
@@ -527,54 +535,19 @@ const fill = (s) => s.replaceAll('{n}', nTxt).replaceAll('{min}', dec(Math.min(.
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td set:html={t.s[140]}></td>
-              <td set:html={t.s[141]}></td>
-              <td set:html={t.s[142]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[143]}></td>
-              <td set:html={t.s[144]}></td>
-              <td set:html={t.s[145]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[146]}></td>
-              <td set:html={t.s[147]}></td>
-              <td set:html={t.s[148]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[149]}></td>
-              <td set:html={t.s[150]}></td>
-              <td set:html={t.s[151]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[152]}></td>
-              <td set:html={t.s[153]}></td>
-              <td set:html={t.s[154]}></td>
-            </tr>
-                        <tr>
-              <td set:html={t.s[180]}></td>
-              <td set:html={t.s[181]}></td>
-              <td set:html={t.s[182]}></td>
-            </tr>
-<tr>
-              <td set:html={t.s[155]}></td>
-              <td set:html={t.s[156]}></td>
-              <td set:html={t.s[157]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[158]}></td>
-              <td set:html={t.s[159]}></td>
-              <td set:html={t.s[160]}></td>
-            </tr>
-            <tr>
-              <td set:html={t.s[161]}></td>
-              <td set:html={t.s[162]}></td>
-              <td set:html={t.s[163]}></td>
-            </tr>
+            {meta.sources.map((r) => (
+              <tr>
+                <td>{r.name}{r.stale && <span style="color:var(--amber,#b45309)"> *</span>}</td>
+                <td>{r.edition[lang]}</td>
+                <td set:html={vfill(r.coverage[lang])}></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+      <p class="meth-p" style="font-size:0.85em">{lang === 'fr'
+        ? '* Source plus ancienne que son délai de révision. Ces millésimes sont lus dans le registre des sources du modèle, pas saisis à la main. Les périmètres de risque de guerre du Joint War Committee ne font pas partie des scores du PRI\u00a0; ils relèvent de la couche d’événements.'
+        : '* Source older than its review interval. These vintages are read from the model’s source registry, not typed by hand. Joint War Committee listed areas are not part of the PRI scores; they sit in the events layer.'}</p>
 
       <p class="meth-p" set:html={localizeHtml(lang, fill(t.s[164]))}></p>
 

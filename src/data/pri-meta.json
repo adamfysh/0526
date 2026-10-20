@@ -1,0 +1,367 @@
+{
+ "generated": "2026-10-20",
+ "csv_rows": 3774,
+ "csv_sha1": "a3220bb5c46f",
+ "facts": {
+  "ports": 3774,
+  "countries": 193,
+  "score_min": 0.55,
+  "score_max": 3.53,
+  "score_mean": 1.32,
+  "score_median": 1.21,
+  "tier_a": 79,
+  "tier_b": 3695,
+  "tier_c": 0,
+  "tier_a_pct": 2,
+  "tier_b_pct": 98,
+  "dwell_port_level": 57,
+  "dwell_unctad": 1841,
+  "dwell_lpi_formula": 1876,
+  "disputes": 35,
+  "catchment_flat_100": 40,
+  "n_dims_values": [
+   "4"
+  ],
+  "indicators_per_dim": [
+   4,
+   3,
+   4,
+   3
+  ],
+  "indicators_total": 14
+ },
+ "params": {
+  "floor": 0.1,
+  "depth_cap_m": 24.0,
+  "depth_sentinel_m": 23.2,
+  "depth_overrides": 84,
+  "vessel_thresholds_m": {
+   "handysize": 8.0,
+   "panamax": 12.0,
+   "post_panamax": 14.0,
+   "vlcc": 17.0
+  },
+  "vessel_class_score": {
+   "0": 10.0,
+   "1": 7.5,
+   "2": 5.0,
+   "3": 2.5,
+   "4": 0.0
+  },
+  "terminal_max": 7,
+  "terminal_p99_cap": 10,
+  "cyclone_radius_km": 250,
+  "cyclone_from": 1980,
+  "cyclone_full_storms": 12,
+  "pga_full_g": 0.4,
+  "dwell_lo_h": 12.0,
+  "dwell_hi_h": 168.0,
+  "alt_lo_km": 50,
+  "alt_hi_km": 2500,
+  "catchment_cap_pct": 22.0,
+  "hinterland_steps": [
+   {
+    "from": 1,
+    "to": 1,
+    "score": 2.0
+   },
+   {
+    "from": 2,
+    "to": 2,
+    "score": 4.0
+   },
+   {
+    "from": 3,
+    "to": 4,
+    "score": 6.0
+   },
+   {
+    "from": 5,
+    "to": 6,
+    "score": 8.0
+   },
+   {
+    "from": 7,
+    "to": null,
+    "score": 10.0
+   }
+  ],
+  "labour_scores": {
+   "stable": 2.0,
+   "uncertain": 5.0,
+   "volatile": 8.0
+  },
+  "psc_flag_scores": {
+   "white": 1.0,
+   "grey": 4.0,
+   "black": 8.0
+  },
+  "psc_weights": {
+   "flag": 0.6,
+   "regional_rate": 0.4
+  },
+  "sanctions_scores": {
+   "none": 0.0,
+   "sdn_adjacent": 3.0,
+   "sectoral": 6.0,
+   "comprehensive": 10.0
+  },
+  "dispute_scores": {
+   "none": 0.0,
+   "historical": 2.0,
+   "active_diplomatic": 6.0,
+   "active_military": 10.0
+  },
+  "unctad_economies": 25
+ },
+ "indicators": {
+  "d1": [
+   "score_1_1",
+   "score_1_2",
+   "score_1_3",
+   "score_1_4"
+  ],
+  "d2": [
+   "score_2_2",
+   "score_2_3",
+   "score_2_4"
+  ],
+  "d3": [
+   "score_3_1",
+   "score_3_2",
+   "score_3_3",
+   "score_3_4"
+  ],
+  "d4": [
+   "score_4_3",
+   "score_4_4",
+   "score_4_wgi"
+  ]
+ },
+ "sources": [
+  {
+   "id": "wpi",
+   "name": "NGA World Port Index (Pub. 150)",
+   "edition": {
+    "en": "2024 release",
+    "fr": "Édition 2024"
+   },
+   "as_of": "2024",
+   "retrieved": null,
+   "review_months": 24,
+   "used_for": [
+    "d1",
+    "universe"
+   ],
+   "coverage": {
+    "en": "Current at time of publication",
+    "fr": "À jour au moment de la publication"
+   },
+   "stale": false
+  },
+  {
+   "id": "ibtracs",
+   "name": "IBTrACS tropical cyclone tracks",
+   "edition": {
+    "en": "v04r01 (NOAA)",
+    "fr": "v04r01 (NOAA)"
+   },
+   "as_of": "2024",
+   "retrieved": null,
+   "review_months": 24,
+   "used_for": [
+    "d1"
+   ],
+   "coverage": {
+    "en": "From {cyclone_from}; Category 3+ storms within {cyclone_radius} km",
+    "fr": "Depuis {cyclone_from} ; cyclones de catégorie 3+ à moins de {cyclone_radius} km"
+   },
+   "stale": false
+  },
+  {
+   "id": "gshap",
+   "name": "GSHAP seismic hazard grid",
+   "edition": {
+    "en": "Global map, per-port values",
+    "fr": "Carte mondiale, valeurs par port"
+   },
+   "as_of": "2026-07",
+   "retrieved": "2026-07",
+   "review_months": 60,
+   "used_for": [
+    "d1"
+   ],
+   "coverage": {
+    "en": "Probabilistic, 10% exceedance in 50 years",
+    "fr": "Probabiliste, dépassement de 10 % en 50 ans"
+   },
+   "stale": false
+  },
+  {
+   "id": "lpi",
+   "name": "World Bank Logistics Performance Index",
+   "edition": {
+    "en": "2023 edition",
+    "fr": "Édition 2023"
+   },
+   "as_of": "2023",
+   "retrieved": "2026-10-07",
+   "review_months": 36,
+   "used_for": [
+    "d2"
+   ],
+   "coverage": {
+    "en": "Survey-based, 2022/23; national values replaced with the published scores on {lpi_retrieved}",
+    "fr": "Fondé sur des enquêtes, 2022/23 ; valeurs nationales remplacées par les scores publiés le {lpi_retrieved}"
+   },
+   "stale": false
+  },
+  {
+   "id": "unctad",
+   "name": "UNCTAD Review of Maritime Transport",
+   "edition": {
+    "en": "2022 edition",
+    "fr": "Édition 2022"
+   },
+   "as_of": "2021",
+   "retrieved": "2026-07",
+   "review_months": 36,
+   "used_for": [
+    "d2"
+   ],
+   "coverage": {
+    "en": "Country-median time in port, 2021 data, {unctad_n} economies",
+    "fr": "Temps médian passé au port par pays, données 2021, {unctad_n} économies"
+   },
+   "stale": false
+  },
+  {
+   "id": "psc",
+   "name": "Port State Control reports (Paris MOU, Tokyo MOU, USCG)",
+   "edition": {
+    "en": "2023 annual reports",
+    "fr": "Rapports annuels 2023"
+   },
+   "as_of": "2023",
+   "retrieved": null,
+   "review_months": 18,
+   "used_for": [
+    "d2"
+   ],
+   "coverage": {
+    "en": "Flag-state tiers and regional detention rates",
+    "fr": "Niveaux des États du pavillon et taux de détention régionaux"
+   },
+   "stale": true
+  },
+  {
+   "id": "labour",
+   "name": "Port labour disruption record (ILO, ITF, ILWU, Drewry, Xeneta, press)",
+   "edition": {
+    "en": "2018 to 2024 record",
+    "fr": "Bilan 2018 à 2024"
+   },
+   "as_of": "2024",
+   "retrieved": null,
+   "review_months": 12,
+   "used_for": [
+    "d2"
+   ],
+   "coverage": {
+    "en": "Port level where possible, country level otherwise",
+    "fr": "Au niveau du port lorsque c’est possible, sinon du pays"
+   },
+   "stale": true
+  },
+  {
+   "id": "catchment",
+   "name": "UN Comtrade bilateral flows via the Chokepoint Dependency Model",
+   "edition": {
+    "en": "2022 base",
+    "fr": "Base 2022"
+   },
+   "as_of": "2022",
+   "retrieved": null,
+   "review_months": 24,
+   "used_for": [
+    "d3"
+   ],
+   "coverage": {
+    "en": "Real trade values for matched ports; proxy for the rest",
+    "fr": "Valeurs commerciales réelles pour les ports rapprochés ; approximation pour les autres"
+   },
+   "stale": true
+  },
+  {
+   "id": "wgi",
+   "name": "World Bank Worldwide Governance Indicators",
+   "edition": {
+    "en": "2022 estimates",
+    "fr": "Estimations 2022"
+   },
+   "as_of": "2022",
+   "retrieved": "2024-05",
+   "review_months": 18,
+   "used_for": [
+    "d4"
+   ],
+   "coverage": {
+    "en": "Political stability and government effectiveness",
+    "fr": "Stabilité politique et efficacité du gouvernement"
+   },
+   "stale": true
+  },
+  {
+   "id": "sanctions",
+   "name": "OFAC SDN list and EU consolidated list (country table)",
+   "edition": {
+    "en": "Static country table",
+    "fr": "Table statique par pays"
+   },
+   "as_of": "2024-05",
+   "retrieved": "2024-05",
+   "review_months": 6,
+   "used_for": [
+    "d4"
+   ],
+   "coverage": {
+    "en": "Compiled May 2024 and not refreshed since; port-level overrides where known",
+    "fr": "Établie en mai 2024 et non actualisée depuis ; corrections au niveau du port lorsqu’elles sont connues"
+   },
+   "stale": true
+  },
+  {
+   "id": "disputes",
+   "name": "Territorial and maritime dispute flags",
+   "edition": {
+    "en": "Manually maintained",
+    "fr": "Tenu à la main"
+   },
+   "as_of": "2026-10-06",
+   "retrieved": null,
+   "review_months": 6,
+   "used_for": [
+    "d4"
+   ],
+   "coverage": {
+    "en": "{disputes} ports flagged; matching revised 6 Oct 2026",
+    "fr": "{disputes} ports signalés ; rapprochement révisé le 6 oct. 2026"
+   },
+   "stale": false
+  }
+ ],
+ "not_in_scores": [
+  {
+   "id": "jwc",
+   "name": "Joint War Committee listed areas",
+   "note": "Not part of the PRI scores since 8 Oct 2026 (fix_v24 shelved). Lives in the events layer and the map-printer tool; current circular is read from data/jwc_listed_areas.json."
+  }
+ ],
+ "warnings": [
+  "psc: older than 18 months (as_of 2023, retrieved None)",
+  "labour: older than 12 months (as_of 2024, retrieved None)",
+  "catchment: older than 24 months (as_of 2022, retrieved None)",
+  "wgi: older than 18 months (as_of 2022, retrieved 2024-05)",
+  "sanctions: older than 6 months (as_of 2024-05, retrieved 2024-05)"
+ ]
+}
