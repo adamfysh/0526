@@ -1,0 +1,456 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
+import { langPaths, getLang, lp } from '../../i18n';
+import { about } from '../../i18n/pages/about';
+import { home } from '../../i18n/pages/home';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = about[lang];
+const h = home[lang].products;
+---
+
+<BaseLayout
+  lang={lang}
+  title={t.title}
+  description={COMMERCIAL ? "The Narrows is a trade risk intelligence resource. The due diligence step before a deal closes, a policy locks in, or a facility is underwritten." : t.description}
+>
+
+<style>
+.about-hero {
+  background: var(--navy);
+  padding: 128px var(--s4) var(--s6);
+  border-bottom: 3px solid var(--gold);
+}
+.about-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about-hero-title {
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s4);
+}
+.about-hero-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.about-hero-body {
+  font-size: 17px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  max-width: 620px;
+}
+.about-hero-body strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+.about-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--s6) var(--s4);
+}
+.about-section {
+  padding-bottom: var(--s5);
+  margin-bottom: var(--s5);
+  border-bottom: var(--rule-light);
+}
+.about-section:last-of-type { border-bottom: none; }
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--s2);
+}
+.about-eyebrow::before {
+  content: '';
+  width: 16px;
+  height: 2px;
+  background: var(--gold);
+  display: inline-block;
+}
+.about-section-title {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s3);
+}
+.about-body {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.about-body p { margin-bottom: var(--s3); }
+.about-body p:last-child { margin-bottom: 0; }
+.about-body strong { color: var(--text-primary); font-weight: 500; }
+
+/* Principle list */
+.principle-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--s3);
+}
+.principle-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--s2);
+  padding: var(--s2) 0;
+  border-bottom: var(--rule-light);
+}
+.principle-item:first-child { border-top: var(--rule-light); }
+.principle-mark {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 1px;
+  margin-top: 9px;
+  flex-shrink: 0;
+}
+.principle-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+.principle-text strong { color: var(--text-primary); font-weight: 600; }
+
+/* Founder */
+.founder-block {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--s4);
+  align-items: start;
+  margin-top: var(--s3);
+}
+.founder-photo-slot {
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: var(--rule-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.founder-photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+@media (max-width: 600px) {
+  .founder-block { grid-template-columns: 1fr; }
+  .founder-photo-slot { width: 100px; height: 100px; }
+}
+
+/* Contact */
+.contact-block {
+  background: var(--surface);
+  border: var(--rule-light);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: var(--s3) var(--s4);
+  margin-top: var(--s4);
+}
+.contact-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.contact-email {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+  transition: color 0.15s;
+}
+.contact-email:hover { color: var(--blue); }
+.contact-sub {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  font-family: var(--font-body);
+}
+
+/* CTA */
+.about-cta {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: var(--s5) var(--s4);
+}
+.about-cta-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  flex-wrap: wrap;
+}
+.about-cta-text {
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.about-cta-text em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+@media (max-width: 700px) {
+  .about-cta-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* Product tiles */
+.tile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+.tile {
+  background: var(--white);
+  border: var(--rule-light);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tile-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+.tile-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.tile-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tile-badge-free { background: var(--green-pale); color: var(--green); }
+.tile-badge-paid { background: var(--gold-pale); color: var(--gold-dark); border: 1px solid rgba(240,180,41,0.3); }
+.tile-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: var(--font-body);
+  flex: 1;
+}
+.tile-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+}
+.tile-link:hover { text-decoration: underline; }
+@media (max-width: 600px) {
+  .tile-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="eyebrow" style="color:rgba(255,255,255,0.35);">
+      <span style="background:var(--gold);width:16px;height:2px;display:inline-block;margin-right:8px;vertical-align:middle;flex-shrink:0;"></span>
+      {t.hero.eyebrow}
+    </div>
+    <h1 class="about-hero-title" set:html={t.hero.titleHtml}></h1>
+    <p class="about-hero-body" set:html={t.hero.bodyHtml}></p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="about-wrap">
+
+  <div class="about-section">
+    <div class="about-eyebrow">{t.premise.eyebrow}</div>
+    <h2 class="about-section-title">{t.premise.title}</h2>
+    <div class="about-body">
+      <p>{t.premise.p1}</p>
+      <p>{t.premise.p2}</p>
+      <p set:html={t.premise.p3Html}></p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">{t.name.eyebrow}</div>
+    <h2 class="about-section-title">{t.name.title}</h2>
+    <div class="about-body">
+      <p>{t.name.p1}</p>
+      <p>{t.name.p2}</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">{COMMERCIAL ? "What The Narrows is building" : t.work.eyebrow}</div>
+    <h2 class="about-section-title">{COMMERCIAL ? "Six products. One data foundation." : t.work.title}</h2>
+    <div class="about-body">
+      <p>{COMMERCIAL ? 'Every product is built on the same underlying Chokepoint Dependency Model, 37 maritime risk corridors, $2.15 trillion in matched trade value, 44 importing countries, and 17 commodity classes. Different clients need some, all, or none of them.' : t.work.lead}</p>
+    </div>
+    <div class="tile-grid">
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">{h.pri.name}</div>
+          {COMMERCIAL && <span class="tile-badge tile-badge-free">Free</span>}
+        </div>
+        <p class="tile-desc">{h.pri.desc}</p>
+        <a href={lp(lang, '/pri')} class="tile-link">{h.pri.link} &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">{h.analysis.name}</div>
+          {COMMERCIAL && <span class="tile-badge tile-badge-free">Free</span>}
+        </div>
+        <p class="tile-desc">{h.analysis.desc}</p>
+        <a href={lp(lang, '/analysis')} class="tile-link">{h.analysis.link} &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">{h.cdm.name}</div>
+          {COMMERCIAL && <span class="tile-badge tile-badge-paid">Paid</span>}
+        </div>
+        <p class="tile-desc">{h.cdm.desc}{COMMERCIAL && ' Available to institutional and analytical clients.'}</p>
+        {COMMERCIAL ? <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="tile-link">Enquire &rarr;</a> : <a href={lp(lang, '/methodology')} class="tile-link">{h.cdm.link} &rarr;</a>}
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">{h.cape.name}</div>
+          {COMMERCIAL && <span class="tile-badge tile-badge-paid">Paid</span>}
+        </div>
+        <p class="tile-desc">{h.cape.desc}</p>
+        <a href={lp(lang, '/cape')} class="tile-link">{h.cape.link} &rarr;</a>
+      </div>
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">{h.cascade.name}</div>
+          {COMMERCIAL && <span class="tile-badge tile-badge-paid">Paid</span>}
+        </div>
+        <p class="tile-desc">{COMMERCIAL ? 'Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.' : h.cascade.desc}</p>
+        {COMMERCIAL ? <a href="mailto:fysh@narrows.io?subject=CASCADE enquiry" class="tile-link">Enquire &rarr;</a> : <a href={lp(lang, '/cascade')} class="tile-link">{h.cascade.link} &rarr;</a>}
+      </div>
+      {COMMERCIAL && (
+      <div class="tile">
+        <div class="tile-top">
+          <div class="tile-name">Bespoke Analysis</div>
+          <span class="tile-badge tile-badge-paid">Paid</span>
+        </div>
+        <p class="tile-desc">The Narrows methodology applied to a specific event, portfolio, or research question. Commissioned scenario and corridor analysis delivered as a report.</p>
+        <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="tile-link">Enquire &rarr;</a>
+      </div>
+      )}
+    </div>
+    <div class="about-body" style="margin-top: var(--s3);">
+      <p style="font-size:14px;" set:html={t.work.validationHtml}></p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">{t.how.eyebrow}</div>
+    <h2 class="about-section-title">{COMMERCIAL ? "Every demo is a live session. Every assumption is yours to change." : t.how.title}</h2>
+    <div class="about-body">
+      {COMMERCIAL ? (<Fragment><p>The Narrows is a model run against the interests and priorities of specific counterparties, corridors, and commodities. Every parameter the model uses can be replaced with the client's own assumptions.</p>
+      <p>Detailed documentation is available under NDA for qualified counterparties.</p></Fragment>) : (<p>{t.how.body}</p>)}
+    </div>
+    <div class="principle-list">
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text" set:html={COMMERCIAL ? "<strong>Assumptions are stated, not buried.</strong> Every output identifies the parameters behind it. If the defaults differ from the client's view, that is a one-parameter change in the session." : t.how.principles[0]}></div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text" set:html={t.how.principles[1]}></div>
+      </div>
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text" set:html={COMMERCIAL ? "<strong>The analysis precedes the conversation.</strong> The papers published on this site are not marketing materials. They are model outputs applied to live events, with every assumption stated. They exist so that a prospective client can evaluate the work before requesting access." : t.how.principles[2]}></div>
+      </div>
+      {COMMERCIAL && (
+      <div class="principle-item">
+        <div class="principle-mark"></div>
+        <div class="principle-text"><strong>No sales funnel.</strong> A person responds to every enquiry. There is no CRM sequence, no free trial tier, and no self-serve onboarding. Access is a conversation.</div>
+      </div>
+      )}
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">{t.who.eyebrow}</div>
+    <h2 class="about-section-title">{t.who.title}</h2>
+    <div class="founder-block">
+      <div class="founder-photo-slot">
+        <img src="/founder.jpg" alt={COMMERCIAL ? "Adam Fysh, Founder, Narrows" : t.who.alt} />
+      </div>
+      <div class="about-body">
+        <p set:html={t.who.p1Html}></p>
+        <p>{t.who.p2}</p>
+        <p>{t.who.p3}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-eyebrow">{t.contact.eyebrow}</div>
+    <h2 class="about-section-title">{COMMERCIAL ? "One address. A person replies." : t.contact.title}</h2>
+    <div class="about-body">
+      <p>{COMMERCIAL ? 'All enquiries, demo requests, press, research collaboration, methodology questions go to the same address. Response time is typically within one business day.' : t.contact.body}</p>
+    </div>
+    <div class="contact-block">
+      <div class="contact-label">{t.contact.label}</div>
+      <a href="mailto:fysh@narrows.io" class="contact-email">fysh@narrows.io</a>
+      <div class="contact-sub">{COMMERCIAL ? "The Narrows · Trade Risk Intelligence · narrows.io" : t.contact.sub}</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="about-cta">
+  <div class="about-cta-inner">
+    <div class="about-cta-text" set:html={t.cta.html}></div>
+    {COMMERCIAL && <a href="mailto:fysh@narrows.io?subject=Demo request: The Narrows&body=Organisation:%0ARole:%0APrimary corridor of interest:%0A%0AContext (optional):" class="btn btn-gold">Request a demo</a>}
+  </div>
+</div>
+
+</BaseLayout>

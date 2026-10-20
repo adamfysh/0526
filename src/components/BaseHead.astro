@@ -1,15 +1,24 @@
 ---
+import { ui } from '../i18n/ui';
+import { basePath, TRANSLATED_PATHS, type Lang } from '../i18n';
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  lang?: Lang;
 }
 
 const {
   title,
-  description = 'Narrows models bilateral seaborne trade dependency at the chokepoint level. When a chokepoint closes, who is exposed and by how much?',
+  description: descriptionProp,
   ogImage = '/og-default.png',
+  lang = 'en',
 } = Astro.props;
+const description = descriptionProp ?? ui[lang].head.description;
+const base = basePath(Astro.url.pathname);
+const hasFr = TRANSLATED_PATHS.has(base);
+const enHref = new URL(base, Astro.site);
+const frHref = new URL(base === '/' ? '/fr/' : '/fr' + base, Astro.site);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
@@ -30,12 +39,16 @@ const orgSchema = JSON.stringify({
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{hasFr && <link rel="alternate" hreflang="en" href={enHref} />}
+{hasFr && <link rel="alternate" hreflang="fr" href={frHref} />}
+{hasFr && <link rel="alternate" hreflang="x-default" href={enHref} />}
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href={FAVICON_SVG} />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
+<meta property="og:locale" content={ui[lang].head.locale} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

@@ -709,18 +709,9 @@
       <h2 class="port-title">Vessels &middot; <em>sorted by VaR</em></h2>
       <div class="port-tabs">
         <button class="ptab on" data-m="illustrative">Illustrative fleet</button>
-        <button class="ptab" data-m="custom">My portfolio</button>
       </div>
     </div>
 
-    <!-- My portfolio toolbar (hidden until custom mode) -->
-    <div id="portToolbar" style="display:none" class="port-toolbar">
-      <button class="btn-sm amber" onclick="openAccessModal()">+ Add vessel</button>
-      <button class="btn-sm" onclick="openAccessModal()">Upload CSV</button>
-      <input type="file" id="csvInput" accept=".csv" style="display:none" onchange="handleCSV(event)">
-      <button class="btn-sm" onclick="downloadTemplate()">Download template</button>
-      <span id="portCount" style="font-size:12px;color:var(--text-muted);margin-left:4px;"></span>
-    </div>
 
     <div id="vesselCards"></div>
   </section>
@@ -791,7 +782,7 @@
     </div>
   </div>
   <div class="tide-cascade" id="tide-cascade-note" style="display:none"></div>
-  <div class="tide-cta">Full TIDE output including cascade modelling and vessel-count breakdown &mdash; <a onclick="openAccessModal()">request access</a></div>
+  <div class="tide-cta">Illustrative output on a sample fleet.</div>
 </div>
 
   <!-- Export -->
@@ -803,42 +794,6 @@
 
 </main>
 
-<!-- ADD VESSEL MODAL -->
-
-<div class="access-overlay" id="accessOverlay" onclick="if(event.target===this)closeAccessModal()">
-  <div class="access-box">
-    <div class="access-head">
-      <span class="access-title">Get full access to CAPE</span>
-      <button class="access-close" onclick="closeAccessModal()">&times;</button>
-    </div>
-    <div class="access-body">
-      <p>The full version of CAPE lets you upload your own vessel portfolio — by IMO number, vessel class, and route — and run corridor exposure calculations against your actual book.</p>
-      <p>It also includes <strong>TIDE</strong> accumulation outputs: event horizon, seasonal peak, cascade ratios, and war risk PML by chokepoint — the numbers underwriters and reinsurers use to size aggregate exposure.</p>
-      <form class="access-form" onsubmit="submitAccess(event)">
-        <input type="text" id="ac-name" placeholder="Your name" required>
-        <input type="text" id="ac-org" placeholder="Organisation" required>
-        <select id="ac-role">
-          <option value="">Role (optional)</option>
-          <option>Marine underwriter</option>
-          <option>Reinsurer</option>
-          <option>P&I / mutual</option>
-          <option>Cargo underwriter</option>
-          <option>Commodity trader</option>
-          <option>Risk manager</option>
-          <option>Analyst / researcher</option>
-          <option>Other</option>
-        </select>
-        <textarea id="ac-use" placeholder="What are you looking to model? (optional)"></textarea>
-        <input type="email" id="ac-email" placeholder="Email address" required>
-        <p class="privacy">&#x1F512; Your portfolio data is processed in your browser and never transmitted. This form sends only your contact details.</p>
-      </form>
-    </div>
-    <div class="access-foot">
-      <button class="btn-ghost" onclick="closeAccessModal()">Cancel</button>
-      <button class="btn-primary" onclick="submitAccess()">Request access</button>
-    </div>
-  </div>
-</div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="maybeClose(event)">
   <div class="modal" id="modalBox">
@@ -1333,10 +1288,6 @@ function renderCards() {
       <div class="empty-state">
         <div class="empty-title">No vessels in portfolio</div>
         <div class="empty-sub">Add vessels individually or upload a CSV file.<br>Download the template to see the expected column format.</div>
-        <div style="display:flex;gap:8px;justify-content:center">
-          <button class="btn-sm amber" onclick="openAccessModal()">+ Add vessel</button>
-          <button class="btn-sm" onclick="openAccessModal()">Upload CSV</button>
-        </div>
       </div>`;
     return;
   }
@@ -2117,35 +2068,6 @@ function renderTIDE(){
   } else {
     cascNote.style.display='none';
   }
-}
-
-/* ═══════════════════════════════
-   ACCESS MODAL
-═══════════════════════════════ */
-function openAccessModal(){
-  document.getElementById('accessOverlay').classList.add('open');
-}
-function closeAccessModal(){
-  document.getElementById('accessOverlay').classList.remove('open');
-}
-function submitAccess(e){
-  if(e) e.preventDefault();
-  const name  = document.getElementById('ac-name').value.trim();
-  const org   = document.getElementById('ac-org').value.trim();
-  const email = document.getElementById('ac-email').value.trim();
-  const role  = document.getElementById('ac-role').value;
-  const use   = document.getElementById('ac-use').value.trim();
-  if(!name||!org||!email){alert('Please fill in name, organisation, and email.');return;}
-  const subj = encodeURIComponent('CAPE access request: ' + org);
-  const body = encodeURIComponent(
-    'Name: ' + name + '\n' +
-    'Organisation: ' + org + '\n' +
-    'Role: ' + (role||'--') + '\n' +
-    'Email: ' + email + '\n' +
-    'Use case: ' + (use||'--')
-  );
-  window.location.href = 'mailto:fysh@narrows.io?subject=' + subj + '&body=' + body;
-  closeAccessModal();
 }
 
 /* TIDE rendering is called from init and corridor changes below */

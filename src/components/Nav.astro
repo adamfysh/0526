@@ -1,41 +1,51 @@
 ---
+import { COMMERCIAL } from '../config';
+import { ui } from '../i18n/ui';
+import { lp, altPath, type Lang } from '../i18n';
+interface Props { lang?: Lang }
+const { lang = 'en' } = Astro.props;
+const t = ui[lang].nav;
+const alt = altPath(lang, Astro.url.pathname);
+const otherLang: Lang = lang === 'en' ? 'fr' : 'en';
 const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="http://www.w3.org/2000/svg"><path d="M906.75 759.29 l-50.35 -0.37 0 -260.50 c0 -178.93 -0.37 -260.38 -1.23 -260.01 -0.74 0.25 -4.07 6.54 -7.28 13.94 -67.01 151.04 -91.32 207.19 -133.27 307.89 -7.40 18.02 -29.12 69.97 -48.13 115.38 l-34.55 82.68 -63.06 0.37 -63.06 0.25 0.74 -2.71 c0.49 -1.60 4.94 -12.59 9.87 -24.43 4.94 -11.85 20.48 -49.36 34.55 -83.30 31.59 -76.26 94.03 -224.59 152.65 -362.18 8.88 -20.73 21.60 -50.72 28.26 -66.64 6.79 -15.92 12.71 -29.86 13.33 -30.85 0.86 -1.60 9.63 -1.85 64.79 -2.22 l63.67 -0.25 0.25 239.65 0.37 239.65 4.20 -10.98 c11.35 -30.48 124.88 -313.44 175.23 -436.84 l12.09 -29.62 66.76 -0.37 c36.77 -0.12 66.88 0.12 66.88 0.49 0 0.49 -7.77 18.88 -17.15 41.09 -39.49 92.55 -76.51 180.17 -105.38 249.39 -7.77 18.63 -23.08 55.04 -33.81 80.83 -38.38 91.07 -55.16 131.18 -68.73 164.12 -14.31 34.80 -15.18 36.65 -16.54 36.16 -0.49 -0.25 -23.45 -0.49 -51.09 -0.62z"/></svg>`;
 ---
 
 <nav id="main-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
+    <a href={lp(lang, "/")} class="nav-logo">
       <Fragment set:html={NAV_LOGO_SVG} />
       <span class="nav-logo-word">The Narrows</span>
     </a>
 
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false">
+    <button class="nav-hamburger" id="nav-hamburger" aria-label={t.menu} aria-expanded="false">
       <span class="ham-line"></span>
       <span class="ham-line"></span>
       <span class="ham-line"></span>
     </button>
 
     <ul class="nav-links" id="nav-links">
-      <li><a href="/about">About</a></li>
-      <li><a href="/pri">Port Risk Index</a></li>
-      <li><a href="/cape">CAPE</a></li>
-      <li><a href="/cascade">CASCADE</a></li>
-      <li><a href="/analysis">Analysis</a></li>
-      <li><a href="https://app.narrows.io" class="nav-login">Client login</a></li>
-      <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="nav-cta">Request demo</a></li>
+      <li><a href={lp(lang, "/about")}>{t.about}</a></li>
+      <li><a href={lp(lang, "/pri")}>{t.pri}</a></li>
+      <li><a href={lp(lang, "/cape")}>{t.cape}</a></li>
+      <li><a href={lp(lang, "/cascade")}>{t.cascade}</a></li>
+      <li><a href={lp(lang, "/analysis")}>{t.analysis}</a></li>
+      {alt && <li class="nav-lang"><a href={alt} hreflang={otherLang} lang={otherLang} aria-label={t.langLabel + ': ' + otherLang.toUpperCase()}>{otherLang.toUpperCase()}</a></li>}
+      {COMMERCIAL && <li><a href="https://app.narrows.io" class="nav-login">Client login</a></li>}
+      {COMMERCIAL && <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="nav-cta">Request demo</a></li>}
     </ul>
   </div>
 </nav>
 
 <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
   <ul class="nav-mobile-links">
-    <li><a href="/about">About</a></li>
-    <li><a href="/pri">Port Risk Index</a></li>
-    <li><a href="/cape">CAPE</a></li>
-    <li><a href="/cascade">CASCADE</a></li>
-    <li><a href="/analysis">Analysis</a></li>
-    <li><a href="https://app.narrows.io" class="mobile-login">Client login</a></li>
-    <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="mobile-cta">Request demo</a></li>
+    <li><a href={lp(lang, "/about")}>{t.about}</a></li>
+    <li><a href={lp(lang, "/pri")}>{t.pri}</a></li>
+    <li><a href={lp(lang, "/cape")}>{t.cape}</a></li>
+    <li><a href={lp(lang, "/cascade")}>{t.cascade}</a></li>
+    <li><a href={lp(lang, "/analysis")}>{t.analysis}</a></li>
+    {alt && <li class="nav-lang-m"><a href={alt} hreflang={otherLang} lang={otherLang} aria-label={t.langLabel + ': ' + otherLang.toUpperCase()}>{otherLang === 'fr' ? 'Français' : 'English'}</a></li>}
+    {COMMERCIAL && <li><a href="https://app.narrows.io" class="mobile-login">Client login</a></li>}
+    {COMMERCIAL && <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="mobile-cta">Request demo</a></li>}
   </ul>
 </div>
 <div class="nav-overlay" id="nav-overlay"></div>
@@ -117,6 +127,15 @@ nav {
   transition: border-color 0.15s, color 0.15s !important;
   letter-spacing: 0 !important;
 }
+.nav-lang a {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(10,37,64,0.25);
+  border-radius: 4px;
+  padding: 4px 8px !important;
+}
+.nav-lang a:hover { border-color: var(--navy); }
 .nav-login:hover { border-color: var(--navy) !important; color: var(--navy) !important; }
 
 /* ── Hamburger button ── */

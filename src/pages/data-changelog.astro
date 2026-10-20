@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../config';
 ---
 
 <BaseLayout
@@ -313,10 +314,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="content-section" style="border-top:none;padding-top:var(--s5);">
     <div class="section-eyebrow">About this page</div>
-    <h2 class="section-heading">The public summary. The full technical record is available under NDA.</h2>
+    <h2 class="section-heading">{COMMERCIAL ? "The public summary. The full technical record is available under NDA." : "The public summary of every correction."}</h2>
     <div class="text-body">
       <p>This is a running, dated record of corrections made to the data behind the Chokepoint Dependency Model and the Port Risk Index. Every entry below is real and complete in its own right: what changed, when, and what it affected.</p>
-      <p>A fuller technical writeup for each correction, including root cause detail and verification methodology, is available to serious prospects under a non disclosure agreement. See the request form at the bottom of this page.</p>
+      {COMMERCIAL && <p>A fuller technical writeup for each correction, including root cause detail and verification methodology, is available to serious prospects under a non disclosure agreement. See the request form at the bottom of this page.</p>}
     </div>
   </section>
 
@@ -428,7 +429,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       "Earlier corrections" is not a euphemism for hidden. It means reviewed to a lower publication standard than the entries above, not withheld.
     </div>
     <div class="text-body">
-      <p>The entries above are not where our correction record begins. The model has an internal engineering history reaching back through its initial build, with well over one hundred individually numbered corrections made during that period, covering routing logic, coverage gaps, and data quality issues found in the ordinary course of extending and hardening the model. That earlier record exists and is retained in full internally. We are working through it to bring it up to the same publication standard as the entries above, rather than publish a rough summary of periods we have not yet reviewed to that standard. Until that work is complete, the full internal history for any period is available to serious prospects under a non disclosure agreement, on the same terms as the technical detail behind the entries above.</p>
+      <p>The entries above are not where our correction record begins. The model has an internal engineering history reaching back through its initial build, with well over one hundred individually numbered corrections made during that period, covering routing logic, coverage gaps, and data quality issues found in the ordinary course of extending and hardening the model. That earlier record exists and is retained in full internally. We are working through it to bring it up to the same publication standard as the entries above, rather than publish a rough summary of periods we have not yet reviewed to that standard. {COMMERCIAL ? 'Until that work is complete, the full internal history for any period is available to serious prospects under a non disclosure agreement, on the same terms as the technical detail behind the entries above.' : 'Until that work is complete, no summary of those earlier periods is published.'}</p>
     </div>
   </section>
 
@@ -465,12 +466,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Scope</div>
     <h2 class="section-heading">What this record intentionally does not include.</h2>
     <div class="text-body">
-      <p>This page does not include every internal check that found nothing wrong. Those checks happen on a fixed schedule regardless of whether an anomaly is suspected, and their results are logged internally. It also does not include the full technical mechanics behind each correction. That level of detail, including exact root cause and code level verification steps, is available under non disclosure agreement on request, and is the kind of material we expect a data as liability buyer, an ESG platform, a reinsurer, or a port financier, to reasonably want before relying on our figures in their own work.</p>
+      <p>This page does not include every internal check that found nothing wrong. Those checks happen on a fixed schedule regardless of whether an anomaly is suspected, and their results are logged internally. It also does not include the full technical mechanics behind each correction. {COMMERCIAL ? 'That level of detail, including exact root cause and code level verification steps, is available under non disclosure agreement on request, and is the kind of material we expect a data as liability buyer, an ESG platform, a reinsurer, or a port financier, to reasonably want before relying on our figures in their own work.' : 'That level of detail is not published.'}</p>
     </div>
   </section>
 
 </div><!-- end content-wrap -->
 
+{COMMERCIAL ? (
+<Fragment>
 <!-- ACCESS / NDA SECTION -->
 <div class="access-section" id="contact">
   <div class="access-inner">
@@ -488,9 +491,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </div>
 
-<script>
+<script is:inline>
 function handleChangelogRequest() {
-  const input = document.getElementById('changelog-email') as HTMLInputElement;
+  const input = document.getElementById('changelog-email');
   const email = input.value.trim();
   if (!email || !email.includes('@')) {
     input.style.borderColor = 'rgba(192,57,43,0.8)';
@@ -500,9 +503,23 @@ function handleChangelogRequest() {
   window.location.href = `mailto:fysh@narrows.io?subject=Full correction record request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
 }
 document.getElementById('changelog-btn')?.addEventListener('click', handleChangelogRequest);
-document.getElementById('changelog-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
+document.getElementById('changelog-email')?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') handleChangelogRequest();
 });
 </script>
+</Fragment>
+) : (
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">Questions and corrections.</h2>
+      <p class="access-body">If you believe a figure is wrong, please write. Confirmed corrections are added to this page.</p>
+    </div>
+    <div class="access-right">
+      <span class="access-note">fysh@narrows.io</span>
+    </div>
+  </div>
+</div>
+)}
 
 </BaseLayout>

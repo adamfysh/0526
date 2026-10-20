@@ -60,6 +60,7 @@ const articleSchema = JSON.stringify({
   "datePublished": publishDate,
   "url": canonicalURL.toString()
 });
+import { COMMERCIAL } from '../config';
 ---
 
 <!DOCTYPE html>
@@ -357,7 +358,7 @@ const articleSchema = JSON.stringify({
   </div>
 
   <!-- Optional CTA strip -->
-  <slot name="cta" />
+  {COMMERCIAL && <slot name="cta" />}
 
   <Footer />
 

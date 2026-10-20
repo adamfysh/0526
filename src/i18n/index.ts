@@ -1,0 +1,49 @@
+// Language helpers. English is the default locale (no URL prefix);
+// French lives under /fr/. A page is "translated" once its path is listed in
+// TRANSLATED_PATHS. Links to untranslated pages stay on the English version
+// and the language switcher is hidden on them, so nothing 404s.
+export type Lang = 'en' | 'fr';
+export const LANGS: Lang[] = ['en', 'fr'];
+
+export const TRANSLATED_PATHS = new Set<string>([
+  '/',
+  '/about',
+]);
+
+// Used by every [...lang] page: generates / and /fr/ variants.
+export function langPaths() {
+  return [{ params: { lang: undefined } }, { params: { lang: 'fr' } }];
+}
+
+export function getLang(param?: string): Lang {
+  return param === 'fr' ? 'fr' : 'en';
+}
+
+function normalize(p: string): string {
+  const x = p.replace(/\/+$/, '');
+  return x === '' ? '/' : x;
+}
+
+// '/fr/about/' -> '/about'
+export function basePath(pathname: string): string {
+  const n = normalize(pathname);
+  if (n === '/fr') return '/';
+  if (n.startsWith('/fr/')) return n.slice(3);
+  return n;
+}
+
+// Localised internal link. path may carry a #hash or ?query.
+export function lp(lang: Lang, path: string): string {
+  if (lang === 'en') return path;
+  const m = path.match(/^([^#?]*)(.*)$/)!;
+  const base = normalize(m[1] || '/');
+  if (!TRANSLATED_PATHS.has(base)) return path;
+  return (base === '/' ? '/fr/' : '/fr' + base) + m[2];
+}
+
+// Path of the same page in the other language, or null if it does not exist.
+export function altPath(lang: Lang, pathname: string): string | null {
+  const base = basePath(pathname);
+  if (lang === 'fr') return base;
+  return TRANSLATED_PATHS.has(base) ? (base === '/' ? '/fr/' : '/fr' + base) : null;
+}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../config';
 ---
 
 <BaseLayout
@@ -275,7 +276,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <em>and how to ask for more.</em>
       </h1>
       <p class="page-hero-sub">
-        How Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. Written for a buyer relying on this data, whether pricing a portfolio, feeding an ESG score, or financing a port asset.
+        How Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. {COMMERCIAL ? 'Written for a buyer relying on this data, whether pricing a portfolio, feeding an ESG score, or financing a port asset.' : 'Written for anyone relying on the figures published on this site.'}
       </p>
     </div>
     <div class="hero-coverage">
@@ -305,7 +306,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Purpose</div>
     <h2 class="section-heading">Every figure carries a tier. The tier is never hidden.</h2>
     <div class="text-body">
-      <p>This page explains how Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. It exists so that a buyer relying on this data can see how confident to be in any given figure, and how to ask for more.</p>
+      <p>This page explains how Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. It exists so that {COMMERCIAL ? "a buyer" : "a reader"} relying on this data can see how confident to be in any given figure, and how to ask for more.</p>
     </div>
   </section>
 
@@ -366,7 +367,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="text-body">
       <p><strong>Structured spot audits.</strong> A sample of country, commodity, and chokepoint combinations is checked against independent public sources on a fixed schedule, not only when an anomaly is reported. Each audit is logged internally: what was checked, what was found, and what was corrected.</p>
       <p><strong>Benchmark regression.</strong> A fixed set of known reference figures is checked after every model rebuild, so that a change made for one reason cannot silently move an unrelated figure without being caught.</p>
-      <p>Every correction, however small, is logged with a date, a description of what changed, the scope of countries or commodities affected, and the value impact. A public summary of this log is published as our <a href="/data-changelog" style="color:var(--blue);">data changelog</a>, updated as corrections happen. The full internal log, including root cause detail and code level verification steps, is not published in full, for the same reason a pricing model's full workings are not published: the audit trail is the demonstration of rigor, not the underlying method. That fuller record is available to serious prospects under a non disclosure agreement, on request.</p>
+      <p>Every correction, however small, is logged with a date, a description of what changed, the scope of countries or commodities affected, and the value impact. A public summary of this log is published as our <a href="/data-changelog" style="color:var(--blue);">data changelog</a>, updated as corrections happen. The full internal log, including root cause detail and code level verification steps, is not published in full, for the same reason a pricing model's full workings are not published: the audit trail is the demonstration of rigor, not the underlying method. {COMMERCIAL && 'That fuller record is available to serious prospects under a non disclosure agreement, on request.'}</p>
     </div>
     <div class="pullquote">
       A model with a visible history of catching and fixing its own errors is more trustworthy than one that claims never to have had any.
@@ -378,7 +379,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h2 class="section-heading">Any figure can be independently checked on request.</h2>
     <div class="text-body">
       <p>A specific country, commodity, or chokepoint figure can be independently checked on request. This produces a short verification note covering: the source of the figure, the tier it carries, the date it was last checked, and the result of a fresh spot check against an independent source if one has not been run recently for that combination.</p>
-      <p>This is offered rather than full access to the internal log because most of the value in a verification request is the answer, not the archive. A buyer who needs the full audit history for a specific regulatory or diligence purpose should raise that directly, and it will be considered case by case.</p>
+      <p>This is offered rather than a copy of the internal log because most of the value in a verification request is the answer, not the archive. {COMMERCIAL && 'A buyer who needs the full audit history for a specific regulatory or diligence purpose should raise that directly, and it will be considered case by case.'}</p>
     </div>
   </section>
 
@@ -392,6 +393,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 </div><!-- end content-wrap -->
 
+{COMMERCIAL ? (
+<Fragment>
 <!-- ACCESS / NDA SECTION -->
 <div class="access-section" id="contact">
   <div class="access-inner">
@@ -409,9 +412,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </div>
 
-<script>
+<script is:inline>
 function handleVerifyRequest() {
-  const input = document.getElementById('verify-email') as HTMLInputElement;
+  const input = document.getElementById('verify-email');
   const email = input.value.trim();
   if (!email || !email.includes('@')) {
     input.style.borderColor = 'rgba(192,57,43,0.8)';
@@ -421,9 +424,23 @@ function handleVerifyRequest() {
   window.location.href = `mailto:fysh@narrows.io?subject=Full audit log request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
 }
 document.getElementById('verify-btn')?.addEventListener('click', handleVerifyRequest);
-document.getElementById('verify-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
+document.getElementById('verify-email')?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') handleVerifyRequest();
 });
 </script>
+</Fragment>
+) : (
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">Questions and corrections.</h2>
+      <p class="access-body">If you believe a figure is wrong, please write. Confirmed corrections are recorded on the data changelog.</p>
+    </div>
+    <div class="access-right">
+      <span class="access-note">fysh@narrows.io</span>
+    </div>
+  </div>
+</div>
+)}
 
 </BaseLayout>

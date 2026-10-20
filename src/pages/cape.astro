@@ -191,9 +191,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- Demo notice -->
 <div class="demo-notice">
   <p class="demo-notice-inner">
-    <strong>Demonstration.</strong> This version runs against a sample portfolio with fixed positions.
-    The full version of CAPE connects to a live cargo portfolio and updates in real time.
-    <a href="mailto:fysh@narrows.io?subject=CAPE full access" style="color:var(--blue);font-weight:500;margin-left:6px">Request access.</a>
+    <strong>Demonstration.</strong> This version runs against a sample fleet with fixed, illustrative positions.
+    It is shown to explain the method and is not available for use on any real portfolio.
   </p>
 </div>
 
@@ -202,13 +201,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="cape-kicker">Narrows analytics</div>
   <h1>Corridor Accumulation<br>and <em>Portfolio Exposure</em></h1>
   <p class="cape-hero-lead">
-    CAPE tells you what is physically at risk on a single bad day. Load your vessel portfolio,
-    select a corridor event, and get aggregate exposure by vessel class, corridor, and scenario severity.
+    CAPE is a demonstration of how exposure can be computed for a vessel portfolio on a single bad day.
+    Select a corridor event to see aggregate exposure by vessel class, corridor, and scenario severity on an illustrative fleet.
     Powered by the Narrows CDM and TIDE accumulation model.
   </p>
   <div class="cape-hero-actions">
     <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
-    <a href="mailto:fysh@narrows.io?subject=CAPE access request" class="btn-ghost-lg">Request full access</a>
   </div>
 </section>
 
@@ -300,8 +298,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <h2>How CAPE works</h2>
   <div class="cape-steps">
     <div class="cape-step">
-      <div class="cape-step-num">Step 01 — Free demo</div>
-      <h3>Illustrative fleet</h3>
+      <div class="cape-step-num">Step 01 — Illustrative fleet</div>
+      <h3>A sample fleet</h3>
       <p>
         Twelve representative vessels across all major corridors are pre-loaded: VLCCs on Hormuz,
         LNG carriers on Qatar routes, Neopanamax containers through Panama, Capesize bulk through
@@ -309,48 +307,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         cargo value. Run any scenario immediately.
       </p>
     </div>
-    <div class="cape-step locked">
-      <div class="cape-step-num">Step 02 — Full access</div>
-      <h3>Your portfolio</h3>
+    <div class="cape-step">
+      <div class="cape-step-num">Step 02 — Method</div>
+      <h3>Exposure mapping</h3>
       <p>
-        Upload your own vessel book as a CSV or enter vessels individually. CAPE maps each vessel
-        to its corridor exposure and computes aggregate VaR, diversion cost, and JWC status
-        across your actual positions.
+        The model maps each vessel to its corridor exposure and computes aggregate VaR,
+        diversion cost, and JWC status across the positions in the sample fleet.
       </p>
-      <span class="cape-step-gate">Request access</span>
     </div>
-    <div class="cape-step locked">
-      <div class="cape-step-num">Step 03 — Full access</div>
+    <div class="cape-step">
+      <div class="cape-step-num">Step 03 — Method</div>
       <h3>TIDE accumulation output</h3>
       <p>
-        Full TIDE report: event horizon by corridor, seasonal peak calendar, cascade ratios
-        for diversion routes, vessel-count breakdown, and war risk PML by scenario severity.
-        Exportable as a plain-text report for use in capital models.
+        The TIDE accumulation model produces an event horizon by corridor, a seasonal peak
+        calendar, cascade ratios for diversion routes, a vessel-count breakdown, and war risk PML
+        by scenario severity.
       </p>
-      <span class="cape-step-gate">Request access</span>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cape-cta-section">
-  <h2>Run your own book</h2>
+  <h2>Try the demonstration</h2>
   <p>
-    CAPE is available to marine underwriters, reinsurers, P&I clubs, and commodity desks.
-    Full access includes portfolio upload, all TIDE accumulation outputs, and corridor
-    scenario export.
+    The demonstration runs on an illustrative fleet. It is a research tool shown to explain
+    the method, not a service.
   </p>
   <div class="cape-hero-actions" style="justify-content:center">
     <a href="/cape.html" class="btn-primary-lg" target="_blank">Open CAPE demo</a>
-    <a href="mailto:fysh@narrows.io?subject=CAPE access request" class="btn-ghost-lg">Request access</a>
   </div>
-  <p class="cape-privacy">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="11" width="18" height="11" rx="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
-    Portfolio data is processed in your browser and never transmitted to any server.
-  </p>
 </section>
 
 </BaseLayout>

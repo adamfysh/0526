@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../config';
 ---
 
 <BaseLayout
   title="Narrows | Methodology"
-  description="How the Narrows trade risk model works. Written for risk professionals who want to understand what is under the hood before a conversation."
+  description={COMMERCIAL ? "How the Narrows trade risk model works. Written for risk professionals who want to understand what is under the hood before a conversation." : "How the Narrows trade risk model works. Written for readers who want to understand what is under the hood."}
 >
 
 <style>
@@ -574,7 +575,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-eyebrow">Sample output</div>
     <h2 class="section-heading">Strait of Malacca: 100% closure, 14 days.</h2>
     <div class="text-body">
-      <p>The following is a live model output, not a hypothetical illustration. Parameters shown are the defaults for this scenario. All can be substituted in a demo session.</p>
+      <p>The following is a live model output, not a hypothetical illustration. Parameters shown are the defaults for this scenario. {COMMERCIAL ? 'All can be substituted in a demo session.' : 'All can be changed in the demonstration tool.'}</p>
     </div>
     <div class="sample-params">
       <div class="sample-param"><div class="sample-param-label">Corridor</div><div class="sample-param-value">Strait of Malacca</div></div>
@@ -710,6 +711,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 </div><!-- end content-wrap -->
 
+{COMMERCIAL ? (
+<Fragment>
 <!-- ACCESS / NDA SECTION -->
 <div class="access-section" id="contact">
   <div class="access-inner">
@@ -727,9 +730,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </div>
 
-<script>
+<script is:inline>
 function handleMethodRequest() {
-  const input = document.getElementById('method-email') as HTMLInputElement;
+  const input = document.getElementById('method-email');
   const email = input.value.trim();
   if (!email || !email.includes('@')) {
     input.style.borderColor = 'rgba(192,57,43,0.8)';
@@ -739,9 +742,23 @@ function handleMethodRequest() {
   window.location.href = `mailto:fysh@narrows.io?subject=Methodology documentation request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
 }
 document.getElementById('method-btn')?.addEventListener('click', handleMethodRequest);
-document.getElementById('method-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
+document.getElementById('method-email')?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') handleMethodRequest();
 });
 </script>
+</Fragment>
+) : (
+<div class="access-section" id="contact">
+  <div class="access-inner">
+    <div>
+      <h2 class="access-title">Questions about the method.</h2>
+      <p class="access-body">If something on this page looks wrong or unclear, please write. Corrections are recorded on the data changelog.</p>
+    </div>
+    <div class="access-right">
+      <span class="access-note">fysh@narrows.io</span>
+    </div>
+  </div>
+</div>
+)}
 
 </BaseLayout>

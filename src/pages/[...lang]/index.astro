@@ -1,10 +1,25 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
+import { langPaths, getLang, lp } from '../../i18n';
+import { home } from '../../i18n/pages/home';
+
+export function getStaticPaths() {
+  return langPaths();
+}
+
+const lang = getLang(Astro.params.lang);
+const t = home[lang];
+const dimColors = ['#378ADD', '#EF9F27', '#7F77DD', '#D85A30'];
+const dimScores = ['0.52', '4.33', '3.38', '0.70'];
+const dimFill = ['5.2%', '43.3%', '33.8%', '7%'];
+const dimScoresFr = ['0,52', '4,33', '3,38', '0,70'];
 ---
 
 <BaseLayout
-  title="The Narrows | Maritime Trade Risk Intelligence"
-  description="Chokepoint exposure quantified by corridor, commodity, and vessel class. Built on the Chokepoint Dependency Model."
+  lang={lang}
+  title={COMMERCIAL ? "The Narrows | Maritime Trade Risk Intelligence" : t.title}
+  description={t.description}
 >
 
 <style>
@@ -625,13 +640,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="hero-kicker">The Narrows</span>
-      <h1 class="hero-headline">Maritime trade risk intelligence.</h1>
-      <p class="hero-sub">Chokepoint exposure quantified by corridor, commodity, and vessel class, from VLCC to Handymax dry bulk. Available before the disruption.</p>
-      <a href="#briefing" class="btn btn-gold">Request a briefing</a>
+      <span class="hero-kicker">{t.hero.kicker}</span>
+      <h1 class="hero-headline">{COMMERCIAL ? "Maritime trade risk intelligence." : t.hero.headline}</h1>
+      <p class="hero-sub">{t.hero.sub}</p>
+      {COMMERCIAL && <a href="#briefing" class="btn btn-gold">Request a briefing</a>}
     </div>
     <div class="hero-image">
-      <img src="/images/suez-n.jpg" alt="Suez Canal — aerial view" loading="eager" />
+      <img src="/images/suez-n.jpg" alt={t.hero.imgAlt} loading="eager" />
     </div>
   </div>
 </section>
@@ -639,11 +654,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- CDM BAND -->
 <div class="cdm-band">
   <div class="cdm-inner">
-    <div class="cdm-label">Chokepoint Dependency Model</div>
+    <div class="cdm-label">{t.cdm.label}</div>
     <p class="cdm-text">
-      Every product in The Narrows is built on the <strong>Chokepoint Dependency Model</strong>.
-      Bilateral trade data at commodity level, supplemented and validated with vessel, port, and market sources.
-      The CDM is available directly to institutional and analytical clients.
+      <Fragment set:html={t.cdm.html} />
+      {COMMERCIAL ? 'The CDM is available directly to institutional and analytical clients.' : t.cdm.tail}
     </p>
   </div>
 </div>
@@ -652,60 +666,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="products-section">
   <div class="products-inner">
     <div class="products-header fade-up">
-      <h2 class="products-title">Risk intelligence products.</h2>
-      <p class="products-lead">The Narrows products are connected and built on a common data foundation. Different clients will need some, all, or none of them.</p>
+      <h2 class="products-title">{COMMERCIAL ? "Risk intelligence products." : t.products.title}</h2>
+      <p class="products-lead">{COMMERCIAL ? 'The Narrows products are connected and built on a common data foundation. Different clients will need some, all, or none of them.' : t.products.lead}</p>
     </div>
     <div class="products-grid">
 
       <div class="product-card fade-up">
         <div class="product-card-top">
-          <div class="product-name">Port Risk Index</div>
-          <span class="badge badge-free">Free</span>
+          <div class="product-name">{t.products.pri.name}</div>
+          {COMMERCIAL && <span class="badge badge-free">Free</span>}
         </div>
-        <p class="product-desc">3,778 ports scored across four risk dimensions: accessibility, reliability, trade concentration, and political stability. The entry point to The Narrows data layer.</p>
-        <a href="/pri" class="product-link">Open the Port Risk Index</a>
+        <p class="product-desc">{t.products.pri.desc}</p>
+        <a href={lp(lang, '/pri')} class="product-link">{t.products.pri.link}</a>
       </div>
 
       <div class="product-card fade-up">
         <div class="product-card-top">
-          <div class="product-name">Analysis</div>
-          <span class="badge badge-free">Free</span>
+          <div class="product-name">{t.products.analysis.name}</div>
+          {COMMERCIAL && <span class="badge badge-free">Free</span>}
         </div>
-        <p class="product-desc">Corridor and scenario analysis demonstrating the method against live events. Published outputs proving the model and quantifying disruption.</p>
-        <a href="/analysis" class="product-link">Read the analysis</a>
+        <p class="product-desc">{t.products.analysis.desc}</p>
+        <a href={lp(lang, '/analysis')} class="product-link">{t.products.analysis.link}</a>
       </div>
 
       <div class="product-card fade-up">
         <div class="product-card-top">
-          <div class="product-name">Chokepoint Dependency Model</div>
-          <span class="badge badge-paid">Paid</span>
+          <div class="product-name">{t.products.cdm.name}</div>
+          {COMMERCIAL && <span class="badge badge-paid">Paid</span>}
         </div>
-        <p class="product-for">For institutional and analytical clients</p>
-        <p class="product-desc">Bilateral trade dependency at commodity level across the world's principal maritime corridors. The data foundation. Available to institutional and analytical clients.</p>
-        <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="product-link">Enquire</a>
+        {COMMERCIAL && <p class="product-for">For institutional and analytical clients</p>}
+        <p class="product-desc">{t.products.cdm.desc}{COMMERCIAL && ' Available to institutional and analytical clients.'}</p>
+        {COMMERCIAL ? <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="product-link">Enquire</a> : <a href={lp(lang, '/methodology')} class="product-link">{t.products.cdm.link}</a>}
       </div>
 
       <div class="product-card fade-up">
         <div class="product-card-top">
-          <div class="product-name">CAPE</div>
-          <span class="badge badge-paid">Paid</span>
+          <div class="product-name">{t.products.cape.name}</div>
+          {COMMERCIAL && <span class="badge badge-paid">Paid</span>}
         </div>
-        <p class="product-for">For marine underwriters, reinsurers, P&amp;I clubs, commodity desks</p>
-        <p class="product-desc">The CDM applied to a specific cargo portfolio. Locked positions, divertible positions, and rerouting cost by vessel class, charter and bunker included, tanker to dry bulk. A demonstration version is available.</p>
-        <a href="/cape" class="product-link">View demonstration</a>
-        <span class="product-link-note">Full version runs against a live portfolio.</span>
+        {COMMERCIAL && <p class="product-for">For marine underwriters, reinsurers, P&amp;I clubs, commodity desks</p>}
+        <p class="product-desc">{t.products.cape.desc} {COMMERCIAL ? 'A demonstration version is available.' : t.products.cape.tail}</p>
+        <a href={lp(lang, '/cape')} class="product-link">{t.products.cape.link}</a>
+        {COMMERCIAL && <span class="product-link-note">Full version runs against a live portfolio.</span>}
       </div>
 
       <div class="product-card fade-up">
         <div class="product-card-top">
-          <div class="product-name">CASCADE</div>
-          <span class="badge badge-paid">Paid</span>
+          <div class="product-name">{t.products.cascade.name}</div>
+          {COMMERCIAL && <span class="badge badge-paid">Paid</span>}
         </div>
-        <p class="product-for">For desks managing a live closure or diversion decision</p>
-        <p class="product-desc">Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.</p>
-        <a href="/cascade" class="product-link">View demonstration</a>
+        {COMMERCIAL && <p class="product-for">For desks managing a live closure or diversion decision</p>}
+        <p class="product-desc">{COMMERCIAL ? 'Decision-support for live events. Committed fleet positions, decision windows, diversion cost and timeline by vessel. Built for the desk managing a closure in real time.' : t.products.cascade.desc}</p>
+        <a href={lp(lang, '/cascade')} class="product-link">{t.products.cascade.link}</a>
       </div>
 
+      {COMMERCIAL && (
       <div class="product-card fade-up">
         <div class="product-card-top">
           <div class="product-name">Bespoke Analysis</div>
@@ -715,6 +730,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p class="product-desc">The Narrows methodology applied to a specific event, portfolio, or research question. Commissioned scenario and corridor analysis delivered as a report.</p>
         <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="product-link">Enquire</a>
       </div>
+      )}
 
     </div>
   </div>
@@ -724,65 +740,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="detail-section">
   <div class="detail-inner">
     <div class="detail-header fade-up">
-      <h2 class="detail-title">What you get.</h2>
-      <p class="detail-lead">Concrete outputs, not just capability descriptions. Four products, four different deliverables.</p>
+      <h2 class="detail-title">{COMMERCIAL ? "What you get." : t.detail.title}</h2>
+      <p class="detail-lead">{COMMERCIAL ? 'Concrete outputs, not just capability descriptions. Four products, four different deliverables.' : t.detail.lead}</p>
     </div>
     <div class="detail-grid">
 
       <div class="detail-card fade-up">
         <div class="detail-card-top">
-          <span class="detail-eyebrow">Chokepoint Dependency Model</span>
-          <span class="detail-for">Institutional &amp; analytical clients</span>
+          <span class="detail-eyebrow">{t.detail.cdm.eyebrow}</span>
+          {COMMERCIAL && <span class="detail-for">Institutional &amp; analytical clients</span>}
         </div>
         <div class="detail-example">
-          <div class="detail-example-label">From the data</div>
-          <div class="detail-example-row"><span>India's urea imports, headline Gulf dependency</span><span class="detail-example-value">63%</span></div>
-          <div class="detail-example-row"><span>Hormuz-specific, once Oman is separated out</span><span class="detail-example-value">27%</span></div>
-          <div class="detail-example-caption">The gap between a headline dependency figure and the one that's actually load-bearing. <a href="/analysis/hormuz-dry-cargo">Read the analysis &rarr;</a></div>
+          <div class="detail-example-label">{t.detail.cdm.label}</div>
+          <div class="detail-example-row"><span>{t.detail.cdm.row1}</span><span class="detail-example-value">{t.detail.cdm.val1}</span></div>
+          <div class="detail-example-row"><span>{t.detail.cdm.row2}</span><span class="detail-example-value">{t.detail.cdm.val2}</span></div>
+          <div class="detail-example-caption">{t.detail.cdm.caption} <a href={lp(lang, '/analysis/hormuz-dry-cargo')}>{t.detail.cdm.captionLink} &rarr;</a></div>
         </div>
-        <p class="detail-desc">The bilateral trade dependency data behind every Narrows product: commodity-level, corridor-level, validated against vessel and port sources. Licensed directly to clients who want the underlying numbers, not just the tools built on them.</p>
+        <p class="detail-desc">{t.detail.cdm.desc}{COMMERCIAL && ' Licensed directly to clients who want the underlying numbers, not just the tools built on them.'}</p>
         <div class="detail-footer">
-          <span class="detail-terms-badge">Licensed access</span>
-          <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="detail-link">Enquire</a>
+          {COMMERCIAL && <span class="detail-terms-badge">Licensed access</span>}
+          {COMMERCIAL ? <a href="mailto:fysh@narrows.io?subject=CDM access enquiry" class="detail-link">Enquire</a> : <a href={lp(lang, '/methodology')} class="detail-link">{t.detail.cdm.link}</a>}
         </div>
       </div>
 
       <div class="detail-card fade-up">
         <div class="detail-card-top">
-          <span class="detail-eyebrow">CAPE</span>
-          <span class="detail-for">Underwriters, reinsurers, P&amp;I clubs, commodity desks</span>
+          <span class="detail-eyebrow">{t.detail.cape.eyebrow}</span>
+          {COMMERCIAL && <span class="detail-for">Underwriters, reinsurers, P&amp;I clubs, commodity desks</span>}
         </div>
         <div class="detail-example">
-          <div class="detail-example-label">TIDE accumulation &mdash; Strait of Hormuz</div>
-          <div class="detail-example-row"><span>Event horizon (the insurer's at-risk number)</span><span class="detail-example-value">$36.5B</span></div>
-          <div class="detail-example-row"><span>War risk PML</span><span class="detail-example-value">$3.97B</span></div>
-          <div class="detail-example-caption">Live in the free demo, run against a sample fleet.</div>
+          <div class="detail-example-label">{t.detail.cape.label}</div>
+          <div class="detail-example-row"><span>{t.detail.cape.row1}</span><span class="detail-example-value">{t.detail.cape.val1}</span></div>
+          <div class="detail-example-row"><span>{t.detail.cape.row2}</span><span class="detail-example-value">{t.detail.cape.val2}</span></div>
+          <div class="detail-example-caption">{COMMERCIAL ? 'Live in the free demo, run against a sample fleet.' : t.detail.cape.caption}</div>
         </div>
-        <p class="detail-desc">Load a vessel portfolio, select a corridor event, get aggregate exposure by vessel class, corridor, and scenario severity, plus the TIDE accumulation figures reinsurers price against. The demo runs a fixed illustrative fleet; full access connects to a live portfolio.</p>
+        <p class="detail-desc">{t.detail.cape.desc}{COMMERCIAL && ' Full access connects to a live portfolio.'}</p>
         <div class="detail-footer">
-          <span class="detail-terms-badge">Free demo &middot; full access by request</span>
-          <a href="/cape" class="detail-link">View demonstration</a>
+          {COMMERCIAL && <span class="detail-terms-badge">Free demo &middot; full access by request</span>}
+          <a href={lp(lang, '/cape')} class="detail-link">{t.detail.cape.link}</a>
         </div>
       </div>
 
       <div class="detail-card fade-up">
         <div class="detail-card-top">
-          <span class="detail-eyebrow">CASCADE</span>
-          <span class="detail-for">Desks managing a live closure or diversion decision</span>
+          <span class="detail-eyebrow">{t.detail.cascade.eyebrow}</span>
+          {COMMERCIAL && <span class="detail-for">Desks managing a live closure or diversion decision</span>}
         </div>
         <div class="detail-example">
-          <div class="detail-example-label">What the interface shows, per vessel</div>
-          <div class="detail-example-row"><span>Position</span><span class="detail-example-value">Locked or divertible</span></div>
-          <div class="detail-example-row"><span>Diversion cost</span><span class="detail-example-value">By class &amp; route</span></div>
-          <div class="detail-example-row"><span>Displaced ETA</span><span class="detail-example-value">Recomputed live</span></div>
+          <div class="detail-example-label">{t.detail.cascade.label}</div>
+          <div class="detail-example-row"><span>{t.detail.cascade.row1}</span><span class="detail-example-value">{t.detail.cascade.val1}</span></div>
+          <div class="detail-example-row"><span>{t.detail.cascade.row2}</span><span class="detail-example-value">{t.detail.cascade.val2}</span></div>
+          <div class="detail-example-row"><span>{t.detail.cascade.row3}</span><span class="detail-example-value">{t.detail.cascade.val3}</span></div>
         </div>
-        <p class="detail-desc">Committed fleet positions for a live event, the decision window before a vessel's diversion option closes, and the real cost and timeline of rerouting, corridor by corridor. Built for the desk that needs an answer today, not a quarterly refresh.</p>
+        <p class="detail-desc">{t.detail.cascade.desc}{COMMERCIAL && ' Built for the desk that needs an answer today, not a quarterly refresh.'}</p>
         <div class="detail-footer">
-          <span class="detail-terms-badge">Demo available &middot; full access by request</span>
-          <a href="/cascade" class="detail-link">View demonstration</a>
+          {COMMERCIAL && <span class="detail-terms-badge">Demo available &middot; full access by request</span>}
+          <a href={lp(lang, '/cascade')} class="detail-link">{t.detail.cascade.link}</a>
         </div>
       </div>
 
+      {COMMERCIAL && (
       <div class="detail-card fade-up">
         <div class="detail-card-top">
           <span class="detail-eyebrow">Bespoke Analysis</span>
@@ -800,6 +817,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <a href="mailto:fysh@narrows.io?subject=Bespoke analysis enquiry" class="detail-link">Enquire</a>
         </div>
       </div>
+      )}
 
     </div>
   </div>
@@ -809,80 +827,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="pri-section">
   <div class="pri-inner">
     <div class="pri-header fade-up">
-      <h2 class="pri-title">3,778 ports scored.<br><em>Across four dimensions of risk.</em></h2>
-      <p class="pri-lead">The Narrows Port Risk Index applies an INFORM-style composite methodology to every major port in the World Port Index. Physical accessibility, operational reliability, trade concentration, and political stability: each scored, each decomposable, one composite number per port.</p>
+      <h2 class="pri-title" set:html={t.pri.titleHtml}></h2>
+      <p class="pri-lead">{t.pri.lead}</p>
     </div>
 
-    <div class="pri-preview fade-up" onclick="window.location='/pri'" role="link" tabindex="0" aria-label="Open Port Risk Index">
+    <div class="pri-preview fade-up" onclick={`window.location='${lp(lang, '/pri')}'`} role="link" tabindex="0" aria-label={t.pri.aria}>
       <div class="pri-chrome-topbar">
         <div class="pri-chrome-dots">
           <div class="pri-chrome-dot"></div>
           <div class="pri-chrome-dot"></div>
           <div class="pri-chrome-dot"></div>
         </div>
-        <span class="pri-chrome-url">narrows.io/pri · Port Risk Index · 3,778 ports</span>
+        <span class="pri-chrome-url">{t.pri.url}</span>
       </div>
       <div class="pri-search-bar">
         <span class="pri-search-icon">⌕</span>
-        <span class="pri-search-text"><span class="pri-search-hit">Durban</span>, South Africa · Rank #1,885 of 3,778</span>
+        <span class="pri-search-text"><span class="pri-search-hit">{t.pri.searchHit}</span>{t.pri.searchRest}</span>
       </div>
       <div class="pri-port-header">
         <div>
-          <div class="pri-port-name">Durban</div>
-          <div class="pri-port-country">South Africa · Data tier A · All four dimensions scored</div>
+          <div class="pri-port-name">{t.pri.portName}</div>
+          <div class="pri-port-country">{t.pri.portCountry}</div>
         </div>
         <div class="pri-port-badge">
-          <span class="pri-port-badge-label">Narrows Port Risk Index</span>
-          <span class="pri-port-badge-score">1.52</span>
+          <span class="pri-port-badge-label">{t.pri.badge}</span>
+          <span class="pri-port-badge-score">{lang === 'fr' ? '1,52' : '1.52'}</span>
         </div>
       </div>
       <div class="pri-dim-grid">
-        <div class="pri-dim-card">
-          <div class="pri-dim-label">Dimension 1</div>
-          <div class="pri-dim-name">Accessibility</div>
-          <div class="pri-dim-score">0.52<span>/ 10</span></div>
-          <div class="pri-dim-bar"><div class="pri-dim-fill" style="width:5.2%;background:#378ADD"></div></div>
-        </div>
-        <div class="pri-dim-card">
-          <div class="pri-dim-label">Dimension 2</div>
-          <div class="pri-dim-name">Reliability</div>
-          <div class="pri-dim-score">4.33<span>/ 10</span></div>
-          <div class="pri-dim-bar"><div class="pri-dim-fill" style="width:43.3%;background:#EF9F27"></div></div>
-        </div>
-        <div class="pri-dim-card">
-          <div class="pri-dim-label">Dimension 3</div>
-          <div class="pri-dim-name">Concentration</div>
-          <div class="pri-dim-score">3.38<span>/ 10</span></div>
-          <div class="pri-dim-bar"><div class="pri-dim-fill" style="width:33.8%;background:#7F77DD"></div></div>
-        </div>
-        <div class="pri-dim-card">
-          <div class="pri-dim-label">Dimension 4</div>
-          <div class="pri-dim-name">Stability</div>
-          <div class="pri-dim-score">0.70<span>/ 10</span></div>
-          <div class="pri-dim-bar"><div class="pri-dim-fill" style="width:7%;background:#D85A30"></div></div>
-        </div>
+        {t.pri.dims.map((name, i) => (
+          <div class="pri-dim-card">
+            <div class="pri-dim-label">{t.pri.dimLabel} {i + 1}</div>
+            <div class="pri-dim-name">{name}</div>
+            <div class="pri-dim-score">{lang === 'fr' ? dimScoresFr[i] : dimScores[i]}<span>/ 10</span></div>
+            <div class="pri-dim-bar"><div class="pri-dim-fill" style={`width:${dimFill[i]};background:${dimColors[i]}`}></div></div>
+          </div>
+        ))}
       </div>
       <div class="pri-table-wrap">
         <table class="pri-table">
           <thead>
-            <tr><th>Rank</th><th>Port</th><th>Country</th><th>PRI</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th></tr>
+            <tr>{t.pri.thead.map((h) => <th>{h}</th>)}</tr>
           </thead>
           <tbody>
-            <tr><td>3,778</td><td>Aden</td><td>Yemen</td><td>3.64</td><td>1.5</td><td>6.7</td><td>2.6</td><td>6.6</td></tr>
-            <tr><td>3,803</td><td>Nueva Gerona</td><td>Cuba</td><td>3.12</td><td>5.9</td><td>5.9</td><td>1.5</td><td>1.8</td></tr>
-            <tr style="background:rgba(240,180,41,0.07)"><td>2,515</td><td>Durban</td><td>South Africa</td><td>1.29</td><td>0.5</td><td>4.3</td><td>3.4</td><td>0.4</td></tr>
-            <tr><td>1</td><td>Jurong Island</td><td>Singapore</td><td>0.71</td><td></td><td></td><td></td><td></td></tr>
+            {t.pri.rows.map((row, i) => (
+              <tr style={i === 2 ? 'background:rgba(240,180,41,0.07)' : undefined}>{row.map((c) => <td>{c}</td>)}</tr>
+            ))}
           </tbody>
         </table>
         <div class="pri-blur-overlay">
-          <span class="pri-blur-msg">3,772 more ports · open the full index free</span>
+          <span class="pri-blur-msg">{COMMERCIAL ? '3,772 more ports · open the full index free' : t.pri.overlay}</span>
         </div>
       </div>
     </div>
 
     <div class="pri-open-cta fade-up">
-      <a href="/pri" class="btn btn-gold">Open the Port Risk Index</a>
-      <span class="pri-open-note">3,778 ports · free · no login required</span>
+      <a href={lp(lang, '/pri')} class="btn btn-gold">{t.pri.cta}</a>
+      <span class="pri-open-note">{COMMERCIAL ? '3,778 ports · free · no login required' : t.pri.note}</span>
     </div>
   </div>
 </section>
@@ -891,35 +892,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="analysis-section">
   <div class="analysis-inner">
     <div class="analysis-header fade-up">
-      <h2 class="analysis-title">The method, demonstrated.</h2>
-      <p class="analysis-sub">Published analysis applying The Narrows model to live events and corridors. Free to read.</p>
+      <h2 class="analysis-title">{t.analysis.title}</h2>
+      <p class="analysis-sub">{t.analysis.sub}{COMMERCIAL && ' Free to read.'}</p>
     </div>
     <div class="analysis-grid">
-      <a href="/analysis/panama" class="analysis-card fade-up">
-        <div class="analysis-card-tag">Panama Canal</div>
-        <div class="analysis-card-title">El Nino has already started throttling Panama, a year ahead of schedule.</div>
-        <p class="analysis-card-body">Draft cut to 48.0 feet, daily transit slots cut from 38 to 34 from 3 September. Grain trade at risk, corridor by corridor, updated live.</p>
-        <span class="analysis-card-link">Read</span>
-      </a>
-      <a href="/analysis/hormuz-dry-cargo" class="analysis-card fade-up">
-        <div class="analysis-card-tag">Strait of Hormuz, dry cargo</div>
-        <div class="analysis-card-title">Hormuz has a fertiliser problem too. Not just oil.</div>
-        <p class="analysis-card-body">India's urea dependency on the Gulf looks like 63%. Once you separate out Oman, which does not transit the strait, the real Hormuz-specific figure is closer to 27%.</p>
-        <span class="analysis-card-link">Read</span>
-      </a>
-      <a href="/analysis/malacca" class="analysis-card fade-up">
-        <div class="analysis-card-tag">Strait of Malacca</div>
-        <div class="analysis-card-title">The Malacca toll question has a number. Here it is.</div>
-        <p class="analysis-card-body">Indonesia floated transit fees on the Strait of Malacca. The question did not go away. Bilateral trade dependency data quantifies who pays and by how much.</p>
-        <span class="analysis-card-link">Read</span>
-      </a>
+      {t.analysis.cards.map((c) => (
+        <a href={lp(lang, c.href)} class="analysis-card fade-up">
+          <div class="analysis-card-tag">{c.tag}</div>
+          <div class="analysis-card-title">{c.title}</div>
+          <p class="analysis-card-body">{c.body}</p>
+          <span class="analysis-card-link">{t.analysis.read}</span>
+        </a>
+      ))}
     </div>
     <div style="margin-top:var(--s4)">
-      <a href="/analysis" class="btn-ghost">All analysis</a>
+      <a href={lp(lang, '/analysis')} class="btn-ghost">{t.analysis.all}</a>
     </div>
   </div>
 </section>
 
+{COMMERCIAL && (
 <!-- CTA -->
 <section class="cta-section" id="briefing">
   <div class="cta-inner">
@@ -937,27 +929,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </div>
 </section>
+)}
 
-<script>
-function isValidEmail(email: string): boolean {
+{COMMERCIAL && (
+<script is:inline>
+function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]{2,}\.[^\s@]{2,}$/.test(email);
 }
 function handleRequest() {
-  const input = document.getElementById('demo-email') as HTMLInputElement;
-  const honey = document.getElementById('demo-honey') as HTMLInputElement;
-  const email = input.value.trim();
-  if (honey?.value) return;
+  var input = document.getElementById('demo-email');
+  var honey = document.getElementById('demo-honey');
+  var email = input.value.trim();
+  if (honey && honey.value) return;
   if (!isValidEmail(email)) {
     input.style.borderColor = 'rgba(192,57,43,0.8)';
-    setTimeout(() => { input.style.borderColor = ''; }, 2000);
+    setTimeout(function () { input.style.borderColor = ''; }, 2000);
     return;
   }
-  window.location.href = `mailto:fysh@narrows.io?subject=Briefing request: The Narrows&body=From: ${email}%0A%0AOrganisation:%0ARole:%0AProduct interest:%0A%0AContext (optional):`;
+  window.location.href = 'mailto:fysh@narrows.io?subject=Briefing request: The Narrows&body=From: ' + email + '%0A%0AOrganisation:%0ARole:%0AProduct interest:%0A%0AContext (optional):';
 }
-document.getElementById('demo-btn')?.addEventListener('click', handleRequest);
-document.getElementById('demo-email')?.addEventListener('keydown', (e: KeyboardEvent) => {
-  if (e.key === 'Enter') handleRequest();
-});
+var btn = document.getElementById('demo-btn');
+if (btn) btn.addEventListener('click', handleRequest);
+var em = document.getElementById('demo-email');
+if (em) em.addEventListener('keydown', function (e) { if (e.key === 'Enter') handleRequest(); });
 </script>
+)}
 
 </BaseLayout>

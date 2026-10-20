@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { COMMERCIAL } from '../../config';
 ---
 
 <BaseLayout
@@ -714,6 +715,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
 
+  {COMMERCIAL && (
   <!-- CTA -->
   <div class="article-cta">
     <div>
@@ -725,6 +727,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <a href="/analysis" class="btn-ghost" style="color:rgba(255,255,255,0.5);font-size:13px;">Read more analysis</a>
     </div>
   </div>
+  )}
 
   <!-- SOURCES -->
   <div class="sources">
