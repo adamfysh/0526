@@ -564,6 +564,18 @@
   [
    "Rerouting cost and Cape detour duration: UNCTAD OSGINF2024d2 \"Impact to global trade of disruption of shipping routes in the Red Sea region\" (2024); World Bank report (February 2024). Container freight rates: Xeneta; Freightos Baltic Index; Kpler \"Update on Red Sea trade flow impacts\" (October 2024). Bab-el-Mandeb transit decline (minus 70%): European Parliament EPRS Briefing (2024). Container tonnage at Suez (minus 82%): UNCTAD. Egypt canal revenue loss: IMF blog \"Red Sea Attacks Disrupt Global Trade\" (March 2024). Greek refiner impact: Hellenic Petroleum and Motor Oil operational filings H1 2024. Panama Canal: ACP FY2024 annual data. LNG transit decline (minus 66%): ACP FY2024; EIA Today in Energy (December 2024). Japan / South Korea LNG spot impacts: IEA Gas Market Report H1 2024. Bilateral trade data: UN Comtrade 2023. Chokepoint parameters locked before November 2023 disruption onset. All model assumptions are adjustable.",
    "Coût de déroutement et durée du détour par le Cap : CNUCED OSGINF2024d2 « Impact to global trade of disruption of shipping routes in the Red Sea region » (2024) ; rapport de la Banque mondiale (février 2024). Taux de fret des conteneurs : Xeneta ; Freightos Baltic Index ; Kpler « Update on Red Sea trade flow impacts » (octobre 2024). Baisse du transit à Bab el-Mandeb (moins 70 %) : note de l’EPRS du Parlement européen (2024). Tonnage de conteneurs à Suez (moins 82 %) : CNUCED. Perte de recettes du canal pour l’Égypte : blog du FMI « Red Sea Attacks Disrupt Global Trade » (mars 2024). Impact sur les raffineurs grecs : documents d’exploitation de Hellenic Petroleum et Motor Oil, S1 2024. Canal de Panama : données annuelles de l’ACP, exercice 2024. Baisse des transits de GNL (moins 66 %) : ACP, exercice 2024 ; EIA Today in Energy (décembre 2024). Impacts sur les prix spot du GNL du Japon et de la Corée du Sud : IEA Gas Market Report, S1 2024. Données commerciales bilatérales : UN Comtrade 2023. Paramètres des points de passage figés avant le début de la perturbation de novembre 2023. Toutes les hypothèses du modèle sont ajustables."
+  ],
+  [
+   "The model predicted it. The disruptions confirmed it.",
+   "Le modèle l’avait prédit. Les perturbations l’ont confirmé."
+  ],
+  [
+   "Run your specific importer and commodity exposures through the Chokepoint Dependency Model before the next disruption, not after. A demo runs your corridor, your vessel assumptions, in front of you with an analyst present.",
+   "Passez vos expositions précises d’importateur et de produit dans le Chokepoint Dependency Model avant la prochaine perturbation, et non après. Une démo passe votre corridor et vos hypothèses de navires devant vous, avec un analyste présent."
+  ],
+  [
+   "<a href=\"/#contact\" class=\"btn btn-gold\">Request a demo</a> <a href=\"/analysis\" class=\"btn-ghost\" style=\"color:rgba(255,255,255,0.5);font-size:13px;\">Read more analysis</a>",
+   "<a href=\"/#contact\" class=\"btn btn-gold\">Demander une démo</a> <a href=\"/analysis\" class=\"btn-ghost\" style=\"color:rgba(255,255,255,0.5);font-size:13px;\">Lire d’autres analyses</a>"
   ]
  ],
  "js": []

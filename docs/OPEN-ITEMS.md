@@ -95,3 +95,9 @@ OPEN
 - Underwriter-framed phrasing remains in hormuz, malacca-zombie and malacca; "Adam Fysh, Founder, The Narrows" bylines remain in hormuz-pocketbook.
 - `NARROWS-CORRIDORS.js` / `NARROWS-RATES.js` labels English on French pages; CASCADE+ fleet data uses fixed Sept 2026 dates.
 - `sk.py` regenerates `js` pairs; after re-running it on `viz/qatar-route-tree`, delete the unused pairs "Gulf LNG" and " · ~${n.totalDays} days from origin" (build flags them).
+
+## H. Commercial mode ON (4 Nov 2026)
+- `COMMERCIAL = true` after legal clearance. English commercial copy renders; the 8 analysis CTAs now have French.
+- OPEN (item D): French for the inline commercial strings in Nav, Footer, `[...lang]/index`, `about`, `data-changelog`, `data-verification-policy`, `methodology`, `pri-methodology`, `pri`. They are English-only inline ternaries; the FR site currently shows English "Client login", "Request demo", "Enquire", product badges and pitch lines.
+- Copy removed during research mode (contact sentence in panama, underwriter/desk framing, bylines) stays removed unless the user asks to restore it.
+- Prices, tiers and outreach stay offline.

@@ -1,8 +1,7 @@
 // Site-wide switch for commercial scaffolding (client login, demo requests,
-// enquiry CTAs, access requests, NDA offers). Keep false while the site is
-// operating purely as a research publication. Flip to true only when the
-// business is registered and cleared to trade.
-export const COMMERCIAL = false;
+// enquiry CTAs, access requests, NDA offers). Switched on 4 Nov 2026 after
+// legal clearance. Set to false to return to research-publication mode.
+export const COMMERCIAL = true;
 
 // Single public contact route while COMMERCIAL is false:
 // press, corrections and methodology questions only.

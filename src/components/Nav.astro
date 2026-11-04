@@ -1,6 +1,7 @@
 ---
 import { COMMERCIAL } from '../config';
 import { ui } from '../i18n/ui';
+import { cm } from '../i18n/commercial';
 import { lp, altPath, type Lang } from '../i18n';
 interface Props { lang?: Lang }
 const { lang = 'en' } = Astro.props;
@@ -30,8 +31,8 @@ const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="h
       <li><a href={lp(lang, "/cascade")}>{t.cascade}</a></li>
       <li><a href={lp(lang, "/analysis")}>{t.analysis}</a></li>
       {alt && <li class="nav-lang"><a href={alt} hreflang={otherLang} lang={otherLang} aria-label={t.langLabel + ': ' + otherLang.toUpperCase()}>{otherLang.toUpperCase()}</a></li>}
-      {COMMERCIAL && <li><a href="https://app.narrows.io" class="nav-login">Client login</a></li>}
-      {COMMERCIAL && <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="nav-cta">Request demo</a></li>}
+      {COMMERCIAL && <li><a href="https://app.narrows.io" class="nav-login">{cm[lang].login}</a></li>}
+      {COMMERCIAL && <li><a href={`mailto:fysh@narrows.io?subject=${cm[lang].demoSubject}`} class="nav-cta">{cm[lang].demo}</a></li>}
     </ul>
   </div>
 </nav>
@@ -44,8 +45,8 @@ const NAV_LOGO_SVG = `<svg class="nav-logo-mark" viewBox="0 0 1698 948" xmlns="h
     <li><a href={lp(lang, "/cascade")}>{t.cascade}</a></li>
     <li><a href={lp(lang, "/analysis")}>{t.analysis}</a></li>
     {alt && <li class="nav-lang-m"><a href={alt} hreflang={otherLang} lang={otherLang} aria-label={t.langLabel + ': ' + otherLang.toUpperCase()}>{otherLang === 'fr' ? 'Français' : 'English'}</a></li>}
-    {COMMERCIAL && <li><a href="https://app.narrows.io" class="mobile-login">Client login</a></li>}
-    {COMMERCIAL && <li><a href="mailto:fysh@narrows.io?subject=Demo request: Narrows" class="mobile-cta">Request demo</a></li>}
+    {COMMERCIAL && <li><a href="https://app.narrows.io" class="mobile-login">{cm[lang].login}</a></li>}
+    {COMMERCIAL && <li><a href={`mailto:fysh@narrows.io?subject=${cm[lang].demoSubject}`} class="mobile-cta">{cm[lang].demo}</a></li>}
   </ul>
 </div>
 <div class="nav-overlay" id="nav-overlay"></div>

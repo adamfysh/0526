@@ -1,6 +1,7 @@
 ---
 import { COMMERCIAL } from '../config';
 import { ui } from '../i18n/ui';
+import { cm } from '../i18n/commercial';
 import { lp, type Lang } from '../i18n';
 interface Props { lang?: Lang }
 const { lang = 'en' } = Astro.props;
@@ -15,10 +16,10 @@ const FOOTER_LOGO_SVG = `<svg class="footer-logo-mark" viewBox="0 0 1698 948" xm
         <Fragment set:html={FOOTER_LOGO_SVG} />
         <span class="footer-logo-word">NARROWS</span>
       </a>
-      <p class="footer-tagline" set:html={COMMERCIAL ? "Trade risk intelligence.<br>When a chokepoint closes,<br>who is exposed and by how much?" : t.tagline}></p>
+      <p class="footer-tagline" set:html={COMMERCIAL ? cm[lang].tagline : t.tagline}></p>
     </div>
     <div>
-      <div class="footer-col-label">{COMMERCIAL ? "Company" : t.colAbout}</div>
+      <div class="footer-col-label">{COMMERCIAL ? cm[lang].company : t.colAbout}</div>
       <ul class="footer-col-links">
         <li><a href={lp(lang, "/about")}>{ui[lang].nav.about}</a></li>
         <li><a href={lp(lang, "/methodology")}>{t.methodology}</a></li>
@@ -31,13 +32,13 @@ const FOOTER_LOGO_SVG = `<svg class="footer-logo-mark" viewBox="0 0 1698 948" xm
       <div class="footer-col-label">{t.colContact}</div>
       <ul class="footer-col-links">
         <li><a href="mailto:fysh@narrows.io">fysh@narrows.io</a></li>
-        {COMMERCIAL && <li><a href="mailto:fysh@narrows.io?subject=Demo request — Narrows">Request a demo</a></li>}
+        {COMMERCIAL && <li><a href={`mailto:fysh@narrows.io?subject=${cm[lang].demoSubject}`}>{cm[lang].demoLong}</a></li>}
         <li><a href="mailto:fysh@narrows.io?subject=Press or corrections — Narrows">{t.press}</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>{COMMERCIAL ? '© 2026 Narrows. All rights reserved.' : t.bottom}</span>
+    <span>{COMMERCIAL ? cm[lang].rights : t.bottom}</span>
     <span>narrows.io</span>
   </div>
 </footer>

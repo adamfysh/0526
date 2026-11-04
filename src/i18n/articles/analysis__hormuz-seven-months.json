@@ -356,6 +356,18 @@
   [
    "CDM dependency and substitution data: Narrows CDM dependency matrix, HORMUZ chokepoint, commodity codes 2709 (crude), 271111 (LNG), 2814, 3102, 3103, 3104 and 3105 (fertiliser: ammonia, nitrogenous, phosphatic, potassic and compound N/P/K respectively; expanded 15 October 2026 from 3102 only). Map: site coordinates from standard gazetteers; country outlines from Natural Earth 1:50m Admin 0 boundaries.",
    "Données de dépendance et de substitution du CDM : matrice de dépendance du CDM de Narrows, point de passage HORMUZ, codes de produits 2709 (brut), 271111 (GNL), 2814, 3102, 3103, 3104 et 3105 (engrais : respectivement ammoniac, azotés, phosphatés, potassiques et composés N/P/K ; élargi le 15 octobre 2026 depuis le seul 3102). Carte : coordonnées des sites tirées de répertoires géographiques standard ; contours des pays issus des limites Admin 0 de Natural Earth au 1:50 m."
+  ],
+  [
+   "Run your fertilizer exposure through the Narrows CDM.",
+   "Passez votre exposition aux engrais dans le CDM de Narrows."
+  ],
+  [
+   "India, Thailand, and Sri Lanka aren't the only bilateral pairs on the board. We will run your specific importer, commodity, and substitution assumptions in front of you.",
+   "L’Inde, la Thaïlande et le Sri Lanka ne sont pas les seules paires bilatérales concernées. Nous passerons vos hypothèses d’importateur, de produit et de substitution devant vous."
+  ],
+  [
+   "Request analysis",
+   "Demander une analyse"
   ]
  ],
  "js": []

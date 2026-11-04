@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { cm } from '../../i18n/commercial';
 import { COMMERCIAL } from '../../config';
 import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
 import { home } from '../../i18n/pages/home';
@@ -643,6 +644,7 @@ const dimScoresFr = ['0,20', '4,36', '4,63', '0,37'];
       <span class="hero-kicker">{t.hero.kicker}</span>
       <h1 class="hero-headline">{COMMERCIAL ? "Maritime trade risk intelligence." : t.hero.headline}</h1>
       <p class="hero-sub">{t.hero.sub}</p>
+      {COMMERCIAL && <p class="hero-sub" style="margin-top:12px">{cm[lang].positioning}</p>}
       {COMMERCIAL && <a href="#briefing" class="btn btn-gold">Request a briefing</a>}
     </div>
     <div class="hero-image">
