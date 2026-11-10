@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "node scripts/export-methodology-meta.mjs",
     "build": "astro build && node scripts/fr-postbuild.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "preview": "astro preview",

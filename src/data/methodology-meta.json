@@ -1,0 +1,92 @@
+{
+  "generated": "2026-10-16",
+  "build": "cdm_v3",
+  "modelYear": 2024,
+  "chokepoints": 14,
+  "importers": 75,
+  "commodities": 20,
+  "rows": 2008,
+  "vintages": {
+    "2022": 172,
+    "2024": 1836
+  },
+  "tiers": [
+    {
+      "tier": 1,
+      "label": "Reported",
+      "rows": 282,
+      "valuePct": 42.4
+    },
+    {
+      "tier": 2,
+      "label": "Corroborated",
+      "rows": 427,
+      "valuePct": 10
+    },
+    {
+      "tier": 3,
+      "label": "Estimated",
+      "rows": 1299,
+      "valuePct": 47.6
+    }
+  ],
+  "sample": {
+    "sensitivity": 0.85,
+    "days": 14,
+    "totalB": 27.2,
+    "countriesAbove5": 47,
+    "countriesTotal": 55,
+    "avgDetourDays": 9.1,
+    "detourMin": 3,
+    "detourMax": 5,
+    "tierPct": {
+      "1": 47.2,
+      "2": 4.8,
+      "3": 47.9
+    },
+    "top": [
+      {
+        "name": "China",
+        "iso": "CHN",
+        "dep": 46,
+        "valueB": 4.93
+      },
+      {
+        "name": "Japan",
+        "iso": "JPN",
+        "dep": 96,
+        "valueB": 2.24
+      },
+      {
+        "name": "Rep. of Korea",
+        "iso": "KOR",
+        "dep": 75,
+        "valueB": 2.1
+      },
+      {
+        "name": "Thailand",
+        "iso": "THA",
+        "dep": 66,
+        "valueB": 0.72
+      },
+      {
+        "name": "United States",
+        "iso": "USA",
+        "dep": 4,
+        "valueB": 0.22
+      }
+    ]
+  },
+  "reroute": {
+    "days": 14,
+    "overrunM": 1.6,
+    "carryK": 230
+  },
+  "fleet": {
+    "vlcc": 42,
+    "vessels": 504,
+    "cargoB": 32.1,
+    "overrunM": 295.1,
+    "days": 14
+  }
+}

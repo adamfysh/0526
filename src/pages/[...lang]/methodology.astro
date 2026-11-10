@@ -15,7 +15,7 @@ const t = methodology[lang];
 <BaseLayout
   lang={lang}
   title={t.title}
-  description={COMMERCIAL ? "How the Narrows trade risk model works. Written for risk professionals who want to understand what is under the hood before a conversation." : t.description}
+  description={COMMERCIAL ? t.descriptionCommercial : t.description}
 >
 
 <style>
@@ -530,7 +530,7 @@ const t = methodology[lang];
     <div class="section-eyebrow">{t.sample.eyebrow}</div>
     <h2 class="section-heading">{t.sample.title}</h2>
     <div class="text-body">
-      <p>{t.sample.intro} {COMMERCIAL ? 'All can be substituted in a demo session.' : t.sample.introTail}</p>
+      <p>{t.sample.intro} {COMMERCIAL ? t.access.sampleTail : t.sample.introTail}</p>
     </div>
     <div class="sample-params">
       {t.sample.params.map(([label, value]) => (
@@ -605,15 +605,15 @@ const t = methodology[lang];
 <div class="access-section" id="contact">
   <div class="access-inner">
     <div>
-      <h2 class="access-title">Full documentation is available<br><em>under NDA</em> for serious counterparties.</h2>
-      <p class="access-body">This page describes the model at a level sufficient to evaluate its credibility and fit. <strong>Full documentation</strong>, including corridor definitions, the complete dependency matrix, simulation API specification, and integration notes, is available on request to qualified counterparties under a standard NDA. Request a demo and we will send the documentation pack before the call.</p>
+      <h2 class="access-title" set:html={t.access.titleHtml}></h2>
+      <p class="access-body" set:html={t.access.bodyHtml}></p>
     </div>
     <div class="access-right">
       <div class="access-form">
-        <input type="email" class="access-input" placeholder="your@organisation.com" id="method-email" />
-        <button class="btn btn-gold" id="method-btn" style="width:100%">Request documentation</button>
+        <input type="email" class="access-input" placeholder={t.access.placeholder} id="method-email" />
+        <button class="btn btn-gold" id="method-btn" style="width:100%" data-subject={t.access.mailSubject} data-body={t.access.mailBody}>{t.access.button}</button>
       </div>
-      <span class="access-note">fysh@narrows.io · A person will reply.</span>
+      <span class="access-note">{t.access.note}</span>
     </div>
   </div>
 </div>
@@ -627,7 +627,9 @@ function handleMethodRequest() {
     setTimeout(() => { input.style.borderColor = ''; }, 1600);
     return;
   }
-  window.location.href = `mailto:fysh@narrows.io?subject=Methodology documentation request: Narrows&body=Request from: ${email}%0A%0AOrganisation:%0ARole:%0AContext:`;
+  const b = document.getElementById('method-btn');
+  const body = (b.dataset.body || '').replace('{email}', email);
+  window.location.href = `mailto:fysh@narrows.io?subject=${encodeURIComponent(b.dataset.subject || '')}&body=${encodeURIComponent(body)}`;
 }
 document.getElementById('method-btn')?.addEventListener('click', handleMethodRequest);
 document.getElementById('method-email')?.addEventListener('keydown', (e) => {

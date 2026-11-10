@@ -4,6 +4,7 @@ import { COMMERCIAL } from '../../config';
 import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
 import { about } from '../../i18n/pages/about';
 import { home } from '../../i18n/pages/home';
+import meta from '../../data/methodology-meta.json';
 
 export function getStaticPaths() {
   return langPaths();
@@ -327,7 +328,7 @@ const h = home[lang].products;
     <div class="about-eyebrow">{COMMERCIAL ? "What The Narrows is building" : t.work.eyebrow}</div>
     <h2 class="about-section-title">{COMMERCIAL ? "Six products. One data foundation." : t.work.title}</h2>
     <div class="about-body">
-      <p>{COMMERCIAL ? 'Every product is built on the same underlying Chokepoint Dependency Model, 37 maritime risk corridors, $2.15 trillion in matched trade value, 44 importing countries, and 17 commodity classes. Different clients need some, all, or none of them.' : t.work.lead}</p>
+      <p>{COMMERCIAL ? (lang === 'fr' ? `Chaque produit repose sur le même modèle de dépendance aux points de passage\u00a0: ${meta.chokepoints} points de passage maritimes, ${meta.importers} pays importateurs et ${meta.commodities} codes de produits. Chaque client a besoin de certains d’entre eux, de tous, ou d’aucun.` : `Every product is built on the same underlying Chokepoint Dependency Model: ${meta.chokepoints} maritime chokepoints, ${meta.importers} importing countries, and ${meta.commodities} commodity codes. Different clients need some, all, or none of them.`) : t.work.lead}</p>
     </div>
     <div class="tile-grid">
       <div class="tile">
