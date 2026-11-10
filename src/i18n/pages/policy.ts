@@ -21,7 +21,7 @@ const en = {
   purpose: {
     eyebrow: 'Purpose',
     title: 'Every figure carries a tier. The tier is never hidden.',
-    p: 'This page explains how Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. It exists so that a reader relying on this data can see how confident to be in any given figure, and how to ask for more.',
+    p: 'This page explains how Narrows sources, tiers, and verifies the trade and routing data behind the Chokepoint Dependency Model and the Port Risk Index. It exists so that a buyer relying on this data can see how confident to be in any given figure, and how to ask for more.',
   },
   tiers: {
     eyebrow: 'Data tiers',
@@ -44,7 +44,7 @@ const en = {
     eyebrow: 'Requests',
     title: 'Any figure can be independently checked on request.',
     p1: 'A specific country, commodity, or chokepoint figure can be independently checked on request. This produces a short verification note covering: the source of the figure, the tier it carries, the date it was last checked, and the result of a fresh spot check against an independent source if one has not been run recently for that combination.',
-    p2: 'This is offered rather than a copy of the internal log because most of the value in a verification request is the answer, not the archive.',
+    p2: 'This is offered rather than full access to the internal log because most of the value in a verification request is the answer, not the archive.',
   },
   track: {
     eyebrow: 'Track record',
@@ -76,7 +76,7 @@ const fr: typeof en = {
   purpose: {
     eyebrow: 'Objet',
     title: 'Chaque chiffre porte un niveau. Le niveau n’est jamais masqué.',
-    p: 'Cette page explique comment Narrows s’approvisionne en données commerciales et de routage, les classe par niveau et les vérifie, pour le Chokepoint Dependency Model et le Port Risk Index. Elle existe pour qu’un lecteur qui s’appuie sur ces données puisse voir quel degré de confiance accorder à chaque chiffre, et comment en demander davantage.',
+    p: 'Cette page explique comment Narrows s’approvisionne en données commerciales et de routage, les classe par niveau et les vérifie, pour le Chokepoint Dependency Model et le Port Risk Index. Elle existe pour qu’un acheteur qui s’appuie sur ces données puisse voir quel degré de confiance accorder à chaque chiffre, et comment en demander davantage.',
   },
   tiers: {
     eyebrow: 'Niveaux de données',
@@ -99,7 +99,7 @@ const fr: typeof en = {
     eyebrow: 'Demandes',
     title: 'Tout chiffre peut être vérifié de façon indépendante sur demande.',
     p1: `Un chiffre précis, pour un pays, un produit ou un point de passage, peut être vérifié de façon indépendante sur demande. Cela donne une courte note de vérification qui indique${nb}: la source du chiffre, le niveau qu’il porte, la date de sa dernière vérification et le résultat d’un nouveau contrôle ponctuel auprès d’une source indépendante, si aucun n’a été réalisé récemment pour cette combinaison.`,
-    p2: 'Cette offre remplace la communication d’une copie du journal interne, car l’essentiel de la valeur d’une demande de vérification est la réponse, pas l’archive.',
+    p2: 'Cette offre remplace l’accès complet au journal interne, car l’essentiel de la valeur d’une demande de vérification est la réponse, pas l’archive.',
   },
   track: {
     eyebrow: 'Historique',

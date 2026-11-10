@@ -14,7 +14,7 @@ const en = {
   },
   cdm: {
     label: 'Chokepoint Dependency Model',
-    html: 'Everything on The Narrows is built on the <strong>Chokepoint Dependency Model</strong>. Bilateral trade data at commodity level, supplemented and validated with vessel, port, and market sources.',
+    html: 'Every product in The Narrows is built on the <strong>Chokepoint Dependency Model</strong>. Bilateral trade data at commodity level, supplemented and validated with vessel, port, and market sources.',
     tail: 'The method and its data verification are documented on this site.',
   },
   products: {
@@ -27,7 +27,7 @@ const en = {
     },
     analysis: {
       name: 'Analysis',
-      desc: 'Corridor and scenario analysis demonstrating the method against live events. Published outputs that test the model and quantify disruption.',
+      desc: 'Corridor and scenario analysis demonstrating the method against live events. Published outputs proving the model and quantifying disruption.',
       link: 'Read the analysis',
     },
     cdm: {
@@ -59,7 +59,7 @@ const en = {
       val2: '27%',
       caption: 'The gap between a headline dependency figure and the one that is actually load-bearing.',
       captionLink: 'Read the analysis',
-      desc: 'The bilateral trade dependency data behind every Narrows tool: commodity-level, corridor-level, validated against vessel and port sources.',
+      desc: 'The bilateral trade dependency data behind every Narrows product: commodity-level, corridor-level, validated against vessel and port sources.',
       link: 'Read the methodology',
     },
     cape: {
@@ -70,7 +70,7 @@ const en = {
       row2: 'War risk PML',
       val2: '$3.97B',
       caption: 'Shown in the demonstration, run against a sample fleet.',
-      desc: 'Select a corridor event and see aggregate exposure by vessel class, corridor, and scenario severity, plus the TIDE accumulation figures that reinsurers price against. The demonstration runs a fixed illustrative fleet.',
+      desc: 'Load a vessel portfolio, select a corridor event, get aggregate exposure by vessel class, corridor, and scenario severity, plus the TIDE accumulation figures reinsurers price against. The demo runs a fixed illustrative fleet.',
       link: 'View demonstration',
     },
     cascade: {
@@ -151,7 +151,7 @@ const fr: typeof en = {
   },
   cdm: {
     label: 'Chokepoint Dependency Model',
-    html: `Tout ce que publie The Narrows repose sur le <strong>Chokepoint Dependency Model</strong> (CDM, modèle de dépendance aux points de passage obligés). Des données commerciales bilatérales au niveau de chaque produit, complétées et validées par des sources sur les navires, les ports et les marchés.`,
+    html: `Chaque produit de The Narrows repose sur le <strong>Chokepoint Dependency Model</strong> (CDM, modèle de dépendance aux points de passage obligés). Des données commerciales bilatérales au niveau de chaque produit, complétées et validées par des sources sur les navires, les ports et les marchés.`,
     tail: 'La méthode et la vérification des données sont documentées sur ce site.',
   },
   products: {
@@ -164,7 +164,7 @@ const fr: typeof en = {
     },
     analysis: {
       name: 'Analyses',
-      desc: 'Analyses de corridors et de scénarios qui démontrent la méthode sur des événements d’actualité. Des publications qui mettent le modèle à l’épreuve et chiffrent les perturbations.',
+      desc: 'Analyses de corridors et de scénarios qui démontrent la méthode sur des événements d’actualité. Des publications qui prouvent le modèle et chiffrent les perturbations.',
       link: 'Lire les analyses',
     },
     cdm: {
@@ -196,7 +196,7 @@ const fr: typeof en = {
       val2: `27${nb}%`,
       caption: 'L’écart entre un chiffre de dépendance affiché et celui qui pèse réellement.',
       captionLink: 'Lire l’analyse',
-      desc: `Les données de dépendance commerciale bilatérale qui sous-tendent chaque outil de Narrows${nb}: au niveau du produit et du corridor, validées par des sources sur les navires et les ports.`,
+      desc: `Les données de dépendance commerciale bilatérale qui sous-tendent chaque produit de Narrows${nb}: au niveau du produit et du corridor, validées par des sources sur les navires et les ports.`,
       link: 'Lire la méthodologie',
     },
     cape: {
@@ -207,7 +207,7 @@ const fr: typeof en = {
       row2: 'Sinistre maximum probable (PML), risque de guerre',
       val2: `3,97${nb}Md$`,
       caption: 'Visible dans la démonstration, sur une flotte d’exemple.',
-      desc: 'Choisissez un événement sur un corridor pour obtenir l’exposition agrégée par classe de navire, par corridor et par niveau de gravité du scénario, ainsi que les chiffres de cumul TIDE sur lesquels les réassureurs fondent leurs prix. La démonstration utilise une flotte illustrative fixe.',
+      desc: 'Chargez un portefeuille de navires, choisissez un événement sur un corridor pour obtenir l’exposition agrégée par classe de navire, par corridor et par niveau de gravité du scénario, ainsi que les chiffres de cumul TIDE sur lesquels les réassureurs fondent leurs prix. La démo utilise une flotte illustrative fixe.',
       link: 'Voir la démonstration',
     },
     cascade: {

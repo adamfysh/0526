@@ -10,7 +10,7 @@ const en = {
   hero: {
     eyebrow: 'Methodology',
     titleHtml: 'How bilateral trade data becomes<br>\n        <em>dollar-denominated exposure.</em>',
-    sub: "Written for readers who want to assess the model's credibility. Covers the five-stage data pipeline, the three structured outputs, validation approach, and stated limitations, at the level of detail required to judge the model without disclosing proprietary routing logic.",
+    sub: "Written for risk professionals evaluating fit before a conversation. Covers the five-stage data pipeline, the three structured outputs, validation approach, and stated limitations, at the level of detail required to assess the model's credibility without disclosing proprietary routing logic.",
     cov: [
       { label: 'Risk corridors modelled', value: '37', unit: 'corridors' },
       { label: 'Trade value in scope', value: '$2.15T', unit: 'USD' },
@@ -116,7 +116,7 @@ const en = {
       '<strong>Annual base data, not live flows.</strong> Trade flow data reflects annual bilateral patterns from the most recent complete reference year. The model measures structural dependency, not current cargo positions. Voyage count estimates are model-derived decompositions, not live vessel tracking.',
       '<strong>No seasonal adjustment.</strong> Duration-based calculations use linear scaling rather than seasonal adjustment. The model does not capture monthly variation in commodity flows or periodic vessel traffic patterns.',
       '<strong>Country-level, not vessel-level.</strong> The model does not track individual vessels, flag states, or policy-specific cargo. Portfolio accumulation analysis requires mapping individual policies to corridor assignments, a data integration step that sits outside the model.',
-      '<strong>Capacity sensitivity scores are calibrated parameters.</strong> The 0–1 sensitivity scores applied per corridor are informed judgements calibrated against historical disruption events. They are defensible and adjustable, not statistical estimates with confidence intervals. Readers may substitute their own scores.',
+      '<strong>Capacity sensitivity scores are calibrated parameters.</strong> The 0–1 sensitivity scores applied per corridor are informed judgements calibrated against historical disruption events. They are defensible and adjustable, not statistical estimates with confidence intervals. Commercial clients may substitute their own scores.',
       '<strong>Coverage gaps at thin bilateral flows.</strong> Some commodity-corridor pairs with limited bilateral data coverage are excluded from the dependency matrix. The 87.2% coverage rate (model v0.2) reflects value-weighted coverage; smaller flows by value are disproportionately underrepresented.',
       '<strong>Land-based and pipeline flows excluded.</strong> The model does not distinguish transport mode within bilateral trade data. Flows that are primarily overland or pipeline-routed are excluded where corridor assignment is ambiguous, but the exclusion is not exhaustive.',
     ],
@@ -136,7 +136,7 @@ const fr: typeof en = {
   hero: {
     eyebrow: 'Méthodologie',
     titleHtml: 'Comment des données commerciales bilatérales deviennent<br>\n        <em>une exposition chiffrée en dollars.</em>',
-    sub: 'Écrit pour les lecteurs qui veulent évaluer la crédibilité du modèle. Présente le pipeline de données en cinq étapes, les trois résultats structurés, l’approche de validation et les limites reconnues, avec le niveau de détail nécessaire pour juger le modèle sans divulguer la logique de routage propriétaire.',
+    sub: 'Écrit pour les professionnels du risque qui évaluent l’adéquation avant une première conversation. Présente le pipeline de données en cinq étapes, les trois résultats structurés, l’approche de validation et les limites reconnues, avec le niveau de détail nécessaire pour évaluer la crédibilité du modèle sans divulguer la logique de routage propriétaire.',
     cov: [
       { label: 'Corridors à risque modélisés', value: '37', unit: 'corridors' },
       { label: 'Valeur des échanges couverte', value: '2' + nb + '150', unit: 'Md USD' },
@@ -242,7 +242,7 @@ const fr: typeof en = {
       '<strong>Des données de base annuelles, pas des flux en temps réel.</strong> Les données de flux commerciaux reflètent les schémas bilatéraux annuels de la dernière année de référence complète. Le modèle mesure une dépendance structurelle, pas les positions actuelles des cargaisons. Les estimations du nombre de voyages sont des décompositions issues du modèle, et non un suivi de navires en temps réel.',
       '<strong>Aucun ajustement saisonnier.</strong> Les calculs fondés sur la durée utilisent une mise à l’échelle linéaire plutôt qu’un ajustement saisonnier. Le modèle ne capte ni la variation mensuelle des flux de produits ni les schémas périodiques du trafic de navires.',
       '<strong>À l’échelle du pays, pas du navire.</strong> Le modèle ne suit ni les navires individuels, ni les États du pavillon, ni les cargaisons propres à une police. L’analyse du cumul d’un portefeuille exige de rattacher chaque police à un corridor, une étape d’intégration de données qui se situe en dehors du modèle.',
-      '<strong>Les scores de sensibilité de capacité sont des paramètres calibrés.</strong> Les scores de sensibilité de 0 à 1 appliqués à chaque corridor sont des jugements éclairés, calibrés sur des perturbations historiques. Ils sont défendables et ajustables, mais ne sont pas des estimations statistiques assorties d’intervalles de confiance. Les lecteurs peuvent y substituer leurs propres scores.',
+      '<strong>Les scores de sensibilité de capacité sont des paramètres calibrés.</strong> Les scores de sensibilité de 0 à 1 appliqués à chaque corridor sont des jugements éclairés, calibrés sur des perturbations historiques. Ils sont défendables et ajustables, mais ne sont pas des estimations statistiques assorties d’intervalles de confiance. Les clients commerciaux peuvent y substituer leurs propres scores.',
       '<strong>Des lacunes de couverture pour les flux bilatéraux faibles.</strong> Certaines paires produit-corridor dont la couverture en données bilatérales est limitée sont exclues de la matrice de dépendance. Le taux de couverture de 87,2' + nb + '% (modèle v0.2) est pondéré par la valeur' + nb + '; les flux de moindre valeur sont donc sous-représentés de façon disproportionnée.',
       '<strong>Les flux terrestres et par oléoduc sont exclus.</strong> Le modèle ne distingue pas le mode de transport au sein des données commerciales bilatérales. Les flux principalement acheminés par voie terrestre ou par oléoduc sont exclus lorsque l’affectation à un corridor est ambiguë, mais cette exclusion n’est pas exhaustive.',
     ],

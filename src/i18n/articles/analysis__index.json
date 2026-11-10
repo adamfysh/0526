@@ -14,10 +14,6 @@
    "Le modèle appliqué<br> <em>à l’actualité.</em>"
   ],
   [
-   "Every figure is a model output. Every assumption is stated. Analysis is published as events warrant.",
-   "Chaque chiffre est un résultat du modèle. Chaque hypothèse est énoncée. Les analyses sont publiées au gré de l’actualité."
-  ],
-  [
    "Publishing approach",
    "Politique de publication"
   ],
@@ -456,6 +452,10 @@
   [
    "Read the analysis",
    "Lire l’analyse"
+  ],
+  [
+   "Every figure is a model output. Every assumption is stated. Every number can be run with your own inputs in a demo session. Analysis is published as events warrant.",
+   "Chaque chiffre est un résultat du modèle. Chaque hypothèse est énoncée. Chaque chiffre peut être recalculé avec vos propres données lors d’une session de démonstration. Les analyses sont publiées au gré de l’actualité."
   ]
  ],
  "js": []

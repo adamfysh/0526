@@ -10,7 +10,7 @@ export const cm = {
     company: 'Company',
     tagline: 'Trade risk intelligence.<br>When a chokepoint closes,<br>who is exposed and by how much?',
     rights: '© 2026 Narrows. All rights reserved.',
-    positioning: 'A commercial operation that proves its value in public, through research and analysis.',
+    press: 'Press',
   },
   fr: {
     login: 'Espace client',
@@ -20,6 +20,6 @@ export const cm = {
     company: 'Société',
     tagline: `Intelligence du risque commercial.<br>Quand un point de passage se ferme,<br>qui est exposé, et de combien${nb}?`,
     rights: '© 2026 Narrows. Tous droits réservés.',
-    positioning: 'Une activité commerciale qui prouve sa valeur en public, par la recherche et l’analyse.',
+    press: 'Presse',
   },
 } as const;

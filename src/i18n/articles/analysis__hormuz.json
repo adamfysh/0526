@@ -70,10 +70,6 @@
    "Le tableau de bord du détroit d’Ormuz de la CNUCED, lancé le 28 avril 2026, agrège clairement le signal du marché. Le Baltic Dirty Tanker Index s’établit à 2 795, contre une moyenne de 1 091 en 2024. Le combustible de soute VLSFO à Singapour est passé d’une moyenne de 571 $ la tonne en 2024 à 1 076 $. Le Brent a dépassé 120 $ lors de pics en séance. Ce sont les bons chiffres à surveiller. Ils confirment la gravité. Ils ne la répartissent pas."
   ],
   [
-   "Anyone assessing marine insurance accumulation, a crude supply position, or the resilience of a Capesize fleet needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. The bilateral model answers it.",
-   "Quiconque évalue le cumul d’assurance maritime, une position d’approvisionnement en brut ou la résilience d’une flotte de Capesize a besoin de ce que l’indice ne peut pas fournir : quelles contreparties précises portent une exposition à Ormuz, pour quel produit, à quel pourcentage de leur approvisionnement maritime total, et quel est le coût réel de chaque option de déroutement aux taux de marché actuels. Les indices agrégés sont des intrants de cette question. Le modèle bilatéral y répond."
-  ],
-  [
    "Hormuz sensitivity score 1.00",
    "Score de sensibilité d’Ormuz 1,00"
   ],
@@ -196,10 +192,6 @@
   [
    "In-Gulf vessels vs. forward supply chains",
    "Navires dans le Golfe et chaînes d’approvisionnement futures"
-  ],
-  [
-   "Two distinct risks require different analytical treatment. <strong>For vessels already inside the Persian Gulf, whether loaded, at berth, or at anchor awaiting loading, there is no alternative exit.</strong> The Strait is the only way out. Every such vessel, regardless of cargo type, faces binary exposure: it transits Hormuz, or it waits. This is the accumulation number for in-window fleet exposure. The second question is forward-looking: can an importer substitute supply over a longer horizon? For crude, the answer is yes, at a cost. West African, Brazilian, and North Sea crude can be sourced and routed via Cape at a voyage premium of approximately $3.5M per VLCC at current market rates. That option is painful but real. For LNG, no equivalent alternative supply exists. Qatari LNG cannot be replaced at scale from any other origin. <strong>Every LNG cargo in the Gulf is binary on both timeframes. Crude is binary for in-place vessels; it has a costly alternative for future supply.</strong> The reroute column in the table above reflects supply-chain optionality, not in-place vessel diversion.",
-   "Deux risques distincts exigent un traitement analytique différent. <strong>Pour les navires déjà à l’intérieur du golfe Persique, chargés, à quai ou au mouillage en attente de chargement, il n’existe aucune sortie alternative.</strong> Le détroit est la seule issue. Chacun de ces navires, quelle que soit sa cargaison, fait face à une exposition binaire : il transite par Ormuz, ou il attend. C’est le chiffre de cumul de l’exposition de la flotte présente dans la fenêtre. La seconde question est prospective : un importateur peut-il substituer son approvisionnement à plus long terme ? Pour le brut, la réponse est oui, à un coût. Du brut ouest-africain, brésilien et de mer du Nord peut être acquis et acheminé par le Cap avec une prime de voyage d’environ 3,5 M$ par VLCC aux taux de marché actuels. Cette option est douloureuse, mais réelle. Pour le GNL, aucune offre alternative équivalente n’existe. Le GNL qatari ne peut pas être remplacé à grande échelle depuis une autre origine. <strong>Chaque cargaison de GNL dans le Golfe est binaire sur les deux horizons. Le brut est binaire pour les navires déjà en place ; il a une alternative coûteuse pour l’approvisionnement futur.</strong> La colonne de déroutement du tableau ci-dessus reflète l’optionalité de la chaîne d’approvisionnement, et non la déviation de navires déjà en place."
   ],
   [
    "The forward scenarios",
@@ -622,10 +614,6 @@
    "Matrice de scénarios de durée pour toute hypothèse d’entrée"
   ],
   [
-   "The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. Anyone running their own scenario can replace the model's default vessel-class rates with their own rates and rerun the exposure calculation. This is the capability that aggregate market data, however current, cannot replicate.",
-   "Les hypothèses du modèle sont substituables. Les taux d’affrètement, les prix de la soute, la durée de la perturbation et le niveau de péage sont tous des intrants variables. Quiconque exécute son propre scénario peut remplacer les taux par classe de navires du modèle par les siens et relancer le calcul d’exposition. C’est la capacité que les données de marché agrégées, aussi actuelles soient-elles, ne peuvent pas reproduire."
-  ],
-  [
    "Methodology and data sources",
    "Méthodologie et sources de données"
   ],
@@ -644,6 +632,18 @@
   [
    "Request demo",
    "Demander une démo"
+  ],
+  [
+   "An accumulation underwriter pricing a P&amp;I book, a crude desk managing a supply position, or a lender stress-testing a Capesize fleet facility needs something the index cannot provide: which specific counterparties carry Hormuz exposure, for which commodity, at what percentage of their total seaborne supply, and what the genuine cost of each rerouting option is at current market rates. Aggregate indices are inputs to that question. Run it through The Narrows and you get the answer.",
+   "Un souscripteur de cumul qui tarife un portefeuille P&amp;I, un desk brut qui gère une position d’approvisionnement ou un prêteur qui éprouve une facilité de flotte Capesize a besoin de ce que l’indice ne peut pas fournir : quelles contreparties précises portent une exposition à Ormuz, pour quel produit, à quel pourcentage de leur approvisionnement maritime total, et quel est le coût réel de chaque option de déroutement aux taux de marché actuels. Les indices agrégés sont des intrants de cette question. Passez-la dans The Narrows et vous obtenez la réponse."
+  ],
+  [
+   "Two distinct risks require different analytical treatment. <strong>For vessels already inside the Persian Gulf, whether loaded, at berth, or at anchor awaiting loading, there is no alternative exit.</strong> The Strait is the only way out. Every such vessel, regardless of cargo type, faces binary exposure: it transits Hormuz, or it waits. This is the accumulation number for underwriters pricing in-window fleet exposure. The second question is forward-looking: can an importer substitute supply over a longer horizon? For crude, the answer is yes, at a cost. West African, Brazilian, and North Sea crude can be sourced and routed via Cape at a voyage premium of approximately $3.5M per VLCC at current market rates. That option is painful but real. For LNG, no equivalent alternative supply exists. Qatari LNG cannot be replaced at scale from any other origin. <strong>Every LNG cargo in the Gulf is binary on both timeframes. Crude is binary for in-place vessels; it has a costly alternative for future supply.</strong> The reroute column in the table above reflects supply-chain optionality, not in-place vessel diversion.",
+   "Deux risques distincts exigent un traitement analytique différent. <strong>Pour les navires déjà à l’intérieur du golfe Persique, chargés, à quai ou au mouillage en attente de chargement, il n’existe aucune sortie alternative.</strong> Le détroit est la seule issue. Chacun de ces navires, quelle que soit sa cargaison, fait face à une exposition binaire : il transite par Ormuz, ou il attend. C’est le chiffre de cumul pour les assureurs qui tarifent l’exposition de la flotte présente dans la fenêtre. La seconde question est prospective : un importateur peut-il substituer son approvisionnement à plus long terme ? Pour le brut, la réponse est oui, à un coût. Du brut ouest-africain, brésilien et de mer du Nord peut être acquis et acheminé par le Cap avec une prime de voyage d’environ 3,5 M$ par VLCC aux taux de marché actuels. Cette option est douloureuse, mais réelle. Pour le GNL, aucune offre alternative équivalente n’existe. Le GNL qatari ne peut pas être remplacé à grande échelle depuis une autre origine. <strong>Chaque cargaison de GNL dans le Golfe est binaire sur les deux horizons. Le brut est binaire pour les navires déjà en place ; il a une alternative coûteuse pour l’approvisionnement futur.</strong> La colonne de déroutement du tableau ci-dessus reflète l’optionalité de la chaîne d’approvisionnement, et non la déviation de navires déjà en place."
+  ],
+  [
+   "The model assumptions are substitutable. Charter rates, bunker prices, disruption duration, and toll level are all variable inputs. A counterparty running their own scenario can replace the model's default vessel-class rates with their own book rates and rerun the exposure calculation in real time. This is the capability that aggregate market data, however current, cannot replicate.",
+   "Les hypothèses du modèle sont substituables. Les taux d’affrètement, les prix de la soute, la durée de la perturbation et le niveau de péage sont tous des intrants variables. Une contrepartie qui exécute son propre scénario peut remplacer les taux par classe de navires du modèle par ses propres taux de portefeuille et relancer le calcul d’exposition en temps réel. C’est la capacité que les données de marché agrégées, aussi actuelles soient-elles, ne peuvent pas reproduire."
   ]
  ],
  "js": []

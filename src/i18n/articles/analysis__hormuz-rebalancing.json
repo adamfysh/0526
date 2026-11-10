@@ -490,10 +490,6 @@
    "Europe via la Méditerranée ; l’Asie paie la prime du Cap"
   ],
   [
-   "Does the Atlantic surge reach a given refinery grade?",
-   "La hausse atlantique correspond-elle à une qualité de brut raffinée donnée ?"
-  ],
-  [
    "Cannot answer: no commodity granularity",
    "Impossible de répondre : pas de granularité par produit"
   ],
@@ -512,10 +508,6 @@
   [
    "No · 8 nations across South &amp; Southeast Asia uncovered · bilateral Tier 1",
    "Non · 8 pays d’Asie du Sud et du Sud-Est non couverts · bilatéral de rang 1"
-  ],
-  [
-   "What is a given counterparty's residual Hormuz exposure?",
-   "Quelle est l’exposition résiduelle à Ormuz d’une contrepartie donnée ?"
   ],
   [
    "Cannot answer",
@@ -552,6 +544,14 @@
   [
    "Request analysis",
    "Demander une analyse"
+  ],
+  [
+   "Does the Atlantic surge reach my refinery grade?",
+   "La hausse atlantique correspond-elle à ma qualité de brut raffinée ?"
+  ],
+  [
+   "What is my counterparty's residual Hormuz exposure?",
+   "Quelle est l’exposition résiduelle à Ormuz de ma contrepartie ?"
   ]
  ],
  "js": []

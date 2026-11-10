@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { langPaths, getLang, lp, localizeHtml } from '../../i18n';
-import { cape } from '../../i18n/pages/cape';
+import { cape, capeCommercial } from '../../i18n/pages/cape';
+import { COMMERCIAL } from '../../config';
 
 export function getStaticPaths() {
   return langPaths();
@@ -11,6 +12,8 @@ export function getStaticPaths() {
 
 const lang = getLang(Astro.params.lang);
 const t = cape[lang];
+const cm = capeCommercial[lang];
+const mail = (subj) => `mailto:fysh@narrows.io?subject=${encodeURIComponent(subj)}`;
 const feed = JSON.parse(readFileSync(join(process.cwd(), 'public/cape_tide_feed.json'), 'utf-8'));
 const H = feed.corridors.hormuz;
 const NB = '\u00a0';
@@ -208,15 +211,16 @@ const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
 </style>
 
 <div class="demo-notice">
-  <p class="demo-notice-inner"><strong>{t.demo.b}</strong> {t.demo.t}</p>
+  <p class="demo-notice-inner"><strong>{t.demo.b}</strong> {COMMERCIAL ? cm.demoT : t.demo.t}{COMMERCIAL && <a href={mail('CAPE full access')} style="color:var(--blue);font-weight:500;margin-left:6px">{cm.demoLink}</a>}</p>
 </div>
 
 <section class="cape-hero">
   <div class="cape-kicker">{t.hero.kicker}</div>
   <h1 set:html={t.hero.titleHtml}></h1>
-  <p class="cape-hero-lead">{t.hero.lead}</p>
+  <p class="cape-hero-lead">{COMMERCIAL ? cm.lead : t.hero.lead}</p>
   <div class="cape-hero-actions">
     <a href={tool} class="btn-primary-lg" target="_blank">{t.hero.open}</a>
+    {COMMERCIAL && <a href={mail('CAPE access request')} class="btn-ghost-lg">{cm.requestFull}</a>}
   </div>
 </section>
 
@@ -224,7 +228,7 @@ const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
   <div class="cape-what-inner">
     <div class="cape-what-text">
       <h2>{t.what.h}</h2>
-      {t.what.p.map((p) => <p>{p}</p>)}
+      {t.what.p.map((p, i) => <p>{COMMERCIAL && i === 1 ? cm.p2 : p}</p>)}
     </div>
     <div class="cape-distinction">
       {t.what.rows.map((r) => (
@@ -232,7 +236,7 @@ const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
           <div class="cape-distinction-label">{r[0]}</div>
           <div class="cape-distinction-text">
             <strong>{r[1]}</strong>
-            <span>{r[2]}</span>
+            <span>{COMMERCIAL && r[0] === 'CAPE' ? cm.rowCape : COMMERCIAL && r[0] === 'TIDE' ? cm.rowTide : r[2]}</span>
           </div>
         </div>
       ))}
@@ -256,7 +260,7 @@ const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
       ))}
     </div>
     <div class="tide-cascade-note">
-      <Fragment set:html={fill(t.tide.cascadeHtml)} />
+      <Fragment set:html={fill(COMMERCIAL ? cm.cascadeHtml : t.tide.cascadeHtml)} />
       <span style="display:block;margin-top:8px;opacity:.7;font-size:12px">{fill(t.tide.asof)}</span>
     </div>
   </div>
@@ -265,22 +269,25 @@ const tool = lang === 'fr' ? '/cape.html?lang=fr' : '/cape.html';
 <section class="cape-how">
   <h2>{t.how.h}</h2>
   <div class="cape-steps">
-    {t.how.steps.map((s) => (
-      <div class="cape-step">
+    {(COMMERCIAL ? cm.steps : t.how.steps).map((s, i) => (
+      <div class={'cape-step' + (COMMERCIAL && i > 0 ? ' locked' : '')}>
         <div class="cape-step-num">{s[0]}</div>
         <h3>{s[1]}</h3>
         <p>{s[2]}</p>
+        {COMMERCIAL && i > 0 && <span class="cape-step-gate">{cm.gate}</span>}
       </div>
     ))}
   </div>
 </section>
 
 <section class="cape-cta-section">
-  <h2>{t.cta.h}</h2>
-  <p>{t.cta.p}</p>
+  <h2>{COMMERCIAL ? cm.ctaH : t.cta.h}</h2>
+  <p>{COMMERCIAL ? cm.ctaP : t.cta.p}</p>
   <div class="cape-hero-actions" style="justify-content:center">
     <a href={tool} class="btn-primary-lg" target="_blank">{t.hero.open}</a>
+    {COMMERCIAL && <a href={mail('CAPE access request')} class="btn-ghost-lg">{cm.gate}</a>}
   </div>
+  {COMMERCIAL && <p class="cape-privacy"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>{cm.privacy}</p>}
 </section>
 
 </BaseLayout>

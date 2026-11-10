@@ -466,10 +466,6 @@
    "Ce que le bon chiffre change au calcul des réserves."
   ],
   [
-   "An analyst sizing Chinese crude exposure with an 80 percent Malacca dependency assumption is applying a structural factor 73 percent higher than the CDM bilateral figure. The implied PML is wrong in the same direction. The difference in implied 14-day VaR for China crude between the two assumptions is approximately $4.2 billion, applying the 33.8-percentage-point gap to an implied total seaborne crude book of roughly $327B. In an exposure model, that is a structural error, not a modelling tolerance.",
-   "Un analyste qui dimensionne l’exposition de la Chine en brut avec une hypothèse de dépendance de 80 pour cent envers Malacca applique un facteur structurel supérieur de 73 pour cent au chiffre bilatéral du CDM. La PML implicite est fausse dans le même sens. La différence de VaR implicite à 14 jours pour le brut chinois entre les deux hypothèses est d’environ 4,2 milliards de dollars, en appliquant l’écart de 33,8 points de pourcentage à un portefeuille total implicite de brut maritime d’environ 327 Md$. Dans un modèle d’exposition, c’est une erreur structurelle, et non une tolérance de modélisation."
-  ],
-  [
    "The CDM framework treats Malacca exposure in three distinct buckets:",
    "Le cadre du CDM traite l’exposition de Malacca en trois blocs distincts :"
   ],
@@ -520,6 +516,10 @@
   [
    "Applying 80 percent rather than 46.2 percent to China's seaborne crude import volume produces a 14-day VaR difference of approximately <strong>$4.2 billion</strong>. The resulting PML impact depends on the treaty's specific attachment point and is not restated here as a single figure; see the underlying dependency and VaR figures above for the inputs to that calculation. The bilateral dependency layer in the CDM resolves this by computing structural exposure at the (importer, chokepoint, commodity) level, replacing the origin-mix averaging that generates the throughput figure with a structural dependency figure that accounts for routing alternatives at each margin. The 80 percent figure has been embedded in corridor risk models for over a decade. <strong>The gap is not small, and it does not average out.</strong>",
    "Appliquer 80 pour cent plutôt que 46,2 pour cent au volume d’importations maritimes de brut de la Chine produit une différence de VaR à 14 jours d’environ <strong>4,2 milliards de dollars</strong>. L’impact en PML qui en résulte dépend du point d’attachement précis du traité et n’est pas rappelé ici sous forme d’un chiffre unique ; voir les chiffres de dépendance et de VaR ci-dessus pour les intrants de ce calcul. La couche de dépendance bilatérale du CDM résout cela en calculant l’exposition structurelle au niveau (importateur, point de passage, produit), en remplaçant la moyenne des origines qui génère le chiffre de débit par un chiffre de dépendance structurelle qui tient compte des alternatives de routage à chaque marge. Le chiffre de 80 pour cent est intégré dans les modèles de risque de corridor depuis plus d’une décennie. <strong>L’écart n’est pas petit, et il ne s’annule pas.</strong>"
+  ],
+  [
+   "An underwriter sizing a treaty layer on Chinese crude exposure with an 80 percent Malacca dependency assumption is applying a structural factor 73 percent higher than the CDM bilateral figure. The implied PML is wrong in the same direction. The difference in implied 14-day VaR for China crude between the two assumptions is approximately $4.2 billion, applying the 33.8-percentage-point gap to an implied total seaborne crude book of roughly $327B. In a reinsurance treaty, that is a structural mispricing, not a modelling tolerance.",
+   "Un souscripteur qui dimensionne une tranche de traité sur l’exposition de la Chine en brut avec une hypothèse de dépendance de 80 pour cent envers Malacca applique un facteur structurel supérieur de 73 pour cent au chiffre bilatéral du CDM. La PML implicite est fausse dans le même sens. La différence de VaR implicite à 14 jours pour le brut chinois entre les deux hypothèses est d’environ 4,2 milliards de dollars, en appliquant l’écart de 33,8 points de pourcentage à un portefeuille total implicite de brut maritime d’environ 327 Md$. Dans un traité de réassurance, c’est une erreur structurelle de tarification, et non une tolérance de modélisation."
   ]
  ],
  "js": []

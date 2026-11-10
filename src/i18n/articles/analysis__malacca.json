@@ -98,10 +98,6 @@
    "Le détroit de la Sonde ajoute 2 à 3 jours et est limité en tirant d’eau pour les VLCC chargés. Le détroit de Lombok ajoute 4 à 6 jours et accueille de plus gros navires, mais à un coût important. Un péage à Malacca taxe une dépendance plutôt qu’un monopole. Le score de sensibilité de 0,85 reflète le fait que 15 % de la perturbation indiquée peuvent être absorbés par des alternatives, à un coût."
   ],
   [
-   "This distinction is commercially critical. Accumulation risk on Malacca exposure cannot simply be priced with Hormuz assumptions. The effective severity at Malacca after accounting for bypass capacity is 85 cents on every dollar of stated disruption, not 100. The remaining 15 cents is rerouting cost, not lost cargo. That changes the reserve calculation.",
-   "Cette distinction est cruciale sur le plan commercial. Le risque de cumul sur l’exposition de Malacca ne peut pas simplement être tarifé avec les hypothèses d’Ormuz. La gravité effective à Malacca, après prise en compte de la capacité de contournement, est de 85 cents par dollar de perturbation indiquée, et non de 100. Les 15 cents restants sont un coût de déroutement, pas une cargaison perdue. Cela change le calcul des réserves."
-  ],
-  [
    "The dependency matrix",
    "La matrice de dépendance"
   ],
@@ -354,14 +350,6 @@
    "Les chiffres qui apparaissent dans la couverture du risque de perturbation à Malacca sont surtout agrégés : « 30 % du commerce maritime mondial », « 100 000 navires par an », « 5 billions de dollars de valeur commerciale annuelle ». Ces chiffres sont réels. Ils sont aussi analytiquement inertes."
   ],
   [
-   "Different readers need different cuts of the same data. For marine insurance accumulation: how many insured vessels are in-window during a specific disruption duration, carrying what commodity, for which importer. For a supply chain: what percentage depends on Malacca and what diversion costs look like against current freight rates. For a Capesize fleet: what a 4-day Lombok detour does to voyage economics across the fleet.",
-   "Des lecteurs différents ont besoin de coupes différentes des mêmes données. Pour le cumul d’assurance maritime : combien de navires assurés se trouvent dans la fenêtre pendant une durée de perturbation donnée, avec quel produit, pour quel importateur. Pour une chaîne d’approvisionnement : quel pourcentage dépend de Malacca et à quoi ressemblent les coûts de détournement face aux taux de fret actuels. Pour une flotte de Capesize : ce que fait un détour de 4 jours par Lombok à l’économie des voyages sur l’ensemble de la flotte."
-  ],
-  [
-   "<strong>None of those questions are answered by an aggregate throughput figure.</strong> They are answered by bilateral dependency analysis at commodity resolution: the dependency percentage for a specific (importer, chokepoint, commodity) triplet, combined with vessel-class-specific rerouting economics.",
-   "<strong>Aucune de ces questions n’est tranchée par un chiffre de débit agrégé.</strong> Elles sont tranchées par une analyse de dépendance bilatérale à la résolution du produit : le pourcentage de dépendance pour un triplet précis (importateur, point de passage, produit), combiné à une économie de déroutement propre à chaque classe de navires."
-  ],
-  [
    "Methodology",
    "Méthodologie"
   ],
@@ -380,6 +368,18 @@
   [
    "Request demo",
    "Demander une démo"
+  ],
+  [
+   "This distinction is commercially critical. An underwriter pricing accumulation risk on Malacca exposure cannot simply apply Hormuz assumptions. The effective severity at Malacca after accounting for bypass capacity is 85 cents on every dollar of stated disruption, not 100. The remaining 15 cents is rerouting cost, not lost cargo. That changes the reserve calculation.",
+   "Cette distinction est cruciale sur le plan commercial. Un souscripteur qui tarife le risque de cumul sur l’exposition de Malacca ne peut pas simplement appliquer les hypothèses d’Ormuz. La gravité effective à Malacca, après prise en compte de la capacité de contournement, est de 85 cents par dollar de perturbation indiquée, et non de 100. Les 15 cents restants sont un coût de déroutement, pas une cargaison perdue. Cela change le calcul des réserves."
+  ],
+  [
+   "An accumulation underwriter at a P&amp;I club needs to know how many of their insured vessels are in-window during a specific disruption duration, carrying what commodity, for which importer. A crude desk at a commodity trading house needs to know what percentage of their specific supply chain depends on Malacca and what diversion costs look like against their current freight rates. A lender financing a Capesize fleet needs to know what a 4-day Lombok detour does to voyage economics across their book.",
+   "Un souscripteur de cumul d’un club P&amp;I doit savoir combien de ses navires assurés se trouvent dans la fenêtre pendant une durée de perturbation donnée, avec quel produit, pour quel importateur. Un desk brut d’une maison de négoce doit savoir quel pourcentage de sa chaîne d’approvisionnement dépend de Malacca et à quoi ressemblent les coûts de détournement face à ses taux de fret actuels. Un prêteur qui finance une flotte de Capesize doit savoir ce que fait un détour de 4 jours par Lombok à l’économie des voyages sur l’ensemble de son portefeuille."
+  ],
+  [
+   "<strong>None of those questions are answered by an aggregate throughput figure.</strong> They are answered by bilateral dependency analysis at commodity resolution: the dependency percentage for a specific (importer, chokepoint, commodity) triplet, combined with vessel-class-specific rerouting economics. That is what you get when you run it through The Narrows.",
+   "<strong>Aucune de ces questions n’est tranchée par un chiffre de débit agrégé.</strong> Elles sont tranchées par une analyse de dépendance bilatérale à la résolution du produit : le pourcentage de dépendance pour un triplet précis (importateur, point de passage, produit), combiné à une économie de déroutement propre à chaque classe de navires. C’est ce que vous obtenez en la passant dans The Narrows."
   ]
  ],
  "js": []

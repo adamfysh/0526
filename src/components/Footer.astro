@@ -33,7 +33,7 @@ const FOOTER_LOGO_SVG = `<svg class="footer-logo-mark" viewBox="0 0 1698 948" xm
       <ul class="footer-col-links">
         <li><a href="mailto:fysh@narrows.io">fysh@narrows.io</a></li>
         {COMMERCIAL && <li><a href={`mailto:fysh@narrows.io?subject=${cm[lang].demoSubject}`}>{cm[lang].demoLong}</a></li>}
-        <li><a href="mailto:fysh@narrows.io?subject=Press or corrections — Narrows">{t.press}</a></li>
+        <li><a href="mailto:fysh@narrows.io?subject=Press or corrections — Narrows">{COMMERCIAL ? cm[lang].press : t.press}</a></li>
       </ul>
     </div>
   </div>

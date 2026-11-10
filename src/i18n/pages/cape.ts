@@ -99,4 +99,47 @@ const fr: typeof en = {
   unit: ' Md$',
 };
 
+
+// Commercial-mode variants (shown only when COMMERCIAL is true in src/config.ts).
+const nbc = ' ';
+const cmEn = {
+  demoT: 'This version runs against a sample portfolio with fixed positions. The full version of CAPE connects to a live cargo portfolio and updates in real time.',
+  demoLink: 'Request access.',
+  lead: 'CAPE tells you what is physically at risk on a single bad day. Load your vessel portfolio, select a corridor event, and get aggregate exposure by vessel class, corridor, and scenario severity. Powered by the Narrows CDM and TIDE accumulation model.',
+  p2: 'CAPE answers the underwriting question: if Hormuz restricts today, how much cargo value is simultaneously in transit through the corridor right now, at the worst point in the seasonal calendar, including the approach window where vessels cannot economically divert? That is an accumulation figure. It tells you what is at risk.',
+  rowCape: 'Your vessel book’s aggregate VaR under a named corridor scenario. The underwriting view.',
+  rowTide: 'Total cargo in transit through a chokepoint at seasonal peak, including cascade effects on diversion routes. The reinsurance and ILS view.',
+  cascadeHtml: '<strong>Cascade effect:</strong> when a corridor closes, cargo piles up on its diversion route. In the current model the largest effect is on {maxCascadeName}, where accumulation reaches <strong>{maxCascade}×</strong> its seasonal peak. A Lloyd’s syndicate writing war risk on one route has correlated exposure to events on another. TIDE models cascade ratios for all corridors.',
+  steps: [
+    ['Step 01 · Free demo', 'Illustrative fleet', 'Twelve representative vessels across all major corridors are pre-loaded: VLCCs on Hormuz, LNG carriers on Qatar routes, Neopanamax containers through Panama, Capesize bulk through Malacca. Each vessel carries full JWC listing status, CII rating, diversion cost, and cargo value. Run any scenario immediately.'],
+    ['Step 02 · Full access', 'Your portfolio', 'Upload your own vessel book as a CSV or enter vessels individually. CAPE maps each vessel to its corridor exposure and computes aggregate VaR, diversion cost, and JWC status across your actual positions.'],
+    ['Step 03 · Full access', 'TIDE accumulation output', 'Full TIDE report: event horizon by corridor, seasonal peak calendar, cascade ratios for diversion routes, vessel-count breakdown, and war risk PML by scenario severity. Exportable as a plain-text report for use in capital models.'],
+  ],
+  gate: 'Request access',
+  requestFull: 'Request full access',
+  ctaH: 'Run your own book',
+  ctaP: 'CAPE is available to marine underwriters, reinsurers, P&I clubs, and commodity desks. Full access includes portfolio upload, all TIDE accumulation outputs, and corridor scenario export.',
+  privacy: 'Portfolio data is processed in your browser and never transmitted to any server.',
+};
+const cmFr: typeof cmEn = {
+  demoT: 'Cette version s’exécute sur un portefeuille type avec des positions fixes. La version complète de CAPE se connecte à un portefeuille de cargaisons réel et se met à jour en temps réel.',
+  demoLink: 'Demander l’accès.',
+  lead: 'CAPE vous montre ce qui est physiquement en jeu un jour de crise. Chargez votre portefeuille de navires, choisissez un événement de corridor et obtenez l’exposition agrégée par classe de navire, par corridor et par gravité du scénario. Fondé sur le CDM de Narrows et le modèle d’accumulation TIDE.',
+  p2: 'CAPE répond à la question de souscription : si Ormuz se ferme aujourd’hui, quelle valeur de cargaison se trouve simultanément en transit dans le corridor, au pire moment du calendrier saisonnier, y compris dans la fenêtre d’approche où les navires ne peuvent pas se dérouter à un coût raisonnable ? C’est un chiffre d’accumulation. Il indique ce qui est en jeu.',
+  rowCape: 'La VaR agrégée de votre portefeuille de navires dans un scénario de corridor nommé. La vue souscription.',
+  rowTide: 'Total des cargaisons en transit par un point de passage au pic saisonnier, y compris les effets de cascade sur les routes de déroutement. La vue réassurance et ILS.',
+  cascadeHtml: '<strong>Effet de cascade :</strong> lorsqu’un corridor se ferme, les cargaisons s’accumulent sur sa route de déroutement. Dans le modèle actuel, l’effet le plus fort concerne {maxCascadeName}, où l’accumulation atteint <strong>{maxCascade} fois</strong> son pic saisonnier. Un syndicat du Lloyd’s qui souscrit le risque de guerre sur une route a une exposition corrélée aux événements sur une autre. TIDE modélise les ratios de cascade pour tous les corridors.',
+  steps: [
+    ['Étape 01 · Démo gratuite', 'Flotte illustrative', 'Douze navires représentatifs sur tous les grands corridors sont préchargés : VLCC à Ormuz, méthaniers sur les routes du Qatar, porte-conteneurs Neopanamax à Panama, vraquiers Capesize à Malacca. Chaque navire porte son statut complet de zone listée par le JWC, sa note CII, son coût de déroutement et la valeur de sa cargaison. Lancez n’importe quel scénario immédiatement.'],
+    ['Étape 02 · Accès complet', 'Votre portefeuille', 'Importez votre portefeuille de navires en CSV ou saisissez les navires un par un. CAPE rattache chaque navire à son exposition par corridor et calcule la VaR agrégée, le coût de déroutement et le statut JWC sur vos positions réelles.'],
+    ['Étape 03 · Accès complet', 'Résultats d’accumulation TIDE', 'Rapport TIDE complet : horizon d’événement par corridor, calendrier des pics saisonniers, ratios de cascade pour les routes de déroutement, ventilation par nombre de navires et PML risque de guerre par gravité de scénario. Exportable en rapport texte pour vos modèles de capital.'],
+  ],
+  gate: 'Demander l’accès',
+  requestFull: 'Demander l’accès complet',
+  ctaH: 'Passez votre propre portefeuille',
+  ctaP: 'CAPE est proposé aux souscripteurs maritimes, aux réassureurs, aux clubs P&I et aux desks de matières premières. L’accès complet comprend l’import de portefeuille, tous les résultats d’accumulation TIDE et l’export des scénarios de corridor.',
+  privacy: 'Les données du portefeuille sont traitées dans votre navigateur et ne sont jamais transmises à un serveur.',
+};
+export const capeCommercial = { en: cmEn, fr: cmFr };
+
 export const cape = { en, fr };
